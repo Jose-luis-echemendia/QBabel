@@ -118,6 +118,7 @@ python-magic==0.4.27
 python-magic-bin==0.4.14
 python3-openid==3.2.0
 pytz==2024.1
+onedrivesdk==2.0.1
 redis==4.3.3
 referencing==0.35.1
 rembg==2.0.59
