@@ -8,6 +8,7 @@ env = environ.Env()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = env('SECRET_KEY', default='strong-key')
+SITE_ID = 1
 
 ALLOWED_HOSTS = []
 
