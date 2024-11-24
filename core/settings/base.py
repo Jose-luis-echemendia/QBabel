@@ -12,14 +12,37 @@ SITE_ID = 1
 
 ALLOWED_HOSTS = []
 
-INSTALLED_APPS = [
+
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.humanize',
 ]
+
+PROJECT_APPS = ["apps.utils", "apps.user"]
+EMOTE_GENERATOR_APPS = ["apps.component", "apps.emote_generator"]
+
+
+THIRD_PARTY_APPS=[
+    'corsheaders',
+    'rest_framework',
+    'djoser',
+    'storages',
+    'social_django',
+    'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
+    'simple_history',
+    'django_filters'
+]
+
+
+INSTALLED_APPS= DJANGO_APPS + PROJECT_APPS + EMOTE_GENERATOR_APPS + THIRD_PARTY_APPS
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
