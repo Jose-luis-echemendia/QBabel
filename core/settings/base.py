@@ -12,7 +12,6 @@ SITE_ID = 1
 
 ALLOWED_HOSTS = []
 
-
 DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -24,9 +23,8 @@ DJANGO_APPS = [
     'django.contrib.humanize',
 ]
 
-PROJECT_APPS = ["apps.utils", "apps.user"]
-EMOTE_GENERATOR_APPS = ["apps.component", "apps.emote_generator"]
-
+PROJECT_APPS = []
+EMOTE_GENERATOR_APPS = []
 
 THIRD_PARTY_APPS=[
     'corsheaders',
