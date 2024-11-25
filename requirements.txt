@@ -34,7 +34,6 @@ django-js-asset==2.2.0
 django-menu-generator==1.0.4
 django-model-utils==4.1.1
 django-modeltranslation==0.18.2
-django-pdfkit==0.3.1
 django-phonenumber-field==4.0.0
 django-phonenumbers==1.0.1
 django-picklefield==3.2
@@ -95,7 +94,6 @@ onnxruntime==1.19.2
 openai==1.46.0
 opencv-python-headless==4.10.0.84
 packaging==24.1
-pdfkit==1.0.0
 phonenumbers==8.13.39
 pillow==10.4.0
 platformdirs==4.3.6
