@@ -69,3 +69,5 @@ if DOMAIN:
         f"https://www.{DOMAIN}",
     ]
 
+EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
+
