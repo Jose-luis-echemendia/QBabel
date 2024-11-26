@@ -62,4 +62,10 @@ STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 CORS_ALLOW_ALL_ORIGINS = True
 
+if DOMAIN:
+    CORS_ALLOWED_ORIGINS = [
+        f"http://{DOMAIN}",
+        f"https://{DOMAIN}",
+        f"https://www.{DOMAIN}",
+    ]
 
