@@ -52,4 +52,10 @@ CSRF_TRUSTED_ORIGINS = [
     "https://desing.netsy.ai",
 ]
 
+INTERNAL_IPS = [
+    "localhost",
+    "127.0.0.1",
+]
+
+
 
