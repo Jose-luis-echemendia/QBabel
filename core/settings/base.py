@@ -90,25 +90,11 @@ TEMPLATES = [
 WSGI_APPLICATION = 'core.wsgi.application'
 ASGI_APPLICATION = "core.asgi.application"
 
-print(env.db("DATABASE_URL", default="postgres:///QBabel"))
+
 DATABASES = {
     "default": env.db("DATABASE_URL", default="postgres:///QBabel"),
 }
-"""
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'QBabel',
-        'USER': 'postgres',
-        'PASSWORD': 'newpassword',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
-"""
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
-
 
 PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.Argon2PasswordHasher",
