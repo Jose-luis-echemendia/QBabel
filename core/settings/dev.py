@@ -60,4 +60,6 @@ INTERNAL_IPS = [
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
+CORS_ALLOW_ALL_ORIGINS = True
+
 
