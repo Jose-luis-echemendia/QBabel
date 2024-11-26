@@ -6,7 +6,9 @@ import environ
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env()
-environ.Env.read_env(env_file=Path(__file__).resolve(strict=True).parent.parent / '.env')
+environ.Env.read_env()
+
+ENVIRONMENT = env
 
 SECRET_KEY = env('SECRET_KEY', default='strong-key')
 SITE_ID = 1
