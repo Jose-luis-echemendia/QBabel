@@ -155,7 +155,6 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-
 SIMPLE_JWT = {
     'USER_ID_FIELD': 'uid',  
     'USER_ID_CLAIM': 'user_id',
@@ -168,11 +167,5 @@ SIMPLE_JWT = {
         'rest_framework_simplejwt.tokens.AccessToken',
     )
 }
-
-
-BT_ENVIRONMENT = env('BT_ENVIRONMENT', default='')
-BT_MERCHANT_ID = env('BT_MERCHANT_ID', default='')
-BT_PUBLIC_KEY = env('BT_PUBLIC_KEY', default='')
-BT_PRIVATE_KEY = env('BT_PRIVATE_KEY', default='')
 
 
