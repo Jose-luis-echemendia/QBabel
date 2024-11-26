@@ -14,6 +14,7 @@ if os.path.exists(env_file):
     environ.Env.read_env(env_file)
 else:
     print("Archivo .env no encontrado.")
+print(f"DATABASE_URL cargada: {env('DATABASE_URL', default='No configurada')}")
 
 
 SECRET_KEY = env('SECRET_KEY', default='strong-key')
