@@ -32,7 +32,6 @@ QBABEL_APPS = []
 THIRD_PARTY_APPS=[
     'corsheaders',
     'rest_framework',
-    'djoser',
     'storages',
     'social_django',
     'rest_framework_simplejwt',
