@@ -17,6 +17,43 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+
+# views.py
+
+import requests
+from django.shortcuts import redirect
+from django.conf import settings
+
+def redirect_view(request):
+    code = request.GET.get('code')
+    if code:
+        token_url = f'https://login.microsoftonline.com/{settings.AZURE_TENANT_ID}/oauth2/v2.0/token'
+        token_data = {
+            'grant_type': 'authorization_code',
+            'client_id': settings.AZURE_CLIENT_ID,
+            'client_secret': settings.AZURE_CLIENT_SECRET,
+            'code': code,
+            'redirect_uri': settings.AZURE_REDIRECT_URI,
+        }
+        response = requests.post(token_url, data=token_data)
+        token_info = response.json()
+        # Aquí puedes manejar el token y hacer peticiones a la API de OneDrive
+        return redirect('home')  # Redirige a la página principal o donde desees
+    return redirect('error')  # Manejar error
+
+def list_files(access_token):
+    headers = {
+        'Authorization': f'Bearer {access_token}',
+        'Content-Type': 'application/json'
+    }
+    response = requests.get('https://graph.microsoft.com/v1.0/me/drive/root/children', headers=headers)
+    return response.json()
+
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('redirect/', redirect_view, name='redirect'),
 ]
+
+
