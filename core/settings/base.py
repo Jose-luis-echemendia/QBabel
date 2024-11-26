@@ -8,6 +8,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env()
 environ.Env.read_env(env_file=Path(__file__).resolve(strict=True).parent.parent / '.env')
 
+env_file = os.path.join(BASE_DIR, '.env')
+if os.path.exists(env_file):
+    print(f"Cargando archivo de entorno: {env_file}")  # Para depurar
+    environ.Env.read_env(env_file)
+else:
+    print("Archivo .env no encontrado.")
+
+
 SECRET_KEY = env('SECRET_KEY', default='strong-key')
 SITE_ID = 1
 
@@ -88,10 +96,23 @@ TEMPLATES = [
 WSGI_APPLICATION = 'core.wsgi.application'
 ASGI_APPLICATION = "core.asgi.application"
 
-
+print(env.db("DATABASE_URL", default="postgres:///QBabel"))
 DATABASES = {
     "default": env.db("DATABASE_URL", default="postgres:///QBabel"),
 }
+"""
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'QBabel',
+        'USER': 'postgres',
+        'PASSWORD': 'newpassword',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+"""
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
 
