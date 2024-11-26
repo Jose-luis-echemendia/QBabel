@@ -11,6 +11,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env('SECRET_KEY', default='strong-key')
 SITE_ID = 1
 
+DOMAIN = os.environ.get("DOMAIN")
+
 ALLOWED_HOSTS = []
 
 DJANGO_APPS = [
