@@ -90,7 +90,7 @@ ASGI_APPLICATION = "core.asgi.application"
 
 
 DATABASES = {
-    "default": env.db("DATABASE_URL", default="postgres:///EmoteGenerator"),
+    "default": env.db("DATABASE_URL", default="postgres:///QBabel"),
 }
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
