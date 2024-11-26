@@ -8,15 +8,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env()
 environ.Env.read_env(env_file=Path(__file__).resolve(strict=True).parent.parent / '.env')
 
-env_file = os.path.join(BASE_DIR, '.env')
-if os.path.exists(env_file):
-    print(f"Cargando archivo de entorno: {env_file}")  # Para depurar
-    environ.Env.read_env(env_file)
-else:
-    print("Archivo .env no encontrado.")
-print(f"DATABASE_URL cargada: {env('DATABASE_URL', default='No configurada')}")
-
-
 SECRET_KEY = env('SECRET_KEY', default='strong-key')
 SITE_ID = 1
 
