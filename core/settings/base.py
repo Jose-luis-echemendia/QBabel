@@ -31,7 +31,7 @@ DJANGO_APPS = [
     'django.contrib.humanize',
 ]
 
-PROJECT_APPS = []
+PROJECT_APPS = ["apps.utils"]
 QBABEL_APPS = []
 
 THIRD_PARTY_APPS=[
