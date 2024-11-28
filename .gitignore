@@ -1,9 +1,33 @@
-# Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,django,react
-# Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,django,react
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Created by https://www.toptal.com/developers/gitignore/api/django,react
+# Edit at https://www.toptal.com/developers/gitignore?templates=django,react
 
 ### Django ###
 *.log
-*.json
 *.pot
 *.pyc
 __pycache__/
@@ -133,7 +157,6 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-env
 .env
 .venv
 env/
@@ -188,25 +211,7 @@ psd
 thumb
 sketch
 
-### VisualStudioCode ###
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-!.vscode/*.code-snippets
-
-# Local History for Visual Studio Code
-.history/
-
-# Built Visual Studio Code Extensions
-*.vsix
-
-### VisualStudioCode Patch ###
-# Ignore all local history of files
-.history
-.ionide
-
-# End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,django,react
+# End of https://www.toptal.com/developers/gitignore/api/django,react
 
 Explicar
+
