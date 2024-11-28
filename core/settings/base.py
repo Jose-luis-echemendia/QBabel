@@ -1,7 +1,10 @@
 from pathlib import Path
 from datetime import timedelta
+from google.oauth2 import service_account
 import os
 import environ
+
+
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -129,7 +132,32 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
+
+# Configurar las credenciales para Google Cloud
+GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+    os.path.join(BASE_DIR, "service-accounts.json")
+)
+
+# Nombre de tu bucket
+GS_BUCKET_NAME = 'netsy_emote_generator'
+
+# Configurar el backend para el almacenamiento de archivos
+DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+GS_DEFAULT_ACL = None
+
+# Opcional: Define una URL base si deseas generar enlaces a las imágenes
+MEDIA_URL = f'https://storage.googleapis.com/{GS_BUCKET_NAME}/'
+
+
+#MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
 STATIC_URL = 'static/'
+
+
+
+STATIC_ROOT = BASE_DIR / "static"
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
