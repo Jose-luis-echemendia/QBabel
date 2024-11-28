@@ -135,13 +135,13 @@ USE_TZ = True
 
 # Configurar las credenciales para Google Cloud
 
-SERVICE_ACCOUNTS_FILE = os.path.join(BASE_DIR, 'credentials', 'service-accounts.json')
+SERVICE_ACCOUNTS_FILE = os.path.join(BASE_DIR, 'service-accounts.json')
 
 # Cargar credenciales de la cuenta de servicio
 GS_CREDENTIALS = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNTS_FILE)
 
 # Nombre de tu bucket
-GS_BUCKET_NAME = 'netsy_emote_generator'
+GS_BUCKET_NAME = 'qbabel'
 
 # Configurar el backend para el almacenamiento de archivos
 DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
