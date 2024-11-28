@@ -168,9 +168,3 @@ SIMPLE_JWT = {
         'rest_framework_simplejwt.tokens.AccessToken',
     )
 }
-
-# Configuración de OAuth2
-AZURE_CLIENT_ID = '17dbe630-50a7-4a49-b5b2-7a05110a91bb'  # Id. de aplicación (cliente)
-AZURE_CLIENT_SECRET = 'iXl8Q~fle_fomE_hKlu5cUC.sojWoFBZx50pJc8L'  # Secreto de cliente
-AZURE_TENANT_ID = 'f8cdef31-a31e-4b4a-93e4-5f571e91255a'  # Id. de directorio (inquilino)
-AZURE_REDIRECT_URI = 'http://localhost:8000/redirect'  # URI de redirección
