@@ -1,4 +1,4 @@
-import "./styles/qbabel.css";
+import "./styles/QBabel.css";
 
 function QBabel() {
   return (
