@@ -135,10 +135,11 @@ USE_TZ = True
 
 # Configurar las credenciales para Google Cloud
 
-SERVICE_ACCOUNTS = service_account.Credentials.from_service_account_file(
-    os.path.join(BASE_DIR, "service-accountS.json")
-)
-GS_CREDENTIALS
+SERVICE_ACCOUNTS_FILE = os.path.join(BASE_DIR, 'credentials', 'service-accounts.json')
+
+# Cargar credenciales de la cuenta de servicio
+GS_CREDENTIALS = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNTS_FILE)
+
 # Nombre de tu bucket
 GS_BUCKET_NAME = 'netsy_emote_generator'
 
@@ -150,14 +151,10 @@ GS_DEFAULT_ACL = None
 MEDIA_URL = f'https://storage.googleapis.com/{GS_BUCKET_NAME}/'
 
 
-#MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 STATIC_URL = 'static/'
 
-
-
-STATIC_ROOT = BASE_DIR / "static"
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
