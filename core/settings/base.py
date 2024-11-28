@@ -136,7 +136,6 @@ USE_TZ = True
 # Configurar las credenciales para Google Cloud
 
 SERVICE_ACCOUNTS_FILE = os.path.join(BASE_DIR, 'service-accounts.json')
-
 # Cargar credenciales de la cuenta de servicio
 GS_CREDENTIALS = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNTS_FILE)
 
