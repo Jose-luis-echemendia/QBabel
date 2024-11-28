@@ -134,10 +134,11 @@ USE_TZ = True
 
 
 # Configurar las credenciales para Google Cloud
-SERVICE_ = service_account.Credentials.from_service_account_file(
-    os.path.join(BASE_DIR, "service-accounts.json")
-)
 
+SERVICE_ACCOUNTS = service_account.Credentials.from_service_account_file(
+    os.path.join(BASE_DIR, "service-accountS.json")
+)
+GS_CREDENTIALS
 # Nombre de tu bucket
 GS_BUCKET_NAME = 'netsy_emote_generator'
 
