@@ -137,10 +137,6 @@ USE_TZ = True
 
 SERVICE_ACCOUNTS_FILE = os.path.join(BASE_DIR, 'service-accounts.json')
 # Cargar credenciales de la cuenta de servicio
-
-if not os.path.exists(SERVICE_ACCOUNTS_FILE):
-    raise FileNotFoundError(f"El archivo de credenciales no se encuentra en la ruta: {SERVICE_ACCOUNTS_FILE}")
-
 GS_CREDENTIALS = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNTS_FILE)
 
 # Nombre de tu bucket
