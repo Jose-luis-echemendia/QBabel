@@ -5,7 +5,6 @@ import CustomLayout from '@layout/custom-layout'
 const HomeView = lazy(() => import('@views/home-page'))
 
 const HomePage = () => {
-  console.log(2)
   return (
     <LoadSuspense>
       <CustomLayout>
