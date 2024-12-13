@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
-import LoadSuspense from '@components/load-suspense'
-import Footer from '@views/footer';
-import NavBar from '@views/navbar';
+import LoadSuspense from '@/components/load-suspense'
+import Footer from '@/views/footer';
+import NavBar from '@/views/navbar';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
