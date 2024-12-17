@@ -60,7 +60,7 @@ export const ExplorePopover = () => {
           Explorar
         </Button>
       </PopoverHandler>
-      <PopoverContent className="hidden md:block absolute z-20 top-full inset-x-0 transform shadow-lg">
+      <PopoverContent className="absolute z-20 top-full left-0 w-full transform shadow-lg bg-white">
         <div className="absolute inset-0 flex">
           <div className="bg-white w-1/2" />
           <div className="bg-gray-50 w-1/2" />
