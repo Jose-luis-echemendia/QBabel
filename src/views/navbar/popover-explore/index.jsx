@@ -54,7 +54,7 @@ const blogPosts = [
 
 export const ExplorePopover = () => {
   return (
-    <Popover className="flex items-center w-full relative">
+    <Popover className="flex items-center relative">
       <PopoverHandler>
         <Button className="block text-primary text-3xl font-opensans normal-case font-normal">
           Explorar
