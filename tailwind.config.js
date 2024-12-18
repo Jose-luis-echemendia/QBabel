@@ -1,3 +1,6 @@
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
@@ -12,12 +15,15 @@ export default {
       },
 
       fontFamily: {
-        sans: ['Inter', 'sans-serif'], 
+        inter: ['Inter', 'sans-serif'], 
         anton: ['Anton', 'sans-serif'], 
         quicksand: ['Quicksand', 'sans-serif'], 
         opensans: ['Open Sans', 'sans-serif'], 
       },
     },
   },
-  plugins: [],
+  plugins: [
+    // ...other plugins
+    require("@designbycode/tailwindcss-text-shadow"),
+],
 };
