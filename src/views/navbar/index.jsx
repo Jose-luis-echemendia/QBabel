@@ -10,18 +10,22 @@ const NavBar = () => {
         <nav className="flex justify-between px-5 items-center text-primary text-3xl font-opensans">
           <div className="flex items-center space-x-5 w-1/3 relative">
             <IconLogo size="120" />
-            <ExplorePopover />
+            <div className="p-1"> 
+              <ExplorePopover />
+            </div>
             <div className="relative">
               <input
                 type="text"
-                className="bg-white-100 bg-opacity-20 py-3 rounded-xl text-primary placeholder-primary pl-12 focus: ml-6"
+                className="bg-white-100 bg-opacity-20 py-3 rounded-xl text-primary placeholder-primary pl-14 focus:outline-none ml-8"
                 placeholder="Buscar"
               />
-              <CustomIcon
-                src="/assets/searchIcon.svg"
-                size="30"
-                className="absolute left-2 top-1/2 transform -translate-y-1/2 text-primary ml-6"
-              />
+              <button>
+                <CustomIcon
+                  src="/assets/searchIcon.svg"
+                  size="30"
+                  className="absolute left-2 top-1/2 transform -translate-y-1/2 text-primary ml-10"
+                />
+              </button>
             </div>
           </div>
           <div>
