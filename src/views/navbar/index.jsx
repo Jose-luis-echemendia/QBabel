@@ -6,7 +6,7 @@ import { AuthLinks } from "./auth-links";
 const NavBar = () => {
   return (
     <>
-      <header className="w-full h-[110px] bg-black-500 p-1">
+      <header className="w-full h-[110px] bg-black-500 p-1 border-b border-black-500 shadow-xl shadow-gray-400">
         <h2 id="footer-heading" className="sr-only">
           Navbar
         </h2>
