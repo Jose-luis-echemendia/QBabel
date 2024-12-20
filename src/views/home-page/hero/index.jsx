@@ -1,7 +1,7 @@
 export const Hero = () => {
   return (
     <>
-      <div className="relative py-10 flex flex-row border-b">
+      <div className="relative pt-10 pb-5 flex flex-row border-b shadow-lg shadow-gray-400">
         <h2 id="footer-heading" className="sr-only">
           Hero
         </h2>
