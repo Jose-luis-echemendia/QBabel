@@ -1,3 +1,4 @@
+import { Features } from "./features";
 import { Hero } from "./hero";
 
 const HomeView = () => {
@@ -8,6 +9,7 @@ const HomeView = () => {
           Home
         </h2>
         <Hero />
+        <Features />
       </div>
     </>
   );
