@@ -7,6 +7,9 @@ const NavBar = () => {
   return (
     <>
       <header className="w-full h-[110px] bg-black-500 p-1">
+        <h2 id="footer-heading" className="sr-only">
+          Navbar
+        </h2>
         <nav className="flex justify-between px-5 items-center text-primary text-3xl font-opensans">
           <div className="flex items-center space-x-5 w-1/3 relative">
             <IconLogo size="120" />
@@ -21,7 +24,7 @@ const NavBar = () => {
               />
               <button>
                 <CustomIcon
-                  src="/assets/searchIcon.svg"
+                  src="/assets/icons/searchIcon.svg"
                   size="30"
                   className="absolute left-2 top-1/2 transform -translate-y-1/2 text-primary ml-10"
                 />
