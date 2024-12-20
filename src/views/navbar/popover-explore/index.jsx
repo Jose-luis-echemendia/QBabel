@@ -57,7 +57,7 @@ export const ExplorePopover = () => {
     <>
       <Popover className="flex items-center relative">
         <PopoverHandler>
-          <Button className="block w-full text-primary text-3xl font-opensans normal-case font-normal">
+          <Button variant="text" className="block w-full text-primary text-3xl font-opensans normal-case font-normal">
             Explorar
           </Button>
         </PopoverHandler>
