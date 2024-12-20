@@ -1,3 +1,4 @@
+import { BestBooks } from "./best-books";
 import { Features } from "./features";
 import { Hero } from "./hero";
 
@@ -10,6 +11,7 @@ const HomeView = () => {
         </h2>
         <Hero />
         <Features />
+        <BestBooks/>
       </div>
     </>
   );
