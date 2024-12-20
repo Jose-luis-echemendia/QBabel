@@ -4,7 +4,7 @@ export const IconLogo = ({ alt, size, className }) => {
     return (
       <img
         className={className}
-        src='/assets/Logoprincipal.svg'
+        src='/assets/icons/Logoprincipal.svg'
         alt={alt || 'App Logo'}
         width={size || '40'} 
         height={size || '40'}
