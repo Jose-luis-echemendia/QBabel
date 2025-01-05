@@ -1,15 +1,36 @@
-import React from 'react';
+import { fadeIn } from "@/utils/MotionTransition";
+import { motion } from "framer-motion";
 
 export const BestBooks = () => {
   const items = [
-    { img: 'image/img1.jpg', author: 'LUNDEV', title: 'DESIGN SLIDER', topic: 'ANIMAL' },
-    { img: 'image/img2.jpg', author: 'LUNDEV', title: 'DESIGN SLIDER', topic: 'ANIMAL' },
-    { img: 'image/img3.jpg', author: 'LUNDEV', title: 'DESIGN SLIDER', topic: 'ANIMAL' },
-    { img: 'image/img4.jpg', author: 'LUNDEV', title: 'DESIGN SLIDER', topic: 'ANIMAL' },
+    {
+      img: "image/img1.jpg",
+      author: "LUNDEV",
+      title: "DESIGN SLIDER",
+      topic: "ANIMAL",
+    },
+    {
+      img: "image/img2.jpg",
+      author: "LUNDEV",
+      title: "DESIGN SLIDER",
+      topic: "ANIMAL",
+    },
+    {
+      img: "image/img3.jpg",
+      author: "LUNDEV",
+      title: "DESIGN SLIDER",
+      topic: "ANIMAL",
+    },
+    {
+      img: "image/img4.jpg",
+      author: "LUNDEV",
+      title: "DESIGN SLIDER",
+      topic: "ANIMAL",
+    },
   ];
 
   return (
-    <div className="bg-black text-white font-poppins">
+    <div className="bg-black text-white font-poppins pt-20">
       {/* Carousel */}
       <div className="carousel h-screen overflow-hidden relative">
         {/* List of Items */}
@@ -18,7 +39,7 @@ export const BestBooks = () => {
             <div
               key={index}
               className={`item absolute inset-0 ${
-                index === 0 ? 'z-10' : 'hidden'
+                index === 0 ? "z-10" : "hidden"
               }`}
             >
               <img
@@ -26,27 +47,36 @@ export const BestBooks = () => {
                 alt=""
                 className="w-full h-full object-cover"
               />
-              <div className="absolute top-1/5 left-1/2 transform -translate-x-1/2 w-[80%] max-w-[1140px] pr-[30%] text-shadow-md">
-                <div className="font-bold tracking-widest">{item.author}</div>
-                <div className="text-5xl font-bold leading-[1.3em]">{item.title}</div>
-                <div className="text-5xl font-bold leading-[1.3em] text-orange-500">
-                  {item.topic}
+              <motion.div
+                variants={fadeIn("top")}
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+              >
+                <div className="absolute top-1/5 left-1/2 transform -translate-x-1/2 w-[80%] max-w-[1140px] pr-[30%] text-shadow-md">
+                  <div className="font-bold tracking-widest">{item.author}</div>
+                  <div className="text-5xl font-bold leading-[1.3em]">
+                    {item.title}
+                  </div>
+                  <div className="text-5xl font-bold leading-[1.3em] text-orange-500">
+                    {item.topic}
+                  </div>
+                  <div className="mt-4">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut
+                    sequi, rem magnam nesciunt minima placeat, itaque eum neque
+                    officiis unde, eaque optio ratione aliquid assumenda facere
+                    ab et quasi ducimus aut doloribus non numquam.
+                  </div>
+                  <div className="grid grid-cols-2 gap-5 mt-5">
+                    <button className="bg-white text-black font-medium py-2 px-4">
+                      SEE MORE
+                    </button>
+                    <button className="bg-transparent text-white border border-white py-2 px-4">
+                      SUBSCRIBE
+                    </button>
+                  </div>
                 </div>
-                <div className="mt-4">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut
-                  sequi, rem magnam nesciunt minima placeat, itaque eum neque
-                  officiis unde, eaque optio ratione aliquid assumenda facere
-                  ab et quasi ducimus aut doloribus non numquam.
-                </div>
-                <div className="grid grid-cols-2 gap-5 mt-5">
-                  <button className="bg-white text-black font-medium py-2 px-4">
-                    SEE MORE
-                  </button>
-                  <button className="bg-transparent text-white border border-white py-2 px-4">
-                    SUBSCRIBE
-                  </button>
-                </div>
-              </div>
+              </motion.div>
             </div>
           ))}
         </div>
@@ -70,11 +100,10 @@ export const BestBooks = () => {
 
         {/* Arrows */}
         <div className="">
-            <button id="prev">f</button>
-            <button id="next">f</button>
+          <button id="prev">f</button>
+          <button id="next">f</button>
         </div>
       </div>
     </div>
   );
 };
-
