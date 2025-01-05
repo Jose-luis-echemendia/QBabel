@@ -1,5 +1,5 @@
 import { BestBooks } from "./best-books";
-import { Features } from "./features";
+import { ExplotaTuTalento } from "./explota-tu-talento";
 import { Hero } from "./hero";
 
 const HomeView = () => {
@@ -10,7 +10,7 @@ const HomeView = () => {
           Home
         </h2>
         <Hero />
-        <Features />
+        <ExplotaTuTalento />
         <BestBooks/>
       </div>
     </>
