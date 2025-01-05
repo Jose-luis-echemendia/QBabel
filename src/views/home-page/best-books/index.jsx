@@ -1,4 +1,4 @@
-import { fadeIn } from "@/utils/MotionTransition";
+import { fadeIn, itema } from "@/utils/MotionTransition";
 import { motion } from "framer-motion";
 
 export const BestBooks = () => {
@@ -47,36 +47,41 @@ export const BestBooks = () => {
                 alt=""
                 className="w-full h-full object-cover"
               />
-              <motion.div
+              <motion.ol
                 variants={fadeIn("top")}
                 initial="hidden"
                 animate="visible"
                 exit="hidden"
               >
                 <div className="absolute top-1/5 left-1/2 transform -translate-x-1/2 w-[80%] max-w-[1140px] pr-[30%] text-shadow-md">
-                  <div className="font-bold tracking-widest">{item.author}</div>
-                  <div className="text-5xl font-bold leading-[1.3em]">
-                    {item.title}
-                  </div>
-                  <div className="text-5xl font-bold leading-[1.3em] text-orange-500">
-                    {item.topic}
-                  </div>
-                  <div className="mt-4">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut
-                    sequi, rem magnam nesciunt minima placeat, itaque eum neque
-                    officiis unde, eaque optio ratione aliquid assumenda facere
-                    ab et quasi ducimus aut doloribus non numquam.
-                  </div>
-                  <div className="grid grid-cols-2 gap-5 mt-5">
-                    <button className="bg-white text-black font-medium py-2 px-4">
-                      SEE MORE
-                    </button>
-                    <button className="bg-transparent text-white border border-white py-2 px-4">
-                      SUBSCRIBE
-                    </button>
-                  </div>
+                  <motion.li variants={itema}>
+                    <div className="font-bold tracking-widest">
+                      {item.author}
+                    </div>
+                    <div className="text-5xl font-bold leading-[1.3em]">
+                      {item.title}
+                    </div>
+                  </motion.li>
+                  <motion.li variants={itema}>
+                    <div className="mt-4">
+                      Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                      Ut sequi, rem magnam nesciunt minima placeat, itaque eum
+                      neque officiis unde, eaque optio ratione aliquid assumenda
+                      facere ab et quasi ducimus aut doloribus non numquam.
+                    </div>
+                  </motion.li>
+                  <motion.li variants={itema}>
+                    <div className="grid grid-cols-2 gap-5 mt-5">
+                      <button className="bg-white text-black font-medium py-2 px-4">
+                        SEE MORE
+                      </button>
+                      <button className="bg-transparent text-white border border-white py-2 px-4">
+                        SUBSCRIBE
+                      </button>
+                    </div>
+                  </motion.li>
                 </div>
-              </motion.div>
+              </motion.ol>
             </div>
           ))}
         </div>
