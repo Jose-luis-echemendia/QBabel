@@ -32,33 +32,36 @@ export const BestBooks = () => {
         <img
           src="/assets/images/home/best_books/book1.png"
           alt=""
-          className="w-full h-screen object-cover"
+          className="w-full h-screen object-contain"
         />
       </figure>
 
       {/* Información */}
-      <div className="flex-1 p-4 pt-10">
+      <div className="flex-1 p-4 pt-10 ml-10">
         <motion.ol
-          variants={fadeIn("top")}
-          initial="hidden"
-          animate="visible"
-          exit="hidden"
+          variants={{ staggerChildren: 0.07, delayChildren: 0.2 }}
           className="text-white"
         >
           <motion.li
-            variants={fadeIn("top")}
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
+            variants={{
+              y: 0,
+              opacity: 1,
+              transition: {
+                y: { stiffness: 1000, velocity: -100 },
+              },
+            }}
           >
             <div>Author</div>
             <div>Title</div>
           </motion.li>
           <motion.li
-            variants={fadeIn("top")}
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
+            variants={{
+              y: 0,
+              opacity: 1,
+              transition: {
+                y: { stiffness: 1000, velocity: -100 },
+              },
+            }}
           >
             <div className="mt-4">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut
@@ -68,16 +71,19 @@ export const BestBooks = () => {
             </div>
           </motion.li>
           <motion.li
-            variants={fadeIn("top")}
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
+            variants={{
+              y: 0,
+              opacity: 1,
+              transition: {
+                y: { stiffness: 1000, velocity: -100 },
+              },
+            }}
           >
             <div className="flex gap-5 mt-5 justify-center">
-              <button className="bg-white text-black font-medium py-2 px-8  rounded-md flex-grow-0 max-w-[150px]">
+              <button className="bg-white text-black font-medium py-2 px-8 rounded-md flex-grow-0 max-w-[150px]">
                 SEE MORE
               </button>
-              <button className="bg-transparent text-white border border-white py-2 px-8 rounded-md  flex-grow-0 max-w-[150px]">
+              <button className="bg-transparent text-white border border-white py-2 px-8 rounded-md flex-grow-0 max-w-[150px]">
                 SUBSCRIBE
               </button>
             </div>
