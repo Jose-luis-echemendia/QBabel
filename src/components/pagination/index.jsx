@@ -44,7 +44,7 @@ const Pagination = ({ className, totalPages, currentPage, setCurrentPage, varian
       {/* Navigation left */}
       <div
         className={classNames(
-          'relative flex flex-row gap-[8px] items-center justify-center bg-white-100 h-[40px] px-[1rem] rounded-[6px] z-50 flex justify-center items-center cursor-pointer'
+          'relative flex flex-row gap-[8px] items-center justify-center bg-white-100 h-[40px] px-[1rem] rounded-[6px] z-50 cursor-pointer'
         )}
         onClick={() => handlePrevPage()}
       >
@@ -74,7 +74,7 @@ const Pagination = ({ className, totalPages, currentPage, setCurrentPage, varian
       {/* Navigation right */}
       <div
         className={classNames(
-          'relative flex flex-row gap-[8px] items-center justify-center bg-white-100 h-[40px] px-[1rem] rounded-[6px] z-50 flex justify-center items-center cursor-pointer'
+          'relative flex flex-row gap-[8px] items-center justify-center bg-white-100 h-[40px] px-[1rem] rounded-[6px] z-50  cursor-pointer'
         )}
         onClick={() => handleNextPage()}
       >
