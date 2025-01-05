@@ -1,4 +1,4 @@
-import { fadeIn, itema } from "@/utils/MotionTransition";
+import { fadeIn } from "@/utils/MotionTransition";
 import { motion } from "framer-motion";
 
 export const BestBooks = () => {
@@ -54,7 +54,12 @@ export const BestBooks = () => {
                 exit="hidden"
               >
                 <div className="absolute top-1/5 left-1/2 transform -translate-x-1/2 w-[80%] max-w-[1140px] pr-[30%] text-shadow-md">
-                  <motion.li variants={itema}>
+                  <motion.li
+                    variants={fadeIn("top")}
+                    initial="hidden"
+                    animate="visible"
+                    exit="hidden"
+                  >
                     <div className="font-bold tracking-widest">
                       {item.author}
                     </div>
@@ -62,7 +67,12 @@ export const BestBooks = () => {
                       {item.title}
                     </div>
                   </motion.li>
-                  <motion.li variants={itema}>
+                  <motion.li
+                    variants={fadeIn("top")}
+                    initial="hidden"
+                    animate="visible"
+                    exit="hidden"
+                  >
                     <div className="mt-4">
                       Lorem ipsum dolor, sit amet consectetur adipisicing elit.
                       Ut sequi, rem magnam nesciunt minima placeat, itaque eum
@@ -70,7 +80,12 @@ export const BestBooks = () => {
                       facere ab et quasi ducimus aut doloribus non numquam.
                     </div>
                   </motion.li>
-                  <motion.li variants={itema}>
+                  <motion.li
+                    variants={fadeIn("top")}
+                    initial="hidden"
+                    animate="visible"
+                    exit="hidden"
+                  >
                     <div className="grid grid-cols-2 gap-5 mt-5">
                       <button className="bg-white text-black font-medium py-2 px-4">
                         SEE MORE

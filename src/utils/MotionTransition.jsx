@@ -20,7 +20,7 @@ export const fadeIn = (position) => {
       y: position === "bottom" ? -80 : 80,
       x: position === "right" ? 80 : 0,
       opacity: 0,
-      filter: "blur(2px)",
+      filter: "blur(4px)",
       transition: {
         type: "tween",
         duration: 0.5,
@@ -31,7 +31,3 @@ export const fadeIn = (position) => {
   };
 };
 
-export const itema = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1 },
-};
