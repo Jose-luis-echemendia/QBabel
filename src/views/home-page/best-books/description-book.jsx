@@ -1,17 +1,6 @@
+import { childrenVariants, containerVariants } from "@/utils/transition/home-page-variants/best-books-variants";
 import { motion } from "framer-motion";
-import { createContainerVariants, createChildrenVariants } from "@/utils/transition/MotionVariants";
 
-
-const containerVariants = createContainerVariants({
-  staggerChildren: 0.5, // Ajusta el retraso entre los hijos
-  delayChildren: 0.2,   // Ajusta el retraso inicial para los hijos
-});
-
-const childrenVariants = createChildrenVariants({
-  yOffset: 20,          // Desplazamiento vertical inicial
-  blurAmount: 4,        // Cantidad de desenfoque inicial
-  duration: 1.0,        // Duración de la animación
-});
 
 export const DescriptionBook = () => {
   return (
