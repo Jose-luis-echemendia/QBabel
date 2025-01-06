@@ -1,6 +1,4 @@
-
-
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 export const PhoneCard = ({
   number,
@@ -13,12 +11,15 @@ export const PhoneCard = ({
   return (
     <>
       <div className="bg-transparent mt-8  relative pt-8">
-      <div
-        className={`absolute z-[80]  top-12 h-[462px]  rounded-lg left-5 w-[225px] ${bg}`}
+        <div
+          className={`absolute z-[80]  top-12 h-[462px]  rounded-lg left-5 w-[225px] ${bg}`}
         >
-
           <div className="flex  w-fit mx-auto mt-4">
-            <span className={`text-[40px] font-bold font-inter ${textColorSpan}`}>{number}</span>
+            <span
+              className={`text-[40px] font-bold font-inter ${textColorSpan}`}
+            >
+              {number}
+            </span>
             <h3 className="text-[32px] font-quicksand font-bold mt-[6px]">
               {title}
             </h3>
@@ -44,10 +45,10 @@ export const PhoneCard = ({
 };
 
 PhoneCard.propTypes = {
-    number: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    span: PropTypes.string.isRequired,
-    bg: PropTypes.string.isRequired,
-    textColorSpan: PropTypes.string.isRequired,
-  };
+  number: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  span: PropTypes.string.isRequired,
+  bg: PropTypes.string.isRequired,
+  textColorSpan: PropTypes.string.isRequired,
+};
