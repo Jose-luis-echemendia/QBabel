@@ -32,7 +32,7 @@ export const DescriptionBook = () => {
         </motion.p>
         <motion.div
           variants={childrenVariants}
-          className="flex gap-5 mt-5 justify-center"
+          className="flex gap-5 mt-3 justify-center"
         >
           <button className="bg-white text-black py-2 px-8 rounded-md flex-grow-0 max-w-[150px] font-opensans font-bold">
             SEE MORE
