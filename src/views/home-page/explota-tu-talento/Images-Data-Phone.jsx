@@ -32,6 +32,16 @@ export const ImageDataPhone=()=>{
           alt: '',
           className: 'absolute right-52 bottom-0 z-10',
         },
+        {
+            src: '/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (13) 1.png',
+            alt: '',
+            className: 'absolute -right-56 w-[230px]  top-8 z-10',
+          },
+          {/*{
+            src: '/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (9) 1.png',
+            alt: '',
+            className: 'absolute -right-56  w-[220px]  -bottom-20 z-0',
+          }, */}
       ];
       
     return (
