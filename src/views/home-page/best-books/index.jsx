@@ -3,7 +3,7 @@ import { DescriptionBook } from "./description-book";
 export const BestBooks = () => {
   return (
     <div className="flex flex-row gap-3 bg-[#111217] ">
-      {/* Imagen */}
+      {/* Imagen book*/}
       <figure className="flex-1">
         <img
           src="/assets/images/home/best_books/book1.png"
@@ -11,8 +11,10 @@ export const BestBooks = () => {
           className="w-full h-screen object-contain"
         />
       </figure>
-      {/* Información */}
+      {/* Información book*/}
       <DescriptionBook />
+
+      { /* caruesol books */ }
     </div>
   );
 };
