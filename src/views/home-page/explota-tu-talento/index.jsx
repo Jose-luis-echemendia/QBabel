@@ -1,22 +1,25 @@
-import { WaterfallBooks } from "./waterfall-books";
 import { NarrativeSteps } from "./narrative-steps";
+import { ImagesData } from "./Images-Data-Waterfall";
 
 export const ExploitYourTalent = () => {
   return (
     <div className="w-full h-[740px] relative bg-primary p-1 bg-opacity-50">
-      <h2 className="text-center text-[40px] font-bold font-inter mt-36  ">
+      <h2 className="text-center italic  text-[40px] font-bold font-inter mt-36  ">
         Explota tu talento
       </h2>
 
-      <div className="flex  justify-center">
+      <div className="flex relative justify-center">
         <NarrativeSteps />
-      </div>
+
+       
+    </div>
 
       <img
-        src="public/assets/images/home/explota_talento/Vector (2).png"
+        src="/assets/images/home/explota_talento/Vector (2).png"
         alt=""
+        className="absolute bottom-48"
       />
-      <WaterfallBooks />
+      <ImagesData/>
     </div>
   );
 };
