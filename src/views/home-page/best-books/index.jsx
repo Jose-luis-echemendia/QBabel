@@ -1,6 +1,23 @@
 import { DescriptionBook } from "./description-book";
 import { motion } from "framer-motion";
 
+
+const variants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3,
+      delayChildren: 0.2,
+    },
+  },
+}
+
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { stiffness: 1000, velocity: -100 } },
+}
+
 export const BestBooks = () => {
   return (
     <div className="flex flex-row gap-3 bg-[#111217] ">
@@ -15,50 +32,21 @@ export const BestBooks = () => {
       {/* Información */}
       <DescriptionBook />
 
+      <motion.div
+        variants={variants}
+        initial="hidden"
+        whileInView="show"
+        className="text-white"
+        viewport={{once:true}}
+      >
+        <motion.div variants={item}>132</motion.div>
+        <motion.div variants={item}>134</motion.div>
+        <motion.div variants={item}>1234</motion.div>
+        <motion.div variants={item}>1234</motion.div>
 
-
-      <div className="text-black w-96 h-96 bg-red-200 ">
-        <div >
-                <motion.nav
-                    initial={false}
-                    animate={{transition: { staggerChildren: 0.07, delayChildren: 0.2 }}}
-
-                >
-                    <Navigation />
-                </motion.nav>
-            </div>
-      </div>
+      </motion.div>
     </div>
   );
 };
 
 
-const Navigation = () => (
-  <motion.ul variants={{transition: { staggerChildren: 0.07, delayChildren: 0.2 }}}>
-      
-      {[0, 1, 2, 3, 4].map((i) => (
-            <MenuItem i={i} key={i} />
-        ))}
-      
-  </motion.ul>
-)
-const colors = ["#FF008C", "#D309E1", "#9C1AFF", "#7700FF", "#4400FF"]
-
-const MenuItem = ({ i }) => {
-  return (
-      <motion.li
-          variants={{
-            y: 0,
-            opacity: 1,
-            transition: {
-                y: { stiffness: 1000, velocity: -100 },
-            },
-        }}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-      >
-       <div className="border-2 border-solid border-red-300 p-3" />
-       <div className="border-2 border-solid border-yellow-700 p-3" />
-      </motion.li>
-  )
-}
