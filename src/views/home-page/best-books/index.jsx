@@ -1,30 +1,7 @@
-import { fadeIn } from "@/utils/MotionTransition";
+import { DescriptionBook } from "./description-book";
 import { motion } from "framer-motion";
 
 export const BestBooks = () => {
-  const best_books = [
-    {
-      img: "image/img1.jpg",
-      author: "LUNDEV",
-      title: "DESIGN SLIDER",
-    },
-    {
-      img: "image/img2.jpg",
-      author: "LUNDEV",
-      title: "DESIGN SLIDER",
-    },
-    {
-      img: "image/img3.jpg",
-      author: "LUNDEV",
-      title: "DESIGN SLIDER",
-    },
-    {
-      img: "image/img4.jpg",
-      author: "LUNDEV",
-      title: "DESIGN SLIDER",
-    },
-  ];
-
   return (
     <div className="flex flex-row gap-3 bg-[#111217] ">
       {/* Imagen */}
@@ -35,63 +12,53 @@ export const BestBooks = () => {
           className="w-full h-screen object-contain"
         />
       </figure>
-
       {/* Información */}
-      <div className="flex-1 p-4 pt-10 ml-10">
-        <motion.ol
-          initial={false}
-          animate="visible"
-          variants={{
-            visible: {
-              transition: {
-                staggerChildren: 0.3, // Tiempo entre las animaciones de cada hijo
-                delayChildren: 0.2
-              },
-            },
-          }}
-          whileInView="visible"
-          viewport={{once:true}}
-          className="text-white"
-        >
-          <motion.li
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0, transition: { stiffness: 1000, velocity: -100 } },
-            }}
-          >
-            <div>Author</div>
-            <div>Title</div>
-          </motion.li>
-          <motion.li
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0, transition: { stiffness: 1000 } },
-            }}
-          >
-            <div className="mt-4">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut
-              sequi, rem magnam nesciunt minima placeat, itaque eum neque
-              officiis unde, eaque optio ratione aliquid assumenda facere ab et
-              quasi ducimus aut doloribus non numquam.
+      <DescriptionBook />
+
+
+
+      <div className="text-black w-96 h-96 bg-red-200 ">
+        <div >
+                <motion.nav
+                    initial={false}
+                    animate={{transition: { staggerChildren: 0.07, delayChildren: 0.2 }}}
+
+                >
+                    <Navigation />
+                </motion.nav>
             </div>
-          </motion.li>
-          <motion.li
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0, transition: { stiffness: 1000 } },
-            }}
-          >
-            <div className="flex gap-5 mt-5 justify-center">
-              <button className="bg-white text-black font-medium py-2 px-8 rounded-md flex-grow-0 max-w-[150px]">
-                SEE MORE
-              </button>
-              <button className="bg-transparent text-white border border-white py-2 px-8 rounded-md flex-grow-0 max-w-[150px]">
-                SUBSCRIBE
-              </button>
-            </div>
-          </motion.li>
-        </motion.ol>
       </div>
     </div>
   );
 };
+
+
+const Navigation = () => (
+  <motion.ul variants={{transition: { staggerChildren: 0.07, delayChildren: 0.2 }}}>
+      
+      {[0, 1, 2, 3, 4].map((i) => (
+            <MenuItem i={i} key={i} />
+        ))}
+      
+  </motion.ul>
+)
+const colors = ["#FF008C", "#D309E1", "#9C1AFF", "#7700FF", "#4400FF"]
+
+const MenuItem = ({ i }) => {
+  return (
+      <motion.li
+          variants={{
+            y: 0,
+            opacity: 1,
+            transition: {
+                y: { stiffness: 1000, velocity: -100 },
+            },
+        }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+      >
+       <div className="border-2 border-solid border-red-300 p-3" />
+       <div className="border-2 border-solid border-yellow-700 p-3" />
+      </motion.li>
+  )
+}
