@@ -13,7 +13,7 @@ export const Hero = () => {
         <img
           src="/assets/icons/Vector2.svg"
           alt=""
-          className="absolute right-0 top-[300px] w-[300px]"
+          className="absolute right-0 top-[300px] w-[300px] z-10"
         />
         <div className="w-1/2 ml-36 mt-24 flex flex-col p-8">
           <h1 className="font-quicksand mb-10 text-8xl text-left font-bold">
