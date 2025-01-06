@@ -1,8 +1,9 @@
+import { CarouselBooks } from "./carousel-books";
 import { DescriptionBook } from "./description-book";
 
 export const BestBooks = () => {
   return (
-    <div className="flex flex-row gap-3 bg-[#111217] ">
+    <section className="flex flex-row gap-3 bg-[#111217] ">
       {/* Imagen book*/}
       <figure className="flex-1">
         <img
@@ -15,7 +16,8 @@ export const BestBooks = () => {
       <DescriptionBook />
 
       { /* caruesol books */ }
-    </div>
+      <CarouselBooks />
+    </section>
   );
 };
 
