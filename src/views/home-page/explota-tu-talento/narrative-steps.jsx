@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { PhoneCard } from './phone-card';
+import { ImageDataPhone } from './Images-Data-Phone';
 
 const infoPhones = [
     {
@@ -24,16 +25,18 @@ const infoPhones = [
         description: "Construye seguidores compartiendo tus historias y conectando con lectores apasionados. Usa nuestras herramientas para promocionar tu trabajo y mantener la interacción.    ",
         span: "¡Deja que tu escritura hable y observa cómo tu comunidad crece!",
         bg: "bg-[#625453]",
-        textColorSpan:"text-[#EAD38D]"
+        textColorSpan:"text-[#FFFFFF]"
     },
 ];
 
 export const NarrativeSteps = () => {
     return (
-        <div className="flex absolute items-center justify-center bottom-0 w-[full]">
+        <div className="flex relative  gap-24">
             {infoPhones.map(infoPhone => (
                 <PhoneCard key={uuidv4()} {...infoPhone}/>
             ))}
+        <ImageDataPhone/>
+            
         </div>
     );
 };
