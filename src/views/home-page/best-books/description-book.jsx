@@ -1,4 +1,4 @@
-import { childrenVariants, containerVariants } from "@/utils/transition/home-page-variants/best-books-variants";
+import { containerVariants, childrenVariants } from "@/utils/home-page-variants/best-books-variants";
 import { motion } from "framer-motion";
 
 
