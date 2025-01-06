@@ -12,13 +12,13 @@ export const BestBooks = () => {
           className="w-full h-screen object-contain"
         />
       </figure>
-      {/* Información book*/}
-      <DescriptionBook />
+      <div className="flex-1 p-4 pt-10 ml-10">
+        {/* Información book*/}
+        <DescriptionBook />
 
-      { /* caruesol books */ }
-      <CarouselBooks />
+        {/* caruesol books */}
+        <CarouselBooks />
+      </div>
     </section>
   );
 };
-
-
