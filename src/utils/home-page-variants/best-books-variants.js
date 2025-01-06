@@ -1,4 +1,4 @@
-import { createContainerVariants, createChildrenVariants } from "@/utils/transition/MotionVariants";
+import { createContainerVariants, createChildrenVariants } from "../MotionVariants";
 
 
 export const containerVariants = createContainerVariants({
