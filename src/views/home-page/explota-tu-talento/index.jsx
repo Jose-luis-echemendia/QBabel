@@ -1,9 +1,7 @@
-import { Aplilamiento } from "./Apilamiento"
-import { Componente1 } from "./Componente1"
-import { Componente2 } from "./Componente2"
+import { WaterfallBooks } from "./waterfall-books";
+import { Componente2 } from "./Componente2";
 
-
-export const ExplotaTuTalento = () => {
+export const ExploitYourTalent = () => {
   return (
     <div className="w-full h-[740px] relative  bg-primary p-1 bg-opacity-50">
       <h2 className="text-center text-[40px] font-bold font-inter mt-36  ">
@@ -11,12 +9,14 @@ export const ExplotaTuTalento = () => {
       </h2>
 
       <div className="flex  justify-center">
-      <Componente2/>
+        <Componente2 />
       </div>
 
-      <Componente1/>
-      <Aplilamiento/>
-      
+      <img
+        src="public/assets/images/home/explota_talento/Vector (2).png"
+        alt=""
+      />
+      <WaterfallBooks />
     </div>
-  )
-}
+  );
+};

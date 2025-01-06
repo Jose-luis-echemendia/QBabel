@@ -39,16 +39,24 @@ export const BestBooks = () => {
       {/* Información */}
       <div className="flex-1 p-4 pt-10 ml-10">
         <motion.ol
-          variants={{ staggerChildren: 0.07, delayChildren: 0.2 }}
+          initial={false}
+          animate="visible"
+          variants={{
+            visible: {
+              transition: {
+                staggerChildren: 0.3, // Tiempo entre las animaciones de cada hijo
+                delayChildren: 0.2
+              },
+            },
+          }}
+          whileInView="visible"
+          viewport={{once:true}}
           className="text-white"
         >
           <motion.li
             variants={{
-              y: 0,
-              opacity: 1,
-              transition: {
-                y: { stiffness: 1000, velocity: -100 },
-              },
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0, transition: { stiffness: 1000, velocity: -100 } },
             }}
           >
             <div>Author</div>
@@ -56,11 +64,8 @@ export const BestBooks = () => {
           </motion.li>
           <motion.li
             variants={{
-              y: 0,
-              opacity: 1,
-              transition: {
-                y: { stiffness: 1000, velocity: -100 },
-              },
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0, transition: { stiffness: 1000 } },
             }}
           >
             <div className="mt-4">
@@ -72,11 +77,8 @@ export const BestBooks = () => {
           </motion.li>
           <motion.li
             variants={{
-              y: 0,
-              opacity: 1,
-              transition: {
-                y: { stiffness: 1000, velocity: -100 },
-              },
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0, transition: { stiffness: 1000 } },
             }}
           >
             <div className="flex gap-5 mt-5 justify-center">
