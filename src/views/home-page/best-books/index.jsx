@@ -12,7 +12,7 @@ export const BestBooks = () => {
           className="w-full h-screen object-contain"
         />
       </figure>
-      <div className="flex-1 p-4 pt-10 ml-10">
+      <div className="flex-1 p-4 pt-10 ml-10 flex flex-col gap-14">
         {/* Información book*/}
         <DescriptionBook />
 
