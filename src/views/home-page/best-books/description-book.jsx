@@ -20,20 +20,20 @@ export const DescriptionBook = () => {
   return (
     <>
       <div className="flex-1 p-4 pt-10 ml-10">
-        <motion.ol
+        <motion.article
           variants={variants}
           initial="hidden"
           whileInView="show"
           className="text-white"
           viewport={{once:true}}
         >
-          <motion.li
+          <motion.div
             variants={item}
           >
             <div>Author</div>
             <div>Title</div>
-          </motion.li>
-          <motion.li
+          </motion.div>
+          <motion.div
             variants={item}
           >
             <div className="mt-4">
@@ -42,8 +42,8 @@ export const DescriptionBook = () => {
               officiis unde, eaque optio ratione aliquid assumenda facere ab et
               quasi ducimus aut doloribus non numquam.
             </div>
-          </motion.li>
-          <motion.li
+          </motion.div>
+          <motion.div
             variants={item}
           >
             <div className="flex gap-5 mt-5 justify-center">
@@ -54,8 +54,8 @@ export const DescriptionBook = () => {
                 SUBSCRIBE
               </button>
             </div>
-          </motion.li>
-        </motion.ol>
+          </motion.div>
+        </motion.article>
       </div>
     </>
   );
