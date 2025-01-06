@@ -31,20 +31,6 @@ export const BestBooks = () => {
       </figure>
       {/* Información */}
       <DescriptionBook />
-
-      <motion.div
-        variants={variants}
-        initial="hidden"
-        whileInView="show"
-        className="text-white"
-        viewport={{once:true}}
-      >
-        <motion.div variants={item}>132</motion.div>
-        <motion.div variants={item}>134</motion.div>
-        <motion.div variants={item}>1234</motion.div>
-        <motion.div variants={item}>1234</motion.div>
-
-      </motion.div>
     </div>
   );
 };
