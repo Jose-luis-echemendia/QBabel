@@ -1,34 +1,27 @@
-export const WaterfallBooks = () => {
+import PropTypes from 'prop-types';
+import { v4 as uuid } from 'uuid';
+export const WaterfallBooks = ({ images }) => {
   return (
     <div>
-      <img
-        src="public/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (7) 1.png"
-        alt=""
-        className="absolute bottom-0 z-10 "
-      />
-
-      <img
-        src="public/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (10) 1.png"
-        alt=""
-        className="absolute z-30 bottom-0 left-[55px]"
-      />
-
-      <img
-        src="public/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (16) 1.png"
-        alt=""
-        className="absolute z-50 bottom-8"
-      />
-      <img
-        src="public/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (5) 1.png"
-        alt=""
-        className="absolute z-40 bottom-8 left-5     w-[140px] h-[115px]"
-      />
-
-      <img
-        src="public/assets/images/home/explota_talento/book.png"
-        alt=""
-        className="absolute -bottom-1 z-[35] w-[180px] h-[150px]"
-      />
+      {images.map((image) => (
+        <img
+          key={uuid()}
+          src={image.src} 
+          alt={image.alt || ''}
+          className={`absolute ${image.className || ''}`} 
+        />
+      ))}
     </div>
   );
+};
+
+
+WaterfallBooks.propTypes = {
+  images: PropTypes.arrayOf(
+    PropTypes.shape({
+      src: PropTypes.string.isRequired,
+      alt: PropTypes.string,
+      className: PropTypes.string,
+    })
+  ).isRequired,
 };
