@@ -1,5 +1,5 @@
-import { NarrativeSteps } from "./narrative-steps";
-import { ImagesData } from "./Images-Data-Waterfall";
+import { NarrativeSteps } from './narrative-steps';
+import { ImagesDataWaterfallBook } from './images-data-waterfall';
 
 export const ExploitYourTalent = () => {
   return (
@@ -8,7 +8,7 @@ export const ExploitYourTalent = () => {
         Explota tu talento
       </h2>
 
-      <div className="flex relative justify-center">
+      <div className=" flex relative justify-center">
         <NarrativeSteps />
       </div>
 
@@ -17,7 +17,7 @@ export const ExploitYourTalent = () => {
         alt=""
         className="absolute bottom-48"
       />
-      <ImagesData />
+      <ImagesDataWaterfallBook />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 export const PhoneCard = ({
   number,
@@ -35,7 +35,7 @@ export const PhoneCard = ({
           </div>
         </div>
         <img
-          src="public/assets/images/home/explota_talento/Recortada.png"
+          src="/assets/images/home/explota_talento/Recortada.png"
           alt=""
           className="relative  z-[100] "
         />

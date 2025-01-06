@@ -4,18 +4,17 @@ import { v4 as uuid } from 'uuid';
 export const WaterfallBooks = ({ images }) => {
   return (
     <div>
-      {images.map((image) => (
+      {images.map(image => (
         <img
           key={uuid()}
-          src={image.src} 
+          src={image.src}
           alt={image.alt || ''}
-          className={`absolute ${image.className || ''}`} 
+          className={`absolute ${image.className || ''}`}
         />
       ))}
     </div>
   );
 };
-
 
 WaterfallBooks.propTypes = {
   images: PropTypes.arrayOf(
