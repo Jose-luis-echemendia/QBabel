@@ -12,12 +12,12 @@ export const PhoneCard = ({
 }) => {
   return (
     <>
-      <div className="bg-transparent relative pt-8">
+      <div className="bg-transparent mt-8  relative pt-8">
       <div
-        className={`absolute top-14 h-[462px] rounded-lg left-[8rem] w-[225px] ${bg}`}
+        className={`absolute z-[80]  top-12 h-[462px]  rounded-lg left-5 w-[225px] ${bg}`}
         >
 
-          <div className="flex w-fit mx-auto mt-4">
+          <div className="flex  w-fit mx-auto mt-4">
             <span className={`text-[40px] font-bold font-inter ${textColorSpan}`}>{number}</span>
             <h3 className="text-[32px] font-quicksand font-bold mt-[6px]">
               {title}
@@ -34,9 +34,9 @@ export const PhoneCard = ({
           </div>
         </div>
         <img
-          src="public/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (2) 1.png"
+          src="public/assets/images/home/explota_talento/Recortada.png"
           alt=""
-          className="relative z-50"
+          className="relative  z-[100] "
         />
       </div>
     </>
