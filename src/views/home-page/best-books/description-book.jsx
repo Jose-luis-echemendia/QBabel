@@ -1,40 +1,37 @@
 import { motion } from "framer-motion";
+import { createContainerVariants, createChildrenVariants } from "@/utils/transition/MotionVariants";
 
-const variants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.3,
-      delayChildren: 0.2,
-    },
-  },
-}
 
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { stiffness: 1000, velocity: -100 } },
-}
+const containerVariants = createContainerVariants({
+  staggerChildren: 0.5, // Ajusta el retraso entre los hijos
+  delayChildren: 0.2,   // Ajusta el retraso inicial para los hijos
+});
+
+const childrenVariants = createChildrenVariants({
+  yOffset: 20,          // Desplazamiento vertical inicial
+  blurAmount: 4,        // Cantidad de desenfoque inicial
+  duration: 1.0,        // Duración de la animación
+});
 
 export const DescriptionBook = () => {
   return (
     <>
       <div className="flex-1 p-4 pt-10 ml-10">
         <motion.article
-          variants={variants}
+          variants={containerVariants}
           initial="hidden"
           whileInView="show"
           className="text-white"
           viewport={{once:true}}
         >
           <motion.div
-            variants={item}
+            variants={childrenVariants}
           >
             <div>Author</div>
             <div>Title</div>
           </motion.div>
           <motion.div
-            variants={item}
+            variants={childrenVariants}
           >
             <div className="mt-4">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut
@@ -44,7 +41,7 @@ export const DescriptionBook = () => {
             </div>
           </motion.div>
           <motion.div
-            variants={item}
+            variants={childrenVariants}
           >
             <div className="flex gap-5 mt-5 justify-center">
               <button className="bg-white text-black font-medium py-2 px-8 rounded-md flex-grow-0 max-w-[150px]">
