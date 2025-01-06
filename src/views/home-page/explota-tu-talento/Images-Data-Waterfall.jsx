@@ -28,7 +28,7 @@ const imagesData = [
   },
 ];
 
-export const ImagesData = () => {
+export const ImagesDataWaterfallBook = () => {
   return (
     <div>
       <WaterfallBooks images={imagesData} />
