@@ -1,22 +1,4 @@
 import { DescriptionBook } from "./description-book";
-import { motion } from "framer-motion";
-
-
-const variants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.3,
-      delayChildren: 0.2,
-    },
-  },
-}
-
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { stiffness: 1000, velocity: -100 } },
-}
 
 export const BestBooks = () => {
   return (
@@ -31,20 +13,6 @@ export const BestBooks = () => {
       </figure>
       {/* Información */}
       <DescriptionBook />
-
-      <motion.div
-        variants={variants}
-        initial="hidden"
-        whileInView="show"
-        className="text-white"
-        viewport={{once:true}}
-      >
-        <motion.div variants={item}>132</motion.div>
-        <motion.div variants={item}>134</motion.div>
-        <motion.div variants={item}>1234</motion.div>
-        <motion.div variants={item}>1234</motion.div>
-
-      </motion.div>
     </div>
   );
 };
