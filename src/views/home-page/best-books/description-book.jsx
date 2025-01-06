@@ -1,42 +1,40 @@
 import { motion } from "framer-motion";
 
+const variants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3,
+      delayChildren: 0.2,
+    },
+  },
+}
+
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { stiffness: 1000, velocity: -100 } },
+}
+
 export const DescriptionBook = () => {
   return (
     <>
       <div className="flex-1 p-4 pt-10 ml-10">
         <motion.ol
-          initial={false}
-          animate="visible"
-          variants={{
-            visible: {
-              transition: {
-                staggerChildren: 0.3, // Tiempo entre las animaciones de cada hijo
-                delayChildren: 0.2,
-              },
-            },
-          }}
-          whileInView="visible"
-          viewport={{ once: true }}
+          variants={variants}
+          initial="hidden"
+          whileInView="show"
           className="text-white"
+          viewport={{once:true}}
         >
           <motion.li
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: {
-                opacity: 1,
-                y: 0,
-                transition: { stiffness: 1000, velocity: -100 },
-              },
-            }}
+            variants={item}
           >
             <div>Author</div>
             <div>Title</div>
           </motion.li>
           <motion.li
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0, transition: { stiffness: 1000 } },
-            }}
+            variants={item}
           >
             <div className="mt-4">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut
@@ -46,10 +44,7 @@ export const DescriptionBook = () => {
             </div>
           </motion.li>
           <motion.li
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0, transition: { stiffness: 1000 } },
-            }}
+            variants={item}
           >
             <div className="flex gap-5 mt-5 justify-center">
               <button className="bg-white text-black font-medium py-2 px-8 rounded-md flex-grow-0 max-w-[150px]">
