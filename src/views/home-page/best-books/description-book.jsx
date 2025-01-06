@@ -12,15 +12,14 @@ export const DescriptionBook = () => {
           variants={containerVariants}
           initial="hidden"
           whileInView="show"
-          className="text-white text-left flex flex-col"
+          className="text-white text-left flex flex-col gap-5"
           viewport={{ once: true }}
         >
           <motion.div variants={childrenVariants}>
             <span className="font-anton text-xl">Laura Sebastian</span>
             <h2 className="font-anton text-6xl mt-5">Princesas de Cenizas</h2>
           </motion.div>
-          <motion.p variants={childrenVariants}>
-            <div className="mt-4 mr-20 text-balance font-quicksand">
+          <motion.p variants={childrenVariants} className="mt-4 mr-20 text-balance font-quicksand">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut
               sequi, rem magnam nesciunt minima placeat, itaque eum neque
               officiis unde, eaque optio ratione aliquid assumenda facere ab et
@@ -29,11 +28,10 @@ export const DescriptionBook = () => {
               doloribus ipsam ratione fugit officia, rem necessitatibus,
               repellat itaque optio velit quia a corrupti cum impedit voluptates
               iure?
-            </div>
           </motion.p>
           <motion.div
             variants={childrenVariants}
-            className="flex gap-5 mt-10 justify-center"
+            className="flex gap-5 mt-5 justify-center"
           >
             <button className="bg-white text-black py-2 px-8 rounded-md flex-grow-0 max-w-[150px] font-opensans font-bold">
               SEE MORE
