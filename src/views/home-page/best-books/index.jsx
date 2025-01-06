@@ -1,30 +1,24 @@
-import { fadeIn } from "@/utils/MotionTransition";
+import { DescriptionBook } from "./description-book";
 import { motion } from "framer-motion";
 
-export const BestBooks = () => {
-  const best_books = [
-    {
-      img: "image/img1.jpg",
-      author: "LUNDEV",
-      title: "DESIGN SLIDER",
-    },
-    {
-      img: "image/img2.jpg",
-      author: "LUNDEV",
-      title: "DESIGN SLIDER",
-    },
-    {
-      img: "image/img3.jpg",
-      author: "LUNDEV",
-      title: "DESIGN SLIDER",
-    },
-    {
-      img: "image/img4.jpg",
-      author: "LUNDEV",
-      title: "DESIGN SLIDER",
-    },
-  ];
 
+const variants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3,
+      delayChildren: 0.2,
+    },
+  },
+}
+
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { stiffness: 1000, velocity: -100 } },
+}
+
+export const BestBooks = () => {
   return (
     <div className="flex flex-row gap-3 bg-[#111217] ">
       {/* Imagen */}
@@ -35,63 +29,24 @@ export const BestBooks = () => {
           className="w-full h-screen object-contain"
         />
       </figure>
-
       {/* Información */}
-      <div className="flex-1 p-4 pt-10 ml-10">
-        <motion.ol
-          initial={false}
-          animate="visible"
-          variants={{
-            visible: {
-              transition: {
-                staggerChildren: 0.3, // Tiempo entre las animaciones de cada hijo
-                delayChildren: 0.2
-              },
-            },
-          }}
-          whileInView="visible"
-          viewport={{once:true}}
-          className="text-white"
-        >
-          <motion.li
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0, transition: { stiffness: 1000, velocity: -100 } },
-            }}
-          >
-            <div>Author</div>
-            <div>Title</div>
-          </motion.li>
-          <motion.li
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0, transition: { stiffness: 1000 } },
-            }}
-          >
-            <div className="mt-4">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut
-              sequi, rem magnam nesciunt minima placeat, itaque eum neque
-              officiis unde, eaque optio ratione aliquid assumenda facere ab et
-              quasi ducimus aut doloribus non numquam.
-            </div>
-          </motion.li>
-          <motion.li
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0, transition: { stiffness: 1000 } },
-            }}
-          >
-            <div className="flex gap-5 mt-5 justify-center">
-              <button className="bg-white text-black font-medium py-2 px-8 rounded-md flex-grow-0 max-w-[150px]">
-                SEE MORE
-              </button>
-              <button className="bg-transparent text-white border border-white py-2 px-8 rounded-md flex-grow-0 max-w-[150px]">
-                SUBSCRIBE
-              </button>
-            </div>
-          </motion.li>
-        </motion.ol>
-      </div>
+      <DescriptionBook />
+
+      <motion.div
+        variants={variants}
+        initial="hidden"
+        whileInView="show"
+        className="text-white"
+        viewport={{once:true}}
+      >
+        <motion.div variants={item}>132</motion.div>
+        <motion.div variants={item}>134</motion.div>
+        <motion.div variants={item}>1234</motion.div>
+        <motion.div variants={item}>1234</motion.div>
+
+      </motion.div>
     </div>
   );
 };
+
+
