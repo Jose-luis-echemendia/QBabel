@@ -34,11 +34,11 @@ const infoPhones = [
 
 export const NarrativeSteps = () => {
   return (
-    <div className="flex relative  gap-24">
+    <section className="flex  ml-24  relative  gap-24">
       {infoPhones.map(infoPhone => (
         <PhoneCard key={uuidv4()} {...infoPhone} />
       ))}
       <ImageDataPhone />
-    </div>
+    </section>
   );
 };

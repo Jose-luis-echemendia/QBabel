@@ -2,9 +2,6 @@ export const Hero = () => {
   return (
     <>
       <div className="relative pt-10 pb-5 flex flex-row border-b shadow-lg shadow-gray-400">
-        <h2 id="footer-heading" className="sr-only">
-          Hero
-        </h2>
         <img
           src="/assets/icons/Vector1.svg"
           alt=""
@@ -17,7 +14,7 @@ export const Hero = () => {
         />
         <div className="w-1/2 ml-36 mt-24 flex flex-col p-8">
           <h1 className="font-quicksand mb-10 text-8xl text-left font-bold">
-            Hola, somos{" "}
+            Hola, somos{' '}
             <span className="text-primary text-shadow text-shadow-y-5">
               QBabel
             </span>
