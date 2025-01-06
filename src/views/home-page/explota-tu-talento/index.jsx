@@ -10,16 +10,14 @@ export const ExploitYourTalent = () => {
 
       <div className="flex relative justify-center">
         <NarrativeSteps />
-
-       
-    </div>
+      </div>
 
       <img
         src="/assets/images/home/explota_talento/Vector (2).png"
         alt=""
         className="absolute bottom-48"
       />
-      <ImagesData/>
+      <ImagesData />
     </div>
   );
 };
