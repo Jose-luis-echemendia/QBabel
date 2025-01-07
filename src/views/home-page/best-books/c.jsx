@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 
 
 export const C = ({
@@ -43,6 +44,14 @@ export const C = ({
             ])
         }, 5)
     }
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+          handleNext(); // Llama automáticamente a handleNext
+        }, 3000); // Cambia cada 3 segundos (puedes ajustar el tiempo)
+    
+        return () => clearInterval(interval); // Limpia el intervalo al desmontar el componente
+      }, [transitionData, data]);
 
   return (
     <div className="flex items-center gap-3 px-0 py-3 md:px-1 md:py-5">
