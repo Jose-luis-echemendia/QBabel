@@ -12,8 +12,6 @@ export const C = ({
     dataSlice
 }) => {
 
-    console.log(data)
-
     const handlePrev = () => {
         handleData((prevData) => [
             transitionData ? transitionData : initialData,
