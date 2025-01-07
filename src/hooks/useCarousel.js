@@ -1,49 +1,61 @@
-import { useState } from "react"
-import { bestBooksbooksData, initialBestBookbooksData } from "@/constants/home-page/best-books";
+import { useEffect, useState } from "react";
+import {
+  bestBooksData,
+  initialBestBookData,
+} from "@/constants/home-page/best-books";
 
 export const useCarousel = () => {
-    const [booksbooksData, setBooksbooksData] = useState(bestBooksbooksData.slice(1));
-    
-    const [transitionbooksData, setTransitionbooksData] = useState(bestBooksbooksData[0]);
+  const [booksData, setBooksData] = useState(bestBooksData.slice(1));
 
-    const [currentBookbooksData, setCurrentBookbooksData] = useState({
-      booksData: initialBestBookbooksData,
-      index: 0,
+  const [transitionData, setTransitionData] = useState(bestBooksData[0]);
+
+  const [currentBookData, setCurrentBookData] = useState({
+    data: initialBestBookData,
+    index: 0,
+  });
+
+  const handlePrev = () => {
+    setBooksData((prevData) => [
+      transitionData ? transitionData : initialBestBookData,
+      ...prevData.slice(0, prevData.length - 1),
+    ]);
+
+    setCurrentBookData({
+      data: transitionData ? transitionData : bestBooksData[0],
+      index: bestBooksData.findIndex(
+        (ele) => ele.img === booksData[booksData.length - 1].img
+      ),
     });
 
-    const handlePrev = () => {
-        setBooksbooksData((prevbooksData) => [
-            transitionbooksData ? transitionbooksData : initialBestBookbooksData,
-            ...prevbooksData.slice(0, prevbooksData.length - 1),
-        ]);
-        
-        setTransitionbooksData({
-            booksData: transitionbooksData ? transitionbooksData : bestBooksbooksData[0],
-            index: bestBooksbooksData.findIndex(
-                (ele) => ele.img === booksData[booksData.length - 1].img
-            ),
-        });
-        
-        handleTransitionbooksData(booksData[booksData.length - 1]);
-    }
+    setTransitionData(booksData[booksData.length - 1]);
+  };
 
-    const handleNext = () => {
-        setBooksbooksData((prev) => prev.slice(1));
-        setTransitionbooksData({
-            booksData: transitionbooksData ? transitionbooksData: initialBestBookbooksData,
-            index: bestBooksbooksData.findIndex((ele) =>ele.img === booksData[0].img),
-        });
-        handleTransitionbooksData(booksData[0]);
-        setTimeout(() => {
-            setBooksbooksData((newbooksData) => [
-                ...newbooksData,
-                transitionbooksData ? transitionbooksData: initialBestBookbooksData,
-            ])
-        }, 5)
-    }
+  const handleNext = () => {
+    setBooksData((prev) => prev.slice(1));
+    setTransitionData({
+      data: transitionData ? transitionData : initialBestBookData,
+      index: bestBooksData.findIndex((ele) => ele.img === booksData[0].img),
+    });
+    setCurrentBookData(booksData[0]);
+    setTimeout(() => {
+      setBooksData((newData) => [
+        ...newData,
+        transitionData ? transitionData : initialBestBookData,
+      ]);
+    }, 500);
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      handleNext(); // Llama automáticamente a handleNext
+    }, 3000); // Cambia cada 3 segundos (puedes ajustar el tiempo)
+
+    return () => clearInterval(interval); // Limpia el intervalo al desmontar el componente
+  }, [transitionData, booksData]);
 
   return {
+    booksData,
     handlePrev,
-    handleNext
-}
-}
+    handleNext,
+  };
+};
