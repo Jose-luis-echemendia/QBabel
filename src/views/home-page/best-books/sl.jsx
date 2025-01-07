@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
 
 export const Sl = ({ data }) => {
+
   return (
     <>
       <div className="flex w-full gap-6">
         {data.map((item, index) => (
           <motion.div
-            key={index}
+            key={item.img}
             className="relative h-52 min-w-[250px] rounded-2xl shadow-md md:h-80 md:min-w-[250px]"
             layout
             initial={{ scale: 0.9, opacity: 0 }}
@@ -22,9 +23,9 @@ export const Sl = ({ data }) => {
             transition={{ type: "spring", damping: 20, stiffness: 100 }}
           >
             <motion.img
-              layoutId={data.img}
+              layoutId={item.img}
               alt="transition Image"
-              src={data.img}
+              src={item.img}
               className="absolute h-full w-full object-cover rounded-2xl brightness-75"
             />
 
@@ -35,15 +36,15 @@ export const Sl = ({ data }) => {
               />
               <motion.div
                 className="text-xs text-[#D5D5D6]"
-                layoutId={data.author}
+                layoutId={item.author}
               >
-                {data.author}
+                {item.author}
               </motion.div>
               <motion.h1
                 className="text-xl leading-6 text-white"
-                layoutId={data.title}
+                layoutId={item.title}
               >
-                {data.title}
+                {item.title}
               </motion.h1>
             </motion.div>
           </motion.div>

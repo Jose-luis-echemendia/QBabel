@@ -41,7 +41,7 @@ export const C = ({
                 ...newData,
                 transitionData ? transitionData: initialData,
             ])
-        }, 500)
+        }, 5)
     }
 
   return (
