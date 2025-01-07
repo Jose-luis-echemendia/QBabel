@@ -48,12 +48,12 @@ export const Hero = () => {
           <img
             src="/assets/images/home/image1.png"
             alt=""
-            className="absolute mb-10 z-10 w-[500px] h-[600px]"
+            className="absolute mb-10 z-20 w-[500px] h-[600px]"
           />
           <img
             src="/assets/images/home/image2.png"
             alt=""
-            className="absolute z-0 w-[700px] h-[700px]"
+            className="absolute z-10 w-[700px] h-[700px]"
           />
         </div>
       </div>
