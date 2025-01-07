@@ -10,7 +10,7 @@ const CustomLayout = ({ children }) => {
     <LoadSuspense className="relative flex flex-col ">
       <NavBar />
       <ToastContainer autoClose={5000} />
-      <main>{children}</main>
+      <main className='antialiased'>{children}</main>
       <Footer />
     </LoadSuspense>
   );
