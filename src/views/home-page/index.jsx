@@ -1,4 +1,5 @@
 import { BestBooks } from "./best-books";
+import { Test } from "./best-books/test";
 import { ExploitYourTalent } from "./explota-tu-talento";
 import { Hero } from "./hero";
 
@@ -11,7 +12,7 @@ const HomeView = () => {
         </h2>
         <Hero />
         <ExploitYourTalent />
-        <BestBooks/>
+        <Test/>
       </div>
     </>
   );
