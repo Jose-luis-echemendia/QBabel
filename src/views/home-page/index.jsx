@@ -13,6 +13,7 @@ const HomeView = () => {
         <Hero />
         <ExploitYourTalent />
         <Test/>
+        <BestBooks/>
       </div>
     </>
   );
