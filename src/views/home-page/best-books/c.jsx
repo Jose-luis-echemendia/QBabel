@@ -40,7 +40,7 @@ export const C = ({
                 ...newData,
                 transitionData ? transitionData: initialData,
             ])
-        }, 5)
+        }, 500)
     }
 
     useEffect(() => {
