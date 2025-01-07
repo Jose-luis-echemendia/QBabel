@@ -9,14 +9,14 @@ export const bestBooksData = [
     {
       author: "aaa",
       tittle: "pepito",
-      img: "/assets/images/home/best_books/2.png",
+      img: "/assets/images/home/best_books/book2.png",
       description:
         "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi,rem magnam nesciunt minima placeat, itaque eum neque officiis unde,eaque optio ratione aliquid assumenda facere ab et quasi ducimus autdoloribus non numquam. Lorem ipsum dolor, sit amet consecteturadipisicing elit. Quisquam quidem perferendis ab doloribus ipsamratione fugit officia, rem necessitatibus, repellat itaque optio velitquia a corrupti cum impedit voluptates iure",
     },
     {
       author: "vv",
       tittle: "manuel",
-      img: "/assets/images/home/best_books/3.png",
+      img: "/assets/images/home/best_books/book3.png",
       description:
         "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi,rem magnam nesciunt minima placeat, itaque eum neque officiis unde,eaque optio ratione aliquid assumenda facere ab et quasi ducimus autdoloribus non numquam. Lorem ipsum dolor, sit amet consecteturadipisicing elit. Quisquam quidem perferendis ab doloribus ipsamratione fugit officia, rem necessitatibus, repellat itaque optio velitquia a corrupti cum impedit voluptates iure",
     },
