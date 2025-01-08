@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import PropTypes from 'prop-types';
 
 export const CarouselBooks = ({ booksData }) => {
   return (
@@ -55,4 +56,14 @@ export const CarouselBooks = ({ booksData }) => {
       </div>
     </>
   );
+};
+
+CarouselBooks.propTypes = {
+  booksData: PropTypes.arrayOf(
+    PropTypes.shape({
+      img: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 };
