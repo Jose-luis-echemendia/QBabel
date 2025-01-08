@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 export const CarouselBooks = ({ booksData }) => {
   return (
@@ -9,7 +9,7 @@ export const CarouselBooks = ({ booksData }) => {
           {booksData.map((bookData) => (
             <motion.div
               key={bookData.img}
-              className="relative h-52 min-w-[250px] rounded-2xl shadow-md md:h-80 md:min-w-[250px]"
+              className="relative h-56 min-w-[250px] rounded-2xl shadow-md md:h-80 md:min-w-[250px]"
               layout
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{
@@ -22,12 +22,14 @@ export const CarouselBooks = ({ booksData }) => {
               exit={{ scale: 0.8, opacity: 0 }}
               transition={{ type: "spring", damping: 20, stiffness: 100 }}
             >
-              <motion.img
-                layoutId={bookData.img}
-                alt="transition Image"
-                src={bookData.img}
-                className="absolute h-full w-full object-cover rounded-2xl brightness-75"
-              />
+              <figure className="object-cover">
+                <motion.img
+                  layoutId={bookData.img}
+                  alt="transition Image"
+                  src={bookData.img}
+                  className="absolute h-full w-full rounded-2xl brightness-75"
+                />
+              </figure>
             </motion.div>
           ))}
         </div>
