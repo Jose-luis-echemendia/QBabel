@@ -8,16 +8,10 @@ export const BestBooks = () => {
   const { booksData, transitionBookData, currentBookData } = useCarousel();
 
   return (
-    <motion.section
-      key={currentBookData.img}
-      initial={{ background: "#111217" }}
-      animate={{
-        background: `linear-gradient(to right, #111217, ${currentBookData.color})`,
-      }}
-      transition={{ duration: 0.5 }}
-      className="grid grid-cols-10 gap-3 overflow-hidden pb-16"
-    >
+    <section className="grid grid-cols-10 gap-3 overflow-hidden">
       <AnimatePresence>
+        {/* background */}
+
         {/* Imagen book*/}
         <div className="col-span-4 py-10">
           <BookCover
@@ -36,6 +30,26 @@ export const BestBooks = () => {
           <CarouselBooks booksData={booksData} />
         </div>
       </AnimatePresence>
-    </motion.section>
+    </section>
   );
 };
+
+/**key={currentBookData.img}
+      variants={{
+        initial: {
+          x: "100%",
+          width: "100%",
+        },
+        animate: {
+          x: "0%",
+          width: "0%",
+        },
+        exit: {
+          x: ["0%", "100%"],
+          width: ["0%", "100%"],
+        },
+      }}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      transition={{ delay: 0.2, duration: 0.6, ease: "easeInOut" }} */
