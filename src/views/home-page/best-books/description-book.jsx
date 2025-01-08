@@ -1,9 +1,10 @@
+import CustomButton from "@/components/button";
 import {
   containerVariants,
   childrenVariants,
 } from "@/utils/home-page-variants/best-books-variants";
 import { motion } from "framer-motion";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 export const DescriptionBook = ({ bookData }) => {
   const { author, tittle, description } = bookData;
@@ -31,12 +32,15 @@ export const DescriptionBook = ({ bookData }) => {
           variants={childrenVariants}
           className="flex gap-5 mt-3 justify-center"
         >
-          <button className="bg-white text-black py-2 px-8 rounded-md flex-grow-0 max-w-[150px] font-opensans font-bold">
-            VER MÁS
-          </button>
-          <button className="bg-transparent text-white border border-white py-2 px-8 rounded-md flex-grow-0 max-w-[150px] font-opensans font-bold">
-            LEER
-          </button>
+          <CustomButton
+            name="VER MÁS"
+            className="bg-white text-black py-2 px-8 rounded-md flex-grow-0 max-w-[150px] font-opensans font-bold"
+          />
+
+          <CustomButton
+            name="LEER"
+            className="bg-transparent text-white border border-white py-2 px-8 rounded-md flex-grow-0 max-w-[150px] font-opensans font-bold"
+          />
         </motion.div>
       </motion.article>
     </>
