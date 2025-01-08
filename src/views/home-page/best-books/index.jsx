@@ -5,7 +5,7 @@ import { useCarousel } from "@/hooks/useCarousel";
 
 export const BestBooks = () => {
 
-  const { booksData } = useCarousel()
+  const { booksData, transitionBookData, currentBookData } = useCarousel()
 
   return (
     <section className="grid grid-cols-10 gap-3 bg-[#111217] overflow-hidden">
@@ -20,7 +20,7 @@ export const BestBooks = () => {
         </figure>
         <div className="col-span-6 p-4 pt-10 ml-10 flex flex-col gap-14">
           {/* Información book*/}
-          <DescriptionBook />
+          <DescriptionBook bookData={(transitionBookData ? transitionBookData : currentBookData)} />
 
           {/* caruesol books */}
           <CarouselBooks booksData={booksData} />
