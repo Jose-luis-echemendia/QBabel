@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-export const background = () => {
+export const Background = ({transitionBookData, currentBookData}) => {
   return (
     <>
       <motion.div
