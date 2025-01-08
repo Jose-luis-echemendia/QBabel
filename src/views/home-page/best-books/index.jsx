@@ -9,6 +9,7 @@ export const BestBooks = () => {
 
   return (
     <motion.section
+      key={currentBookData.img}
       initial={{ background: "#111217" }}
       animate={{
         background: `linear-gradient(to right, #111217, ${currentBookData.color})`,
