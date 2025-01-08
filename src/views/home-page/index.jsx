@@ -12,7 +12,6 @@ const HomeView = () => {
         </h2>
         <Hero />
         <ExploitYourTalent />
-        
         <BestBooks/>
       </div>
     </>

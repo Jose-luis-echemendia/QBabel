@@ -45,13 +45,7 @@ export const useCarousel = () => {
     }, 500);
   };
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      handleNext(); // Llama automáticamente a handleNext
-    }, 3000); // Cambia cada 3 segundos (puedes ajustar el tiempo)
-
-    return () => clearInterval(interval); // Limpia el intervalo al desmontar el componente
-  }, [transitionData, booksData]);
+  
 
   return {
     booksData,
