@@ -11,7 +11,7 @@ export const BestBooks = () => {
     <section className="grid grid-cols-10 gap-3 overflow-hidden">
       <AnimatePresence>
         {/* background */}
-
+        <div  className="fixed top-0 bottom-0 right-full w-screen z-30 "/>
         {/* Imagen book*/}
         <div className="col-span-4 py-10">
           <BookCover
