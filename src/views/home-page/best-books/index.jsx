@@ -1,6 +1,6 @@
 import { CarouselBooks } from "./carousel-books";
 import { DescriptionBook } from "./description-book";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { useCarousel } from "@/hooks/useCarousel";
 import { BookCover } from "./book-cover";
 import { Background } from "./background";
