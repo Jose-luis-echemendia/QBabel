@@ -9,7 +9,7 @@ export const BestBooks = () => {
   const { booksData, transitionBookData, currentBookData } = useCarousel();
 
   return (
-    <section className="relative grid grid-cols-10 gap-3 overflow-hidden pb-10">
+    <section className="relative min-h-screen grid grid-cols-10 gap-3 overflow-hidden pb-10">
       {/* Fondo animado */}
       <AnimatePresence mode="wait">
         <Background
