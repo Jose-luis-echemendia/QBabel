@@ -1,20 +1,20 @@
+import { CustomImageDecorator } from "@/components/image-decorator";
+
 export const Hero = () => {
   return (
     <>
       <div className="relative pt-10 pb-5 flex flex-row border-b shadow-lg shadow-gray-400">
-        <img
+        <CustomImageDecorator
           src="/assets/icons/Vector1.svg"
-          alt=""
           className="absolute left-0 top-[25px] w-[160px]"
         />
-        <img
+        <CustomImageDecorator
           src="/assets/icons/Vector2.svg"
-          alt=""
           className="absolute right-0 top-[300px] w-[300px] z-10"
         />
         <div className="w-1/2 ml-36 mt-24 flex flex-col p-8">
           <h1 className="font-quicksand mb-10 text-8xl text-left font-bold">
-            Hola, somos{' '}
+            Hola, somos{" "}
             <span className="text-primary text-shadow text-shadow-y-5">
               QBabel
             </span>
@@ -46,14 +46,14 @@ export const Hero = () => {
         </div>
         <div className="w-1/2 relative flex items-center justify-center">
           <img
-            src="/assets/images/home/image1.png"
+            src="/assets/images/home/hero/image1.png"
             alt=""
-            className="absolute mb-10 z-20 w-[500px] h-[600px]"
+            className="absolute mb-10 z-20 w-[600px] h-[600px]"
           />
           <img
-            src="/assets/images/home/image2.png"
+            src="/assets/images/home/hero/image2.png"
             alt=""
-            className="absolute z-10 w-[700px] h-[700px]"
+            className="absolute z-10"
           />
         </div>
       </div>
