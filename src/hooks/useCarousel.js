@@ -7,7 +7,7 @@ import {
 export const useCarousel = () => {
   const [booksData, setBooksData] = useState(bestBooksData.slice(1));
 
-  const [transitionData, setTransitionData] = useState(bestBooksData[0]);
+  const [transitionBookData, setTransitionBookData] = useState(bestBooksData[0]);
 
   const [currentBookData, setCurrentBookData] = useState({
     data: initialBestBookData,
@@ -16,31 +16,31 @@ export const useCarousel = () => {
 
   const handlePrev = () => {
     setBooksData((prevData) => [
-      transitionData ? transitionData : initialBestBookData,
+      transitionBookData ? transitionBookData : initialBestBookData,
       ...prevData.slice(0, prevData.length - 1),
     ]);
 
     setCurrentBookData({
-      data: transitionData ? transitionData : bestBooksData[0],
+      data: transitionBookData ? transitionBookData : bestBooksData[0],
       index: bestBooksData.findIndex(
         (ele) => ele.img === booksData[booksData.length - 1].img
       ),
     });
 
-    setTransitionData(booksData[booksData.length - 1]);
+    setTransitionBookData(booksData[booksData.length - 1]);
   };
 
   const handleNext = () => {
     setBooksData((prev) => prev.slice(1));
-    setTransitionData({
-      data: transitionData ? transitionData : initialBestBookData,
+    setTransitionBookData({
+      data: transitionBookData ? transitionBookData : initialBestBookData,
       index: bestBooksData.findIndex((ele) => ele.img === booksData[0].img),
     });
     setCurrentBookData(booksData[0]);
     setTimeout(() => {
       setBooksData((newData) => [
         ...newData,
-        transitionData ? transitionData : initialBestBookData,
+        transitionBookData ? transitionBookData : initialBestBookData,
       ]);
     }, 500);
   };
@@ -51,10 +51,12 @@ export const useCarousel = () => {
     }, 3000); // Cambia cada 3 segundos (puedes ajustar el tiempo)
 
     return () => clearInterval(interval); // Limpia el intervalo al desmontar el componente
-  }, [transitionData, booksData]);
+  }, [transitionBookData, booksData]);
 
   return {
     booksData,
+    transitionBookData,
+    currentBookData,
     handlePrev,
     handleNext,
   };
