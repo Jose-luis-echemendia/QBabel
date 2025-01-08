@@ -8,7 +8,7 @@ export const BestBooks = () => {
   const { booksData, transitionBookData, currentBookData } = useCarousel();
 
   return (
-    <section className="grid grid-cols-10 gap-3 overflow-hidden relative">
+    <section className="grid grid-cols-10 gap-3 overflow-hidden relative pb-10">
       <AnimatePresence mode="wait">
         {/* background */}
         <motion.div
