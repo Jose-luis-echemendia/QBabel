@@ -5,9 +5,6 @@ export const CarouselBooks = ({ booksData }) => {
   return (
     <>
       <div className="flex flex-col gap-6">
-        <h6 className="font-opensans text-white mx-auto text-lg">
-          historias similares
-        </h6>
         <div className="flex flex-row gap-6">
           {booksData.map((bookData) => (
             <motion.div
