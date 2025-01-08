@@ -22,7 +22,7 @@ export const DescriptionBook = ({ bookData }) => {
         </motion.div>
         <motion.p
           variants={childrenVariants}
-          className="mt-4 mr-20 text-balance font-quicksand"
+          className="mt-4 mr-20 text-balance font-quicksand text-left text-xl font-medium text-opacity-60"
         >
           {description}
         </motion.p>
