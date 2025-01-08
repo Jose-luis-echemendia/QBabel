@@ -11,9 +11,9 @@ export const BestBooks = () => {
     <section className="grid grid-cols-10 gap-3 bg-[#111217] overflow-hidden">
       <AnimatePresence>
         {/* Imagen book*/}
-        <figure className="col-span-4">
+        <figure className="col-span-4 py-10">
           <img
-            src="/assets/images/home/best_books/book1.png"
+            src="/assets/images/home/best_books/book1.jpg"
             alt=""
             className="w-full h-screen object-contain"
           />
