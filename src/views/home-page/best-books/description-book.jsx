@@ -3,6 +3,7 @@ import {
   childrenVariants,
 } from "@/utils/home-page-variants/best-books-variants";
 import { motion } from "framer-motion";
+import PropTypes from 'prop-types';
 
 export const DescriptionBook = ({ bookData }) => {
   const { author, tittle, description } = bookData;
@@ -40,4 +41,12 @@ export const DescriptionBook = ({ bookData }) => {
       </motion.article>
     </>
   );
+};
+
+DescriptionBook.propTypes = {
+  bookData: PropTypes.shape({
+    author: PropTypes.string.isRequired,
+    tittle: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+  }).isRequired,
 };
