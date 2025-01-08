@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 export const BookCover = ({ transitionBookData, currentBookData }) => {
   return (
     <>
-      <figure>
+      <figure className="ml-10">
         {transitionBookData && (
           <motion.img
             key={transitionBookData.img}
@@ -13,7 +13,7 @@ export const BookCover = ({ transitionBookData, currentBookData }) => {
               opacity: { ease: "linear" },
               layout: { duration: 0.6 },
             }}
-            className="absolute left-0 top-0 w-full h-full object-cover z-10 brightness-50"
+            className="w-full h-screen object-cover rounded-2xl brightness-50"
             src={transitionBookData.img}
           />
         )}

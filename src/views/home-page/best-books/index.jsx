@@ -12,7 +12,7 @@ export const BestBooks = () => {
       <AnimatePresence>
         {/* Imagen book*/}
         <div className="col-span-4 py-10">
-          
+          <BookCover transitionBookData={transitionBookData} currentBookData={currentBookData} />
         </div>
 
         <div className="col-span-6 p-4 pt-10 ml-10 flex flex-col gap-14">
