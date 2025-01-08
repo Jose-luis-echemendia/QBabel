@@ -16,7 +16,7 @@ function CustomButton({
     <button
       className={classNames(
         "flex flex-row gap-[6px] h-[40px] px-[16px] items-center justify-center rounded-[16px]",
-        "font-sans font-semibold text-[14px] leading-[16px]",
+        "font-opensans font-bold text-[14px] leading-[16px]",
         add && " text-[#fff]",
         cancel && "bg-[#fff]  border-[1px] border-solid ",
         className
