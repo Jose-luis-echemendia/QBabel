@@ -32,7 +32,7 @@ export const DescriptionBook = ({ bookData }) => {
           className="flex gap-5 mt-3 justify-center"
         >
           <button className="bg-white text-black py-2 px-8 rounded-md flex-grow-0 max-w-[150px] font-opensans font-bold">
-            SEE MORE
+            VER MÁS
           </button>
           <button className="bg-transparent text-white border border-white py-2 px-8 rounded-md flex-grow-0 max-w-[150px] font-opensans font-bold">
             LEER
