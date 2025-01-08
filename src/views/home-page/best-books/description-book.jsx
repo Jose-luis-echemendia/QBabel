@@ -4,7 +4,13 @@ import {
 } from "@/utils/home-page-variants/best-books-variants";
 import { motion } from "framer-motion";
 
-export const DescriptionBook = () => {
+export const DescriptionBook = ({
+  author,
+  tittle,
+  img,
+  description
+  
+}) => {
   return (
     <>
       <motion.article
