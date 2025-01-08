@@ -8,6 +8,7 @@ export const CustomImageDecorator = ({ src, className }) => {
         alt="Image decorator"
         className="w-full h-full object-cover"
       />
+      <figcaption className="sr-only">Image Decorator</figcaption>
     </figure>
   );
 };
