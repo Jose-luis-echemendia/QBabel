@@ -6,7 +6,7 @@ export const Background = ({ transitionBookData, currentBookData }) => {
       {transitionBookData && (
         <motion.div
           key={currentBookData.data.color}
-          className="absolute top-0 left-0 w-full h-full z-0 bg-opacity-75"
+          className="absolute top-0 left-0 w-full h-full z-0"
           style={{
             background: `linear-gradient(to right, #111217, ${currentBookData.data.color})`,
           }}
@@ -23,7 +23,7 @@ export const Background = ({ transitionBookData, currentBookData }) => {
       )}
       <motion.div
         key={transitionBookData.color + "transition"}
-        className="absolute top-0 left-0 w-full h-full z-0 bg-opacity-75"
+        className="absolute top-0 left-0 w-full h-full z-0"
         style={{
           background: `linear-gradient(to right, #111217, ${transitionBookData.color})`,
         }}
