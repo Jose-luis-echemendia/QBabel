@@ -4,12 +4,13 @@ import { AnimatePresence } from "framer-motion";
 import { useCarousel } from "@/hooks/useCarousel";
 import { BookCover } from "./book-cover";
 import { Background } from "./background";
+import { Controls } from "./controls";
 
 export const BestBooks = () => {
   const { booksData, transitionBookData, currentBookData } = useCarousel();
 
   return (
-    <section className="relative min-h-screen grid grid-cols-10 gap-3 overflow-hidden pb-10">
+    <section className="relative min-h-screen grid grid-cols-10 gap-3 overflow-hidden py-6">
       {/* Fondo animado */}
       <AnimatePresence mode="wait">
         <Background
@@ -30,6 +31,7 @@ export const BestBooks = () => {
             bookData={transitionBookData ? transitionBookData : currentBookData}
           />
           <CarouselBooks booksData={booksData} />
+          <Controls />
         </div>
       </AnimatePresence>
     </section>
