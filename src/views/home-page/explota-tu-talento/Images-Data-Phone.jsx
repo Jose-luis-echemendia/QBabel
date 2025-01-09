@@ -28,9 +28,9 @@ export const ImageDataPhone = () => {
       className: 'absolute right-44 w-[350px] top-32 z-10',
     },
     {
-      src: '/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (4).png',
+      src: '/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (4) 1.png',
       alt: 'Motivación Diaria - Imagen 6',
-      className: 'absolute right-44  w-[300px] bottom-0 z-10',
+      className: 'absolute right-40  w-[270px] bottom-0 z-10',
     },
     {
       src: '/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (13).png',
