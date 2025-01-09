@@ -14,7 +14,7 @@ export const Controls = () => {
           IconCenter={ChevronRightIcon}
           className="p-5 h-14 w-14 rounded-full bg-white/50 text-black  flex-grow-0 hover:shadow-xl hover:shadow-white/50 hover:translate-y-[-2px] transition-transform duration-300"
         />
-        <Progress />
+        <Progress  value={25} size="sm" variant="gradient" color="red"/>
       </div>
     </>
   );
