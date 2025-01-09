@@ -10,6 +10,7 @@ function CustomButton({
   action,
   IconLeft,
   IconRight,
+  iconCenter,
   iconSize,
 }) {
   return (
@@ -32,6 +33,14 @@ function CustomButton({
         />
       )}
       {name && <span className="font-semibold leading-6">{name}</span>}
+      {iconCenter && (
+        <IconRight
+          className="h-[16px] w-[16px]"
+          height={16 || iconSize}
+          width={16 || iconSize}
+          color={cancel ? "#261E1B" : "#fff"}
+        />
+      )}
       {IconRight && (
         <IconRight
           className="h-[16px] w-[16px]"
