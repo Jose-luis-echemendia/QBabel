@@ -9,7 +9,7 @@ function CustomButton({
   action,
   IconLeft,
   IconRight,
-  iconCenter,
+  IconCenter,
   iconSize,
 }) {
   return (
@@ -32,8 +32,8 @@ function CustomButton({
         />
       )}
       {name && <span className="font-semibold leading-6">{name}</span>}
-      {iconCenter && (
-        <iconCenter
+      {IconCenter && (
+        <IconCenter
           className="h-[16px] w-[16px]"
           height={iconSize || 16}
           width={iconSize || 16}
@@ -60,7 +60,7 @@ CustomButton.propTypes = {
   action: PropTypes.func,
   IconLeft: PropTypes.elementType,
   IconRight: PropTypes.elementType,
-  iconCenter: PropTypes.elementType,
+  IconCenter: PropTypes.elementType,
   iconSize: PropTypes.number,
 };
 
