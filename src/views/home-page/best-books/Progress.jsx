@@ -2,14 +2,16 @@ import PropTypes from "prop-types";
 import { motion } from "framer-motion";
 
 export const Progress = ({ currentIndex, length }) => {
+
   return (
     <>
-      <div className="flex h-[1px] items-center rounded-full bg-white bg-opacity-50 w-full">
+      <div className="flex h-[2px] items-center rounded-full bg-white/50 w-full">
         <div
+          key={currentIndex}
           style={{
             width: (((currentIndex + 1) / length) * 100).toString() + "%",
           }}
-          className={`h-[1px] bg-yellow-400 bg-opacity-50 rounded-full`}
+          className={`h-[2px] bg-primary rounded-full`}
         ></div>
       </div>
       <motion.span key={currentIndex}>

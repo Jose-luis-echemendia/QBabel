@@ -31,7 +31,7 @@ export const BestBooks = () => {
             bookData={transitionBookData ? transitionBookData : currentBookData}
           />
           <CarouselBooks booksData={booksData} />
-          <Controls currentIndex={currentBookData.index} length={currentBookData.length} handleNext={handleNext} handlePrev={handlePrev} />
+          <Controls currentIndex={currentBookData.index} length={booksData.length} handleNext={handleNext} handlePrev={handlePrev} />
         </div>
       </AnimatePresence>
     </section>

@@ -3,6 +3,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import { Progress } from "./Progress";
 
 export const Controls = ({ currentIndex, length, handleNext, handlePrev }) => {
+  console.log(currentIndex, length)
   return (
     <div className="flex flex-row gap-4 ml-6 -mt-5 items-center">
       {/* Botones */}
