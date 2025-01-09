@@ -34,12 +34,12 @@ export const DescriptionBook = ({ bookData }) => {
         >
           <CustomButton
             name="VER MÁS"
-            className="bg-white/50 text-black py-2 px-8 rounded-md flex-grow-0 min-w-[100px] hover:shadow-xl hover:shadow-white/50"
+            className="bg-white/50 text-black py-2 px-8 rounded-md flex-grow-0 min-w-[100px] hover:shadow-xl hover:shadow-white/50 hover:translate-y-[-2px] transition-transform duration-300"
           />
 
           <CustomButton
             name="LEER"
-            className="bg-transparent text-white border border-white/50 py-2 px-8 rounded-md flex-grow-0 min-w-[100px] hover:shadow-xl hover:shadow-white/50"
+            className="bg-transparent text-white border border-white/50 py-2 px-8 rounded-md flex-grow-0 min-w-[100px] hover:shadow-xl hover:shadow-white/50 hover:translate-y-[-2px] transition-transform duration-300"
           />
         </motion.div>
       </motion.article>
