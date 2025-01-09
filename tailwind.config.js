@@ -1,19 +1,19 @@
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 
+// Importamos el helper de Material Tailwind
+import withMT from "@material-tailwind/react/utils/withMT";
+
 /** @type {import('tailwindcss').Config} */
-export default {
+export default withMT({
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
         primary: '#EAD38D',
-      
         'white-100': '#FFFFFF',
-
-        'black-500': '#2E2E2E'
+        'black-500': '#2E2E2E',
       },
-
       fontFamily: {
         inter: ['Inter', 'sans-serif'], 
         anton: ['Anton', 'sans-serif'], 
@@ -23,7 +23,7 @@ export default {
     },
   },
   plugins: [
-    // ...other plugins
     require("@designbycode/tailwindcss-text-shadow"),
-],
-};
+    // Otros plugins que quieras usar
+  ],
+});
