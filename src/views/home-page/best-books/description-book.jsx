@@ -30,7 +30,7 @@ export const DescriptionBook = ({ bookData }) => {
         </motion.p>
         <motion.div
           variants={childrenVariants}
-          className="flex gap-5 mt-3 justify-center"
+          className="flex gap-5 mt-[6px] justify-center"
         >
           <CustomButton
             name="VER MÁS"
