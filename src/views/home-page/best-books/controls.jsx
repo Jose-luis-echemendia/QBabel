@@ -1,6 +1,5 @@
 import CustomButton from "@/components/button";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
-import { Progress } from "@material-tailwind/react";
+import { Progress } from "./Progress";
 
 export const Controls = () => {
   return (
@@ -14,11 +13,7 @@ export const Controls = () => {
         IconCenter={ChevronRightIcon}
         className="p-5 h-14 w-14 rounded-full bg-white/50 text-black  flex-grow-0 hover:shadow-xl hover:shadow-white/50 hover:translate-y-[-2px] transition-transform duration-300"
       />
-
-      {/* Barra de Progreso */}
-      <div className="w-full ml-5">
-        <Progress value={1} size="sm" variant="gradient"/>
-      </div>
+      <Progress />
     </div>
   );
 };
