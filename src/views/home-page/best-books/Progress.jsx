@@ -1,7 +1,33 @@
+import PropTypes from "prop-types";
+import { motion } from "framer-motion";
 
-
-export const Progress = () => {
+export const Progress = ({ currentIndex, length }) => {
   return (
-    <></>
-  )
-}
+    <>
+      <div className="flex h-[1px] items-center rounded-full bg-white bg-opacity-50 w-full">
+        <div
+          style={{
+            width: (((currentIndex + 1) / length) * 100).toString() + "%",
+          }}
+          className={`h-[1px] bg-yellow-400 bg-opacity-50 rounded-full`}
+        ></div>
+      </div>
+      <span key={currentIndex}>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          key={currentIndex}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+          className="flex items-center text-4xl font-medium text-white/50"
+        >
+          0{currentIndex + 1}
+        </motion.div>
+      </span>
+    </>
+  );
+};
+
+Progress.propTypes = {
+  currentIndex: PropTypes.number.isRequired,
+  length: PropTypes.number.isRequired,
+};
