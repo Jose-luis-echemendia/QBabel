@@ -12,7 +12,7 @@ export const Progress = ({ currentIndex, length }) => {
           className={`h-[1px] bg-yellow-400 bg-opacity-50 rounded-full`}
         ></div>
       </div>
-      <span key={currentIndex}>
+      <motion.span key={currentIndex}>
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -22,7 +22,7 @@ export const Progress = ({ currentIndex, length }) => {
         >
           0{currentIndex + 1}
         </motion.div>
-      </span>
+      </motion.span>
     </>
   );
 };
