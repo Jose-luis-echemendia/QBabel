@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 export const BookCover = ({ transitionBookData, currentBookData }) => {
   return (
     <>
-      <figure className="ml-10 relative object-contain">
+      <figure className="ml-10 relative object-contain mt-6">
         {transitionBookData && (
           <motion.img
             key={transitionBookData.img}
