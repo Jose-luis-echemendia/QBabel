@@ -7,7 +7,7 @@ import { Background } from "./background";
 import { Controls } from "./controls";
 
 export const BestBooks = () => {
-  const { booksData, transitionBookData, currentBookData } = useCarousel();
+  const { booksData, transitionBookData, currentBookData, handleNext, handlePrev } = useCarousel();
 
   return (
     <section className="relative min-h-screen grid grid-cols-10 gap-3 overflow-hidden pt-6 pb-4">
@@ -31,7 +31,7 @@ export const BestBooks = () => {
             bookData={transitionBookData ? transitionBookData : currentBookData}
           />
           <CarouselBooks booksData={booksData} />
-          <Controls currentIndex={currentBookData.index} length={currentBookData.length} />
+          <Controls currentIndex={currentBookData.index} length={currentBookData.length} handleNext={handleNext} handlePrev={handlePrev} />
         </div>
       </AnimatePresence>
     </section>
