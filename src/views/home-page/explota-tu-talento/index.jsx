@@ -1,10 +1,11 @@
-import { NarrativeSteps } from './narrative-steps';
-import { ImagesDataWaterfallBook } from './images-data-waterfall';
+import { NarrativeSteps } from "./narrative-steps";
+import { ImagesDataWaterfallBook } from "./images-data-waterfall";
+import { ImageDataPhone } from "./Images-Data-Phone";
 
 export const ExploitYourTalent = () => {
   return (
     <section
-      className="w-full h-[674px] relative bg-primary p-1 bg-opacity-50"
+      className="w-full min-h-screen relative bg-primary p-1 bg-opacity-50"
       aria-labelledby="exploit-your-talent"
     >
       <h2
@@ -14,7 +15,7 @@ export const ExploitYourTalent = () => {
         Explota tu talento
       </h2>
 
-      <div className="flex relative justify-center ">
+      <div className="flex relative justify-center mt-4">
         <NarrativeSteps />
       </div>
 
@@ -24,6 +25,8 @@ export const ExploitYourTalent = () => {
         className="absolute bottom-32 w-[160px]"
       />
       <ImagesDataWaterfallBook />
+
+      <ImageDataPhone />
     </section>
   );
 };
