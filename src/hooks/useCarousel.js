@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import {
   bestBooksData,
   initialBestBookData,
-} from "@/constants/home-page/best-books";
+} from '@/constants/home-page/best-books';
 
 export const useCarousel = () => {
   const [booksData, setBooksData] = useState(bestBooksData.slice(1));
 
-  const [transitionBookData, setTransitionBookData] = useState(bestBooksData[0]);
+  const [transitionBookData, setTransitionBookData] = useState(
+    bestBooksData[0]
+  );
 
   const [currentBookData, setCurrentBookData] = useState({
     data: initialBestBookData,
@@ -15,7 +17,7 @@ export const useCarousel = () => {
   });
 
   const handlePrev = () => {
-    setBooksData((prevData) => [
+    setBooksData(prevData => [
       transitionBookData ? transitionBookData : initialBestBookData,
       ...prevData.slice(0, prevData.length - 1),
     ]);
@@ -23,7 +25,7 @@ export const useCarousel = () => {
     setCurrentBookData({
       data: transitionBookData ? transitionBookData : bestBooksData[0],
       index: bestBooksData.findIndex(
-        (ele) => ele.img === booksData[booksData.length - 1].img
+        ele => ele.img === booksData[booksData.length - 1].img
       ),
     });
 
@@ -31,14 +33,14 @@ export const useCarousel = () => {
   };
 
   const handleNext = () => {
-    setBooksData((prev) => prev.slice(1));
+    setBooksData(prev => prev.slice(1));
     setCurrentBookData({
       data: transitionBookData ? transitionBookData : initialBestBookData,
-      index: bestBooksData.findIndex((ele) => ele.img === booksData[0].img),
+      index: bestBooksData.findIndex(ele => ele.img === booksData[0].img),
     });
     setTransitionBookData(booksData[0]);
     setTimeout(() => {
-      setBooksData((newData) => [
+      setBooksData(newData => [
         ...newData,
         transitionBookData ? transitionBookData : initialBestBookData,
       ]);

@@ -9,9 +9,9 @@ export const PhoneCard = ({
   textColorSpan,
 }) => {
   return (
-    <article className="bg-transparent mt-8 relative pt-8">
+    <article className="bg-transparent  relative pt-8">
       <div
-        className={`absolute z-[80] top-12 h-[462px] rounded-lg left-5 w-[225px] ${bg}`}
+        className={`absolute z-[80] top-12 h-[470px] rounded-lg left-5 w-[225px] ${bg}`}
         aria-labelledby={`card-${number}`}
       >
         <header className="flex w-fit mx-auto mt-4">
@@ -33,11 +33,13 @@ export const PhoneCard = ({
           {span}
         </span>
       </div>
-      <img
-        src="/assets/images/home/explota_talento/Recortada.png"
-        alt={`Imagen representativa de ${title}`}
-        className="relative z-[100]"
-      />
+      <div>
+        <img
+          src="/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (2).png"
+          alt={`Imagen representativa de ${title}`}
+          className="relative w-[486ox] h-[507px] z-[100]"
+        />
+      </div>
     </article>
   );
 };
