@@ -33,7 +33,7 @@ const infoPhones = [
 
 export const NarrativeSteps = () => {
   return (
-    <div className="flex gap-24">
+    <div className="flex gap-24 justify-center mt-4">
       {infoPhones.map((infoPhone) => (
         <PhoneCard key={uuidv4()} {...infoPhone} />
       ))}
