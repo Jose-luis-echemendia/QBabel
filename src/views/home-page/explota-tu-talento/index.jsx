@@ -15,9 +15,7 @@ export const ExploitYourTalent = () => {
         Explota tu talento
       </h2>
 
-      <div className="flex relative justify-center mt-4">
-        <NarrativeSteps />
-      </div>
+      <NarrativeSteps />
 
       <img
         src="/assets/images/home/explota_talento/Vector (2).png"
