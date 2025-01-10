@@ -7,9 +7,8 @@ export const Progress = ({ currentIndex, length }) => {
     <>
       <div className="flex h-[2px] items-center rounded-full bg-white/50 w-full">
         <div
-          key={currentIndex}
           style={{
-            width: (((currentIndex + 1) / length) * 100).toString() + "%",
+            width: (((currentIndex + 0.2) / length) * 100).toString() + "%",
           }}
           className={`h-[2px] bg-primary rounded-full`}
         ></div>
@@ -19,7 +18,7 @@ export const Progress = ({ currentIndex, length }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           key={currentIndex}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
+          transition={{ duration: 0.7, ease: "easeInOut" }}
           className="flex items-center text-4xl font-medium text-white/50"
         >
           0{currentIndex + 1}
