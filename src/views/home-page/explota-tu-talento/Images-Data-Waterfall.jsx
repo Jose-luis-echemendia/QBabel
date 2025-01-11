@@ -29,12 +29,12 @@ const imagesData = [
   {
     src: '/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (8).png',
     alt: 'Imagen de un libro',
-    className: '-bottom-52 -left-5 z-[55] w-[300] h-[280px]',
+    className: '-bottom-56 -left-5 z-[55] h-[300px]',
   },
   {
     src: '/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (12).png',
     alt: 'Imagen de un libro',
-    className: ' z-[70] -right-32 mt-20 w-[360px] h-[380px]',
+    className: ' z-[70] -right-32 mt-16 w-[360px] h-[300px]',
   },
   {
     src: '/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (9).png',
@@ -44,12 +44,12 @@ const imagesData = [
   {
     src: '/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (6).png',
     alt: 'Imagen de un libro',
-    className: ' z-[60] -bottom-60 -right-20   w-[480px] h-[380px]',
+    className: ' z-[60] -bottom-72 -right-10   w-[400px] h-[380px]',
   },
   {
     src: '/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (13).png',
     alt: 'Imagen de un libro',
-    className: ' z-[55] top-60 right-0  mt-10 w-[250px] h-[297px]',
+    className: ' z-[55] top-60 right-0  mt-10 w-[200px] h-[297px]',
   },
 ];
 
