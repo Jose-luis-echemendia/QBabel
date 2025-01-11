@@ -32,26 +32,6 @@ export const ImageDataPhone = () => {
       alt: 'Motivación Diaria - Imagen 6',
       className: 'absolute right-40  w-[270px] bottom-0 z-10',
     },
-    {
-      src: '/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (13).png',
-      alt: 'Imagen de un libro',
-      className: ' z-[55] top-14 ml-[2.5px] mt-10  h-[297px]',
-    },
-    {
-      src: '/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (9).png',
-      alt: 'Imagen de un libro',
-      className: ' z-[5] top-36  ml-8 mt-56 w-[135px] h-[230px]',
-    },
-    {
-      src: '/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (6).png',
-      alt: 'Imagen de un libro',
-      className: ' z-[60] top-36 -right-44   mt-64 w-[295px] h-[310px]',
-    },
-    {
-      src: '/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (12).png',
-      alt: 'Imagen de un libro',
-      className: ' z-[60] top-60    mt-64 w-[275px] h-[310px]',
-    },
   ];
 
   return (
