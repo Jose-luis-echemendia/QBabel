@@ -4,17 +4,17 @@ const imagesData = [
   {
     src: '/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (7).png',
     alt: 'Motivación Diaria - Imagen de Fondo',
-    className: 'bottom-10 -left-8 z-10 w-[285px] h-[284px]',
+    className: 'bottom-10 -left-8 z-10 w-[320px] h-[294px]',
   },
   {
     src: '/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (10).png',
     alt: 'Motivación Diaria - Imagen Central',
-    className: 'z-30 bottom-10 left-[45px] w-[195px] h-[176px]',
+    className: 'z-30 bottom-10 left-[45px] w-[235px] h-[196px]',
   },
   {
     src: '/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (16).png',
     alt: 'Motivación Diaria - Imagen Superior',
-    className: 'z-50 bottom-8 -left-20 w-[150px]',
+    className: 'z-50 bottom-8 -left-24 w-[200px]',
   },
   {
     src: '/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (5).png',
@@ -31,11 +31,31 @@ const imagesData = [
     alt: 'Imagen de un libro',
     className: '-bottom-52 -left-5 z-[55] w-[300] h-[280px]',
   },
+  {
+    src: '/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (12).png',
+    alt: 'Imagen de un libro',
+    className: ' z-[70] -right-32 mt-20 w-[360px] h-[380px]',
+  },
+  {
+    src: '/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (9).png',
+    alt: 'Imagen de un libro',
+    className: ' z-[5]  -right-8 -bottom-40  w-[240px] h-[320px]',
+  },
+  {
+    src: '/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (6).png',
+    alt: 'Imagen de un libro',
+    className: ' z-[60] -bottom-60 -right-20   w-[480px] h-[380px]',
+  },
+  {
+    src: '/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (13).png',
+    alt: 'Imagen de un libro',
+    className: ' z-[55] top-60 right-0  mt-10 w-[250px] h-[297px]',
+  },
 ];
 
 export const ImagesDataWaterfallBook = () => {
   return (
-    <section aria-labelledby="waterfall-images" className="right-">
+    <section aria-labelledby="waterfall-images">
       <WaterfallBooks images={imagesData} />
     </section>
   );
