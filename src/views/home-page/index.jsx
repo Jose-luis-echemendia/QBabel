@@ -1,4 +1,4 @@
-import { BestAuthor } from './best-author';
+import { BestAuthorPage } from './best-author';
 import { BestBooks } from './best-books';
 import { ExploitYourTalent } from './explota-tu-talento';
 import { Hero } from './hero';
@@ -12,7 +12,7 @@ const HomeView = () => {
         </h2>
         <Hero />
         <ExploitYourTalent />
-        <BestAuthor />
+        <BestAuthorPage />
         <BestBooks />
       </div>
     </>
