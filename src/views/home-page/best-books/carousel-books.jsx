@@ -1,12 +1,12 @@
-import { motion } from "framer-motion";
-import PropTypes from "prop-types";
+import { motion } from 'framer-motion';
+import PropTypes from 'prop-types';
 
 export const CarouselBooks = ({ booksData }) => {
   return (
     <>
       <div className="flex flex-col gap-6 -mt-3">
         <div className="flex flex-row gap-6">
-          {booksData.map((bookData) => (
+          {booksData.map(bookData => (
             <motion.div
               key={bookData.img}
               className="relative h-56 min-w-[250px] rounded-2xl shadow-md md:h-80 md:min-w-[250px]"
@@ -20,7 +20,7 @@ export const CarouselBooks = ({ booksData }) => {
                 },
               }}
               exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ type: "spring", damping: 20, stiffness: 100 }}
+              transition={{ type: 'spring', damping: 20, stiffness: 100 }}
             >
               <figure className="object-cover">
                 <motion.img
@@ -43,7 +43,7 @@ CarouselBooks.propTypes = {
     PropTypes.shape({
       img: PropTypes.string.isRequired,
       author: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
+      title: PropTypes.string,
     })
   ).isRequired,
 };
