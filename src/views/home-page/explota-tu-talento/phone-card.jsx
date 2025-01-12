@@ -55,6 +55,5 @@ PhoneCard.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   span: PropTypes.string.isRequired,
-  bg: PropTypes.string.isRequired,
   textColorSpan: PropTypes.string.isRequired,
 };
