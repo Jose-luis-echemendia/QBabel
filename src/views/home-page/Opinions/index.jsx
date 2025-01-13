@@ -5,51 +5,57 @@ export const Opinions = () => {
   const [currentPage, setCurrentPage] = useState(0);
 
   const pages = [
-    { id: 1, content: "Página 1 - Bienvenido al Libro" },
-    { id: 2, content: "Página 2 - Animaciones con Framer Motion" },
-    { id: 3, content: "Página 3 - ¡Gracias por leer!" },
+    "Página 1 - Introducción",
+    "Página 2 - Conceptos básicos",
+    "Página 3 - Animaciones con Framer Motion",
+    "Página 4 - TailwindCSS en acción",
+    "Página 5 - Gracias por leer",
+    "Página 6 - Fin del libro",
   ];
 
   const handleNextPage = () => {
-    if (currentPage < pages.length - 1) {
-      setCurrentPage((prev) => prev + 1);
+    if (currentPage < pages.length - 2) {
+      setCurrentPage((prev) => prev + 2); // Avanzamos dos páginas
     }
   };
 
   const handlePrevPage = () => {
     if (currentPage > 0) {
-      setCurrentPage((prev) => prev - 1);
+      setCurrentPage((prev) => prev - 2); // Retrocedemos dos páginas
     }
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
-      <div className="relative w-[300px] h-[400px] perspective">
-        {pages.map((page, index) => (
-          <motion.div
-            key={page.id}
-            className={`absolute w-full h-full bg-white shadow-md rounded-lg flex items-center justify-center ${
-              index % 2 === 0 ? "bg-gray-100" : "bg-white"
-            }`}
-            initial={{ rotateY: index < currentPage ? -180 : 0 }}
-            animate={{
-              rotateY:
-                index === currentPage ? 0 : index < currentPage ? -180 : 180,
-              zIndex: index === currentPage ? 2 : 1,
-            }}
-            transition={{ duration: 0.8, ease: "easeInOut" }}
-            style={{
-              transformOrigin: "left",
-              backfaceVisibility: "hidden",
-            }}
-          >
-            <p className="text-center text-lg font-semibold text-gray-700 px-4">
-              {page.content}
-            </p>
-          </motion.div>
-        ))}
+    <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-r from-blue-200 to-purple-300">
+      {/* Contenedor del libro */}
+      <div className="relative w-[600px] h-[400px] perspective">
+        {/* Página izquierda */}
+        <div className="absolute w-1/2 h-full bg-gray-100 left-0 shadow-md rounded-lg flex items-center justify-center">
+          <p className="text-center text-lg font-semibold text-gray-700 px-4">
+            {pages[currentPage] || "Vacío"}
+          </p>
+        </div>
+
+        {/* Página derecha */}
+        <motion.div
+          className="absolute w-1/2 h-full bg-white right-0 shadow-md rounded-lg flex items-center justify-center"
+          initial={{ rotateY: 0 }}
+          animate={{
+            rotateY: currentPage % 2 === 0 ? 0 : -180,
+          }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
+          style={{
+            transformOrigin: "left",
+            backfaceVisibility: "hidden",
+          }}
+        >
+          <p className="text-center text-lg font-semibold text-gray-700 px-4">
+            {pages[currentPage + 1] || "Vacío"}
+          </p>
+        </motion.div>
       </div>
 
+      {/* Botones de navegación */}
       <div className="mt-6 flex gap-4">
         <button
           onClick={handlePrevPage}
@@ -60,7 +66,7 @@ export const Opinions = () => {
         </button>
         <button
           onClick={handleNextPage}
-          disabled={currentPage === pages.length - 1}
+          disabled={currentPage >= pages.length - 2}
           className="px-4 py-2 bg-blue-500 text-white font-bold rounded-lg shadow-md hover:bg-blue-600 transition disabled:bg-gray-300 disabled:cursor-not-allowed"
         >
           Siguiente
