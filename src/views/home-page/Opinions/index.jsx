@@ -32,12 +32,12 @@ export const Opinions = () => {
         {/* Página izquierda */}
 
         <div className="absolute w-1/2 h-full bg-gray-100 left-0 shadow-md rounded-lg flex items-center justify-center">
-        <p className="text-center text-lg font-semibold text-gray-700 px-4">
+          <p className="text-center text-lg font-semibold text-gray-700 px-4">
             {pages[currentPage] || "Vacío"}
           </p>
         </div>
         <div className="absolute w-1/2 h-full bg-gray-100 right-0 shadow-md rounded-lg flex items-center justify-center">
-        <p className="text-center text-lg font-semibold text-gray-700 px-4">
+          <p className="text-center text-lg font-semibold text-gray-700 px-4">
             {pages[currentPage] || "Vacío"}
           </p>
         </div>
@@ -54,29 +54,10 @@ export const Opinions = () => {
           }}
           transition={{ duration: 3, ease: "easeInOut" }}
           className="absolute w-1/2 h-full bg-white left-0 shadow-md rounded-lg flex items-center justify-center"
-        >
-          
-        </motion.div>
+        ></motion.div>
 
         {/* Página derecha */}
-        <motion.div
-          key={currentPage}
-          className="absolute w-1/2 h-full bg-white right-0 shadow-md rounded-lg flex items-center justify-center"
-          style={{
-            transformOrigin: "left center",
-            backfaceVisibility: "hidden", // Asegura que la cara trasera no sea visible
-          }}
-          animate={{
-            rotateY: currentPage % 2 === 0 ? -180 : 0, // Rotación sincronizada
-          }}
-          transition={{ duration: 1, ease: "easeInOut" }}
-        >
-          <p className="text-center text-lg font-semibold text-gray-700 px-4">
-            {pages[currentPage + 1] || "Vacío"}
-          </p>
-        </motion.div>
 
-        {/* Página trasera derecha (reverso visible al pasar página) */}
         <motion.div
           key={currentPage}
           className="absolute w-1/2 h-full bg-gray-200 right-0 shadow-md rounded-lg flex items-center justify-center"
