@@ -8,3 +8,10 @@ html {
     scroll-padding-top: 100px;
     overscroll-behavior: none;
 }
+
+.flip-book {
+    perspective: 1000px; 
+}
+
+
+
