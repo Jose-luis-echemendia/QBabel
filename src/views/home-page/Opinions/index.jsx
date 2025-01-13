@@ -23,7 +23,7 @@ export const Opinions = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-r from-blue-200 to-purple-300">
+    <div className="flex flex-col items-center justify-center min-h-screen">
       <div className="relative w-[300px] h-[400px] perspective">
         {pages.map((page, index) => (
           <motion.div
