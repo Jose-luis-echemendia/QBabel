@@ -30,7 +30,7 @@ export const ImageDataPhone = () => {
     {
       src: '/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (4) 1.png',
       alt: 'Motivación Diaria - Imagen 6',
-      className: 'absolute right-40  w-[270px] bottom-0 z-10',
+      className: 'absolute right-52  w-[270px] bottom-0 z-10',
     },
   ];
 
