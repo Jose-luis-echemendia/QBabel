@@ -4,7 +4,7 @@ import { ImagesDataWaterfallBook } from './images-data-waterfall';
 export const ExploitYourTalent = () => {
   return (
     <section
-      className="w-full h-[700px] relative bg-primary p-1 bg-opacity-50"
+      className="w-full h-[700px] relative z-0 bg-primary p-1 bg-opacity-50"
       aria-labelledby="exploit-your-talent"
     >
       <h2
