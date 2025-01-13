@@ -30,11 +30,33 @@ export const Opinions = () => {
       {/* Contenedor del libro */}
       <div className="relative w-[600px] h-[400px] perspective">
         {/* Página izquierda */}
-        <div className="absolute w-1/2 h-full bg-gray-100 left-0 shadow-md rounded-lg flex items-center justify-center z-10">
-          <p className="text-center text-lg font-semibold text-gray-700 px-4">
+
+        <div className="absolute w-1/2 h-full bg-gray-100 left-0 shadow-md rounded-lg flex items-center justify-center">
+        <p className="text-center text-lg font-semibold text-gray-700 px-4">
             {pages[currentPage] || "Vacío"}
           </p>
         </div>
+        <div className="absolute w-1/2 h-full bg-gray-100 right-0 shadow-md rounded-lg flex items-center justify-center">
+        <p className="text-center text-lg font-semibold text-gray-700 px-4">
+            {pages[currentPage] || "Vacío"}
+          </p>
+        </div>
+
+        <motion.div
+          key={currentPage}
+          style={{
+            transformOrigin: "left center",
+            backfaceVisibility: "hidden",
+            transform: "rotateY(180deg)", // Página trasera inicial
+          }}
+          animate={{
+            rotateY: currentPage % 2 === 0 ? 180 : 0, // Rotación sincronizada
+          }}
+          transition={{ duration: 3, ease: "easeInOut" }}
+          className="absolute w-1/2 h-full bg-white left-0 shadow-md rounded-lg flex items-center justify-center"
+        >
+          
+        </motion.div>
 
         {/* Página derecha */}
         <motion.div
@@ -45,7 +67,7 @@ export const Opinions = () => {
             backfaceVisibility: "hidden", // Asegura que la cara trasera no sea visible
           }}
           animate={{
-            rotateY: currentPage % 2 === 0 ? 0 : -180, // Rotación condicional
+            rotateY: currentPage % 2 === 0 ? -180 : 0, // Rotación sincronizada
           }}
           transition={{ duration: 1, ease: "easeInOut" }}
         >
@@ -66,7 +88,7 @@ export const Opinions = () => {
           animate={{
             rotateY: currentPage % 2 === 0 ? 180 : 0, // Rotación sincronizada
           }}
-          transition={{ duration: 1, ease: "easeInOut" }}
+          transition={{ duration: 3, ease: "easeInOut" }}
         >
           <p className="text-center text-lg font-semibold text-gray-700 px-4">
             {pages[currentPage + 2] || "Vacío"}
