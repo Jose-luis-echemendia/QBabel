@@ -11,11 +11,11 @@ const HomeView = () => {
         <h2 id="footer-heading" className="sr-only">
           Home
         </h2>
+        <Opinions />
         <Hero />
         <ExploitYourTalent />
         <BestAuthorPage />
         <BestBooks />
-        <Opinions />
       </div>
     </>
   );
