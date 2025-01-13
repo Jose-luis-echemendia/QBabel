@@ -14,7 +14,9 @@ export const BestAuthor = ({ images }) => {
           key={uuid()}
           src={image.src}
           alt={image.alt || ''}
-          className={`absolute opacity-70  ${image.className || ''}`}
+          className={`absolute w-[300px] top-  opacity-70  ${
+            image.className || ''
+          }`}
         />
       ))}
     </div>
