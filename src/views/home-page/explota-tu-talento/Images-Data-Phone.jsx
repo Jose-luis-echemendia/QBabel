@@ -3,32 +3,32 @@ import { WaterfallBooks } from './waterfall-books';
 export const ImageDataPhone = () => {
   const imagesDataPhone = [
     {
-      src: '/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (15).png',
+      src: '/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (15).webp',
       alt: 'Motivación Diaria - Imagen 1',
-      className: 'absolute w-[220px] left-32 top-28 z-0',
+      className: 'absolute w-[220px] left-40 top-28 z-0',
     },
     {
-      src: '/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (19).png',
+      src: '/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (19).webp',
       alt: 'Motivación Diaria - Imagen 2',
       className: 'absolute left-28 top-36 rotate-[18deg] w-[350px] z-30',
     },
     {
-      src: '/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (18).png',
+      src: '/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (18).webp',
       alt: 'Motivación Diaria - Imagen 3',
       className: 'absolute left-32  w-[350px]  top-48 w-[280px] z-20',
     },
     {
-      src: '/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (17).png',
+      src: '/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (17).webp',
       alt: 'Motivación Diaria - Imagen 4',
       className: 'absolute left-36 top-64 w-[340px] z-10',
     },
     {
-      src: '/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (11).png',
+      src: '/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (11).webp',
       alt: 'Motivación Diaria - Imagen 5',
       className: 'absolute right-44 w-[350px] top-32 z-10',
     },
     {
-      src: '/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (4) 1.png',
+      src: '/assets/images/home/explota_talento/Publicación de Instagram de Motivación Diaria (4) 1.webp',
       alt: 'Motivación Diaria - Imagen 6',
       className: 'absolute right-52  w-[270px] bottom-0 z-10',
     },
