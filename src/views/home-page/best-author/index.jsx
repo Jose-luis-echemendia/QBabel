@@ -16,7 +16,7 @@ export const BestAuthorPage = () => {
       <img
         src="/assets/images/home/best_author/Vector.png"
         alt=""
-        className="relative -top-32 right-10 w-96"
+        className="relative -top-32  w-[500px] h-[900px]"
       />
 
       <BestAuthor images={schemaImages} />
