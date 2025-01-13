@@ -10,8 +10,8 @@ export const PhoneCard = ({
   descriptionColor,
 }) => {
   return (
-    <article className="relative   bg-transparent pt-8">
-      <div className="relative   h-[507px]">
+    <article className="relative  bg-transparent pt-8">
+      <div className="relative h-[550px]">
         {/* Imagen */}
         <img
           src={src}
@@ -36,7 +36,7 @@ export const PhoneCard = ({
             </h3>
           </header>
 
-          <div className="  px-4">
+          <div className="px-4 flex flex-col space-y-3">
             <p
               className={`text-[16px] font-quicksand font-semibold ${descriptionColor}`}
             >
@@ -56,4 +56,6 @@ PhoneCard.propTypes = {
   description: PropTypes.string.isRequired,
   span: PropTypes.string.isRequired,
   textColorSpan: PropTypes.string.isRequired,
+  descriptionColor: PropTypes.string.isRequired,
+  src: PropTypes.string.isRequired,
 };
