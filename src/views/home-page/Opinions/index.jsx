@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 
 export const Opinions = () => {
   const [currentPage, setCurrentPage] = useState(0);
+  const [animateFirstPage, setAnimateFirstPage] = useState(false);
 
   const pages = [
     "Página 1 - Introducción",
@@ -16,12 +17,14 @@ export const Opinions = () => {
   const handleNextPage = () => {
     if (currentPage < pages.length - 2) {
       setCurrentPage((prev) => prev + 2); // Avanzamos dos páginas
+      setAnimateFirstPage(false);
     }
   };
 
   const handlePrevPage = () => {
     if (currentPage > 0) {
       setCurrentPage((prev) => prev - 2); // Retrocedemos dos páginas
+      setAnimateFirstPage(false);
     }
   };
 
