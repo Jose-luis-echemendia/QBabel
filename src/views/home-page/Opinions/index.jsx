@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 
 export const Opinions = () => {
   const [currentPage, setCurrentPage] = useState(0);
-  const [animateFirstPage, setAnimateFirstPage] = useState(false);
-  const [animateSecondPage, setAnimateSecondPage] = useState(false);
+  const [animateRigthPage, setAnimateRigthPage] = useState(false);
+  const [animateLeftPage, setAnimateLefthPage] = useState(false);
 
   const pages = [
     "Página 1 - Introducción",
@@ -22,22 +22,19 @@ export const Opinions = () => {
   const handleNextPage = () => {
     if (currentPage < pages.length - 2) {
       setCurrentPage((prev) => prev + 2); // Avanzamos dos páginas
-      setAnimateSecondPage(true);
-      setAnimateFirstPage(true);
     }
+    setAnimateRigthPage(true)
   };
 
   const handlePrevPage = () => {
     if (currentPage > 0) {
       setCurrentPage((prev) => prev - 2); // Retrocedemos dos páginas
-      setAnimateSecondPage(true);
-      setAnimateFirstPage(true);
     }
+    setAnimateLefthPage(true)
   };
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-r from-blue-200 to-purple-300">
-      
       {/* Contenedor del libro */}
       <div className="relative w-[600px] h-[400px] flip-book ">
         {/* Página izquierda */}
@@ -55,26 +52,45 @@ export const Opinions = () => {
 
         {/* Página derecha */}
 
-        <motion.div
-          key={currentPage}
-          className="absolute w-1/2 h-full bg-gray-200 right-0 shadow-md rounded-lg flex items-center justify-center"
-          style={{
-            transformOrigin: "left top",
-            transform: "rotateY(180deg)", // Página trasera inicial
-          }}
-          animate={{
-            rotateY: animateSecondPage ? -180 : 0, // Rotación sincronizada
-          }}
-          transition={{
-            duration: 3,
-            ease: "easeInOut",
-            animationDirection: "normal",
-          }}
-        >
-          <p className="text-center text-lg font-semibold text-gray-700 px-4">
-            {pages[currentPage + 2] || "Vacío"}
-          </p>
-        </motion.div>
+        {animateLeftPage && (
+          <motion.div
+            className="absolute w-1/2 h-full bg-gray-200 left-0 shadow-md rounded-lg flex items-center justify-center"
+            style={{
+              transformOrigin: "right top",
+              transform: "rotateY(180deg)", // Página trasera inicial
+            }}
+            animate={{
+              rotateY: 180, // Rotación sincronizada
+            }}
+            transition={{
+              duration: 3,
+              ease: "easeInOut",
+              animationDirection: "normal",
+            }}
+          ></motion.div>
+        )}
+
+        {animateRigthPage && (
+          <motion.div
+            className="absolute w-1/2 h-full bg-gray-200 right-0 shadow-md rounded-lg flex items-center justify-center"
+            style={{
+              transformOrigin: "left top",
+              transform: "rotateY(180deg)", // Página trasera inicial
+            }}
+            animate={{
+              rotateY: -180, // Rotación sincronizada
+            }}
+            transition={{
+              duration: 3,
+              ease: "easeInOut",
+              animationDirection: "normal",
+            }}
+          >
+            <p className="text-center text-lg font-semibold text-gray-700 px-4">
+              {pages[currentPage + 2] || "Vacío"}
+            </p>
+          </motion.div>
+        )}
       </div>
       {/* Botones de navegación */}
       <div className="mt-6 flex gap-4">
