@@ -67,6 +67,9 @@ export const Opinions = () => {
               ease: "easeInOut",
               animationDirection: "normal",
             }}
+            onAnimationComplete={() => {
+              setAnimateLefthPage(false);
+            }}
           ></motion.div>
         )}
 
@@ -84,6 +87,9 @@ export const Opinions = () => {
               duration: 3,
               ease: "easeInOut",
               animationDirection: "normal",
+            }}
+            onAnimationComplete={() => {
+              setAnimateRigthPage(false);
             }}
           >
             <p className="text-center text-lg font-semibold text-gray-700 px-4">
