@@ -3,9 +3,10 @@ import { motion } from "framer-motion";
 
 export const Opinions = () => {
   const [currentPage, setCurrentPage] = useState(0);
-  const [animateRigthPage, setAnimateRigthPage] = useState(false);
-  const [animateLeftPage, setAnimateLefthPage] = useState(false);
-  const [flipProgress, setFlipProgress] = useState(0);
+  const [animateRightPage, setAnimateRightPage] = useState(false);
+  const [animateLeftPage, setAnimateLeftPage] = useState(false);
+  const [flipProgress, setFlipProgress] = useState(1);
+  const [isAnimating, setIsAnimating] = useState(false); // Bloquea múltiples clics
 
   const pages = [
     "Página 1 - Introducción",
@@ -14,131 +15,105 @@ export const Opinions = () => {
     "Página 4 - TailwindCSS en acción",
     "Página 5 - Gracias por leer",
     "Página 6 - Fin del libro",
-    "Página 5 - Gracias por leer",
-    "Página 6 - Fin del libro",
-    "Página 5 - Gracias por leer",
-    "Página 6 - Fin del libro",
   ];
 
   const handleNextPage = () => {
-    if (currentPage < pages.length - 2) {
-      setCurrentPage((prev) => prev + 2); // Avanzamos dos páginas
+    if (currentPage < pages.length - 2 && !isAnimating) {
+      setIsAnimating(true);
+      setAnimateRightPage(true);
     }
-    setAnimateRigthPage(true);
   };
 
   const handlePrevPage = () => {
-    if (currentPage > 0) {
-      setCurrentPage((prev) => prev - 2); // Retrocedemos dos páginas
+    if (currentPage > 0 && !isAnimating) {
+      setIsAnimating(true);
+      setAnimateLeftPage(true);
     }
-    setAnimateLefthPage(true);
   };
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-r from-blue-200 to-purple-300">
       {/* Contenedor del libro */}
       <div
-        className="relative w-[600px] h-[400px] "
+        className="relative w-[600px] h-[400px]"
         style={{ perspective: "1000px" }}
       >
         {/* Página izquierda */}
-
         <div className="absolute w-1/2 h-full bg-gray-100 right-0 shadow-md rounded-lg flex items-center justify-center">
           <p className="text-center text-lg font-semibold text-gray-700 px-4">
             {pages[currentPage] || "Vacío"}
           </p>
         </div>
+
         <div className="absolute w-1/2 h-full bg-gray-100 left-0 shadow-md rounded-lg flex items-center justify-center">
           <p className="text-center text-lg font-semibold text-gray-700 px-4">
-            {pages[currentPage] || "Vacío"}
+            {pages[currentPage + 1] || "Vacío"}
           </p>
         </div>
 
-        {/* Página derecha transform-style: preserve-3d*/}
+        {/* Página izquierda animada */}
         {animateLeftPage && (
           <motion.div
             className="absolute w-1/2 h-full bg-gray-200 left-0 shadow-md rounded-lg flex items-center justify-center"
-            style={{
-              transformOrigin: "right top",
-            }}
-            animate={{
-              rotateY: 180, // Rotación sincronizada
-            }}
-            transition={{
-              duration: 3,
-              ease: "easeInOut",
-              animationDirection: "normal",
-            }}
+            style={{ transformOrigin: "right top" }}
+            animate={{ rotateY: 180 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
             onUpdate={(latest) => {
-              if (latest.rotateY <= 90) {
-                setFlipProgress(1); // Aplica la inversión de escala cuando pase -90°
-              } else {
-                setFlipProgress(-1);
-              }
+              setFlipProgress(latest.rotateY >= 90 ? -1 : 1);
             }}
             onAnimationComplete={() => {
-              setAnimateLefthPage(false);
-            }}
-          >
-            <p
-              className="text-center text-lg font-semibold text-gray-700 px-4 "
-              style={{
-                transform: `scaleX(${flipProgress})`,
-              }}
-            >
-              {pages[currentPage] || "Vacío"}
-            </p>
-          </motion.div>
-        )}
-
-        {animateRigthPage && (
-          <motion.div
-            className="absolute w-1/2 h-full bg-gray-200 right-0 shadow-md rounded-lg flex items-center justify-center "
-            style={{
-              transformOrigin: "left top",
-            }}
-            animate={{
-              rotateY: -180, // Rotación sincronizada
-            }}
-            transition={{
-              duration: 3,
-              ease: "easeInOut",
-              animationDirection: "normal",
-            }}
-            onUpdate={(latest) => {
-              if (latest.rotateY <= -90) {
-                setFlipProgress(-1); // Aplica la inversión de escala cuando pase -90°
-              } else {
-                setFlipProgress(1);
-              }
-            }}
-            onAnimationComplete={() => {
-              setAnimateRigthPage(false);
+              setAnimateLeftPage(false);
+              setCurrentPage((prev) => Math.max(0, prev - 2)); // Retrocede dos páginas
+              setIsAnimating(false); // Permite nuevos clics
             }}
           >
             <p
               className="text-center text-lg font-semibold text-gray-700 px-4"
-              style={{
-                transform: `scaleX(${flipProgress})`,
-              }}
+              style={{ transform: `scaleX(${flipProgress})` }}
             >
               {pages[currentPage] || "Vacío"}
             </p>
           </motion.div>
         )}
+
+        {/* Página derecha animada */}
+        {animateRightPage && (
+          <motion.div
+            className="absolute w-1/2 h-full bg-gray-200 right-0 shadow-md rounded-lg flex items-center justify-center"
+            style={{ transformOrigin: "left top" }}
+            animate={{ rotateY: -180 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+            onUpdate={(latest) => {
+              setFlipProgress(latest.rotateY <= -90 ? -1 : 1);
+            }}
+            onAnimationComplete={() => {
+              setAnimateRightPage(false);
+              setCurrentPage((prev) => Math.min(pages.length - 2, prev + 2)); // Avanza dos páginas
+              setIsAnimating(false); // Permite nuevos clics
+            }}
+          >
+            <p
+              className="text-center text-lg font-semibold text-gray-700 px-4"
+              style={{ transform: `scaleX(${flipProgress})` }}
+            >
+              {pages[currentPage + 1] || "Vacío"}
+            </p>
+          </motion.div>
+        )}
       </div>
+
       {/* Botones de navegación */}
       <div className="mt-6 flex gap-4">
         <button
           onClick={handlePrevPage}
-          disabled={currentPage === 0}
+          disabled={currentPage === 0 || isAnimating}
           className="px-4 py-2 bg-blue-500 text-white font-bold rounded-lg shadow-md hover:bg-blue-600 transition disabled:bg-gray-300 disabled:cursor-not-allowed"
         >
           Anterior
         </button>
         <button
           onClick={handleNextPage}
-          disabled={currentPage >= pages.length - 2}
+          disabled={currentPage >= pages.length - 2 || isAnimating}
           className="px-4 py-2 bg-blue-500 text-white font-bold rounded-lg shadow-md hover:bg-blue-600 transition disabled:bg-gray-300 disabled:cursor-not-allowed"
         >
           Siguiente
