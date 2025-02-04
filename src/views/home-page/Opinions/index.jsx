@@ -5,6 +5,7 @@ export const Opinions = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [animateRigthPage, setAnimateRigthPage] = useState(false);
   const [animateLeftPage, setAnimateLefthPage] = useState(false);
+  const [flipProgress, setFlipProgress] = useState(0);
 
   const pages = [
     "Página 1 - Introducción",
@@ -23,20 +24,23 @@ export const Opinions = () => {
     if (currentPage < pages.length - 2) {
       setCurrentPage((prev) => prev + 2); // Avanzamos dos páginas
     }
-    setAnimateRigthPage(true)
+    setAnimateRigthPage(true);
   };
 
   const handlePrevPage = () => {
     if (currentPage > 0) {
       setCurrentPage((prev) => prev - 2); // Retrocedemos dos páginas
     }
-    setAnimateLefthPage(true)
+    setAnimateLefthPage(true);
   };
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-r from-blue-200 to-purple-300">
       {/* Contenedor del libro */}
-      <div className="relative w-[600px] h-[400px] flip-book ">
+      <div
+        className="relative w-[600px] h-[400px] "
+        style={{ perspective: "1000px" }}
+      >
         {/* Página izquierda */}
 
         <div className="absolute w-1/2 h-full bg-gray-100 right-0 shadow-md rounded-lg flex items-center justify-center">
@@ -56,7 +60,6 @@ export const Opinions = () => {
             className="absolute w-1/2 h-full bg-gray-200 left-0 shadow-md rounded-lg flex items-center justify-center"
             style={{
               transformOrigin: "right top",
-              transform: "rotateY(180deg)", // Página trasera inicial
             }}
             animate={{
               rotateY: 180, // Rotación sincronizada
@@ -66,18 +69,33 @@ export const Opinions = () => {
               ease: "easeInOut",
               animationDirection: "normal",
             }}
+            onUpdate={(latest) => {
+              if (latest.rotateY <= 90) {
+                setFlipProgress(1); // Aplica la inversión de escala cuando pase -90°
+              } else {
+                setFlipProgress(-1);
+              }
+            }}
             onAnimationComplete={() => {
               setAnimateLefthPage(false);
             }}
-            ></motion.div>
-          )}
+          >
+            <p
+              className="text-center text-lg font-semibold text-gray-700 px-4 "
+              style={{
+                transform: `scaleX(${flipProgress})`,
+              }}
+            >
+              {pages[currentPage] || "Vacío"}
+            </p>
+          </motion.div>
+        )}
 
         {animateRigthPage && (
           <motion.div
-          className="absolute w-1/2 h-full bg-gray-200 right-0 shadow-md rounded-lg flex items-center justify-center"
-          style={{
-            transformOrigin: "left top",
-            transform: "rotateY(180deg)", // Página trasera inicial
+            className="absolute w-1/2 h-full bg-gray-200 right-0 shadow-md rounded-lg flex items-center justify-center "
+            style={{
+              transformOrigin: "left top",
             }}
             animate={{
               rotateY: -180, // Rotación sincronizada
@@ -87,12 +105,24 @@ export const Opinions = () => {
               ease: "easeInOut",
               animationDirection: "normal",
             }}
+            onUpdate={(latest) => {
+              if (latest.rotateY <= -90) {
+                setFlipProgress(-1); // Aplica la inversión de escala cuando pase -90°
+              } else {
+                setFlipProgress(1);
+              }
+            }}
             onAnimationComplete={() => {
               setAnimateRigthPage(false);
             }}
           >
-            <p className="text-center text-lg font-semibold text-gray-700 px-4">
-              {pages[currentPage + 2] || "Vacío"}
+            <p
+              className="text-center text-lg font-semibold text-gray-700 px-4"
+              style={{
+                transform: `scaleX(${flipProgress})`,
+              }}
+            >
+              {pages[currentPage] || "Vacío"}
             </p>
           </motion.div>
         )}
