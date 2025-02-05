@@ -2,7 +2,12 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 
 export const Opinions = () => {
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentLeftPage, setCurrentLeftPage] = useState(0);
+  const [currentRigthPage, setCurrentRigthtPage] = useState(1);
+  
+  const [rigthPage, setRigthtPage] = useState(0);
+  const [leftPage, setLeftPage] = useState(0);
+  
   const [animateRightPage, setAnimateRightPage] = useState(false);
   const [animateLeftPage, setAnimateLeftPage] = useState(false);
   const [flipProgress, setFlipProgress] = useState(1);
@@ -15,19 +20,30 @@ export const Opinions = () => {
     "Página 4 - TailwindCSS en acción",
     "Página 5 - Gracias por leer",
     "Página 6 - Fin del libro",
+    "Página 7 - Fin del libro",
+    "Página 8 - Fin del libro",
+    "Página 9 - Fin del libro",
+    "Página 10 - Fin del libro",
+    "Página 11 - Fin del libro",
+    "Página 12 - Fin del libro",
   ];
 
+
   const handleNextPage = () => {
-    if (currentPage < pages.length - 2 && !isAnimating) {
+    if (currentRigthPage < pages.length && !isAnimating) {
       setIsAnimating(true);
       setAnimateRightPage(true);
+      setCurrentRigthtPage((prev) => prev + 2)
+      setRigthtPage(currentRigthPage)
     }
   };
 
   const handlePrevPage = () => {
-    if (currentPage > 0 && !isAnimating) {
+    if (currentRigthPage > 1 && !isAnimating) {
       setIsAnimating(true);
       setAnimateLeftPage(true);
+      setCurrentLeftPage((prev) => prev - 2)
+      setLeftPage(currentLeftPage)
     }
   };
 
@@ -38,16 +54,17 @@ export const Opinions = () => {
         className="relative w-[600px] h-[400px]"
         style={{ perspective: "1000px" }}
       >
-        {/* Página izquierda */}
+        {/* Página derecha */}
         <div className="absolute w-1/2 h-full bg-gray-100 right-0 shadow-md rounded-lg flex items-center justify-center">
           <p className="text-center text-lg font-semibold text-gray-700 px-4">
-            {pages[currentPage] || "Vacío"}
+            {pages[currentRigthPage] || "Vacío"}
           </p>
         </div>
 
+        {/* Página izquierda */}
         <div className="absolute w-1/2 h-full bg-gray-100 left-0 shadow-md rounded-lg flex items-center justify-center">
           <p className="text-center text-lg font-semibold text-gray-700 px-4">
-            {pages[currentPage + 1] || "Vacío"}
+            {pages[currentLeftPage] || "Vacío"}
           </p>
         </div>
 
@@ -60,18 +77,21 @@ export const Opinions = () => {
             transition={{ duration: 1.5, ease: "easeInOut" }}
             onUpdate={(latest) => {
               setFlipProgress(latest.rotateY >= 90 ? -1 : 1);
+              if (latest.rotateY >= 90) {
+                setLeftPage(currentRigthPage - 2)
+              }
             }}
             onAnimationComplete={() => {
               setAnimateLeftPage(false);
-              setCurrentPage((prev) => Math.max(0, prev - 2)); // Retrocede dos páginas
-              setIsAnimating(false); // Permite nuevos clics
+              setIsAnimating(false); 
+              setCurrentRigthtPage((prev) => prev - 2)
             }}
           >
             <p
               className="text-center text-lg font-semibold text-gray-700 px-4"
               style={{ transform: `scaleX(${flipProgress})` }}
             >
-              {pages[currentPage] || "Vacío"}
+              {pages[leftPage] || "Vacío"}
             </p>
           </motion.div>
         )}
@@ -85,18 +105,21 @@ export const Opinions = () => {
             transition={{ duration: 1.5, ease: "easeInOut" }}
             onUpdate={(latest) => {
               setFlipProgress(latest.rotateY <= -90 ? -1 : 1);
+              if (latest.rotateY <= -90) {
+                setRigthtPage(currentLeftPage + 2)
+              }
             }}
             onAnimationComplete={() => {
               setAnimateRightPage(false);
-              setCurrentPage((prev) => Math.min(pages.length - 2, prev + 2)); // Avanza dos páginas
               setIsAnimating(false); // Permite nuevos clics
+              setCurrentLeftPage((prev) => prev + 2)
             }}
           >
             <p
               className="text-center text-lg font-semibold text-gray-700 px-4"
               style={{ transform: `scaleX(${flipProgress})` }}
             >
-              {pages[currentPage + 1] || "Vacío"}
+              {pages[rigthPage] || "Vacío"}
             </p>
           </motion.div>
         )}
@@ -106,14 +129,14 @@ export const Opinions = () => {
       <div className="mt-6 flex gap-4">
         <button
           onClick={handlePrevPage}
-          disabled={currentPage === 0 || isAnimating}
+          disabled={currentRigthPage === 1 || isAnimating}
           className="px-4 py-2 bg-blue-500 text-white font-bold rounded-lg shadow-md hover:bg-blue-600 transition disabled:bg-gray-300 disabled:cursor-not-allowed"
         >
           Anterior
         </button>
         <button
           onClick={handleNextPage}
-          disabled={currentPage >= pages.length - 2 || isAnimating}
+          disabled={currentRigthPage >= pages.length - 2 || isAnimating}
           className="px-4 py-2 bg-blue-500 text-white font-bold rounded-lg shadow-md hover:bg-blue-600 transition disabled:bg-gray-300 disabled:cursor-not-allowed"
         >
           Siguiente
