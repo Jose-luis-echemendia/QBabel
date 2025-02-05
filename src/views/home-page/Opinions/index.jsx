@@ -74,7 +74,7 @@ export const Opinions = () => {
             className="absolute w-1/2 h-full bg-gray-200 left-0 shadow-md rounded-lg flex items-center justify-center"
             style={{ transformOrigin: "right top" }}
             animate={{ rotateY: 180 }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
+            transition={{ duration: 2, ease: "easeInOut" }}
             onUpdate={(latest) => {
               setFlipProgress(latest.rotateY >= 90 ? -1 : 1);
               if (latest.rotateY >= 90) {
@@ -102,7 +102,7 @@ export const Opinions = () => {
             className="absolute w-1/2 h-full bg-gray-200 right-0 shadow-md rounded-lg flex items-center justify-center"
             style={{ transformOrigin: "left top" }}
             animate={{ rotateY: -180 }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
+            transition={{ duration: 2, ease: "easeInOut" }}
             onUpdate={(latest) => {
               setFlipProgress(latest.rotateY <= -90 ? -1 : 1);
               if (latest.rotateY <= -90) {
