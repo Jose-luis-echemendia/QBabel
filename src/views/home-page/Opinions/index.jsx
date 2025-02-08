@@ -48,12 +48,18 @@ export const Opinions = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-r from-blue-200 to-purple-300">
+    <div className="flex flex-col items-center justify-center h-screen pt-16"> {/*  bg-[#644844] bg-opacity-40*/}
+      <h2 className="mx-auto w-fit font-quicksand my-10 pb-6 font-bold text-[64px] text-black">
+        Opiniones
+      </h2>
+
       {/* Contenedor del libro */}
       <div
-        className="relative w-[600px] h-[400px]"
+        className="relative w-[650px] h-[450px]"
         style={{ perspective: "1000px" }}
       >
+        <div className="h-full w-full absolute z-[-1] bg-[#644844] scale-110 shadow-xl rounded-md" />
+
         {/* Página derecha */}
         <div className="absolute w-1/2 h-full bg-gray-100 right-0 shadow-md rounded-lg flex items-center justify-center">
           <p className="text-center text-lg font-semibold text-gray-700 px-4">
@@ -126,7 +132,7 @@ export const Opinions = () => {
       </div>
 
       {/* Botones de navegación */}
-      <div className="mt-6 flex gap-4">
+      <div className="mt-16 flex gap-4 ">
         <button
           onClick={handlePrevPage}
           disabled={currentRigthPage === 1 || isAnimating}
