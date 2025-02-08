@@ -1,12 +1,10 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-export const CustomAvatar = ({src}) => {
+export const CustomAvatar = ({ src }) => {
   return (
-    <div>
-
-      <img src={src} alt="avatar" className='object-cover'/>
-    </div>
-    
+    <figure>
+      <img src={src} alt="avatar" className="object-cover w-full" />
+    </figure>
   );
 };
 
