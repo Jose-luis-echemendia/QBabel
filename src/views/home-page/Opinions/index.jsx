@@ -15,14 +15,54 @@ export const Opinions = () => {
   const [isAnimating, setIsAnimating] = useState(false); // Bloquea múltiples clics
 
   const pages = [
-    "/assets/images/home/opinions/1.png",
-    "/assets/images/home/opinions/2.png",
-    "/assets/images/home/opinions/1.png",
-    "/assets/images/home/opinions/2.png",
-    "/assets/images/home/opinions/1.png",
-    "/assets/images/home/opinions/2.png",
-    "/assets/images/home/opinions/1.png",
-    "/assets/images/home/opinions/2.png",
+    {
+      srcImage: "/assets/images/home/opinions/1.png",
+      opinion:
+        "“La página es muy fácil de navegar Me encanta como puedo buscar mis libros favoritos.“",
+      rating: 5,
+    },
+    {
+      srcImage: "/assets/images/home/opinions/2.png",
+      opinion:
+        "“Me encanta la variedad de libros que ofrecen. Siempre encuentro algo nuevo para leer.”",
+      rating: 4,
+    },
+    {
+      srcImage: "/assets/images/home/opinions/1.png",
+      opinion:
+        "“La página es muy fácil de navegar Me encanta como puedo buscar mis libros favoritos.“",
+      rating: 5,
+    },
+    {
+      srcImage: "/assets/images/home/opinions/2.png",
+      opinion:
+        "“Me encanta la variedad de libros que ofrecen. Siempre encuentro algo nuevo para leer.”",
+      rating: 4,
+    },
+    {
+      srcImage: "/assets/images/home/opinions/1.png",
+      opinion:
+        "“La página es muy fácil de navegar Me encanta como puedo buscar mis libros favoritos.“",
+      rating: 5,
+    },
+    {
+      srcImage: "/assets/images/home/opinions/2.png",
+      opinion:
+        "“Me encanta la variedad de libros que ofrecen. Siempre encuentro algo nuevo para leer.”",
+      rating: 4,
+    },
+    {
+      srcImage: "/assets/images/home/opinions/1.png",
+      opinion:
+        "“La página es muy fácil de navegar Me encanta como puedo buscar mis libros favoritos.“",
+      rating: 5,
+    },
+    {
+      srcImage: "/assets/images/home/opinions/2.png",
+      opinion:
+        "“Me encanta la variedad de libros que ofrecen. Siempre encuentro algo nuevo para leer.”",
+      rating: 4,
+    },
   ];
 
   const handleNextPage = () => {
@@ -44,10 +84,9 @@ export const Opinions = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen pt-14 pb-20">
-      {" "}
+    <div className="flex flex-col items-center justify-center min-h-screen pt-14 pb-20 mt-6">
       {/*  bg-[#644844] bg-opacity-40*/}
-      <h2 className="mx-auto w-fit font-quicksand my-1 pb-12 font-bold text-[64px] text-black">
+      <h2 className="mx-auto w-fit font-quicksand my-1 mb-10 pb-12 font-bold text-[64px] text-black">
         Opiniones
       </h2>
       {/* Contenedor del libro */}
@@ -59,23 +98,17 @@ export const Opinions = () => {
 
         {/* Página derecha */}
         <div className="absolute w-1/2 h-full bg-gray-100 right-0 shadow-md rounded-lg flex flex-col py-4">
-          <CustomAvatar src={pages[currentRigthPage]} />
+          <CustomAvatar src={pages[currentRigthPage].srcImage} />
           <p className="text-center text-lg font-semibold text-gray-700 px-4">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro
-            recusandae, eligendi iste aperiam soluta qui reiciendis doloremque
-            consectetur est earum sapiente ea aliquam, animi, cumque voluptas
-            rem hic nisi quaerat.
+            {pages[currentRigthPage].opinion}
           </p>
         </div>
 
         {/* Página izquierda */}
         <div className="absolute w-1/2 h-full bg-gray-100 left-0 shadow-md rounded-lg flex flex-col py-4">
-          <CustomAvatar src={pages[currentLeftPage]} />
+          <CustomAvatar src={pages[currentLeftPage].srcImage} />
           <p className="text-center text-lg font-semibold text-gray-700 px-4">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro
-            recusandae, eligendi iste aperiam soluta qui reiciendis doloremque
-            consectetur est earum sapiente ea aliquam, animi, cumque voluptas
-            rem hic nisi quaerat.
+            {pages[currentLeftPage].opinion}
           </p>
         </div>
 
@@ -99,12 +132,9 @@ export const Opinions = () => {
             }}
           >
             <div style={{ transform: `scaleX(${flipProgress})` }}>
-              <CustomAvatar src={pages[leftPage]} />
+              <CustomAvatar src={pages[leftPage].srcImage} />
               <p className="text-center text-lg font-semibold text-gray-700 px-4">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro
-                recusandae, eligendi iste aperiam soluta qui reiciendis
-                doloremque consectetur est earum sapiente ea aliquam, animi,
-                cumque voluptas rem hic nisi quaerat.
+                {pages[leftPage].opinion}
               </p>
             </div>
           </motion.div>
@@ -130,12 +160,9 @@ export const Opinions = () => {
             }}
           >
             <div style={{ transform: `scaleX(${flipProgress})` }}>
-              <CustomAvatar src={pages[rigthPage]} />
+              <CustomAvatar src={pages[rigthPage].srcImage} />
               <p className="text-center text-lg font-semibold text-gray-700 px-4">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro
-                recusandae, eligendi iste aperiam soluta qui reiciendis
-                doloremque consectetur est earum sapiente ea aliquam, animi,
-                cumque voluptas rem hic nisi quaerat.
+                {pages[rigthPage].opinion}
               </p>
             </div>
           </motion.div>
