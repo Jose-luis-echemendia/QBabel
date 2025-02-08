@@ -48,8 +48,8 @@ export const Opinions = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen pt-16"> {/*  bg-[#644844] bg-opacity-40*/}
-      <h2 className="mx-auto w-fit font-quicksand my-10 pb-6 font-bold text-[64px] text-black">
+    <div className="flex flex-col items-center justify-center min-h-screen pt-14 pb-20"> {/*  bg-[#644844] bg-opacity-40*/}
+      <h2 className="mx-auto w-fit font-quicksand my-1 pb-12 font-bold text-[64px] text-black">
         Opiniones
       </h2>
 
