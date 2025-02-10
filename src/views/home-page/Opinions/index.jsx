@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { CustomAvatar } from "./custom-avatar";
+import { Opinion } from "./opinion";
 
 export const Opinions = () => {
   const [currentLeftPage, setCurrentLeftPage] = useState(0);
@@ -98,15 +98,12 @@ export const Opinions = () => {
 
         {/* Página derecha */}
         <div className="absolute w-1/2 h-full bg-gray-100 right-0 shadow-md rounded-lg flex flex-col py-4">
-          <CustomAvatar src={pages[currentRigthPage].srcImage} />
-          <p className="text-center text-lg font-semibold text-gray-700 px-4">
-            {pages[currentRigthPage].opinion}
-          </p>
+          
         </div>
 
         {/* Página izquierda */}
         <div className="absolute w-1/2 h-full bg-gray-100 left-0 shadow-md rounded-lg flex flex-col py-4">
-          <CustomAvatar src={pages[currentLeftPage].srcImage} />
+          <Opinion src={pages[currentLeftPage].srcImage} />
           <p className="text-center text-lg font-semibold text-gray-700 px-4">
             {pages[currentLeftPage].opinion}
           </p>
@@ -132,7 +129,7 @@ export const Opinions = () => {
             }}
           >
             <div style={{ transform: `scaleX(${flipProgress})` }}>
-              <CustomAvatar src={pages[leftPage].srcImage} />
+              <Opinion src={pages[leftPage].srcImage} />
               <p className="text-center text-lg font-semibold text-gray-700 px-4">
                 {pages[leftPage].opinion}
               </p>
@@ -160,7 +157,7 @@ export const Opinions = () => {
             }}
           >
             <div style={{ transform: `scaleX(${flipProgress})` }}>
-              <CustomAvatar src={pages[rigthPage].srcImage} />
+              <Opinion src={pages[rigthPage].srcImage} />
               <p className="text-center text-lg font-semibold text-gray-700 px-4">
                 {pages[rigthPage].opinion}
               </p>
