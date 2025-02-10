@@ -98,15 +98,12 @@ export const Opinions = () => {
 
         {/* Página derecha */}
         <div className="absolute w-1/2 h-full bg-gray-100 right-0 shadow-md rounded-lg flex flex-col py-4">
-          <Opinion data={pages[currentRigthPage]}/>
+          <Opinion data={pages[currentRigthPage]} />
         </div>
 
         {/* Página izquierda */}
         <div className="absolute w-1/2 h-full bg-gray-100 left-0 shadow-md rounded-lg flex flex-col py-4">
-          <Opinion src={pages[currentLeftPage].srcImage} />
-          <p className="text-center text-lg font-semibold text-gray-700 px-4">
-            {pages[currentLeftPage].opinion}
-          </p>
+          <Opinion src={pages[currentLeftPage]} />
         </div>
 
         {/* Página izquierda animada */}
@@ -129,10 +126,7 @@ export const Opinions = () => {
             }}
           >
             <div style={{ transform: `scaleX(${flipProgress})` }}>
-              <Opinion src={pages[leftPage].srcImage} />
-              <p className="text-center text-lg font-semibold text-gray-700 px-4">
-                {pages[leftPage].opinion}
-              </p>
+              <Opinion src={pages[leftPage]} />
             </div>
           </motion.div>
         )}
@@ -157,10 +151,7 @@ export const Opinions = () => {
             }}
           >
             <div style={{ transform: `scaleX(${flipProgress})` }}>
-              <Opinion src={pages[rigthPage].srcImage} />
-              <p className="text-center text-lg font-semibold text-gray-700 px-4">
-                {pages[rigthPage].opinion}
-              </p>
+              <Opinion src={pages[rigthPage]} />
             </div>
           </motion.div>
         )}
