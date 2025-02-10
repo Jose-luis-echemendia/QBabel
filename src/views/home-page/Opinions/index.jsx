@@ -16,48 +16,56 @@ export const Opinions = () => {
 
   const pages = [
     {
+      page: 1,
       srcImage: "/assets/images/home/opinions/1.png",
       opinion:
         "“La página es muy fácil de navegar Me encanta como puedo buscar mis libros favoritos.“",
       rating: 5,
     },
     {
+      page: 2,
       srcImage: "/assets/images/home/opinions/2.png",
       opinion:
         "“Me encanta la variedad de libros que ofrecen. Siempre encuentro algo nuevo para leer.”",
       rating: 4,
     },
     {
+      page: 3,
       srcImage: "/assets/images/home/opinions/1.png",
       opinion:
         "“La página es muy fácil de navegar Me encanta como puedo buscar mis libros favoritos.“",
       rating: 5,
     },
     {
+      page: 4,
       srcImage: "/assets/images/home/opinions/2.png",
       opinion:
         "“Me encanta la variedad de libros que ofrecen. Siempre encuentro algo nuevo para leer.”",
       rating: 4,
     },
     {
+      page: 5,
       srcImage: "/assets/images/home/opinions/1.png",
       opinion:
         "“La página es muy fácil de navegar Me encanta como puedo buscar mis libros favoritos.“",
       rating: 5,
     },
     {
+      page: 6,
       srcImage: "/assets/images/home/opinions/2.png",
       opinion:
         "“Me encanta la variedad de libros que ofrecen. Siempre encuentro algo nuevo para leer.”",
       rating: 4,
     },
     {
+      page: 7,
       srcImage: "/assets/images/home/opinions/1.png",
       opinion:
         "“La página es muy fácil de navegar Me encanta como puedo buscar mis libros favoritos.“",
       rating: 5,
     },
     {
+      page: 8,
       srcImage: "/assets/images/home/opinions/2.png",
       opinion:
         "“Me encanta la variedad de libros que ofrecen. Siempre encuentro algo nuevo para leer.”",
