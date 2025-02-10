@@ -67,19 +67,19 @@ export const Opinions = () => {
 
   const handleNextPage = () => {
     if (currentRigthPage < pages.length && !isAnimating) {
-      setIsAnimating(true);
-      setAnimateRightPage(true);
       setCurrentRigthtPage((prev) => prev + 2);
       setRigthtPage(currentRigthPage);
+      setIsAnimating(true);
+      setAnimateRightPage(true);
     }
   };
 
   const handlePrevPage = () => {
     if (currentRigthPage > 1 && !isAnimating) {
-      setIsAnimating(true);
-      setAnimateLeftPage(true);
       setCurrentLeftPage((prev) => prev - 2);
       setLeftPage(currentLeftPage);
+      setIsAnimating(true);
+      setAnimateLeftPage(true);
     }
   };
 
@@ -103,7 +103,7 @@ export const Opinions = () => {
 
         {/* Página izquierda */}
         <div className="absolute w-1/2 h-full bg-gray-100 left-0 shadow-md rounded-lg flex flex-col py-4">
-          <Opinion src={pages[currentLeftPage]} />
+          <Opinion data={pages[currentLeftPage]} />
         </div>
 
         {/* Página izquierda animada */}
@@ -126,7 +126,7 @@ export const Opinions = () => {
             }}
           >
             <div style={{ transform: `scaleX(${flipProgress})` }}>
-              <Opinion src={pages[leftPage]} />
+              <Opinion data={pages[leftPage]} />
             </div>
           </motion.div>
         )}
@@ -151,7 +151,7 @@ export const Opinions = () => {
             }}
           >
             <div style={{ transform: `scaleX(${flipProgress})` }}>
-              <Opinion src={pages[rigthPage]} />
+              <Opinion data={pages[rigthPage]} />
             </div>
           </motion.div>
         )}
