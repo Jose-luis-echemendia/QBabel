@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 
 export const Opinion = ({ data }) => {
+  console.log(data)
   return (
     <>
       <figure>
