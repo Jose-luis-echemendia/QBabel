@@ -14,5 +14,8 @@ export const Opinion = ({ data }) => {
 };
 
 Opinion.propTypes = {
-  src: PropTypes.string.isRequired,
+  data: PropTypes.shape({
+    src: PropTypes.string.isRequired,
+    opinion: PropTypes.string.isRequired,
+  }).isRequired,
 };

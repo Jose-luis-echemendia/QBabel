@@ -98,7 +98,7 @@ export const Opinions = () => {
 
         {/* Página derecha */}
         <div className="absolute w-1/2 h-full bg-gray-100 right-0 shadow-md rounded-lg flex flex-col py-4">
-          
+          <Opinion data={pages[currentRigthPage]}/>
         </div>
 
         {/* Página izquierda */}
