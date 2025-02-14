@@ -31,3 +31,43 @@ export const schemaImages = [
     className: '   z-50 bottom-48 -left-20',
   },
 ];
+
+// Fotos contenida en el carrusel
+export const schemaCarrusel = [
+  {
+    src: '/assets/images/home/best_author/Publicación de Instagram de Motivación Diaria (20).webp',
+    alt: 'Ariana Godoy',
+  },
+  {
+    src: '/assets/images/home/best_author/Publicación de Instagram de Motivación Diaria (21).webp',
+    alt: 'Lauren Roberts',
+  },
+  {
+    src: '/assets/images/home/best_author/Publicación de Instagram de Motivación Diaria (22).webp',
+    alt: 'Isabel',
+  },
+  {
+    src: '/assets/images/home/best_author/Publicación de Instagram de Motivación Diaria (33).webp',
+    alt: 'Isabel',
+  },
+  {
+    src: '/assets/images/home/best_author/Publicación de Instagram de Motivación Diaria (34).webp',
+    alt: 'Isabel',
+  },
+  {
+    src: '/assets/images/home/best_author/Publicación de Instagram de Motivación Diaria (35).webp',
+    alt: 'Isabel',
+  },
+  {
+    src: '/assets/images/home/best_author/Publicación de Instagram de Motivación Diaria (36).webp',
+    alt: 'Isabel',
+  },
+  {
+    src: '/assets/images/home/best_author/Publicación de Instagram de Motivación Diaria (37).webp',
+    alt: 'Isabel',
+  },
+  {
+    src: '/assets/images/home/best_author/Publicación de Instagram de Motivación Diaria (38).webp',
+    alt: 'Isabel',
+  },
+]
