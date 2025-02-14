@@ -35,39 +35,39 @@ export const schemaImages = [
 // Fotos contenida en el carrusel
 export const schemaCarrusel = [
   {
-    src: '/assets/images/home/best_author/Publicación de Instagram de Motivación Diaria (20).webp',
+    src: '/assets/images/home/best_author/1.webp',
     alt: 'Ariana Godoy',
   },
   {
-    src: '/assets/images/home/best_author/Publicación de Instagram de Motivación Diaria (21).webp',
+    src: '/assets/images/home/best_author/2.webp',
     alt: 'Lauren Roberts',
   },
   {
-    src: '/assets/images/home/best_author/Publicación de Instagram de Motivación Diaria (22).webp',
+    src: '/assets/images/home/best_author/3.webp',
     alt: 'Isabel',
   },
   {
-    src: '/assets/images/home/best_author/Publicación de Instagram de Motivación Diaria (33).webp',
+    src: '/assets/images/home/best_author/4.webp',
     alt: 'Isabel',
   },
   {
-    src: '/assets/images/home/best_author/Publicación de Instagram de Motivación Diaria (34).webp',
+    src: '/assets/images/home/best_author/5.webp',
     alt: 'Isabel',
   },
   {
-    src: '/assets/images/home/best_author/Publicación de Instagram de Motivación Diaria (35).webp',
+    src: '/assets/images/home/best_author/6.webp',
     alt: 'Isabel',
   },
   {
-    src: '/assets/images/home/best_author/Publicación de Instagram de Motivación Diaria (36).webp',
+    src: '/assets/images/home/best_author/7.webp',
     alt: 'Isabel',
   },
   {
-    src: '/assets/images/home/best_author/Publicación de Instagram de Motivación Diaria (37).webp',
+    src: '/assets/images/home/best_author/8.webp',
     alt: 'Isabel',
   },
   {
-    src: '/assets/images/home/best_author/Publicación de Instagram de Motivación Diaria (38).webp',
+    src: '/assets/images/home/best_author/9.webp',
     alt: 'Isabel',
   },
 ]
