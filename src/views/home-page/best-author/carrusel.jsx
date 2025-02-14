@@ -35,10 +35,11 @@ export const Carrusel = () => {
         }}
         className="mySwiper"
       >
-        {schemaCarrusel.map((image) => (
+        {schemaCarrusel.map((author) => (
           <SwiperSlide key={uuid()}>
-            <figure className="">
-              <img src={image.src} alt={image.alt} />
+            <figure className="p-4 ">
+              <img src={author.src} alt={author.alt} className="h-full w-full" />
+              <figcaption>{author.description}</figcaption>
             </figure>
           </SwiperSlide>
         ))}
