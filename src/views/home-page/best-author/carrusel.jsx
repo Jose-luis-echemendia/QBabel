@@ -5,7 +5,7 @@ import { v4 as uuid } from "uuid";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
-import ".styles.css"
+import "./styles.css";
 
 // import required modules
 import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules";
