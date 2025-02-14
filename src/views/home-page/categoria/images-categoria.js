@@ -7,12 +7,12 @@ export const schemaImagesCategoria = [
       src: '/assets/images/home/categoria/Aventura.png',
       alt: 'Aventura',
     },
-   /* {
+    {
       src: '/assets/images/home/categoria/Chick-it.png',
       alt: 'Chick-it',
     },
     {
-      src: '/assets/images/home/categoria/Ciencia-Ficcion.png',
+      src: '/assets/images/home/categoria/Ciencia_Ficcion.png',
       alt: 'Ciencia-Ficcion'
     },
     {
@@ -81,6 +81,6 @@ export const schemaImagesCategoria = [
       },
       {
         src: '/assets/images/home/categoria/Terror.png',
-        alt: 'Terros',
-      },*/
+        alt: 'Terror',
+      },
   ];
