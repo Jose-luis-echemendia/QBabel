@@ -35,6 +35,7 @@ export const BestAuthorPage = () => {
       />
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       <BestAuthor images={schemaImages} />
    
     
@@ -45,6 +46,9 @@ export const BestAuthorPage = () => {
      
 =======
     <Carrusel/>
+>>>>>>> develop
+=======
+      <Carrusel />
 >>>>>>> develop
     </section>
   );
