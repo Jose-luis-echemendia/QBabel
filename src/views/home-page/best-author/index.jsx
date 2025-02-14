@@ -13,7 +13,6 @@ export const BestAuthorPage = () => {
           Escritores destacados
         </h2>
       </div>
-
       <div className="flex flex-row justify-center items-center">
         <img
           src="/assets/images/home/best_author/Vector.png"
