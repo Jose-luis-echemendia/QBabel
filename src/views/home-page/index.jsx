@@ -1,6 +1,6 @@
 import { BestAuthorPage } from './best-author';
 import { BestBooks } from './best-books';
-import { ExploitYourTalent } from './explota-tu-talento';
+import { ExploitYourTalent } from './exploit-your-talent';
 import { Hero } from './hero';
 import { Opinions } from './Opinions';
 
@@ -11,11 +11,11 @@ const HomeView = () => {
         <h2 id="footer-heading" className="sr-only">
           Home
         </h2>
-        <Opinions />
         <Hero />
         <ExploitYourTalent />
         <BestAuthorPage />
         <BestBooks />
+        <Opinions />
       </div>
     </>
   );
