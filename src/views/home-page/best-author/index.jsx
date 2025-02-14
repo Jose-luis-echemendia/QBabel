@@ -20,7 +20,7 @@ export const BestAuthorPage = () => {
         className="relative -top-32  w-[500px] h-[900px]"
       />
 
-    <Carrusel/>
+      <Carrusel />
     </section>
   );
 };
