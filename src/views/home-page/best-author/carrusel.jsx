@@ -15,7 +15,7 @@ import { schemaCarrusel } from "./schema/schema-images";
 export const Carrusel = () => {
   return (
     <>
-      <div className="-mt-10 h-full max-w-7xl">
+      <div className=" h-full max-w-7xl">
         <Swiper
           effect={"coverflow"}
           grabCursor={true}
