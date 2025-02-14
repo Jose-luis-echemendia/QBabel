@@ -1,4 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
+import { v4 as uuid } from 'uuid';
 
 // Import Swiper styles
 import "swiper/css";
@@ -7,6 +8,8 @@ import "swiper/css/pagination";
 
 // import required modules
 import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules";
+
+import { schemaCarrusel } from "./schema/schema-images";
 
 export const Carrusel = () => {
   return (
@@ -31,18 +34,12 @@ export const Carrusel = () => {
         }}
         className="mySwiper"
       >
-        <SwiperSlide key={2}>
-          <p>abc</p>
+        {schemaCarrusel.map((image) => (
+        <SwiperSlide key={uuid()}>
+          <figure><img src={image.src} alt={image.alt}/></figure>
         </SwiperSlide>
-        <SwiperSlide key={2}>
-          <p>abc</p>
-        </SwiperSlide>
-        <SwiperSlide key={2}>
-          <p>abc</p>
-        </SwiperSlide>
-        <SwiperSlide key={2}>
-          <p>abc</p>
-        </SwiperSlide>
+
+        ))}
       </Swiper>
     </>
   );
