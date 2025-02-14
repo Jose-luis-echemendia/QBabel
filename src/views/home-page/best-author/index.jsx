@@ -1,11 +1,10 @@
 // best-author-page.jsx
 import { BestAuthor } from './best-author';
-import Carrusel from './carrusel';
 import { schemaImages } from './schema/schema-images';
 
 export const BestAuthorPage = () => {
   return (
-    <section className="relative  w-full min-h-screen z-10 ">
+    <section className="relative w-full min-h-screen z-10 ">
      
      <p className="mx-auto w-fit text-[20px] font-opensans font-semibold mt-28 text-[#644844]">
         Find out more about what we do for writers →
@@ -15,9 +14,6 @@ export const BestAuthorPage = () => {
         Escritores destacados
       </h2>
 
-    <div className='bg-red-500 h-14 w-2 mx-auto'>
-
-      </div>
 
       <img
         src="/assets/images/home/best_author/Vector.png"
@@ -25,9 +21,8 @@ export const BestAuthorPage = () => {
         className="relative -top-32  w-[500px] h-[900px]"
       />
 
-      <div className='relative'>
       <BestAuthor images={schemaImages} />
-      </div>
+   
     
    
   
