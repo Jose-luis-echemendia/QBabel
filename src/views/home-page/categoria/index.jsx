@@ -44,10 +44,8 @@ const Categoria = () => {
   return (
     <div className="w-full overflow-hidden relative">
       <h1 className="text-center py-3 mt-10 text-[45px] font-quicksand font-bold">
-        Categoria
+        Categorias
       </h1>
-
-
       <motion.div
         className="flex gap-6 flex-nowrap min-w-max hover:cursor-pointer"
         style={{ x: xTranslation }}
