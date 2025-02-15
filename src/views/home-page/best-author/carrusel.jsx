@@ -37,9 +37,9 @@ export const Carrusel = () => {
       >
         {schemaCarrusel.map((author) => (
           <SwiperSlide key={uuid()}>
-            <figure className={`${author.color} p-4`} >
+            <figure className={` p-4`} >
               <img src={author.src} alt={author.alt} className="h-full w-full" />
-              <figcaption>{author.description}</figcaption>
+              
             </figure>
           </SwiperSlide>
         ))}
