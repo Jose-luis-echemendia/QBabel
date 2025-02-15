@@ -63,6 +63,23 @@ const Categoria = () => {
           <Card key={index} src={item.src} alt={item.alt} text={item.alt} />
         ))}
       </motion.div>
+      <motion.div
+        className="flex gap-6 flex-nowrap min-w-max hover:cursor-pointer"
+        style={{ x: xTranslation }}
+        ref={ref}
+        onHoverStart={() => {
+          setMustFinish(true);
+          setDuration(SLOW_SPEED); 
+        }}
+        onHoverEnd={() => {
+          setMustFinish(true);
+          setDuration(FAST_SPEED); 
+        }}
+      >
+        {[...schemaImagesCategoria, ...schemaImagesCategoria].slice().reverse().map((item, index) => (
+          <Card key={index} src={item.src} alt={item.alt} text={item.alt} />
+        ))}
+      </motion.div>
     </div>
   );
 };
