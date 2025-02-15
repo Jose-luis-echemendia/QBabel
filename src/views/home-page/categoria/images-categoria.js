@@ -21,7 +21,7 @@ export const schemaImagesCategoria = [
     },
     {
       src: '/assets/images/home/categoria/Cocina.png',
-      alt: 'Ocina',
+      alt: 'Cocina',
     },
     {
         src: '/assets/images/home/categoria/Espiritual.png',
