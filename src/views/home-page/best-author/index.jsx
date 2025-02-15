@@ -3,7 +3,7 @@ import { Carrusel } from "./carrusel";
 
 export const BestAuthorPage = () => {
   return (
-    <section className="relative w-full min-h-screen flex flex-col">
+    <section className="relative w-full min-h-screen flex flex-col p-20 -mt-10 mb-20">
       <div>
         <p className="mx-auto w-fit text-[20px] font-opensans font-semibold mt-28 text-[#644844]">
           Find out more about what we do for writers →
@@ -17,7 +17,7 @@ export const BestAuthorPage = () => {
         <img
           src="/assets/images/home/best_author/Vector.png"
           alt=""
-          className="absolute top-36 -left-0 w-[500px] h-[900px] z-[-1]"
+          className="absolute top-36 -left-0 w-[500px] h-[800px] z-[-1]"
         />
         <Carrusel />
       </div>

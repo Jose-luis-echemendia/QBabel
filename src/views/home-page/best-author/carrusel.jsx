@@ -15,36 +15,35 @@ import { schemaCarrusel } from "./schema/schema-images";
 export const Carrusel = () => {
   return (
     <>
-      <div className="-mt-10 h-full max-w-7xl">
-        <Swiper
-          effect={"coverflow"}
-          grabCursor={true}
-          centeredSlides={true}
-          slidesPerView={"auto"}
-          coverflowEffect={{
-            rotate: 50,
-            stretch: 0,
-            depth: 100,
-            modifier: 1,
-            slideShadows: true,
-          }}
-          pagination={true}
-          modules={[EffectCoverflow, Pagination, Autoplay]}
-          autoplay={{
-            delay: 5000, // Tiempo en milisegundos entre cada transición (por ejemplo, 5000 para 5 segundos)
-            disableOnInteraction: false, // Desactivar autoplay cuando el usuario interactúa (arrastra o hace clic)
-          }}
-          className="mySwiper"
-        >
-          {schemaCarrusel.map((image) => (
-            <SwiperSlide key={uuid()}>
-              <figure className="">
-                <img src={image.src} alt={image.alt} />
-              </figure>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
+      <Swiper
+        effect={"coverflow"}
+        grabCursor={true}
+        centeredSlides={true}
+        slidesPerView={"auto"}
+        coverflowEffect={{
+          rotate: 50,
+          stretch: 0,
+          depth: 100,
+          modifier: 1,
+          slideShadows: true,
+        }}
+        pagination={true}
+        modules={[EffectCoverflow, Pagination, Autoplay]}
+        autoplay={{
+          delay: 5000, // Tiempo en milisegundos entre cada transición (por ejemplo, 5000 para 5 segundos)
+          disableOnInteraction: false, // Desactivar autoplay cuando el usuario interactúa (arrastra o hace clic)
+        }}
+        className="mySwiper"
+      >
+        {schemaCarrusel.map((author) => (
+          <SwiperSlide key={uuid()}>
+            <figure className={`${author.color} p-4`} >
+              <img src={author.src} alt={author.alt} className="h-full w-full" />
+              <figcaption>{author.description}</figcaption>
+            </figure>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </>
   );
 };
