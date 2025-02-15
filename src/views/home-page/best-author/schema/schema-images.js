@@ -31,69 +31,68 @@ export const schemaImages = [
     className: "   z-50 bottom-48 -left-20",
   },
 ];
-
 // Fotos contenida en el carrusel
 export const schemaCarrusel = [
   {
     src: "/assets/images/home/best_author/1.webp",
     alt: "Ariana Godoy",
-    color: "#9D5EC1",
+    color: "bg-[#9D5EC1]",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum non labore modi quae incidunt impedit aliquam, facere dolores similique dicta maxime et aut sapiente libero laudantium ea pariatur nisi soluta?",
   },
   {
     src: "/assets/images/home/best_author/2.webp",
     alt: "Lauren Roberts",
-    color: "#130F44",
+    color: "bg-[#130F44]",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum non labore modi quae incidunt impedit aliquam, facere dolores similique dicta maxime et aut sapiente libero laudantium ea pariatur nisi soluta?",
   },
   {
     src: "/assets/images/home/best_author/3.webp",
     alt: "Isabel",
-    color: "#E9DBAE",
+    color: "bg-[#E9DBAE]",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum non labore modi quae incidunt impedit aliquam, facere dolores similique dicta maxime et aut sapiente libero laudantium ea pariatur nisi soluta?",
   },
   {
     src: "/assets/images/home/best_author/4.webp",
     alt: "Isabel",
-    color: "#9e7fb0",
+    color: "bg-[#9e7fb0]",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum non labore modi quae incidunt impedit aliquam, facere dolores similique dicta maxime et aut sapiente libero laudantium ea pariatur nisi soluta?",
   },
   {
     src: "/assets/images/home/best_author/5.webp",
     alt: "Isabel",
-    color: "#2f2a69",
+    color: "bg-[#2f2a69]",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum non labore modi quae incidunt impedit aliquam, facere dolores similique dicta maxime et aut sapiente libero laudantium ea pariatur nisi soluta?",
   },
   {
     src: "/assets/images/home/best_author/6.webp",
     alt: "Isabel",
-    color: "#e1d7b5",
+    color: "bg-[#e1d7b5]",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum non labore modi quae incidunt impedit aliquam, facere dolores similique dicta maxime et aut sapiente libero laudantium ea pariatur nisi soluta?",
   },
   {
     src: "/assets/images/home/best_author/7.webp",
     alt: "Isabel",
-    color: "#9D5EC1",
+    color: "bg-[#9D5EC1]",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum non labore modi quae incidunt impedit aliquam, facere dolores similique dicta maxime et aut sapiente libero laudantium ea pariatur nisi soluta?",
   },
   {
     src: "/assets/images/home/best_author/8.webp",
     alt: "Isabel",
-    color: "#514d82",
+    color: "bg-[#514d82]",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum non labore modi quae incidunt impedit aliquam, facere dolores similique dicta maxime et aut sapiente libero laudantium ea pariatur nisi soluta?",
   },
   {
     src: "/assets/images/home/best_author/9.webp",
     alt: "Isabel",
-    color: "#dad4bf",
+    color: "bg-[#dad4bf]",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum non labore modi quae incidunt impedit aliquam, facere dolores similique dicta maxime et aut sapiente libero laudantium ea pariatur nisi soluta?",
   },
