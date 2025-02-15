@@ -39,7 +39,6 @@ export const Carrusel = () => {
           <SwiperSlide key={uuid()}>
             <figure className={` p-4`} >
               <img src={author.src} alt={author.alt} className="h-full w-full" />
-              
             </figure>
           </SwiperSlide>
         ))}
