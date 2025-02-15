@@ -3,10 +3,11 @@ import { schemaImagesCategoria } from "./images-categoria";
 import { Card } from "./card";
 import { motion, useMotionValue, animate } from "framer-motion";
 import useMeasure from "react-use-measure";
+import { v4 as uuidi } from "uuid";
 
 const Categoria = () => {
-  const FAST_SPEED = 200; 
-  const SLOW_SPEED = 300; 
+  const FAST_SPEED = 100; 
+  const SLOW_SPEED = 160; 
 
   const [duration, setDuration] = useState(FAST_SPEED); 
   const [mustFinish, setMustFinish] = useState(false); 
@@ -61,13 +62,13 @@ const Categoria = () => {
           setDuration(FAST_SPEED); 
         }}
       >
-        {[...schemaImagesCategoria, ...schemaImagesCategoria].map((item, index) => (
-          <Card key={index} src={item.src} alt={item.alt} text={item.alt} />
+        {[...schemaImagesCategoria, ...schemaImagesCategoria].map((item) => (
+          <Card key={uuidi()} src={item.src} alt={item.alt} text={item.alt} />
         ))}
       </motion.div>
 
       <motion.div
-        className="flex gap-6 flex-nowrap min-w-max hover:cursor-pointer"
+        className="flex gap-6 flex-nowrap min-w-max hover:cursor-pointer "
         style={{ x: xTranslation }}
         ref={ref}
         onHoverStart={() => {
@@ -79,8 +80,8 @@ const Categoria = () => {
           setDuration(FAST_SPEED); 
         }}
       >
-        {[...schemaImagesCategoria, ...schemaImagesCategoria].reverse().map((item, index) => (
-          <Card key={index} src={item.src} alt={item.alt} text={item.text} />
+        {[...schemaImagesCategoria, ...schemaImagesCategoria].reverse().map((item) => (
+          <Card key={uuidi()+1} src={item.src} alt={item.alt} text={item.text} />
         ))}
       </motion.div>
       
