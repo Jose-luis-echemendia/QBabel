@@ -6,17 +6,21 @@ export const Card = ({ src, alt, text }) => {
 
   return (
     <div 
-      className="relative px-28 mt-10 py-6 rounded-2xl m-10 shadow-lg overflow-hidden border-2 border-gray-400"
+      className="relative w-[300px] h-20 px-6 py-4 rounded-2xl mt-10 shadow-lg overflow-hidden border-2 border-gray-400 flex flex-col justify-between"
       onMouseEnter={() => setShowOverlay(true)}
       onMouseLeave={() => setShowOverlay(false)}
     >
-      <p className="text-black mr-16 font-quicksand font-normal text-[30px]">
+      {/* Texto con tamaño controlado */}
+      <p className="text-black text-center mr-10 my-auto font-quicksand font-normal text-[25px] truncate max-w-[250px]">
         {text}
       </p>
-      <div className="absolute right-0 px-1 top-2 h-20">
-        <img src={src} alt={alt} className="w-full h-full" />
+
+      {/* Imagen con tamaño fijo */}
+      <div className="absolute right-2 top-2 w-16 h-16">
+        <img src={src} alt={alt} className="w-full h-full object-cover" />
       </div>
 
+      {/* Overlay animado */}
       <AnimatePresence>
         {showOverlay && (
           <motion.div
@@ -26,7 +30,7 @@ export const Card = ({ src, alt, text }) => {
             exit={{ opacity: 0 }}
           >
             <motion.h1
-              className="bg-white font-semibold text-sm px-3 py-2 rounded-full flex items-center gap-[0.5ch] hover:opacity-75"
+              className="bg-white font-semibold text-lg px-4 py-2 rounded-full flex items-center gap-[0.5ch] hover:opacity-75"
               initial={{ y: 10 }}
               animate={{ y: 0 }}
               exit={{ y: 10 }}
