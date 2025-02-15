@@ -5,8 +5,8 @@ import { motion, useMotionValue, animate } from "framer-motion";
 import useMeasure from "react-use-measure";
 
 const Categoria = () => {
-  const FAST_SPEED = 40; 
-  const SLOW_SPEED = 100; 
+  const FAST_SPEED = 200; 
+  const SLOW_SPEED = 300; 
 
   const [duration, setDuration] = useState(FAST_SPEED); 
   const [mustFinish, setMustFinish] = useState(false); 
@@ -18,6 +18,8 @@ const Categoria = () => {
   useEffect(() => {
     let controls;
     let finalPosition = -width / 2 - 8; 
+
+    console.log('duration:'+duration)
 
     if (mustFinish) {
       controls = animate(xTranslation, [xTranslation.get(), finalPosition], {
@@ -63,6 +65,7 @@ const Categoria = () => {
           <Card key={index} src={item.src} alt={item.alt} text={item.alt} />
         ))}
       </motion.div>
+
       <motion.div
         className="flex gap-6 flex-nowrap min-w-max hover:cursor-pointer"
         style={{ x: xTranslation }}
@@ -76,10 +79,11 @@ const Categoria = () => {
           setDuration(FAST_SPEED); 
         }}
       >
-        {[...schemaImagesCategoria, ...schemaImagesCategoria].slice().reverse().map((item, index) => (
-          <Card key={index} src={item.src} alt={item.alt} text={item.alt} />
+        {[...schemaImagesCategoria, ...schemaImagesCategoria].reverse().map((item, index) => (
+          <Card key={index} src={item.src} alt={item.alt} text={item.text} />
         ))}
       </motion.div>
+      
     </div>
   );
 };
