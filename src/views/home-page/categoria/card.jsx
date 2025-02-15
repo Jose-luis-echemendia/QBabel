@@ -26,7 +26,7 @@ export const Card = ({ src, alt, text }) => {
             exit={{ opacity: 0 }}
           >
             <motion.h1
-              className="bg-white font-semibold text-sm px-3 py-2 rounded-full flex items-center gap-[0.5ch] hover:opacity-75"
+              className="bg-white font-semibold text-lg px-4 py-2 rounded-full flex items-center gap-[0.5ch] hover:opacity-75"
               initial={{ y: 10 }}
               animate={{ y: 0 }}
               exit={{ y: 10 }}
