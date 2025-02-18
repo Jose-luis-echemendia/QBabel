@@ -3,12 +3,12 @@ export const schemaImages = [
   {
     src: "/assets/images/home/best_author/5.webp",
     alt: "Isabel",
-    className: " z-10 left-7  top-0 ",
+    className: " z-10 left-7  top-40 ",
   },
   {
     src: "/assets/images/home/best_author/4.webp",
     alt: "Erich",
-    className: " top-36 z-20 -left-24 z-500 top-0 ",
+    className: " top-64 z-20 -left-24 z-500 top-0 ",
   },
   {
     src: "/assets/images/home/best_author/6.webp",
@@ -23,12 +23,12 @@ export const schemaImages = [
   {
     src: "/assets/images/home/best_author/7.webp",
     alt: "Mark",
-    className: " bottom-[315px] left-24 opacity-70",
+    className: " bottom-40 left-24 opacity-70",
   },
   {
     src: "/assets/images/home/best_author/9.webp",
     alt: "Aurora Perez",
-    className: "   z-50 bottom-48 -left-20",
+    className: "   z-50 bottom-20 -left-20",
   },
 ];
 // Fotos contenida en el carrusel
