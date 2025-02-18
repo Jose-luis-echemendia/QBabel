@@ -1,5 +1,7 @@
 // best-author-page.jsx
+import { BestAuthor } from "./best-author";
 import { Carrusel } from "./carrusel";
+import { schemaImages } from "./schema/schema-images";
 
 export const BestAuthorPage = () => {
   return (
@@ -19,6 +21,7 @@ export const BestAuthorPage = () => {
           alt=""
           className="absolute top-36 -left-0 w-[500px] h-[800px] z-[-1]"
         />
+        <BestAuthor images={schemaImages}/>
         <Carrusel />
       </div>
     </section>
