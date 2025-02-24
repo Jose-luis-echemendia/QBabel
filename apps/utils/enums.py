@@ -47,4 +47,7 @@ class Enum(metaclass=EnumMetaClass):
     pass
 
 
-    
+class ImageTypes(Enum):
+    avatar = _("Avatar")
+    cover = _("Cover")
+    category = _("Category")
