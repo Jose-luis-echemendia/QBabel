@@ -17,28 +17,9 @@ def upload_generic_image(instance, filename):
     """
     name = generate_filename(filename, "emote")
     path = f"images/{name}"
-    if instance.is_avatar:
-        path = f"users/avatar/{name}"
-    elif instance.is_emote:
-        path = f"emotes/{name}"
-    elif instance.is_style_emote_component:
-        path = f"category/emote/estyles/{name}"
-    elif instance.is_color_palette_emote_component:
-        path = f"category/emote/color_palettes/{name}"
-    elif instance.is_expression_emote_component:
-        path = f"category/emote/expressions/{name}"
-    elif instance.is_base_emote_component:
-        path = f"category/emote/bases/{name}"
-    elif instance.is_accessory_emote_component:
-        path = f"category/emote/accessories/{name}"
-    elif instance.is_primary_color_emote_component:
-        path = f"category/emote/primary_color/{name}"
-    elif instance.is_secondary_color_emote_component:
-        path = f"category/emote/secondary_color/{name}"
-    elif instance.is_actions_emote_component:
-        path = f"category/emote/actions/{name}"
-    elif instance.is_presentation_gallery:
-        path = f"gallery/presentation/{name}"
+    if instance.is_cover:
+        path = f"libros/{name}"
+
     return path
 
 
