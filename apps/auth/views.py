@@ -1,3 +1,4 @@
+from rest_framework import status
 from rest_framework.response import Response
 from django_ratelimit.decorators import ratelimit
 from django.utils.decorators import method_decorator
@@ -6,6 +7,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
 from .serializers import LoginSerializer
+from rest_framework_simplejwt.exceptions import TokenError
 
 class BasicAuthView(APIView):
     permission_classes = [AllowAny]
@@ -30,7 +32,6 @@ class BasicAuthView(APIView):
             'user_id': user.uid,
         })
 
-
 class AdminAuthView(APIView):
     permission_classes = [AllowAny]
 
@@ -47,6 +48,32 @@ class AdminAuthView(APIView):
                 'user_id': user.uid,
             })
         return Response({'error': 'Invalid credentials or not an admin'}, status=401)
+    
+class CustomTokenRefreshView(APIView):
+    permission_classes = [AllowAny]  
+
+    def post(self, request, *args, **kwargs):
+        refresh_token = request.data.get('refresh')
+
+        if not refresh_token:
+            return Response({'error': 'Refresh token is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            # Verifica y decodifica el refresh token
+            refresh = RefreshToken(refresh_token)
+            
+            # Genera un nuevo access token
+            access_token = str(refresh.access_token)
+            # Generar nuevo refresh token
+            new_refresh_token = str(refresh)
+
+            return Response({
+                'access': access_token,
+                'refresh': new_refresh_token, 
+            }, status=status.HTTP_200_OK)
+
+        except TokenError as e:
+            return Response({'error': 'Invalid or expired refresh token'}, status=status.HTTP_401_UNAUTHORIZED)
 
 class LogoutView(APIView):
     def post(self, request):
