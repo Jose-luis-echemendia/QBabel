@@ -16,21 +16,21 @@ class BasicAuthView(APIView):
     def post(self, request, *args, **kwargs):
         serializer = LoginSerializer(data=request.data)
         if not serializer.is_valid():
-            return Response({'error': 'Invalid input'}, status=400)
+            return Response({'error': 'Invalid input'}, status=status.HTTP_400_BAD_REQUEST)
 
         email = serializer.validated_data['email']
         password = serializer.validated_data['password']
 
         user = authenticate(email=email, password=password)
         if not user:
-            return Response({'error': 'User not found or incorrect password'}, status=401)
+            return Response({'error': 'User not found or incorrect password'}, status=status.HTTP_401_UNAUTHORIZED)
 
         refresh = RefreshToken.for_user(user)
         return Response({
             'access': str(refresh.access_token),
             'refresh': str(refresh),
-            'user_id': user.uid,
-        })
+            'user_id': user.uid,  
+        }, status=status.HTTP_200_OK)
 
 class AdminAuthView(APIView):
     permission_classes = [AllowAny]
@@ -73,7 +73,7 @@ class CustomTokenRefreshView(APIView):
             }, status=status.HTTP_200_OK)
 
         except TokenError as e:
-            return Response({'error': 'Invalid or expired refresh token'}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response({'error': 'Invalid or expired refresh token. Please log in again.'}, status=status.HTTP_401_UNAUTHORIZED)
 
 class LogoutView(APIView):
     def post(self, request):
