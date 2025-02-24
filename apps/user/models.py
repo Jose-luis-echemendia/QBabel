@@ -6,8 +6,8 @@ from django.contrib.auth.models import (
 )
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
-from apps.utils.models.generic_abstract_models import BaseModel
-from apps.utils.validators import validate_password_strength
+from apps.utils.models.abstract_models import BaseModel
+from .validators import validate_password_strength
 from .enums import RoleType
 from django.utils.timezone import now
 
