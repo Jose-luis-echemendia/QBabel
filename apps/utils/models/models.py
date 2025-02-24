@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import get_user_model
 from versatileimagefield.fields import VersatileImageField
 from versatileimagefield.placeholder import OnStoragePlaceholderImage
-from .generic_abstract_models import BaseModel
+from .abstract_models import BaseModel
 from ..enums import ImageTypes
 from ..image_manager import upload_generic_image, optimize_image
 import environ
@@ -54,12 +54,6 @@ class GenericImage(BaseModel):
         return 'title'
 
     def save(self, *args, **kwargs):
-        user = kwargs.pop("user", None)
-        if not self.pk and not self.registered_by:
-            self.registered_by = user
-        if self.image:
-            self.image = optimize_image(self.image)
-        kwargs["is_type_image_generate"] = self.is_emote or self.is_logo or self.is_wall_art or self.is_custom_image
         super(GenericImage, self).save(*args, **kwargs)
 
     @property
@@ -71,56 +65,12 @@ class GenericImage(BaseModel):
         return self.type == ImageTypes.avatar
     
     @property
-    def is_emote(self):
-        return self.type == ImageTypes.emote
+    def is_category(self):
+        return self.type == ImageTypes.category
     
     @property
-    def is_logo(self):
-        return self.type == ImageTypes.logo
-    
-    @property
-    def is_wall_art(self):
-        return self.type == ImageTypes.wall_art
-    
-    @property
-    def is_custom_image(self):
-        return self.type == ImageTypes.custom_image
-
-    @property
-    def is_style_emote_component(self):
-        return self.type == ImageTypes.style_emote_component 
-    
-    @property
-    def is_color_palette_emote_component(self):
-        return self.type == ImageTypes.color_palette_emote_component
-    
-    @property
-    def is_expression_emote_component(self):
-        return self.type == ImageTypes.expression_emote_component
-    
-    @property
-    def is_base_emote_component(self):
-        return self.type == ImageTypes.base_emote_component
-    
-    @property
-    def is_accessory_emote_component(self):
-        return self.type == ImageTypes.accessory_emote_component
-    
-    @property
-    def is_primary_color_emote_component(self):
-        return self.type == ImageTypes.primary_color_emote_component
-    
-    @property
-    def is_secondary_color_emote_component(self):
-        return self.type == ImageTypes.secondary_color_emote_component
-    
-    @property
-    def is_actions_emote_component(self):
-        return self.type == ImageTypes.actions_emote_component
-    
-    @property
-    def is_presentation_gallery(self):
-        return self.type == ImageTypes.presentation_gallery
+    def is_cover(self):
+        return self.t
 
     class Meta:
         verbose_name = _("Generic Image")
