@@ -6,7 +6,7 @@ from apps.utils.utils import desconvertir_de_snake_case
 
 User = get_user_model()
 
-class UserCreateSerializer(serializers.Serializer):
+class UserSerializer(serializers.Serializer):
     day_expense = serializers.DecimalField(read_only=True, required=False, max_digits=10, decimal_places=2)
     spending = serializers.DecimalField(read_only=True, required=False, max_digits=10, decimal_places=2)
     count_emote = serializers.IntegerField(read_only=True, required=False)
