@@ -1,7 +1,8 @@
-
+from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from rest_framework.exceptions import ValidationError
 from .abstract_serializers import AbstractBaseSerializer
+from ..models.models import GenericImage
 import logging
 
 # Configurar un logger
