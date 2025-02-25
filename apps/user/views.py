@@ -1,3 +1,93 @@
-from django.shortcuts import render
+from rest_framework import status
+from rest_framework.decorators import action
+from django.contrib.auth import get_user_model
+from rest_framework.response import Response
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
+from .serializers import UserCreateSerializer
+from apps.user.permissions import IsAdminRole
 
-# Create your views here.
+User = get_user_model()
+
+class CustomUserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserCreateSerializer
+    permission_classes = [IsAdminRole, IsAuthenticated]
+    
+    def perform_create(self, serializer):
+        serializer.save()
+
+    def get_permissions(self):
+        """
+        Ajustar permisos dinámicamente según la acción.
+        """
+        if self.action in ["retrieve", "destroy"]:
+            # Solo requiere autenticación para el detalle
+            return [IsAuthenticated()]
+        # Otras acciones mantienen los permisos originales
+        return [IsAdminRole(), IsAuthenticated()]
+
+    def create(self, request, *args, **kwargs):
+        if not request.user.is_superuser:
+            return Response(
+                {"detail": "Only superusers can create users."},
+                status=status.HTTP_403_FORBIDDEN,
+            )
+
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(
+            serializer.data, status=status.HTTP_201_CREATED, headers=headers
+        )
+
+    def destroy(self, request, *args, **kwargs):
+        instance_user = self.get_object()
+
+        if instance_user.is_active:
+            return Response(
+                {"detail": "This user can not delete becouse he is active."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+            
+        instance_user.delete()
+
+        return Response(
+            {"message": "user account deleted successfully"},
+            status=status.HTTP_204_NO_CONTENT,
+        )
+
+    @action(detail=True, methods=["POST"])
+    def active(self, request, pk=None, *args, **kwargs):
+        instance_user = self.get_object()
+
+        if instance_user.is_active:
+            return Response(
+                {"detail": "This user is already active."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        instance_user.is_active = True
+        instance_user.save()
+        return Response(
+            {"message": "user account activate successfully"},
+            status=status.HTTP_204_NO_CONTENT,
+        )
+
+    @action(detail=True, methods=["POST"])
+    def desactive(self, request, pk=None, *args, **kwargs):
+        instance_user = self.get_object()
+
+        if not instance_user.is_active:
+            return Response(
+                {"detail": "This user is already inactive."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        instance_user.is_active = False
+        instance_user.save()
+        return Response(
+            {"message": "user account desactive successfully"},
+            status=status.HTTP_204_NO_CONTENT,
+        )
