@@ -31,8 +31,8 @@ DJANGO_APPS = [
     'django.contrib.humanize',
 ]
 
-PROJECT_APPS = ["apps.utils"]
-QBABEL_APPS = []
+PROJECT_APPS = ["apps.utils", "apps.user", "apps.authentication"]
+QBABEL_APPS = ["apps.perfil"]
 
 THIRD_PARTY_APPS=[
     'corsheaders',
