@@ -65,3 +65,18 @@ class AuditUserChangeModel(models.Model):
 
     class Meta:
         abstract = True       
+        
+class AuditRegisteredObjectModel(models.Model):
+    registered_by = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name=_("Registered By"),
+        related_name="images_registered",
+    )
+    
+    class Meta:
+        abstract = True 
+        
+        
