@@ -9,9 +9,9 @@ from django.contrib.auth.models import (
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from apps.utils.models.abstract_models import BaseModel
+from django.utils.translation import gettext_lazy as _
 from .validators import validate_password_strength
 from .enums import RoleType
-from django.utils.timezone import now
 
 class UserAccountManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -55,15 +55,15 @@ class UserAccountManager(BaseUserManager):
         return user
 
 class UserAccount(BaseModel, AbstractBaseUser, PermissionsMixin):
-    groups = models.ManyToManyField(Group, related_name="useraccount_groups")
-    user_permissions = models.ManyToManyField(Permission, related_name="useraccount_permissions")
-    email = models.EmailField(max_length=255, unique=True)
-    user_name = models.CharField(max_length=255)
-    is_premium = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
-    is_superuser = models.BooleanField(default=False)
-    is_staff = models.BooleanField(default=False)
-    role = models.CharField(verbose_name="Role", max_length=20, choices=RoleType.choices, default=RoleType.user)
+    groups = models.ManyToManyField(Group, related_name="useraccount_groups", verbose_name=_("Groups"))
+    user_permissions = models.ManyToManyField(Permission, related_name="useraccount_permissions", verbose_name=_("User Permissions"))
+    email = models.EmailField(max_length=255, unique=True, verbose_name=_("Email"))
+    user_name = models.CharField(max_length=255, unique=True, verbose_name=_("User Name"))
+    is_premium = models.BooleanField(default=False, verbose_name=_("Is Premium"))
+    is_active = models.BooleanField(default=True, verbose_name=_("Is Active"))
+    is_superuser = models.BooleanField(default=False, verbose_name=_("Is Superuser"))
+    is_staff = models.BooleanField(default=False, verbose_name=_("Is Staff"))
+    role = models.CharField(verbose_name=_("Role"), max_length=20, choices=RoleType.choices, default=RoleType.user)
     
     objects = UserAccountManager()
 
