@@ -15,6 +15,9 @@ class CustomUserViewSet(viewsets.ModelViewSet):
     
     def perform_create(self, serializer):
         serializer.save()
+        
+    def perform_update(self, serializer):
+        return serializer.save()
 
     def create(self, request, *args, **kwargs):
         if not request.user.is_superuser:
@@ -29,6 +32,19 @@ class CustomUserViewSet(viewsets.ModelViewSet):
         headers = self.get_success_headers(serializer.data)
         return Response(
             serializer.data, status=status.HTTP_201_CREATED, headers=headers
+        )
+        
+    def update(self, request, *args, **kwargs):
+        request_data = request.data.copy()
+        partial = kwargs.pop("partial", False)
+        instance = self.get_object()
+        self.validate(request_data)          
+        serializer = self.get_serializer(instance, data=request_data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+
+        return Response(
+            serializer.data, status=status.HTTP_200_OK,
         )
 
     def destroy(self, request, *args, **kwargs):
