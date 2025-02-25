@@ -64,7 +64,6 @@ class AuditUserChangeSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
-
 class AbstractImageSerializer(serializers.ModelSerializer):
     image = serializers.PrimaryKeyRelatedField(
         queryset=GenericImage.objects.all(), write_only=True
