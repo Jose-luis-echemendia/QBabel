@@ -73,12 +73,16 @@ class GenericImage(BaseModel):
         return self.t
 
     class Meta:
+        db_table = 'Image'
+        managed = True
         verbose_name = _("Generic Image")
         verbose_name_plural = _("Generic Images")
         ordering = ("-created_at",)
 
 class GenericDocument(BaseModel):
     class Meta:
+        db_table = 'Document'
+        managed = True
         verbose_name = _("Generic Decoument")
         verbose_name_plural = _("Generic Documents")
         ordering = ("-created_at",)
