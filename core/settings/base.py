@@ -32,7 +32,7 @@ DJANGO_APPS = [
 ]
 
 PROJECT_APPS = ["apps.utils", "apps.user", "apps.authentication"]
-QBABEL_APPS = ["apps.perfil"]
+QBABEL_APPS = ["apps.perfil", "apps.category"]
 
 THIRD_PARTY_APPS=[
     'corsheaders',
