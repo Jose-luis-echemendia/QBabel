@@ -64,6 +64,22 @@ class AuditUserChangeSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
+
+class AbstractImageSerializer(serializers.ModelSerializer):
+    image = serializers.PrimaryKeyRelatedField(
+        queryset=GenericImage.objects.all(), write_only=True
+    )
+    
+    class Meta:
+        abstract = True
+        fields = [
+            "image",
+            "image_details"
+        ]
+        
+    def get_image_details(self, obj):
+        return ImageSerializer(obj.image).data if obj.image else None
+
 class ImageSerializer(AbstractBaseSerializer):
     registered_by = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
 
