@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 from versatileimagefield.fields import VersatileImageField
 from versatileimagefield.placeholder import OnStoragePlaceholderImage
 from .abstract_models import BaseModel, AuditRegisteredObjectModel
-from ..enums import ImageTypes
+from ..enums import ImageTypes, DocumentTypes
 from ..image_manager import upload_generic_image, optimize_image
 import environ
 
@@ -85,8 +85,8 @@ class GenericDocument(BaseModel, AuditRegisteredObjectModel):
     type = models.CharField(
         verbose_name=_("Type"),
         max_length=50,
-        choices=[('PDF', 'PDF'), ('DOC', 'DOC'), ('TXT', 'TXT')],  
-        default='PDF',
+        choices=DocumentTypes.choices,  
+        default=DocumentTypes.PDF,
     )
 
     def __str__(self):
