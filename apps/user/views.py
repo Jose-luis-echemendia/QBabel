@@ -3,29 +3,18 @@ from rest_framework.decorators import action
 from django.contrib.auth import get_user_model
 from rest_framework.response import Response
 from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from .serializers import UserCreateSerializer
-from apps.user.permissions import IsAdminRole
 
 User = get_user_model()
 
 class CustomUserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserCreateSerializer
-    permission_classes = [IsAdminRole, IsAuthenticated]
+    permission_classes = [AllowAny, IsAuthenticated]
     
     def perform_create(self, serializer):
         serializer.save()
-
-    def get_permissions(self):
-        """
-        Ajustar permisos dinámicamente según la acción.
-        """
-        if self.action in ["retrieve", "destroy"]:
-            # Solo requiere autenticación para el detalle
-            return [IsAuthenticated()]
-        # Otras acciones mantienen los permisos originales
-        return [IsAdminRole(), IsAuthenticated()]
 
     def create(self, request, *args, **kwargs):
         if not request.user.is_superuser:
