@@ -3,6 +3,8 @@ from django.contrib.auth.models import (
     AbstractBaseUser,
     PermissionsMixin,
     BaseUserManager,
+    Group, 
+    Permission
 )
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
@@ -53,6 +55,8 @@ class UserAccountManager(BaseUserManager):
         return user
 
 class UserAccount(BaseModel, AbstractBaseUser, PermissionsMixin):
+    groups = models.ManyToManyField(Group, related_name="useraccount_groups")
+    user_permissions = models.ManyToManyField(Permission, related_name="useraccount_permissions")
     email = models.EmailField(max_length=255, unique=True)
     user_name = models.CharField(max_length=255)
     is_premium = models.BooleanField(default=False)
