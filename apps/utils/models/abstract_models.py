@@ -73,7 +73,7 @@ class AuditRegisteredObjectModel(models.Model):
         null=True,
         blank=True,
         verbose_name=_("Registered By"),
-        related_name="images_registered",
+        related_name="%(class)s_registered",
     )
     
     class Meta:
