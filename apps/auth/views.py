@@ -49,7 +49,7 @@ class AdminAuthView(APIView):
             return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 
         if not user.is_active:
-                return Response({'error': 'User account is inactive'}, status=403)
+                return Response({'error': 'User account is inactive'}, status=status.HTTP_403_FORBIDDEN)
 
         if not user.is_staff_business:
             return Response({'error': 'Invalid credentials or not an admin'}, status=status.HTTP_401_UNAUTHORIZED)
@@ -93,6 +93,6 @@ class LogoutView(APIView):
             refresh_token = request.data['refresh_token']
             token = RefreshToken(refresh_token)
             token.blacklist()
-            return Response(status=204)
+            return Response(status=status.HTTP_205_RESET_CONTENT)
         except Exception as e:
-            return Response(status=400)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
