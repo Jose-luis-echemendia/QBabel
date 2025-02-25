@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import get_user_model
 from versatileimagefield.fields import VersatileImageField
 from versatileimagefield.placeholder import OnStoragePlaceholderImage
-from .abstract_models import BaseModel
+from .abstract_models import BaseModel, AuditRegisteredObjectModel
 from ..enums import ImageTypes
 from ..image_manager import upload_generic_image, optimize_image
 import environ
@@ -33,14 +33,6 @@ class GenericImage(BaseModel):
         verbose_name=_("Image"),
         upload_to=upload_generic_image,
         placeholder_image=OnStoragePlaceholderImage(path="images/placeholder.jpg"),
-    )
-    registered_by = models.ForeignKey(
-        User,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name=_("Registered By"),
-        related_name="images_registered",
     )
 
     def __str__(self):
@@ -75,12 +67,44 @@ class GenericImage(BaseModel):
         verbose_name_plural = _("Generic Images")
         ordering = ("-created_at",)
 
-class GenericDocument(BaseModel):
+class GenericDocument(BaseModel, AuditRegisteredObjectModel):
+    """
+    Model for handling generic documents within the application
+    """
     
+    title = models.CharField(
+        verbose_name=_("Title"), max_length=255, blank=True, null=True
+    )
+    description = models.TextField(
+        verbose_name=_("Description"), blank=True, null=True
+    )
+    file = models.FileField(
+        verbose_name=_("File"),
+        upload_to='uploads/documents/',  # Define la ruta donde se guardarán los documentos
+    )
+    type = models.CharField(
+        verbose_name=_("Type"),
+        max_length=50,
+        choices=[('PDF', 'PDF'), ('DOC', 'DOC'), ('TXT', 'TXT')],  
+        default='PDF',
+    )
+
+    def __str__(self):
+        return "{} #{}".format(self.title, self.pk)
     
+    def get_slug_source_field(self):
+        return 'title'
+
+    def save(self, *args, **kwargs):
+        super(GenericDocument, self).save(*args, **kwargs)
+
+    @property
+    def url(self):
+        return self.file.url
+
     class Meta:
         db_table = 'Document'
         managed = True
-        verbose_name = _("Generic Decoument")
+        verbose_name = _("Generic Document")
         verbose_name_plural = _("Generic Documents")
         ordering = ("-created_at",)
