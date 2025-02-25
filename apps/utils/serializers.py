@@ -21,7 +21,6 @@ class AbstractBaseSerializer(serializers.ModelSerializer):
         fields = ["uid", "slug", "created_at", "updated_at"]
         read_only_fields = ("uid", "slug", "created_at", "updated_at")
 
-
 class AuditUserChangeSerializer(serializers.ModelSerializer):
     created_by = serializers.PrimaryKeyRelatedField(
         queryset=User.objects.all(), write_only=True, required=False
