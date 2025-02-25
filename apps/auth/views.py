@@ -23,7 +23,11 @@ class BasicAuthView(APIView):
 
         user = authenticate(email=email, password=password)
         if not user:
-            return Response({'error': 'User not found or incorrect password'}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+
+        if not user.is_active:
+                return Response({'error': 'User account is inactive'}, status=status.HTTP_403_FORBIDDEN)
+
 
         refresh = RefreshToken.for_user(user)
         return Response({
@@ -40,14 +44,22 @@ class AdminAuthView(APIView):
         password = request.data.get('password')
 
         user = authenticate(email=email, password=password)
-        if user and user.is_staff:
-            refresh = RefreshToken.for_user(user)
-            return Response({
-                'access': str(refresh.access_token),
-                'refresh': str(refresh),
-                'user_id': user.uid,
-            })
-        return Response({'error': 'Invalid credentials or not an admin'}, status=401)
+        
+        if not user:
+            return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+
+        if not user.is_active:
+                return Response({'error': 'User account is inactive'}, status=403)
+
+        if not user.is_staff_business:
+            return Response({'error': 'Invalid credentials or not an admin'}, status=status.HTTP_401_UNAUTHORIZED)
+        
+        refresh = RefreshToken.for_user(user)
+        return Response({
+            'access': str(refresh.access_token),
+            'refresh': str(refresh),
+            'user_id': user.uid,
+        })
     
 class CustomTokenRefreshView(APIView):
     permission_classes = [AllowAny]  
