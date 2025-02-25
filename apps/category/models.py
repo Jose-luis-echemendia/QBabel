@@ -1,8 +1,8 @@
 from django.db import models
-from apps.utils.models.abstract_models import BaseModel
+from apps.utils.models.abstract_models import BaseModel, AuditUserChangeModel
 from apps.utils.models.models import GenericImage
 
-class Category(BaseModel):
+class Category(BaseModel, AuditUserChangeModel):
     name = models.CharField(max_length=50, unique=True)
     image = models.OneToOneField(GenericImage, on_delete=models.SET_NULL, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
