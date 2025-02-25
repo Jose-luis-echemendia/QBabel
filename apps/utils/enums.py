@@ -51,3 +51,6 @@ class ImageTypes(Enum):
     avatar = _("Avatar")
     cover = _("Cover")
     category = _("Category")
+
+class DocumentTypes(Enum):
+    pass
