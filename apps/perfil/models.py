@@ -1,6 +1,9 @@
 from django.db import models
-from apps.user.models import User
 from apps.utils.models.models import BaseModel
+from django.contrib.auth import get_user_model
+from django.utils.translation import gettext_lazy as _
+
+User = get_user_model()
 
 class Perfil(BaseModel):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
