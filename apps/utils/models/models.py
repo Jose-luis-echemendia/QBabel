@@ -77,3 +77,8 @@ class GenericImage(BaseModel):
         verbose_name_plural = _("Generic Images")
         ordering = ("-created_at",)
 
+class GenericDocument(BaseModel):
+    class Meta:
+        verbose_name = _("Generic Decoument")
+        verbose_name_plural = _("Generic Documents")
+        ordering = ("-created_at",)
