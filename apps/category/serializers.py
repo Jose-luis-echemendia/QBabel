@@ -18,3 +18,4 @@ class CategorySerializer():
         
     def get_image_details(self, obj):
         return ImageSerializer(obj.image).data if obj.image else None
+    
