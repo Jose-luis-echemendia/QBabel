@@ -76,6 +76,8 @@ class GenericImage(BaseModel):
         ordering = ("-created_at",)
 
 class GenericDocument(BaseModel):
+    
+    
     class Meta:
         db_table = 'Document'
         managed = True
