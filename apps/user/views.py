@@ -4,13 +4,13 @@ from django.contrib.auth import get_user_model
 from rest_framework.response import Response
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from .serializers import UserCreateSerializer
+from .serializers import UserSerializer
 
 User = get_user_model()
 
 class CustomUserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
-    serializer_class = UserCreateSerializer
+    serializer_class = UserSerializer
     permission_classes = [AllowAny, IsAuthenticated]
     
     def perform_create(self, serializer):
