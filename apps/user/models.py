@@ -70,3 +70,9 @@ class UserAccount(BaseModel, AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
+    class Meta:
+        db_table = 'User'
+        managed = True
+        verbose_name = 'User'
+        verbose_name_plural = 'Users'
+        ordering = ("-created_at",)
