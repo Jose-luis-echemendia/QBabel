@@ -15,10 +15,6 @@ class GenericImage(BaseModel):
     """
     Model for handling generic images within the application
     """
-
-    DEFAULT_EMOTE_COMPONENT_IMAGE_UUID = env('DEFAULT_EMOTE_COMPONENT_IMAGE_UUID')
-    DEFAULT_LOGO_COMPONENT_IMAGE_UUID = env('DEFAULT_LOGO_COMPONENT_IMAGE_UUID')
-    DEFAULT_WALL_ART_COMPONENT_IMAGE_UUID = env('DEFAULT_WALL_ART_COMPONENT_IMAGE_UUID')
     
     alt = models.CharField(
         verbose_name=_("Alt Text"), max_length=255, blank=True, null=True
