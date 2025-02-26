@@ -4,7 +4,7 @@ export const Decorator = () => {
     <>
       <CustomImageDecorator
         src="/assets/icons/2.svg"
-        className="absolute left-0 top-[300px] z-10"
+        className="absolute left-0 top-[400px] z-10"
       />
       <CustomImageDecorator
         src="/assets/icons/3.svg"
