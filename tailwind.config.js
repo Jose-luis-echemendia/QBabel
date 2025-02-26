@@ -19,6 +19,7 @@ export default withMT({
         anton: ['Anton', 'sans-serif'], 
         quicksand: ['Quicksand', 'sans-serif'], 
         opensans: ['Open Sans', 'sans-serif'], 
+        italianno: ['Italianno', 'cursive'],
       },
     },
   },
