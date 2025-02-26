@@ -1,6 +1,12 @@
 
-export const Footer = () => {
+const Footer = () => {
   return (
-    <div>Footer</div>
+    <footer className="w-full p-10 flex justify-center items-center bg-[#2E2E2E] text-primary">
+      <section>
+        <h2>QBabel siempre disponible para usted</h2>
+      </section>
+    </footer>
   )
 }
+
+export default Footer;
