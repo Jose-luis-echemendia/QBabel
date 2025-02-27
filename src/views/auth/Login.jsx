@@ -1,5 +1,5 @@
 import { useForm } from "@/hooks/useForm";
-import { initialFormLogin } from "../../helpers/formInitialState";
+import { initialFormLogin } from "@/constants/form-initial-state"; 
 import { useState } from "react";
 import { Oval } from "react-loader-spinner";
 import { Link, Navigate } from "react-router-dom";
@@ -8,6 +8,8 @@ export const Login = () => {
   const [ isAuthenticated, setIsAuthenticated ] = useState(false)
   const { formState, onInputChange, setFormState } = useForm(initialFormLogin);
   const { email, password } = formState;
+
+  const stateAuth = true
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -111,7 +113,7 @@ export const Login = () => {
               </div>
 
               <div>
-                {stateAuth.loading ? (
+                {stateAuth ? (
                   <button   className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     <Oval
                       visible={true}
