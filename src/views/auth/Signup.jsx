@@ -1,29 +1,20 @@
-import { Layout } from "../../hocs/layout";
-import { useForm } from "../../hooks/useForm";
+import { useForm } from "@/hooks/useForm";
 import { initialFormSignup } from "../../helpers/formInitialState";
-import { useEffect, useState } from "react";
-import { useAuth } from "../../hooks/useAuth";
+import { useState } from "react";
 import { Oval } from "react-loader-spinner";
 
 export const Signup = () => {
   const [accountCreated, setAccountCreated] = useState(false);
-  const { stateAuth, signup } = useAuth();
   const { formState, onInputChange, setFormState } = useForm(initialFormSignup);
   const { email, firstName, lastName, password, rePassword } = formState;
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const onSubmit = (event) => {
     event.preventDefault();
-    signup(firstName, lastName, email, password, rePassword);
-    setAccountCreated(true);
-    window.scrollTo(0, 0);
+
   };
 
   return (
-    <Layout>
+    <>
       <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <img
@@ -245,6 +236,6 @@ export const Signup = () => {
           </div>
         </div>
       </div>
-    </Layout>
+    </>
   );
 };
