@@ -1,10 +1,9 @@
 'use client'
-import React from 'react'
 import PropTypes from 'prop-types'
 import { Dialog, DialogHeader, DialogBody, DialogFooter } from '@material-tailwind/react'
 import classNames from 'classnames'
 
-const CustomModal = ({
+export const CustomModal = ({
   open,
   handleOpen,
   classNameDialog,
@@ -55,5 +54,3 @@ CustomModal.propTypes = {
   header: PropTypes.element,
   footer: PropTypes.element
 }
-
-export default CustomModal
