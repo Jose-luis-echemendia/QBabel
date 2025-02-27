@@ -2,7 +2,11 @@ import { useState, useEffect } from "react";
 import { useMotionValue, animate } from "framer-motion";
 import useMeasure from "react-use-measure";
 
-export const useInfinityCarousel = ({ fastSpeed = 100, slowSpeed = 160 }) => {
+export const useInfinityCarousel = ({
+  fastSpeed = 100,
+  slowSpeed = 160,
+  direction = "left", // "left" o "right"
+}) => {
   const [duration, setDuration] = useState(fastSpeed);
   const [mustFinish, setMustFinish] = useState(false);
   const [rerender, setRerender] = useState(false);
@@ -12,7 +16,8 @@ export const useInfinityCarousel = ({ fastSpeed = 100, slowSpeed = 160 }) => {
 
   useEffect(() => {
     let controls;
-    const finalPosition = -width / 2 - 8; // Posición final para el desplazamiento
+    const finalPosition =
+      direction === "left" ? -width / 2 - 8 : width / 2 + 8; // Posición final según la dirección
 
     if (mustFinish) {
       controls = animate(xTranslation, [xTranslation.get(), finalPosition], {
@@ -24,7 +29,10 @@ export const useInfinityCarousel = ({ fastSpeed = 100, slowSpeed = 160 }) => {
         },
       });
     } else {
-      controls = animate(xTranslation, [0, finalPosition], {
+      const startPosition = direction === "left" ? 0 : -finalPosition;
+      const endPosition = direction === "left" ? finalPosition : 0;
+
+      controls = animate(xTranslation, [startPosition, endPosition], {
         ease: "linear",
         duration: duration,
         repeat: Infinity,
@@ -34,7 +42,7 @@ export const useInfinityCarousel = ({ fastSpeed = 100, slowSpeed = 160 }) => {
     }
 
     return () => controls?.stop?.();
-  }, [rerender, xTranslation, duration, width]);
+  }, [rerender, xTranslation, duration, width, direction]);
 
   const handleHoverStart = () => {
     setMustFinish(true);
