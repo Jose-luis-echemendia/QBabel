@@ -3,7 +3,7 @@ import { BestBooks } from './best-books';
 import { ExploitYourTalent } from './exploit-your-talent';
 import { Hero } from './hero';
 import { Opinions } from './Opinions';
-import Categoria from './categoria';
+import Categoria from './categories';
 
 const HomeView = () => {
   return (
