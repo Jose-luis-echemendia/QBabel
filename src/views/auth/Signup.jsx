@@ -143,7 +143,7 @@ export const Signup = () => {
                       visible={true}
                       height="20"
                       width="20"
-                      color="#fff"
+                      color="#EAD38D"
                       ariaLabel="oval-loading"
                       wrapperStyle={{}}
                       wrapperClass=""
