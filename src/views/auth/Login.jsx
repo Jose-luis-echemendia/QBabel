@@ -1,8 +1,6 @@
-import { Layout } from "../../hocs/Layout";
-import { useForm } from "../../hooks/useForm";
+import { useForm } from "@/hooks/useForm";
 import { initialFormLogin } from "../../helpers/formInitialState";
-import { useAuth } from "../../hooks/useAuth";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Oval } from "react-loader-spinner";
 import { Link, Navigate } from "react-router-dom";
 
@@ -11,25 +9,15 @@ export const Login = () => {
   const { formState, onInputChange, setFormState } = useForm(initialFormLogin);
   const { email, password } = formState;
 
-  const { stateAuth, login } = useAuth();
-
-  useEffect(() => {
-    setIsAuthenticated(false)
-    window.scrollTo(0, 0);
-  }, []);
-
   const onSubmit = (event) => {
     event.preventDefault();
-    login(email, password);
-    setIsAuthenticated(true)
-    window.scrollTo(0, 0);
   };
  
-  if(isAuthenticated && stateAuth.isAuthenticated) return <Navigate to="/"></Navigate>;
+  //if(isAuthenticated && stateAuth.isAuthenticated) return <Navigate to="/"></Navigate>;
 
 
   return (
-    <Layout>
+    <>
       <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <img
@@ -129,7 +117,7 @@ export const Login = () => {
                       visible={true}
                       height="20"
                       width="20"
-                      color="#fff"
+                      color="#EAD38D"
                       ariaLabel="oval-loading"
                       wrapperStyle={{}}
                       wrapperClass=""
@@ -222,6 +210,6 @@ export const Login = () => {
           </div>
         </div>
       </div>
-    </Layout>
+    </>
   );
 };
