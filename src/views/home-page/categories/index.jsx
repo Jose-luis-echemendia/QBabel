@@ -1,15 +1,17 @@
 import { schemaImagesCategoria } from "./images-categoria";
 import { Card } from "./card";
-import { motion,  } from "framer-motion";
+import { motion } from "framer-motion";
 import { v4 as uuidi } from "uuid";
+import { useInfinityCarousel } from "@/hooks/useInfinityCarousel";
 
 export const Categories = () => {
+  // Usa el custom hook para el primer carrusel (derecha a izquierda)
   const {
     ref: ref1,
     xTranslation: xTranslation1,
     handleHoverStart: handleHoverStart1,
     handleHoverEnd: handleHoverEnd1,
-  } = useInfiniteScroll({ fastSpeed: 100, slowSpeed: 160 });
+  } = useInfinityCarousel({ fastSpeed: 100, slowSpeed: 160 });
 
   // Usa el custom hook para el segundo carrusel (izquierda a derecha)
   const {
@@ -17,7 +19,7 @@ export const Categories = () => {
     xTranslation: xTranslation2,
     handleHoverStart: handleHoverStart2,
     handleHoverEnd: handleHoverEnd2,
-  } = useInfiniteScroll({ fastSpeed: 100, slowSpeed: 160 });
+  } = useInfinityCarousel({ fastSpeed: 100, slowSpeed: 160 });
 
   return (
     <div className="w-full overflow-hidden relative">
@@ -30,14 +32,8 @@ export const Categories = () => {
         className="flex gap-6 flex-nowrap min-w-max hover:cursor-pointer mb-6"
         style={{ x: xTranslation1 }}
         ref={ref1}
-        onHoverStart={() => {
-          setMustFinish(true);
-          setDuration(SLOW_SPEED);
-        }}
-        onHoverEnd={() => {
-          setMustFinish(true);
-          setDuration(FAST_SPEED);
-        }}
+        onHoverStart={handleHoverStart1}
+        onHoverEnd={handleHoverEnd1}
       >
         {[...schemaImagesCategoria, ...schemaImagesCategoria].map((item) => (
           <Card key={uuidi()} src={item.src} alt={item.alt} text={item.alt} />
@@ -49,14 +45,8 @@ export const Categories = () => {
         className="flex gap-6 flex-nowrap min-w-max hover:cursor-pointer"
         style={{ x: xTranslation2 }}
         ref={ref2}
-        onHoverStart={() => {
-          setMustFinish(true);
-          setDuration(SLOW_SPEED);
-        }}
-        onHoverEnd={() => {
-          setMustFinish(true);
-          setDuration(FAST_SPEED);
-        }}
+        onHoverStart={handleHoverStart2}
+        onHoverEnd={handleHoverEnd2}
       >
         {[...schemaImagesCategoria, ...schemaImagesCategoria].map((item) => (
           <Card key={uuidi()} src={item.src} alt={item.alt} text={item.alt} />
