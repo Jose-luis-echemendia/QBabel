@@ -11,7 +11,7 @@ export const Categories = () => {
     xTranslation: xTranslation1,
     handleHoverStart: handleHoverStart1,
     handleHoverEnd: handleHoverEnd1,
-  } = useInfinityCarousel({ fastSpeed: 100, slowSpeed: 160 });
+  } = useInfinityCarousel({ fastSpeed: 100, slowSpeed: 160, direction: "left" });
 
   // Usa el custom hook para el segundo carrusel (izquierda a derecha)
   const {
@@ -19,7 +19,7 @@ export const Categories = () => {
     xTranslation: xTranslation2,
     handleHoverStart: handleHoverStart2,
     handleHoverEnd: handleHoverEnd2,
-  } = useInfinityCarousel({ fastSpeed: 100, slowSpeed: 160 });
+  } = useInfinityCarousel({ fastSpeed: 100, slowSpeed: 160, direction: "right" });
 
   return (
     <div className="w-full overflow-hidden relative">
