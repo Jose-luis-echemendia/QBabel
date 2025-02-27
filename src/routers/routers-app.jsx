@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 //PAGES
 import HomePage from "@/pages/home/page";
+import { Error404 } from "@/pages/error/Error404";
 
 const Routers = () => {
   return (
@@ -9,7 +10,7 @@ const Routers = () => {
       <Router>
         <Routes>
           {/* ERROR DISPLAY */}
-          {/* <Route path="*" element={<Error404 />}></Route> */}
+          <Route path="*" element={<Error404 />}></Route> 
           
 
           {/* HOME DISPLAY */}
