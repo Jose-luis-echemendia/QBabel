@@ -11,7 +11,7 @@ export const Categories = () => {
     xTranslation: xTranslation1,
     handleHoverStart: handleHoverStart1,
     handleHoverEnd: handleHoverEnd1,
-  } = useInfinityCarousel({ fastSpeed: 1, slowSpeed: 160, direction: "left" });
+  } = useInfinityCarousel({ fastSpeed: 100, slowSpeed: 160, direction: "left" });
 
   // Usa el custom hook para el segundo carrusel (izquierda a derecha)
   const {
