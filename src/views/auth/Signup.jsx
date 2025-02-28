@@ -2,6 +2,8 @@ import { useForm } from "@/hooks/useForm";
 import { initialFormSignup } from "@/constants/form-initial-state";
 import { useState } from "react";
 import { Oval } from "react-loader-spinner";
+import { CustomImageDecorator } from "@/components/image-decorator";
+
 
 export const Signup = () => {
   const [accountCreated, setAccountCreated] = useState(false);
@@ -17,12 +19,8 @@ export const Signup = () => {
   return (
     <>
       <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+        <div className="flex flex-col justify-center z-10">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          <img
-            className="mx-auto h-12 w-auto"
-            src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-            alt="Workflow"
-          />
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
             Registra tu cuenta en QBabel
           </h2>
@@ -196,6 +194,15 @@ export const Signup = () => {
             </div>
           </div>
         </div>
+        </div>
+        <CustomImageDecorator
+                  src="/assets/icons/11.svg"
+                  className="absolute left-0 top-0 z-0"
+                />
+                <CustomImageDecorator
+                  src="/assets/icons/12.svg"
+                  className="absolute right-0 z-0 bottom-0"
+                />
       </div>
     </>
   );
