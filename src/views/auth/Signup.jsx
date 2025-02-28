@@ -22,7 +22,7 @@ export const Signup = () => {
         <div className="flex flex-col justify-center z-10">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Registra tu cuenta en QBabel
+            Registra tu cuenta en <span className="text-primary-100">QBabel</span>
           </h2>
           
         </div>
