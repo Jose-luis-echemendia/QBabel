@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
+import { CustomImageDecorator } from "@/components/image-decorator";
 
 export const Error404 = () => {
   return (
     <>
-      <div className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
+      <div className="relative grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
         <div className="text-center mt-20">
           <div className="flex items-center justify-center gap-5">
             <h3 className="text-[100px] font-semibold text-[#2E2E2E]">404</h3>
@@ -36,6 +37,14 @@ export const Error404 = () => {
             </Link>
           </div>
         </div>
+        <CustomImageDecorator
+          src="/assets/icons/11.svg"
+          className="absolute left-0 top-0 z-10"
+        />
+        <CustomImageDecorator
+          src="/assets/icons/12.svg"
+          className="absolute right-0 z-10 -bottom-10"
+        />
       </div>
     </>
   );
