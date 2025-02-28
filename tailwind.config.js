@@ -11,6 +11,7 @@ export default withMT({
     extend: {
       colors: {
         primary: '#EAD38D',
+        'primary-100': '#e9cb6f',
         'white-100': '#FFFFFF',
         'black-500': '#2E2E2E',
       },
