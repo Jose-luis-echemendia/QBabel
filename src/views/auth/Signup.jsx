@@ -128,7 +128,7 @@ export const Signup = () => {
                 </div>
                 <div className="relative flex justify-center text-sm">
                   <span className="px-2 bg-white text-gray-500">
-                    Or continue with
+                    O continuar con
                   </span>
                 </div>
               </div>
@@ -137,11 +137,11 @@ export const Signup = () => {
                 <div>
                   <a
                     href="#"
-                    className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+                    className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-[#2E2E2E] text-sm font-medium text-gray-500 hover:bg-gray-50"
                   >
                     <span className="sr-only">Sign in with Facebook</span>
                     <svg
-                      className="w-5 h-5"
+                      className="w-5 h-5 text-primary"
                       aria-hidden="true"
                       fill="currentColor"
                       viewBox="0 0 20 20"
@@ -158,11 +158,11 @@ export const Signup = () => {
                 <div>
                   <a
                     href="#"
-                    className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+                    className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-[#2E2E2E] text-sm font-medium text-gray-500 hover:bg-gray-50"
                   >
                     <span className="sr-only">Sign in with Twitter</span>
                     <svg
-                      className="w-5 h-5"
+                      className="w-5 h-5 text-primary"
                       aria-hidden="true"
                       fill="currentColor"
                       viewBox="0 0 20 20"
@@ -175,11 +175,11 @@ export const Signup = () => {
                 <div>
                   <a
                     href="#"
-                    className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+                    className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-[#2E2E2E] text-sm font-medium text-gray-500 hover:bg-gray-50"
                   >
                     <span className="sr-only">Sign in with GitHub</span>
                     <svg
-                      className="w-5 h-5"
+                      className="w-5 h-5 text-primary"
                       aria-hidden="true"
                       fill="currentColor"
                       viewBox="0 0 20 20"
