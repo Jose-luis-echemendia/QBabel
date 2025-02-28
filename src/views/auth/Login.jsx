@@ -117,11 +117,11 @@ export const Login = () => {
                 <div>
                   <a
                     href="#"
-                    className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-[#2E2E2E] text-sm font-medium text-gray-500 hover:bg-gray-50"
+                    className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-[#2E2E2E] text-sm font-medium text-primary hover:text-primary-100 hover:bg-[#242424]"
                   >
                     <span className="sr-only">Sign in with Facebook</span>
                     <svg
-                      className="w-5 h-5 text-primary"
+                      className="w-5 h-5"
                       aria-hidden="true"
                       fill="currentColor"
                       viewBox="0 0 20 20"
@@ -138,11 +138,11 @@ export const Login = () => {
                 <div>
                   <a
                     href="#"
-                    className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-[#2E2E2E] text-sm font-medium text-gray-500 hover:bg-gray-50"
+                    className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-[#2E2E2E] text-sm font-medium text-primary hover:text-primary-100 hover:bg-[#242424]"
                   >
                     <span className="sr-only">Sign in with Twitter</span>
                     <svg
-                      className="w-5 h-5 text-primary"
+                      className="w-5 h-5"
                       aria-hidden="true"
                       fill="currentColor"
                       viewBox="0 0 20 20"
@@ -155,11 +155,11 @@ export const Login = () => {
                 <div>
                   <a
                     href="#"
-                    className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-[#2E2E2E] text-sm font-medium text-gray-500 hover:bg-gray-50"
+                    className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-[#2E2E2E] text-sm font-medium text-primary hover:text-primary-100 hover:bg-[#242424]"
                   >
                     <span className="sr-only">Sign in with GitHub</span>
                     <svg
-                      className="w-5 h-5 text-primary"
+                      className="w-5 h-5"
                       aria-hidden="true"
                       fill="currentColor"
                       viewBox="0 0 20 20"
