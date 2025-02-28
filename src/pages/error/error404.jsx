@@ -21,7 +21,7 @@ export const Error404 = () => {
           <div className="mt-12 flex items-center justify-center gap-x-6">
             <Link
               to={"/"}
-              className="rounded-xl bg-primary px-7 py-5 text-sm font-semibold text-black shadow-lg hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="rounded-xl bg-primary px-7 py-5 text-sm font-semibold text-black shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Regresar al inicio
             </Link>
@@ -32,7 +32,7 @@ export const Error404 = () => {
               {/* Contenido del botón */}
               Contactar con soporte <span aria-hidden="true">&rarr;</span>
               {/* Sombra solo en la parte superior */}
-              <div className="absolute inset-x-0 top-0 h-1 shadow-lg"></div>
+              <div className="absolute inset-x-0 -top-14 h-12 shadow-2xl"></div>
             </Link>
           </div>
         </div>
