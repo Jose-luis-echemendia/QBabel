@@ -34,7 +34,6 @@ export const GetAuthLinks = () => {
       <CustomModal
         open={openRegisterModal}
         handleOpen={() => setOpenRegisterModal(false)} // Cierra el modal
-        header={<h3>Registrarse</h3>} // Título del modal
         classNameDialog="custom-dialog-class" // Clases personalizadas
         classNameBody="custom-body-class"
       >
@@ -45,7 +44,6 @@ export const GetAuthLinks = () => {
       <CustomModal
         open={openLoginModal}
         handleOpen={() => setOpenLoginModal(false)} // Cierra el modal
-        header={<h3>Iniciar sesión</h3>} // Título del modal
         classNameDialog="custom-dialog-class" // Clases personalizadas
         classNameBody="custom-body-class"
       >
