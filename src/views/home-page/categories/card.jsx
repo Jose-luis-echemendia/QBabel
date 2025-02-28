@@ -30,14 +30,14 @@ export const Card = ({ src, alt, text }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <motion.h1
-              className='bg-white font-semibold text-lg px-4 py-2 rounded-full flex items-center gap-[0.5ch]'
+            <motion.p
+              className="bg-white font-semibold text-lg px-4 py-2 rounded-full flex items-center gap-[0.5ch] hover:text-gray-800"
               initial={{ y: 10 }}
               animate={{ y: 0 }}
               exit={{ y: 10 }}
             >
               <span>Explorar</span>
-            </motion.h1>
+            </motion.p>
           </motion.div>
         )}
       </AnimatePresence>
