@@ -1,7 +1,13 @@
 import { Link } from "react-router-dom";
 import { CustomImageDecorator } from "@/components/image-decorator";
+import { useSelector } from "react-redux";
 
 export const Error404 = () => {
+
+  const auth = useSelector((state) => state.auth)
+
+  console.log(auth)
+
   return (
     <>
       <div className="relative grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
