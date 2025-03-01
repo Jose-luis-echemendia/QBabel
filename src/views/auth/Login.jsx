@@ -22,13 +22,13 @@ export const Login = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    event.preventDefault();
+    console.log("login", email, password)
     handleLogin(email, password);
     setIsAuthenticated(true);
   };
 
   if (isAuthenticated && auth.isAuthenticated)
-    return <Navigate to="/"></Navigate>;
+    return <Navigate to="/home"></Navigate>;
 
   return (
     <>
@@ -86,7 +86,7 @@ export const Login = () => {
                 </div>
 
                 <div>
-                  {auth.isAuthenticated ? (
+                  {!auth.loading ? (
                     <button
                       type="submit"
                       className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-md font-medium text-[#2E2E2E] bg-primary hover:bg-primary-100 hover:text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#242424] focus:border-[#242424]"
