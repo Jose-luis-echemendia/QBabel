@@ -32,7 +32,7 @@ DJANGO_APPS = [
 ]
 
 PROJECT_APPS = ["apps.utils", "apps.user", "apps.authentication"]
-QBABEL_APPS = ["apps.perfil", "apps.category"]
+QBABEL_APPS = ["apps.profile", "apps.category"]
 
 THIRD_PARTY_APPS=[
     'corsheaders',
@@ -178,7 +178,7 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
     'social_core.backends.facebook.FacebookOAuth2',
     'django.contrib.auth.backends.ModelBackend',
-    'auth.backends.EmailBackend',
+    'apps.authentication.backends.EmailBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
