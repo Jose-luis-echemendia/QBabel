@@ -2,7 +2,7 @@
 const HomeView = () => {
   return (
     <>
-      <div className="min-h-screen overflow-hidden">
+      <div className="min-h-screen h-full overflow-hidden">
         <h2 id="footer-heading" className="sr-only">
           Home
         </h2>
