@@ -7,7 +7,9 @@ export const useInfinityCarousel = ({
   slowSpeed = 160,
   direction = "left", // "left" o "right"
 }) => {
-  const [speed, setSpeed] = useState(fastSpeed);
+  const FASTSPEED = fastSpeed;
+  const SLOWSPEED = slowSpeed;
+  const [speed, setSpeed] = useState(FASTSPEED);
   const [mustFinish, setMustFinish] = useState(false);
   const [rerender, setRerender] = useState(false);
   const [ref, { width }] = useMeasure();
@@ -32,7 +34,7 @@ export const useInfinityCarousel = ({
     } else {
       controls = animate(xTranslation, [startPosition, endPosition], {
         ease: "linear",
-        duration: speed, // Controla la velocidad de desplazamiento
+        duration: speed, 
         repeat: Infinity,
         repeatType: "loop",
         repeatDelay: 0,
@@ -44,11 +46,11 @@ export const useInfinityCarousel = ({
 
   const handleHoverStart = () => {
     setMustFinish(true);
-    setSpeed(slowSpeed);
+    setSpeed(SLOWSPEED);
   };
   const handleHoverEnd = () => {
     setMustFinish(true);
-    setSpeed(fastSpeed);
+    setSpeed(FASTSPEED);
   };
 
   return {

@@ -54,7 +54,7 @@ export const Categories = () => {
           onHoverStart={handleHoverStart2}
           onHoverEnd={handleHoverEnd2}
         >
-          {[...schemaImagesCategoria, ...schemaImagesCategoria].map((item, index) => (
+          {[...schemaImagesCategoria, ...schemaImagesCategoria].reverse().map((item, index) => (
             <Card key={`${item.alt}-${index}`} src={item.src} alt={item.alt} text={item.alt} />
           ))}
         </motion.div>
