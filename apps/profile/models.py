@@ -21,13 +21,13 @@ class Perfil(BaseModel):
         return self.user.username
     
     def get_slug_source_field(self):
-        return self.user
+        return 'user'
     
     class Meta:
-        db_table = 'Perfil'
+        db_table = 'Profile'
         managed = True
-        verbose_name = 'Perfil'
-        verbose_name_plural = 'Perfils'
+        verbose_name = 'Profile'
+        verbose_name_plural = 'Profiles'
         ordering = ("-created_at",)
 
 
@@ -44,7 +44,7 @@ class BankAccount(BaseModel):
     is_default = models.BooleanField(default=False)
     
     def get_slug_source_field(self):
-        return self.user
+        return 'user'
 
     def __str__(self):
         return f"{self.user.username} - {self.bank}"
