@@ -11,46 +11,65 @@ export const useInfinityCarousel = ({
   const SLOWSPEED = slowSpeed;
   const [speed, setSpeed] = useState(FASTSPEED);
   const [mustFinish, setMustFinish] = useState(false);
-  const [rerender, setRerender] = useState(false);
   const [ref, { width }] = useMeasure();
   const xTranslation = useMotionValue(0);
+  const [controls, setControls] = useState(null);
 
   useEffect(() => {
-    let controls;
     if (width === 0) return;
 
     const startPosition = direction === "left" ? 0 : -width / 2;
     const endPosition = direction === "left" ? -width / 2 : 0;
 
+    let newControls;
+
     if (mustFinish) {
-      controls = animate(xTranslation, [xTranslation.get(), endPosition], {
+      // Si debe terminar, animar hasta el final y luego reiniciar
+      newControls = animate(xTranslation, [xTranslation.get(), endPosition], {
         ease: "linear",
-        duration: speed,
+        duration: speed * (Math.abs(endPosition - xTranslation.get()) / (width / 2)),
         onComplete: () => {
           setMustFinish(false);
-          setRerender(!rerender);
+          xTranslation.set(startPosition); // Reiniciar la posición
+          newControls = animate(xTranslation, [startPosition, endPosition], {
+            ease: "linear",
+            duration: speed,
+            repeat: Infinity,
+            repeatType: "loop",
+            repeatDelay: 0,
+          });
+          setControls(newControls);
         },
       });
     } else {
-      controls = animate(xTranslation, [startPosition, endPosition], {
+      // Animación normal
+      newControls = animate(xTranslation, [startPosition, endPosition], {
         ease: "linear",
-        duration: speed, 
+        duration: speed,
         repeat: Infinity,
         repeatType: "loop",
         repeatDelay: 0,
       });
+      setControls(newControls);
     }
 
-    return () => controls.stop();
-  }, [rerender, speed, width, direction]);
+    return () => {
+      if (newControls) newControls.stop();
+    };
+  }, [speed, width, direction, mustFinish]);
 
   const handleHoverStart = () => {
-    setMustFinish(true);
-    setSpeed(SLOWSPEED);
+    if (speed !== SLOWSPEED) {
+      setMustFinish(true);
+      setSpeed(SLOWSPEED);
+    }
   };
+
   const handleHoverEnd = () => {
-    setMustFinish(true);
-    setSpeed(FASTSPEED);
+    if (speed !== FASTSPEED) {
+      setMustFinish(true);
+      setSpeed(FASTSPEED);
+    }
   };
 
   return {
