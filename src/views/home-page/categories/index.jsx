@@ -1,7 +1,6 @@
 import { schemaImagesCategoria } from "./images-categoria";
 import { Card } from "./card";
-import { motion, AnimatePresence } from "framer-motion";
-import { v4 as uuid } from "uuid";
+import { motion } from "framer-motion";
 import { useInfinityCarousel } from "@/hooks/useInfinityCarousel";
 
 export const Categories = () => {
@@ -34,7 +33,6 @@ export const Categories = () => {
       <h2 className="text-center py-3 mt-10 text-[45px] font-quicksand font-bold">
         ¿Sobre qué deseas leer...?
       </h2>
-      <AnimatePresence>
         {/* Primer carrusel (derecha a izquierda) */}
         <motion.div
           className="flex gap-6 flex-nowrap min-w-max hover:cursor-pointer mb-6"
@@ -43,8 +41,8 @@ export const Categories = () => {
           onHoverStart={handleHoverStart1}
           onHoverEnd={handleHoverEnd1}
         >
-          {[...schemaImagesCategoria, ...schemaImagesCategoria].map((item) => (
-            <Card key={uuid()} src={item.src} alt={item.alt} text={item.alt} />
+          {[...schemaImagesCategoria, ...schemaImagesCategoria].map((item, index) => (
+            <Card key={`${item.alt}-${index}`} src={item.src} alt={item.alt} text={item.alt} />
           ))}
         </motion.div>
 
@@ -56,11 +54,10 @@ export const Categories = () => {
           onHoverStart={handleHoverStart2}
           onHoverEnd={handleHoverEnd2}
         >
-          {[...schemaImagesCategoria, ...schemaImagesCategoria].map((item) => (
-            <Card key={uuid()} src={item.src} alt={item.alt} text={item.alt} />
+          {[...schemaImagesCategoria, ...schemaImagesCategoria].map((item, index) => (
+            <Card key={`${item.alt}-${index}`} src={item.src} alt={item.alt} text={item.alt} />
           ))}
         </motion.div>
-      </AnimatePresence>
     </div>
   );
 };
