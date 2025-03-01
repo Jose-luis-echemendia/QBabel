@@ -2,7 +2,6 @@ import CustomRating from "@/components/rating";
 import PropTypes from "prop-types";
 
 export const Opinion = ({ data }) => {
-  console.log(data);
   return (
     <>
       <div className="flex flex-col justify-center items-center gap-5">
