@@ -5,8 +5,6 @@ import { useAppSelector } from "@/hooks/useStore";
 export const Error404 = () => {
 
   const auth = useAppSelector((state) => state.auth)
-  console.log(auth)
-  console.log(auth.isAuthenticated)
 
   return (
     <>
