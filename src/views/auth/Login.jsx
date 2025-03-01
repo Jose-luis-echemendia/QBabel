@@ -1,6 +1,6 @@
 import { useForm } from "@/hooks/useForm";
 import { initialFormLogin } from "@/constants/form-initial-state";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Oval } from "react-loader-spinner";
 import { Link, Navigate } from "react-router-dom";
 import { CustomImageDecorator } from "@/components/image-decorator";
@@ -15,13 +15,18 @@ export const Login = () => {
   const { handleLogin } = useAuth()
   const auth = useAppSelector((state) => state.auth)
   
-
   const { email, password } = formState;
 
-  const stateAuth = true;
+  useEffect(() => {
+    setIsAuthenticated(false)
+    window.scrollTo(0, 0);
+  }, []);
 
   const onSubmit = (event) => {
     event.preventDefault();
+    event.preventDefault();
+    handleLogin(email, password);
+    setIsAuthenticated(true)
   };
 
   if(isAuthenticated && auth.isAuthenticated) return <Navigate to="/"></Navigate>;
