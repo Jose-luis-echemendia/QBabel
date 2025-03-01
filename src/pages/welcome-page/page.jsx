@@ -2,13 +2,13 @@ import { lazy } from "react";
 import LoadSuspense from "@/components/load-suspense";
 import CustomLayout from "@/layout/custom-layout";
 
-const HomeView = lazy(() => import("@/views/home-page"));
+const WelcomeView = lazy(() => import("@/views/welcome-page"));
 
-const HomePage = () => {
+const WelcomePage = () => {
   return (
     <LoadSuspense>
       <CustomLayout>
-        <HomeView />
+        <WelcomeView />
       </CustomLayout>
     </LoadSuspense>
   );
