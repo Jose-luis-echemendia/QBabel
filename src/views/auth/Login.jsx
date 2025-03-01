@@ -22,7 +22,6 @@ export const Login = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log("login", email, password)
     handleLogin(email, password);
     setIsAuthenticated(true);
   };

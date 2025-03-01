@@ -5,7 +5,6 @@ export const useAuth = () => {
   const dispath = useAppDispatch();
 
   const handleLogin = ( email, password ) => {
-    console.log("use auth", email, password)
     dispath(login({ email, password }));
   };
 
