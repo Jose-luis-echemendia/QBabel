@@ -1,7 +1,7 @@
 import { schemaImagesCategoria } from "./images-categoria";
 import { Card } from "./card";
 import { motion, AnimatePresence } from "framer-motion";
-import { v4 as uuidi } from "uuid";
+import { v4 as uuid } from "uuid";
 import { useInfinityCarousel } from "@/hooks/useInfinityCarousel";
 
 export const Categories = () => {
@@ -12,7 +12,7 @@ export const Categories = () => {
     handleHoverStart: handleHoverStart1,
     handleHoverEnd: handleHoverEnd1,
   } = useInfinityCarousel({
-    fastSpeed: 100,
+    fastSpeed: 90,
     slowSpeed: 160,
     direction: "left",
   });
@@ -24,7 +24,7 @@ export const Categories = () => {
     handleHoverStart: handleHoverStart2,
     handleHoverEnd: handleHoverEnd2,
   } = useInfinityCarousel({
-    fastSpeed: 100,
+    fastSpeed: 90,
     slowSpeed: 160,
     direction: "right",
   });
@@ -44,7 +44,7 @@ export const Categories = () => {
           onHoverEnd={handleHoverEnd1}
         >
           {[...schemaImagesCategoria, ...schemaImagesCategoria].map((item) => (
-            <Card key={uuidi()} src={item.src} alt={item.alt} text={item.alt} />
+            <Card key={uuid()} src={item.src} alt={item.alt} text={item.alt} />
           ))}
         </motion.div>
 
@@ -57,7 +57,7 @@ export const Categories = () => {
           onHoverEnd={handleHoverEnd2}
         >
           {[...schemaImagesCategoria, ...schemaImagesCategoria].map((item) => (
-            <Card key={uuidi()} src={item.src} alt={item.alt} text={item.alt} />
+            <Card key={uuid()} src={item.src} alt={item.alt} text={item.alt} />
           ))}
         </motion.div>
       </AnimatePresence>

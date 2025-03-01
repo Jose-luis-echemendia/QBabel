@@ -8,28 +8,48 @@ export const useInfinityCarousel = ({
   direction = "left", // "left" o "right"
 }) => {
   const [speed, setSpeed] = useState(fastSpeed);
+  const [mustFinish, setMustFinish] = useState(false);
+  const [rerender, setRerender] = useState(false);
   const [ref, { width }] = useMeasure();
   const xTranslation = useMotionValue(0);
 
   useEffect(() => {
+    let controls;
     if (width === 0) return;
 
     const startPosition = direction === "left" ? 0 : -width / 2;
     const endPosition = direction === "left" ? -width / 2 : 0;
 
-    const controls = animate(xTranslation, [startPosition, endPosition], {
-      ease: "linear",
-      duration: speed, // Controla la velocidad de desplazamiento
-      repeat: Infinity,
-      repeatType: "loop",
-      repeatDelay: 0,
-    });
+    if (mustFinish) {
+      controls = animate(xTranslation, [xTranslation.get(), endPosition], {
+        ease: "linear",
+        duration: speed,
+        onComplete: () => {
+          setMustFinish(false);
+          setRerender(!rerender);
+        },
+      });
+    } else {
+      controls = animate(xTranslation, [startPosition, endPosition], {
+        ease: "linear",
+        duration: speed, // Controla la velocidad de desplazamiento
+        repeat: Infinity,
+        repeatType: "loop",
+        repeatDelay: 0,
+      });
+    }
 
     return () => controls.stop();
-  }, [speed, width, direction]);
+  }, [rerender, speed, width, direction]);
 
-  const handleHoverStart = () => setSpeed(slowSpeed);
-  const handleHoverEnd = () => setSpeed(fastSpeed);
+  const handleHoverStart = () => {
+    setMustFinish(true);
+    setSpeed(slowSpeed);
+  };
+  const handleHoverEnd = () => {
+    setMustFinish(true);
+    setSpeed(fastSpeed);
+  };
 
   return {
     ref,
