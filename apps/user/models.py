@@ -76,3 +76,6 @@ class UserAccount(BaseModel, AbstractBaseUser, PermissionsMixin):
         verbose_name = 'User'
         verbose_name_plural = 'Users'
         ordering = ("-created_at",)
+        
+    def get_slug_source_field(self):
+        return self.user_name
