@@ -1,9 +1,11 @@
-import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import QBabel from "./QBabel.jsx";
 
+import { store } from "./store";
+import { Provider } from "react-redux";
+
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
+  <Provider sotre={store} >
     <QBabel />
-  </StrictMode>
+  </Provider>
 );

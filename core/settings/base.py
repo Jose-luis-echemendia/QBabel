@@ -31,8 +31,8 @@ DJANGO_APPS = [
     'django.contrib.humanize',
 ]
 
-PROJECT_APPS = ["apps.utils"]
-QBABEL_APPS = []
+PROJECT_APPS = ["apps.utils", "apps.user", "apps.authentication"]
+QBABEL_APPS = ["apps.profile", "apps.category"]
 
 THIRD_PARTY_APPS=[
     'corsheaders',
@@ -154,11 +154,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 STATIC_URL = 'static/'
 
-
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#AUTH_USER_MODEL="user.UserAccount"
+AUTH_USER_MODEL="user.UserAccount"
 
 
 REST_FRAMEWORK = {
@@ -178,6 +176,7 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
     'social_core.backends.facebook.FacebookOAuth2',
     'django.contrib.auth.backends.ModelBackend',
+    'apps.authentication.backends.EmailBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
