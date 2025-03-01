@@ -5,12 +5,12 @@ import { Hero } from './hero';
 import { Opinions } from './Opinions';
 import {Categories} from './categories';
 
-const HomeView = () => {
+const WelcomeView = () => {
   return (
     <>
       <div className="min-h-screen overflow-hidden">
         <h2 id="footer-heading" className="sr-only">
-          Home
+          Welcome
         </h2>
         <Hero />
         <ExploitYourTalent />
@@ -23,4 +23,4 @@ const HomeView = () => {
   );
 };
 
-export default HomeView;
+export default WelcomeView;
