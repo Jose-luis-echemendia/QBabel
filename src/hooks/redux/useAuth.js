@@ -1,12 +1,12 @@
-import { login } from "@/store/auth/slice"
-import { useAppDispatch } from "./useStore"
+import { login } from "@/store/auth/slice";
+import { useAppDispatch } from "./useStore";
 
 export const useAuth = () => {
-    const dispath = useAppDispatch()
+  const dispath = useAppDispatch();
 
-    const handleLogin = () => {
-        dispath(login())
-    }
+  const handleLogin = ({ email, password }) => {
+    dispath(login({ email, password }));
+  };
 
-    return {handleLogin}
-} 
+  return { handleLogin };
+};
