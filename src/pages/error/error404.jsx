@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 export const Error404 = () => {
 
   const auth = useSelector((state) => state.auth)
+  console.log(auth)
+  console.log(auth.isAuthenticated)
 
   return (
     <>
