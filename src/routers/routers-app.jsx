@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 //PAGES
 import HomePage from "@/pages/home/page";
+import WelcomePage from "@/pages/welcome-page/page"
 import { Error404 } from "@/pages/error/Error404";
 
 const Routers = () => {
@@ -14,7 +15,8 @@ const Routers = () => {
           
 
           {/* HOME DISPLAY */}
-          <Route path="/" element={<HomePage />}></Route>
+          <Route path="/" element={<WelcomePage />}></Route>
+          <Route path="/home" element={<HomePage />}></Route>
 
           {/* PAGES DISPLAY */}
 
