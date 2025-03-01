@@ -5,13 +5,17 @@ import { Oval } from "react-loader-spinner";
 import { Link, Navigate } from "react-router-dom";
 import { CustomImageDecorator } from "@/components/image-decorator";
 import { useAuth } from "@/hooks/redux/useAuth";
+import { useAppSelector } from "@/hooks/redux/useStore";
+
 
 
 export const Login = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const { formState, onInputChange, setFormState } = useForm(initialFormLogin);
-
+  const { handleLogin } = useAuth()
+  const auth = useAppSelector((state) => state.auth)
   
+
   const { email, password } = formState;
 
   const stateAuth = true;
@@ -20,7 +24,7 @@ export const Login = () => {
     event.preventDefault();
   };
 
-  if(isAuthenticated && stateAuth.isAuthenticated) return <Navigate to="/"></Navigate>;
+  if(isAuthenticated && auth.isAuthenticated) return <Navigate to="/"></Navigate>;
 
   return (
     <>
