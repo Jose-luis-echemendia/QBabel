@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { CustomImageDecorator } from "@/components/image-decorator";
-import { useAppSelector } from "@/hooks/useStore";
+import { useAppSelector } from "@/hooks/redux/useStore";
 
 export const Error404 = () => {
 
