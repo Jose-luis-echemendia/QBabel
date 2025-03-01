@@ -5,6 +5,7 @@ const initialState = {
   jwtTokenAccess: null,
   jwtTokenRefresh: null,
   user: {},
+  loading: false
 };
 
 export const authSlice = createSlice({
@@ -12,8 +13,8 @@ export const authSlice = createSlice({
   initialState: initialState,
   reducers: {
     login: (state, action) => {
-      console.log(state);
-      console.log(action);
+      console.log("state", state);
+      console.log("action", action);
     },
   },
 });
