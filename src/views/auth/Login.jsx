@@ -11,7 +11,7 @@ import { useAppSelector } from "@/hooks/redux/useStore";
 
 export const Login = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const { formState, onInputChange, setFormState } = useForm(initialFormLogin);
+  const { formState, onInputChange } = useForm(initialFormLogin);
   const { handleLogin } = useAuth()
   const auth = useAppSelector((state) => state.auth)
   
@@ -87,7 +87,7 @@ export const Login = () => {
                 </div>
 
                 <div>
-                  {!stateAuth ? (
+                  {!auth.isAuthenticated ? (
                     <button className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-[#2E2E2E] bg-primary hover:bg-primary-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:border-primary">
                       <Oval
                         visible={true}
