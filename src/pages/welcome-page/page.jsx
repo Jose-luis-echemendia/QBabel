@@ -14,4 +14,4 @@ const WelcomePage = () => {
   );
 };
 
-export default HomePage;
+export default WelcomePage;
