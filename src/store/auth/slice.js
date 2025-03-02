@@ -7,7 +7,7 @@ import {
 } from "./thunks";
 
 const initialState = {
-  isAuthenticated: true,
+  isAuthenticated: false,
   jwtTokenAccess: null,
   jwtTokenRefresh: null,
   userId: null,
@@ -63,7 +63,9 @@ export const authSlice = createSlice({
       })
 
       // **Verify Tojen Reducers**
-      .addCase(verifyTokenThunk.fulfilled, () => {})
+      .addCase(verifyTokenThunk.fulfilled, (state, action) => {
+        state.isAuthenticated = action.payload
+      })
       .addCase(verifyTokenThunk.rejected, (state) => {
         state.isAuthenticated = false;
         state.jwtTokenAccess = null;

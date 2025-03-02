@@ -25,7 +25,7 @@ export const verifyTokenThunk = createAsyncThunk(
     async (_, { rejectWithValue }) => {
       try {
         const response = await verifyTokenApi();
-        if (response.status === 200) return
+        if (response.status === 200) return true
         return rejectWithValue(response?.data);
       } catch (error) {
         return rejectWithValue(error.response?.data || error.message);
