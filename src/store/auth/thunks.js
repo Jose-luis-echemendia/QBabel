@@ -12,7 +12,7 @@ export const loginThunk = createAsyncThunk(
           toast.success('Haz Iniciado sesión correctamente')
           return response.data;
         }
-        return 
+        return rejectWithValue(response?.data); 
       } catch (error) {
         return rejectWithValue(error.response?.data || error.message);
       }
@@ -25,7 +25,8 @@ export const verifyTokenThunk = createAsyncThunk(
     async (_, { rejectWithValue }) => {
       try {
         const response = await verifyTokenApi();
-        return response;
+        if (response.status === 200) return
+        return (response?.data );
       } catch (error) {
         return rejectWithValue(error.response?.data || error.message);
       }
@@ -38,7 +39,8 @@ export const refreshTokenThunk = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await refreshTokenApi();
-      return response;
+      if (response.status === 200) return response.data
+      return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
     }
@@ -50,7 +52,8 @@ export const logoutThunk = createAsyncThunk(
   "auth/logout",
   async (_, { rejectWithValue }) => {
     try {
-      await logoutApi();
+      const response = await logoutApi();
+      if (response.status === 205)
       return true;
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
