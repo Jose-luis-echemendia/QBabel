@@ -59,4 +59,4 @@ export const authSlice = createSlice({
 });
 
 export default authSlice.reducer;
-export const { login } = authSlice.actions;
+export const { logoutLocal } = authSlice.actions;
