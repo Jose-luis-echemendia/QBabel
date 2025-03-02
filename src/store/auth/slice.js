@@ -5,7 +5,7 @@ const initialState = {
   isAuthenticated: true,
   jwtTokenAccess: null,
   jwtTokenRefresh: null,
-  user: {},
+  userId: null,
   loading: false,
 };
 
@@ -17,7 +17,7 @@ export const authSlice = createSlice({
       state.isAuthenticated = false;
       state.jwtTokenAccess = null;
       state.jwtTokenRefresh = null;
-      state.user = null;
+      state.userId = null;
       localStorage.removeItem("jwtTokenAccess");
       localStorage.removeItem("jwtTokenRefresh");
     },
@@ -31,10 +31,11 @@ export const authSlice = createSlice({
       .addCase(loginThunk.fulfilled, (state, action) => {
         state.loading = false;
         state.isAuthenticated = true;
-        state.jwtTokenAccess = action.payload.accessToken;
-        state.jwtTokenRefresh = action.payload.refreshToken;
+        state.jwtTokenAccess = action.payload.access;
+        state.jwtTokenRefresh = action.payload.refresh;
+        state.userId = action.payload.user_id;
         localStorage.setItem("jwtTokenAccess", action.payload.accessToken);
-        localStorage.setItem("jwtTokenRefresh", action.payload.refreshToken);
+        localStorage.setItem("jwtTokenRefresh", action.payload.refresh);
       })
       .addCase(loginThunk.rejected, (state) => {
         state.loading = false;
@@ -51,7 +52,7 @@ export const authSlice = createSlice({
         state.isAuthenticated = false;
         state.jwtTokenAccess = null;
         state.jwtTokenRefresh = null;
-        state.user = null;
+        state.userId = null;
         localStorage.removeItem("jwtTokenAccess");
         localStorage.removeItem("jwtTokenRefresh");
       });
