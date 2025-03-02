@@ -43,13 +43,13 @@ export const verifyTokenApi = async () => {
       throw new Error("No hay access token disponible");
     }
 
-    const response = await axiosInstance.post("/api/token/jwt/refresh/custom/", {
-      accessToken,
+    const response = await axiosInstance.post("/api/token/jwt/verify/custom/", {
+      token: accessToken,
     });
 
     return response;
   } catch (error) {
-    console.error("Error al refrescar el token:", error.response?.data || error.message);
+    console.error("Error al verificar el token:", error.response?.data || error.message);
     throw error;
   }
 }
