@@ -31,8 +31,7 @@ export const refreshTokenApi = async () => {
       refreshToken,
     });
 
-    localStorage.setItem("jwtTokenAccess", response.data.accessToken);
-    return response.data.accessToken;
+    return response.data;
   } catch (error) {
     console.error("Error al refrescar el token:", error.response?.data || error.message);
     throw error;
@@ -40,7 +39,22 @@ export const refreshTokenApi = async () => {
 };
 
 export const verifyTokenApi = async () => {
-  
+  try {
+    const accessToken = localStorage.getItem("jwtTokenAccess");
+
+    if (!accessToken) {
+      throw new Error("No hay access token disponible");
+    }
+
+    const response = await axiosInstance.post("/api/token/jwt/refresh/custom/", {
+      accessToken,
+    });
+
+    return response.status;
+  } catch (error) {
+    console.error("Error al refrescar el token:", error.response?.data || error.message);
+    throw error;
+  }
 }
 
 export const logoutApi = async () => {
