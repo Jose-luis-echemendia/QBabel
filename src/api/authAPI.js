@@ -55,11 +55,10 @@ export const verifyTokenApi = async () => {
 }
 
 export const logoutApi = async () => {
-  localStorage.removeItem("jwtTokenAccess");
-  localStorage.removeItem("jwtTokenRefresh");
+  const refreshToken = localStorage.getItem("jwtTokenRefresh");
 
   try {
-    const response = await axiosInstance.post("/api/logout/custom/");
+    const response = await axiosInstance.post("/api/logout/custom/", refreshToken);
     return response;
   } catch (error) {
     console.error("Error en login:", error.response?.data || error.message);
