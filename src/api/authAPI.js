@@ -1,5 +1,6 @@
 // src/api/authApi.js
 import axiosInstance from "./axiosInstance";
+import { toast } from 'sonner'
 
 export const loginApi = async (email, password) => {
   try {
@@ -7,7 +8,10 @@ export const loginApi = async (email, password) => {
       email,
       password,
     });
-
+    
+    if (response.status === 200){
+      toast.success('Event has been created')
+    }
     // Guardamos los tokens en localStorage
     localStorage.setItem("jwtTokenAccess", response.data.accessToken);
     localStorage.setItem("jwtTokenRefresh", response.data.refreshToken);
