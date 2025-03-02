@@ -25,7 +25,7 @@ export const refreshTokenApi = async () => {
     }
 
     const response = await axiosInstance.post("/api/token/jwt/refresh/custom/", {
-      refreshToken,
+      refresh : refreshToken,
     });
 
     return response;
