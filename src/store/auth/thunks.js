@@ -1,5 +1,6 @@
 import { loginApi, refreshTokenApi, logoutApi, verifyTokenApi } from "@/api/authAPI";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { toast } from 'sonner'
 
 // **Thunk para manejar el login**
 export const loginThunk = createAsyncThunk(
@@ -7,7 +8,11 @@ export const loginThunk = createAsyncThunk(
     async ({ email, password }, { rejectWithValue }) => {
       try {
         const response = await loginApi(email, password);
-        return response;
+        if (response.status === 200){
+          toast.success('Haz Iniciado sesión correctamente')
+          return response.data;
+        }
+        return 
       } catch (error) {
         return rejectWithValue(error.response?.data || error.message);
       }
