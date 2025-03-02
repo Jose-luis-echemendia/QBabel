@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { loginThunk, logoutThunk, refreshTokenThunk, verifyTokenThunk } from "./thunks";
-import { act } from "react";
 
 const initialState = {
   isAuthenticated: true,
