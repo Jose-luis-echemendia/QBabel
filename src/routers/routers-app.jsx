@@ -11,7 +11,6 @@ const Routers = () => {
   const auth = useAppSelector((state) => state.auth);
   console.log(auth)
   const isAuthenticated = !!auth.userId && auth.isAuthenticated;
-  const isUnauthenticated = !auth.userId || !auth.isAuthenticated;
 
   return (
     <>
@@ -33,7 +32,7 @@ const Routers = () => {
             element={
               <ProtectedRoute
                 redirectTo="/home"
-                isAllowed={isUnauthenticated}
+                isAllowed={!isAuthenticated}
               />
             }
           >
