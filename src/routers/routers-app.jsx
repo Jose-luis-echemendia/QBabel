@@ -9,6 +9,10 @@ import { Error404 } from "@/pages/error/Error404";
 
 const Routers = () => {
   const auth = useAppSelector((state) => state.auth);
+  console.log(auth)
+  const isAuthenticated = !!auth.userId && auth.isAuthenticated;
+  const isUnauthenticated = !auth.userId || !auth.isAuthenticated;
+
   return (
     <>
       <Router>
@@ -19,10 +23,7 @@ const Routers = () => {
           {/* HOME DISPLAY */}
           <Route
             element={
-              <ProtectedRoute
-                redirectTo="/"
-                isAllowed={!!auth.userId && auth.isAuthenticated}
-              />
+              <ProtectedRoute redirectTo="/" isAllowed={isAuthenticated} />
             }
           >
             <Route path="/home" element={<HomePage />}></Route>
@@ -32,7 +33,7 @@ const Routers = () => {
             element={
               <ProtectedRoute
                 redirectTo="/home"
-                isAllowed={(auth.userId === undefined || auth.userId === null) && !auth.isAuthenticated}
+                isAllowed={isUnauthenticated}
               />
             }
           >
