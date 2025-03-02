@@ -4,7 +4,6 @@ import { CustomModal } from "@/components/modal/index";
 import { Login } from "@/views/auth/Login";
 import { Signup } from "@/views/auth/Signup";
 
-
 export const GetAuthLinks = () => {
   // Estados para controlar la apertura y cierre de los modales
   const [openRegisterModal, setOpenRegisterModal] = useState(false);
@@ -12,21 +11,21 @@ export const GetAuthLinks = () => {
 
   return (
     <>
-      <div className="flex items-center gap-10 mr-2">
+      <div className="flex text-xl items-center gap-10 mr-2">
         {/* Botón para abrir el modal de registro */}
-        <div className="flex items-center gap-3">
-          <button onClick={() => setOpenRegisterModal(true)}>
+        <div>
+          <button onClick={() => setOpenRegisterModal(true)} className="flex gap-3">
             <span>Registrarse</span>
+            <CustomIcon src="/assets/icons/iconRegistrarse.svg" size={35}/>
           </button>
-          <CustomIcon src="/assets/icons/iconRegistrarse.svg" />
         </div>
 
         {/* Botón para abrir el modal de inicio de sesión */}
-        <div className="flex items-center gap-3">
-          <button onClick={() => setOpenLoginModal(true)}>
+        <div>
+          <button onClick={() => setOpenLoginModal(true)} className="flex gap-3 items-center">
             <span>Iniciar sesión</span>
+            <CustomIcon src="/assets/icons/iconIniciarSesion.svg" size={35} />
           </button>
-          <CustomIcon src="/assets/icons/iconIniciarSesion.svg" />
         </div>
       </div>
 
@@ -37,7 +36,7 @@ export const GetAuthLinks = () => {
         classNameDialog="custom-dialog-class" // Clases personalizadas
         classNameBody="custom-body-class"
       >
-        <Signup/>
+        <Signup />
       </CustomModal>
 
       {/* Modal de inicio de sesión */}
@@ -47,7 +46,7 @@ export const GetAuthLinks = () => {
         classNameDialog="custom-dialog-class" // Clases personalizadas
         classNameBody="custom-body-class"
       >
-        <Login/>
+        <Login />
       </CustomModal>
     </>
   );
