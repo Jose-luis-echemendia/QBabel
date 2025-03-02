@@ -7,10 +7,10 @@ import {
 } from "./thunks";
 
 const initialState = {
-  isAuthenticated: false,
-  jwtTokenAccess: null,
-  jwtTokenRefresh: null,
-  userId: null,
+  isAuthenticated: localStorage.getItem('isAuthenticated') === "true",
+  jwtTokenAccess: localStorage.getItem("jwtTokenAccess"),
+  jwtTokenRefresh: localStorage.getItem("jwtTokenRefresh"),
+  userId: localStorage.getItem("userId"),
   loading: false,
 };
 
@@ -25,6 +25,7 @@ export const authSlice = createSlice({
       state.userId = null;
       localStorage.removeItem("jwtTokenAccess");
       localStorage.removeItem("jwtTokenRefresh");
+      localStorage.removeItem("isAuthenticated");
     },
   },
   extraReducers: (builder) => {
@@ -41,6 +42,7 @@ export const authSlice = createSlice({
         state.userId = action.payload.user_id;
         localStorage.setItem("jwtTokenAccess", action.payload.access);
         localStorage.setItem("jwtTokenRefresh", action.payload.refresh);
+        localStorage.setItem("isAuthenticated", true);
       })
       .addCase(loginThunk.rejected, (state) => {
         state.loading = false;
@@ -61,16 +63,18 @@ export const authSlice = createSlice({
         localStorage.removeItem("jwtTokenAccess");
         localStorage.removeItem("jwtTokenRefresh");
       })
-
+      
       // **Verify Tojen Reducers**
       .addCase(verifyTokenThunk.fulfilled, (state, action) => {
         state.isAuthenticated = action.payload
+        localStorage.setItem("isAuthenticated", true);
       })
       .addCase(verifyTokenThunk.rejected, (state) => {
         state.isAuthenticated = false;
         state.jwtTokenAccess = null;
         state.jwtTokenRefresh = null;
         state.userId = null;
+        localStorage.removeItem("isAuthenticated");
         localStorage.removeItem("jwtTokenAccess");
         localStorage.removeItem("jwtTokenRefresh");
       })

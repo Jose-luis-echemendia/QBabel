@@ -11,20 +11,17 @@ import { Error404 } from "@/pages/error/Error404";
 
 const Routers = () => {
   const auth = useAppSelector((state) => state.auth);
-  const { handleVerifyToken, handlRefreshToken } = useAuth()
-  console.log(auth)
-  const isAuthenticated = !!auth.userId && auth.isAuthenticated;
+  const { handleVerifyToken, handlRefreshToken } = useAuth();
+  console.log(auth);
 
   const getStateAuth = async () => {
     try {
-      await handleVerifyToken();
       await handlRefreshToken();
+      await handleVerifyToken();
       //await loaderUser();
     } catch (error) {
       console.log(error);
-
     }
-
   };
 
   useEffect(() => {
@@ -41,7 +38,7 @@ const Routers = () => {
           {/* HOME DISPLAY */}
           <Route
             element={
-              <ProtectedRoute redirectTo="/" isAllowed={isAuthenticated} />
+              <ProtectedRoute redirectTo="/" isAllowed={auth.isAuthenticated} />
             }
           >
             <Route path="/home" element={<HomePage />}></Route>
@@ -51,7 +48,7 @@ const Routers = () => {
             element={
               <ProtectedRoute
                 redirectTo="/home"
-                isAllowed={!isAuthenticated}
+                isAllowed={!auth.isAuthenticated}
               />
             }
           >
