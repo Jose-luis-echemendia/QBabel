@@ -1,6 +1,6 @@
 // src/api/authApi.js
 import axiosInstance from "./axiosInstance";
-import { toast } from 'sonner'
+
 
 export const loginApi = async (email, password) => {
   try {
@@ -9,10 +9,7 @@ export const loginApi = async (email, password) => {
       password,
     });
     
-    if (response.status === 200){
-      toast.success('Haz Iniciado sesión correctamente')
-    }
-    return response.data;
+    return response;
   } catch (error) {
     console.error("Error en login:", error.response?.data || error.message);
     throw error;
@@ -31,7 +28,7 @@ export const refreshTokenApi = async () => {
       refreshToken,
     });
 
-    return response.data;
+    return response;
   } catch (error) {
     console.error("Error al refrescar el token:", error.response?.data || error.message);
     throw error;
@@ -50,7 +47,7 @@ export const verifyTokenApi = async () => {
       accessToken,
     });
 
-    return response.status;
+    return response;
   } catch (error) {
     console.error("Error al refrescar el token:", error.response?.data || error.message);
     throw error;
@@ -63,7 +60,7 @@ export const logoutApi = async () => {
 
   try {
     const response = await axiosInstance.post("/api/logout/custom/");
-    return response.status;
+    return response;
   } catch (error) {
     console.error("Error en login:", error.response?.data || error.message);
     throw error;
