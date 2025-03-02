@@ -10,12 +10,8 @@ export const loginApi = async (email, password) => {
     });
     
     if (response.status === 200){
-      toast.success('Event has been created')
+      toast.success('Haz Iniciado sesión correctamente')
     }
-    // Guardamos los tokens en localStorage
-    localStorage.setItem("jwtTokenAccess", response.data.accessToken);
-    localStorage.setItem("jwtTokenRefresh", response.data.refreshToken);
-
     return response.data;
   } catch (error) {
     console.error("Error en login:", error.response?.data || error.message);
