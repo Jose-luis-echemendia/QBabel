@@ -50,7 +50,7 @@ export const authSlice = createSlice({
       .addCase(refreshTokenThunk.fulfilled, (state, action) => {
         state.jwtTokenAccess = action.payload.access;
         state.jwtTokenRefresh = action.payload.refresh;
-        localStorage.setItem("jwtTokenAccess", action.payload);
+        localStorage.setItem("jwtTokenAccess", action.payload.access);
         localStorage.setItem("jwtTokenRefresh", action.payload.refresh);
       })
       .addCase(refreshTokenThunk.rejected, (state) => {
