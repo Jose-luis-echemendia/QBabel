@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loginThunk, logoutThunk, refreshTokenThunk } from "./thunks";
+import { loginThunk, logoutThunk, refreshTokenThunk, verifyTokenThunk } from "./thunks";
 
 const initialState = {
   isAuthenticated: true,
@@ -45,6 +45,10 @@ export const authSlice = createSlice({
       .addCase(refreshTokenThunk.fulfilled, (state, action) => {
         state.jwtTokenAccess = action.payload;
         localStorage.setItem("jwtTokenAccess", action.payload);
+      })
+
+      // **Verify Tojen Reducers**
+      .addCase(verifyTokenThunk.fulfilled, () => {
       })
 
       // **Logout Reducers**
