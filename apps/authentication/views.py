@@ -93,7 +93,6 @@ class CustomJWTVerifyView(APIView):
 
     def post(self, request):
         token = request.data.get("token")  # Obtiene el token del body
-        print(token)
         if not token:
             return Response({"error": "Token is required"}, status=status.HTTP_400_BAD_REQUEST)
 
