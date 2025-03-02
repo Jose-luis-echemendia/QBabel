@@ -34,7 +34,7 @@ export const authSlice = createSlice({
         state.jwtTokenAccess = action.payload.access;
         state.jwtTokenRefresh = action.payload.refresh;
         state.userId = action.payload.user_id;
-        localStorage.setItem("jwtTokenAccess", action.payload.accessToken);
+        localStorage.setItem("jwtTokenAccess", action.payload.access);
         localStorage.setItem("jwtTokenRefresh", action.payload.refresh);
       })
       .addCase(loginThunk.rejected, (state) => {
