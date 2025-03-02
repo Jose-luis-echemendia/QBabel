@@ -12,8 +12,13 @@ export const loginThunk = createAsyncThunk(
         return rejectWithValue(error.response?.data || error.message);
       }
     }
-  );
-  
+);
+
+// **Thunk para verificar token de acceso**
+export const checkAuthenticated = createAsyncThunk(
+    "auth/verify"
+)
+
 // **Thunk para refrescar el token**
 export const refreshTokenThunk = createAsyncThunk(
   "auth/refreshToken",
