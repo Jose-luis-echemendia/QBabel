@@ -26,7 +26,7 @@ export const verifyTokenThunk = createAsyncThunk(
       try {
         const response = await verifyTokenApi();
         if (response.status === 200) return
-        return (response?.data );
+        return rejectWithValue(response?.data);
       } catch (error) {
         return rejectWithValue(error.response?.data || error.message);
       }
@@ -40,7 +40,7 @@ export const refreshTokenThunk = createAsyncThunk(
     try {
       const response = await refreshTokenApi();
       if (response.status === 200) return response.data
-      return response.data;
+      return rejectWithValue(response?.data);
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
     }
@@ -52,8 +52,7 @@ export const logoutThunk = createAsyncThunk(
   "auth/logout",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await logoutApi();
-      if (response.status === 205)
+      await logoutApi();
       return true;
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
