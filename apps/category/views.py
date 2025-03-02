@@ -5,11 +5,31 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import Category
 from .serializers import CategorySerializer
+from apps.user.permisions import IsAdminRole
 
 class CustomCategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     permission_classes = [AllowAny, IsAuthenticated]
+    
+    def get_permissions(self):
+        permissions = [IsAuthenticated()]
+        
+        if self.request.user and IsAdminRole().has_permission(self.request, self):
+            permissions.append(AllowAny())
+            return permissions
+        
+        if self.action in [
+            "create",
+            "update",
+            "partial_update",
+            "destroy",
+            "retrieve",
+        ]:
+            permissions.append(IsPromptEngineerRole())
+            return permissions
+        
+        return super().get_permissions()
     
     def perform_create(self, serializer):
         serializer.save()
