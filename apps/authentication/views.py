@@ -4,10 +4,11 @@ from django_ratelimit.decorators import ratelimit
 from django.utils.decorators import method_decorator
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.tokens import RefreshToken,  UntypedToken
 from django.contrib.auth import authenticate
 from .serializers import LoginSerializer
 from rest_framework_simplejwt.exceptions import TokenError
+from rest_framework.exceptions import AuthenticationFailed
 
 class BasicAuthView(APIView):
     permission_classes = [AllowAny]
@@ -87,6 +88,20 @@ class CustomTokenRefreshView(APIView):
         except TokenError as e:
             return Response({'error': 'Invalid or expired refresh token. Please log in again.'}, status=status.HTTP_401_UNAUTHORIZED)
 
+class CustomJWTVerifyView(APIView):
+    permission_classes = [AllowAny]  # Permite acceso sin autenticación
+
+    def post(self, request):
+        token = request.data.get("token")  # Obtiene el token del body
+        if not token:
+            return Response({"error": "Token is required"}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            # Intenta decodificar el token sin importar su tipo (access o refresh)
+            UntypedToken(token)
+            return Response({"message": "Token is valid"}, status=status.HTTP_200_OK)
+        except Exception as e:
+            raise AuthenticationFailed("Invalid token")  # Si falla, el token no es válido
 class LogoutView(APIView):
     permission_classes = [IsAuthenticated]
     
