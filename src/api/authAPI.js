@@ -39,6 +39,10 @@ export const refreshTokenApi = async () => {
   }
 };
 
+export const verifyTokenApi = async () => {
+  
+}
+
 export const logoutApi = async () => {
   localStorage.removeItem("jwtTokenAccess");
   localStorage.removeItem("jwtTokenRefresh");
