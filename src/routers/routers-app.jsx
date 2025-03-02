@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ProtectedRoute } from "@/components/protected-route";
 import { useAppSelector } from "@/hooks/redux/useStore";
+import { useEffect } from "react";
 
 //PAGES
 import HomePage from "@/pages/home/page";
@@ -11,6 +12,22 @@ const Routers = () => {
   const auth = useAppSelector((state) => state.auth);
   console.log(auth)
   const isAuthenticated = !!auth.userId && auth.isAuthenticated;
+
+  const getStateAuth = async () => {
+    try {
+      await checkAuthenticated();
+      await refresh();
+      await loaderUser();
+    } catch (error) {
+      console.log(error);
+
+    }
+
+  };
+
+  useEffect(() => {
+    getStateAuth();
+  }, [auth.isAuthenticated]);
 
   return (
     <>
