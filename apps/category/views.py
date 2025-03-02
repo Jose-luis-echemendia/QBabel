@@ -10,7 +10,7 @@ from apps.user.permisions import IsAdminRole
 class CustomCategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    permission_classes = [AllowAny, IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     
     def get_permissions(self):
         permissions = [IsAuthenticated()]
@@ -26,7 +26,7 @@ class CustomCategoryViewSet(viewsets.ModelViewSet):
             "destroy",
             "retrieve",
         ]:
-            permissions.append(IsPromptEngineerRole())
+            permissions.append(IsAdminRole())
             return permissions
         
         return super().get_permissions()
