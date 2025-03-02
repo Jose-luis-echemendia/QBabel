@@ -1,4 +1,4 @@
-import { loginApi, refreshTokenApi, logoutApi } from "@/api/authAPI";
+import { loginApi, refreshTokenApi, logoutApi, verifyTokenApi } from "@/api/authAPI";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 // **Thunk para manejar el login**
@@ -15,8 +15,16 @@ export const loginThunk = createAsyncThunk(
 );
 
 // **Thunk para verificar token de acceso**
-export const checkAuthenticated = createAsyncThunk(
-    "auth/verify"
+export const verifyTokenThunk = createAsyncThunk(
+    "auth/verifyToken",
+    async (_, { rejectWithValue }) => {
+      try {
+        const response = await verifyTokenApi();
+        return response;
+      } catch (error) {
+        return rejectWithValue(error.response?.data || error.message);
+      }
+    }
 )
 
 // **Thunk para refrescar el token**
@@ -24,8 +32,8 @@ export const refreshTokenThunk = createAsyncThunk(
   "auth/refreshToken",
   async (_, { rejectWithValue }) => {
     try {
-      const accessToken = await refreshTokenApi();
-      return accessToken;
+      const response = await refreshTokenApi();
+      return response;
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
     }
