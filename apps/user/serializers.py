@@ -56,7 +56,6 @@ class UserSerializer(AbstractBaseSerializer):
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        print(representation)
         representation["is_superuser"] = 1 if instance.is_superuser else 0
         representation["is_staff"] = 1 if instance.is_staff else 0
         representation["role"] = desconvertir_de_snake_case(representation["role"])
