@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
 import { CustomImageDecorator } from "@/components/image-decorator";
+import { useAppSelector } from "@/hooks/redux/useStore";
 
 export const Error404 = () => {
+
+  const auth = useAppSelector((state) => state.auth)
+
   return (
     <>
       <div className="relative grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
@@ -21,7 +25,7 @@ export const Error404 = () => {
           </p>
           <div className="mt-12 flex items-center justify-center gap-x-6">
             <Link
-              to={"/"}
+              to={ auth.isAuthenticated ? "/home" : "/"}
               className="rounded-xl bg-primary px-7 py-5 text-sm font-semibold text-black shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Regresar al inicio

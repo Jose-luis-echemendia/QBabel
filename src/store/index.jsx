@@ -3,7 +3,7 @@ import usersReducer from "./users/slice"
 import authReducer from "./auth/slice"
 
 
-export const sotre = configureStore({
+export const store = configureStore({
     reducer : {
         auth: authReducer,
         users: usersReducer,

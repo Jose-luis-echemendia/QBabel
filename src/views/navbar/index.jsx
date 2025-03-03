@@ -6,20 +6,20 @@ import { AuthLinks } from "./auth-links";
 const NavBar = () => {
   return (
     <>
-      <header className="w-full h-[110px] bg-black-500 p-1 border-b border-black-500 shadow-lg shadow-gray-400">
+      <header className="w-full h-[80px] bg-black-500 p-1 border-b border-black-500 shadow-lg shadow-gray-400">
         <h2 id="footer-heading" className="sr-only">
           Navbar
         </h2>
         <nav className="flex justify-between px-5 items-center text-primary text-3xl font-opensans">
           <div className="flex items-center space-x-5 w-1/3 relative">
-            <IconLogo size="120" />
-            <div className="p-1"> 
+            <IconLogo size="80" />
+            <div className="p-1 mb-1"> 
               <ExplorePopover />
             </div>
-            <div className="relative">
+            <div className="relative mb-1.5">
               <input
                 type="text"
-                className="bg-white-100 bg-opacity-20 py-3 rounded-xl text-primary placeholder-primary pl-14 focus:outline-none ml-8"
+                className="bg-white-100 bg-opacity-20 py-2 rounded-xl text-xl text-primary placeholder-primary pl-14 focus:outline-none ml-8"
                 placeholder="Buscar"
               />
               <button>

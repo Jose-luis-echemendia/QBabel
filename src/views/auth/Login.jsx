@@ -1,22 +1,33 @@
 import { useForm } from "@/hooks/useForm";
 import { initialFormLogin } from "@/constants/form-initial-state";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Oval } from "react-loader-spinner";
-import { Link, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { CustomImageDecorator } from "@/components/image-decorator";
+import { useAuth } from "@/hooks/redux/useAuth";
+import { useAppSelector } from "@/hooks/redux/useStore";
 
 export const Login = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const { formState, onInputChange, setFormState } = useForm(initialFormLogin);
+  const { formState, onInputChange } = useForm(initialFormLogin);
+  const { handleLogin } = useAuth();
+  const auth = useAppSelector((state) => state.auth);
+
   const { email, password } = formState;
 
-  const stateAuth = true;
+  useEffect(() => {
+    setIsAuthenticated(false);
+    window.scrollTo(0, 0);
+  }, []);
 
   const onSubmit = (event) => {
     event.preventDefault();
+    handleLogin(email, password);
+    setIsAuthenticated(true);
   };
 
-  //if(isAuthenticated && stateAuth.isAuthenticated) return <Navigate to="/"></Navigate>;
+  if (isAuthenticated && auth.isAuthenticated)
+    return <Navigate to="/home"></Navigate>;
 
   return (
     <>
@@ -74,7 +85,14 @@ export const Login = () => {
                 </div>
 
                 <div>
-                  {!stateAuth ? (
+                  {!auth.loading ? (
+                    <button
+                      type="submit"
+                      className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-md font-medium text-[#2E2E2E] bg-primary hover:bg-primary-100 hover:text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#242424] focus:border-[#242424]"
+                    >
+                      Login
+                    </button>
+                  ) : (
                     <button className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-[#2E2E2E] bg-primary hover:bg-primary-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:border-primary">
                       <Oval
                         visible={true}
@@ -85,13 +103,6 @@ export const Login = () => {
                         wrapperStyle={{}}
                         wrapperClass=""
                       />
-                    </button>
-                  ) : (
-                    <button
-                      type="submit"
-                      className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-md font-medium text-[#2E2E2E] bg-primary hover:bg-primary-100 hover:text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#242424] focus:border-[#242424]"
-                    >
-                      Login
                     </button>
                   )}
                 </div>

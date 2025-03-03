@@ -102,6 +102,7 @@ class CustomJWTVerifyView(APIView):
             return Response({"message": "Token is valid"}, status=status.HTTP_200_OK)
         except Exception as e:
             raise AuthenticationFailed("Invalid token")  # Si falla, el token no es válido
+        
 class LogoutView(APIView):
     permission_classes = [IsAuthenticated]
     

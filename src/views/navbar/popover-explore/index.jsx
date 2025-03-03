@@ -5,7 +5,7 @@ import {
   Button,
 } from "@material-tailwind/react";
 import { NavLink } from "react-router-dom";
-import { schemaImagesCategoria } from "@/views/home-page/categories/images-categoria";
+import { schemaImagesCategoria } from "@/views/welcome-page/categories/images-categoria";
 import { v4 as uuidi } from "uuid";
 
 const blogPosts = [
@@ -45,7 +45,7 @@ export const ExplorePopover = () => {
         <PopoverHandler>
           <Button
             variant="text"
-            className="block w-full text-primary text-3xl font-opensans normal-case font-normal"
+            className="block w-full text-primary text-xl font-opensans normal-case font-normal"
           >
             Explorar
           </Button>
