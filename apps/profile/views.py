@@ -5,10 +5,9 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.exceptions import ValidationError
 from django_filters.rest_framework import DjangoFilterBackend
 from apps.utils.pagination import MediumSetPagination
-from django.db import transaction
+from django.shortcuts import get_object_or_404
 
                
 class EmoteView(APIView):
@@ -29,6 +28,15 @@ class EmoteView(APIView):
         if "state" not in self.request.GET:
             queryset = queryset.filter(is_active=True)
         return queryset
+    
+    def get_object(self):
+        """
+        Retrieve the profile instance based on the provided ID.
+        """
+        queryset = self.get_queryset()
+        obj = get_object_or_404(queryset, pk=self.kwargs.get("pk"))
+        self.check_object_permissions(self.request, obj)
+        return obj
 
     def perform_create(self, serializer):
         return serializer.save()
@@ -64,7 +72,24 @@ class EmoteView(APIView):
         return paginator.get_paginated_response({"emotes": emotes_data})
             
     def put(self, request, *args, **kwargs):
-        pass
+        """
+        Endpoint to update an profile (full update).
+        """
+        instance = self.get_object()  # Obtén la instancia que se va a actualizar
+        serializer = self.serializer_class(instance, data=request.data, partial=False)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-    def
+    def patch(self, request, *args, **kwargs):
+        """
+        Endpoint to partially update an profile.
+        """
+        instance = self.get_object()  # Obtén la instancia que se va a actualizar
+        serializer = self.serializer_class(instance, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
