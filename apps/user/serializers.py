@@ -41,17 +41,12 @@ class UserSerializer(AbstractBaseSerializer):
         return value
 
     def create(self, validated_data):
-        print(validated_data)
         is_superuser = validated_data.pop("is_superuser", False)
-        email = validated_data.get("email")  # Asegúrate de que el email esté presente
-
-        if not email:
-            raise serializers.ValidationError("Email is required")
 
         if is_superuser:
-            return User.objects.create_superuser(email=email, **validated_data)
+            return User.objects.create_superuser(**validated_data)
 
-        return User.objects.create_user(email=email, **validated_data)
+        return User.objects.create_user(**validated_data)
 
     def update(self, instance, validated_data):
         password = validated_data.pop("password", None)
