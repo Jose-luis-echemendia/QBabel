@@ -13,7 +13,7 @@ const NavBar = () => {
         <nav className="flex justify-between px-5 items-center text-primary text-3xl font-opensans">
           <div className="flex items-center space-x-5 w-1/3 relative">
             <IconLogo size="80" />
-            <div className="p-1 mb-1.5"> 
+            <div className="p-1 mb-1"> 
               <ExplorePopover />
             </div>
             <div className="relative mb-1.5">
