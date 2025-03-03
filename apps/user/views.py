@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .serializers import UserSerializer
+from .permisions import IsAdminRole
 
 User = get_user_model()
 
@@ -11,6 +12,16 @@ class CustomUserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [AllowAny, IsAuthenticated]
+    
+    def get_permissions(self):
+        permissions = [IsAuthenticated()]
+        
+        if self.request.user and IsAdminRole().has_permission(self.request, self) or self.action == "create":
+            permissions.append(AllowAny())
+            return permissions
+        
+        return super().get_permissions()
+    
     
     def perform_create(self, serializer):
         serializer.save()
