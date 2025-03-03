@@ -11,13 +11,14 @@ import { Error404 } from "@/pages/error/Error404";
 
 const Routers = () => {
   const auth = useAppSelector((state) => state.auth);
-  const { handleVerifyToken, handlRefreshToken } = useAuth();
+  const { handleGetAuthenticatedUser, handleVerifyToken, handlRefreshToken } = useAuth();
   console.log(auth);
 
   const getStateAuth = async () => {
     try {
       await handlRefreshToken();
       await handleVerifyToken();
+      await handleGetAuthenticatedUser();
       //await loaderUser();
     } catch (error) {
       console.log(error);
