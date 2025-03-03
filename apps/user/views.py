@@ -66,7 +66,7 @@ class CustomUserViewSet(viewsets.ModelViewSet):
             status=status.HTTP_204_NO_CONTENT,
         )
         
-    @action(detail=True, methods=["GET"])
+    @action(detail=False, methods=["GET"], url_path='me')
     def get_authenticated_user(self, request, *args, **kwargs):
         user = request.user
         serializer = self.get_serializer(user)
