@@ -1,4 +1,4 @@
-import { loginApi, refreshTokenApi, logoutApi, verifyTokenApi } from "@/api/authAPI";
+import { loginAPI, refreshTokenAPI, logoutAPI, verifyTokenAPI } from "@/api/authAPI";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from 'sonner'
 
@@ -7,7 +7,7 @@ export const loginThunk = createAsyncThunk(
     "auth/login",
     async ({ email, password }, { rejectWithValue }) => {
       try {
-        const response = await loginApi(email, password);
+        const response = await loginAPI(email, password);
         if (response.status === 200){
           toast.success('Haz Iniciado sesión correctamente')
           return response.data;
@@ -24,7 +24,7 @@ export const verifyTokenThunk = createAsyncThunk(
     "auth/verifyToken",
     async (_, { rejectWithValue }) => {
       try {
-        const response = await verifyTokenApi();
+        const response = await verifyTokenAPI();
         if (response.status === 200) return true
         return false
       } catch (error) {
@@ -38,7 +38,7 @@ export const refreshTokenThunk = createAsyncThunk(
   "auth/refreshToken",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await refreshTokenApi();
+      const response = await refreshTokenAPI();
       if (response.status === 200) return response.data
       return rejectWithValue(response?.data);
     } catch (error) {
@@ -52,7 +52,7 @@ export const logoutThunk = createAsyncThunk(
   "auth/logout",
   async (_, { rejectWithValue }) => {
     try {
-      await logoutApi();
+      await logoutAPI();
       return true;
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);

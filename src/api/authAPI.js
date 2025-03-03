@@ -1,7 +1,7 @@
 import axiosInstance from "./axiosInstance";
 
 
-export const loginApi = async (email, password) => {
+export const loginAPI = async (email, password) => {
   try {
     const response = await axiosInstance.post("/api/token/jwt/create/users/", {
       email,
@@ -15,7 +15,7 @@ export const loginApi = async (email, password) => {
   }
 };
 
-export const refreshTokenApi = async () => {
+export const refreshTokenAPI = async () => {
   try {
     const refreshToken = localStorage.getItem("jwtTokenRefresh");
 
@@ -34,7 +34,7 @@ export const refreshTokenApi = async () => {
   }
 };
 
-export const verifyTokenApi = async () => {
+export const verifyTokenAPI = async () => {
   try {
     const accessToken = localStorage.getItem("jwtTokenAccess");
 
@@ -53,7 +53,7 @@ export const verifyTokenApi = async () => {
   }
 }
 
-export const logoutApi = async () => {
+export const logoutAPI = async () => {
   const refreshToken = localStorage.getItem("jwtTokenRefresh");
 
   try {
