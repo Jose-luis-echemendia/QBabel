@@ -1,12 +1,22 @@
-import { loginThunk, verifyTokenThunk, refreshTokenThunk, logoutThunk } from "@/store/auth/thunks";
+import {
+  loginThunk,
+  getAuthenticatedUserThunk,
+  verifyTokenThunk,
+  refreshTokenThunk,
+  logoutThunk,
+} from "@/store/auth/thunks";
 import { useAppDispatch } from "./useStore";
 import { logoutLocal } from "@/store/auth/slice";
 
 export const useAuth = () => {
   const dispath = useAppDispatch();
 
-  const handleLogin = ( email, password ) => {
+  const handleLogin = (email, password) => {
     dispath(loginThunk({ email, password }));
+  };
+
+  const handleGetAuthenticatedUser = () => {
+    dispath(getAuthenticatedUserThunk());
   };
 
   const handleVerifyToken = () => {
@@ -20,8 +30,15 @@ export const useAuth = () => {
   };
 
   const handleLogoutLocal = () => {
-    dispath(logoutLocal())
-  }
+    dispath(logoutLocal());
+  };
 
-  return { handleLogin, handleVerifyToken, handlRefreshToken, handleLogout, handleLogoutLocal };
+  return {
+    handleLogin,
+    handleGetAuthenticatedUser,
+    handleVerifyToken,
+    handlRefreshToken,
+    handleLogout,
+    handleLogoutLocal,
+  };
 };
