@@ -8,14 +8,10 @@ class IsSuperUserRole(permissions.BasePermission):
 class IsAdminRole(permissions.BasePermission):
     def has_permission(self, request, view):
         return bool(request.user and request.user.role == RoleType.admin)
-    
-class IsPromptEngineerRole(permissions.BasePermission):
+
+class IsAuthorRole(permissions.BasePermission):
     def has_permission(self, request, view):
-        return bool(request.user and request.user.role == RoleType.prompt_engineer)    
-    
-class IsDesignerRole(permissions.BasePermission):
-    def has_permission(self, request, view):
-        return bool(request.user and request.user.role == RoleType.designer)
+        return bool(request.user and request.user.role == RoleType.author)
 
 class IsUserRole(permissions.BasePermission):
     def has_permission(self, request, view):

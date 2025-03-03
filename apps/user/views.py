@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .serializers import UserSerializer
+from .permisions import IsAdminRole
 
 User = get_user_model()
 
@@ -12,6 +13,16 @@ class CustomUserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     permission_classes = [AllowAny, IsAuthenticated]
     
+    def get_permissions(self):
+        permissions = []
+        
+        if self.action == "create":
+            permissions.append(AllowAny())
+            return permissions
+        
+        return super().get_permissions()
+    
+    
     def perform_create(self, serializer):
         serializer.save()
         
@@ -19,18 +30,11 @@ class CustomUserViewSet(viewsets.ModelViewSet):
         return serializer.save()
 
     def create(self, request, *args, **kwargs):
-        if not request.user.is_superuser:
-            return Response(
-                {"detail": "Only superusers can create users."},
-                status=status.HTTP_403_FORBIDDEN,
-            )
-
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
         return Response(
-            serializer.data, status=status.HTTP_201_CREATED, headers=headers
+            serializer.data, status=status.HTTP_201_CREATED
         )
         
     def update(self, request, *args, **kwargs):
@@ -61,6 +65,12 @@ class CustomUserViewSet(viewsets.ModelViewSet):
             {"message": "user account deleted successfully"},
             status=status.HTTP_204_NO_CONTENT,
         )
+        
+    @action(detail=True, methods=["GET"])
+    def get_authenticated_user(self, request, *args, **kwargs):
+        user = request.user
+        serializer = self.get_serializer(user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     @action(detail=True, methods=["POST"])
     def active(self, request, pk=None, *args, **kwargs):
