@@ -1,4 +1,4 @@
-import { loginAPI, refreshTokenAPI, logoutAPI, verifyTokenAPI } from "@/api/authAPI";
+import { loginAPI, getAuthenticatedUserAPI, refreshTokenAPI, logoutAPI, verifyTokenAPI } from "@/api/authAPI";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from 'sonner'
 
@@ -17,6 +17,19 @@ export const loginThunk = createAsyncThunk(
         return rejectWithValue(error.response?.data || error.message);
       }
     }
+);
+
+export const getAuthenticatedUserThunk = createAsyncThunk(
+  "auth/getAuthenticatedUser",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await getAuthenticatedUserAPI();
+      if (response.status === 200) return response.data
+      return rejectWithValue(response?.data); 
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
 );
 
 // **Thunk para verificar token de acceso**
