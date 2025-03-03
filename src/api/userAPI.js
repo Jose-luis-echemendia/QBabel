@@ -1,5 +1,17 @@
 import axiosInstance from "./axiosInstance";
 
+// endpoint for loading login user
+export const getUser = async () => {
+    try {
+        const response = await axiosInstance.post("/api/custom-users/");
+        
+        return response;
+      } catch (error) {
+        console.error("Error en login:", error.response?.data || error.message);
+        throw error;
+      }
+}
+
 // endpoint for get users
 export const getUsers = async () => {
     try {
