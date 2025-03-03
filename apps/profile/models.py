@@ -7,7 +7,7 @@ from .enums import SexType
 
 User = get_user_model()
 
-class Perfil(BaseModel):
+class Profile(BaseModel):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
     bio = models.TextField(max_length=500, blank=True)
