@@ -14,9 +14,9 @@ class CustomUserViewSet(viewsets.ModelViewSet):
     permission_classes = [AllowAny, IsAuthenticated]
     
     def get_permissions(self):
-        permissions = [IsAuthenticated()]
+        permissions = []
         
-        if self.request.user and IsAdminRole().has_permission(self.request, self) or self.action == "create":
+        if self.action == "create":
             permissions.append(AllowAny())
             return permissions
         
@@ -30,12 +30,6 @@ class CustomUserViewSet(viewsets.ModelViewSet):
         return serializer.save()
 
     def create(self, request, *args, **kwargs):
-        if not request.user.is_superuser:
-            return Response(
-                {"detail": "Only superusers can create users."},
-                status=status.HTTP_403_FORBIDDEN,
-            )
-
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
