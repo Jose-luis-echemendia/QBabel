@@ -1,19 +1,7 @@
 import axiosInstance from "./axiosInstance";
 
-// endpoint for get authenticated user
-export const getAuthenticatedUser = async () => {
-    try {
-        const response = await axiosInstance.post("/api/custom-users/");
-        
-        return response;
-      } catch (error) {
-        console.error("Error en login:", error.response?.data || error.message);
-        throw error;
-      }
-}
-
 // endpoint for get users
-export const getUsers = async () => {
+export const getUsersAPI = async () => {
     try {
         const response = await axiosInstance.get("/api/custom-users/",);
         
@@ -25,7 +13,7 @@ export const getUsers = async () => {
 }
 
 // endpoint for get user by id
-export const getUserById = async (id) => {
+export const getUserByIdAPI = async (id) => {
   try {
       const response = await axiosInstance.get(`/api/custom-users/${id}/`);
       
@@ -37,7 +25,7 @@ export const getUserById = async (id) => {
 }
 
 // endpoint for create user
-export const createUser = async (data) => {
+export const createUserAPI = async (data) => {
     try {
         const response = await axiosInstance.post("/api/custom-users/", data);
         
@@ -49,7 +37,7 @@ export const createUser = async (data) => {
 } 
 
 // endpoint for update user
-export const updateUser = async (data) => {
+export const updateUserAPI = async (data) => {
     try {
         const response = await axiosInstance.put(`/api/custom-users/${data.id}/`, data);
         
