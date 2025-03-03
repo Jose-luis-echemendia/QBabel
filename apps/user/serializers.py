@@ -9,21 +9,6 @@ User = get_user_model()
 
 
 class UserSerializer(AbstractBaseSerializer):
-    day_expense = serializers.DecimalField(
-        read_only=True, required=False, max_digits=10, decimal_places=2
-    )
-    spending = serializers.DecimalField(
-        read_only=True, required=False, max_digits=10, decimal_places=2
-    )
-    count_emote = serializers.IntegerField(read_only=True, required=False)
-    count_emote_image = serializers.IntegerField(read_only=True, required=False)
-    count_downloaded_emote_image = serializers.IntegerField(
-        read_only=True, required=False
-    )
-    daily_spending_limit = serializers.DecimalField(
-        required=False, max_digits=10, decimal_places=2
-    )
-
     class Meta:
         model = User
         fields = AbstractBaseSerializer.Meta.fields + [
