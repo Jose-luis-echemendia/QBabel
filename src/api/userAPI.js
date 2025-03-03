@@ -1,7 +1,7 @@
 import axiosInstance from "./axiosInstance";
 
-// endpoint for loading login user
-export const getUser = async () => {
+// endpoint for get authenticated user
+export const getAuthenticatedUser = async () => {
     try {
         const response = await axiosInstance.post("/api/custom-users/");
         
