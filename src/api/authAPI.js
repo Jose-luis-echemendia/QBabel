@@ -7,10 +7,28 @@ export const loginAPI = async (email, password) => {
       email,
       password,
     });
-    
+
     return response;
   } catch (error) {
     console.error("Error en login:", error.response?.data || error.message);
+    throw error;
+  }
+};
+
+// endpoint for get authenticated user
+export const getAuthenticatedUserAPI = async () => {
+  try {
+    const accessToken = localStorage.getItem("jwtTokenAccess");
+    const response = await axiosInstance.post(
+      "/api/custom-users/get_authenticated_user/"
+    );
+
+    return response;
+  } catch (error) {
+    console.error(
+      "Error al obtener el usuario authenticado:",
+      error.response?.data || error.message
+    );
     throw error;
   }
 };
@@ -24,13 +42,19 @@ export const refreshTokenAPI = async () => {
       throw new Error("No hay refresh token disponible");
     }
 
-    const response = await axiosInstance.post("/api/token/jwt/refresh/custom/", {
-      refresh : refreshToken,
-    });
+    const response = await axiosInstance.post(
+      "/api/token/jwt/refresh/custom/",
+      {
+        refresh: refreshToken,
+      }
+    );
 
     return response;
   } catch (error) {
-    console.error("Error al refrescar el token:", error.response?.data || error.message);
+    console.error(
+      "Error al refrescar el token:",
+      error.response?.data || error.message
+    );
     throw error;
   }
 };
@@ -50,17 +74,22 @@ export const verifyTokenAPI = async () => {
 
     return response;
   } catch (error) {
-    console.error("Error al verificar el token:", error.response?.data || error.message);
+    console.error(
+      "Error al verificar el token:",
+      error.response?.data || error.message
+    );
     throw error;
   }
-}
+};
 
 // endpoint for logout
 export const logoutAPI = async () => {
   const refreshToken = localStorage.getItem("jwtTokenRefresh");
 
   try {
-    const response = await axiosInstance.post("/api/logout/custom/", refreshToken);
+    const response = await axiosInstance.post("/api/logout/custom/", {
+      refresh: refreshToken,
+    });
     return response;
   } catch (error) {
     console.error("Error en login:", error.response?.data || error.message);
