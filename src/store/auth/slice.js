@@ -50,8 +50,8 @@ export const authSlice = createSlice({
       })
 
       .addCase(getAuthenticatedUserThunk.fulfilled, (state, action) => {
-        state.user = action.payload.id;
-        localStorage.setItem("user", action.payload.id);
+        state.user = action.payload;
+        localStorage.setItem("user", action.payload);
       })
       .addCase(getAuthenticatedUserThunk.rejected, (state) => {
         state.jwtTokenAccess
