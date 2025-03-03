@@ -1,7 +1,6 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from ..models.models import GenericImage
-from apps.user.serializers import UserSerializer
 import logging
 
 # Configurar un logger
@@ -39,9 +38,11 @@ class AuditUserChangeSerializer(serializers.ModelSerializer):
         ]
         
     def get_created_by_details(self, obj):
+        from apps.user.serializers import UserSerializer
         return UserSerializer(obj.created_by).data if obj.created_by else None
 
     def get_updated_by_details(self, obj):
+        from apps.user.serializers import UserSerializer
         return UserSerializer(obj.updated_by).data if obj.updated_by else None
 
     def create(self, validated_data):
