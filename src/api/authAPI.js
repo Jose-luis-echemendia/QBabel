@@ -19,6 +19,7 @@ export const loginAPI = async (email, password) => {
 export const getAuthenticatedUserAPI = async () => {
   try {
     const accessToken = localStorage.getItem("jwtTokenAccess");
+    console.log("access token: ",accessToken);
 
     if (!accessToken) {
       throw new Error("No hay access token disponible");
