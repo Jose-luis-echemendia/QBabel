@@ -55,14 +55,17 @@ export const authSlice = createSlice({
       })
       .addCase(getAuthenticatedUserThunk.rejected, (state) => {
         state.jwtTokenAccess
-          ? localStorage.setItem("jwtTokenAccess")
+          ? localStorage.getItem("jwtTokenAccess")
           : localStorage.removeItem("jwtTokenAccess");
         state.jwtTokenRefresh
-          ? localStorage.setItem("jwtTokenRefresh")
+          ? localStorage.getItem("jwtTokenRefresh")
           : localStorage.removeItem("jwtTokenRefresh");
         state.user
-          ? localStorage.setItem("user")
+          ? localStorage.getItem("user")
           : localStorage.removeItem("user");
+        state.isAuthenticated
+          ? localStorage.getItem("isAuthenticated")
+          : localStorage.removeItem("isAuthenticated");
       })
 
       // **Refresh Token Reducers**

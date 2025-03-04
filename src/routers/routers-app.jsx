@@ -19,7 +19,6 @@ const Routers = () => {
       await handlRefreshToken();
       await handleVerifyToken();
       await handleGetAuthenticatedUser();
-      //await loaderUser();
     } catch (error) {
       console.log(error);
     }
