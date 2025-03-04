@@ -18,6 +18,10 @@ export const loginAPI = async (email, password) => {
 // endpoint for get authenticated user
 export const getAuthenticatedUserAPI = async () => {
   try {
+    const accessToken = localStorage.getItem("jwtTokenAccess");
+    const isAuthenticated = localStorage.getItem("isAuthenticated");
+
+    if (!accessToken || !isAuthenticated) return
     const response = await axiosInstance.get("/api/custom-users/me/");
     return response;
   } catch (error) {
