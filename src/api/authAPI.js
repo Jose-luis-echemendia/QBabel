@@ -18,23 +18,7 @@ export const loginAPI = async (email, password) => {
 // endpoint for get authenticated user
 export const getAuthenticatedUserAPI = async () => {
   try {
-    const accessToken = localStorage.getItem("jwtTokenAccess");
-    console.log("access token: ",accessToken);
-
-    if (!accessToken) {
-      throw new Error("No hay access token disponible");
-    }
-
-    const response = await axiosInstance.get(
-      "/api/custom-users/me/",
-      {
-        headers: {
-          Accept: "application/json",
-          Authorization: `JWT ${accessToken}`,
-        },
-      }
-    );
-
+    const response = await axiosInstance.get("/api/custom-users/me/");
     return response;
   } catch (error) {
     console.error(
