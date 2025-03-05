@@ -37,6 +37,39 @@ class CustomCategoryViewSet(viewsets.ModelViewSet):
     def perform_update(self, serializer):
         return serializer.save()
 
+    def get(self, request, *args, **kwargs):
+        if Category.objects.all().exists():
+            categories = Category.objects.all()
+
+            result = []
+
+            for category in categories:
+                if not category.parent:
+                    item = {}
+                    item["uid"] = category.uid
+                    item["name"] = category.name
+                    item["thumbnail"] = category.thumbnail.url
+
+                    item["sub_categories"] = []
+
+                    for cat in categories:
+                        sub_item = {}
+                        if cat.parent and cat.parent.id == category.id:
+                            sub_item["id"] = cat.id
+                            sub_item["name"] = cat.name
+                            sub_item["thumbnail"] = cat.thumbnail.url
+
+                            item["sub_categories"].append(sub_item)
+
+                    result.append(item)
+
+            return Response({"categories": result}, status=status.HTTP_200_OK)
+        else:
+            return Response(
+                {"error": "No categories found"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+
     def create(self, request, *args, **kwargs):
         if not request.user.is_superuser:
             return Response(
