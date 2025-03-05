@@ -5,7 +5,7 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import Category
 from .serializers import CategorySerializer
-from .filters import CategoeyFilter
+from .filters import CategoryFilter
 from apps.user.permisions import IsAdminRole
 from django_filters.rest_framework import DjangoFilterBackend
 
@@ -15,7 +15,7 @@ class CustomCategoryViewSet(viewsets.ModelViewSet):
     serializer_class = CategorySerializer
     permission_classes = [IsAuthenticated]
     filter_backends = [DjangoFilterBackend]
-    filterset_class = CategoeyFilter
+    filterset_class = CategoryFilter
 
     def get_permissions(self):
         if self.request.user and IsAdminRole().has_permission(self.request, self) or self.action == "get":
