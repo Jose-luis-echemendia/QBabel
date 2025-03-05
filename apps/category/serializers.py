@@ -12,3 +12,7 @@ class CategorySerializer(AbstractBaseSerializer, AuditUserChangeSerializer, Abst
             ] + AuditUserChangeSerializer.Meta.fields + AbstractImageSerializer.Meta.fields
         
     
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        
+        return representation
