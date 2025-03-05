@@ -29,7 +29,7 @@ export const usersSlice = createSlice({
             })
             .addCase(getUsersThunk.fulfilled, (state, action) => {
                 state.loading = false
-                state.users = action.payload
+                state.users = action.payload.res
             })
             .addCase(getUsersThunk.rejected, (state) => {
                 state.loading = false
