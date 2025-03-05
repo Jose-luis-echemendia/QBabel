@@ -16,6 +16,9 @@ class GenericImage(BaseModel, AuditRegisteredObjectModel):
     Model for handling generic images within the application
     """
     
+    
+    DEFAULT_AVATAR_IMAGE_UUID = env('DEFAULT_AVATAR_IMAGE_UUID')
+    
     alt = models.CharField(
         verbose_name=_("Alt Text"), max_length=255, blank=True, null=True
     )
