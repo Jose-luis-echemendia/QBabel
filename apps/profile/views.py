@@ -10,7 +10,7 @@ from apps.utils.pagination import MediumSetPagination
 from django.shortcuts import get_object_or_404
 
                
-class EmoteView(APIView):
+class ProfileView(APIView):
     """
     view to handle emotes requested by the user
     """
