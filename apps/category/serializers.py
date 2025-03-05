@@ -14,30 +14,28 @@ class CategorySerializer(AbstractBaseSerializer, AuditUserChangeSerializer, Abst
     
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        withparent = self.context.get('withparent', False)
-        print(representation)
-        print(withparent)
+        withparent = self.context.pop('withparent')
         if not withparent:
             return representation
         
-        results = []
-
-        for category in representation:
-            item = {}
-            item["uid"] = category.uid
-            item["name"] = category.name
-            item["image"] = category.image
-            item["description"] = category.description
-            item["children_categories"] = []
-            
-            children_categories = Category.objects.filter(parent=category.uid) or category.children.all()
-            for cat in children_categories:
-                sub_item = {}
-                sub_item["uid"] = cat.uid
-                sub_item["name"] = cat.name
-                sub_item["description"] = cat.description
-                sub_item["image"] = cat.image
-                item["children_categories"].append(sub_item)
-            results.append(item)
+        
+        print(representation)
+        item = {}
+        print(category)
+        item["uid"] = category.uid
+        item["name"] = category.name
+        item["image"] = category.image
+        item["description"] = category.description
+        item["children_categories"] = []
+        
+        children_categories = Category.objects.filter(parent=category.uid) or category.children.all()
+        for cat in children_categories:
+            sub_item = {}
+            sub_item["uid"] = cat.uid
+            sub_item["name"] = cat.name
+            sub_item["description"] = cat.description
+            sub_item["image"] = cat.image
+            item["children_categories"].append(sub_item)
+        results.append(item)
             
         return results
