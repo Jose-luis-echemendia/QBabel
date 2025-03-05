@@ -10,6 +10,9 @@ import {
 
 const initialState = {
     user : null,
+    count: 0,
+    next: null,
+    previous: null,
     users: [],
     loading: false,
 }
