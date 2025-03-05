@@ -12,7 +12,7 @@ from django.shortcuts import get_object_or_404
                
 class ProfileView(APIView):
     """
-    view to handle emotes requested by the user
+    view to handle profiles requested by the user
     """
     serializer_class = ProfileSerializer
     permission_classes = [IsAuthenticated]
@@ -56,20 +56,20 @@ class ProfileView(APIView):
 
     def get(self, request, *args, **kwargs):
         """
-        endpoint to get all emotes of the authenticated user
+        endpoint to get all profiles of the authenticated user
         """
         queryset = self.get_queryset()
         if not queryset.exists():
             return Response(
-                {"details": "not emotes found"}, status=status.HTTP_404_NOT_FOUND
+                {"details": "not profile found"}, status=status.HTTP_404_NOT_FOUND
             )
             
         filtered_queryset = self.filter_queryset(queryset)
         ordered_queryset = self.order_queryset(filtered_queryset)
         paginator = MediumSetPagination()
         results = paginator.paginate_queryset(ordered_queryset, request)
-        emotes_data = self.serializer_class(results, many=True).data
-        return paginator.get_paginated_response({"emotes": emotes_data})
+        profiles_data = self.serializer_class(results, many=True).data
+        return paginator.get_paginated_response({"profiles": profiles_data})
             
     def put(self, request, *args, **kwargs):
         """
