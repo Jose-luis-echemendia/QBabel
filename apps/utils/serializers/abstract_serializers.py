@@ -67,6 +67,7 @@ class AbstractImageSerializer(serializers.ModelSerializer):
     image = serializers.PrimaryKeyRelatedField(
         queryset=GenericImage.objects.all(), write_only=True
     )
+    image_details = serializers.SerializerMethodField()
     
     class Meta:
         abstract = True
