@@ -17,8 +17,8 @@ const initialState = {
     loading: false,
 }
 
-export const usersSlice = createSlice({
-    name : 'users',
+export const userSlice = createSlice({
+    name : 'user',
     initialState: initialState,
     reducers: {},
     extraReducers: (builder) => {
@@ -101,4 +101,4 @@ export const usersSlice = createSlice({
     }
 })
 
-export default usersSlice.reducer
+export default userSlice.reducer
