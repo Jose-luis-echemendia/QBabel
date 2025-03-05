@@ -5,13 +5,17 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import Category
 from .serializers import CategorySerializer
+from .filters import CategoeyFilter
 from apps.user.permisions import IsAdminRole
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class CustomCategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     permission_classes = [IsAuthenticated]
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = CategoeyFilter
 
     def get_permissions(self):
         permissions = [IsAuthenticated()]
@@ -39,10 +43,7 @@ class CustomCategoryViewSet(viewsets.ModelViewSet):
         return serializer.save()
 
     def get_queryset(self, with_parent=False):
-        if not with_parent:
-            return self.queryset
-
-        return self.queryset.filter(parent=None)
+        return
 
     def get(self, request, *args, **kwargs):
         queryset = self.get_queryset(with_parent=True)
