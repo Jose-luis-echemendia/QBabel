@@ -69,6 +69,7 @@ export const userSlice = createSlice({
             })
             .addCase(updateUserThunk.fulfilled, (state, action) => {
                 state.loading = false
+                state.user = action.payload
                 state.users = state.users.map(user => user.id === action.payload.id ? action.payload : user)
             })
             .addCase(updateUserThunk.rejected, (state) => {
@@ -81,6 +82,7 @@ export const userSlice = createSlice({
             })
             .addCase(updatePartialUserThunk.fulfilled, (state, action) => {
                 state.loading = false
+                state.user = action.payload
                 state.users = state.users.map(user => user.id === action.payload.id ? action.payload : user)
             })
             .addCase(updatePartialUserThunk.rejected, (state) => {
