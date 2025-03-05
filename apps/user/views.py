@@ -70,7 +70,7 @@ class CustomUserViewSet(viewsets.ModelViewSet):
     def get_authenticated_user(self, request, *args, **kwargs):
         user = request.user
         serializer = self.get_serializer(user)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response({"user":serializer.data}, status=status.HTTP_200_OK)
 
     @action(detail=True, methods=["POST"])
     def active(self, request, pk=None, *args, **kwargs):
