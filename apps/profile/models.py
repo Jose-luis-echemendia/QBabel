@@ -1,5 +1,6 @@
 from django.db import models
-from apps.utils.models.models import BaseModel
+from apps.utils.models.abstract_models import BaseModel
+from apps.utils.models.models import GenericImage
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 from apps.category.models import Category
@@ -9,7 +10,7 @@ User = get_user_model()
 
 class Profile(BaseModel):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
+    avatar = models.ForeignKey(GenericImage, on_delete=models.SET_NULL, related_name='avatar', blank=True, null=True)
     bio = models.TextField(max_length=500, blank=True)
     age = models.PositiveIntegerField(blank=True, null=True)
     sex = models.CharField(max_length=1, blank=True, null=True, choices=SexType.choices, default=SexType.m)
