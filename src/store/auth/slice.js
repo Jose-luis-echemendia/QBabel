@@ -52,7 +52,7 @@ export const authSlice = createSlice({
       // **Get Authenticated User Reducers**
       .addCase(getAuthenticatedUserThunk.fulfilled, (state, action) => {
         state.user = action.payload;
-        localStorage.setItem("user", action.payload);
+        localStorage.setItem("user", JSON.stringify(action.payload));
       })
       .addCase(getAuthenticatedUserThunk.rejected, (state) => {
         state.jwtTokenAccess
