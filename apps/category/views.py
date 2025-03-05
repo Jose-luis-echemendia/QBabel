@@ -59,7 +59,7 @@ class CustomCategoryViewSet(viewsets.ModelViewSet):
         return queryset
 
     def get(self, request, *args, **kwargs):
-        queryset = self.get_queryset(with_parent=True)
+        queryset = self.get_queryset()
         if not queryset:
             return Response(
                 {"details": "Categories not found"}, status=status.HTTP_404_NOT_FOUND
