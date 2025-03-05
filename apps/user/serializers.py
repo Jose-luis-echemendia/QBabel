@@ -23,14 +23,6 @@ class UserSerializer(AbstractBaseSerializer):
         extra_kwargs = {"password": {"write_only": True}}
         read_only_fields = ("uid", "created_at", "updated_at")
 
-    def get_fields(self):
-        fields = super().get_fields()
-        if self.context["request"].method == "PATCH":
-            fields["password"].required = (
-                False  # Hacemos que el campo sea opcional en PATCH
-            )
-        return fields
-
     def validate_password(self, value):
         if value is None:
             return None  # No validar si el valor es None
