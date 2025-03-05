@@ -49,6 +49,7 @@ export const authSlice = createSlice({
         state.loading = false;
       })
 
+      // **Get Authenticated User Reducers**
       .addCase(getAuthenticatedUserThunk.fulfilled, (state, action) => {
         state.user = action.payload;
         localStorage.setItem("user", action.payload);
