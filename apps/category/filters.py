@@ -1,8 +1,8 @@
 import django_filters
 from .models import Category
 
-class CategoeyFilter(django_filters.FilterSet):
-    withparent = django_filters.BooleanFilter(method='filter_me')
+class CategoryFilter(django_filters.FilterSet):
+    withparent = django_filters.BooleanFilter(method='filter_withparent')
     created_at = django_filters.DateFromToRangeFilter(field_name="created_at")
 
     class Meta:
