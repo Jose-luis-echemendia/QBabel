@@ -66,7 +66,7 @@ class CustomCategoryViewSet(viewsets.ModelViewSet):
             )
         filtered_queryset = self.filter_queryset(queryset)
         ordered_queryset = self.order_queryset(filtered_queryset)
-        
+        print("vista", self.request.query_params.get('withparent', False) )
         context = self.get_serializer_context()
         context['withparent'] = self.request.query_params.get('withparent', False) 
         data_cateogries = self.get_serializer(ordered_queryset, many=True).data
