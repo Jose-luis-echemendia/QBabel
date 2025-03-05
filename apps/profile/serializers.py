@@ -17,6 +17,7 @@ class ProfileSerializer(AbstractBaseSerializer):
         fields = AbstractBaseSerializer.Meta.fields + [
             "user",
             "avatar",
+            "avatar_details",
             "bio",
             "age",
             "sex",
@@ -24,4 +25,8 @@ class ProfileSerializer(AbstractBaseSerializer):
             "number_phone",
             "literary_preferences",
         ]
+        
+    def get_avatar_details(self, obj):
+        from apps.utils.serializers.serializers import ImageSerializer
+        return ImageSerializer(obj.image).data if obj.image else None
 
