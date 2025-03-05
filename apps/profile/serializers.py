@@ -31,5 +31,5 @@ class ProfileSerializer(AbstractBaseSerializer):
         
     def get_avatar_details(self, obj):
         from apps.utils.serializers.serializers import ImageSerializer
-        return ImageSerializer(obj.image).data if obj.image else None
+        return ImageSerializer(obj.avatar).data if obj.avatar else None
 
