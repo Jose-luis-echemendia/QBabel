@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 from apps.utils.utils import desconvertir_de_snake_case
 from apps.utils.serializers.abstract_serializers import AbstractBaseSerializer
 from apps.utils.models.models import GenericImage
+from .models import Profile
 
 User = get_user_model()
 
@@ -15,7 +16,7 @@ class ProfileSerializer(AbstractBaseSerializer):
     avatar_details = serializers.SerializerMethodField()
     
     class Meta:
-        model = User
+        model = Profile
         fields = AbstractBaseSerializer.Meta.fields + [
             "user",
             "avatar",
