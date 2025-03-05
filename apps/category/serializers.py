@@ -28,14 +28,15 @@ class CategorySerializer(AbstractBaseSerializer, AuditUserChangeSerializer, Abst
             item["image"] = category.image
             item["description"] = category.description
             item["sub_categories"] = []
-            for cat in representation:
+            
+            categories = Category.objects.filter(parent=category.uid)
+            for cat in categories:
                 sub_item = {}
-                if cat.parent and cat.parent.uid == category.uid:
-                    sub_item["uid"] = cat.id
-                    sub_item["name"] = cat.name
-                    sub_item["description"] = cat.description
-                    sub_item["image"] = cat.image
-                    item["sub_categories"].append(sub_item)
+                sub_item["uid"] = cat.id
+                sub_item["name"] = cat.name
+                sub_item["description"] = cat.description
+                sub_item["image"] = cat.image
+                item["sub_categories"].append(sub_item)
             results.append(item)
             
         return results
