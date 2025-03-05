@@ -11,10 +11,13 @@ import environ
 env=environ.Env()
 User = get_user_model()
 
-class GenericImage(BaseModel):
+class GenericImage(BaseModel, AuditRegisteredObjectModel):
     """
     Model for handling generic images within the application
     """
+    
+    
+    DEFAULT_AVATAR_IMAGE_UUID = env('DEFAULT_AVATAR_IMAGE_UUID')
     
     alt = models.CharField(
         verbose_name=_("Alt Text"), max_length=255, blank=True, null=True
@@ -58,7 +61,7 @@ class GenericImage(BaseModel):
     
     @property
     def is_cover(self):
-        return self.t
+        return self.type == ImageTypes.cover
 
     class Meta:
         db_table = 'Image'
