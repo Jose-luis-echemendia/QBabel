@@ -94,15 +94,16 @@ class ProfileView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class ProfileDetailsView(APIView):
+    def get_object(self):
+        """
+        Retrieve the profile instance based on the provided ID.
+        """
+        queryset = self.get_queryset()
+        obj = get_object_or_404(queryset, pk=self.kwargs.get("pk"))
+        self.check_object_permissions(self.request, obj)
+        return obj
+    
     def get(self, request, *args, **kwargs):
-        def get_object(self):
-            """
-            Retrieve the profile instance based on the provided ID.
-            """
-            queryset = self.get_queryset()
-            obj = get_object_or_404(queryset, pk=self.kwargs.get("pk"))
-            self.check_object_permissions(self.request, obj)
-            return obj
     
         """
         endpoint to get all profiles of the authenticated user
@@ -119,4 +120,23 @@ class ProfileDetailsView(APIView):
         results = paginator.paginate_queryset(ordered_queryset, request)
         profiles_data = self.serializer_class(results, many=True).data
         return paginator.get_paginated_response({"profiles": profiles_data})
+
+class AuthenticatedProfileDetailsView(APIView):
+    def get(self, request, *args, **kwargs):
+
+    
+        """
+        endpoint to get all profiles of the authenticated user
+        """
+        queryset = self.get_queryset()
+        if not queryset.exists():
+            return Response(
+                {"details": "not profile found"}, status=status.HTTP_404_NOT_FOUND
+            )
             
+        filtered_queryset = self.filter_queryset(queryset)
+        ordered_queryset = self.order_queryset(filtered_queryset)
+        paginator = MediumSetPagination()
+        results = paginator.paginate_queryset(ordered_queryset, request)
+        profiles_data = self.serializer_class(results, many=True).data
+        return paginator.get_paginated_response({"profiles": profiles_data})
