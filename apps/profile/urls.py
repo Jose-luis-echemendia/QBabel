@@ -4,5 +4,5 @@ from .views import ProfileView, ProfileDetailsView, AuthenticatedProfileDetailsV
 urlpatterns = [
     path('profile/', ProfileView.as_view()),
     path('profile/<uuid:pk>/', ProfileDetailsView.as_view()),
-    path('profile/authenticated/', AuthenticatedProfileDetailsView.as_view()),
+    path('profile/me/', AuthenticatedProfileDetailsView.as_view()),
 ]
