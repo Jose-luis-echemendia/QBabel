@@ -98,8 +98,7 @@ class ProfileDetailsView(APIView):
         """
         Retrieve the profile instance based on the provided ID.
         """
-        queryset = self.get_queryset()
-        obj = get_object_or_404(queryset, pk=self.kwargs.get("pk"))
+        obj = get_object_or_404(Profile, pk=self.kwargs.get("pk"))
         self.check_object_permissions(self.request, obj)
         return obj
     
@@ -109,11 +108,6 @@ class ProfileDetailsView(APIView):
         endpoint to get all profiles of the authenticated user
         """
         profile = self.get_object()
-        if not profile.exists():
-            return Response(
-                {"details": "not profile found"}, status=status.HTTP_404_NOT_FOUND
-            )
-            
         profiles_data = self.serializer_class(profile).data
         return Response({"profile": profiles_data}, status=status.HTTP_200_OK)
 
