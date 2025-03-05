@@ -29,7 +29,10 @@ export const usersSlice = createSlice({
             })
             .addCase(getUsersThunk.fulfilled, (state, action) => {
                 state.loading = false
-                state.users = action.payload.res
+                state.users = action.payload.results
+                state.count = action.payload.count
+                state.next = action.payload.next
+                state.previous = action.payload.previous
             })
             .addCase(getUsersThunk.rejected, (state) => {
                 state.loading = false
@@ -53,7 +56,8 @@ export const usersSlice = createSlice({
             })
             .addCase(createUserThunk.fulfilled, (state, action) => {
                 state.loading = false
-                state.users.push(action.payload)
+                if (state.users.length === 0) state.users = action.payload
+                else state.users.push(action.payload)
             })
             .addCase(createUserThunk.rejected, (state) => {
                 state.loading = false
