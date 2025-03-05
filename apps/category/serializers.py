@@ -15,7 +15,7 @@ class CategorySerializer(AbstractBaseSerializer, AuditUserChangeSerializer, Abst
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         withparent = self.context.get('withparent', False)
-        
+        print(withparent)
         if not withparent:
             return representation
         
@@ -27,7 +27,7 @@ class CategorySerializer(AbstractBaseSerializer, AuditUserChangeSerializer, Abst
             item["name"] = category.name
             item["image"] = category.image
             item["description"] = category.description
-            item["sub_categories"] = []
+            item["children_categories"] = []
             
             children_categories = Category.objects.filter(parent=category.uid) or category.children.all()
             for cat in children_categories:
@@ -36,7 +36,7 @@ class CategorySerializer(AbstractBaseSerializer, AuditUserChangeSerializer, Abst
                 sub_item["name"] = cat.name
                 sub_item["description"] = cat.description
                 sub_item["image"] = cat.image
-                item["sub_categories"].append(sub_item)
+                item["children_categories"].append(sub_item)
             results.append(item)
             
         return results
