@@ -19,8 +19,8 @@ class CategorySerializer(AbstractBaseSerializer, AuditUserChangeSerializer, Abst
             return representation
         
         representation["children_categories"] = [
-            for category in 
-            Category.objects.filter(parent=representation.get("uid")) or instance.children.all()
+            CategorySerializer(category, context=self.context).data
+            for category in Category.objects.filter(parent=representation.get("uid")) or instance.children.all()
         ]
         
         return representation
