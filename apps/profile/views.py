@@ -18,7 +18,7 @@ class ProfileView(APIView):
     permission_classes = [IsAuthenticated]
     filter_backends = [DjangoFilterBackend]
     filterset_class = ProfileFilter
-    ordering_fields = ["created_at", "quality", "count_download", "count_images"]  
+    ordering_fields = ["created_at"]  
     ordering = ["created_at"]
 
     def get_queryset(self):
