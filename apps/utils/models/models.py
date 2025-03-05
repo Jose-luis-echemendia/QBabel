@@ -11,7 +11,7 @@ import environ
 env=environ.Env()
 User = get_user_model()
 
-class GenericImage(BaseModel):
+class GenericImage(BaseModel, AuditRegisteredObjectModel):
     """
     Model for handling generic images within the application
     """
