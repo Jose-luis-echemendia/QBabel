@@ -14,5 +14,9 @@ class CategorySerializer(AbstractBaseSerializer, AuditUserChangeSerializer, Abst
     
     def to_representation(self, instance):
         representation = super().to_representation(instance)
+        withparent = self.context.get('withparent', False)
         
-        return representation
+        if not withparent:
+            return representation
+        
+        
