@@ -18,11 +18,8 @@ class CustomCategoryViewSet(viewsets.ModelViewSet):
     filterset_class = CategoeyFilter
 
     def get_permissions(self):
-        permissions = [IsAuthenticated()]
-
-        if self.request.user and IsAdminRole().has_permission(self.request, self):
-            permissions.append(AllowAny())
-            return permissions
+        if self.request.user and IsAdminRole().has_permission(self.request, self) or self.action == "get":
+            return [AllowAny()]
 
         if self.action in [
             "create",
@@ -31,8 +28,7 @@ class CustomCategoryViewSet(viewsets.ModelViewSet):
             "destroy",
             "retrieve",
         ]:
-            permissions.append(IsAdminRole())
-            return permissions
+            return [IsAdminRole()]
 
         return super().get_permissions()
 
