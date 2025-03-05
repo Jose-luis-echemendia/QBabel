@@ -108,18 +108,14 @@ class ProfileDetailsView(APIView):
         """
         endpoint to get all profiles of the authenticated user
         """
-        queryset = self.get_queryset()
-        if not queryset.exists():
+        profile = self.get_object()
+        if not profile.exists():
             return Response(
                 {"details": "not profile found"}, status=status.HTTP_404_NOT_FOUND
             )
             
-        filtered_queryset = self.filter_queryset(queryset)
-        ordered_queryset = self.order_queryset(filtered_queryset)
-        paginator = MediumSetPagination()
-        results = paginator.paginate_queryset(ordered_queryset, request)
-        profiles_data = self.serializer_class(results, many=True).data
-        return paginator.get_paginated_response({"profiles": profiles_data})
+        profiles_data = self.serializer_class(profile).data
+        return Response({"profile": profiles_data}, status=status.HTTP_200_OK)
 
 class AuthenticatedProfileDetailsView(APIView):
     def get(self, request, *args, **kwargs):
