@@ -58,7 +58,7 @@ class GenericImage(BaseModel):
     
     @property
     def is_cover(self):
-        return self.t
+        return self.type == ImageTypes.cover
 
     class Meta:
         db_table = 'Image'
