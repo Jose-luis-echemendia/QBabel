@@ -1,4 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
+import {
+    getUsersThunk,
+    getUserByIdThunk,
+    createUserThunk,
+    updateUserThunk,
+    updatePartialUserThunk,
+    deleteUserThunk
+} from "./thunks"
 
 const initialState = {
     user : null,
