@@ -21,6 +21,8 @@ def upload_generic_image(instance, filename):
         path = f"libros/{name}"
     elif instance.is_avatar:
         path = f"avatar/{name}"
+    elif instance.is_category:
+        path = f"category/{name}"
 
     return path
 
