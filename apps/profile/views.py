@@ -112,7 +112,7 @@ class ProfileDetailsView(APIView):
         """
         profile = self.get_object()
         profile_data = ProfileSerializer(profile).data
-        return Response({"profile": profile_data}, status=status.HTTP_200_OK)
+        return Response(profile_data, status=status.HTTP_200_OK)
 
 
 class AuthenticatedProfileDetailsView(APIView):
@@ -123,4 +123,4 @@ class AuthenticatedProfileDetailsView(APIView):
         user = request.user
         profile = Profile.objects.get(user=user)
         profile_data = ProfileSerializer(profile).data
-        return Response({"profile": profile_data}, status=status.HTTP_200_OK)
+        return Response(profile_data, status=status.HTTP_200_OK)
