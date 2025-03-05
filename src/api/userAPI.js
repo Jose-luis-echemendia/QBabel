@@ -49,7 +49,7 @@ export const updateUserAPI = async (data) => {
 }
 
 // endpoint for update partial user
-export const updatePartialUser = async (data) => {
+export const updatePartialUserAPI = async (data) => {
     try {
         const response = await axiosInstance.patch(`/api/custom-users/${data.id}/`, data);
         
@@ -61,7 +61,7 @@ export const updatePartialUser = async (data) => {
 }
 
 // endpoint for delete user
-export const deleteUser = async (id) => {
+export const deleteUserAPI = async (id) => {
     try {
         const response = await axiosInstance.delete(`/api/custom-users/${id}/`);
         
