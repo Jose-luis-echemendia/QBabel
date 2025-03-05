@@ -42,8 +42,25 @@ class CustomCategoryViewSet(viewsets.ModelViewSet):
     def perform_update(self, serializer):
         return serializer.save()
 
-    def get_queryset(self, with_parent=False):
-        return
+    def get_queryset(self):
+        if not self.request.user.is_superuser:
+            queryset = self.queryset.filter(gallery__user=self.request.user)
+        if "state" not in self.request.GET:
+            queryset = self.queryset.filter(is_active=True)
+        return queryset
+    
+    def filter_queryset(self, queryset):
+        filterset = self.filterset_class(self.request.GET, queryset=queryset, request=self.request)
+        if not filterset.is_valid():
+            raise ValueError(f"Invalid filter data: {filterset.errors}")
+        queryset = filterset.qs
+        return queryset
+    
+    def order_queryset(self, queryset):
+        ordering = self.request.GET.get("ordering", None)
+        if ordering:
+            queryset = queryset.order_by(*ordering.split(","))
+        return queryset
 
     def get(self, request, *args, **kwargs):
         queryset = self.get_queryset(with_parent=True)
@@ -51,14 +68,15 @@ class CustomCategoryViewSet(viewsets.ModelViewSet):
             return Response(
                 {"details": "Categories not found"}, status=status.HTTP_404_NOT_FOUND
             )
-
-        data_cateogries = self.get_serializer(data=queryset, many=True).data
+        filtered_queryset = self.filter_queryset(queryset)
+        ordered_queryset = self.order_queryset(filtered_queryset)
+        data_cateogries = self.get_serializer(ordered_queryset, many=True).data
         return Response({"categories": data_cateogries}, status=status.HTTP_200_OK)
 
     def create(self, request, *args, **kwargs):
         if not request.user.is_superuser:
             return Response(
-                {"detail": "Only superusers can create users."},
+                {"detail": "Only superusers can create categories."},
                 status=status.HTTP_403_FORBIDDEN,
             )
 
