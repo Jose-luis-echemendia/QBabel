@@ -7,18 +7,19 @@ from .models import Category
 from .serializers import CategorySerializer
 from apps.user.permisions import IsAdminRole
 
+
 class CustomCategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     permission_classes = [IsAuthenticated]
-    
+
     def get_permissions(self):
         permissions = [IsAuthenticated()]
-        
+
         if self.request.user and IsAdminRole().has_permission(self.request, self):
             permissions.append(AllowAny())
             return permissions
-        
+
         if self.action in [
             "create",
             "update",
@@ -28,47 +29,30 @@ class CustomCategoryViewSet(viewsets.ModelViewSet):
         ]:
             permissions.append(IsAdminRole())
             return permissions
-        
+
         return super().get_permissions()
-    
+
     def perform_create(self, serializer):
         serializer.save()
-        
+
     def perform_update(self, serializer):
         return serializer.save()
 
+    def get_queryset(self, with_parent=False):
+        if not with_parent:
+            return self.queryset
+
+        return self.queryset.filter(parent=None)
+
     def get(self, request, *args, **kwargs):
-        if Category.objects.all().exists():
-            categories = Category.objects.all()
-
-            result = []
-
-            for category in categories:
-                if not category.parent:
-                    item = {}
-                    item["uid"] = category.uid
-                    item["name"] = category.name
-                    item["thumbnail"] = category.thumbnail.url
-
-                    item["sub_categories"] = []
-
-                    for cat in categories:
-                        sub_item = {}
-                        if cat.parent and cat.parent.id == category.id:
-                            sub_item["id"] = cat.id
-                            sub_item["name"] = cat.name
-                            sub_item["thumbnail"] = cat.thumbnail.url
-
-                            item["sub_categories"].append(sub_item)
-
-                    result.append(item)
-
-            return Response({"categories": result}, status=status.HTTP_200_OK)
-        else:
+        queryset = self.get_queryset(with_parent=True)
+        if not queryset:
             return Response(
-                {"error": "No categories found"},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                {"details": "Categories not found"}, status=status.HTTP_404_NOT_FOUND
             )
+
+        data_cateogries = self.get_serializer(data=queryset, many=True).data
+        return Response({"categories": data_cateogries}, status=status.HTTP_200_OK)
 
     def create(self, request, *args, **kwargs):
         if not request.user.is_superuser:
@@ -80,21 +64,20 @@ class CustomCategoryViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
-        return Response(
-            serializer.data, status=status.HTTP_201_CREATED
-        )
-        
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
     def update(self, request, *args, **kwargs):
         request_data = request.data.copy()
         partial = kwargs.pop("partial", False)
         instance = self.get_object()
-        self.validate(request_data)          
+        self.validate(request_data)
         serializer = self.get_serializer(instance, data=request_data, partial=partial)
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
 
         return Response(
-            serializer.data, status=status.HTTP_200_OK,
+            serializer.data,
+            status=status.HTTP_200_OK,
         )
 
     def destroy(self, request, *args, **kwargs):
@@ -105,7 +88,7 @@ class CustomCategoryViewSet(viewsets.ModelViewSet):
                 {"detail": "This user can not delete becouse he is active."},
                 status=status.HTTP_400_BAD_REQUEST,
             )
-            
+
         instance_user.delete()
 
         return Response(
