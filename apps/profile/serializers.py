@@ -12,6 +12,8 @@ class ProfileSerializer(AbstractBaseSerializer):
     avatar = serializers.PrimaryKeyRelatedField(
         queryset=GenericImage.objects.all(), write_only=True
     )
+    avatar_details = serializers.SerializerMethodField()
+    
     class Meta:
         model = User
         fields = AbstractBaseSerializer.Meta.fields + [
