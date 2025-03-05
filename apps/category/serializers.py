@@ -19,4 +19,21 @@ class CategorySerializer(AbstractBaseSerializer, AuditUserChangeSerializer, Abst
         if not withparent:
             return representation
         
-        
+        result = []
+
+        for category in representation:
+            print(category)
+            if not category.parent:
+                item = {}
+                item["id"] = category.id
+                item["name"] = category.name
+                item["thumbnail"] = category.thumbnail.url
+                item["sub_categories"] = []
+                for cat in representation:
+                    sub_item = {}
+                    if cat.parent and cat.parent.id == category.id:
+                        sub_item["id"] = cat.id
+                        sub_item["name"] = cat.name
+                        sub_item["thumbnail"] = cat.thumbnail.url
+                        item["sub_categories"].append(sub_item)
+                result.append(item)
