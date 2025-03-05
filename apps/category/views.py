@@ -58,7 +58,7 @@ class CustomCategoryViewSet(viewsets.ModelViewSet):
             queryset = queryset.order_by(*ordering.split(","))
         return queryset
 
-    def get(self, request, *args, **kwargs):
+    def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
         if not queryset:
             return Response(
@@ -66,10 +66,9 @@ class CustomCategoryViewSet(viewsets.ModelViewSet):
             )
         filtered_queryset = self.filter_queryset(queryset)
         ordered_queryset = self.order_queryset(filtered_queryset)
-        print("vista", self.request.query_params.get('withparent', False) )
         context = self.get_serializer_context()
         context['withparent'] = self.request.query_params.get('withparent', False) 
-        data_cateogries = self.get_serializer(ordered_queryset, many=True).data
+        data_cateogries = self.get_serializer(ordered_queryset, many=True, context=context).data
         return Response({"categories": data_cateogries}, status=status.HTTP_200_OK)
 
     def create(self, request, *args, **kwargs):
