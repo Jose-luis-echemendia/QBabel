@@ -29,10 +29,10 @@ class CategorySerializer(AbstractBaseSerializer, AuditUserChangeSerializer, Abst
             item["description"] = category.description
             item["sub_categories"] = []
             
-            categories = Category.objects.filter(parent=category.uid)
-            for cat in categories:
+            children_categories = Category.objects.filter(parent=category.uid) or category.children.all()
+            for cat in children_categories:
                 sub_item = {}
-                sub_item["uid"] = cat.id
+                sub_item["uid"] = cat.uid
                 sub_item["name"] = cat.name
                 sub_item["description"] = cat.description
                 sub_item["image"] = cat.image
