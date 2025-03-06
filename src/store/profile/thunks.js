@@ -1,4 +1,4 @@
-import {getProfilesAPI, getProfileByIdAPI, getAuthenticatedUserProfileAPI, updateProfileAPI, updatePartialProfileAPI} from "@/api/profileAPI";
+import {getProfilesAPI, getProfileByIdAPI, updateProfileAPI, updatePartialProfileAPI} from "@/api/profileAPI";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from 'sonner'
 
@@ -64,16 +64,4 @@ export const updatePartialProfileThunk = createAsyncThunk(
     }
 );
 
-// **thunk for get authenticated user profile**
-export const getAuthenticatedUserProfileThunk = createAsyncThunk(
-    "profiles/getAuthenticatedUserProfile",
-    async (_, { rejectWithValue }) => {
-      try {
-        const response = await getAuthenticatedUserProfileAPI();
-        if (response.status === 200) return response.data
-        return rejectWithValue(response?.data); 
-      } catch (error) {
-        return rejectWithValue(error.response?.data || error.message);
-      }
-    }
-);
+
