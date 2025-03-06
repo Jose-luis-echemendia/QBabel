@@ -1,6 +1,7 @@
 import {
   loginThunk,
   getAuthenticatedUserThunk,
+  getAuthenticatedUserProfileThunk,
   verifyTokenThunk,
   refreshTokenThunk,
   logoutThunk,
@@ -17,6 +18,10 @@ export const useAuth = () => {
 
   const handleGetAuthenticatedUser = () => {
     dispath(getAuthenticatedUserThunk());
+  };
+
+  const handleGetAuthenticatedUserProfile = () => {
+    dispath(getAuthenticatedUserProfileThunk());
   };
 
   const handleVerifyToken = () => {
@@ -36,6 +41,7 @@ export const useAuth = () => {
   return {
     handleLogin,
     handleGetAuthenticatedUser,
+    handleGetAuthenticatedUserProfile,
     handleVerifyToken,
     handlRefreshToken,
     handleLogout,
