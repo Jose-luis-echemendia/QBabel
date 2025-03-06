@@ -1,4 +1,4 @@
-import { CustomFooter } from "@/components/footer";
+import CustomFooter  from "@/components/footer";
 import { Decorator } from "./decorator";
 
 const Footer = () => {
