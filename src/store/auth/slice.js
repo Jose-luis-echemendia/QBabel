@@ -12,8 +12,8 @@ const initialState = {
   isAuthenticated: localStorage.getItem("isAuthenticated") === "true",
   jwtTokenAccess: localStorage.getItem("jwtTokenAccess"),
   jwtTokenRefresh: localStorage.getItem("jwtTokenRefresh"),
-  user: localStorage.getItem("user"),
-  profile: localStorage.getItem("profile"),
+  user: JSON.parse(localStorage.getItem("user")),
+  profile: JSON.parse(localStorage.getItem("profile")),
   loading: false,
 };
 
