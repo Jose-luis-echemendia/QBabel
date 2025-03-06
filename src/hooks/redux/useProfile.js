@@ -9,27 +9,26 @@ import { useAppDispatch } from "./useStore";
 export const useProfile = () => {
   const dispath = useAppDispatch();
 
-    const handleGetProfiles = () => {
-        dispath(getProfilesThunk());
-    };
+  const handleGetProfiles = () => {
+    dispath(getProfilesThunk());
+  };
 
-    const handleGetProfileById = (id) => {
-        dispath(getProfileByIdThunk(id));
-    };
+  const handleGetProfileById = (id) => {
+    dispath(getProfileByIdThunk(id));
+  };
 
-    const handleUpdateProfile = (data) => {
-        dispath(updateProfileThunk(data));
-    };
+  const handleUpdateProfile = (data) => {
+    dispath(updateProfileThunk(data));
+  };
 
-    const handleUpdatePartialProfile = (data) => {
-        dispath(updatePartialProfileThunk(data));
-    };
+  const handleUpdatePartialProfile = (data) => {
+    dispath(updatePartialProfileThunk(data));
+  };
 
-    return {
-        handleGetProfiles,
-        handleGetProfileById,
-        handleUpdateProfile,
-        handleUpdatePartialProfile,
-    }
-
+  return {
+    handleGetProfiles,
+    handleGetProfileById,
+    handleUpdateProfile,
+    handleUpdatePartialProfile,
+  };
 };
