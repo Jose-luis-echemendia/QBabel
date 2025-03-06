@@ -5,8 +5,7 @@ export const initialFormLogin = {
 
 export const initialFormSignup = {
     email: '',
-    firstNmae: '',
-    lastName: '',
+    userName: '',
     password: '',
     rePassword: ''
 }
