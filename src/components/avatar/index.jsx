@@ -1,7 +1,5 @@
 'use-client'
-import React from 'react'
 import PropTypes from 'prop-types'
-import Image from 'next/image'
 import classNames from 'classnames'
 
 const CustomAvatar = ({
@@ -11,7 +9,7 @@ const CustomAvatar = ({
   withBorder = false
 }) => {
   return (
-    <Image
+    <img
       className={classNames(
         variant === 'circular' && 'rounded-full',
         variant === 'rounded' && 'rounded-lg',
