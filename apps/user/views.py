@@ -41,7 +41,6 @@ class CustomUserViewSet(viewsets.ModelViewSet):
         request_data = request.data.copy()
         partial = kwargs.pop("partial", False)
         instance = self.get_object()
-        self.validate(request_data)          
         serializer = self.get_serializer(instance, data=request_data, partial=partial)
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
