@@ -9,5 +9,27 @@ import { useAppDispatch } from "./useStore";
 export const useProfile = () => {
   const dispath = useAppDispatch();
 
-  c;
+    const handleGetProfiles = () => {
+        dispath(getProfilesThunk());
+    };
+
+    const handleGetProfileById = (id) => {
+        dispath(getProfileByIdThunk(id));
+    };
+
+    const handleUpdateProfile = (data) => {
+        dispath(updateProfileThunk(data));
+    };
+
+    const handleUpdatePartialProfile = (data) => {
+        dispath(updatePartialProfileThunk(data));
+    };
+
+    return {
+        handleGetProfiles,
+        handleGetProfileById,
+        handleUpdateProfile,
+        handleUpdatePartialProfile,
+    }
+
 };
