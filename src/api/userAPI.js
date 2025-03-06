@@ -72,4 +72,20 @@ export const deleteUserAPI = async (id) => {
       }
 }
 
+// endpoint for get authenticated user
+export const getAuthenticatedUserAPI = async () => {
+  try {
+    const accessToken = localStorage.getItem("jwtTokenAccess");
+    const isAuthenticated = localStorage.getItem("isAuthenticated");
 
+    if (!accessToken || !isAuthenticated) return
+    const response = await axiosInstance.get("/api/custom-users/me/");
+    return response;
+  } catch (error) {
+    console.error(
+      "Error al obtener el usuario authenticado:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};
