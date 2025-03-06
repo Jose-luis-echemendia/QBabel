@@ -1,9 +1,9 @@
-import { BestAuthorPage } from './best-author';
-import { BestBooks } from './best-books';
-import { ExploitYourTalent } from './exploit-your-talent';
-import { Hero } from './hero';
-import { Opinions } from './Opinions';
-import {Categories} from './categories';
+import { BestAuthorPage } from "./best-author";
+import { BestBooks } from "./best-books";
+import { ExploitYourTalent } from "./exploit-your-talent";
+import { Hero } from "./hero";
+import { Opinions } from "./Opinions";
+import { Categories } from "./categories";
 
 const WelcomeView = () => {
   return (
@@ -16,7 +16,7 @@ const WelcomeView = () => {
         <ExploitYourTalent />
         <BestAuthorPage />
         <BestBooks />
-        <Categories/>
+        <Categories />
         <Opinions />
       </div>
     </>
