@@ -1,10 +1,12 @@
 import { GetAuthLinks } from "./get-auth-links";
+import { Avatar } from "./avatar";
+import { useAppSelector } from "@/hooks/redux/useStore";
 
 export const AuthLinks = () => {
-  const authenticated = false;
+  const auth = useAppSelector((state) => state.auth);
   return (
     <>
-      <div>{authenticated ? <>avatar</> : <GetAuthLinks/>}</div>
+      <div>{auth.isAuthenticated ? <Avatar/> : <GetAuthLinks/>}</div>
     </>
   );
 };
