@@ -33,23 +33,7 @@ const Footer = () => {
               Has realidad tu historia!
             </h5>
           </div>
-          <div className="col-span-6 grid grid-cols-3 gap-10 ml-10 -mt-20">
-            <div className="font-quicksand text-3xl">Subtitulo</div>
-            <div className="font-quicksand text-3xl">Subtitulo</div>
-            <div className="font-quicksand text-3xl">Subtitulo</div>
-            <div className="">links</div>
-            <div className="">links</div>
-            <div className="">links</div>
-            <div className="">links</div>
-            <div className="">links</div>
-            <div className="">links</div>
-            <div className="">links</div>
-            <div className="">links</div>
-            <div className="">links</div>
-            <div className="">links</div>
-            <div className="">links</div>
-            <div className="">links</div>
-          </div>
+
         </div>
         <CustomFooter />
       </section>
