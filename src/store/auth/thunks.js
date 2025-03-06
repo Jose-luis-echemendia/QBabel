@@ -1,4 +1,6 @@
-import { loginAPI, getAuthenticatedUserAPI, refreshTokenAPI, logoutAPI, verifyTokenAPI } from "@/api/authAPI";
+import { loginAPI, refreshTokenAPI, logoutAPI, verifyTokenAPI } from "@/api/authAPI";
+import {  getAuthenticatedUserAPI } from "@/api/userAPI"
+import { getAuthenticatedUserProfileAPI } from "@/api/profileAPI";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from 'sonner'
 
@@ -19,11 +21,26 @@ export const loginThunk = createAsyncThunk(
     }
 );
 
+// **thunk for get authenticated user**
 export const getAuthenticatedUserThunk = createAsyncThunk(
   "auth/getAuthenticatedUser",
   async (_, { rejectWithValue }) => {
     try {
       const response = await getAuthenticatedUserAPI();
+      if (response.status === 200) return response.data
+      return rejectWithValue(response?.data); 
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
+
+// **thunk for get authenticated profile**
+export const getAuthenticatedUserProfileThunk = createAsyncThunk(
+  "profiles/getAuthenticatedUserProfile",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await getAuthenticatedUserProfileAPI();
       if (response.status === 200) return response.data
       return rejectWithValue(response?.data); 
     } catch (error) {
