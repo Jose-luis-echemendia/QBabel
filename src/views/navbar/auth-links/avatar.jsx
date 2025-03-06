@@ -1,10 +1,10 @@
-import { Avatar as Av, Typography } from "@material-tailwind/react";
+import { Avatar , Typography } from "@material-tailwind/react";
 
-export const Avatar = () => {
+export const CustomAvatar = () => {
   return (
     <>
-      <div className="flex items-center gap-4">
-        <Av
+      <div className="flex items-center gap-4 mr-5">
+        <Avatar
           src="https://docs.material-tailwind.com/img/face-2.jpg"
           alt="avatar"
         />
@@ -15,6 +15,7 @@ export const Avatar = () => {
           </Typography>
         </div>
       </div>
+
     </>
   );
 };
