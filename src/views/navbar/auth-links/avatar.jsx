@@ -24,7 +24,7 @@ const profileMenuItems = [
     // icon: InboxArrowDownIcon,
   },
   {
-    label: "Help",
+    label: "Ayuda",
     // icon: LifebuoyIcon,
   },
   {
@@ -50,7 +50,7 @@ export const CustomAvatar = ({ imageAvatar, user }) => {
             <div className="flex items-center gap-4 mr-5">
               <Avatar src={imageAvatar.image} alt={imageAvatar.alt} />
               <div>
-                <Typography variant="h6"> {user.user_name} </Typography>
+                <Typography variant="h6" className="text-primary"> {user.user_name} </Typography>
               </div>
             </div>
           </Button>
