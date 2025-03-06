@@ -8,7 +8,7 @@ import { CustomImageDecorator } from "@/components/image-decorator";
 export const Signup = () => {
   const [accountCreated, setAccountCreated] = useState(false);
   const { formState, onInputChange, setFormState } = useForm(initialFormSignup);
-  const { email, firstName, lastName, password, rePassword } = formState;
+  const { email, userName, password, rePassword } = formState;
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -51,7 +51,26 @@ export const Signup = () => {
                 </div>
               </div>
 
-
+              <div>
+                <label
+                  htmlFor="usuario"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  usuario
+                </label>
+                <div className="mt-1">
+                  <input
+                    id="userName"
+                    name="userName"
+                    type="userName"
+                    onChange={onInputChange}
+                    value={userName}
+                    autoComplete="userName"
+                    required
+                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
+                  />
+                </div>
+              </div>
               <div>
                 <label
                   htmlFor="password"
