@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   loginThunk,
   getAuthenticatedUserThunk,
+  getAuthenticatedUserProfileThunk,
   logoutThunk,
   refreshTokenThunk,
   verifyTokenThunk,
@@ -12,6 +13,7 @@ const initialState = {
   jwtTokenAccess: localStorage.getItem("jwtTokenAccess"),
   jwtTokenRefresh: localStorage.getItem("jwtTokenRefresh"),
   user: localStorage.getItem("user"),
+  profile: localStorage.getItem("profile"),
   loading: false,
 };
 
@@ -64,6 +66,26 @@ export const authSlice = createSlice({
         state.user
           ? localStorage.getItem("user")
           : localStorage.removeItem("user");
+        state.isAuthenticated
+          ? localStorage.getItem("isAuthenticated")
+          : localStorage.removeItem("isAuthenticated");
+      })
+
+      // **Get Authenticated Profile Reducers**
+      .addCase(getAuthenticatedUserProfileThunk.fulfilled, (state, action) =>{
+        state.profile = action.payload
+        localStorage.setItem("profile", JSON.stringify(action.payload))
+      })
+      .addCase(getAuthenticatedUserProfileThunk.rejected, (state) => {
+        state.jwtTokenAccess
+          ? localStorage.getItem("jwtTokenAccess")
+          : localStorage.removeItem("jwtTokenAccess");
+        state.jwtTokenRefresh
+          ? localStorage.getItem("jwtTokenRefresh")
+          : localStorage.removeItem("jwtTokenRefresh");
+        state.profile
+          ? localStorage.getItem("profile")
+          : localStorage.removeItem("profile");
         state.isAuthenticated
           ? localStorage.getItem("isAuthenticated")
           : localStorage.removeItem("isAuthenticated");
