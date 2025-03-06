@@ -1,17 +1,19 @@
-import PropTypes from 'prop-types';
-import LoadSuspense from '@/components/load-suspense';
-import CustomFooter  from "@/components/footer";
-import NavBar from '@/views/navbar';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import PropTypes from "prop-types";
+import LoadSuspense from "@/components/load-suspense";
+import CustomFooter from "@/components/footer";
+import NavBar from "@/views/navbar";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AuthenticatedLayout = ({ children }) => {
   return (
-    <LoadSuspense className="relative flex flex-col ">
+    <LoadSuspense className="relative flex flex-col">
       <NavBar />
       <ToastContainer autoClose={5000} />
-      <main className='antialiased'>{children}</main>
-      <CustomFooter textColor="text-black"/>
+      <main className="antialiased">{children}</main>
+      <footer className="pb-6">
+        <CustomFooter textColor="text-black"/>
+      </footer>
     </LoadSuspense>
   );
 };
