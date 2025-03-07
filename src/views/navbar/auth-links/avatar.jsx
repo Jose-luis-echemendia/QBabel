@@ -16,6 +16,10 @@ const profileMenuItems = [
     // icon: UserCircleIcon,
   },
   {
+    label: "Mi biblioteca",
+    // icon: UserCircleIcon,
+  },
+  {
     label: "Mi buzón",
     // icon: Cog6ToothIcon,
   },
@@ -28,7 +32,7 @@ const profileMenuItems = [
     // icon: LifebuoyIcon,
   },
   {
-    label: "Sign Out",
+    label: "Cerrar sesión",
     // icon: PowerIcon,
   },
 ];
