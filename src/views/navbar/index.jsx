@@ -1,4 +1,4 @@
-import { IconLogo } from "@/components/icons/logo.-icon";
+import { IconLogo } from "@/components/icons/logo-icon";
 import { ExplorePopover } from "./popover-explore";
 import { CustomIcon } from "@/components/icons/custom-icons";
 import { AuthLinks } from "./auth-links";
