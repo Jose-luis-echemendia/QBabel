@@ -7,6 +7,7 @@ import { useAuth } from "@/hooks/redux/useAuth";
 //PAGES
 import HomePage from "@/pages/home/page";
 import WelcomePage from "@/pages/welcome-page/page";
+import AdminPage from "@/pages/admin";
 import { Error404 } from "@/pages/error/Error404";
 
 const Routers = () => {
@@ -54,6 +55,17 @@ const Routers = () => {
             }
           >
             <Route path="/" element={<WelcomePage />}></Route>
+          </Route>
+
+          <Route
+            element={
+              <ProtectedRoute
+                redirectTo="/home"
+                isAllowed={auth.isAuthenticated && auth.user.role==='admin'}
+              />
+            }
+          >
+            <Route path="/" element={<AdminPage />}></Route>
           </Route>
 
           {/* PAGES DISPLAY */}
