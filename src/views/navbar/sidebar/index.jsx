@@ -3,7 +3,7 @@ import { getSidebarElements } from './sidebar-data'
 import { IconLogo } from '@/components/icons/log-icon'
 
 
-const CustomSideBar = ({ className }) => {
+const CustomSideBar = () => {
 
 
   const sideBarElements = getSidebarElements(t, pathName)
@@ -11,12 +11,12 @@ const CustomSideBar = ({ className }) => {
   console.log(t('orders_defectiveProducts', { returnObjects: true }))
 
   return (
-    <aside className={classNames('relative py-[20px]', className)}>
+    <aside className="relative py-[20px]">
       <IconLogo size="80" />
       <SidebarAccordion elements={sideBarElements} />
     </aside>
   )
 }
 
-// Exportar el componente optimizado
-export default React.memo(CustomSideBar)
+
+export default CustomSideBar
