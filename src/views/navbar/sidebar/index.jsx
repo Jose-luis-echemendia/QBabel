@@ -1,6 +1,6 @@
-import SidebarAccordion from '@views/sidebar/accordion-items/Accordion'
+import SidebarAccordion from './accordion-items/Accordion'
 import { getSidebarElements } from './sidebar-data'
-import { IconLogo } from '@/components/icons/log-icon'
+import { IconLogo } from '@/components/icons/logo-icon'
 
 
 const CustomSideBar = () => {
