@@ -68,7 +68,7 @@ const Routers = () => {
             element={
               <ProtectedRoute
                 redirectTo="/home"
-                isAllowed={auth.isAuthenticated && auth.user.role === "admin"}
+                isAllowed={auth.isAuthenticated && auth.user.role === "Admin"}
               />
             }
           >
