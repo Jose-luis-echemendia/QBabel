@@ -1,6 +1,8 @@
 import { CustomCarousel } from "./carousel";
 import { ContainerHome } from "@/containers/home";
 import { bestBooksData } from "@/constants/home-page/best-books";
+import { v4 as uuid } from "uuid";
+import { Carousel } from "@material-tailwind/react";
 
 const HomeView = () => {
   return (
@@ -25,8 +27,8 @@ const HomeView = () => {
             {bestBooksData.map((book) => (
               <figure key={uuid()} className="w-full h-96">
                 <img
-                  src={item.title}
-                  alt={book.img}
+                  src={book.img}
+                  alt={book.title}
                   className="h-full w-full object-cover"
                 />
               </figure>
