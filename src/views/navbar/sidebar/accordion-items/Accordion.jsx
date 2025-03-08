@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { Accordion, AccordionHeader, AccordionBody, List, ListItem } from '@material-tailwind/react'
-import { IconCollapse } from '@components/icons/custom-icons'
+import { IconCollapse } from '@/components/icons/custom-icons'
 import PropTypes from 'prop-types'
 import { v4 as uuidv4 } from 'uuid'
 import { elements } from '../sidebar-data'
 
-const SidebarAccordion = ({ elements }) => {
+const SidebarAccordion = () => {
   const [open, setOpen] = useState(0)
 
   const handleOpen = (value) => {
