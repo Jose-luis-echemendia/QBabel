@@ -1,5 +1,8 @@
 import { CustomCarousel } from "./carousel";
 import { ContainerHome } from "@/containers/home";
+import {
+  bestBooksData
+} from '@/constants/home-page/best-books';
 
 const HomeView = () => {
   return (
