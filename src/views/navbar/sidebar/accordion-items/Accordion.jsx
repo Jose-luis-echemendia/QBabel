@@ -3,7 +3,53 @@ import { Accordion, AccordionHeader, AccordionBody, List, ListItem } from '@mate
 import { IconCollapse } from '@/components/icons/custom-icons'
 import PropTypes from 'prop-types'
 import { v4 as uuidv4 } from 'uuid'
-import { elements } from '../sidebar-data'
+import { IconDashboard } from "@/components/icons/custom-icons";
+
+const elements = [
+  {
+    id: 1,
+    label: 'Dashboard',
+    highlightPath: ['/dashboard'],
+    icon: <IconDashboard />,
+    subElements: [],
+  },
+  {
+    id: 2,
+    label: 'Orders',
+    highlightPath: ['/orders', '/orders/defective-products'],
+    icon: <IconDashboard />,
+    subElements: ['Defective Products'],
+  },
+  {
+    id: 3,
+    label: 'Products',
+    highlightPath: ['/products', '/products/add-product'],
+    icon: <IconDashboard />,
+    subElements: ['Add Product'],
+  },
+  {
+    id: 4,
+    label: 'Customers',
+    highlightPath: ['/customers'],
+    icon: <IconDashboard />,
+    subElements: [],
+  },
+  {
+    id: 5,
+    label: 'Reports',
+    highlightPath: ['/reports'],
+    icon: <IconDashboard />,
+    subElements: [],
+  },
+  {
+    id: 6,
+    label: 'Settings',
+    highlightPath: ['/settings'],
+    icon: <IconDashboard />,
+    subElements: [],
+  },
+]
+
 
 const SidebarAccordion = () => {
   const [open, setOpen] = useState(0)
