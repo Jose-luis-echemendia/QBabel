@@ -1,10 +1,9 @@
-'use client'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Accordion, AccordionHeader, AccordionBody, List, ListItem } from '@material-tailwind/react'
 import { IconCollapse } from '@components/icons/custom-icons'
-import { usePathname } from 'next/navigation'
 import PropTypes from 'prop-types'
 import { v4 as uuidv4 } from 'uuid'
+import { elements } from '../sidebar-data'
 
 const SidebarAccordion = ({ elements }) => {
   const [open, setOpen] = useState(0)
@@ -13,7 +12,7 @@ const SidebarAccordion = ({ elements }) => {
     setOpen(open === value ? 0 : value)
   }
 
-  const pathName = usePathname()
+
 
   const sideBarElementsStyle =
     'font-poppins text-[14px] text-center font-semibold leading-[28px] text-[#A0AEC0]'
