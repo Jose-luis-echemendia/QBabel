@@ -1,8 +1,6 @@
 import { CustomCarousel } from "./carousel";
 import { ContainerHome } from "@/containers/home";
-import {
-  bestBooksData
-} from '@/constants/home-page/best-books';
+import { bestBooksData } from "@/constants/home-page/best-books";
 
 const HomeView = () => {
   return (
@@ -18,12 +16,22 @@ const HomeView = () => {
           <p>historias completadas</p>
           <p>recomendaciones para ti</p>
           <p>lo mejor de romance y amor</p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque eos
-            perferendis quidem fugiat, quo tenetur adipisci deserunt similique,
-            perspiciatis et dolor animi. Libero modi provident reprehenderit
-            labore non alias exercitationem.xxxxxxxxx
-          </p>
+          <Carousel
+            className="rounded-xl"
+            loop={true}
+            autoplay={true}
+            autoplayDelay={5000}
+          >
+            {bestBooksData.map((book) => (
+              <figure key={uuid()} className="w-full h-96">
+                <img
+                  src={item.title}
+                  alt={book.img}
+                  className="h-full w-full object-cover"
+                />
+              </figure>
+            ))}
+          </Carousel>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque eos
             perferendis quidem fugiat, quo tenetur adipisci deserunt similique,
