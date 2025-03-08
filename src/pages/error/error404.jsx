@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { CustomImageDecorator } from "@/components/image-decorator";
 import { useAppSelector } from "@/hooks/redux/useStore";
 
-export const Error404 = () => {
+const Error404 = () => {
 
   const auth = useAppSelector((state) => state.auth)
 
@@ -53,3 +53,5 @@ export const Error404 = () => {
     </>
   );
 };
+
+export default Error404;
