@@ -11,7 +11,7 @@ const AuthenticatedLayout = ({ children }) => {
       <NavBar />
       <ToastContainer autoClose={5000} />
       <main className="antialiased">{children}</main>
-      <footer className="pb-6">
+      <footer className="pb-6 z-10 absolute bottom-0 w-full">
         <CustomFooter textColor="text-black"/>
       </footer>
     </LoadSuspense>
