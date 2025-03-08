@@ -7,8 +7,9 @@ import { useAuth } from "@/hooks/redux/useAuth";
 //PAGES
 import HomePage from "@/pages/home/page";
 import WelcomePage from "@/pages/welcome-page/page";
-import AdminPage from "@/pages/admin";
-import { Error404 } from "@/pages/error/Error404";
+import AdminPage from "@/pages/admin/page";
+import LibraryPage from "@/pages/library/page";
+import Error404  from "@/pages/error/Error404";
 
 const Routers = () => {
   const auth = useAppSelector((state) => state.auth);
@@ -61,6 +62,7 @@ const Routers = () => {
             }
           >
             <Route path="/home" element={<HomePage />}></Route>
+            <Route path="/library" element={<LibraryPage />}></Route>
           </Route>
 
           {/* ADMIN DISPLAY */}
