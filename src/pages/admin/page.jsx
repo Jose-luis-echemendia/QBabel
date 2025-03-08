@@ -15,7 +15,7 @@ const AdminPage = () => {
           </div>
           <div className="col-span-10 relative -mt-1">
             <AdminView />
-            <div className="absolute bg-gray-50 w-full  -bottom-20 z-[-1]" />
+            <div className="absolute bg-gray-50 w-full h-20 -bottom-20 z-[-1]" />
           </div>
         </div>
       </AuthenticatedLayout>
