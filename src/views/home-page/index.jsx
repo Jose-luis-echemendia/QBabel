@@ -9,18 +9,42 @@ const HomeView = () => {
           Home
         </h2>
         <ContainerHome>
-          <p>
-          Lo más interesante de la semana
-          </p>
+          <p>Lo más interesante de la semana</p>
           <CustomCarousel />
-          <p>
-            Historias gratis escogidas por la comunidad
-          </p>
-          <p>
-            historias completadas
-          </p>
+          <p>Historias gratis escogidas por la comunidad</p>
+          <p>historias completadas</p>
           <p>recomendaciones para ti</p>
           <p>lo mejor de romance y amor</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque eos
+            perferendis quidem fugiat, quo tenetur adipisci deserunt similique,
+            perspiciatis et dolor animi. Libero modi provident reprehenderit
+            labore non alias exercitationem.xxxxxxxxx
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque eos
+            perferendis quidem fugiat, quo tenetur adipisci deserunt similique,
+            perspiciatis et dolor animi. Libero modi provident reprehenderit
+            labore non alias exercitationem.xxxxxxxxx
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque eos
+            perferendis quidem fugiat, quo tenetur adipisci deserunt similique,
+            perspiciatis et dolor animi. Libero modi provident reprehenderit
+            labore non alias exercitationem.xxxxxxxxx
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque eos
+            perferendis quidem fugiat, quo tenetur adipisci deserunt similique,
+            perspiciatis et dolor animi. Libero modi provident reprehenderit
+            labore non alias exercitationem.xxxxxxxxx
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque eos
+            perferendis quidem fugiat, quo tenetur adipisci deserunt similique,
+            perspiciatis et dolor animi. Libero modi provident reprehenderit
+            labore non alias exercitationem.xxxxxxxxx
+          </p>
         </ContainerHome>
       </div>
     </>
