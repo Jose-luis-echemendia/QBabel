@@ -34,19 +34,11 @@ const SidebarAccordion = () => {
             )
           }
         >
-          {/* Borde izquierdo cuando se selecciona */}
-          {element.highlightPath.includes(pathName) && (
-            <span className=" before:absolute before:right-full before:top-0 before:h-full before:w-1 before:bg-primary before:content-[''] flex items-center before:rounded-br-full before:rounded-tr-full before:-translate-x-full" />
-          )}
           {/* ------------------------------------- */}
           <ListItem className='p-0' selected={open === element.id}>
             <AccordionHeader onClick={() => handleOpen(element.id)} className='border-b-0 p-3'>
               {element.icon}
-              <span
-                className={`${sideBarElementsStyle} ${
-                  element.highlightPath.includes(pathName) && 'text-primary'
-                }`}
-              >
+              <span>
                 {element.label}
               </span>
             </AccordionHeader>
