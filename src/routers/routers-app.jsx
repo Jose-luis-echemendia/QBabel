@@ -42,15 +42,7 @@ const Routers = () => {
           {/* ERROR DISPLAY */}
           <Route path="*" element={<Error404 />}></Route>
 
-          {/* HOME DISPLAY */}
-          <Route
-            element={
-              <ProtectedRoute redirectTo="/" isAllowed={auth.isAuthenticated} />
-            }
-          >
-            <Route path="/home" element={<HomePage />}></Route>
-          </Route>
-
+          {/* WELCOME DISPLAY */}
           <Route
             element={
               <ProtectedRoute
@@ -62,6 +54,16 @@ const Routers = () => {
             <Route path="/" element={<WelcomePage />}></Route>
           </Route>
 
+          {/* HOME DISPLAY */}
+          <Route
+            element={
+              <ProtectedRoute redirectTo="/" isAllowed={auth.isAuthenticated} />
+            }
+          >
+            <Route path="/home" element={<HomePage />}></Route>
+          </Route>
+
+          {/* ADMIN DISPLAY */}
           <Route
             element={
               <ProtectedRoute
@@ -70,7 +72,7 @@ const Routers = () => {
               />
             }
           >
-            <Route path="/" element={<AdminPage />}></Route>
+            <Route path="/admin" element={<AdminPage />}></Route>
           </Route>
 
           {/* PAGES DISPLAY */}
