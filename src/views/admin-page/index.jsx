@@ -1,9 +1,9 @@
-
-
 const AdminView = () => {
   return (
-    <div>Admin</div>
-  )
-}
+    <>
+      <section className="bg-gray-50 w-full h-full">Admin</section>
+    </>
+  );
+};
 
-export default AdminView
+export default AdminView;
