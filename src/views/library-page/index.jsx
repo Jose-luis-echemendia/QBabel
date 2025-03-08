@@ -1,6 +1,8 @@
 
-export const Library = () => {
+const LibraryView = () => {
   return (
     <>Library</>
   )
 }
+
+export default LibraryView  
