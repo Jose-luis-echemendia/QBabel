@@ -9,12 +9,13 @@ const AdminPage = () => {
   return (
     <LoadSuspense>
       <AuthenticatedLayout>
-        <div className="grid grid-cols-12 container ml-10 mt-5">
+        <div className="grid grid-cols-12 ml-10 mt-5">
           <div className="col-span-2 -ml-3">
             <SidebarView />
           </div>
-          <div className="col-span-10">
+          <div className="col-span-10 relative">
             <AdminView />
+            <div className="absolute bg-gray-50 w-full h-20 -bottom-20 z-[-1]" />
           </div>
         </div>
       </AuthenticatedLayout>
