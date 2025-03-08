@@ -14,4 +14,4 @@ const LibraryPage = () => {
   );
 };
 
-export default HomePage;
+export default LibraryPage;
