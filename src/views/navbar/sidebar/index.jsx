@@ -3,7 +3,7 @@ import SidebarAccordion from './accordion-items/Accordion'
 const CustomSideBar = () => {
 
   return (
-    <aside className="relative py-[20px]">
+    <aside className="relative py-[30px]">
       <SidebarAccordion />
     </aside>
   )
