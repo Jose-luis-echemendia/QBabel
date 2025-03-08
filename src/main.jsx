@@ -3,9 +3,12 @@ import QBabel from "./QBabel.jsx";
 
 import { store } from "./store";
 import { Provider } from "react-redux";
+import ErrorBoundary from "./components/error/index.jsx";
 
 createRoot(document.getElementById("root")).render(
-  <Provider store={store} >
-    <QBabel />
-  </Provider>
+  <ErrorBoundary>
+    <Provider store={store}>
+      <QBabel />
+    </Provider>
+  </ErrorBoundary>
 );
