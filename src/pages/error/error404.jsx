@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import { CustomImageDecorator } from "@/components/image-decorator";
 import { useAppSelector } from "@/hooks/redux/useStore";
+import LoadSuspense from "@/components/load-suspense";
 
 const Error404 = () => {
 
   const auth = useAppSelector((state) => state.auth)
 
   return (
-    <>
+    <LoadSuspense>
       <div className="relative grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
         <div className="text-center mt-20">
           <div className="flex items-center justify-center gap-5">
@@ -50,7 +51,7 @@ const Error404 = () => {
           className="absolute right-0 z-10 -bottom-10"
         />
       </div>
-    </>
+    </LoadSuspense>
   );
 };
 
