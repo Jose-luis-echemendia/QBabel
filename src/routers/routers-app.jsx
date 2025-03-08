@@ -1,27 +1,87 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { ProtectedRoute } from "@/components/protected-route";
+import { useAppSelector } from "@/hooks/redux/useStore";
+import { useEffect } from "react";
+import { useAuth } from "@/hooks/redux/useAuth";
 
 //PAGES
 import HomePage from "@/pages/home/page";
-import { Error404 } from "@/pages/error/Error404";
+import WelcomePage from "@/pages/welcome-page/page";
+import AdminPage from "@/pages/admin/page";
+import LibraryPage from "@/pages/library/page";
+import Error404  from "@/pages/error/Error404";
 
 const Routers = () => {
+  const auth = useAppSelector((state) => state.auth);
+  const {
+    handleGetAuthenticatedUser,
+    handleGetAuthenticatedUserProfile,
+    handleVerifyToken,
+    handlRefreshToken,
+  } = useAuth();
+  console.log(auth);
+
+  const getStateAuth = async () => {
+    try {
+      await handlRefreshToken();
+      await handleVerifyToken();
+      await handleGetAuthenticatedUser();
+      await handleGetAuthenticatedUserProfile();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getStateAuth();
+  }, [auth.isAuthenticated]);
+
   return (
     <>
       <Router>
         <Routes>
           {/* ERROR DISPLAY */}
-          <Route path="*" element={<Error404 />}></Route> 
-          
+          <Route path="*" element={<Error404 />}></Route>
+
+          {/* WELCOME DISPLAY */}
+          <Route
+            element={
+              <ProtectedRoute
+                redirectTo="/home"
+                isAllowed={!auth.isAuthenticated}
+              />
+            }
+          >
+            <Route path="/" element={<WelcomePage />}></Route>
+          </Route>
 
           {/* HOME DISPLAY */}
-          <Route path="/" element={<HomePage />}></Route>
+          <Route
+            element={
+              <ProtectedRoute redirectTo="/" isAllowed={auth.isAuthenticated} />
+            }
+          >
+            <Route path="/home" element={<HomePage />}></Route>
+            <Route path="/library" element={<LibraryPage />}></Route>
+          </Route>
+
+          {/* ADMIN DISPLAY */}
+          <Route
+            element={
+              <ProtectedRoute
+                redirectTo="/home"
+                isAllowed={auth.isAuthenticated && auth.user.role === "Admin"}
+              />
+            }
+          >
+            <Route path="/admin" element={<AdminPage />}></Route>
+          </Route>
 
           {/* PAGES DISPLAY */}
-
         </Routes>
       </Router>
     </>
   );
 };
 
-export default Routers
+export default Routers;

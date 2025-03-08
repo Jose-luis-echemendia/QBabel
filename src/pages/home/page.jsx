@@ -1,15 +1,15 @@
 import { lazy } from "react";
 import LoadSuspense from "@/components/load-suspense";
-import CustomLayout from "@/layout/custom-layout";
+import AuthenticatedLayout from "@/layout/authenticated-layout";
 
 const HomeView = lazy(() => import("@/views/home-page"));
 
 const HomePage = () => {
   return (
     <LoadSuspense>
-      <CustomLayout>
+      <AuthenticatedLayout>
         <HomeView />
-      </CustomLayout>
+      </AuthenticatedLayout>
     </LoadSuspense>
   );
 };

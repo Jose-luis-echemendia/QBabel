@@ -8,7 +8,7 @@ import {
   MenuList,
   Typography
 } from '@material-tailwind/react'
-import CustomAvatar from '@components/avatar'
+import CustomAvatar from '@/components/avatar'
 
 const profileMenuItems = [
   {

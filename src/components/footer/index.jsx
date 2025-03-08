@@ -62,34 +62,39 @@ const social = [
   },
 ];
 
-export const CustomFooter = () => {
+const CustomFooter = ({textColor = "text-white-100" }) => {
   return (
     <>
-      <div className="flex gap-10 mt-10">
-        <a className="text-white-100 hover:text-opacity-60 hover:cursor-pointer">
+      <div className="flex gap-10 mt-8 justify-center">
+        <a className={`${textColor} hover:text-opacity-60 hover:cursor-pointer`}>
           Condiciones
         </a>
-        <a className="text-white-100 hover:text-opacity-60 hover:cursor-pointer">
+        <a className={`${textColor} hover:text-opacity-60 hover:cursor-pointer`}>
           Privacidad
         </a>
-        <a className="text-white-100 hover:text-opacity-60 hover:cursor-pointer">
+        <a className={`${textColor} hover:text-opacity-60 hover:cursor-pointer`}>
           Políticas de pagos
         </a>
-        <a className="text-white-100 hover:text-opacity-60 hover:cursor-pointer">
+        <a className={`${textColor} hover:text-opacity-60 hover:cursor-pointer`}>
           Accesibilidad
         </a>
-        <a className="text-white-100 hover:text-opacity-60 hover:cursor-pointer">
+        <a className={`${textColor} hover:text-opacity-60 hover:cursor-pointer`}>
           Ayuda
         </a>
-        <div className="h-4 w-[2px] bg-primary" />
-        <span className="text-white-100">© 2025 QBabel</span>
+        {
+          textColor === "text-white-100" ?
+          <div className="h-4 w-[2px] bg-primary" />:
+          <div className="h-4 w-[2px] bg-black" />
+
+        }
+        <span className={textColor}>© 2025 QBabel</span>
 
         <div className="flex space-x-6 md:order-2">
           {social.map((item) => (
             <a
               key={item.name}
               href={item.href}
-              className="text-white-100 hover:text-gray-500"
+              className={`${textColor} hover:text-gray-500`}
             >
               <span className="sr-only">{item.name}</span>
               <item.icon className="h-6 w-6" aria-hidden="true" />
@@ -100,3 +105,5 @@ export const CustomFooter = () => {
     </>
   );
 };
+
+export default CustomFooter
