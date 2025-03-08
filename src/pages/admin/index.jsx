@@ -1,7 +1,7 @@
 import { lazy } from "react";
 import LoadSuspense from "@/components/load-suspense";
 import AuthenticatedLayout from "@/layout/authenticated-layout";
-import { CustomSidebar } from "@/views/navbar/sidebar";
+import CustomSidebar from "@/views/navbar/sidebar";
 
 const AdminView = lazy(() => import("@/views/admin"));
 
@@ -10,8 +10,8 @@ const AdminPage = () => {
     <LoadSuspense>
       <AuthenticatedLayout>
         <div className="grid grid-cols-12">
-        <CustomSidebar/>
-        <AdminView />
+          <CustomSidebar />
+          <AdminView />
         </div>
       </AuthenticatedLayout>
     </LoadSuspense>
