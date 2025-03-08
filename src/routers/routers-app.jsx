@@ -12,7 +12,12 @@ import { Error404 } from "@/pages/error/Error404";
 
 const Routers = () => {
   const auth = useAppSelector((state) => state.auth);
-  const { handleGetAuthenticatedUser, handleGetAuthenticatedUserProfile, handleVerifyToken, handlRefreshToken } = useAuth();
+  const {
+    handleGetAuthenticatedUser,
+    handleGetAuthenticatedUserProfile,
+    handleVerifyToken,
+    handlRefreshToken,
+  } = useAuth();
   console.log(auth);
 
   const getStateAuth = async () => {
@@ -61,7 +66,7 @@ const Routers = () => {
             element={
               <ProtectedRoute
                 redirectTo="/home"
-                isAllowed={auth.isAuthenticated && auth.user.role==='admin'}
+                isAllowed={auth.isAuthenticated && auth.user.role === "admin"}
               />
             }
           >
