@@ -9,9 +9,13 @@ const AdminPage = () => {
   return (
     <LoadSuspense>
       <AuthenticatedLayout>
-        <div className="grid grid-cols-12">
-          <SidebarView />
-          <AdminView />
+        <div className="grid grid-cols-12 container ml-10 mt-5">
+          <div className="col-span-2 -ml-3">
+            <SidebarView />
+          </div>
+          <div className="col-span-10">
+            <AdminView />
+          </div>
         </div>
       </AuthenticatedLayout>
     </LoadSuspense>
