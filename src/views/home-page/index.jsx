@@ -24,15 +24,17 @@ const HomeView = () => {
             autoplay={true}
             autoplayDelay={5000}
           >
-            {bestBooksData.map((book) => (
-              <figure key={uuid()} className="w-full h-96">
-                <img
-                  src={book.img}
-                  alt={book.title}
-                  className="h-full w-full object-cover"
-                />
-              </figure>
-            ))}
+            <div className="flex items-center justify-center gap-4">
+              {bestBooksData.map((book) => (
+                <figure key={uuid()} className="w-full h-96">
+                  <img
+                    src={book.img}
+                    alt={book.title}
+                    className="h-full w-full object-cover"
+                  />
+                </figure>
+              ))}
+            </div>
           </Carousel>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque eos
