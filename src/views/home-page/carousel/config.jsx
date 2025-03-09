@@ -3,7 +3,7 @@ export const PrevArrow = () => (
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     fill="currentColor"
-    className="size-10"
+    className="size-14"
   >
     <path
       fillRule="evenodd"
@@ -19,7 +19,7 @@ export const NextArrow = () => (
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     fill="currentColor"
-    className="size-10"
+    className="size-14"
   >
     <path
       fillRule="evenodd"
@@ -35,10 +35,10 @@ export const customTheme = {
       prevArrow: ({ loop, handlePrev, firstIndex }) => {
         return (
           <>
-            {!loop && firstIndex && (
+            {!(!loop && firstIndex) && (
               <button
                 onClick={handlePrev}
-                className="!absolute top-2/4 -left-7 -translate-y-2/4 rounded-full select-none transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-12 max-w-[48px] h-12 max-h-[48px] text-white hover:bg-white/10 active:bg-white/30 grid place-items-center"
+                className="!absolute top-2/4 -left-5 -translate-y-2/4 rounded-full select-none transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-12 max-w-[48px] h-12 max-h-[48px] text-white hover:bg-white/10 active:bg-white/30 grid place-items-center"
               >
                 <PrevArrow strokeWidth={3} className="-ml-1 h-7 w-7" />
               </button>
@@ -48,10 +48,10 @@ export const customTheme = {
       },
       nextArrow: ({ loop, handleNext, lastIndex }) => (
         <>
-          {!loop && lastIndex && (
+          {!(!loop && lastIndex) && (
             <button
               onClick={handleNext}
-              className="!absolute top-2/4 -right-7 -translate-y-2/4 rounded-full select-none transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-12 max-w-[48px] h-12 max-h-[48px] text-white hover:bg-white/10 active:bg-white/30 grid place-items-center"
+              className="!absolute top-2/4 -right-5 -translate-y-2/4 rounded-full select-none transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-12 max-w-[48px] h-12 max-h-[48px] text-white hover:bg-white/10 active:bg-white/30 grid place-items-center"
             >
               <NextArrow strokeWidth={3} className="ml-1 h-7 w-7" />
             </button>
