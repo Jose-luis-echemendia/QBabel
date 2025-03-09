@@ -1,56 +1,6 @@
 import { CustomCarousel } from "./carousel";
 import { ContainerHome } from "@/containers/home";
-import { bestBooksData } from "@/constants/home-page/best-books";
-import { v4 as uuid } from "uuid";
-import { Carousel } from "@material-tailwind/react";
-
-const data = [
-  {
-    code: (
-      <div className="flex items-center justify-center gap-4">
-        {[...bestBooksData].map((book) => (
-          <figure key={uuid()} className="w-full h-96">
-            <img
-              src={book.img}
-              alt={book.title}
-              className="h-full w-full object-cover"
-            />
-          </figure>
-        ))}
-      </div>
-    ),
-  },
-  {
-    code: (
-      <div className="flex items-center justify-center gap-4">
-        {[...bestBooksData].map((book) => (
-          <figure key={uuid()} className="w-full h-96">
-            <img
-              src={book.img}
-              alt={book.title}
-              className="h-full w-full object-cover"
-            />
-          </figure>
-        ))}
-      </div>
-    ),
-  },
-  {
-    code: (
-      <div className="flex items-center justify-center gap-4">
-        {[...bestBooksData].map((book) => (
-          <figure key={uuid()} className="w-full h-96">
-            <img
-              src={book.img}
-              alt={book.title}
-              className="h-full w-full object-cover"
-            />
-          </figure>
-        ))}
-      </div>
-    ),
-  },
-];
+import { CustomCarouselBooks } from "./carousel/books";
 
 const HomeView = () => {
   return (
@@ -62,20 +12,12 @@ const HomeView = () => {
         <ContainerHome>
           <p>Lo más interesante de la semana</p>
           <CustomCarousel />
+          <CustomCarouselBooks/>
           <p>Historias gratis escogidas por la comunidad</p>
           <p>historias completadas</p>
           <p>recomendaciones para ti</p>
           <p>lo mejor de romance y amor</p>
-          <Carousel
-            className="rounded-xl"
-            loop={true}
-            autoplay={true}
-            autoplayDelay={5000}
-          >
-            {data.map((item) => (
-              <>{item.code}</>
-            ))}
-          </Carousel>
+
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque eos
             perferendis quidem fugiat, quo tenetur adipisci deserunt similique,
