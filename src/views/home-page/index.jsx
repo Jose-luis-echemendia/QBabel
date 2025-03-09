@@ -14,7 +14,7 @@ const HomeView = () => {
           <CustomCarousel />
           <CustomCarouselBooks />
           <CustomCarouselBooks />
-          <CustomCarouselBooks boolsPerSlide={6} carouselSize="h-80"/>
+          <CustomCarouselBooks boolsPerSlide={6} carouselSize="h-80" />
           <CustomCarouselBooks />
           <CustomCarouselBooks />
           <p>Historias gratis escogidas por la comunidad</p>
