@@ -1,6 +1,7 @@
 import { bestBooksData } from "@/constants/home-page/best-books";
 import { Carousel } from "@material-tailwind/react";
 import { BookGroup } from "./carousel-items";
+import PropTypes from "prop-types"; 
 
 // Función para dividir el array de libros en grupos (chunks)
 const chunkArray = (array, size) => {
@@ -11,27 +12,41 @@ const chunkArray = (array, size) => {
   return result;
 };
 
-const nextArrow = () => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      className="size-6"
-    >
-      <path
-        fillRule="evenodd"
-        d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm4.28 10.28a.75.75 0 0 0 0-1.06l-3-3a.75.75 0 1 0-1.06 1.06l1.72 1.72H8.25a.75.75 0 0 0 0 1.5h5.69l-1.72 1.72a.75.75 0 1 0 1.06 1.06l3-3Z"
-        clipRule="evenodd"
-      />
-    </svg>
-  );
-};
+// Componente para la flecha "siguiente"
+const NextArrow = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className="size-6"
+  >
+    <path
+      fillRule="evenodd"
+      d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm4.28 10.28a.75.75 0 0 0 0-1.06l-3-3a.75.75 0 1 0-1.06 1.06l1.72 1.72H8.25a.75.75 0 0 0 0 1.5h5.69l-1.72 1.72a.75.75 0 1 0 1.06 1.06l3-3Z"
+      clipRule="evenodd"
+    />
+  </svg>
+);
+
+// Componente para la flecha "anterior"
+const PrevArrow = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className="size-6"
+  >
+    <path
+      fillRule="evenodd"
+      d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-4.28 10.28a.75.75 0 0 1 0-1.06l3-3a.75.75 0 1 1 1.06 1.06l-1.72 1.72H15.75a.75.75 0 0 1 0 1.5h-5.69l1.72 1.72a.75.75 0 1 1-1.06 1.06l-3-3Z"
+      clipRule="evenodd"
+    />
+  </svg>
+);
 
 export const CustomCarouselBooks = ({
   carouselSize = "h-64",
   carouselWidth = "w-full",
-  itemSize = "w-1/4",
   itemHeight = carouselSize === "h-64"
     ? "h-56"
     : carouselSize === "h-80"
@@ -51,11 +66,22 @@ export const CustomCarouselBooks = ({
     <Carousel
       className={`rounded-xl ${carouselSize} ${carouselWidth}`}
       autoplay={false}
-      nextArrow={nextArrow}
+      navigation={{
+        nextArrow: <NextArrow />,
+        prevArrow: <PrevArrow />,
+      }}
     >
       {bookGroups.map((group, index) => (
         <BookGroup key={index} books={group} itemHeight={itemHeight} />
       ))}
     </Carousel>
   );
+};
+
+CustomCarouselBooks.propTypes = {
+  carouselSize: PropTypes.oneOf(["h-64", "h-80", "h-96"]),
+  carouselWidth: PropTypes.string,
+  itemSize: PropTypes.string,
+  itemHeight: PropTypes.string,
+  boolsPerSlide: PropTypes.number,
 };
