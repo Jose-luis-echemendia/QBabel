@@ -16,7 +16,9 @@ const BOOKS_PER_SLIDE = 8;
 
 // Componente para renderizar un grupo de libros
 
-export const CustomCarouselBooks = () => {
+export const CustomCarouselBooks = ({
+    carouselSize = ""
+  }) => {
   // Dividir los libros en grupos
   const bookGroups = chunkArray(
     [...bestBooksData, ...bestBooksData, ...bestBooksData],
