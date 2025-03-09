@@ -38,7 +38,7 @@ export const customTheme = {
             {!(!loop && firstIndex) && (
               <button
                 onClick={handlePrev}
-                className="!absolute top-2/4 -left-5 -translate-y-2/4 rounded-full select-none transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-12 max-w-[48px] h-12 max-h-[48px] text-white hover:bg-white/10 active:bg-white/30 grid place-items-center"
+                className="!absolute shadow-2xl top-2/4 -left-7 -translate-y-2/4 rounded-full select-none transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-12 max-w-[48px] h-12 max-h-[48px] text-white hover:bg-white/10 active:bg-white/30 grid place-items-center"
               >
                 <PrevArrow strokeWidth={3} className="-ml-1 h-7 w-7" />
               </button>
@@ -51,26 +51,14 @@ export const customTheme = {
           {!(!loop && lastIndex) && (
             <button
               onClick={handleNext}
-              className="!absolute top-2/4 -right-5 -translate-y-2/4 rounded-full select-none transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-12 max-w-[48px] h-12 max-h-[48px] text-white hover:bg-white/10 active:bg-white/30 grid place-items-center"
+              className="!absolute shadow-2xl top-2/4 -right-6 -translate-y-2/4 rounded-full select-none transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-12 max-w-[48px] h-12 max-h-[48px] text-white hover:bg-white/10 active:bg-white/30 grid place-items-center"
             >
               <NextArrow strokeWidth={3} className="ml-1 h-7 w-7" />
             </button>
           )}
         </>
       ),
-      navigation: ({ setActiveIndex, activeIndex, length }) => (
-        <div className="absolute bottom-4 left-2/4 z-50 flex -translate-x-2/4 gap-2">
-          {new Array(length).fill("").map((_, i) => (
-            <span
-              key={i}
-              className={`block h-3 w-3 cursor-pointer rounded-full transition-colors content-[''] ${
-                activeIndex === i ? "bg-white" : "bg-white/50"
-              }`}
-              onClick={() => setActiveIndex(i)}
-            />
-          ))}
-        </div>
-      ),
+      navigation: null,
       autoplay: false,
       autoplayDelay: 5000,
       transition: {
