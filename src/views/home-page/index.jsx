@@ -5,14 +5,14 @@ import { CustomCarouselBooks } from "./carousel/books";
 const HomeView = () => {
   return (
     <>
-      <div className="min-h-screen h-full overflow-hidden">
+      <div className="min-h-screen h-full overflow-hidden py-10 mt-5">
         <h2 id="footer-heading" className="sr-only">
           Home
         </h2>
         <ContainerHome>
-          <p>Lo más interesante de la semana</p>
+          <CustomCarouselBooks />
           <CustomCarousel />
-          <CustomCarouselBooks/>
+          <CustomCarouselBooks />
           <p>Historias gratis escogidas por la comunidad</p>
           <p>historias completadas</p>
           <p>recomendaciones para ti</p>
