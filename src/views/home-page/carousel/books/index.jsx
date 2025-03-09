@@ -37,8 +37,8 @@ export const CustomCarouselBooks = ({
       <Carousel
         className={`rounded-xl ${carouselSize} ${carouselWidth}`}
         autoplay={false}
-        PrevArrow={() => <PrevArrow />} // Flecha personalizada "anterior" (como función)
-        NextArrow={() => <NextArrow />} // Flecha personalizada "siguiente" (como función)
+        PrevArrow={() => <PrevArrow />} 
+        NextArrow={() => <NextArrow />} 
       >
         {bookGroups.map((group, index) => (
           <BookGroup key={index} books={group} itemHeight={itemHeight} />
