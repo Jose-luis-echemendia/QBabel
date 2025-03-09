@@ -7,8 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "./styles.css";
-import { Pagination } from "swiper/modules";
-
+import { Pagination, Navigation } from "swiper/modules";
 
 const items = [
   {
@@ -36,7 +35,16 @@ const items = [
 export const CustomCarousel = () => {
   return (
     <>
-      <Swiper  loop={true} modules={[Pagination]} className="mySwiper">
+      <Swiper
+        slidesPerView={1}
+        loop={true}
+        pagination={{
+          clickable: true,
+        }}
+        navigation={true}
+        modules={[Pagination, Navigation]}
+        className="mySwiper"
+      >
         {items.map((item) => (
           <SwiperSlide key={uuid()}>
             <figure className="w-full h-96">
