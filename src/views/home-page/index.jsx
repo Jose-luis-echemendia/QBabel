@@ -14,9 +14,7 @@ const HomeView = () => {
           <CustomCarousel />
           <CustomCarouselBooks />
           <CustomCarouselBooks />
-          <p>
-            OTRO CON OTRO TIPO DE ANCHO
-          </p>
+          <CustomCarouselBooks />
           <CustomCarouselBooks />
           <CustomCarouselBooks />
           <p>Historias gratis escogidas por la comunidad</p>
