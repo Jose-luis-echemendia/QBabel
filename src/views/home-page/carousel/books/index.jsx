@@ -66,10 +66,8 @@ export const CustomCarouselBooks = ({
     <Carousel
       className={`rounded-xl ${carouselSize} ${carouselWidth}`}
       autoplay={false}
-      navigation={{
-        nextArrow: <NextArrow />,
-        prevArrow: <PrevArrow />,
-      }}
+      PrevArrow={<PrevArrow/>}
+      nextArrow={<NextArrow/>}
     >
       {bookGroups.map((group, index) => (
         <BookGroup key={index} books={group} itemHeight={itemHeight} />
