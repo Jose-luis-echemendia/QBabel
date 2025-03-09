@@ -1,3 +1,5 @@
+import { Background } from "@/views/welcome-page/best-books/background";
+
 export const PrevArrow = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -5,7 +7,7 @@ export const PrevArrow = () => (
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className="size-10"
+    className="size-8"
   >
     <path
       strokeLinecap="round"
@@ -23,7 +25,7 @@ export const NextArrow = () => (
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className="size-10"
+    className="size-8"
   >
     <path
       strokeLinecap="round"
@@ -31,6 +33,20 @@ export const NextArrow = () => (
       d="m8.25 4.5 7.5 7.5-7.5 7.5"
     />
   </svg>
+);
+
+export const customNavigation = ({ setActiveIndex, activeIndex, length }) => (
+    <div className="absolute -bottom-4 left-2/4 z-50 flex -translate-x-2/4 gap-2.5">
+    {new Array(length).fill("").map((_, i) => (
+      <span
+        key={i}
+        className={`block h-1 cursor-pointer rounded-2xl transition-all content-[''] ${
+          activeIndex === i ? "w-8 bg-black" : "w-4 bg-gray-300"
+        }`}
+        onClick={() => setActiveIndex(i)}
+      />
+    ))}
+  </div>
 );
 
 export const customTheme = {
@@ -42,7 +58,7 @@ export const customTheme = {
             {!(!loop && firstIndex) && (
               <button
                 onClick={handlePrev}
-                className="!absolute shadow-2xl top-2/4 -left-7 -translate-y-2/4 rounded-full select-none transition-all w-12 max-w-[48px] h-12 max-h-[48px] bg-gray-100 hover:bg-white/10 active:bg-white/30 grid place-items-center"
+                className="!absolute shadow-2xl top-2/4 left-0 -translate-y-2/4 rounded-full select-none transition-all w-10 max-w-[48px] h-10 max-h-[48px] bg-gray-200 hover:bg-gray-300 active:bg-white/30 grid place-items-center"
               >
                 <PrevArrow strokeWidth={3} className="-ml-1 h-7 w-7" />
               </button>
@@ -55,7 +71,7 @@ export const customTheme = {
           {!(!loop && lastIndex) && (
             <button
               onClick={handleNext}
-              className="!absolute shadow-2xl top-2/4 -right-6 -translate-y-2/4 rounded-full select-none transition-all w-12 max-w-[48px] h-12 max-h-[48px] bg-gray-100 hover:bg-white/10 active:bg-white/30 grid place-items-center"
+              className="!absolute shadow-2xl top-2/4 right-0 -translate-y-2/4 rounded-full select-none transition-all w-10 max-w-[48px] h-10 max-h-[48px] bg-gray-200 hover:bg-gray-300 active:bg-white/30 grid place-items-center"
             >
               <NextArrow strokeWidth={3} className="ml-1 h-7 w-7" />
             </button>
@@ -80,6 +96,7 @@ export const customTheme = {
           height: "h-full",
           overflowX: "overflow-x-hidden",
           display: "flex",
+          background: "bg-white",
         },
         slide: {
           width: "w-full",
