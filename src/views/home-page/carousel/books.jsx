@@ -7,7 +7,7 @@ const data = [
     code: (
       <div className="flex items-center justify-center gap-4">
         {[...bestBooksData].map((book) => (
-          <figure key={uuid()} className="w-full h-96">
+          <figure key={uuid()} className="w-full h-56">
             <img
               src={book.img}
               alt={book.title}
@@ -22,7 +22,7 @@ const data = [
     code: (
       <div className="flex items-center justify-center gap-4">
         {[...bestBooksData].map((book) => (
-          <figure key={uuid()} className="w-full h-96">
+          <figure key={uuid()} className="w-full h-56">
             <img
               src={book.img}
               alt={book.title}
@@ -37,7 +37,7 @@ const data = [
     code: (
       <div className="flex items-center justify-center gap-4">
         {[...bestBooksData].map((book) => (
-          <figure key={uuid()} className="w-full h-96">
+          <figure key={uuid()} className="w-full h-56">
             <img
               src={book.img}
               alt={book.title}
@@ -53,7 +53,7 @@ const data = [
 export const CustomCarouselBooks = () => {
   return (
     <>
-      <Carousel className="rounded-xl" autoplay={false}>
+      <Carousel className="rounded-xl h-56" autoplay={false}>
         {data.map((item) => (
           <>{item.code}</>
         ))}
