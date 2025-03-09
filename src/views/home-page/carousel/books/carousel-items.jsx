@@ -1,5 +1,5 @@
 export const BookGroup = ({ books, itemHeight }) => (
-  <div className="flex items-center justify-center gap-2">
+  <div className="flex items-center justify-center gap-2 px-5">
     {books.map((book) => (
       <figure key={book.id} className={`w-1/4 ${itemHeight}`}>
         <img
