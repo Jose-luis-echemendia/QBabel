@@ -53,7 +53,7 @@ const data = [
 export const CustomCarouselBooks = () => {
   return (
     <>
-      <Carousel className="rounded-xl" loop={true} autoplay={false}>
+      <Carousel className="rounded-xl" autoplay={false}>
         {data.map((item) => (
           <>{item.code}</>
         ))}
