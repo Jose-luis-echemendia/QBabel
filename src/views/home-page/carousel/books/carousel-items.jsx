@@ -1,7 +1,7 @@
 export const BookGroup = ({ books, itemHeight }) => (
   <div className="flex items-center justify-center gap-2">
     {books.map((book) => (
-      <figure key={book.id} className="w-1/4 h-56"> {/* Ajusta el ancho según el número de libros por slide */}
+      <figure key={book.id} className={`w-1/4 ${itemHeight}`}>
         <img
           src={book.img}
           alt={book.title}
