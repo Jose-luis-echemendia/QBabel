@@ -11,22 +11,23 @@ const chunkArray = (array, size) => {
   return result;
 };
 
-// Tamaño del grupo (número de libros por slide)
-const BOOKS_PER_SLIDE = 8;
-
-// Componente para renderizar un grupo de libros
-
 export const CustomCarouselBooks = ({
-    carouselSize = ""
-  }) => {
+  carouselSize = "h-64",
+  carouselWidth = "w-full",
+  boolsPerSlide = 8,
+}) => {
+  
   // Dividir los libros en grupos
   const bookGroups = chunkArray(
     [...bestBooksData, ...bestBooksData, ...bestBooksData],
-    BOOKS_PER_SLIDE
+    boolsPerSlide
   );
 
   return (
-    <Carousel className="rounded-xl h-64" autoplay={false}>
+    <Carousel
+      className={`rounded-xl ${carouselSize} ${carouselWidth}`}
+      autoplay={false}
+    >
       {bookGroups.map((group, index) => (
         <BookGroup key={index} books={group} />
       ))}
