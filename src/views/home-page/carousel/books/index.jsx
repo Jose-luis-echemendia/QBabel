@@ -2,7 +2,7 @@ import { bestBooksData } from "@/constants/home-page/best-books";
 import { Carousel } from "@material-tailwind/react";
 import { BookGroup } from "./carousel-items";
 import { ThemeProvider } from "@material-tailwind/react";
-import { NextArrow, PrevArrow } from "../config";
+import { NextArrow, PrevArrow, customTheme } from "../config";
 import PropTypes from "prop-types";
 
 // Función para dividir el array de libros en grupos (chunks)
@@ -13,7 +13,6 @@ const chunkArray = (array, size) => {
   }
   return result;
 };
-
 
 export const CustomCarouselBooks = ({
   carouselSize = "h-64",
@@ -34,16 +33,18 @@ export const CustomCarouselBooks = ({
   );
 
   return (
-    <Carousel
-      className={`rounded-xl ${carouselSize} ${carouselWidth}`}
-      autoplay={false}
-      PrevArrow={() => <PrevArrow />} // Flecha personalizada "anterior" (como función)
-      NextArrow={() => <NextArrow />} // Flecha personalizada "siguiente" (como función)
-    >
-      {bookGroups.map((group, index) => (
-        <BookGroup key={index} books={group} itemHeight={itemHeight} />
-      ))}
-    </Carousel>
+    <ThemeProvider value={customTheme}>
+      <Carousel
+        className={`rounded-xl ${carouselSize} ${carouselWidth}`}
+        autoplay={false}
+        PrevArrow={() => <PrevArrow />} // Flecha personalizada "anterior" (como función)
+        NextArrow={() => <NextArrow />} // Flecha personalizada "siguiente" (como función)
+      >
+        {bookGroups.map((group, index) => (
+          <BookGroup key={index} books={group} itemHeight={itemHeight} />
+        ))}
+      </Carousel>
+    </ThemeProvider>
   );
 };
 
