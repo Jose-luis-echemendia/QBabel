@@ -4,6 +4,54 @@ import { bestBooksData } from "@/constants/home-page/best-books";
 import { v4 as uuid } from "uuid";
 import { Carousel } from "@material-tailwind/react";
 
+const data = [
+  {
+    code: (
+      <div className="flex items-center justify-center gap-4">
+        {[...bestBooksData].map((book) => (
+          <figure key={uuid()} className="w-full h-96">
+            <img
+              src={book.img}
+              alt={book.title}
+              className="h-full w-full object-cover"
+            />
+          </figure>
+        ))}
+      </div>
+    ),
+  },
+  {
+    code: (
+      <div className="flex items-center justify-center gap-4">
+        {[...bestBooksData].map((book) => (
+          <figure key={uuid()} className="w-full h-96">
+            <img
+              src={book.img}
+              alt={book.title}
+              className="h-full w-full object-cover"
+            />
+          </figure>
+        ))}
+      </div>
+    ),
+  },
+  {
+    code: (
+      <div className="flex items-center justify-center gap-4">
+        {[...bestBooksData].map((book) => (
+          <figure key={uuid()} className="w-full h-96">
+            <img
+              src={book.img}
+              alt={book.title}
+              className="h-full w-full object-cover"
+            />
+          </figure>
+        ))}
+      </div>
+    ),
+  },
+];
+
 const HomeView = () => {
   return (
     <>
@@ -24,17 +72,9 @@ const HomeView = () => {
             autoplay={true}
             autoplayDelay={5000}
           >
-            <div className="flex items-center justify-center gap-4">
-              {bestBooksData.map((book) => (
-                <figure key={uuid()} className="w-full h-96">
-                  <img
-                    src={book.img}
-                    alt={book.title}
-                    className="h-full w-full object-cover"
-                  />
-                </figure>
-              ))}
-            </div>
+            {data.map((item) => (
+              <>{item.code}</>
+            ))}
           </Carousel>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque eos
