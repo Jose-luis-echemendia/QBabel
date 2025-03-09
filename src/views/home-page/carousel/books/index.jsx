@@ -14,9 +14,18 @@ const chunkArray = (array, size) => {
 export const CustomCarouselBooks = ({
   carouselSize = "h-64",
   carouselWidth = "w-full",
+  itemSize = "w-1/4",
+  itemHeight =
+    carouselSize === "h-64"
+      ? "h-40"
+      : carouselSize === "h-80"
+      ? "h-56"
+      : carouselSize === "h-96"
+      ? "h-72"
+      : "h-40",
   boolsPerSlide = 8,
 }) => {
-  
+
   // Dividir los libros en grupos
   const bookGroups = chunkArray(
     [...bestBooksData, ...bestBooksData, ...bestBooksData],
@@ -29,7 +38,7 @@ export const CustomCarouselBooks = ({
       autoplay={false}
     >
       {bookGroups.map((group, index) => (
-        <BookGroup key={index} books={group} />
+        <BookGroup key={index} books={group} itemHeight={itemHeight} />
       ))}
     </Carousel>
   );
