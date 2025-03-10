@@ -8,8 +8,8 @@ import { IconDashboard } from "@/components/icons/custom-icons";
 const elements = [
   {
     id: 1,
-    label: 'Dashboard',
-    highlightPath: ['/dashboard'],
+    label: 'General',
+    highlightPath: ['/overview'],
     icon: <IconDashboard />,
     subElements: [],
   },
