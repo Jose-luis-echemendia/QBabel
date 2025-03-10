@@ -49,8 +49,8 @@ const HomeView = () => {
             </span>
             <CustomCarouselBooks />
           </div>
-          <div className="flex flex-col gap-1">
-            <span className="flex gap-2 items-center justify-start ml-7 text-black font-bold font-opensans text-lg leading-8">
+          <div className="flex flex-col gap-0">
+            <span className="flex gap-2 -mb-1.5 items-center justify-start ml-7 text-black font-bold font-opensans text-lg leading-8">
               Historias gratis de la semana escogidas por la comunidad
               <svg
                 xmlns="http://www.w3.org/2000/svg"
