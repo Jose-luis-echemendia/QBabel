@@ -65,6 +65,7 @@ const Routers = () => {
           >
             <Route path="/home" element={<HomePage />}></Route>
             <Route path="/library" element={<LibraryPage />}></Route>
+            <Route path="/books/reader/:bookId" element={<BookReaderPage />}></Route>
           </Route>
 
           {/* ADMIN DISPLAY */}
@@ -82,7 +83,6 @@ const Routers = () => {
           {/* PAGES DISPLAY */}
 
           <Route path="/books/:bookId" element={<DetailsBookPage />}></Route>
-          <Route path="/books/reader/:bookId" element={<BookReaderPage />}></Route>
         </Routes>
       </Router>
     </>
