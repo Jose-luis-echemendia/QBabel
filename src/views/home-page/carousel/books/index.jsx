@@ -25,6 +25,7 @@ export const CustomCarouselBooks = ({
     ? "h-76"
     : "h-56",
   boolsPerSlide = 8,
+  CarouselItemComponent = BookGroup
 }) => {
   // Dividir los libros en grupos
   const bookGroups = chunkArray(
@@ -41,7 +42,7 @@ export const CustomCarouselBooks = ({
         NextArrow={() => <NextArrow />} 
       >
         {bookGroups.map((group, index) => (
-          <BookGroup key={index} books={group} itemHeight={itemHeight} />
+          <CarouselItemComponent key={index} books={group} itemHeight={itemHeight} />
         ))}
       </Carousel>
     </ThemeProvider>
