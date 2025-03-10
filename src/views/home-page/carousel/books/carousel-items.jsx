@@ -5,17 +5,17 @@ export const BookGroup = ({ books, itemHeight }) => (
     {books.map((book) => (
       <figure
         key={book.id}
-        className={`w-1/4 ${itemHeight} gap-1`}
+        className={`w-1/4 ${itemHeight} flex flex-col gap-1`}
       >
         <img
           src={book.img}
           alt={book.title}
           className="h-full w-full object-cover rounded-xl"
         />
-        <span className="ml-2 bg-gray-200 w-fit p-0.5 mt-1 rounded-xl font-opensans text-black font-semibold">
+        <span className="ml-2 bg-gray-200 w-fit p-0.5 px-2 mt-1 rounded-xl font-opensans text-black font-semibold">
           {book.category}{" "}
         </span>
-        <span className="ml-2 flex gap-1.5 text-gray-800">
+        <span className="ml-3 flex gap-1.5 text-gray-800 mt-1">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
