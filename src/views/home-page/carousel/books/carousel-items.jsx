@@ -12,7 +12,7 @@ export const BookGroup = ({ books, itemHeight, boolsPerSlide }) => (
           alt={book.title}
           className={
             boolsPerSlide < 8
-              ? "h-full w-full object-cover rounded-xl" 
+              ? "h-72 w-full object-cover rounded-xl" 
               : "h-56 w-40 object-cover rounded-xl"
           }
         />
