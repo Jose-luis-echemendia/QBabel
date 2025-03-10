@@ -16,8 +16,9 @@ export const BookGroup = ({ books, itemHeight }) => (
 
 export const BookGroupCard = ({ books, itemHeight }) => (
   <div
-    className={`${itemHeight} flex flex-row items-center justify-center gap-2 px-5 w-1/2`}
+    className={`${itemHeight} flex gap-2 px-5 w-1/2`}
   >
+    {console.log(itemHeight)}
     {books.map((book) => (
       <div key={book.id}>
         <figure className="">
