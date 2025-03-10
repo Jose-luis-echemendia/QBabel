@@ -9,7 +9,9 @@ import HomePage from "@/pages/home/page";
 import WelcomePage from "@/pages/welcome-page/page";
 import AdminPage from "@/pages/admin/page";
 import LibraryPage from "@/pages/library/page";
-import Error404  from "@/pages/error/Error404";
+import DetailsBookPage from "@/pages/details-book/page";
+import BookReaderPage from "@/pages/book-reader/page";
+import Error404 from "@/pages/error/Error404";
 
 const Routers = () => {
   const auth = useAppSelector((state) => state.auth);
@@ -78,6 +80,9 @@ const Routers = () => {
           </Route>
 
           {/* PAGES DISPLAY */}
+
+          <Route path="/books/:bookId" element={<DetailsBookPage />}></Route>
+          <Route path="/books/reader/:bookId" element={<BookReaderPage />}></Route>
         </Routes>
       </Router>
     </>
