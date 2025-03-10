@@ -1,7 +1,8 @@
 
-
-export const BookReaderView = () => {
+ const BookReaderView = () => {
   return (
     <>BookReaderView</>
   )
 }
+
+export default BookReaderView
