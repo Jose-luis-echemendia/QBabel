@@ -36,7 +36,7 @@ export const CustomCarouselBooks = ({
   return (
     <ThemeProvider value={customTheme}>
       <Carousel
-        className={`rounded-xl bg-red-200 ${carouselSize} ${carouselWidth}`}
+        className={`rounded-xl ${carouselSize} ${carouselWidth}`}
         autoplay={false}
         PrevArrow={() => <PrevArrow />} 
         NextArrow={() => <NextArrow />} 
