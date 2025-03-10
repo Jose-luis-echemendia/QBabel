@@ -1,6 +1,8 @@
 
-export const DetailsBookView = () => {
+const DetailsBookView = () => {
   return (
     <>DetailsBookView</>
   )
 }
+
+export default DetailsBookView
