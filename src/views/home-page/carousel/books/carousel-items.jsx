@@ -15,15 +15,19 @@ export const BookGroup = ({ books, itemHeight }) => (
 );
 
 export const BookGroupCard = ({ books, itemHeight }) => (
-  <div className="flex items-center justify-center gap-2 px-5">
+  <div
+    className={`${itemHeight} flex flex-row items-center justify-center gap-2 px-5 w-1/2`}
+  >
     {books.map((book) => (
-      <figure key={book.id} className={`w-1/4 ${itemHeight}`}>
-        <img
-          src={book.img}
-          alt={book.title}
-          className="h-full w-full object-cover rounded-xl"
-        />
-      </figure>
+      <div key={book.id}>
+        <figure className="">
+          <img
+            src={book.img}
+            alt={book.title}
+            className="h-full w-full object-cover rounded-xl"
+          />
+        </figure>
+      </div>
     ))}
   </div>
 );
