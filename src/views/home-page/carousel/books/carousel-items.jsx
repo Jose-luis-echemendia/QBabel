@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
 export const BookGroup = ({ books, itemHeight }) => (
-  <div className="flex items-center justify-center gap-2 px-5">
+  <div className="flex items-center justify-center gap-2 px-5 pt-3">
     {books.map((book) => (
       <figure
         key={book.id}
@@ -10,7 +10,7 @@ export const BookGroup = ({ books, itemHeight }) => (
         <img
           src={book.img}
           alt={book.title}
-          className="h-full w-full object-cover rounded-xl"
+          className="h-56 w-40 object-cover rounded-xl"
         />
         <span className="ml-2 bg-gray-200 w-fit p-0.5 px-2 mt-1 rounded-xl font-opensans text-black font-semibold">
           {book.category}{" "}
