@@ -34,7 +34,7 @@ const HomeView = () => {
             <span className="ml-7 text-black font-bold font-opensans text-lg leading-8">
               Las mejores selecciones para ti para ti
             </span>
-            <CustomCarouselBooks boolsPerSlide={6} carouselSize={"h-80"} />
+            <CustomCarouselBooks boolsPerSlide={6} carouselSize={"h-96"} />
           </div>
 
           <div className="flex flex-col gap-1">
