@@ -57,7 +57,7 @@ export const customTheme = {
             {!(!loop && firstIndex) && (
               <button
                 onClick={handlePrev}
-                className="!absolute shadow-2xl top-2/4 left-0 -translate-y-2/4 rounded-full select-none transition-all w-10 max-w-[48px] h-10 max-h-[48px] bg-gray-200 hover:bg-gray-300 active:bg-white/30 grid place-items-center"
+                className="!absolute shadow-2xl top-2/4 left-0 -translate-y-2/4 rounded-full select-none transition-all w-10 max-w-[48px] h-10 max-h-[48px] bg-gray-3s00 hover:bg-gray-400 active:bg-white/30 grid place-items-center"
               >
                 <PrevArrow strokeWidth={3} className="-ml-1 h-7 w-7" />
               </button>
@@ -70,7 +70,7 @@ export const customTheme = {
           {!(!loop && lastIndex) && (
             <button
               onClick={handleNext}
-              className="!absolute shadow-2xl top-2/4 right-0 -translate-y-2/4 rounded-full select-none transition-all w-10 max-w-[48px] h-10 max-h-[48px] bg-gray-200 hover:bg-gray-300 active:bg-white/30 grid place-items-center"
+              className="!absolute shadow-2xl top-2/4 right-0 -translate-y-2/4 rounded-full select-none transition-all w-10 max-w-[48px] h-10 max-h-[48px] bg-gray-300 hover:bg-gray-400 active:bg-white/30 grid place-items-center"
             >
               <NextArrow strokeWidth={3} className="ml-1 h-7 w-7" />
             </button>
