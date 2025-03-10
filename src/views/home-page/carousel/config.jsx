@@ -1,4 +1,3 @@
-import { Background } from "@/views/welcome-page/best-books/background";
 
 export const PrevArrow = () => (
   <svg
