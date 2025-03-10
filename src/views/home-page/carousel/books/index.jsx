@@ -42,7 +42,7 @@ export const CustomCarouselBooks = ({
         NextArrow={() => <NextArrow />} 
       >
         {bookGroups.map((group, index) => (
-          <CarouselItemComponent key={index} books={group} itemHeight={itemHeight} />
+          <CarouselItemComponent key={index} books={group} itemHeight={itemHeight} boolsPerSlide={boolsPerSlide} />
         ))}
       </Carousel>
     </ThemeProvider>
