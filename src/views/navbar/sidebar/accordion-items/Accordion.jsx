@@ -15,35 +15,49 @@ const elements = [
   },
   {
     id: 2,
-    label: 'Orders',
+    label: 'Usuarios',
+    highlightPath: ['/overview'],
+    icon: <IconDashboard />,
+    subElements: [],
+  },
+  {
+    id: 3,
+    label: 'Libros',
     highlightPath: ['/orders', '/orders/defective-products'],
     icon: <IconDashboard />,
     subElements: ['Defective Products'],
   },
   {
-    id: 3,
-    label: 'Products',
+    id: 4,
+    label: 'Categorías',
     highlightPath: ['/products', '/products/add-product'],
     icon: <IconDashboard />,
     subElements: ['Add Product'],
   },
   {
-    id: 4,
-    label: 'Customers',
+    id: 5,
+    label: 'Ventas',
     highlightPath: ['/customers'],
     icon: <IconDashboard />,
     subElements: [],
   },
   {
-    id: 5,
-    label: 'Reports',
+    id: 6,
+    label: 'Publicaciones',
     highlightPath: ['/reports'],
     icon: <IconDashboard />,
     subElements: [],
   },
   {
-    id: 6,
-    label: 'Settings',
+    id: 7,
+    label: 'Soporte profesional',
+    highlightPath: ['/settings'],
+    icon: <IconDashboard />,
+    subElements: [],
+  },
+  {
+    id: 8,
+    label: 'Denuncias',
     highlightPath: ['/settings'],
     icon: <IconDashboard />,
     subElements: [],
@@ -64,7 +78,7 @@ const SidebarAccordion = () => {
     'font-poppins text-[14px] text-center font-semibold leading-[28px] text-[#A0AEC0]'
 
   return (
-    <div className='w-[229px]'>
+    <div className='w-[300px]'>
       {elements.map((element) => (
         <Accordion
           className='relative'
