@@ -15,7 +15,7 @@ const HomeView = () => {
             <span className="ml-7 text-black font-bold font-opensans text-lg leading-8">
               Lo mejor de fantasía para ti
             </span>
-            <CustomCarouselBooks carouselSize={"h-96"} />
+            <CustomCarouselBooks carouselSize={"h-80"} />
           </div>
           <CustomCarousel />
           <div className="flex flex-col gap-1">
