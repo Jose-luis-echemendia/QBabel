@@ -1,6 +1,7 @@
 import { CustomCarousel } from "./carousel";
 import { ContainerHome } from "@/containers/home";
 import { CustomCarouselBooks } from "./carousel/books";
+import { BookGroupCard } from "./carousel/books/carousel-items";
 
 const HomeView = () => {
   return (
@@ -68,7 +69,7 @@ const HomeView = () => {
               </svg>
               <small className="text-gray-600">22d 1h</small>
             </span>
-            <CustomCarouselBooks boolsPerSlide={2} carouselSize="h-80"/>
+            <CustomCarouselBooks boolsPerSlide={2} carouselSize="h-80" CarouselItemComponent={BookGroupCard} />
           </div>
           <p>historias completadas</p>
           <p>recomendaciones para ti</p>
