@@ -16,7 +16,6 @@ export const PrevArrow = () => (
   </svg>
 );
 
-// Flecha personalizada "siguiente" (como función)
 export const NextArrow = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
