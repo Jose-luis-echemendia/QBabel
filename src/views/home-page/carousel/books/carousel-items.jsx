@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 export const BookGroup = ({ books, itemHeight }) => (
   <div className="flex items-center justify-center gap-2 px-5">
     {books.map((book) => (
@@ -11,3 +13,14 @@ export const BookGroup = ({ books, itemHeight }) => (
     ))}
   </div>
 );
+
+BookGroup.propTypes = {
+  books: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      img: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  itemHeight: PropTypes.string.isRequired,
+};
