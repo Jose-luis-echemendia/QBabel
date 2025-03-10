@@ -5,7 +5,7 @@ export const BookGroup = ({ books, itemHeight }) => (
     {books.map((book) => (
       <figure
         key={book.id}
-        className={`w-1/4 ${itemHeight} flex flex-col gap-1`}
+        className={`w-1/4 ${itemHeight} gap-1`}
       >
         <img
           src={book.img}
