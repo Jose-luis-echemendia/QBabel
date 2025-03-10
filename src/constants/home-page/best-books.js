@@ -6,7 +6,8 @@ export const bestBooksData = [
     description:
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi,rem magnam nesciunt minima placeat, itaque eum neque officiis unde,eaque optio ratione aliquid assumenda facere ab et quasi ducimus autdoloribus non numquam. Lorem ipsum dolor, sit amet consecteturadipisicing elit. Quisquam quidem perferendis ab doloribus ipsamratione fugit officia, rem necessitatibus.",
     color: "#5C505A",
-    reviews: "21k"
+    reviews: "21k",
+    category: "category"
   },
   {
     author: "Jennifer Lynn Barnes",
@@ -15,7 +16,8 @@ export const bestBooksData = [
     description:
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi,rem magnam nesciunt minima placeat, itaque eum neque officiis unde,eaque optio ratione aliquid assumenda facere ab et quasi ducimus autdoloribus non numquam. Lorem ipsum dolor, sit amet consecteturadipisicing elit. Quisquam quidem perferendis ab doloribus ipsamratione fugit officia, rem necessitatibus.",
     color: "#6F151D",
-    reviews: "26k"
+    reviews: "26k",
+    category: "category"
   },
   {
     author: "Ariana Godoy",
@@ -24,7 +26,8 @@ export const bestBooksData = [
     description:
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi,rem magnam nesciunt minima placeat, itaque eum neque officiis unde,eaque optio ratione aliquid assumenda facere ab et quasi ducimus autdoloribus non numquam. Lorem ipsum dolor, sit amet consecteturadipisicing elit. Quisquam quidem perferendis ab doloribus ipsamratione fugit officia, rem necessitatibus.",
     color: "#272450",
-    reviews: "11k"
+    reviews: "11k",
+    category: "category"
   },
   {
     author: "Stephanie Garber",
@@ -33,7 +36,8 @@ export const bestBooksData = [
     description:
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi,rem magnam nesciunt minima placeat, itaque eum neque officiis unde,eaque optio ratione aliquid assumenda facere ab et quasi ducimus autdoloribus non numquam. Lorem ipsum dolor, sit amet consecteturadipisicing elit. Quisquam quidem perferendis ab doloribus ipsamratione fugit officia, rem necessitatibus.",
     color: "#488899",
-    reviews: "31k"
+    reviews: "31k",
+    category: "category"
   },
   {
     author: "Antoine De Saint-Exupéry",
@@ -42,7 +46,8 @@ export const bestBooksData = [
     description:
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi,rem magnam nesciunt minima placeat, itaque eum neque officiis unde,eaque optio ratione aliquid assumenda facere ab et quasi ducimus autdoloribus non numquam. Lorem ipsum dolor, sit amet consecteturadipisicing elit. Quisquam quidem perferendis ab doloribus ipsamratione fugit officia, rem necessitatibus.",
     color: "#A5A5A6",
-    reviews: "41k"
+    reviews: "41k",
+    category: "category"
   },
   {
     author: "J.K Rowling",
@@ -51,7 +56,8 @@ export const bestBooksData = [
     description:
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi,rem magnam nesciunt minima placeat, itaque eum neque officiis unde,eaque optio ratione aliquid assumenda facere ab et quasi ducimus autdoloribus non numquam. Lorem ipsum dolor, sit amet consecteturadipisicing elit. Quisquam quidem perferendis ab doloribus ipsamratione fugit officia, rem necessitatibus.",
     color: "#12284C",
-    reviews: "20k"
+    reviews: "20k",
+    category: "category"
   },
   {
     author: "Eva Muñoz",
@@ -60,7 +66,8 @@ export const bestBooksData = [
     description:
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi,rem magnam nesciunt minima placeat, itaque eum neque officiis unde,eaque optio ratione aliquid assumenda facere ab et quasi ducimus autdoloribus non numquam. Lorem ipsum dolor, sit amet consecteturadipisicing elit. Quisquam quidem perferendis ab doloribus ipsamratione fugit officia, rem necessitatibus.",
     color: "#182139",
-    reviews: "81k"
+    reviews: "81k",
+    category: "category"
   },
   {
     author: "Jessica Rivas",
@@ -69,7 +76,8 @@ export const bestBooksData = [
     description:
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi,rem magnam nesciunt minima placeat, itaque eum neque officiis unde,eaque optio ratione aliquid assumenda facere ab et quasi ducimus autdoloribus non numquam. Lorem ipsum dolor, sit amet consecteturadipisicing elit. Quisquam quidem perferendis ab doloribus ipsamratione fugit officia, rem necessitatibus.",
     color: "#404145",
-    reviews: "12k"
+    reviews: "12k",
+    category: "category"
   },
 ];
 
