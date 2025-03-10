@@ -15,7 +15,7 @@ export const BookGroup = ({ books, itemHeight }) => (
 );
 
 export const BookGroupCard = ({ books, itemHeight }) => (
-  <div className={`flex justify-center gap-3 px-6`}>
+  <div className={`flex justify-center gap-3 px-6 mt-5`}>
     {books.map((book) => (
       <div
         key={book.id}
