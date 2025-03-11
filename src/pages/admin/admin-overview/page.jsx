@@ -2,7 +2,7 @@ import { lazy } from "react";
 import LoadSuspense from "@/components/load-suspense";
 import AuthenticatedLayout from "@/layout/authenticated-layout";
 
-const AdminUser = lazy(() => import("@/views/admin-page"));
+const AdminUserView = lazy(() => import("@/views/admin-page"));
 const SidebarView = lazy(() => import("@/views/navbar/sidebar"));
 
 const AdminOverViewPage = () => {
@@ -14,7 +14,7 @@ const AdminOverViewPage = () => {
             <SidebarView />
           </div>
           <div className="col-span-10 relative -mt-1">
-            <AdminView />
+            <AdminUserView />
             <div className="absolute bg-gray-50 w-full h-20 -bottom-20 z-[-1]" />
           </div>
         </div>
