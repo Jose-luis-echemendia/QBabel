@@ -7,11 +7,11 @@ import "react-toastify/dist/ReactToastify.css";
 
 const AuthenticatedLayout = ({ children }) => {
   return (
-    <LoadSuspense className="flex flex-col">
+    <LoadSuspense className="flex flex-col overflow-hidden">
       <NavBar />
       <ToastContainer autoClose={5000} />
       <main className="antialiased">{children}</main>
-      <footer className="pb-6 z-10 w-full">
+      <footer className="pb-6 z-10 w-full ml-28">
         <CustomFooter textColor="text-black"/>
       </footer>
     </LoadSuspense>
