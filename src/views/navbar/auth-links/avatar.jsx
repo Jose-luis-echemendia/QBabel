@@ -51,13 +51,11 @@ export const CustomAvatar = ({ imageAvatar, user }) => {
               color="blue-gray"
               className="flex items-center rounded-full p-0"
             >
-              {" "}
               <div className="flex items-center gap-4 mr-5">
                 <Avatar src={imageAvatar.image} alt={imageAvatar.alt} />
                 <div>
                   <Typography variant="h6" className="text-primary">
-                    {" "}
-                    {user.user_name}{" "}
+                    {user.user_name}
                   </Typography>
                 </div>
               </div>
