@@ -76,9 +76,9 @@ export const customTheme = {
               <motion.button
                 onClick={handleNext}
                 className="!absolute shadow-2xl top-2/4 right-0 -translate-y-2/4 rounded-full select-none transition-all w-10 max-w-[48px] h-10 max-h-[48px] bg-gray-300 hover:bg-gray-400 active:bg-white/30 grid place-items-center"
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
+                exit={{ opacity: 0, x: 20 }}
                 transition={{ duration: 0.3 }}
               >
                 <NextArrow strokeWidth={3} className="ml-1 h-7 w-7" />
