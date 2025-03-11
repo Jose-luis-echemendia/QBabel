@@ -82,7 +82,7 @@ const TABLE_ROWS = [
   },
 ];
  
-const AdminUser = () => {
+const AdminUserView = () => {
   return (
     <Card className="h-full w-full">
       <CardHeader floated={false} shadow={false} className="rounded-none">
@@ -241,4 +241,4 @@ const AdminUser = () => {
   );
 }
 
-export default AdminUser
+export default AdminUserView
