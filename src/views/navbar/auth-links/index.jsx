@@ -6,7 +6,16 @@ export const AuthLinks = () => {
   const auth = useAppSelector((state) => state.auth);
   return (
     <>
-      <div>{auth.isAuthenticated ? <CustomAvatar imageAvatar={auth.profile.avatar_details} user={auth.user} /> : <GetAuthLinks/>}</div>
+      <div>
+        {auth.isAuthenticated ? (
+          <CustomAvatar
+            imageAvatar={auth.profile.avatar_details}
+            user={auth.user}
+          />
+        ) : (
+          <GetAuthLinks />
+        )}
+      </div>
     </>
   );
 };
