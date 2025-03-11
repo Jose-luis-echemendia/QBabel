@@ -16,7 +16,8 @@ import {
   IconButton,
   Tooltip,
 } from "@material-tailwind/react";
- 
+import Pagination from "@/components/pagination";
+
 const TABS = [
   {
     label: "All",
@@ -31,9 +32,9 @@ const TABS = [
     value: "unmonitored",
   },
 ];
- 
-const TABLE_HEAD = ["Member", "Function", "Status", "Employed", ""];
- 
+
+const TABLE_HEAD = ["Nombre & Email", "Rol", "Activo", "Fecha", ""];
+
 const TABLE_ROWS = [
   {
     img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg",
@@ -81,21 +82,20 @@ const TABLE_ROWS = [
     date: "04/10/21",
   },
 ];
- 
+
 const AdminUserView = () => {
   return (
-    <Card className="h-full w-fit bg-gray-50 shadow-none max-h-[600px]">
-      <CardHeader floated={false} shadow={false} className="rounded-none">
-        <div className="mb-8 flex items-center justify-between gap-8">
+    <Card className="h-full w-full bg-gray-50 shadow-none ">
+      <CardHeader
+        floated={false}
+        shadow={false}
+        className="rounded-none bg-gray-50"
+      >
+        <div className="mb-2 ml-1 flex items-center justify-between gap-8">
           <div>
             <Typography variant="h5" color="blue-gray">
-               Usuarios de QBabel
+              Usuarios de QBabel
             </Typography>
-          </div>
-          <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
-            <Button className="flex items-center gap-3" size="sm">
-              <UserPlusIcon strokeWidth={2} className="h-4 w-4" /> Add member
-            </Button>
           </div>
         </div>
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
@@ -117,7 +117,7 @@ const AdminUserView = () => {
         </div>
       </CardHeader>
       <CardBody className="px-0">
-        <table className="mt-4 w-full min-w-max table-auto text-left">
+        <table className="mt-0 w-full min-w-max table-auto text-left">
           <thead>
             <tr>
               {TABLE_HEAD.map((head) => (
@@ -143,7 +143,7 @@ const AdminUserView = () => {
                 const classes = isLast
                   ? "p-4"
                   : "p-4 border-b border-blue-gray-50";
- 
+
                 return (
                   <tr key={name}>
                     <td className={classes}>
@@ -204,16 +204,9 @@ const AdminUserView = () => {
                         {date}
                       </Typography>
                     </td>
-                    <td className={classes}>
-                      <Tooltip content="Edit User">
-                        <IconButton variant="text">
-                          <PencilIcon className="h-4 w-4" />
-                        </IconButton>
-                      </Tooltip>
-                    </td>
                   </tr>
                 );
-              },
+              }
             )}
           </tbody>
         </table>
@@ -233,6 +226,6 @@ const AdminUserView = () => {
       </CardFooter>
     </Card>
   );
-}
+};
 
-export default AdminUserView
+export default AdminUserView;
