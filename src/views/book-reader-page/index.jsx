@@ -50,7 +50,7 @@ const BookReaderView = () => {
         <button
           onClick={goToPrevPage}
           disabled={pageNumber <= 1}
-          className={`text-2xl text-slate-100 transition-all duration-200 hover:text-2xl hover:text-whitesmoke hover:bg-[#a76c00] px-3 py-1 pl-5 pr-2 rounded-tl-2xl rounded-bl-2xl rounded-tr-lg rounded-br-lg ${activeButton === 'previous' ? 'bg-[#a76c00]' : 'bg-[#422b00]'}`}
+          className={`text-2xl text-gray-100 transition-all duration-200 hover:text-2xl hover:text-whitesmoke hover:bg-[#a76c00] px-3 py-1 pl-5 pr-2 rounded-tl-2xl rounded-bl-2xl rounded-tr-lg rounded-br-lg ${activeButton === 'previous' ? 'bg-[#a76c00]' : 'bg-[#422b00]'}`}
         >
           Anterior
         </button>
@@ -60,7 +60,7 @@ const BookReaderView = () => {
         <button
           onClick={goToNextPage}
           disabled={pageNumber >= numPages}
-          className={`text-2xl text-slate-100 bg-[#422b00] transition-all duration-200 hover:text-2xl hover:text-whitesmoke hover:bg-[#a76c00] px-5 py-1 pl-2 pr-5 rounded-tl-lg rounded-bl-lg rounded-tr-2xl rounded-br-2xl ${activeButton === 'next' ? 'bg-[#a76c00]' : 'bg-[#422b00]'}`}
+          className={`text-2xl text-gray-100 bg-[#422b00] transition-all duration-200 hover:text-2xl hover:text-whitesmoke hover:bg-[#a76c00] px-5 py-1 pl-2 pr-5 rounded-tl-lg rounded-bl-lg rounded-tr-2xl rounded-br-2xl ${activeButton === 'next' ? 'bg-[#a76c00]' : 'bg-[#422b00]'}`}
         >
           Siguiente
         </button>
