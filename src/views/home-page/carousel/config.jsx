@@ -1,3 +1,4 @@
+import { motion, AnimatePresence } from "framer-motion";
 
 export const PrevArrow = () => (
   <svg
@@ -34,7 +35,7 @@ export const NextArrow = () => (
 );
 
 export const customNavigation = ({ setActiveIndex, activeIndex, length }) => (
-    <div className="absolute -bottom-0 left-2/4 z-50 flex -translate-x-2/4 gap-2.5">
+  <div className="absolute -bottom-0 left-2/4 z-50 flex -translate-x-2/4 gap-2.5">
     {new Array(length).fill("").map((_, i) => (
       <span
         key={i}
@@ -52,16 +53,20 @@ export const customTheme = {
     defaultProps: {
       prevArrow: ({ loop, handlePrev, firstIndex }) => {
         return (
-          <>
+          <AnimatePresence>
             {!(!loop && firstIndex) && (
-              <button
+              <motion.button
                 onClick={handlePrev}
                 className="!absolute shadow-2xl top-2/4 left-0 -translate-y-2/4 rounded-full select-none transition-all w-10 max-w-[48px] h-10 max-h-[48px] bg-gray-300 hover:bg-gray-400 active:bg-white/30 grid place-items-center"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
               >
                 <PrevArrow strokeWidth={3} className="-ml-1 h-7 w-7" />
-              </button>
+              </motion.button>
             )}
-          </>
+          </AnimatePresence>
         );
       },
       nextArrow: ({ loop, handleNext, lastIndex }) => (
