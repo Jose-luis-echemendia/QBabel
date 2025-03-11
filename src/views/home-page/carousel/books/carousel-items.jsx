@@ -12,21 +12,21 @@ export const BookGroup = ({ books, itemHeight, boolsPerSlide }) => (
           alt={book.title}
           className={
             boolsPerSlide < 8
-              ? "h-72 w-full object-cover rounded-xl" 
+              ? "h-72 w-full object-cover rounded-xl"
               : "h-56 w-40 object-cover rounded-xl"
           }
         />
-        <span className="ml-2 bg-gray-200 w-fit p-0.5 px-2 mt-1 rounded-xl font-opensans text-black font-semibold">
-          {book.category}{" "}
+        <span className="ml-2 bg-gray-200 w-fit p-0.5 px-2 mt-1 rounded-xl font-opensans text-black text-sm font-semibold">
+          {book.category}
         </span>
-        <span className="ml-3 flex gap-1.5 text-gray-800 mt-1">
+        <span className="ml-3 flex gap-1.5 text-gray-800 mt-1 text-xs">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="size-6"
+            className="size-4"
           >
             <path
               strokeLinecap="round"
@@ -38,8 +38,8 @@ export const BookGroup = ({ books, itemHeight, boolsPerSlide }) => (
               strokeLinejoin="round"
               d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
             />
-          </svg>{" "}
-          {book.reviews}{" "}
+          </svg>
+          {book.reviews}
         </span>
       </figure>
     ))}
@@ -60,23 +60,21 @@ export const BookGroupCard = ({ books, itemHeight }) => (
             className="h-full w-full object-cover rounded-l-xl"
           />
         </figure>
-        <div className="flex flex-col gap-4 pt-3 px-2">
+        <div className="flex flex-col gap-2 pt-5 px-2">
           <h4 className="text-xl text-black font-opensans font-bold">
-            {" "}
-            {book.tittle}{" "}
+            {book.tittle}
           </h4>
           <p className="text-sm text-start text-gray-800 pr-5">
-            {" "}
-            {book.description}{" "}
+            {book.description}
           </p>
-          <span className="flex gap-1.5 -mt-1 text-gray-800">
+          <span className="flex gap-1.5 -mt-1 text-gray-800 text-sm">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="size-6"
+              className="size-5"
             >
               <path
                 strokeLinecap="round"
@@ -89,7 +87,6 @@ export const BookGroupCard = ({ books, itemHeight }) => (
                 d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
               />
             </svg>
-
             {book.reviews}
           </span>
         </div>
