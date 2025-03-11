@@ -46,7 +46,7 @@ export const BookGroup = ({ books, itemHeight, boolsPerSlide }) => (
   </div>
 );
 
-export const BookGroupCard = ({ books, itemHeight }) => (
+export const BookGroupCard = ({ books, itemHeight, boolsPerSlide }) => (
   <div className={`flex justify-center gap-3 px-6 mt-5`}>
     {books.map((book) => (
       <div
@@ -104,4 +104,5 @@ BookGroupCard.propTypes = BookGroup.propTypes = {
     })
   ).isRequired,
   itemHeight: PropTypes.string.isRequired,
+  boolsPerSlide: PropTypes.number,
 };
