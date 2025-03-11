@@ -3,7 +3,7 @@
 import classNames from 'classnames'
 import React from 'react'
 import PropTypes from 'prop-types'
-import { IconArrowLeft, IconArrowRigth } from '@components/icons/custom-icons'
+import { IconArrowLeft, IconArrowRigth } from '@/components/icons/custom-icons'
 
 const Pagination = ({ className, totalPages, currentPage, setCurrentPage, variant = 'orange' }) => {
   const getPageNumbers = () => {
