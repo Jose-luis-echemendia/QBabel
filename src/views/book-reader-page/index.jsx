@@ -5,6 +5,7 @@ const BookReaderView = () => {
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
   const [activeButton, setActiveButton] = useState('');
+  const [scale, setScale] = useState(1);
 
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
@@ -30,6 +31,23 @@ const BookReaderView = () => {
   }
 
   useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth <= 400) {
+        setScale(0.5);
+      } else {
+        setScale(1);
+      }
+    }
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
     function handleKeyDown(event) {
       if (event.key === 'ArrowLeft') {
         goToPrevPage();
@@ -45,12 +63,12 @@ const BookReaderView = () => {
   }, [numPages, pageNumber]);
 
   return (
-    <div className='bg-[#fff8eb] flex flex-col items-center h-screen'>
-      <div className='flex items-center gap-5 mb-5 mt-5 text-2xl'>
+    <div className='bg-[#fff8eb] flex flex-col items-center h-screen overflow-x-hidden'>
+      <div div className='flex items-center gap-5 mb-5 mt-5 text-xl sm:text-2xl' >
         <button
           onClick={goToPrevPage}
           disabled={pageNumber <= 1}
-          className={`text-2xl text-gray-100 transition-all duration-200 hover:text-2xl hover:text-whitesmoke hover:bg-[#a76c00] px-3 py-1 pl-5 pr-2 rounded-tl-2xl rounded-bl-2xl rounded-tr-lg rounded-br-lg ${activeButton === 'previous' ? 'bg-[#a76c00]' : 'bg-[#422b00]'}`}
+          className={`text-xl sm:text-2xl text-gray-100 transition-all duration-200 hover:text-xl sm:hover:text-2xl hover:text-whitesmoke hover:bg-[#a76c00] px-2 sm:px-3 py-1 pl-3 sm:pl-5 pr-2 rounded-tl-2xl rounded-bl-2xl rounded-tr-lg rounded-br-lg ${activeButton === 'previous' ? 'bg-[#a76c00]' : 'bg-[#422b00]'}`}
         >
           Anterior
         </button>
@@ -60,42 +78,36 @@ const BookReaderView = () => {
         <button
           onClick={goToNextPage}
           disabled={pageNumber >= numPages}
-          className={`text-2xl text-gray-100 bg-[#422b00] transition-all duration-200 hover:text-2xl hover:text-whitesmoke hover:bg-[#a76c00] px-5 py-1 pl-2 pr-5 rounded-tl-lg rounded-bl-lg rounded-tr-2xl rounded-br-2xl ${activeButton === 'next' ? 'bg-[#a76c00]' : 'bg-[#422b00]'}`}
+          className={`text-xl sm:text-2xl text-gray-100 transition-all duration-200 hover:text-xl sm:hover:text-2xl hover:text-whitesmoke hover:bg-[#a76c00] px-2 sm:px-3 py-1 pl-2 sm:pl-5 pr-2 rounded-tl-lg rounded-bl-lg rounded-tr-2xl rounded-br-2xl ${activeButton === 'next' ? 'bg-[#a76c00]' : 'bg-[#422b00]'}`}
         >
           Siguiente
         </button>
-        {/*<input
-                    type="number"
-                    min="1"
-                    max={numPages || 1}
-                    value={pageNumber}
-                    onChange={handlePageNumberChange}
-                    aria-label="Page Number"
-                />*/}
-      </div>
+      </div >
 
       <Document file="/pdf.pdf" onLoadSuccess={onDocumentLoadSuccess}>
-        <div className="flex justify-center items-center h-full border-8 border-[#492800] rounded-2xl bg-white shadow-2xl shadow-gray-800 sm:flex-col lg:flex-row">
+        <div className="flex justify-center items-center h-full border-8 border-[#492800] rounded-2xl bg-white shadow-2xl shadow-gray-800 flex-col lg:flex-row">
           <Page
             pageNumber={pageNumber}
             renderTextLayer={false}
             renderAnnotationLayer={false}
-            className="w-[40vw] h-[40vw] flex justify-center items-center rounded-tl-lg rounded-bl-lg"
+            scale={scale}
+            className="w-[80vw] h-[40vw] lg:w-[40vw] lg:h-[40vw] flex justify-center items-center rounded-tl-lg rounded-bl-lg"
           />
           {pageNumber + 1 <= numPages && (
-            <div className="flex items-center h-full rounded-tr-lg rounded-br-lg sm:flex-col lg:flex-row">
-              <div className='lg:w-4 lg:h-full bg-[#492800] sm:w-full sm:h-4'></div>
+            <div className="flex items-center h-full lg:rounded-tr-lg lg:rounded-br-lg flex-col lg:flex-row">
+              <div className='lg:w-4 lg:h-full bg-[#492800] w-full h-4'></div>
               <Page
                 pageNumber={pageNumber + 1}
                 renderTextLayer={false}
                 renderAnnotationLayer={false}
-                className="w-[40vw] h-[40vw] flex justify-center items-center rounded-tr-lg rounded-br-lg"
+                scale={scale}
+                className="w-[80vw] h-[40vw] lg:w-[40vw] lg:h-[40vw] flex justify-center items-center rounded-tr-lg rounded-br-lg"
               />
             </div>
           )}
         </div>
       </Document>
-    </div>
+    </div >
   );
 }
 
