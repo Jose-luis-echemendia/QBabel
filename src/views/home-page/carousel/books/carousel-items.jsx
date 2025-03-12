@@ -12,7 +12,7 @@ export const BookGroup = ({ books, itemHeight, boolsPerSlide }) => (
           alt={book.title}
           className={
             boolsPerSlide < 8
-              ? "h-72 w-full object-cover rounded-xl"
+              ? "h-56 w-full object-cover rounded-xl"
               : "h-56 w-40 object-cover rounded-xl"
           }
         />
@@ -47,20 +47,20 @@ export const BookGroup = ({ books, itemHeight, boolsPerSlide }) => (
 );
 
 export const BookGroupCard = ({ books, itemHeight }) => (
-  <div className={`flex justify-center gap-3 px-6 mt-5`}>
+  <div className={`flex lg:justify-center gap-3 lg:px-6 mt-5 w-full`}>
     {books.map((book) => (
       <div
         key={book.id}
-        className={`${itemHeight} bg-gray-100 flex gap-2  w-1/2 rounded-xl`}
+        className={`${itemHeight} bg-gray-100 flex gap-2 lg:w-1/2 w-full rounded-xl h-full lg:h-56`}
       >
-        <figure className="w-[800px]">
+        <figure className="lg:w-[800px] w-[400px]">
           <img
             src={book.img}
             alt={book.title}
-            className="h-full w-full object-cover rounded-l-xl"
+            className="h-full w-full object-cover rounded-l-xl hover:lg:relative hover:absolute hover:top-0 hover:left-0 hover:bottom-0 hover:right-0"
           />
         </figure>
-        <div className="flex flex-col gap-2 pt-5 px-2">
+        <div className="flex flex-col gap-2 pt-5 px-2 lg:w-[2500px] w-full">
           <h4 className="text-xl text-black font-opensans font-bold">
             {book.tittle}
           </h4>

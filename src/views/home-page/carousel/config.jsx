@@ -39,9 +39,8 @@ export const customNavigation = ({ setActiveIndex, activeIndex, length }) => (
     {new Array(length).fill("").map((_, i) => (
       <span
         key={i}
-        className={`block h-1 cursor-pointer rounded-2xl transition-all content-[''] ${
-          activeIndex === i ? "w-8 bg-black" : "w-4 bg-gray-300"
-        }`}
+        className={`block h-1 cursor-pointer rounded-2xl transition-all content-[''] ${activeIndex === i ? "w-8 bg-black" : "w-4 bg-gray-300"
+          }`}
         onClick={() => setActiveIndex(i)}
       />
     ))}
@@ -57,7 +56,7 @@ export const customTheme = {
             {!(!loop && firstIndex) && (
               <motion.button
                 onClick={handlePrev}
-                className="!absolute shadow-2xl top-2/4 left-0 -translate-y-2/4 rounded-full select-none transition-all w-10 max-w-[48px] h-10 max-h-[48px] bg-gray-300 hover:bg-gray-400 active:bg-white/30 grid place-items-center"
+                className="!absolute shadow-2xl lg:top-2/4 top-[50%] left-0 -translate-y-2/4 rounded-full select-none transition-all w-10 max-w-[48px] h-10 max-h-[48px] bg-gray-300 hover:bg-gray-400 active:bg-white/30 grid place-items-center"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
@@ -75,7 +74,7 @@ export const customTheme = {
             {!(!loop && lastIndex) && (
               <motion.button
                 onClick={handleNext}
-                className="!absolute shadow-2xl top-2/4 right-0 -translate-y-2/4 rounded-full select-none transition-all w-10 max-w-[48px] h-10 max-h-[48px] bg-gray-300 hover:bg-gray-400 active:bg-white/30 grid place-items-center"
+                className="!absolute shadow-2xl lg:top-2/4 top-[50%] right-0 -translate-y-2/4 rounded-full select-none transition-all w-10 max-w-[48px] h-10 max-h-[48px] bg-gray-300 hover:bg-gray-400 active:bg-white/30 grid place-items-center"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 20 }}
