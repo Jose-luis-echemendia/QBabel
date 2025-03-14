@@ -9,18 +9,16 @@ import { Login } from "../auth/login";
 const WelcomeView = () => {
   return (
     <>
-      <div className="">
-        <div className="min-h-screen overflow-hidden">
-          <h2 id="footer-heading" className="sr-only">
-            Welcome
-          </h2>
-          <Hero />
-          <ExploitYourTalent />
-          <BestAuthorPage />
-          <BestBooks />
-          <Categories />
-          <Opinions />
-        </div>
+      <div className="hidden md:block md:min-h-screen md:overflow-hidden">
+        <h2 id="footer-heading" className="sr-only">
+          Welcome
+        </h2>
+        <Hero />
+        <ExploitYourTalent />
+        <BestAuthorPage />
+        <BestBooks />
+        <Categories />
+        <Opinions />
       </div>
       <div className="lg:hidden">
         <Login />
