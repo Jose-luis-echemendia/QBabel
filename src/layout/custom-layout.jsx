@@ -1,17 +1,21 @@
-import PropTypes from 'prop-types';
-import LoadSuspense from '@/components/load-suspense';
-import Footer from '@/views/footer';
-import NavBar from '@/views/navbar';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import PropTypes from "prop-types";
+import LoadSuspense from "@/components/load-suspense";
+import Footer from "@/views/footer";
+import NavBar from "@/views/navbar";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CustomLayout = ({ children }) => {
   return (
     <LoadSuspense className="relative flex flex-col ">
-      <NavBar />
+      <div>
+        <NavBar />
+      </div>
       <ToastContainer autoClose={5000} />
-      <main className='antialiased'>{children}</main>
-      <Footer />
+      <main className="antialiased">{children}</main>
+      <div>
+        <Footer />
+      </div>
     </LoadSuspense>
   );
 };
