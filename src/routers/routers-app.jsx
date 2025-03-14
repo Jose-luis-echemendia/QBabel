@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ProtectedRoute } from "@/components/protected-route";
-import { ProtectedMobileRoute } from "@/components/protected-route/protected-mobile-route";
 import { useAppSelector } from "@/hooks/redux/useStore";
 import { useEffect } from "react";
 import { useAuth } from "@/hooks/redux/useAuth";
@@ -16,13 +15,6 @@ import Error404 from "@/pages/error/Error404";
 // ADMIN PAGES
 import AdminPage from "@/pages/admin/page";
 import AdminUserPage from "@/pages/admin/admin-user/page";
-
-
-// RESPONSIVE PAGE
-import LoginPage from "@/pages/responsive/login/Page";
-
-import MobileRedirect from "./mobile-redirect";
-
 
 const Routers = () => {
   const auth = useAppSelector((state) => state.auth);
@@ -65,7 +57,7 @@ const Routers = () => {
               />
             }
           >
-            <Route path="/" element={<><MobileRedirect/><WelcomePage /></>}></Route>
+            <Route path="/" element={<WelcomePage />}></Route>
           </Route>
 
           {/* HOME DISPLAY */}
@@ -95,18 +87,6 @@ const Routers = () => {
           {/* PAGES DISPLAY */}
           <Route path="/books/:bookId" element={<DetailsBookPage />}></Route>
 
-
-          {/* RESPONSIVE DISPLAY */}
-          <Route
-            element={
-              <ProtectedMobileRoute
-                redirectTo="/home"
-                isAllowed={!auth.isAuthenticated}
-              />
-            }
-          >
-            <Route path="/login" element={<LoginPage />}></Route>
-          </Route>
         </Routes>
       </Router>
     </>
