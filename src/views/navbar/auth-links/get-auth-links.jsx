@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { CustomIcon } from "@/components/icons/custom-icons";
 import { CustomModal } from "@/components/modal/index";
-import { Login } from "@/views/auth/Login";
+import { Login } from "@/views/auth/login";
 import { Signup } from "@/views/auth/Signup";
 
 export const GetAuthLinks = () => {
