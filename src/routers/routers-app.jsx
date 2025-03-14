@@ -61,13 +61,13 @@ const Routers = () => {
             <Route path="/" element={<WelcomePage />}></Route>
           </Route>
 
-          <Route path="/home" element={<HomePage />}></Route>
           {/* HOME DISPLAY */}
           <Route
             element={
               <ProtectedRoute redirectTo="/" isAllowed={auth.isAuthenticated} />
             }
           >
+            <Route path="/home" element={<HomePage />}></Route>
             <Route path="/library" element={<LibraryPage />}></Route>
             <Route path="/books/reader/:bookId" element={<BookReaderPage />}></Route>
           </Route>
