@@ -124,7 +124,7 @@ const NavBar = () => {
           </div>
         </nav>
       </header>
-      <nav className="pt-5 -mb-10">
+      <nav className="pt-5 -mb-10 lg:hidden">
         <div className="flex items-center justify-center gap-2 px-4 py-1 rounded-full bg-white/15 background-blur-sm">
           {itemsNavbar.map((item) => (
             <div
