@@ -16,6 +16,9 @@ const profileMenuItems = [
     // icon: UserCircleIcon,
   },
   {
+    label: "Administración"
+  },
+  {
     label: "Mi biblioteca",
     // icon: UserCircleIcon,
   },
@@ -39,8 +42,8 @@ const profileMenuItems = [
 
 export const CustomAvatar = ({ imageAvatar, user }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  console.log(user);
   const closeMenu = () => setIsMenuOpen(false);
+
   return (
     <>
       <div className="mr-10">
@@ -64,6 +67,7 @@ export const CustomAvatar = ({ imageAvatar, user }) => {
           <MenuList className="">
             {profileMenuItems.map(({ label, icon }, key) => {
               const isLastItem = key === profileMenuItems.length - 1;
+              if (label === "Administración" && user.role !== "Admin") return null
               return (
                 <MenuItem
                   key={label}
