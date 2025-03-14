@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ProtectedRoute } from "@/components/protected-route";
+import { ProtectedMobileRoute } from "@/components/protected-route/protected-mobile-route";
 import { useAppSelector } from "@/hooks/redux/useStore";
 import { useEffect } from "react";
 import { useAuth } from "@/hooks/redux/useAuth";
@@ -96,7 +97,16 @@ const Routers = () => {
 
 
           {/* RESPONSIVE DISPLAY */}
-          <Route path="/login" element={<LoginPage />}></Route>
+          <Route
+            element={
+              <ProtectedMobileRoute
+                redirectTo="/home"
+                isAllowed={!auth.isAuthenticated}
+              />
+            }
+          >
+            <Route path="/login" element={<LoginPage />}></Route>
+          </Route>
         </Routes>
       </Router>
     </>
