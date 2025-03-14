@@ -8,12 +8,12 @@ import "react-toastify/dist/ReactToastify.css";
 const CustomLayout = ({ children }) => {
   return (
     <LoadSuspense className="relative flex flex-col ">
-      <div>
+      <div className="hidden md:block">
         <NavBar />
       </div>
       <ToastContainer autoClose={5000} />
       <main className="antialiased">{children}</main>
-      <div>
+      <div className="hidden md:block">
         <Footer />
       </div>
     </LoadSuspense>
