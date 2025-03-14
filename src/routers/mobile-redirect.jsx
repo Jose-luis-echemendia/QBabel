@@ -5,7 +5,7 @@ const MobileRedirect = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const isMobile = window.innerWidth <= 768; // Ajusta el tamaño según tu criterio
+        const isMobile = window.innerWidth <= 400; // Ajusta el tamaño según tu criterio
         if (isMobile) {
             navigate('/login'); // Redirige a la página de inicio de sesión
         }
