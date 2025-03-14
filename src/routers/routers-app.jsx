@@ -17,6 +17,12 @@ import AdminPage from "@/pages/admin/page";
 import AdminUserPage from "@/pages/admin/admin-user/page";
 
 
+// RESPONSIVE PAGE
+import LoginPage from "@/pages/responsive/login/Page";
+
+import MobileRedirect from "./mobile-redirect";
+
+
 const Routers = () => {
   const auth = useAppSelector((state) => state.auth);
   const {
@@ -58,7 +64,7 @@ const Routers = () => {
               />
             }
           >
-            <Route path="/" element={<WelcomePage />}></Route>
+            <Route path="/" element={<><MobileRedirect/><WelcomePage /></>}></Route>
           </Route>
 
           {/* HOME DISPLAY */}
@@ -87,6 +93,10 @@ const Routers = () => {
 
           {/* PAGES DISPLAY */}
           <Route path="/books/:bookId" element={<DetailsBookPage />}></Route>
+
+
+          {/* RESPONSIVE DISPLAY */}
+          <Route path="/login" element={<LoginPage />}></Route>
         </Routes>
       </Router>
     </>
