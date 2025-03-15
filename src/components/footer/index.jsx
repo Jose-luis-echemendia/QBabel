@@ -65,7 +65,7 @@ const social = [
 const CustomFooter = ({textColor = "text-white-100" }) => {
   return (
     <>
-      <div className="flex gap-10 mt-8 justify-center">
+      <div className="lg:flex lg:gap-10 lg:mt-8 lg:justify-center">
         <a className={`${textColor} hover:text-opacity-60 hover:cursor-pointer`}>
           Condiciones
         </a>
