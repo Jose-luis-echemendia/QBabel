@@ -2,9 +2,11 @@ import { IconLogo } from "@/components/icons/logo-icon";
 import { ExplorePopover } from "./popover-explore";
 import { CustomIcon } from "@/components/icons/custom-icons";
 import { AuthLinks } from "./auth-links";
+import { useAppSelector } from "@/hooks/redux/useStore";
 import ResponsiveNav from "./responsive";
 
 const NavBar = () => {
+  const auth = useAppSelector((state) => state.auth);
   return (
     <>
       <header className="hidden md:block w-full h-[80px] bg-black-500 p-1 border-b border-black-500 shadow-lg shadow-gray-400">
@@ -37,7 +39,7 @@ const NavBar = () => {
           </div>
         </nav>
       </header>
-      <ResponsiveNav />
+      {auth.isAuthenticated && <ResponsiveNav />}
     </>
   );
 };
