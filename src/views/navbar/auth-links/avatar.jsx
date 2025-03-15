@@ -46,6 +46,9 @@ export const CustomAvatar = () => {
   const closeMenu = () => setIsMenuOpen(false);
   const auth = useAppSelector((state) => state.auth);
 
+  console.log(auth);
+  if (auth.profile === null && auth.user === null) return null;
+
   return (
     <>
       <div className="mr-10 lg:ml-0 ml-2">
