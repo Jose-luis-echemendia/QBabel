@@ -62,31 +62,42 @@ const social = [
   },
 ];
 
-const CustomFooter = ({textColor = "text-white-100" }) => {
+const CustomFooter = ({ textColor = "text-white-100" }) => {
   return (
     <>
-      <div className="lg:flex lg:gap-10 lg:mt-8 lg:justify-center">
-        <a className={`${textColor} hover:text-opacity-60 hover:cursor-pointer`}>
-          Condiciones
-        </a>
-        <a className={`${textColor} hover:text-opacity-60 hover:cursor-pointer`}>
-          Privacidad
-        </a>
-        <a className={`${textColor} hover:text-opacity-60 hover:cursor-pointer`}>
-          Políticas de pagos
-        </a>
-        <a className={`${textColor} hover:text-opacity-60 hover:cursor-pointer`}>
-          Accesibilidad
-        </a>
-        <a className={`${textColor} hover:text-opacity-60 hover:cursor-pointer`}>
-          Ayuda
-        </a>
-        {
-          textColor === "text-white-100" ?
-          <div className="h-4 w-[2px] bg-primary" />:
-          <div className="h-4 w-[2px] bg-black" />
-
-        }
+      <div className="lg:flex lg:flex-row lg:gap-10 lg:mt-8 lg:justify-center flex flex-col-reverse gap-4 items-center">
+        <div className="flex space-x-5 flex-wrap ml-1 lg:ml-0 justify-center items-center">
+          <a
+            className={`${textColor} hover:text-opacity-60 hover:cursor-pointer`}
+          >
+            Condiciones
+          </a>
+          <a
+            className={`${textColor} hover:text-opacity-60 hover:cursor-pointer`}
+          >
+            Privacidad
+          </a>
+          <a
+            className={`${textColor} hover:text-opacity-60 hover:cursor-pointer`}
+          >
+            Políticas de pagos
+          </a>
+          <a
+            className={`${textColor} hover:text-opacity-60 hover:cursor-pointer`}
+          >
+            Accesibilidad
+          </a>
+          <a
+            className={`${textColor} hover:text-opacity-60 hover:cursor-pointer`}
+          >
+            Ayuda
+          </a>
+        </div>
+        {textColor === "text-white-100" ? (
+          <div className="hidden md:block md:h-4 md:w-[2px] lg:bg-primary" />
+        ) : (
+          <div className="hidden md:block md:h-4 md:w-[2px] lg:bg-black" />
+        )}
         <span className={textColor}>© 2025 QBabel</span>
 
         <div className="flex space-x-6 md:order-2">
@@ -106,4 +117,4 @@ const CustomFooter = ({textColor = "text-white-100" }) => {
   );
 };
 
-export default CustomFooter
+export default CustomFooter;
