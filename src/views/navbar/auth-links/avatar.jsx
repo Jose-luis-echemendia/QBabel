@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { useState } from "react";
+import { useAppSelector } from "@/hooks/redux/useStore";
 import PropTypes from "prop-types";
 
 const profileMenuItems = [
@@ -16,7 +17,7 @@ const profileMenuItems = [
     // icon: UserCircleIcon,
   },
   {
-    label: "Administración"
+    label: "Administración",
   },
   {
     label: "Mi biblioteca",
@@ -40,9 +41,12 @@ const profileMenuItems = [
   },
 ];
 
-export const CustomAvatar = ({ imageAvatar, user }) => {
+export const CustomAvatar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const closeMenu = () => setIsMenuOpen(false);
+  const auth = useAppSelector((state) => state.auth);
+
+  console.log("auth", auth)
 
   return (
     <>
@@ -55,10 +59,13 @@ export const CustomAvatar = ({ imageAvatar, user }) => {
               className="flex items-center rounded-full p-0"
             >
               <div className="flex items-center gap-4 mr-5">
-                <Avatar src={imageAvatar.image} alt={imageAvatar.alt} />
+                <Avatar
+                  src={auth.profile.avatar_details.image}
+                  alt={auth.profile.avatar_details.alt}
+                />
                 <div>
                   <Typography variant="h6" className="text-primary">
-                    {user.user_name}
+                    {auth.user.user_name}
                   </Typography>
                 </div>
               </div>
@@ -67,7 +74,8 @@ export const CustomAvatar = ({ imageAvatar, user }) => {
           <MenuList className="">
             {profileMenuItems.map(({ label, icon }, key) => {
               const isLastItem = key === profileMenuItems.length - 1;
-              if (label === "Administración" && user.role !== "Admin") return null
+              if (label === "Administración" && auth.user.role !== "Admin")
+                return null;
               return (
                 <MenuItem
                   key={label}
