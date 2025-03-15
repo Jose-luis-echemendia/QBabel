@@ -14,7 +14,7 @@ export default withMT({
         'primary-100': '#e9cb6f',
         'white-100': '#FFFFFF',
         'black-500': '#2E2E2E',
-        'gray': '#625453',
+        'gray-cam': '#625453',
         'marron-100': '#251919',
         'marron-50': '#644844',
         'black-80': '#110A09'
