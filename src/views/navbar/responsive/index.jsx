@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { CustomAvatar } from "../auth-links/avatar";
 
 const itemsNavbar = [
   {
@@ -87,11 +88,10 @@ const itemsNavbar = [
   },
 ];
 
-
 const ResponsiveNav = () => {
   return (
     <>
-    <nav className="pt-5 -mb-10 lg:hidden">
+      <nav className="pt-5 -mb-10 lg:hidden">
         <div className="flex items-center justify-center gap-2 px-4 py-1 rounded-full bg-white/15 background-blur-sm">
           {itemsNavbar.map((item) => (
             <div
@@ -104,10 +104,11 @@ const ResponsiveNav = () => {
               </Link>
             </div>
           ))}
+          <CustomAvatar />
         </div>
       </nav>
     </>
-  )
-}
+  );
+};
 
-export default ResponsiveNav
+export default ResponsiveNav;
