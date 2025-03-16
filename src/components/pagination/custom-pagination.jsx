@@ -2,7 +2,7 @@ import React from "react";
 import { Button, IconButton } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
  
-export const CustomPagination = () => {
+export const CustomTablePagination = () => {
   const [active, setActive] = React.useState(1);
  
   const getItemProps = (index) =>
