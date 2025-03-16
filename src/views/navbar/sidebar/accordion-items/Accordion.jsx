@@ -104,7 +104,7 @@ const SidebarAccordion = () => {
               onClick={() => handleOpen(element.id)}
               className="border-b-0 p-3"
             >
-              <NavLink className={`flex items-center gap-2`}>
+              <NavLink to={element.highlightPath[0]} className={`flex items-center gap-8`}>
                 {element.icon}
                 <span>{element.label}</span>
               </NavLink>
