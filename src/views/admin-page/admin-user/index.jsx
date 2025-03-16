@@ -142,7 +142,7 @@ const AdminUserView = () => {
                 return (
                   <tr key={name}>
                     <td className={classes}>
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-3 ml-2.5">
                         <Avatar src={img} alt={name} size="sm" />
                         <div className="flex flex-col">
                           <Typography
