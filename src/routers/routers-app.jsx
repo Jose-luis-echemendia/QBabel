@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ProtectedRoute } from "@/components/protected-route";
 import { useAppSelector } from "@/hooks/redux/useStore";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "@/hooks/redux/useAuth";
 
 //PAGES
@@ -16,6 +16,8 @@ import Error404 from "@/pages/error/Error404";
 import AdminPage from "@/pages/admin/page";
 import AdminUserPage from "@/pages/admin/admin-user/page";
 
+import LoadSuspense from "@/components/load-suspense";
+
 const Routers = () => {
   const auth = useAppSelector((state) => state.auth);
   const {
@@ -25,24 +27,27 @@ const Routers = () => {
     handlRefreshToken,
   } = useAuth();
   console.log(auth);
-
-  const getStateAuth = () => {
-    try {
-      handlRefreshToken();
-      handleVerifyToken();
-      handleGetAuthenticatedUser();
-      handleGetAuthenticatedUserProfile();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    const getStateAuth = async () => {
+      try {
+        await handlRefreshToken();
+        await handleVerifyToken();
+        await handleGetAuthenticatedUser();
+        await handleGetAuthenticatedUserProfile();
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
     getStateAuth();
-  }, [auth.isAuthenticated]);
+  }, []);
 
   return (
-    <>
+    <LoadSuspense>
       <Router>
         <Routes>
           {/* ERROR DISPLAY */}
@@ -68,7 +73,10 @@ const Routers = () => {
           >
             <Route path="/home" element={<HomePage />}></Route>
             <Route path="/library" element={<LibraryPage />}></Route>
-            <Route path="/books/reader/:bookId" element={<BookReaderPage />}></Route>
+            <Route
+              path="/books/reader/:bookId"
+              element={<BookReaderPage />}
+            ></Route>
           </Route>
 
           {/* ADMIN DISPLAY */}
@@ -86,10 +94,9 @@ const Routers = () => {
 
           {/* PAGES DISPLAY */}
           <Route path="/books/:bookId" element={<DetailsBookPage />}></Route>
-
         </Routes>
       </Router>
-    </>
+    </LoadSuspense>
   );
 };
 
