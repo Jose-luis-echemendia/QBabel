@@ -13,56 +13,57 @@ import { useAuth } from "@/hooks/redux/useAuth";
 import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 
-const profileMenuItems = [
-  {
-    label: "Mi perfil",
-    navigateTo: "/#",
-    action: null,
-    // icon: UserCircleIcon,
-  },
-  {
-    label: "Administración",
-    navigateTo: "/#",
-    action: null,
-    // icon: UserCircleIcon,
-  },
-  {
-    label: "Mi biblioteca",
-    navigateTo: "/#",
-    action: null,
-    // icon: UserCircleIcon,
-  },
-  {
-    label: "Mi buzón",
-    navigateTo: "/#",
-    action: null,
-    // icon: Cog6ToothIcon,
-  },
-  {
-    label: "Inbox",
-    navigateTo: "/#",
-    action: null,
-    // icon: InboxArrowDownIcon,
-  },
-  {
-    label: "Ayuda",
-    navigateTo: "/#",
-    action: null,
-    // icon: LifebuoyIcon,
-  },
-  {
-    label: "Cerrar sesión",
-    navigateTo: "/",
-    action: null,
-    // icon: PowerIcon,
-  },
-];
-
 export const CustomAvatar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const closeMenu = () => setIsMenuOpen(false);
+  
   const auth = useAppSelector((state) => state.auth);
   const { handleLogout } = useAuth();
+
+  const profileMenuItems = [
+    {
+      label: "Mi perfil",
+      navigateTo: "/#",
+      action: null,
+      // icon: UserCircleIcon,
+    },
+    {
+      label: "Administración",
+      navigateTo: "/#",
+      action: null,
+      // icon: UserCircleIcon,
+    },
+    {
+      label: "Mi biblioteca",
+      navigateTo: "/#",
+      action: null,
+      // icon: UserCircleIcon,
+    },
+    {
+      label: "Mi buzón",
+      navigateTo: "/#",
+      action: null,
+      // icon: Cog6ToothIcon,
+    },
+    {
+      label: "Inbox",
+      navigateTo: "/#",
+      action: null,
+      // icon: InboxArrowDownIcon,
+    },
+    {
+      label: "Ayuda",
+      navigateTo: "/#",
+      action: null,
+      // icon: LifebuoyIcon,
+    },
+    {
+      label: "Cerrar sesión",
+      navigateTo: "/",
+      action: () => handleLogout(),
+      // icon: PowerIcon,
+    },
+  ];
 
   return (
     <>
@@ -109,7 +110,7 @@ export const CustomAvatar = () => {
                       className="font-normal"
                       color={isLastItem ? "red" : "inherit"}
                     >
-                      <NavLink to={navigateTo}>{label}</NavLink>
+                      <NavLink to={navigateTo} onClick={action}>{label}</NavLink>
                     </Typography>
                   </MenuItem>
                 );
