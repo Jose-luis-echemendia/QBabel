@@ -16,30 +16,44 @@ import PropTypes from "prop-types";
 const profileMenuItems = [
   {
     label: "Mi perfil",
-    component: <NavLink/>
+    component: <NavLink to="/#" />,
+    action: null,
     // icon: UserCircleIcon,
   },
   {
     label: "Administración",
+    component: <NavLink to="/#" />,
+    action: null,
+    // icon: UserCircleIcon,
   },
   {
     label: "Mi biblioteca",
+    component: <NavLink to="/#" />,
+    action: null,
     // icon: UserCircleIcon,
   },
   {
     label: "Mi buzón",
+    component: <NavLink to="/#" />,
+    action: null,
     // icon: Cog6ToothIcon,
   },
   {
     label: "Inbox",
+    component: <NavLink to="/#" />,
+    action: null,
     // icon: InboxArrowDownIcon,
   },
   {
     label: "Ayuda",
+    component: <NavLink to="/#" />,
+    action: null,
     // icon: LifebuoyIcon,
   },
   {
     label: "Cerrar sesión",
+    component: <NavLink to="/" />,
+    action: null,
     // icon: PowerIcon,
   },
 ];
@@ -81,7 +95,7 @@ export const CustomAvatar = () => {
               return (
                 <MenuItem
                   key={label}
-                  onClick={label==="Cerrar sesión" ? closeMenu : closeMenu}
+                  onClick={label === "Cerrar sesión" ? closeMenu : closeMenu}
                   className={`flex items-center gap-2 rounded ${
                     isLastItem
                       ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
