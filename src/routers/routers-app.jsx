@@ -26,12 +26,12 @@ const Routers = () => {
   } = useAuth();
   console.log(auth);
 
-  const getStateAuth = async () => {
+  const getStateAuth = () => {
     try {
-      await handlRefreshToken();
-      await handleVerifyToken();
-      await handleGetAuthenticatedUser();
-      await handleGetAuthenticatedUserProfile();
+      handlRefreshToken();
+      handleVerifyToken();
+      handleGetAuthenticatedUser();
+      handleGetAuthenticatedUserProfile();
     } catch (error) {
       console.log(error);
     }
@@ -39,7 +39,7 @@ const Routers = () => {
 
   useEffect(() => {
     getStateAuth();
-  }, []);
+  }, [auth.isAuthenticated]);
 
   return (
     <>
