@@ -2,7 +2,7 @@ import { lazy } from "react";
 import LoadSuspense from "@/components/load-suspense";
 import AuthenticatedLayout from "@/layout/authenticated-layout";
 
-const AdminUserView = lazy(() => import("@/views/admin-page"));
+const AdminUserView = lazy(() => import("@/views/admin-page/admin-overview"));
 const SidebarView = lazy(() => import("@/views/navbar/sidebar"));
 
 const AdminOverViewPage = () => {
