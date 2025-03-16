@@ -5,11 +5,11 @@ const Footer = () => {
   return (
     <footer className="w-full max-h-screen h-full p-10 relative flex justify-center items-center bg-[#2E2E2E] text-primary">
       <section className="flex flex-col justify-center items-center w-full">
-        <div className="flex">
-          <h2 className="font-italianno mx-auto w-fit mt-2 text-[64px]">
+        <div className="flex flex-row-reverse items-center justify-center">
+          <h2 className="font-italianno mx-auto w-fit mt-2 text-[50px]">
             QBabel siempre disponible para usted
           </h2>
-          <div className="w-full grid grid-cols-10 gap-20 justify-center items-center px-16">
+          <div className="w-full justify-center items-center px-16">
             <div className="col-span-3 flex flex-col justify-center items-center gap-10">
               <figure className="border border-primary rounded-full p-0 m-0">
                 <img
