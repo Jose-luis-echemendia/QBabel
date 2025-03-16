@@ -39,7 +39,7 @@ const Routers = () => {
 
   useEffect(() => {
     getStateAuth();
-  }, [auth.isAuthenticated]);
+  }, []);
 
   return (
     <>
