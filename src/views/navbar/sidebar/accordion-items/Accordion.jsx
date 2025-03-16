@@ -9,6 +9,7 @@ import {
 import { IconCollapse } from "@/components/icons/custom-icons";
 import { IconDashboard } from "@/components/icons/custom-icons";
 import { v4 as uuidv4 } from "uuid";
+import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const elements = [
@@ -103,8 +104,10 @@ const SidebarAccordion = () => {
               onClick={() => handleOpen(element.id)}
               className="border-b-0 p-3"
             >
-              {element.icon}
-              <span>{element.label}</span>
+              <NavLink className={`flex items-center gap-2`}>
+                {element.icon}
+                <span>{element.label}</span>
+              </NavLink>
             </AccordionHeader>
           </ListItem>
           {element.subElements.length > 0 && (
