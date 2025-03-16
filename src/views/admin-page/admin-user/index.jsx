@@ -1,4 +1,4 @@
-import { CustomPagination } from "@/components/pagination/custom-pagination";
+import { CustomTablePagination } from "@/components/pagination/custom-pagination";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import {
   Card,
@@ -207,7 +207,7 @@ const AdminUserView = () => {
         </table>
       </CardBody>
       <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
-        <CustomPagination />
+        <CustomTablePagination />
       </CardFooter>
     </Card>
   );
