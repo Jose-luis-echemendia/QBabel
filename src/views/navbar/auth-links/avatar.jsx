@@ -16,43 +16,43 @@ import PropTypes from "prop-types";
 const profileMenuItems = [
   {
     label: "Mi perfil",
-    component: <NavLink to="/#" />,
+    navigateTo: "/#",
     action: null,
     // icon: UserCircleIcon,
   },
   {
     label: "Administración",
-    component: <NavLink to="/#" />,
+    navigateTo: "/#",
     action: null,
     // icon: UserCircleIcon,
   },
   {
     label: "Mi biblioteca",
-    component: <NavLink to="/#" />,
+    navigateTo: "/#",
     action: null,
     // icon: UserCircleIcon,
   },
   {
     label: "Mi buzón",
-    component: <NavLink to="/#" />,
+    navigateTo: "/#",
     action: null,
     // icon: Cog6ToothIcon,
   },
   {
     label: "Inbox",
-    component: <NavLink to="/#" />,
+    navigateTo: "/#",
     action: null,
     // icon: InboxArrowDownIcon,
   },
   {
     label: "Ayuda",
-    component: <NavLink to="/#" />,
+    navigateTo: "/#",
     action: null,
     // icon: LifebuoyIcon,
   },
   {
     label: "Cerrar sesión",
-    component: <NavLink to="/" />,
+    navigateTo: "/",
     action: null,
     // icon: PowerIcon,
   },
@@ -88,31 +88,33 @@ export const CustomAvatar = () => {
             </Button>
           </MenuHandler>
           <MenuList className="">
-            {profileMenuItems.map(({ label, icon }, key) => {
-              const isLastItem = key === profileMenuItems.length - 1;
-              if (label === "Administración" && auth.user.role !== "Admin")
-                return null;
-              return (
-                <MenuItem
-                  key={label}
-                  onClick={label === "Cerrar sesión" ? closeMenu : closeMenu}
-                  className={`flex items-center gap-2 rounded ${
-                    isLastItem
-                      ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
-                      : ""
-                  }`}
-                >
-                  <Typography
-                    as="span"
-                    variant="small"
-                    className="font-normal"
-                    color={isLastItem ? "red" : "inherit"}
+            {profileMenuItems.map(
+              ({ label, navigateTo, action, icon }, key) => {
+                const isLastItem = key === profileMenuItems.length - 1;
+                if (label === "Administración" && auth.user.role !== "Admin")
+                  return null;
+                return (
+                  <MenuItem
+                    key={label}
+                    onClick={label === "Cerrar sesión" ? closeMenu : closeMenu}
+                    className={`flex items-center gap-2 rounded ${
+                      isLastItem
+                        ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
+                        : ""
+                    }`}
                   >
-                    {label}
-                  </Typography>
-                </MenuItem>
-              );
-            })}
+                    <Typography
+                      as="span"
+                      variant="small"
+                      className="font-normal"
+                      color={isLastItem ? "red" : "inherit"}
+                    >
+                      <NavLink to={navigateTo} >{label}</NavLink>
+                    </Typography>
+                  </MenuItem>
+                );
+              }
+            )}
           </MenuList>
         </Menu>
       </div>
