@@ -18,7 +18,7 @@ const Footer = () => {
               Leer
             </span>
           </button>
-          <button className="bg-primary py-2 px-10 rounded-xl">
+          <button className="bg-primary py-2 px-6 rounded-xl">
             <span className="text-black-500 font-anton font-medium text-2xl">
               Escribir
             </span>
