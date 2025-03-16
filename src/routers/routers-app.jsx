@@ -13,7 +13,7 @@ import BookReaderPage from "@/pages/book-reader/page";
 import Error404 from "@/pages/error/Error404";
 
 // ADMIN PAGES
-import AdminPage from "@/pages/admin/page";
+import AdminOverViewPage from "@/pages/admin/admin-overview/page";
 import AdminUserPage from "@/pages/admin/admin-user/page";
 
 const Routers = () => {
@@ -80,7 +80,7 @@ const Routers = () => {
               />
             }
           >
-            <Route path="/admin" element={<AdminPage />}></Route>
+            <Route path="/admin" element={<AdminOverViewPage />}></Route>
             <Route path="/admin/user" element={<AdminUserPage />}></Route>
           </Route>
 
