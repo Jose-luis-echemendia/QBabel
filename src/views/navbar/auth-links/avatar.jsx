@@ -170,6 +170,8 @@ export const CustomAvatar = () => {
     },
   ];
 
+  if (auth.profile === null || auth.user === null) return <></>;
+
   return (
     <>
       <div className="mr-10 lg:ml-0 ml-2">
@@ -215,7 +217,11 @@ export const CustomAvatar = () => {
                       className="font-normal"
                       color={isLastItem ? "red" : "inherit"}
                     >
-                      <NavLink to={navigateTo} onClick={action} className={`flex items-center gap-2`}>
+                      <NavLink
+                        to={navigateTo}
+                        onClick={action}
+                        className={`flex items-center gap-2`}
+                      >
                         {icon} {label}
                       </NavLink>
                     </Typography>
