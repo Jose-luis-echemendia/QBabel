@@ -9,11 +9,14 @@ import {
 } from "@material-tailwind/react";
 import { useState } from "react";
 import { useAppSelector } from "@/hooks/redux/useStore";
+import { useAuth } from "@/hooks/redux/useAuth";
+import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const profileMenuItems = [
   {
     label: "Mi perfil",
+    component: <NavLink/>
     // icon: UserCircleIcon,
   },
   {
@@ -45,6 +48,7 @@ export const CustomAvatar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const closeMenu = () => setIsMenuOpen(false);
   const auth = useAppSelector((state) => state.auth);
+  const { handleLogout } = useAuth();
 
   return (
     <>
@@ -77,7 +81,7 @@ export const CustomAvatar = () => {
               return (
                 <MenuItem
                   key={label}
-                  onClick={closeMenu}
+                  onClick={label==="Cerrar sesión" ? closeMenu : closeMenu}
                   className={`flex items-center gap-2 rounded ${
                     isLastItem
                       ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
