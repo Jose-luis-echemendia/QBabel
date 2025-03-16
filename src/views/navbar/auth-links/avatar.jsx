@@ -109,7 +109,7 @@ export const CustomAvatar = () => {
                       className="font-normal"
                       color={isLastItem ? "red" : "inherit"}
                     >
-                      <NavLink to={navigateTo} >{label}</NavLink>
+                      <NavLink to={navigateTo}>{label}</NavLink>
                     </Typography>
                   </MenuItem>
                 );
