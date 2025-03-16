@@ -102,10 +102,6 @@ export const CustomAvatar = () => {
                       : ""
                   }`}
                 >
-                  {/* {React.createElement(icon, {
-                                className: `h-4 w-4 ${isLastItem ? "text-red-500" : ""}`,
-                                strokeWidth: 2,
-                            })} */}
                   <Typography
                     as="span"
                     variant="small"
