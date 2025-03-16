@@ -128,8 +128,12 @@ export const authSlice = createSlice({
         state.jwtTokenAccess = null;
         state.jwtTokenRefresh = null;
         state.user = null;
+        state.profile = null;
+        localStorage.removeItem("isAuthenticated");
         localStorage.removeItem("jwtTokenAccess");
         localStorage.removeItem("jwtTokenRefresh");
+        localStorage.removeItem("user");
+        localStorage.removeItem("profile");
       })
       .addCase(logoutThunk.rejected, (state) => {
         state.isAuthenticated = false;
