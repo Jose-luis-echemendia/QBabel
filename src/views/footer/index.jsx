@@ -9,7 +9,7 @@ const Footer = () => {
           <h2 className="font-italianno mx-auto w-fit mt-2 text-[50px]">
             QBabel siempre disponible para usted
           </h2>
-          <div className="w-full justify-center items-center px-16">
+          <div className="flex flex-col w-full justify-center items-center px-16">
             <div className="col-span-3 flex flex-col justify-center items-center gap-10">
               <figure className="border border-primary rounded-full p-0 m-0">
                 <img
@@ -18,13 +18,13 @@ const Footer = () => {
                   className="object-cover"
                 />
               </figure>
-              <div className="flex justify-center items-center gap-10 mt-3">
-                <button className="bg-primary py-4 px-14 rounded-xl">
+              <div className="flex justify-center items-center gap-10 mt-1">
+                <button className="bg-primary py-2 px-10 rounded-xl">
                   <span className="text-white-100 font-anton font-medium text-2xl">
                     Leer
                   </span>
                 </button>
-                <button className="bg-primary py-4 px-14 rounded-xl">
+                <button className="bg-primary py-2 px-10 rounded-xl">
                   <span className="text-black-500 font-anton font-medium text-2xl">
                     Escribir
                   </span>
