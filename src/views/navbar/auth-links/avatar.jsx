@@ -215,7 +215,7 @@ export const CustomAvatar = () => {
                       className="font-normal"
                       color={isLastItem ? "red" : "inherit"}
                     >
-                      <NavLink to={navigateTo} onClick={action}>
+                      <NavLink to={navigateTo} onClick={action} className={`flex items-center gap-2`}>
                         {icon} {label}
                       </NavLink>
                     </Typography>
