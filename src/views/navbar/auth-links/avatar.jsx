@@ -44,7 +44,7 @@ export const CustomAvatar = () => {
     },
     {
       label: "Administración",
-      navigateTo: "/#",
+      navigateTo: "/admin",
       action: null,
       icon: (
         <svg
