@@ -80,6 +80,24 @@ const TABLE_ROWS = [
     online: false,
     date: "04/10/21",
   },
+  {
+    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
+    name: "Richard Gran",
+    email: "richard@creative-tim.com",
+    job: "Manager",
+    org: "Executive",
+    online: false,
+    date: "04/10/21",
+  },
+  {
+    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
+    name: "Richard Gran",
+    email: "richard@creative-tim.com",
+    job: "Manager",
+    org: "Executive",
+    online: false,
+    date: "04/10/21",
+  },
 ];
 
 const AdminUserView = () => {
