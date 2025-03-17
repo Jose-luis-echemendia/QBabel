@@ -5,14 +5,14 @@ import NavBar from "@/views/navbar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const AuthenticatedLayout = ({ children }) => {
+const AuthenticatedLayout = ({ classNameNav, classNameFooter, children }) => {
   return (
     <LoadSuspense className="flex flex-col overflow-hidden">
       <NavBar />
       <ToastContainer autoClose={5000} />
       <main className="antialiased">{children}</main>
       <footer className="pb-6 z-10 w-full">
-        <CustomFooter textColor="text-black"/>
+        <CustomFooter textColor="text-black" />
       </footer>
     </LoadSuspense>
   );
