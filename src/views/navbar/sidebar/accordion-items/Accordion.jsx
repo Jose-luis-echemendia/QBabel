@@ -69,6 +69,13 @@ const elements = [
     icon: <IconDashboard />,
     subElements: [],
   },
+  {
+    id: 9,
+    label: "Exit",
+    highlightPath: ["/home"],
+    icon: <IconDashboard />,
+    subElements: [],
+  },
 ];
 
 const SidebarAccordion = () => {
