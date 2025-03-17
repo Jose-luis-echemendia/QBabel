@@ -8,7 +8,7 @@ const SidebarView = lazy(() => import("@/views/navbar/sidebar"));
 const AdminUserPage = () => {
   return (
     <LoadSuspense>
-      <AuthenticatedLayout>
+      <AuthenticatedLayout classNameFooter={"mx-auto"}>
         <div className="grid grid-cols-12 ml-10 mt-5 rounded-xl">
           <div className="col-span-2 -ml-8">
             <SidebarView />
