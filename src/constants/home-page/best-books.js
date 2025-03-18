@@ -1,5 +1,6 @@
 export const bestBooksData = [
   {
+    id: 1,
     author: "Laura Sebastian",
     tittle: "Princesas de Cenizas",
     img: "/assets/images/home/best_books/book1.jpg",
@@ -10,6 +11,7 @@ export const bestBooksData = [
     category: "category"
   },
   {
+    id: 2, 
     author: "Jennifer Lynn Barnes",
     tittle: "La Jugada Final",
     img: "/assets/images/home/best_books/book2.jpg",
@@ -20,6 +22,7 @@ export const bestBooksData = [
     category: "category"
   },
   {
+    id: 3,
     author: "Ariana Godoy",
     tittle: "Sigue Mi Voz",
     img: "/assets/images/home/best_books/book3.jpg",
@@ -30,6 +33,7 @@ export const bestBooksData = [
     category: "category"
   },
   {
+    id: 4,
     author: "Stephanie Garber",
     tittle: "Caraval",
     img: "/assets/images/home/best_books/book4.jpg",
@@ -40,6 +44,7 @@ export const bestBooksData = [
     category: "category"
   },
   {
+    id: 5,
     author: "Antoine De Saint-Exupéry",
     tittle: "El Principito",
     img: "/assets/images/home/best_books/book5.jpg",
@@ -50,6 +55,7 @@ export const bestBooksData = [
     category: "category"
   },
   {
+    id: 6,
     author: "J.K Rowling",
     tittle: "Harry Potter y la Pieda Filosofal",
     img: "/assets/images/home/best_books/book6.jpg",
@@ -60,6 +66,7 @@ export const bestBooksData = [
     category: "category"
   },
   {
+    id: 7,
     author: "Eva Muñoz",
     tittle: "Lascivia",
     img: "/assets/images/home/best_books/book7.jpg",
@@ -70,6 +77,7 @@ export const bestBooksData = [
     category: "category"
   },
   {
+    id: 8,
     author: "Jessica Rivas",
     tittle: "El Rey Oscuro",
     img: "/assets/images/home/best_books/book8.jpg",
