@@ -1,4 +1,4 @@
-const AdminView = () => {
+const AdminOverViewView = () => {
   return (
     <>
       <section className="bg-gray-50 w-full h-full p-5">Admin</section>
@@ -6,4 +6,4 @@ const AdminView = () => {
   );
 };
 
-export default AdminView;
+export default AdminOverViewView;

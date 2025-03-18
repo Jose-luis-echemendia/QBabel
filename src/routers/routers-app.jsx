@@ -7,9 +7,14 @@ import { useAuth } from "@/hooks/redux/useAuth";
 //PAGES
 import HomePage from "@/pages/home/page";
 import WelcomePage from "@/pages/welcome-page/page";
-import AdminPage from "@/pages/admin/page";
 import LibraryPage from "@/pages/library/page";
-import Error404  from "@/pages/error/Error404";
+import DetailsBookPage from "@/pages/details-book/page";
+import BookReaderPage from "@/pages/book-reader/page";
+import Error404 from "@/pages/error/Error404";
+
+// ADMIN PAGES
+import AdminOverViewPage from "@/pages/admin/admin-overview/page";
+import AdminUserPage from "@/pages/admin/admin-users/page";
 
 const Routers = () => {
   const auth = useAppSelector((state) => state.auth);
@@ -63,6 +68,7 @@ const Routers = () => {
           >
             <Route path="/home" element={<HomePage />}></Route>
             <Route path="/library" element={<LibraryPage />}></Route>
+            <Route path="/books/reader/:bookId" element={<BookReaderPage />}></Route>
           </Route>
 
           {/* ADMIN DISPLAY */}
@@ -74,10 +80,13 @@ const Routers = () => {
               />
             }
           >
-            <Route path="/admin" element={<AdminPage />}></Route>
+            <Route path="/admin" element={<AdminOverViewPage />}></Route>
+            <Route path="/admin/users" element={<AdminUserPage />}></Route>
           </Route>
 
           {/* PAGES DISPLAY */}
+          <Route path="/books/:bookId" element={<DetailsBookPage />}></Route>
+
         </Routes>
       </Router>
     </>

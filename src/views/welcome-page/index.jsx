@@ -4,11 +4,12 @@ import { ExploitYourTalent } from "./exploit-your-talent";
 import { Hero } from "./hero";
 import { Opinions } from "./Opinions";
 import { Categories } from "./categories";
+import { Login } from "../auth/login";
 
 const WelcomeView = () => {
   return (
     <>
-      <div className="min-h-screen overflow-hidden">
+      <div className="hidden md:block md:min-h-screen md:overflow-hidden">
         <h2 id="footer-heading" className="sr-only">
           Welcome
         </h2>
@@ -18,6 +19,9 @@ const WelcomeView = () => {
         <BestBooks />
         <Categories />
         <Opinions />
+      </div>
+      <div className="lg:hidden">
+        <Login />
       </div>
     </>
   );
