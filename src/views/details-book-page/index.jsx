@@ -1,9 +1,10 @@
 const DetailsBookView = () => {
   return (
     <>
-      <section className="bg-gray-50 max-h-screen w-full h-full p-5">
-        BookReaderView
-      </section>
+      <article className="max-h-screen w-full h-full p-5">
+        <header></header>
+        <footer></footer>
+      </article>
     </>
   );
 };
