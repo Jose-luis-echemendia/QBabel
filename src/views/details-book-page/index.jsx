@@ -23,7 +23,7 @@ const DetailsBookView = () => {
               alt={book.tittle}
               className="object-cover rounded-xl shadow-xl h-[300px] w-[200px] -mt-2.5"
             />
-            <figcaption className="flex flex-col gap-12">
+            <figcaption className="h-full py-8 flex flex-col items-start justify-between">
               <h2>{book.tittle}</h2>
               <div className="flex gap-10 justify-center items-center">
                 <div className="flex flex-col gap-1.5 items-center justify-center">
