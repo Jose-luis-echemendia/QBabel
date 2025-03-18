@@ -11,21 +11,44 @@ const DetailsBookView = () => {
     reads: "7.6M",
     parts: 71,
     category: "category",
+    is_complete: true,
   };
 
   return (
     <>
       <article className="max-h-screen w-full h-full py-5 mx-0">
         <header className="w-full h-[350px] flex items-center justify-center border-b shadow-2xl">
-          <figure className="flex gap-8 items-center justify-center w-full h-full">
+          <figure className="flex gap-5 items-center justify-center w-full h-full">
             <img
               src={book.img}
               alt={book.tittle}
               className="object-cover rounded-xl shadow-xl h-[300px] w-[200px] -mt-2.5"
             />
-            <figcaption className="h-full py-8 flex flex-col items-start justify-between">
-              <h2>{book.tittle}</h2>
-              <div className="flex gap-10 justify-center items-center">
+            <figcaption className="h-full py-12 flex flex-col items-start justify-between">
+              <div>
+                <h2 className="text-3xl font-bold w-full">{book.tittle}</h2>
+                {book.is_complete && (
+                  <span className="text-3xl font-bold w-ful inline-flex -ml-[1px]">
+                    (Completa
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="size-8"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="m4.5 12.75 6 6 9-13.5"
+                      />
+                    </svg>
+                    )
+                  </span>
+                )}
+              </div>
+              <div className="flex gap-10 mt-8 justify-center items-center">
                 <div className="flex flex-col gap-1.5 items-center justify-center">
                   <span className="flex gap-1.5">
                     <svg
@@ -102,9 +125,41 @@ const DetailsBookView = () => {
                   <span> {book.parts} </span>
                 </div>
               </div>
-              <div>
-                <button>Comenzar a leer</button>
-                <button>Agregar</button>
+              <div className="flex gap-1">
+                <button className="flex gap-1.5 bg-primary py-3 px-5 rounded-l-full text-black-500">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"
+                    />
+                  </svg>
+                  <span>Comenzar a leer</span>
+                </button>
+                <button className="flex gap-1.5 bg-black-500 py-3 px-3 rounded-r-full text-primary">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M12 4.5v15m7.5-7.5h-15"
+                    />
+                  </svg>
+                  <span>Agregar</span>
+                </button>
               </div>
             </figcaption>
           </figure>
