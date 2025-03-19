@@ -32,7 +32,7 @@ export const CustomHeaderBook = ({ book }) => {
                 </span>
               )}
             </div>
-            <div className="flex gap-10 mt-8 justify-center items-center">
+            <div className="flex gap-10 mt-3 justify-center items-center">
               <div className="flex flex-col gap-1.5 items-center justify-center">
                 <span className="flex gap-1.5 text-gray-800">
                   <svg
@@ -56,8 +56,9 @@ export const CustomHeaderBook = ({ book }) => {
                   </svg>
                   <small>Lecturas</small>
                 </span>
-                <span>{book.reads}</span>
+                <span className="text-sm font-bold">{book.reads}</span>
               </div>
+              <div className="w-[1px] bg-gray-400 -mx-3 h-14" />
               <div className="flex flex-col gap-1.5 items-center justify-center">
                 <span className="flex gap-1.5 text-gray-800">
                   <svg
@@ -81,8 +82,9 @@ export const CustomHeaderBook = ({ book }) => {
                   </svg>
                   <small>Votos</small>
                 </span>
-                <span>{book.reviews}</span>
+                <span className="text-sm font-bold">{book.reviews}</span>
               </div>
+              <div className="w-[1px] bg-gray-400 -mx-3 h-14" />
               <div className="flex flex-col gap-1.5 items-center justify-center">
                 <span className="flex gap-1.5 text-gray-800">
                   <svg
@@ -106,7 +108,7 @@ export const CustomHeaderBook = ({ book }) => {
                   </svg>
                   <small>Capítulos</small>
                 </span>
-                <span>{book.parts}</span>
+                <span className="text-sm font-bold">{book.parts}</span>
               </div>
             </div>
             <div className="flex gap-1">
