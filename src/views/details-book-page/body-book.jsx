@@ -1,7 +1,7 @@
-
-
-export const CustomBodyBood = ({book}) => {
+export const CustomBodyBood = ({ book }) => {
   return (
-    <>CustomBodyBood</>
-  )
-}
+    <>
+      <div></div>
+    </>
+  );
+};
