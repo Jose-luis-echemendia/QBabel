@@ -10,13 +10,12 @@ export const CustomBodyBook = ({ book }) => {
           />
           <figcaption>{book.author.name}</figcaption>
         </figure>
-
         {book.isComplete && (
           <div className="p-2 rounded-xl bg-green-800 -ml-[1px]">
             <span className="text-white-100 font-semibold">Completada</span>
           </div>
         )}
-        <div className="">
+        <div className="text-gray-800 text-base text-start text-balance leading-7 font-normal">
           {book.description}
           <br />
           <br />
