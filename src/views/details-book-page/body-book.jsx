@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 export const CustomBodyBook = ({ book }) => {
   return (
     <>
@@ -15,7 +17,7 @@ export const CustomBodyBook = ({ book }) => {
             <span className="text-white-100 font-semibold">Completada</span>
           </div>
         )}
-        <div className="text-gray-800 text-base text-start text-balance leading-7 font-normal">
+        <p className="text-gray-800 text-base text-start text-balance leading-7 font-normal">
           {book.description}
           <br />
           <br />
@@ -35,8 +37,37 @@ export const CustomBodyBook = ({ book }) => {
           quas ipsa, vitae ipsum ipsam nihil consectetur non ratione eligendi.
           Quia minima deserunt dolorum earum. Harum itaque officia architecto
           libero veniam!
+        </p>
+        <span>{book.license}</span>
+        <div className="flex flex-wrap gap-2">
+          {book.categories.map((category) => (
+            <span
+              key={category.id}
+              className="px-3 py-1.5 rounded-2xl bg-gray-200 text-black font-semibold"
+            >
+              {category.name}
+            </span>
+          ))}
         </div>
       </div>
     </>
   );
+};
+
+CustomBodyBook.propTypes = {
+  book: PropTypes.shape({
+    author: PropTypes.shape({
+      avatar: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    }).isRequired,
+    isComplete: PropTypes.bool.isRequired,
+    description: PropTypes.string.isRequired,
+    license: PropTypes.string.isRequired,
+    categories: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+      })
+    ).isRequired,
+  }).isRequired,
 };
