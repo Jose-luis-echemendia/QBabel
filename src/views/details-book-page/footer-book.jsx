@@ -1,6 +1,6 @@
 
 
-export const CustomFooterBook = () => {
+export const CustomFooterBook = ({book}) => {
   return (
     <>CustomFooterBook</>
   )
