@@ -12,18 +12,27 @@ export const CustomBodyBook = ({ book }) => {
           />
           <figcaption>{book.author.name}</figcaption>
         </figure>
-        {book.isFree ? (
-          <div className="p-2 rounded-xl bg-green-800 -ml-[1px]">
-            <span className="text-white-100 font-semibold">Gratuito!</span>
-          </div>
-        ) : (
-          <></>
-        )}
-        {book.isComplete && (
-          <div className="p-2 rounded-xl bg-green-800 -ml-[1px]">
-            <span className="text-white-100 font-semibold">Completada</span>
-          </div>
-        )}
+        <div className="flex gap-2">
+          {book.isFree ? (
+            <div className="p-2 rounded-xl bg-green-800 -ml-[1px]">
+              <span className="text-white-100 font-semibold">Gratuito!</span>
+            </div>
+          ) : (
+            <div className="p-2 rounded-xl bg-yellow-800 -ml-[1px]">
+              <span className="text-white-100 font-semibold">De Pago</span>
+            </div>
+          )}
+
+          {book.isComplete ? (
+            <div className="p-2 rounded-xl bg-green-800 -ml-[1px]">
+              <span className="text-white-100 font-semibold">Completada</span>
+            </div>
+          ) : (
+            <div className="p-2 rounded-xl bg-yellow-800 -ml-[1px]">
+              <span className="text-white-100 font-semibold">En curso</span>
+            </div>
+          )}
+        </div>
         <p className="text-gray-800 text-base text-start text-balance leading-7 font-normal">
           {book.description}
           <br />
