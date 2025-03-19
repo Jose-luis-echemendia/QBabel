@@ -21,14 +21,18 @@ const DetailsBookView = () => {
       id: 1,
       avatar: "/assets/images/avatar.jpeg",
       name: "jose luis"
+    },
+    license: "© All Rights Reserved",
+    categories: {
+      id
     }
   };
 
   return (
     <>
-      <article className="max-h-screen w-full h-full py-5 mx-0">
+      <article className="min-h-screen w-full h-full py-5 mx-0">
         <CustomHeaderBook book={book}/>
-        <div className="flex gap-5 container mx-auto px-10">
+        <div className="grid grid-cols-6 gap-10 container mx-auto px-20">
           <CustomBodyBook book={book}/>
           <RelatedInformationBook />
         </div>
