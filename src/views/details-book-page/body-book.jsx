@@ -1,6 +1,6 @@
 
 
-export const CustomBodyBood = () => {
+export const CustomBodyBood = ({book}) => {
   return (
     <>CustomBodyBood</>
   )
