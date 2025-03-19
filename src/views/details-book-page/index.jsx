@@ -1,7 +1,9 @@
+import { CustomBodyBook } from "./body-book";
 import { CustomHeaderBook } from "./header-book";
+import { RelatedInformationBook } from "./related-information-book";
 
 const DetailsBookView = () => {
-  
+
   const book = {
     id: 5,
     author: "Antoine De Saint-Exupéry",
@@ -26,7 +28,10 @@ const DetailsBookView = () => {
     <>
       <article className="max-h-screen w-full h-full py-5 mx-0">
         <CustomHeaderBook book={book}/>
-        
+        <div className="flex gap-5 container mx-auto px-10">
+          <CustomBodyBook book={book}/>
+          <RelatedInformationBook />
+        </div>
         <footer></footer>
       </article>
     </>
