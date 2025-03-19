@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 export const CustomBodyBook = ({ book }) => {
   return (
@@ -12,6 +12,13 @@ export const CustomBodyBook = ({ book }) => {
           />
           <figcaption>{book.author.name}</figcaption>
         </figure>
+        {book.isFree ? (
+          <div className="p-2 rounded-xl bg-green-800 -ml-[1px]">
+            <span className="text-white-100 font-semibold">Gratuito!</span>
+          </div>
+        ) : (
+          <></>
+        )}
         {book.isComplete && (
           <div className="p-2 rounded-xl bg-green-800 -ml-[1px]">
             <span className="text-white-100 font-semibold">Completada</span>
@@ -21,10 +28,7 @@ export const CustomBodyBook = ({ book }) => {
           {book.description}
           <br />
           <br />
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis
-          quas ipsa, vitae ipsum ipsam nihil consectetur non ratione eligendi.
-          Quia minima deserunt dolorum earum. Harum itaque officia architecto
-          libero veniam!
+          ***
           <br />
           <br />
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis
@@ -37,6 +41,17 @@ export const CustomBodyBook = ({ book }) => {
           quas ipsa, vitae ipsum ipsam nihil consectetur non ratione eligendi.
           Quia minima deserunt dolorum earum. Harum itaque officia architecto
           libero veniam!
+          <br />
+          <br />
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis
+          quas ipsa, vitae ipsum ipsam nihil consectetur non ratione eligendi.
+          Quia minima deserunt dolorum earum. Harum itaque officia architecto
+          libero veniam!
+          <br />
+          <br />
+          Disponible en librerías de España y en ebook para el resto del mundo a
+          partir del 17 de septiembre del 2020 💕. Pronto esperemos tener fecha
+          de llegada en físico a otros países 😍.
         </p>
         <span>{book.license}</span>
         <div className="flex flex-wrap gap-2">
