@@ -1,7 +1,7 @@
-
-
-export const CustomFooterBook = ({book}) => {
+export const CustomFooterBook = ({ book }) => {
   return (
-    <>CustomFooterBook</>
-  )
-}
+    <>
+      <footer>footer</footer>
+    </>
+  );
+};
