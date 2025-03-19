@@ -1,6 +1,7 @@
 import { CustomHeaderBook } from "./header-book";
 
 const DetailsBookView = () => {
+  
   const book = {
     id: 5,
     author: "Antoine De Saint-Exupéry",
@@ -14,15 +15,18 @@ const DetailsBookView = () => {
     parts: 71,
     category: "category",
     isComplete: true,
+    author: {
+      id: 1,
+      avatar: "/assets/images/avatar.jpeg",
+      name: "jose luis"
+    }
   };
 
   return (
     <>
       <article className="max-h-screen w-full h-full py-5 mx-0">
         <CustomHeaderBook book={book}/>
-        <div>
-
-        </div>
+        
         <footer></footer>
       </article>
     </>
