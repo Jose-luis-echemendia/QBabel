@@ -32,8 +32,8 @@ export const CustomHeaderBook = ({ book }) => {
                 </span>
               )}
             </div>
-            <div className="flex gap-10 mt-3 justify-center items-center">
-              <div className="flex flex-col gap-1.5 items-center justify-center">
+            <div className="flex gap-10 mt-3 ml-3 justify-center items-center">
+              <div className="flex flex-col gap-1 items-center justify-center">
                 <span className="flex gap-1.5 text-gray-800">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +59,7 @@ export const CustomHeaderBook = ({ book }) => {
                 <span className="text-sm font-bold">{book.reads}</span>
               </div>
               <div className="w-[1px] bg-gray-400 -mx-3 h-14" />
-              <div className="flex flex-col gap-1.5 items-center justify-center">
+              <div className="flex flex-col gap-1 items-center justify-center">
                 <span className="flex gap-1.5 text-gray-800">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +85,7 @@ export const CustomHeaderBook = ({ book }) => {
                 <span className="text-sm font-bold">{book.reviews}</span>
               </div>
               <div className="w-[1px] bg-gray-400 -mx-3 h-14" />
-              <div className="flex flex-col gap-1.5 items-center justify-center">
+              <div className="flex flex-col gap-1 items-center justify-center">
                 <span className="flex gap-1.5 text-gray-800">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -127,7 +127,7 @@ export const CustomHeaderBook = ({ book }) => {
                     d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"
                   />
                 </svg>
-                <span>Comenzar a leer</span>
+                <span className="font-semibold">Comenzar a leer</span>
               </button>
               <button className="flex gap-1.5 bg-black-500 py-3 px-3 rounded-r-full text-primary">
                 <svg
@@ -144,7 +144,7 @@ export const CustomHeaderBook = ({ book }) => {
                     d="M12 4.5v15m7.5-7.5h-15"
                   />
                 </svg>
-                <span>Agregar</span>
+                <span className="font-semibold">Agregar</span>
               </button>
             </div>
           </figcaption>
