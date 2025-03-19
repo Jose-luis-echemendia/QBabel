@@ -1,4 +1,5 @@
 import { CustomBodyBook } from "./body-book";
+import { CustomFooterBook } from "./footer-book";
 import { CustomHeaderBook } from "./header-book";
 import { RelatedInformationBook } from "./related-information-book";
 
@@ -23,9 +24,32 @@ const DetailsBookView = () => {
       name: "jose luis"
     },
     license: "© All Rights Reserved",
-    categories: {
-      id
+    categories: [{
+      id: 1,
+      name: "Ficticio",
+    },
+    {
+      id: 2,
+      name: "Aventura",
+    },
+    {
+      id: 3,
+      name: "Infantil",
+    },
+    {
+      id: 4,
+      name: "Ciencia Ficción",
+    },
+    {
+      id: 5,
+      name: "Romántico",
+    },
+    {
+      id: 6,
+      name: "Drama",
     }
+  ],
+    
   };
 
   return (
@@ -36,7 +60,7 @@ const DetailsBookView = () => {
           <CustomBodyBook book={book}/>
           <RelatedInformationBook />
         </div>
-        <footer></footer>
+        <CustomFooterBook book={book} />
       </article>
     </>
   );
