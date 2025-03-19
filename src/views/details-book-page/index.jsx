@@ -59,8 +59,8 @@ const DetailsBookView = () => {
         <div className="grid grid-cols-6 gap-10 container mx-auto px-20">
           <CustomBodyBook book={book}/>
           <RelatedInformationBook />
+          <CustomFooterBook book={book} />
         </div>
-        <CustomFooterBook book={book} />
       </article>
     </>
   );
