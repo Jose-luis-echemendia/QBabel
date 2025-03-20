@@ -5,7 +5,7 @@ export const RecommendationsBooks = ({ books }) => {
     <>
       <div className="w-full h-full">
         <h3 className="text-2xl font-medium mb-2">Recomendaciones</h3>
-        <div className="grid grid-cols-2 gap-5 place-items-center py-2">
+        <div className="grid grid-cols-2 gap-5 place-items-center py-2 space-y-3">
           {books.map((book) => (
             <div
               key={book.id}
