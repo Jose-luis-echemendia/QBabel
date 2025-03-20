@@ -5,7 +5,7 @@ import { v4 as uuid } from "uuid";
 export const RelatedInformationBook = () => {
   return (
     <>
-      <div className="col-span-2 py-10 mt-10">
+      <div className="py-10 mt-10">
         <div className="flex flex-col gap-5 justify-start items-start -mt-10 shadow-2xl shadow-gray-400 py-4 px-6 rounded-2xl">
           <span className="font-semibold text-xl pt-4">
             También te puede interesar
