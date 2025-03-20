@@ -67,7 +67,6 @@ const Routers = () => {
             }
           >
             <Route path="/home" element={<HomePage />}></Route>
-            <Route path="/library" element={<LibraryPage />}></Route>
             <Route path="/books/reader/:bookId" element={<BookReaderPage />}></Route>
           </Route>
 
@@ -84,8 +83,9 @@ const Routers = () => {
             <Route path="/admin/users" element={<AdminUserPage />}></Route>
           </Route>
 
-          {/* PAGES DISPLAY */}
+          {/* PAGES DISPLAY */} 
           <Route path="/books/:bookId" element={<DetailsBookPage />}></Route>
+          <Route path="/library" element={<LibraryPage />}></Route>
 
         </Routes>
       </Router>
