@@ -8,7 +8,8 @@ export const bestBooksData = [
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi,rem magnam nesciunt minima placeat, itaque eum neque officiis unde,eaque optio ratione aliquid assumenda facere ab et quasi ducimus autdoloribus non numquam. Lorem ipsum dolor, sit amet consecteturadipisicing elit. Quisquam quidem perferendis ab doloribus ipsamratione fugit officia, rem necessitatibus.",
     color: "#5C505A",
     reviews: "21k",
-    category: "category"
+    category: "category",
+    parts: 12
   },
   {
     id: 2, 
@@ -19,7 +20,8 @@ export const bestBooksData = [
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi,rem magnam nesciunt minima placeat, itaque eum neque officiis unde,eaque optio ratione aliquid assumenda facere ab et quasi ducimus autdoloribus non numquam. Lorem ipsum dolor, sit amet consecteturadipisicing elit. Quisquam quidem perferendis ab doloribus ipsamratione fugit officia, rem necessitatibus.",
     color: "#6F151D",
     reviews: "26k",
-    category: "category"
+    category: "category",
+    parts: 23
   },
   {
     id: 3,
@@ -30,7 +32,8 @@ export const bestBooksData = [
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi,rem magnam nesciunt minima placeat, itaque eum neque officiis unde,eaque optio ratione aliquid assumenda facere ab et quasi ducimus autdoloribus non numquam. Lorem ipsum dolor, sit amet consecteturadipisicing elit. Quisquam quidem perferendis ab doloribus ipsamratione fugit officia, rem necessitatibus.",
     color: "#272450",
     reviews: "11k",
-    category: "category"
+    category: "category",
+    parts: 82
   },
   {
     id: 4,
@@ -41,7 +44,8 @@ export const bestBooksData = [
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi,rem magnam nesciunt minima placeat, itaque eum neque officiis unde,eaque optio ratione aliquid assumenda facere ab et quasi ducimus autdoloribus non numquam. Lorem ipsum dolor, sit amet consecteturadipisicing elit. Quisquam quidem perferendis ab doloribus ipsamratione fugit officia, rem necessitatibus.",
     color: "#488899",
     reviews: "31k",
-    category: "category"
+    category: "category",
+    parts: 51
   },
   {
     id: 5,
@@ -52,7 +56,8 @@ export const bestBooksData = [
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi,rem magnam nesciunt minima placeat, itaque eum neque officiis unde,eaque optio ratione aliquid assumenda facere ab et quasi ducimus autdoloribus non numquam. Lorem ipsum dolor, sit amet consecteturadipisicing elit. Quisquam quidem perferendis ab doloribus ipsamratione fugit officia, rem necessitatibus.",
     color: "#A5A5A6",
     reviews: "41k",
-    category: "category"
+    category: "category",
+    parts: 37
   },
   {
     id: 6,
@@ -63,7 +68,8 @@ export const bestBooksData = [
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi,rem magnam nesciunt minima placeat, itaque eum neque officiis unde,eaque optio ratione aliquid assumenda facere ab et quasi ducimus autdoloribus non numquam. Lorem ipsum dolor, sit amet consecteturadipisicing elit. Quisquam quidem perferendis ab doloribus ipsamratione fugit officia, rem necessitatibus.",
     color: "#12284C",
     reviews: "20k",
-    category: "category"
+    category: "category",
+    parts: 52
   },
   {
     id: 7,
@@ -74,7 +80,8 @@ export const bestBooksData = [
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi,rem magnam nesciunt minima placeat, itaque eum neque officiis unde,eaque optio ratione aliquid assumenda facere ab et quasi ducimus autdoloribus non numquam. Lorem ipsum dolor, sit amet consecteturadipisicing elit. Quisquam quidem perferendis ab doloribus ipsamratione fugit officia, rem necessitatibus.",
     color: "#182139",
     reviews: "81k",
-    category: "category"
+    category: "category",
+    parts: 69
   },
   {
     id: 8,
@@ -85,7 +92,8 @@ export const bestBooksData = [
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi,rem magnam nesciunt minima placeat, itaque eum neque officiis unde,eaque optio ratione aliquid assumenda facere ab et quasi ducimus autdoloribus non numquam. Lorem ipsum dolor, sit amet consecteturadipisicing elit. Quisquam quidem perferendis ab doloribus ipsamratione fugit officia, rem necessitatibus.",
     color: "#404145",
     reviews: "12k",
-    category: "category"
+    category: "category",
+    parts: 5
   },
 ];
 
