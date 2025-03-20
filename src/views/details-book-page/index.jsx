@@ -9,7 +9,6 @@ const DetailsBookView = () => {
 
   const book = {
     id: 5,
-    author: "Antoine De Saint-Exupéry",
     tittle: "El Principito",
     img: "/assets/images/home/best_books/book5.jpg",
     description:
@@ -24,7 +23,7 @@ const DetailsBookView = () => {
     author: {
       id: 1,
       avatar: "/assets/images/avatar.jpeg",
-      name: "jose luis",
+      name: "Antoine De Saint-Exupéry",
     },
     license: "© All Rights Reserved",
     categories: [
