@@ -78,6 +78,17 @@ export const RecommendationsBooks = ({ books }) => {
                 <p className="text-sm text-start text-gray-800 pr-5 line-clamp-4">
                   {book.description}
                 </p>
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {book.categories.slice(0, 4).map((category) => (
+                    <span
+                      key={category.id}
+                      className="px-1.5 py-1 rounded-2xl bg-gray-200 text-black font-semibold text-xs"
+                    >
+                      {category.name}
+                    </span>
+                  ))}
+                  {book.categories.length > 4 && <span className="text-gray-800 text-xs flex items-center ml-1.5">+{book.categories.length - 4} más</span>}
+                </div>
               </div>
             </div>
           ))}
