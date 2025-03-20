@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-export const BookGroup = ({ books, itemHeight, boolsPerSlide }) => (
+export const BookGroup = ({ books, itemHeight, booksPerSlide }) => (
   <div className="flex items-center justify-center gap-2 px-5 pt-3">
     {books.map((book) => (
       <figure
@@ -13,7 +13,7 @@ export const BookGroup = ({ books, itemHeight, boolsPerSlide }) => (
             src={book.img}
             alt={book.title}
             className={
-              boolsPerSlide < 8
+              booksPerSlide < 8
                 ? "h-56 w-full object-cover rounded-xl"
                 : "h-56 w-40 object-cover rounded-xl"
             }
@@ -111,5 +111,5 @@ BookGroupCard.propTypes = BookGroup.propTypes = {
     })
   ).isRequired,
   itemHeight: PropTypes.string.isRequired,
-  boolsPerSlide: PropTypes.number,
+  booksPerSlide: PropTypes.number,
 };
