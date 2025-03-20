@@ -105,6 +105,36 @@ const DetailsBookView = () => {
         description:
           "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam quidem perferendis ab doloribus ipsam ratione fugit officia, rem necessitatibus.",
       },
+      {
+        id: 3,
+        name: "Capítulo 3",
+        description:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam quidem perferendis ab doloribus ipsam ratione fugit officia, rem necessitatibus.",
+      },
+      {
+        id: 3,
+        name: "Capítulo 3",
+        description:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam quidem perferendis ab doloribus ipsam ratione fugit officia, rem necessitatibus.",
+      },
+      {
+        id: 3,
+        name: "Capítulo 3",
+        description:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam quidem perferendis ab doloribus ipsam ratione fugit officia, rem necessitatibus.",
+      },
+      {
+        id: 3,
+        name: "Capítulo 3",
+        description:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam quidem perferendis ab doloribus ipsam ratione fugit officia, rem necessitatibus.",
+      },
+      {
+        id: 3,
+        name: "Capítulo 3",
+        description:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam quidem perferendis ab doloribus ipsam ratione fugit officia, rem necessitatibus.",
+      },
     ],
   };
 
@@ -112,7 +142,7 @@ const DetailsBookView = () => {
     <>
       <article className="min-h-screen w-full h-full py-5 mx-0">
         <CustomHeaderBook book={book} />
-        <div className="grid grid-cols-6 gap-10 container mx-auto px-16">
+        <div className="grid grid-cols-6 gap-10 container mx-auto px-20">
           <div className="col-span-4 flex flex-col gap-10">
             <CustomBodyBook book={book} />
             <CustomFooterBook book={book} />
