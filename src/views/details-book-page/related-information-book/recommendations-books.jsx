@@ -27,13 +27,13 @@ export const RecommendationsBooks = ({ books }) => {
                 <span className="text-sm">
                   <strong>Por: </strong> {book.author.name}{" "}
                 </span>
-                <div className="flex gap-3">
-                  <span className="flex gap-1.5 -mt-1 text-gray-800 text-sm">
+                <div className="flex gap-4 mt-1">
+                  <span className="flex gap-1.5 -mt-1 text-gray-800 text-xs">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
-                      className="size-5"
+                      className="size-4"
                     >
                       <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
                       <path
@@ -44,12 +44,12 @@ export const RecommendationsBooks = ({ books }) => {
                     </svg>
                     {book.reviews}
                   </span>
-                  <span className="flex gap-1.5 -mt-1 text-gray-800 text-sm">
+                  <span className="flex gap-1.5 -mt-1 text-gray-800 text-xs">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
-                      className="size-5"
+                      className="size-4"
                     >
                       <path
                         fillRule="evenodd"
@@ -59,12 +59,12 @@ export const RecommendationsBooks = ({ books }) => {
                     </svg>
                     {book.reads}
                   </span>
-                  <span className="flex gap-1.5 -mt-1 text-gray-800 text-sm">
+                  <span className="flex gap-1.5 -mt-1 text-gray-800 text-xs">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
-                      className="size-5"
+                      className="size-4"
                     >
                       <path
                         fillRule="evenodd"
