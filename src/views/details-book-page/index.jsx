@@ -2,6 +2,7 @@ import { CustomBodyBook } from "./body-book";
 import { CustomFooterBook } from "./footer-book";
 import { CustomHeaderBook } from "./header-book";
 import { RelatedInformationBook } from "./related-information-book";
+import { ReviewsBook } from "./reviews";
 
 const DetailsBookView = () => {
   const book = {
@@ -149,6 +150,9 @@ const DetailsBookView = () => {
           </div>
           <div className="col-span-2">
             <RelatedInformationBook />
+          </div>
+          <div className="col-span-6">
+            <ReviewsBook />
           </div>
         </div>
       </article>
