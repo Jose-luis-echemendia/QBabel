@@ -16,7 +16,7 @@ export const RecommendationsBooks = ({ books }) => {
                   <img
                     src={book.img}
                     alt={book.title}
-                    className="h-full w-full object-cover rounded-l-xl hover:lg:relative hover:absolute hover:top-0 hover:left-0 hover:bottom-0 hover:right-0"
+                    className="h-full w-full object-cover rounded-md hover:lg:relative hover:absolute hover:top-0 hover:left-0 hover:bottom-0 hover:right-0"
                   />
                 </Link>
               </figure>
