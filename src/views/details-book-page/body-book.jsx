@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 export const CustomBodyBook = ({ book }) => {
   return (
     <>
-      <div className="col-span-4 flex flex-col justify-start items-start py-10 gap-6">
+      <div className="flex flex-col justify-start items-start py-10 gap-6">
         <figure className="flex gap-5 justify-center items-center">
           <img
             src={book.author.avatar}
