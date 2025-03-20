@@ -40,11 +40,23 @@ export const RelatedInformationBook = () => {
                           d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5"
                         />
                       </svg>
-
-                      <small>Capítulos</small>
                     </span>
                     <span className="text-sm font-bold">{book.parts}</span>
+                    <small>Capítulos</small>
                   </div>
+                  {book.isComplete ? (
+                    <div className="w-[45%] mt-1 rounded-xl bg-green-800 -ml-[1px] flex items-center justify-center">
+                      <span className="text-white-100 font-semibold">
+                        Completada
+                      </span>
+                    </div>
+                  ) : (
+                    <div className="w-[45%] mt-1 rounded-xl bg-yellow-800 -ml-[1px] flex items-center justify-center">
+                      <span className="text-white-100 font-semibold">
+                        En curso
+                      </span>
+                    </div>
+                  )}
                   <p className="text-gray-600 text-sm line-clamp-3">
                     {book.description}
                   </p>
