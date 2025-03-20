@@ -1,16 +1,17 @@
 import { Link } from "react-router-dom";
 
 export const RecommendationsBooks = ({ books }) => {
+  
   return (
     <>
       <div
-        className={`grid grid-cols-2 w-full bg-red-200`}
+        className="grid grid-cols-2 w-full bg-red-200"
       >
-        <h3 className="text-3xl">Recomendaciones</h3>
+        <h3 className="text-3x">Recomendaciones</h3>
         {books.map((book) => (
           <div
             key={book.id}
-            className={`h-64 bg-gray-100 flex gap-2 lg:w-1/2 w-full rounded-xl h-full lg:h-56`}
+            className="bg-gray-100 flex gap-2 lg:w-1/2 w-full rounded-xl lg:h-56"
           >
             <figure className="lg:w-[800px] w-[400px]">
               <Link to={`/books/${book.id}`} className="block w-full h-full">
