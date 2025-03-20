@@ -93,6 +93,11 @@ export const Reviews = () => {
             </div>
           </div>
         ))}
+        <div className="col-span-6 flex justify-center items-center mt-4">
+            <button className="w-1/2 h-12 border-2 border-primary rounded-full hover:bg-gray-50">
+                <span className="font-semibold">Mostrar más</span>
+            </button>
+        </div>
       </div>
     </>
   );
