@@ -6,6 +6,7 @@ import { RecommendationsBooks } from "./related-information-book/recommendations
 import { ReviewsBook } from "./reviews";
 
 const DetailsBookView = () => {
+
   const book = {
     id: 5,
     author: "Antoine De Saint-Exupéry",
@@ -139,7 +140,7 @@ const DetailsBookView = () => {
       },
     ],
   };
-
+  
   return (
     <>
       <article className="min-h-screen w-full h-full py-5 mx-0">
