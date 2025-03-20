@@ -157,7 +157,7 @@ const DetailsBookView = () => {
           </div>
           <hr className="col-span-6" />
           <div className="col-span-6">
-            <RecommendationsBooks />
+            <RecommendationsBooks books={[book, book, book]} />
           </div>
         </div>
       </article>
