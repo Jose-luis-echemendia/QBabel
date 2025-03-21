@@ -6,10 +6,11 @@ import { Navigate } from "react-router-dom";
 import { CustomImageDecorator } from "@/components/image-decorator";
 import { useAuth } from "@/hooks/redux/useAuth";
 import { useAppSelector } from "@/hooks/redux/useStore";
+import { schemaLogin } from "@/helpers/yup-schemas";
 
 export const Login = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const { formState, onInputChange } = useForm(initialFormLogin);
+  const { formState, onInputChange } = useForm(initialFormLogin, schemaLogin);
   const { handleLogin } = useAuth();
   const auth = useAppSelector((state) => state.auth);
 
