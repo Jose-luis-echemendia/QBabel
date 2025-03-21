@@ -5,7 +5,7 @@ export const Decorator = () => {
     <>
       <CustomImageDecorator
         src="/assets/icons/category-books/1.svg"
-        className="absolute right-0 z-0 top-[-3px]"
+        className="absolute z-0 w-full mt-2"
       />
     </>
   );
