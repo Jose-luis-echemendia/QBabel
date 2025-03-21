@@ -7,7 +7,7 @@ function BookCard({ book }) {
   return (
     <div className=''>
       <div
-        className='relative  w-44   cursor-pointer'
+        className='relative  w-44   '
         onMouseEnter={() => setShowActions(true)}
         onMouseLeave={() => setShowActions(false)}
       >
@@ -20,16 +20,16 @@ function BookCard({ book }) {
         {showActions && (
           <div className='absolute inset-0 flex items-center justify-center transition-opacity duration-200'>
             <div className='relative bg-black bg-opacity-70 w-full h-full rounded p-4 flex flex-col items-center justify-center space-y-2'>
-              <button className='w-full bg-transparent text-white border-2 px-3 py-1 rounded hover:bg-gray-300 hover:text-black transition'>
+              <button className='w-full bg-transparent text-white border-2 px-3 py-1 rounded hover:bg-gray-300 cursor-pointer hover:text-black transition'>
                 Start Reading
               </button>
-              <button className='w-full bg-transparent text-white border-2 border-white px-3 py-1 rounded hover:bg-gray-300 hover:text-black transition'>
+              <button className='w-full bg-transparent text-white border-2 border-white px-3 py-1 rounded hover:bg-gray-300 cursor-pointer hover:text-black transition'>
                 Details
               </button>
-              <button className='w-full bg-transparent text-white border-2 border-white px-3 py-1 rounded hover:bg-gray-300 hover:text-black transition'>
+              <button className='w-full bg-transparent text-white border-2 border-white px-3 py-1 rounded hover:bg-gray-300 cursor-pointer hover:text-black transition'>
                 Archive
               </button>
-              <button className='w-full bg-transparent text-white border-2 border-white px-3 py-1 rounded  hover:bg-gray-300 hover:text-black transition'>
+              <button className='w-full bg-transparent text-white border-2 border-white px-3 py-1 rounded  hover:bg-gray-300 cursor-pointer hover:text-black transition'>
                 Add to List
               </button>
 
