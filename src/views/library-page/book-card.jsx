@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-
+import Avatar from '../../../public/assets/images/avatar.jpeg';
 function BookCard({ book }) {
   const [showActions, setShowActions] = useState(false);
 
@@ -57,10 +57,18 @@ function BookCard({ book }) {
         )}
       </div>
 
-      <h3 className='text-sm w-32 font-semibold mt-2 truncate'>
-        {book.tittle}
-      </h3>
-      <p className='text-xs text-gray-500'>{book.author}</p>
+      <div className='flex items-center '>
+        <div className='flex flex-col'>
+          <h3 className='text-sm w-32 font-semibold mt-2 truncate'>
+            {book.tittle}
+          </h3>
+          <p className='text-xs text-gray-500'>{book.author}</p>
+        </div>
+
+        <div className='w-8 h-8 mt-3 rounded-full bg-primary ml-3 flex justify-center items-center '>
+          <img src={Avatar} alt='' className='rounded-full w-full h-full' />
+        </div>
+      </div>
 
       <div className='mt-1 flex  space-x-4 text-lg text-gray-600'>
         <div className='flex items-center space-x-1'>
