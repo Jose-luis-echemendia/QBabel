@@ -88,7 +88,7 @@ const Routers = () => {
           {/* PAGES DISPLAY */} 
           <Route path="/books/:bookId" element={<DetailsBookPage />}></Route>
           <Route path="/books/search/:criterion" element={<SearchBookPage />}></Route>
-          <Route path="/books/:category" element={<CategoryBookPage />}></Route>
+          <Route path="/books/category/:category" element={<CategoryBookPage />}></Route>
           <Route path="/library" element={<LibraryPage />}></Route>
 
         </Routes>
