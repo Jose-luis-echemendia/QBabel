@@ -9,7 +9,7 @@ export const BestSellers = () => {
           Top 10 libros más vendidos
         </h3>
         <Decorator />
-        <div className="flex flex-row bg-red-200 items-center justify-center">
+        <div className="flex flex-row bg-red-200">
           <Carrusel />
         </div>
       </div>
