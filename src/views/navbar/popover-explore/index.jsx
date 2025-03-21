@@ -63,7 +63,7 @@ export const ExplorePopover = () => {
               </h6>
               {[...schemaImagesCategoria, ...schemaImagesCategoria].map(
                 (item) => (
-                  <NavLink to={`/books/category${item.text}`} key={uuidi()}> 
+                  <NavLink to={`/books/category/${item.text}`} key={uuidi()}> 
                     {item.text}
                   </NavLink>
                 )
