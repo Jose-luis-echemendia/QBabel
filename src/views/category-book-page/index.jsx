@@ -1,5 +1,5 @@
 const CategoryBookView = () => {
-  return <>DetailsBookView</>;
+  return <>category</>;
 };
 
 export default CategoryBookView;
