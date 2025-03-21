@@ -63,7 +63,7 @@ export const ExplorePopover = () => {
               </h6>
               {[...schemaImagesCategoria, ...schemaImagesCategoria].map(
                 (item) => (
-                  <NavLink href="" key={uuidi()}> 
+                  <NavLink to={`/books/category${item.text}`} key={uuidi()}> 
                     {item.text}
                   </NavLink>
                 )
@@ -106,7 +106,6 @@ export const ExplorePopover = () => {
                   to=""
                   className="text-indigo-600 hover:text-indigo-500"
                 >
-                  {" "}
                   View all posts <span aria-hidden="true">&rarr;</span>
                 </NavLink>
               </div>
