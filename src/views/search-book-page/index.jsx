@@ -1,5 +1,5 @@
 const SearchBookView = () => {
-  return <>DetailsBookView</>;
+  return <>search</>;
 };
 
 export default SearchBookView;
