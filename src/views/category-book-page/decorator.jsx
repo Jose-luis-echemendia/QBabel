@@ -1,7 +1,12 @@
+import { CustomImageDecorator } from "@/components/image-decorator";
+
 export const Decorator = () => {
   return (
     <>
-      <img src="/assets/icons/category-books/1.svg" alt="" className="absolute w-full h-full object-cover"/>
+      <CustomImageDecorator
+        src="/assets/icons/category-books/1.svg"
+        className="absolute right-0 z-0 top-[-3px]"
+      />
     </>
   );
 };
