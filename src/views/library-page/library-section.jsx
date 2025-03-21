@@ -3,24 +3,19 @@ import PropTypes from 'prop-types';
 import AllStories from './AllStories';
 
 function LibrarySection({ books }) {
-  const [activeTab, setActiveTab] = useState('current'); 
+  const [activeTab, setActiveTab] = useState('current');
 
   return (
     <section className='py-4 '>
       <div className='max-w-[1200px] mx-auto px-4 '>
-        
-        <h2 className=' relative -top-10 text-3xl font-bold mb-4 mt-20  '>
-          Library
-        </h2>
+        <h2 className=' relative  text-3xl font-bold mb-4 mt-20  '>Library</h2>
 
-        
         <div className='flex items-center justify-between border-b border-gray-200 mb-4'>
-          
           <div className='flex space-x-6 text-xl'>
             <button
               className={`pb-2 ${
                 activeTab === 'current'
-                  ? 'border-b-2 border-orange-900 font-bold'
+                  ? 'border-b-2 border-primary font-bold'
                   : 'text-gray-600'
               }`}
               onClick={() => setActiveTab('current')}
@@ -30,7 +25,7 @@ function LibrarySection({ books }) {
             <button
               className={`pb-2 ${
                 activeTab === 'archive'
-                  ? 'border-b-2 border-orange-900 font-bold'
+                  ? 'border-b-2 border-primary  font-bold'
                   : 'text-gray-600'
               }`}
               onClick={() => setActiveTab('archive')}
@@ -40,7 +35,7 @@ function LibrarySection({ books }) {
             <button
               className={`pb-2 ${
                 activeTab === 'reading'
-                  ? 'border-b-2 border-orange-900 font-bold'
+                  ? 'border-b-2 border-primary font-bold'
                   : 'text-gray-600'
               }`}
               onClick={() => setActiveTab('reading')}
@@ -48,15 +43,11 @@ function LibrarySection({ books }) {
               Reading Lists
             </button>
           </div>
-
-         
-          <div className='text-gray-600 text-sm'>Private</div>
         </div>
 
-       
         {activeTab === 'current' && (
           <>
-            <h3 className='text-xl font-bold mb-4'>All Stories</h3>
+            <h3 className='text-xl font-bold mb-7'>All Stories</h3>
             <AllStories books={books} />
           </>
         )}
