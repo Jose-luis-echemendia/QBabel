@@ -1,6 +1,11 @@
+import { Decorator } from "./decorator"
 
 export const BestSellers = () => {
   return (
-    <>BestSellers</>
+    <>
+        <div className="relative">
+            <Decorator/>
+        </div>
+    </>
   )
 }
