@@ -1,3 +1,7 @@
 export const Decorator = () => {
-  return <>decorator</>;
+  return (
+    <>
+      <div className="absolute">img</div>
+    </>
+  );
 };
