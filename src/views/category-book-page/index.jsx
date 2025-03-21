@@ -11,7 +11,7 @@ const CategoryBookView = () => {
             Historias de Romances
           </h2>
         </div>
-        <div className="mt-44 w-full h-full flex flex-col items-center justify-start">
+        <div className="mt-44 w-full h-full flex flex-col items-center justify-start gap-14">
           <BestSellers />
           <Categories />
           <CategoryBooks />
