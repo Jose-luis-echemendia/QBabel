@@ -1,6 +1,8 @@
 import { useState } from "react"
+import { useForm } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
 
-export const useForm = (initialForm={}) => {
+export const useForm = (initialForm={}, schemaYup) => {
     const [formState, setFormState] = useState(initialForm)
     
     const onInputChange = (event) =>{
