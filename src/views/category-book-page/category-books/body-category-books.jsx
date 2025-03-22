@@ -31,12 +31,12 @@ export const BodyCategoryBooks = () => {
             />
 
             <div className="flex flex-col w-full h-full py-1.5">
-            <h3 className="text-xl text-gray-800 font-opensans font-bold line-clamp-1">
-                  {book.tittle}
-                </h3>
-                <span className="text-sm">
-                  <strong>Por: </strong> {book.author.name}{" "}
-                </span>
+              <h3 className="text-xl text-gray-800 font-opensans font-bold line-clamp-1">
+                {book.tittle}
+              </h3>
+              <span className="text-sm">
+                <strong>Por: </strong> {book.author.name}{" "}
+              </span>
             </div>
           </div>
         ))}
