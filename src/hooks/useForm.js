@@ -1,21 +1,18 @@
-import { useState } from "react"
+import { useForm as useFormReact} from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
 
-export const useForm = (initialForm={}) => {
-    const [formState, setFormState] = useState(initialForm)
-    
-    const onInputChange = (event) =>{
-        const {name, value} = event.target
-        setFormState({
-            ...formState,
-            [name]:value
-        })
-    }
-
-     
+export const useForm = (schema) => {
+    const {
+      register,
+      handleSubmit,
+      formState: { errors },
+    } = useFormReact({
+      resolver: yupResolver(schema),
+    });
 
   return {
-    formState,
-    onInputChange,
-    setFormState
+    register,
+    handleSubmit,
+    errors,
   }
 }

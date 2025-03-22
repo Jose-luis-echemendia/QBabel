@@ -9,7 +9,10 @@ import HomePage from "@/pages/home/page";
 import WelcomePage from "@/pages/welcome-page/page";
 import LibraryPage from "@/pages/library/page";
 import DetailsBookPage from "@/pages/details-book/page";
+import SearchBookPage from "@/pages/search-book/page";
+import CategoryBookPage from "@/pages/category-book/page";
 import BookReaderPage from "@/pages/book-reader/page";
+import ProfilePage from "@/pages/profile/page";
 import Error404 from "@/pages/error/Error404";
 
 // ADMIN PAGES
@@ -85,7 +88,10 @@ const Routers = () => {
 
           {/* PAGES DISPLAY */} 
           <Route path="/books/:bookId" element={<DetailsBookPage />}></Route>
+          <Route path="/books/search/:criterion" element={<SearchBookPage />}></Route>
+          <Route path="/books/category/:category" element={<CategoryBookPage />}></Route>
           <Route path="/library" element={<LibraryPage />}></Route>
+          <Route path="/profile/:userName" element={<ProfilePage />}></Route>
 
         </Routes>
       </Router>
