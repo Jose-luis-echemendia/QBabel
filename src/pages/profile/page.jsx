@@ -2,16 +2,16 @@ import { lazy } from "react";
 import LoadSuspense from "@/components/load-suspense";
 import AuthenticatedLayout from "@/layout/authenticated-layout";
 
-const HomeView = lazy(() => import("@/views/home-page"));
+const ProfileView = lazy(() => import("@/views/profile-page"));
 
-const HomePage = () => {
+const ProfilePage = () => {
   return (
     <LoadSuspense>
       <AuthenticatedLayout>
-        <HomeView />
+        <ProfileView />
       </AuthenticatedLayout>
     </LoadSuspense>
   );
 };
 
-export default HomePage;
+export default ProfilePage;
