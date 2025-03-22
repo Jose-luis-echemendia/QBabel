@@ -12,7 +12,7 @@ import { logoutLocal } from "@/store/auth/slice";
 export const useAuth = () => {
   const dispath = useAppDispatch();
 
-  const handleLogin = (email, password) => {
+  const handleLogin = ({email, password}) => {
     dispath(loginThunk({ email, password }));
   };
 
