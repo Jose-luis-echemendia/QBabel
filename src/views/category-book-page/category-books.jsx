@@ -11,22 +11,24 @@ export const CategoryBooks = () => {
               2k Historias
             </span>
           </div>
-          <div className="relative w-full">
-            <span className="w-full absolute right-0">Filtrar por: Populares</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="m19.5 8.25-7.5 7.5-7.5-7.5"
-              />
-            </svg>
+          <div className="relative">
+            <div className="absolute bg-white-100 text-gray-100 inline-flex h-full w-full top-4 left-6 font-bold text-shadow text-xl font-opensans drop-shadow-[2px_2px_0px_black]">
+              <span className="absolute right-7">Filtrar por: Populares</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-6 absolute right-0 top-0 hover:cursor-pointer"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                />
+              </svg>
+            </div>
           </div>
         </header>
         <hr />
