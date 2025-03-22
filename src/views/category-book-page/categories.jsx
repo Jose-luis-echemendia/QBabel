@@ -1,4 +1,5 @@
 import { schemaImagesCategoria } from "@/views/welcome-page/categories/images-categoria";
+import { DecoratorBooks } from "./decorator/decorator-books";
 import { v4 as uuidi } from "uuid";
 
 export const Categories = () => {
@@ -20,6 +21,7 @@ export const Categories = () => {
           </div>
         ))}
       </div>
+      <DecoratorBooks/>
     </div>
   );
 };
