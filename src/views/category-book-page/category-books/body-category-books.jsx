@@ -7,7 +7,7 @@ export const BodyCategoryBooks = () => {
         {booksData.map((book) => (
           <div
             key={book.id}
-            className="relative flex items-center justify-center p-2.5 gap-1.5 bg-white rounded-lg shadow-xl hover:scale-105 transition-transform duration-200"
+            className="relative flex items-center justify-center p-3 gap-1.5 bg-white rounded-lg shadow-xl hover:scale-105 transition-transform duration-200"
           >
             {/* Hear Banner */}
             <div className="absolute -top-5 -left-5">
@@ -26,15 +26,17 @@ export const BodyCategoryBooks = () => {
 
             <img
               src={book.img}
-              alt={book.title}
+              alt={book.tittle}
               className="w-40 h-auto rounded-t-lg"
             />
 
-            <div className="p-4">
-              <h3 className="text-lg font-semibold text-gray-800">
-                {book.title}
-              </h3>
-              <p className="text-sm text-gray-600">{book.author}</p>
+            <div className="flex flex-col w-full h-full">
+            <h3 className="text-xl text-gray-800 font-opensans font-bold line-clamp-1">
+                  {book.tittle}
+                </h3>
+                <span className="text-sm">
+                  <strong>Por: </strong> {book.author.name}{" "}
+                </span>
             </div>
           </div>
         ))}
