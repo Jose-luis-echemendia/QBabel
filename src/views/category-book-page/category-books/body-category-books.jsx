@@ -3,11 +3,11 @@ import { booksData } from "@/constants/home-page/best-books";
 export const BodyCategoryBooks = () => {
   return (
     <>
-      <div className="grid grid-cols-2 w-full h-full py-3 px-5 gap-10 mt-8">
+      <div className="grid grid-cols-2 w-full h-full py-3 px-8 gap-7 mt-5">
         {booksData.map((book) => (
           <div
             key={book.id}
-            className="relative w-1/2 flex items-center justify-center gap-1.5 bg-white rounded-lg shadow-lg"
+            className="relative flex items-center justify-center p-2.5 gap-1.5 bg-white rounded-lg shadow-xl hover:scale-105 transition-transform duration-300"
           >
             <figure>
               <img
