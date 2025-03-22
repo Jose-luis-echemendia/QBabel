@@ -7,7 +7,7 @@ export const BodyCategoryBooks = () => {
         {booksData.map((book) => (
           <div
             key={book.id}
-            className="relative flex items-center justify-center p-2.5 gap-1.5 bg-white rounded-lg shadow-xl hover:scale-105 transition-transform duration-300"
+            className="relative flex items-center justify-center p-2.5 gap-1.5 bg-white rounded-lg shadow-xl hover:scale-105 transition-transform duration-200"
           >
             <figure>
               <img
