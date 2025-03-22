@@ -6,6 +6,9 @@ export const CategoryBooks = () => {
             <header className="flex flex-col items-center justify-center py-10">
           
             </header>
+            <div>
+              
+            </div>
         </section>
     </>
   )
