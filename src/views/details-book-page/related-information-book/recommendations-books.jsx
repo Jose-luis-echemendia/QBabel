@@ -5,7 +5,7 @@ export const RecommendationsBooks = ({ books }) => {
     <>
       <div className="w-full h-full">
         <h3 className="text-2xl font-medium mb-2">Recomendaciones</h3>
-        <div className="grid grid-cols-2 gap-5 place-items-center py-2">
+        <div className="grid grid-cols-2 gap-5 place-items-center py-2 space-y-3">
           {books.map((book) => (
             <div
               key={book.id}
@@ -16,7 +16,7 @@ export const RecommendationsBooks = ({ books }) => {
                   <img
                     src={book.img}
                     alt={book.title}
-                    className="h-full w-full object-cover rounded-l-xl hover:lg:relative hover:absolute hover:top-0 hover:left-0 hover:bottom-0 hover:right-0"
+                    className="h-full w-full object-cover rounded-md hover:lg:relative hover:absolute hover:top-0 hover:left-0 hover:bottom-0 hover:right-0"
                   />
                 </Link>
               </figure>
