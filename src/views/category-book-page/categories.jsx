@@ -5,7 +5,7 @@ export const Categories = () => {
   return (
     <div className="relative z-10 h-[250px] border p-5 rounded-xl shadow-xl pt-12">
       {/* Título con efecto de guiones */}
-      <h6 className="absolute -top-5 left-[10%] -translate-x-1/2 font-italianno text-[40px] flex items-center bg-white px-2 before:content-[''] before:flex-1 before:border-b-2 before:border-dashed before:border-gray-300 before:mr-2 after:content-[''] after:flex-1 after:border-b-2 after:border-dashed after:border-gray-300 after:ml-2">
+      <h6 className="absolute -top-8 left-[10%] -translate-x-1/2 font-italianno text-[40px] flex items-center bg-white px-2 before:content-[''] before:flex-1 before:border-b-2 before:border-dashed before:border-gray-300 before:mr-2 after:content-[''] after:flex-1 after:border-b-2 after:border-dashed after:border-gray-300 after:ml-2">
         Etiquetas:
       </h6>
 
