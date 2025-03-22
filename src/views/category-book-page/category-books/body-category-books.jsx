@@ -3,7 +3,7 @@ import { booksData } from "@/constants/home-page/best-books";
 export const BodyCategoryBooks = () => {
   return (
     <>
-      <div className="gird grid-cols-2 w-full h-full py-3 px-5 ">
+      <div className="gird grid-cols-2 w-full h-full py-3 px-5 gap-10">
         {booksData.map((book) => (
           <div
             key={book.id}
