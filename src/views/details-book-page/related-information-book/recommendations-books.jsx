@@ -21,9 +21,9 @@ export const RecommendationsBooks = ({ books }) => {
                 </Link>
               </figure>
               <div className="flex flex-col gap-2 pt-5 px-2 lg:w-[2500px] w-full">
-                <h4 className="text-xl text-black font-opensans font-bold line-clamp-1">
+                <h3 className="text-xl text-black font-opensans font-bold line-clamp-1">
                   {book.tittle}
-                </h4>
+                </h3>
                 <span className="text-sm">
                   <strong>Por: </strong> {book.author.name}{" "}
                 </span>
