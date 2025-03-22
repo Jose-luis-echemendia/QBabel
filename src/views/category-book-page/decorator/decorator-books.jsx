@@ -7,24 +7,24 @@ const DecoratorBooks = () => {
       {/* LEFT */}
       <CustomImageDecorator
         src="/assets/images/home/explota_talento/9.webp"
-        className="absolute z-0 w-full mt-2"
+        className="absolute left-0 z-0 w-[20px] mt-2"
       />
       <CustomImageDecorator
         src="/assets/images/home/explota_talento/1.webp"
-        className="absolute z-0 w-full mt-2"
+        className="absolute left-0 z-0 w-[20px] mt-2"
       />
       <CustomImageDecorator
         src="/assets/images/home/explota_talento/6.webp"
-        className="absolute z-0 w-full mt-2"
+        className="absolute left-0 z-0 w-[20px] mt-2"
       />
       {/* RIGHT */}
       <CustomImageDecorator
         src="/assets/images/home/explota_talento/11.jpg"
-        className="absolute z-0 w-full mt-2"
+        className="absolute right-0 z-0 w-[20px] mt-2"
       />
       <CustomImageDecorator
         src="/assets/images/home/explota_talento/8.webp"
-        className="absolute z-0 w-full mt-2"
+        className="absolute right-0 z-0 w-[20px] mt-2"
       />
     </>
   );
