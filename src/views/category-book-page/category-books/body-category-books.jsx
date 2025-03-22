@@ -21,6 +21,7 @@ export const BodyCategoryBooks = () => {
               </svg>
               <span className="flex items-center justify-center absolute top-2 left-4 text-primary font-bold">{book.id} </span>
             </div>
+            
             <figure>
               <img
                 src={book.img}
