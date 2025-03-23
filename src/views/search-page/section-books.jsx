@@ -5,7 +5,7 @@ export const SectionBooks = () => {
     <>
       <div className="col-span-2 w-full h-full bg-red-200">dsf</div>
       <div className="col-span-8 grid grid-cols-2 w-full h-full py-3 px-8 gap-9 mt-5">
-      {booksData.map((book) => (
+        {booksData.map((book) => (
           <div
             key={book.id}
             className="relative flex items-center justify-center p-3 gap-1.5 bg-white rounded-lg shadow-xl hover:scale-105 transition-transform duration-200"
@@ -128,24 +128,9 @@ export const SectionBooks = () => {
                   {book.parts}
                 </span>
               </div>
-              <p className="text-sm text-start text-gray-800 pr-5 line-clamp-4">
+              <p className="text-sm text-start text-gray-800 pr-5 line-clamp-3">
                 {book.description}
               </p>
-              <div className="flex flex-wrap gap-2 mt-2">
-                {book.categories.slice(0, 5).map((category) => (
-                  <span
-                    key={category.id}
-                    className="px-1.5 py-1 rounded-2xl bg-gray-200 text-black font-semibold text-xs"
-                  >
-                    {category.name}
-                  </span>
-                ))}
-                {book.categories.length > 4 && (
-                  <span className="text-gray-800 text-xs flex items-center ml-1.5">
-                    +{book.categories.length - 4} más
-                  </span>
-                )}
-              </div>
             </div>
           </div>
         ))}
