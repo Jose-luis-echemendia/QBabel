@@ -111,6 +111,7 @@ export const booksData = [
     reviews: "21k",
     category: "category",
     parts: 12,
+    reads: "7.6M",
     categories: [
       {
         id: 1,
@@ -185,6 +186,7 @@ export const booksData = [
     reviews: "26k",
     category: "category",
     parts: 23,
+    reads: "7.6M",
     categories: [
       {
         id: 1,
@@ -259,6 +261,7 @@ export const booksData = [
     reviews: "11k",
     category: "category",
     parts: 82,
+    reads: "7.6M",
     categories: [
       {
         id: 1,
@@ -333,6 +336,7 @@ export const booksData = [
     reviews: "31k",
     category: "category",
     parts: 51,
+    reads: "7.6M",
     categories: [
       {
         id: 1,
@@ -407,6 +411,7 @@ export const booksData = [
     reviews: "41k",
     category: "category",
     parts: 37,
+    reads: "7.6M",
     categories: [
       {
         id: 1,
@@ -481,6 +486,7 @@ export const booksData = [
     reviews: "20k",
     category: "category",
     parts: 52,
+    reads: "7.6M",
     categories: [
       {
         id: 1,
@@ -555,6 +561,7 @@ export const booksData = [
     reviews: "81k",
     category: "category",
     parts: 69,
+    reads: "7.6M",
     categories: [
       {
         id: 1,
@@ -629,6 +636,7 @@ export const booksData = [
     reviews: "12k",
     category: "category",
     parts: 5,
+    reads: "7.6M",
     categories: [
       {
         id: 1,
