@@ -1,7 +1,7 @@
-import { useState } from "react";
 
-export const HeaderSearchBooks = () => {
-  const [activeTab, setActiveTab] = useState("historias");
+
+export const HeaderSearchBooks = ({activeTab, setActiveTab}) => {
+  
 
   return (
     <div className="flex items-start justify-between border-b border-gray-200 mb-4">
