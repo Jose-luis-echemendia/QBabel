@@ -8,6 +8,27 @@ const partsCriterion = [
   { id: 4, criterion: "30 - 50 capítulos" },
   { id: 5, criterion: "50 o más capítulos" },
 ];
+const updateCriterion = [
+  { id: 1, criterion: "En cualquier momento" },
+  { id: 2, criterion: "Hoy" },
+  { id: 3, criterion: "Esta semana" },
+  { id: 4, criterion: "Este mes" },
+  { id: 5, criterion: "Este año" },
+];
+const contentCriterion = [
+  { id: 1, criterion: "Mostrar solo historias completas" },
+  { id: 2, criterion: "Sin terminar" },
+  { id: 3, criterion: "Solo gratis" },
+  { id: 4, criterion: "En descuento" },
+  { id: 5, criterion: "historias recientes" },
+  { id: 6, criterion: "Primeras historias" },
+];
+const priceCriterion = [
+  { id: 1, criterion: "$0 - 100$" },
+  { id: 2, criterion: "$100 - 500$" },
+  { id: 3, criterion: "$500 - 1500$" },
+  { id: 4, criterion: "$1500 o más" },
+];
 
 export const FilteringOptions = () => {
   const { criterion } = useParams();
@@ -17,8 +38,19 @@ export const FilteringOptions = () => {
       <span className="text-sm text-gray-600 -mt-1">395 resultados</span>
       <OptionFilter
         criterion={"Capítulos"}
-        note={"Puedes seleccionar múltiples opciones"}
         options={partsCriterion}
+      />
+      <OptionFilter
+        criterion={"Última actualización"}
+        options={updateCriterion}
+      />
+      <OptionFilter
+        criterion={"Contenido"}
+        options={contentCriterion}
+      />
+      <OptionFilter
+        criterion={"Precios"}
+        options={priceCriterion}
       />
     </div>
   );
