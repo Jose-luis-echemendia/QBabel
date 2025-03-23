@@ -5,11 +5,11 @@ export const HeaderSearchBooks = () => {
 
   return (
     <div className="flex items-center justify-between border-b border-gray-200 mb-4">
-      <div className="flex space-x-6 text-xl">
+      <div className="flex space-x-6 text-4xl">
         <button
           className={`pb-2 ${
             activeTab === "current"
-              ? "border-b-2 border-primary font-bold"
+              ? "border-b-2 border-primary font-semibold"
               : "text-gray-600"
           }`}
           onClick={() => setActiveTab("current")}
