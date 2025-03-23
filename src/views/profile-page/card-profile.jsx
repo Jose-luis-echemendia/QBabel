@@ -80,7 +80,7 @@ const socialLinks = [
 
 export const CardProfile = () => {
   return (
-    <div className='ml-44 py-6 px-4 border border-gray- border-opacity-40 rounded-md w-[370px]  mt-6 shadow-md'>
+    <div className=' py-6 px-4 border border-gray- border-opacity-40 rounded-md w-[370px]  mt-6 shadow-md'>
       <div className='flex justify-center items-center flex-col text-sm border-b-2'>
         <p className='mb-4 font-inter font-bold'>
           Ayuda a que las personas puedan conocerte
