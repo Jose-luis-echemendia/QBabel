@@ -4,6 +4,9 @@ import {
   ListItem,
   ListItemPrefix,
   Typography,
+  Accordion,
+  AccordionHeader,
+  AccordionBody,
 } from "@material-tailwind/react";
 import { ThemeProvider } from "@material-tailwind/react";
 
@@ -21,10 +24,7 @@ const theme = {
       iconProps: undefined,
     },
     valid: {
-      colors: [
-        "primary",
-        "primary-100"
-      ],
+      colors: ["primary", "primary-100"],
     },
     styles: {
       base: {
@@ -89,7 +89,7 @@ const theme = {
         },
       },
       colors: {
-        "primary": {
+        primary: {
           background: "checked:bg-primary",
           border: "checked:border-primary",
           before: "checked:before:bg-primary",
@@ -104,40 +104,59 @@ const theme = {
   },
 };
 
-export const OptionFilter = ({ criterion, note="Puedes seleccionar múltiples opciones", options }) => {
+export const OptionFilter = ({
+  openAcc,
+  handleOpenAcc,
+  criterion,
+  note = "Puedes seleccionar múltiples opciones",
+  options,
+}) => {
   return (
     <>
-      <div className="flex flex-col gap-0.5 mt-5">
-        <span className="text-xl font-bold">{criterion} </span>
-        <small className="text-xs text-gray-600">{note}</small>
-        <ThemeProvider value={theme}>
-          <List>
-            {options.map((option) => (
-              <ListItem className="p-0 -ml-2" color="primary-100" key={option.id}>
-                <label
-                  htmlFor={option.criterion}
-                  className="flex w-full cursor-pointer items-center px-3 py-2"
-                >
-                  <ListItemPrefix className="mr-3" color="primary-100">
-                    <Checkbox
-                      id={option.criterion}
-                      ripple={false}
-                      color="primary-100"
-                      className="hover:before:opacity-0"
-                      containerProps={{
-                        className: "p-0",
-                      }}
-                    />
-                  </ListItemPrefix>
-                  <Typography color="primary-100" className="font-medium">
-                    {option.criterion}
-                  </Typography>
-                </label>
-              </ListItem>
-            ))}
-          </List>
-        </ThemeProvider>
-      </div>
+      <Accordion open={openAcc}>
+        <div className="flex flex-col gap-0.5 mt-5">
+          <AccordionHeader
+            onClick={handleOpenAcc}
+            className="text-xl font-bold"
+          >
+            {criterion}
+          </AccordionHeader>
+          <AccordionBody>
+            <small className="text-xs text-gray-600">{note}</small>
+            <ThemeProvider value={theme}>
+              <List>
+                {options.map((option) => (
+                  <ListItem
+                    className="p-0 -ml-2"
+                    color="primary-100"
+                    key={option.id}
+                  >
+                    <label
+                      htmlFor={option.criterion}
+                      className="flex w-full cursor-pointer items-center px-3 py-2"
+                    >
+                      <ListItemPrefix className="mr-3" color="primary-100">
+                        <Checkbox
+                          id={option.criterion}
+                          ripple={false}
+                          color="primary-100"
+                          className="hover:before:opacity-0"
+                          containerProps={{
+                            className: "p-0",
+                          }}
+                        />
+                      </ListItemPrefix>
+                      <Typography color="primary-100" className="font-medium">
+                        {option.criterion}
+                      </Typography>
+                    </label>
+                  </ListItem>
+                ))}
+              </List>
+            </ThemeProvider>
+          </AccordionBody>
+        </div>
+      </Accordion>
     </>
   );
 };
