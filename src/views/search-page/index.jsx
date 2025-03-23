@@ -1,13 +1,17 @@
 import { HeaderSearchBooks } from "./header";
+import { SectionBooks } from "./section-books";
+import { SectionProfiles } from "./section-profiles";
+import { useState } from "react";
 
 const SearchView = () => {
+  const [activeTab, setActiveTab] = useState("historias");
   return (
     <>
       <div className="min-h-screen h-full w-full flex flex-col justify-start px-10 py-16 gap-14 relative">
-        <HeaderSearchBooks/>
+        <HeaderSearchBooks activeTab={activeTab} setActiveTab={setActiveTab} />
         <div className="grid grid-cols-10">
-          <div className="col-span-2 w-full h-full bg-red-200">dsf</div>
-          <div className="col-span-8 w-full h-full bg-red-800"></div>
+          {activeTab === "historias" && <SectionBooks />}
+          {activeTab === "perfiles" && <SectionProfiles />}
         </div>
       </div>
     </>
