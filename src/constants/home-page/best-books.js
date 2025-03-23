@@ -508,7 +508,7 @@ export const booksData = [
     parts: 52,
     reads: "7.6M",
     isFree: false,
-    isDiscounted: true,
+    isDiscounted: false,
     discount: "50%",
     price: 0.99,
     categories: [
@@ -587,7 +587,7 @@ export const booksData = [
     parts: 69,
     reads: "7.6M",
     isFree: false,
-    isDiscounted: true,
+    isDiscounted: false,
     discount: "50%",
     price: 71.99,
     categories: [
