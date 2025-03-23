@@ -10,6 +10,9 @@ export const CategoryBooks = () => {
           <hr className="w-full mx-auto" />
         </div>
         <BodyCategoryBooks />
+        <div className="w-full px-10 mt-7">
+          <hr className="w-full mx-auto" />
+        </div>
       </section>
     </>
   );
