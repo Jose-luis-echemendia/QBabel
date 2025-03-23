@@ -1,5 +1,13 @@
 import { useParams } from "react-router-dom";
-import { PartsFilter } from "./parts-filter";
+import { OptionFilter } from "./option-filter";
+
+const partsCriterion = [
+  { id: 1, criterion: "Cualquier extension" },
+  { id: 2, criterion: "1 - 10 capítulos" },
+  { id: 3, criterion: "10 - 30 capítulos" },
+  { id: 4, criterion: "30 - 50 capítulos" },
+  { id: 5, criterion: "50 o más capítulos" },
+];
 
 export const FilteringOptions = () => {
   const { criterion } = useParams();
@@ -7,13 +15,11 @@ export const FilteringOptions = () => {
     <div className="col-span-2 w-full h-full flex flex-col gap-2.5">
       <h6 className="text-3xl font-bold">&quot;{criterion}&quot;</h6>
       <span className="text-sm text-gray-600 -mt-1">395 resultados</span>
-      <div className="flex flex-col gap-0.5 mt-5">
-        <span className="text-xl font-bold">Capítulos</span>
-        <small className="text-xs text-gray-600">
-          Puedes seleccionar múltiples opciones
-        </small>
-        <PartsFilter/>
-      </div>
+      <OptionFilter
+        criterion={"Capítulos"}
+        note={"Puedes seleccionar múltiples opciones"}
+        options={partsCriterion}
+      />
     </div>
   );
 };
