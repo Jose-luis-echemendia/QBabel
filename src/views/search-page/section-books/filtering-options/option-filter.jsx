@@ -104,7 +104,7 @@ const theme = {
   },
 };
 
-export const OptionFilter = ({ criterion, note, options }) => {
+export const OptionFilter = ({ criterion, note="Puedes seleccionar múltiples opciones", options }) => {
   return (
     <>
       <div className="flex flex-col gap-0.5 mt-5">
