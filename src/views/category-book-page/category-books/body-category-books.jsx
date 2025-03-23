@@ -45,7 +45,7 @@ export const BodyCategoryBooks = () => {
               className="w-40 h-auto rounded-t-lg"
             />
 
-            <div className="flex flex-col w-full h-full py-1.5">
+            <div className="flex flex-col w-full h-full py-1.5 gap-1.5">
               <h3 className="text-xl w-[85%] text-gray-800 font-opensans font-bold line-clamp-1">
                 {book.tittle}
               </h3>
