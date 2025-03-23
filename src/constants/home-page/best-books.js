@@ -110,7 +110,69 @@ export const booksData = [
     color: "#5C505A",
     reviews: "21k",
     category: "category",
-    parts: 12
+    parts: 12,
+    categories: [
+      {
+        id: 1,
+        name: "Ficticio",
+      },
+      {
+        id: 2,
+        name: "Aventura",
+      },
+      {
+        id: 3,
+        name: "Infantil",
+      },
+      {
+        id: 4,
+        name: "Ciencia Ficción",
+      },
+      {
+        id: 5,
+        name: "Romántico",
+      },
+      {
+        id: 6,
+        name: "Drama",
+      },
+      {
+        id: 7,
+        name: "Terror",
+      },
+      {
+        id: 8,
+        name: "Acción",
+      },
+      {
+        id: 9,
+        name: "Horror",
+      },
+      {
+        id: 10,
+        name: "Suspenso",
+      },
+      {
+        id: 11,
+        name: "Comedia",
+      },
+      {
+        id: 12,
+        name: "Deportiva",
+      },
+      {
+        id: 13,
+        name: "Biografía",
+      },
+      {
+        id: 14,
+        name: "Historia",
+      },
+      {
+        id: 15,
+        name: "Policial",
+      },
+    ],
   },
   {
     id: 2, 
@@ -122,7 +184,69 @@ export const booksData = [
     color: "#6F151D",
     reviews: "26k",
     category: "category",
-    parts: 23
+    parts: 23,
+    categories: [
+      {
+        id: 1,
+        name: "Ficticio",
+      },
+      {
+        id: 2,
+        name: "Aventura",
+      },
+      {
+        id: 3,
+        name: "Infantil",
+      },
+      {
+        id: 4,
+        name: "Ciencia Ficción",
+      },
+      {
+        id: 5,
+        name: "Romántico",
+      },
+      {
+        id: 6,
+        name: "Drama",
+      },
+      {
+        id: 7,
+        name: "Terror",
+      },
+      {
+        id: 8,
+        name: "Acción",
+      },
+      {
+        id: 9,
+        name: "Horror",
+      },
+      {
+        id: 10,
+        name: "Suspenso",
+      },
+      {
+        id: 11,
+        name: "Comedia",
+      },
+      {
+        id: 12,
+        name: "Deportiva",
+      },
+      {
+        id: 13,
+        name: "Biografía",
+      },
+      {
+        id: 14,
+        name: "Historia",
+      },
+      {
+        id: 15,
+        name: "Policial",
+      },
+    ],
   },
   {
     id: 3,
@@ -134,7 +258,69 @@ export const booksData = [
     color: "#272450",
     reviews: "11k",
     category: "category",
-    parts: 82
+    parts: 82,
+    categories: [
+      {
+        id: 1,
+        name: "Ficticio",
+      },
+      {
+        id: 2,
+        name: "Aventura",
+      },
+      {
+        id: 3,
+        name: "Infantil",
+      },
+      {
+        id: 4,
+        name: "Ciencia Ficción",
+      },
+      {
+        id: 5,
+        name: "Romántico",
+      },
+      {
+        id: 6,
+        name: "Drama",
+      },
+      {
+        id: 7,
+        name: "Terror",
+      },
+      {
+        id: 8,
+        name: "Acción",
+      },
+      {
+        id: 9,
+        name: "Horror",
+      },
+      {
+        id: 10,
+        name: "Suspenso",
+      },
+      {
+        id: 11,
+        name: "Comedia",
+      },
+      {
+        id: 12,
+        name: "Deportiva",
+      },
+      {
+        id: 13,
+        name: "Biografía",
+      },
+      {
+        id: 14,
+        name: "Historia",
+      },
+      {
+        id: 15,
+        name: "Policial",
+      },
+    ],
   },
   {
     id: 4,
@@ -146,7 +332,69 @@ export const booksData = [
     color: "#488899",
     reviews: "31k",
     category: "category",
-    parts: 51
+    parts: 51,
+    categories: [
+      {
+        id: 1,
+        name: "Ficticio",
+      },
+      {
+        id: 2,
+        name: "Aventura",
+      },
+      {
+        id: 3,
+        name: "Infantil",
+      },
+      {
+        id: 4,
+        name: "Ciencia Ficción",
+      },
+      {
+        id: 5,
+        name: "Romántico",
+      },
+      {
+        id: 6,
+        name: "Drama",
+      },
+      {
+        id: 7,
+        name: "Terror",
+      },
+      {
+        id: 8,
+        name: "Acción",
+      },
+      {
+        id: 9,
+        name: "Horror",
+      },
+      {
+        id: 10,
+        name: "Suspenso",
+      },
+      {
+        id: 11,
+        name: "Comedia",
+      },
+      {
+        id: 12,
+        name: "Deportiva",
+      },
+      {
+        id: 13,
+        name: "Biografía",
+      },
+      {
+        id: 14,
+        name: "Historia",
+      },
+      {
+        id: 15,
+        name: "Policial",
+      },
+    ],
   },
   {
     id: 5,
@@ -158,7 +406,69 @@ export const booksData = [
     color: "#A5A5A6",
     reviews: "41k",
     category: "category",
-    parts: 37
+    parts: 37,
+    categories: [
+      {
+        id: 1,
+        name: "Ficticio",
+      },
+      {
+        id: 2,
+        name: "Aventura",
+      },
+      {
+        id: 3,
+        name: "Infantil",
+      },
+      {
+        id: 4,
+        name: "Ciencia Ficción",
+      },
+      {
+        id: 5,
+        name: "Romántico",
+      },
+      {
+        id: 6,
+        name: "Drama",
+      },
+      {
+        id: 7,
+        name: "Terror",
+      },
+      {
+        id: 8,
+        name: "Acción",
+      },
+      {
+        id: 9,
+        name: "Horror",
+      },
+      {
+        id: 10,
+        name: "Suspenso",
+      },
+      {
+        id: 11,
+        name: "Comedia",
+      },
+      {
+        id: 12,
+        name: "Deportiva",
+      },
+      {
+        id: 13,
+        name: "Biografía",
+      },
+      {
+        id: 14,
+        name: "Historia",
+      },
+      {
+        id: 15,
+        name: "Policial",
+      },
+    ],
   },
   {
     id: 6,
@@ -170,7 +480,69 @@ export const booksData = [
     color: "#12284C",
     reviews: "20k",
     category: "category",
-    parts: 52
+    parts: 52,
+    categories: [
+      {
+        id: 1,
+        name: "Ficticio",
+      },
+      {
+        id: 2,
+        name: "Aventura",
+      },
+      {
+        id: 3,
+        name: "Infantil",
+      },
+      {
+        id: 4,
+        name: "Ciencia Ficción",
+      },
+      {
+        id: 5,
+        name: "Romántico",
+      },
+      {
+        id: 6,
+        name: "Drama",
+      },
+      {
+        id: 7,
+        name: "Terror",
+      },
+      {
+        id: 8,
+        name: "Acción",
+      },
+      {
+        id: 9,
+        name: "Horror",
+      },
+      {
+        id: 10,
+        name: "Suspenso",
+      },
+      {
+        id: 11,
+        name: "Comedia",
+      },
+      {
+        id: 12,
+        name: "Deportiva",
+      },
+      {
+        id: 13,
+        name: "Biografía",
+      },
+      {
+        id: 14,
+        name: "Historia",
+      },
+      {
+        id: 15,
+        name: "Policial",
+      },
+    ],
   },
   {
     id: 7,
@@ -182,7 +554,69 @@ export const booksData = [
     color: "#182139",
     reviews: "81k",
     category: "category",
-    parts: 69
+    parts: 69,
+    categories: [
+      {
+        id: 1,
+        name: "Ficticio",
+      },
+      {
+        id: 2,
+        name: "Aventura",
+      },
+      {
+        id: 3,
+        name: "Infantil",
+      },
+      {
+        id: 4,
+        name: "Ciencia Ficción",
+      },
+      {
+        id: 5,
+        name: "Romántico",
+      },
+      {
+        id: 6,
+        name: "Drama",
+      },
+      {
+        id: 7,
+        name: "Terror",
+      },
+      {
+        id: 8,
+        name: "Acción",
+      },
+      {
+        id: 9,
+        name: "Horror",
+      },
+      {
+        id: 10,
+        name: "Suspenso",
+      },
+      {
+        id: 11,
+        name: "Comedia",
+      },
+      {
+        id: 12,
+        name: "Deportiva",
+      },
+      {
+        id: 13,
+        name: "Biografía",
+      },
+      {
+        id: 14,
+        name: "Historia",
+      },
+      {
+        id: 15,
+        name: "Policial",
+      },
+    ],
   },
   {
     id: 8,
@@ -194,7 +628,69 @@ export const booksData = [
     color: "#404145",
     reviews: "12k",
     category: "category",
-    parts: 5
+    parts: 5,
+    categories: [
+      {
+        id: 1,
+        name: "Ficticio",
+      },
+      {
+        id: 2,
+        name: "Aventura",
+      },
+      {
+        id: 3,
+        name: "Infantil",
+      },
+      {
+        id: 4,
+        name: "Ciencia Ficción",
+      },
+      {
+        id: 5,
+        name: "Romántico",
+      },
+      {
+        id: 6,
+        name: "Drama",
+      },
+      {
+        id: 7,
+        name: "Terror",
+      },
+      {
+        id: 8,
+        name: "Acción",
+      },
+      {
+        id: 9,
+        name: "Horror",
+      },
+      {
+        id: 10,
+        name: "Suspenso",
+      },
+      {
+        id: 11,
+        name: "Comedia",
+      },
+      {
+        id: 12,
+        name: "Deportiva",
+      },
+      {
+        id: 13,
+        name: "Biografía",
+      },
+      {
+        id: 14,
+        name: "Historia",
+      },
+      {
+        id: 15,
+        name: "Policial",
+      },
+    ],
   },
 ];
 
