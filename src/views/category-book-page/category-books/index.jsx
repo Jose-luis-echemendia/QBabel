@@ -1,5 +1,5 @@
-import { BodyCategoryBooks } from "./body-category-books";
-import { HeaderCategoryBooks } from "./header-category-books";
+import { BodyCategoryBooks } from "./body";
+import { HeaderCategoryBooks } from "./header";
 
 export const CategoryBooks = () => {
   return (
