@@ -1,4 +1,4 @@
-import { CardProfile } from './card-profile';
+
 import { HeroProfile } from './hero-profile';
 import { TabsMenu } from './tabs-menu';
 
@@ -9,9 +9,6 @@ const ProfileView = () => {
 
       <div className='w-full   mt-4'>
         <TabsMenu />
-      </div>
-      <div>
-        <CardProfile />
       </div>
     </div>
   );
