@@ -4,8 +4,8 @@ export const HeaderSearchBooks = () => {
   const [activeTab, setActiveTab] = useState("info");
 
   return (
-    <div className="flex items-center justify-between border-b border-gray-200 mb-4">
-      <div className="flex space-x-6 text-4xl">
+    <div className="flex items-start justify-between border-b border-gray-200 mb-4">
+      <div className="flex space-x-7 text-4xl">
         <button
           className={`pb-2 ${
             activeTab === "current"
