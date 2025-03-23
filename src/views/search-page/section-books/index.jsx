@@ -1,10 +1,10 @@
-
 import { Books } from "./books";
+import { FilteringOptions } from "./filtering-options";
 
 export const SectionBooks = () => {
   return (
     <>
-      <div className="col-span-2 w-full h-full bg-red-200">dsf</div>
+      <FilteringOptions />
       <Books />
     </>
   );
