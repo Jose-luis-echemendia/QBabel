@@ -1,4 +1,3 @@
-import { Select, Option } from "@material-tailwind/react";
 
 export const HeaderCategoryBooks = () => {
   return (
@@ -9,20 +8,6 @@ export const HeaderCategoryBooks = () => {
           <span className="absolute inline-flex h-full w-full top-4 left-6 font-bold text-gray-100 text-shadow text-xl font-opensans drop-shadow-[2px_2px_0px_black]">
             2k Historias
           </span>
-        </div>
-        <div className="relative flex items-center h-full w-64">
-          <Select
-            label="Filtrar Por:"
-            className=" text-gray-100 font-opensans border-none selection:border-none selection:outline-none active:border-none active:outline-none focus:border-none focus:outline-none"
-          >
-            <Option className="">Todas las historias</Option>
-            <Option className="">Solo gratis</Option>
-            <Option className="">En descuento</Option>
-            <Option className="">Completadas</Option>
-            <Option className="">Sin terminar</Option>
-            <Option className="">Historias recientes</Option>
-            <Option className="">Primeras historias</Option>
-          </Select>
         </div>
         <div className="relative flex items-center h-full w-full font-bold text-shadow text-xl font-opensans">
           <span className="absolute right-7 drop-shadow-[2px_2px_0px_black] text-gray-100">
