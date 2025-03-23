@@ -18,7 +18,7 @@ export const CustomBodyBook = ({ book }) => {
               <span className="text-white-100 font-semibold">Gratuito!</span>
             </div>
           ) : (
-            <div className="p-2 rounded-xl bg-yellow-800 -ml-[1px]">
+            <div className="p-2 rounded-xl bg-gray-cam -ml-[1px]">
               <span className="text-white-100 font-semibold">De Pago</span>
             </div>
           )}
@@ -28,7 +28,7 @@ export const CustomBodyBook = ({ book }) => {
               <span className="text-white-100 font-semibold">Completada</span>
             </div>
           ) : (
-            <div className="p-2 rounded-xl bg-yellow-800 -ml-[1px]">
+            <div className="p-2 rounded-xl bg-gray-cam -ml-[1px]">
               <span className="text-white-100 font-semibold">En curso</span>
             </div>
           )}
