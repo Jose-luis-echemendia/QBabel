@@ -112,6 +112,10 @@ export const booksData = [
     category: "category",
     parts: 12,
     reads: "7.6M",
+    isFree: false,
+    isDiscounted: false,
+    discount: "50%",
+    price: 5.99,
     categories: [
       {
         id: 1,
@@ -187,6 +191,10 @@ export const booksData = [
     category: "category",
     parts: 23,
     reads: "7.6M",
+    isFree: false,
+    isDiscounted: true,
+    discount: "50%",
+    price: 120.99,
     categories: [
       {
         id: 1,
@@ -262,6 +270,10 @@ export const booksData = [
     category: "category",
     parts: 82,
     reads: "7.6M",
+    isFree: true,
+    isDiscounted: false,
+    discount: "50%",
+    price: 0.00,
     categories: [
       {
         id: 1,
@@ -337,6 +349,10 @@ export const booksData = [
     category: "category",
     parts: 51,
     reads: "7.6M",
+    isFree: false,
+    isDiscounted: true,
+    discount: "20%",
+    price: 2029.99,
     categories: [
       {
         id: 1,
@@ -412,6 +428,10 @@ export const booksData = [
     category: "category",
     parts: 37,
     reads: "7.6M",
+    isFree: true,
+    isDiscounted: false,
+    discount: "50%",
+    price: 0.00,
     categories: [
       {
         id: 1,
@@ -487,6 +507,10 @@ export const booksData = [
     category: "category",
     parts: 52,
     reads: "7.6M",
+    isFree: false,
+    isDiscounted: true,
+    discount: "50%",
+    price: 0.99,
     categories: [
       {
         id: 1,
@@ -562,6 +586,10 @@ export const booksData = [
     category: "category",
     parts: 69,
     reads: "7.6M",
+    isFree: false,
+    isDiscounted: true,
+    discount: "50%",
+    price: 71.99,
     categories: [
       {
         id: 1,
@@ -637,6 +665,10 @@ export const booksData = [
     category: "category",
     parts: 5,
     reads: "7.6M",
+    isFree: false,
+    isDiscounted: true,
+    discount: "35%",
+    price: 5.99,
     categories: [
       {
         id: 1,
