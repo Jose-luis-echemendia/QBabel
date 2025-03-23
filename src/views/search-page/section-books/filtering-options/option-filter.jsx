@@ -10,7 +10,7 @@ import { ThemeProvider } from "@material-tailwind/react";
 const theme = {
   checkbox: {
     defaultProps: {
-      color: "blue",
+      color: "primary",
       label: undefined,
       icon: undefined,
       ripple: true,
@@ -23,24 +23,7 @@ const theme = {
     valid: {
       colors: [
         "primary",
-        "gray",
-        "brown",
-        "deep-orange",
-        "orange",
-        "amber",
-        "yellow",
-        "lime",
-        "light-green",
-        "green",
-        "teal",
-        "cyan",
-        "light-blue",
-        "blue",
-        "indigo",
-        "deep-purple",
-        "purple",
-        "pink",
-        "red",
+        "primary-100"
       ],
     },
     styles: {
@@ -111,6 +94,11 @@ const theme = {
           border: "checked:border-primary",
           before: "checked:before:bg-primary",
         },
+        "primary-100": {
+          background: "checked:bg-primary-100",
+          border: "checked:border-primary-100",
+          before: "checked:before:bg-primary-100",
+        },
       },
     },
   },
@@ -125,23 +113,23 @@ export const OptionFilter = ({ criterion, note, options }) => {
         <ThemeProvider value={theme}>
           <List>
             {options.map((option) => (
-              <ListItem className="p-0 -ml-2" color="primary" key={option.id}>
+              <ListItem className="p-0 -ml-2" color="primary-100" key={option.id}>
                 <label
                   htmlFor={option.criterion}
                   className="flex w-full cursor-pointer items-center px-3 py-2"
                 >
-                  <ListItemPrefix className="mr-3" color="primary">
+                  <ListItemPrefix className="mr-3" color="primary-100">
                     <Checkbox
                       id={option.criterion}
                       ripple={false}
-                      color="primary"
+                      color="primary-100"
                       className="hover:before:opacity-0"
                       containerProps={{
                         className: "p-0",
                       }}
                     />
                   </ListItemPrefix>
-                  <Typography color="primary" className="font-medium">
+                  <Typography color="primary-100" className="font-medium">
                     {option.criterion}
                   </Typography>
                 </label>
