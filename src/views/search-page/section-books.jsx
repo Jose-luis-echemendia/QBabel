@@ -62,6 +62,17 @@ export const SectionBooks = () => {
                 <strong>Por: </strong>{" "}
                 <span className="text-gray-700"> {book.author}</span>
               </div>
+              {book.isComplete ? (
+                <div className="w-[25%] h-6 flex place-items-center justify-center p-2 rounded-xl bg-green-800 -ml-[1px]">
+                  <span className="text-white-100 font-semibold">
+                    Completada
+                  </span>
+                </div>
+              ) : (
+                <div className="w-[25%] h-6 flex place-items-center justify-center p-2 rounded-xl bg-gray-cam -ml-[1px]">
+                  <span className="text-white-100 font-semibold">En curso</span>
+                </div>
+              )}
               <div className="flex gap-6 mt-3 ml-0 justify-start items-center">
                 {!book.isFree && (
                   <>
