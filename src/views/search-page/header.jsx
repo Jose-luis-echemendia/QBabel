@@ -12,7 +12,7 @@ export const HeaderSearchBooks = ({activeTab, setActiveTab}) => {
               ? "border-b-2 border-primary font-semibold"
               : "text-gray-600"
           }`}
-          onClick={() => setActiveTab("current")}
+          onClick={() => setActiveTab("historias")}
         >
           Historias
         </button>
