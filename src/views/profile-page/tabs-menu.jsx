@@ -1,18 +1,19 @@
 import { useState } from 'react';
 import { Following } from './following';
 import { CardProfile } from './card-profile';
+import ReadingListProfile from './card-read-profile';
 
 export const TabsMenu = () => {
   const [activeTab, setActiveTab] = useState('info');
 
   return (
     <>
-      <div className='flex items-center justify-between h-12 border-b-2 border-gray-400 bg-white'>
-        <div className='flex space-x-10 text-lg ml-24'>
+      <div className='flex items-center justify-between h-12 border-b-2 border-gray-400 bg-white px-4 md:px-0'>
+        <div className='flex space-x-10 text-lg ml-4 md:ml-24'>
           <button
-            className={`pb-2 ${
+            className={`pb-1 ${
               activeTab === 'info'
-                ? 'border-b-4 border-orange-500 font-bold text-black'
+                ? 'border-b-2 border-primary font-bold text-black'
                 : 'text-gray-600'
             }`}
             onClick={() => setActiveTab('info')}
@@ -20,9 +21,9 @@ export const TabsMenu = () => {
             Info
           </button>
           <button
-            className={`pb-2 ${
+            className={`pb-1 ${
               activeTab === 'following'
-                ? 'border-b-4 border-orange-500 font-bold text-black'
+                ? 'border-b-2 border-primary font-bold text-black'
                 : 'text-gray-600'
             }`}
             onClick={() => setActiveTab('following')}
@@ -31,7 +32,7 @@ export const TabsMenu = () => {
           </button>
         </div>
 
-        <button className='mr-24 px-5 gap-3 py-2 mb-3 border border-gray-300 rounded-md text-gray-700 flex items-center hover:bg-gray-100'>
+        <button className='mr-4 md:mr-24 px-5 gap-3 py-2 mb-3 border border-gray-300 rounded-md text-gray-700 flex items-center hover:bg-gray-100'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 24 24'
@@ -47,10 +48,11 @@ export const TabsMenu = () => {
           Edita tu Perfil
         </button>
       </div>
-      <div className='px-24 py-4'>
+      <div className='px-4 md:px-24 py-4'>
         {activeTab === 'info' && (
-          <div>
+          <div className='flex flex-col md:flex-row'>
             <CardProfile />
+            <ReadingListProfile />
           </div>
         )}
 
