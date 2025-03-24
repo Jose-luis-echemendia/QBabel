@@ -12,7 +12,7 @@ export const CustomHeaderBook = ({ book }) => {
             <div>
               <h2 className="text-3xl font-bold w-full">{book.tittle}</h2>
               {book.isComplete && (
-                <span className="text-3xl font-bold w-ful inline-flex -ml-[1px]">
+                <span className="text-3xl font-bold w-full inline-flex -ml-[1px]">
                   (Completa
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
