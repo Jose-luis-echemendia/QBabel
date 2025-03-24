@@ -7,21 +7,39 @@ export const Profiles = () => {
         {profilesData.map((profile) => (
           <div
             key={profile.id}
-            className="relative h-full flex items-center justify-between py-3 px-7 gap-1.5 bg-white rounded-lg shadow-xl hover:scale-105 transition-transform duration-200"
+            className="relative h-full flex items-center justify-between py-3 px-6 gap-1.5 bg-white rounded-lg shadow-xl hover:scale-105 transition-transform duration-200"
           >
             <div className="flex gap-2 items-start justify-start w-full h-full">
-                <img src={profile.avatar} alt={profile.userName} className="w-20 h-20 rounded-full object-cover" />
-                <div></div>
+              <img
+                src={profile.avatar}
+                alt={profile.userName}
+                className="w-20 h-20 rounded-full object-cover"
+              />
+              <div className="flex flex-col gap-1.5">
+                <h6 className="font-semibold text-xl">{profile.name}</h6>
+                <span className="text-gray-600 font-medium"> {profile.userName} </span>
+                <div className="flex gap-3 w-full">
+                  <div className="text-sm">
+                    <span className="font-semibold">{profile.history}</span> historias
+                  </div>
+                  <div className="text-sm">
+                    <span className="font-semibold">{profile.readingList}</span> listas de lecturas
+                  </div>
+                  <div className="text-sm">
+                    <span className="font-semibold">{profile.followers}</span> Seguidores
+                  </div>
+                </div>
+              </div>
             </div>
-            <div>
-              <button className="flex place-items-center gap-1 py-2 px-5 relative bg-gray-300 rounded-full">
+            <div className="">
+              <button className="flex place-items-center gap-1 py-2 px-5 relative bg-gray-300 rounded-full font-semibold">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="size-6"
+                  className="size-7"
                 >
                   <path
                     strokeLinecap="round"
