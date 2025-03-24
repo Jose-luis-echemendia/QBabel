@@ -1,13 +1,12 @@
-
 import { HeroProfile } from './hero-profile';
 import { TabsMenu } from './tabs-menu';
 
 const ProfileView = () => {
   return (
-    <div className='min-h-screen'>
+    <div className='w-full'>
       <HeroProfile />
 
-      <div className='w-full   mt-4'>
+      <div className='w-full  mt-4'>
         <TabsMenu />
       </div>
     </div>
