@@ -9,12 +9,8 @@ export const Profiles = () => {
             key={book.id}
             className="relative h-full flex items-center justify-between py-3 px-5 gap-1.5 bg-white rounded-lg shadow-xl hover:scale-105 transition-transform duration-200"
           >
-            <div>
-                info
-            </div>
-            <div>
-                Seguir
-            </div>
+            <div>info</div>
+            <div>Seguir</div>
           </div>
         ))}
       </div>
