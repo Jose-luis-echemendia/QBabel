@@ -28,13 +28,17 @@ export default function ReadingListProfile() {
 
             <svg
               xmlns='http://www.w3.org/2000/svg'
-              width='24'
-              height='24'
-              fill='currentColor'
+              fill='none'
               viewBox='0 0 24 24'
+              strokeWidth={1.5}
+              stroke='currentColor'
               className='size-8 text-gray-700'
             >
-              <path d='M12 4.75c.41 0 .75.34.75.75v6.75h6.75c.41 0 .75.34.75.75s-.34.75-.75.75H12.75V18c0 .41-.34.75-.75.75s-.75-.34-.75-.75v-6.75H4.75c-.41 0-.75-.34-.75-.75s.34-.75.75-.75H10.5V5.5c0-.41.34-.75.75-.75z' />
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                d='M12 4.5v15m7.5-7.5h-15'
+              />
             </svg>
           </button>
         </div>
