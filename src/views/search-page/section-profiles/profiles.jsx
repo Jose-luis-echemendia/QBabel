@@ -15,7 +15,7 @@ export const Profiles = () => {
                 alt={profile.userName}
                 className="w-20 h-20 rounded-full object-cover"
               />
-              <div className="flex flex-col gap-1.5">
+              <div className="flex flex-col gap-1.5 ml-1.5">
                 <h6 className="font-semibold text-xl">{profile.name}</h6>
                 <span className="text-gray-600 font-medium"> {profile.userName} </span>
                 <div className="flex gap-3 w-full">
