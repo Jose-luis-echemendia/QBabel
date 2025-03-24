@@ -7,7 +7,7 @@ export const Books = () => {
         {booksData.map((book) => (
           <div
             key={book.id}
-            className="relative flex items-center justify-center p-3 gap-1.5 bg-white rounded-lg shadow-xl hover:scale-105 transition-transform duration-200"
+            className="relative h-fit flex items-center justify-center p-3 gap-1.5 bg-white rounded-lg shadow-xl hover:scale-105 transition-transform duration-200"
           >
             {/* Hear Banner */}
             <div className="absolute -top-5 -left-5">
