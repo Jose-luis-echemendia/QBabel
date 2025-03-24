@@ -8,10 +8,10 @@ export const TabsMenu = () => {
 
   return (
     <>
-      <div className='flex items-center justify-between h-12 border-b-2 border-gray-400 bg-white px-4 md:px-0'>
+      <div className='flex  justify-between h-12 border-b border-gray-400 border-opacity-35 bg-white px-4 md:px-0'>
         <div className='flex space-x-10 text-lg ml-4 md:ml-24'>
           <button
-            className={`pb-1 ${
+            className={` pb-2 w-10 ${
               activeTab === 'info'
                 ? 'border-b-2 border-primary font-bold text-black'
                 : 'text-gray-600'
@@ -21,7 +21,7 @@ export const TabsMenu = () => {
             Info
           </button>
           <button
-            className={`pb-1 ${
+            className={` pb-2 ${
               activeTab === 'following'
                 ? 'border-b-2 border-primary font-bold text-black'
                 : 'text-gray-600'
