@@ -3,11 +3,11 @@ import { booksData } from "@/constants/home-page/best-books";
 export const Books = () => {
   return (
     <>
-      <div className="col-span-8 grid grid-cols-2 w-full h-full py-3 px-8 gap-9 mt-5">
+      <div className="col-span-8 grid grid-cols-2 w-full h-fit py-3 px-8 gap-9 mt-5">
         {booksData.map((book) => (
           <div
             key={book.id}
-            className="relative h-fit flex items-center justify-center p-3 gap-1.5 bg-white rounded-lg shadow-xl hover:scale-105 transition-transform duration-200"
+            className="relative h-full flex items-center justify-center p-3 gap-1.5 bg-white rounded-lg shadow-xl hover:scale-105 transition-transform duration-200"
           >
             {/* Hear Banner */}
             <div className="absolute -top-5 -left-5">
