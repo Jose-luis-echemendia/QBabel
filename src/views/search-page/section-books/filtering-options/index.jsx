@@ -34,10 +34,10 @@ const priceCriterion = [
 
 export const FilteringOptions = () => {
   const { criterion } = useParams();
-  const [openAcc1, setOpenAcc1] = useState(true);
-  const [openAcc2, setOpenAcc2] = useState(true);
-  const [openAcc3, setOpenAcc3] = useState(true);
-  const [openAcc4, setOpenAcc4] = useState(true);
+  const [openAcc1, setOpenAcc1] = useState(false);
+  const [openAcc2, setOpenAcc2] = useState(false);
+  const [openAcc3, setOpenAcc3] = useState(false);
+  const [openAcc4, setOpenAcc4] = useState(false);
 
   const handleOpenAcc1 = () => setOpenAcc1((cur) => !cur);
   const handleOpenAcc2 = () => setOpenAcc2((cur) => !cur);
