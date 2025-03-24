@@ -65,12 +65,14 @@ function BookCard({ book }) {
           <p className='text-xs text-gray-500'>{book.author}</p>
         </div>
 
-        <div className='w-8 h-8 mt-3 rounded-full bg-primary ml-3 flex justify-center items-center '>
-          <img src={Avatar} alt='' className='rounded-full w-full h-full' />
-        </div>
+        <img
+          src={Avatar}
+          alt='Antoine De Saint-Exupéry'
+          className='w-9 h-9 object-cover rounded-full mt-5'
+        />
       </div>
 
-      <div className='mt-1 flex  space-x-4 text-lg text-gray-600'>
+      <div className='mt-1 flex  space-x-4 text-sm text-gray-600'>
         <div className='flex items-center space-x-1'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -78,7 +80,7 @@ function BookCard({ book }) {
             viewBox='0 0 24 24'
             strokeWidth={1.5}
             stroke='currentColor'
-            className='size-6'
+            className='size-4'
           >
             <path
               strokeLinecap='round'
@@ -101,7 +103,7 @@ function BookCard({ book }) {
             viewBox='0 0 24 24'
             strokeWidth={1.5}
             stroke='currentColor'
-            className='size-6'
+            className='size-4'
           >
             <path
               strokeLinecap='round'
@@ -110,6 +112,24 @@ function BookCard({ book }) {
             />
           </svg>
 
+          <span>{book.parts}</span>
+          {/* partes */}
+        </div>
+        <div className='flex items-center space-x-1'>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            viewBox='0 0 24 24'
+            strokeWidth='1.5'
+            stroke='currentColor'
+            className='size-4'
+          >
+            <path
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              d='M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5'
+            ></path>
+          </svg>
           <span>{book.parts}</span>
         </div>
       </div>

@@ -30,14 +30,13 @@ export const Following = () => {
           key={user.id}
           className='w-64 border rounded-md overflow-hidden shadow-md bg-white'
         >
-         
           <div className='relative'>
             <img
               src={user.imageUrl}
               alt={user.name}
               className='w-full h-32 object-cover'
             />
-          
+
             <img
               src={Avatar}
               alt='Avatar'
@@ -45,7 +44,6 @@ export const Following = () => {
             />
           </div>
 
-      
           <div className='p-4 text-center mt-10'>
             <h3 className='font-bold text-lg'>{user.name}</h3>
             <p className='text-sm text-gray-600'>{user.username}</p>
