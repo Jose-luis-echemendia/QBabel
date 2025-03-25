@@ -20,6 +20,7 @@ import AdminOverViewPage from "@/pages/admin/admin-overview/page";
 import AdminUsersPage from "@/pages/admin/admin-users/page";
 import AdminBooksPage from "@/pages/admin/admin-books/page";
 import AdminCategoriesPage from "@/pages/admin/admin-categories/page";
+import AdminSalesPage from "@/pages/admin/admin-sales/page";
 
 const Routers = () => {
   const auth = useAppSelector((state) => state.auth);
@@ -96,6 +97,7 @@ const Routers = () => {
           <Route path="/profile/:userName" element={<ProfilePage />}></Route>
           <Route path="/admin/books" element={<AdminBooksPage />}></Route>
           <Route path="/admin/categories" element={<AdminCategoriesPage />}></Route>
+          <Route path="/admin/sales" element={<AdminSalesPage />}></Route>
 
         </Routes>
       </Router>
