@@ -2,13 +2,13 @@ import { lazy } from "react";
 import LoadSuspense from "@/components/load-suspense";
 import AdminLayout from "@/layout/admin-layout";
 
-const AdminUserView = lazy(() => import("@/views/admin-page/admin-users"));
+const AdminBooksView = lazy(() => import("@/views/admin-page/admin-books"));
 
 const AdminBooksPage = () => {
   return (
     <LoadSuspense>
       <AdminLayout>
-        <AdminUserView />
+        <AdminBooksView />
       </AdminLayout>
     </LoadSuspense>
   );
