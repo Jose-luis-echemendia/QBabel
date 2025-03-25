@@ -17,7 +17,7 @@ import Error404 from "@/pages/error/Error404";
 
 // ADMIN PAGES
 import AdminOverViewPage from "@/pages/admin/admin-overview/page";
-import AdminUserPage from "@/pages/admin/admin-users/page";
+import AdminUsersPage from "@/pages/admin/admin-users/page";
 
 const Routers = () => {
   const auth = useAppSelector((state) => state.auth);
@@ -83,7 +83,7 @@ const Routers = () => {
             }
           >
             <Route path="/admin" element={<AdminOverViewPage />}></Route>
-            <Route path="/admin/users" element={<AdminUserPage />}></Route>
+            <Route path="/admin/users" element={<AdminUsersPage />}></Route>
           </Route>
 
           {/* PAGES DISPLAY */} 
@@ -92,6 +92,7 @@ const Routers = () => {
           <Route path="/books/category/:category" element={<CategoryBookPage />}></Route>
           <Route path="/library" element={<LibraryPage />}></Route>
           <Route path="/profile/:userName" element={<ProfilePage />}></Route>
+          <Route path="/admin/users" element={<AdminUserPage />}></Route>
 
         </Routes>
       </Router>
