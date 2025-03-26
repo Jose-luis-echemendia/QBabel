@@ -20,12 +20,16 @@ const TABS = [
     value: "all",
   },
   {
-    label: "Monitored",
-    value: "monitored",
+    label: "Author",
+    value: "Author",
   },
   {
-    label: "Unmonitored",
-    value: "unmonitored",
+    label: "readers",
+    value: "readers",
+  },
+  {
+    label: "Admins",
+    value: "Admins",
   },
 ];
 
