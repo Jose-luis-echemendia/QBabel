@@ -24,8 +24,8 @@ const TABS = [
     value: "Author",
   },
   {
-    label: "readers",
-    value: "readers",
+    label: "Readers",
+    value: "Readers",
   },
   {
     label: "Admins",
@@ -40,45 +40,40 @@ const TABLE_ROWS = [
     img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg",
     name: "John Michael",
     email: "john@creative-tim.com",
-    job: "Manager",
-    org: "Organization",
-    online: true,
+    job: "Author",
+    isActive: true,
     date: "23/04/18",
   },
   {
     img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-2.jpg",
     name: "Alexa Liras",
     email: "alexa@creative-tim.com",
-    job: "Programator",
-    org: "Developer",
-    online: false,
+    job: "Reader",
+    isActive: false,
     date: "23/04/18",
   },
   {
     img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-1.jpg",
     name: "Laurent Perrier",
     email: "laurent@creative-tim.com",
-    job: "Executive",
-    org: "Projects",
-    online: false,
+    job: "Reader",
+    isActive: false,
     date: "19/09/17",
   },
   {
     img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-4.jpg",
     name: "Michael Levi",
     email: "michael@creative-tim.com",
-    job: "Programator",
-    org: "Developer",
-    online: true,
+    job: "Reader",
+    isActive: true,
     date: "24/12/08",
   },
   {
     img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
     name: "Richard Gran",
     email: "richard@creative-tim.com",
-    job: "Manager",
-    org: "Executive",
-    online: false,
+    job: "Admin",
+    isActive: false,
     date: "04/10/21",
   },
   {
@@ -86,17 +81,15 @@ const TABLE_ROWS = [
     name: "Richard Gran",
     email: "richard@creative-tim.com",
     job: "Manager",
-    org: "Executive",
-    online: false,
+    isActive: false,
     date: "04/10/21",
   },
   {
     img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
     name: "Richard Gran",
     email: "richard@creative-tim.com",
-    job: "Manager",
-    org: "Executive",
-    online: false,
+    job: "Admin",
+    isActive: false,
     date: "04/10/21",
   },
 ];
@@ -152,7 +145,7 @@ const AdminUsersView = () => {
           </thead>
           <tbody>
             {TABLE_ROWS.map(
-              ({ img, name, email, job, org, online, date }, index) => {
+              ({ img, name, email, job, isActive, date }, index) => {
                 const isLast = index === TABLE_ROWS.length - 1;
                 const classes = isLast
                   ? "p-4"
@@ -182,20 +175,13 @@ const AdminUsersView = () => {
                       </div>
                     </td>
                     <td className={classes}>
-                      <div className="flex flex-col">
+                      <div className="flex">
                         <Typography
                           variant="small"
                           color="blue-gray"
                           className="font-normal"
                         >
                           {job}
-                        </Typography>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal opacity-70"
-                        >
-                          {org}
                         </Typography>
                       </div>
                     </td>
@@ -204,8 +190,8 @@ const AdminUsersView = () => {
                         <Chip
                           variant="ghost"
                           size="sm"
-                          value={online ? "online" : "offline"}
-                          color={online ? "green" : "blue-gray"}
+                          value={isActive ? "True" : "False"}
+                          color={isActive ? "green" : "blue-gray"}
                         />
                       </div>
                     </td>
