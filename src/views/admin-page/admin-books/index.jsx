@@ -20,16 +20,24 @@ const TABS = [
     value: "all",
   },
   {
-    label: "Monitored",
-    value: "monitored",
+    label: "Completados",
+    value: "Completados",
   },
   {
-    label: "Unmonitored",
-    value: "unmonitored",
+    label: "Incompletos",
+    value: "Incompletos",
+  },
+  {
+    label: "Gratis",
+    value: "Gratis",
+  },
+  {
+    label: "Pagos",
+    value: "Pagos",
   },
 ];
 
-const TABLE_HEAD = ["Nombre & Email", "Rol", "Activo", "Fecha", ""];
+const TABLE_HEAD = ["title & author", "Completado", "Price", "Fecha", ""];
 
 const TABLE_ROWS = [
   {
@@ -107,7 +115,7 @@ const AdminBooksView = () => {
       >
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <Typography variant="h5" color="blue-gray">
-            Usuarios de QBabel
+            Libros registrados en QBabel
           </Typography>
           <Tabs value="all" className="w-full md:w-max">
             <TabsHeader>
