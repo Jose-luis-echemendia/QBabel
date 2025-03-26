@@ -86,10 +86,10 @@ const Routers = () => {
             }
           >
             <Route path="/admin" element={<AdminOverViewPage />}></Route>
-            <Route path="/admin/users" element={<AdminUsersPage />}></Route>
           </Route>
 
           {/* PAGES DISPLAY */} 
+          <Route path="/admin/users" element={<AdminUsersPage />}></Route>
           <Route path="/books/:bookId" element={<DetailsBookPage />}></Route>
           <Route path="/search/:criterion" element={<SearchPage />}></Route>
           <Route path="/books/category/:category" element={<CategoryBookPage />}></Route>
