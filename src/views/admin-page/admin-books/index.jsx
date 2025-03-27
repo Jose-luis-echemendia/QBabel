@@ -245,7 +245,11 @@ const AdminBooksView = () => {
                     : "p-4 border-b border-blue-gray-50";
 
                   return (
-                    <tr key={author} className="hover:bg-gray-100" onClick={() => setOpenOverViewBookModal(true)}>
+                    <tr
+                      key={author}
+                      className="hover:bg-gray-100"
+                      onClick={() => setOpenOverViewBookModal(true)}
+                    >
                       <td className={classes}>
                         <div className="flex items-center gap-3 ml-2.5">
                           <div className="flex flex-col line-clamp-1 w-full">
