@@ -176,6 +176,7 @@ const AdminBooksView = () => {
       >
         <OverViewBook />
       </CustomModal>
+      {/* Table */}
       <Card className="h-full w-full bg-gray-50 shadow-none ">
         <CardHeader
           floated={false}
@@ -207,15 +208,15 @@ const AdminBooksView = () => {
           <table className="mt-0 w-full min-w-max table-auto text-left">
             <thead>
               <tr>
-                {TABLE_HEAD.map((head) => (
+                {TABLE_HEAD.map((head, index) => (
                   <th
                     key={head}
-                    className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4"
+                    className={`border-y border-blue-gray-100 bg-blue-gray-50/50 p-4`}
                   >
                     <Typography
                       variant="small"
                       color="blue-gray"
-                      className="font-normal leading-none opacity-70"
+                      className={`font-normal w-fit leading-none opacity-70 ${index !== 0 && "cursor-pointer"}`}
                     >
                       {head}
                     </Typography>
