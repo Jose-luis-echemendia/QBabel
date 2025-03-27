@@ -15,7 +15,7 @@ const AdminLayout = ({ children }) => {
         <div className="col-span-2 -ml-8">
           <CustomSideBar />
         </div>
-        <main className="col-span-10 max-h-[200vh] shadow-sm antialiased">{children}</main>
+        <main className="col-span-10 max-h-[220vh] shadow-sm antialiased">{children}</main>
       </div>
       <footer className="ml-48 -mt-4 pb-2.5">
         <CustomFooter textColor="text-black" />
