@@ -85,7 +85,7 @@ const TABLE_ROWS = [
   },
   {
     title: "La Edad de Oro",
-    author: "Michael Levi",
+    author: "José Julian Martí Pérez",
     price: 1231.79,
     isComplete: true,
     date: "24/12/08",
@@ -117,7 +117,7 @@ const TABLE_ROWS = [
     sales: "23",
   },
   {
-    title: "Los Anillos de Poder",
+    title: "El señor de los anillos. Los Anillos de Poder",
     author: "JRR Tolking",
     price: 621.88,
     isComplete: false,
@@ -164,6 +164,7 @@ const TABLE_ROWS = [
 
 const AdminBooksView = () => {
   const [openOverViewBookModal, setOpenOverViewBookModal] = useState(false);
+  const [selectedBook, setSelectedBook] = useState(null);
 
   return (
     <>
@@ -174,7 +175,7 @@ const AdminBooksView = () => {
         classNameDialog="custom-dialog-class" // Clases personalizadas
         classNameBody="custom-body-class"
       >
-        <OverViewBook />
+        <OverViewBook book={selectedBook} />
       </CustomModal>
       {/* Table */}
       <Card className="h-full w-full bg-gray-50 shadow-none ">
@@ -216,7 +217,9 @@ const AdminBooksView = () => {
                     <Typography
                       variant="small"
                       color="blue-gray"
-                      className={`font-normal w-fit leading-none opacity-70 ${index !== 0 && "cursor-pointer"}`}
+                      className={`font-normal w-fit leading-none opacity-70 ${
+                        index !== 0 && "cursor-pointer"
+                      }`}
                     >
                       {head}
                     </Typography>
@@ -225,129 +228,128 @@ const AdminBooksView = () => {
               </tr>
             </thead>
             <tbody>
-              {TABLE_ROWS.map(
-                (
-                  {
-                    author,
-                    title,
-                    price,
-                    isComplete,
-                    date,
-                    parts,
-                    reviews,
-                    reads,
-                    sales,
-                  },
-                  index
-                ) => {
-                  const isLast = index === TABLE_ROWS.length - 1;
-                  const classes = isLast
-                    ? "p-4"
-                    : "p-4 border-b border-blue-gray-50";
+              {TABLE_ROWS.map((book, index) => {
+                const {
+                  author,
+                  title,
+                  price,
+                  isComplete,
+                  date,
+                  parts,
+                  reviews,
+                  reads,
+                  sales,
+                } = book;
+                const isLast = index === TABLE_ROWS.length - 1;
+                const classes = isLast
+                  ? "p-4"
+                  : "p-4 border-b border-blue-gray-50";
 
-                  return (
-                    <tr
-                      key={author}
-                      className="hover:bg-gray-100"
-                      onClick={() => setOpenOverViewBookModal(true)}
-                    >
-                      <td className={classes}>
-                        <div className="flex items-center gap-3 ml-2.5">
-                          <div className="flex flex-col line-clamp-1 w-full">
-                            <Typography
-                              variant="h5"
-                              color="blue-gray"
-                              className="font-semibold"
-                            >
-                              {title}
-                            </Typography>
-                            <Typography
-                              variant="small"
-                              color="blue-gray"
-                              className="font-medium opacity-70"
-                            >
-                              {author}
-                            </Typography>
-                          </div>
-                        </div>
-                      </td>
-                      <td className={classes}>
-                        <div className="flex flex-col">
+                return (
+                  <tr
+                    key={author}
+                    className="hover:bg-gray-100"
+                    onClick={() => {
+                      setSelectedBook(book);
+                      setOpenOverViewBookModal(true);
+                    }}
+                  >
+                    <td className={classes}>
+                      <div className="flex items-center gap-3 ml-2.5">
+                        <div className="flex flex-col line-clamp-1 w-full">
+                          <Typography
+                            variant="h5"
+                            color="blue-gray"
+                            className="font-semibold"
+                          >
+                            {title}
+                          </Typography>
                           <Typography
                             variant="small"
                             color="blue-gray"
-                            className="font-normal inline-flex"
+                            className="font-medium opacity-70"
                           >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              strokeWidth={1.5}
-                              stroke="currentColor"
-                              className="size-5 mr-2"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                              />
-                            </svg>
-                            {price}
+                            {author}
                           </Typography>
                         </div>
-                      </td>
-                      <td className={classes}>
-                        <div className="ml-5">{isComplete ? "✅" : "❌"}</div>
-                      </td>
-                      <td className={classes}>
+                      </div>
+                    </td>
+                    <td className={classes}>
+                      <div className="flex flex-col">
                         <Typography
                           variant="small"
                           color="blue-gray"
-                          className="font-normal"
+                          className="font-normal inline-flex"
                         >
-                          {date}
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="size-5 mr-2"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                            />
+                          </svg>
+                          {price}
                         </Typography>
-                      </td>
-                      <td className={classes}>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal"
-                        >
-                          {parts}
-                        </Typography>
-                      </td>
-                      <td className={classes}>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal"
-                        >
-                          {reviews}
-                        </Typography>
-                      </td>
-                      <td className={classes}>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal"
-                        >
-                          {reads}
-                        </Typography>
-                      </td>
-                      <td className={classes}>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal"
-                        >
-                          {sales}
-                        </Typography>
-                      </td>
-                    </tr>
-                  );
-                }
-              )}
+                      </div>
+                    </td>
+                    <td className={classes}>
+                      <div className="ml-5">{isComplete ? "✅" : "❌"}</div>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {date}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {parts}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {reviews}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {reads}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {sales}
+                      </Typography>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </CardBody>
