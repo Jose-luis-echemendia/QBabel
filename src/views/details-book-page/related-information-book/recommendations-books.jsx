@@ -4,8 +4,8 @@ export const RecommendationsBooks = ({ books }) => {
   return (
     <>
       <div className="w-full h-full">
-        <h3 className="text-2xl font-medium mb-2">Recomendaciones</h3>
-        <div className="grid grid-cols-2 gap-5 place-items-center py-2">
+        <h3 className="text-2xl font-medium mb-2 lg:text-left text-center lg:mt-0 mt-3">Recomendaciones</h3>
+        <div className="grid lg:grid-cols-2 grid-cols-1 lg:gap-5 gap-y-6 lg:px-0 px-5 place-items-center py-2">
           {books.map((book) => (
             <div
               key={book.id}

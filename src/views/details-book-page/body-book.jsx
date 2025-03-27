@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 export const CustomBodyBook = ({ book }) => {
   return (
     <>
-      <div className="flex flex-col justify-start items-start py-10 gap-6">
+      <div className="flex flex-col lg:justify-start lg:items-start items-center py-10 gap-6">
         <figure className="flex gap-5 justify-center items-center">
           <img
             src={book.author.avatar}
@@ -33,7 +33,7 @@ export const CustomBodyBook = ({ book }) => {
             </div>
           )}
         </div>
-        <p className="text-gray-800 text-base text-start text-balance leading-7 font-normal">
+        <p className="text-gray-800 text-base text-start text-balance leading-7 font-normal lg:p-0 pl-4">
           {book.description}
           <br />
           <br />
@@ -63,7 +63,7 @@ export const CustomBodyBook = ({ book }) => {
           de llegada en físico a otros países 😍.
         </p>
         <span>{book.license}</span>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap lg:gap-2 gap-4 lg:justify-normal justify-center">
           {book.categories.map((category) => (
             <span
               key={category.id}
