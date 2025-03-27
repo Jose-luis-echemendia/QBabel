@@ -12,6 +12,7 @@ import {
   Tab,
 } from "@material-tailwind/react";
 import { CustomModal } from "@/components/modal/index";
+import { useState } from "react";
 
 const TABS = [
   {
@@ -161,6 +162,8 @@ const TABLE_ROWS = [
 ];
 
 const AdminBooksView = () => {
+  const [openOverViewBookModal, setOpenOverViewBookModal] = useState(false);
+
   return (
     <Card className="h-full w-full bg-gray-50 shadow-none ">
       <CardHeader
