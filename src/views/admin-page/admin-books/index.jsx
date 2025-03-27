@@ -6,7 +6,6 @@ import {
   Input,
   Typography,
   CardBody,
-  Chip,
   CardFooter,
   Tabs,
   TabsHeader,
@@ -39,8 +38,8 @@ const TABS = [
 
 const TABLE_HEAD = [
   "title & author",
+  "Precio",
   "Completado",
-  "Price",
   "Fecha",
   "Actions",
 ];
@@ -52,7 +51,7 @@ const TABLE_ROWS = [
     email: "john@creative-tim.com",
     job: "Manager",
     org: "Organization",
-    online: true,
+    isComplete: true,
     date: "23/04/18",
   },
   {
@@ -61,7 +60,7 @@ const TABLE_ROWS = [
     email: "alexa@creative-tim.com",
     job: "Programator",
     org: "Developer",
-    online: false,
+    isComplete: false,
     date: "23/04/18",
   },
   {
@@ -70,7 +69,7 @@ const TABLE_ROWS = [
     email: "laurent@creative-tim.com",
     job: "Executive",
     org: "Projects",
-    online: false,
+    isComplete: false,
     date: "19/09/17",
   },
   {
@@ -79,7 +78,7 @@ const TABLE_ROWS = [
     email: "michael@creative-tim.com",
     job: "Programator",
     org: "Developer",
-    online: true,
+    isComplete: true,
     date: "24/12/08",
   },
   {
@@ -88,7 +87,7 @@ const TABLE_ROWS = [
     email: "richard@creative-tim.com",
     job: "Manager",
     org: "Executive",
-    online: false,
+    isComplete: false,
     date: "04/10/21",
   },
   {
@@ -97,7 +96,7 @@ const TABLE_ROWS = [
     email: "richard@creative-tim.com",
     job: "Manager",
     org: "Executive",
-    online: false,
+    isComplete: false,
     date: "04/10/21",
   },
   {
@@ -106,7 +105,7 @@ const TABLE_ROWS = [
     email: "richard@creative-tim.com",
     job: "Manager",
     org: "Executive",
-    online: false,
+    isComplete: false,
     date: "04/10/21",
   },
 ];
@@ -162,14 +161,14 @@ const AdminBooksView = () => {
           </thead>
           <tbody>
             {TABLE_ROWS.map(
-              ({ img, name, email, job, org, online, date }, index) => {
+              ({ img, name, email, job, org, isComplete, date }, index) => {
                 const isLast = index === TABLE_ROWS.length - 1;
                 const classes = isLast
                   ? "p-4"
                   : "p-4 border-b border-blue-gray-50";
 
                 return (
-                  <tr key={name}>
+                  <tr key={name} className="hover:bg-gray-100">
                     <td className={classes}>
                       <div className="flex items-center gap-3 ml-2.5">
                         <Avatar src={img} alt={name} size="sm" />
@@ -210,14 +209,7 @@ const AdminBooksView = () => {
                       </div>
                     </td>
                     <td className={classes}>
-                      <div className="w-max">
-                        <Chip
-                          variant="ghost"
-                          size="sm"
-                          value={online ? "online" : "offline"}
-                          color={online ? "green" : "blue-gray"}
-                        />
-                      </div>
+                      <div className="ml-5">{isComplete ? "✅" : "❌"}</div>
                     </td>
                     <td className={classes}>
                       <Typography

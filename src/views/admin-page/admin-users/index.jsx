@@ -6,7 +6,6 @@ import {
   Input,
   Typography,
   CardBody,
-  Chip,
   CardFooter,
   Tabs,
   TabsHeader,
@@ -152,7 +151,7 @@ const AdminUsersView = () => {
                   : "p-4 border-b border-blue-gray-50";
 
                 return (
-                  <tr key={name}>
+                  <tr key={name} className="hover:bg-gray-100">
                     <td className={classes}>
                       <div className="flex items-center gap-3 ml-2.5">
                         <Avatar src={img} alt={name} size="sm" />
@@ -186,14 +185,7 @@ const AdminUsersView = () => {
                       </div>
                     </td>
                     <td className={classes}>
-                      <div className="w-max">
-                        <Chip
-                          variant="ghost"
-                          size="sm"
-                          value={isActive ? "True" : "False"}
-                          color={isActive ? "green" : "blue-gray"}
-                        />
-                      </div>
+                      <div className="ml-2">{isActive ? "✅" : "❌"}</div>
                     </td>
                     <td className={classes}>
                       <Typography
