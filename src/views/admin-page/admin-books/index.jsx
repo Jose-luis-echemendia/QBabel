@@ -10,7 +10,6 @@ import {
   Tabs,
   TabsHeader,
   Tab,
-  Avatar,
 } from "@material-tailwind/react";
 
 const TABS = [
@@ -46,81 +45,71 @@ const TABLE_HEAD = [
 
 const TABLE_ROWS = [
   {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg",
-    name: "John Michael",
-    email: "john@creative-tim.com",
+    title: "El Principito",
+    author: "John Michael",
     price: 20.2,
     isComplete: true,
     date: "23/04/18",
   },
   {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-2.jpg",
-    name: "Alexa Liras",
-    email: "alexa@creative-tim.com",
+    title: "Lascivia",
+    author: "Alexa Liras",
     price: 1.99,
     isComplete: false,
     date: "23/04/18",
   },
   {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-1.jpg",
-    name: "Laurent Perrier",
-    email: "laurent@creative-tim.com",
+    title: "A Través de mi Ventana",
+    author: "Laurent Perrier",
     price: 109.99,
     isComplete: false,
     date: "19/09/17",
   },
   {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-4.jpg",
-    name: "Michael Levi",
-    email: "michael@creative-tim.com",
+    title: "La Edad de Oro",
+    author: "Michael Levi",
     price: 1231.79,
     isComplete: true,
     date: "24/12/08",
   },
   {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
-    name: "Richard Gran",
-    email: "richard@creative-tim.com",
+    title: "Introducción a la Programación en Python",
+    author: "Richard Gran",
     price: 22.0,
     isComplete: false,
     date: "04/10/21",
   },
   {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
-    name: "Richard Gran",
-    email: "richard@creative-tim.com",
+    title: "Había Una Vez",
+    author: "Richard Gran",
     price: 0.00,
     isComplete: false,
     date: "04/10/21",
   },
   {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
-    name: "Richard Gran",
-    email: "richard@creative-tim.com",
+    title: "Los Anillos de Poder",
+    author: "JRR Tolking",
     price: 621.88,
     isComplete: false,
     date: "04/10/21",
   },
   {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
-    name: "Richard Gran",
-    email: "richard@creative-tim.com",
+    title: "Psicología del Éxito",
+    author: "Mario Luna",
     price: 0.0,
     isComplete: false,
     date: "04/10/21",
   },
   {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
-    name: "Richard Gran",
-    email: "richard@creative-tim.com",
+    title: "Hábitos Átomicos",
+    author: "Richard Gran",
     price: 30.00,
     isComplete: false,
     date: "04/10/21",
   },
   {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
-    name: "Richard Gran",
-    email: "richard@creative-tim.com",
+    title: "Padre Rico, Padre Pobre",
+    author: "Robert Kiyosaki",
     price: 0.0,
     isComplete: false,
     date: "04/10/21",
@@ -178,31 +167,30 @@ const AdminBooksView = () => {
           </thead>
           <tbody>
             {TABLE_ROWS.map(
-              ({ img, name, email, price, isComplete, date }, index) => {
+              ({ author, title, price, isComplete, date }, index) => {
                 const isLast = index === TABLE_ROWS.length - 1;
                 const classes = isLast
                   ? "p-4"
                   : "p-4 border-b border-blue-gray-50";
 
                 return (
-                  <tr key={name} className="hover:bg-gray-100">
+                  <tr key={author} className="hover:bg-gray-100">
                     <td className={classes}>
                       <div className="flex items-center gap-3 ml-2.5">
-                        <Avatar src={img} alt={name} size="sm" />
                         <div className="flex flex-col">
                           <Typography
-                            variant="small"
+                            variant="medium"
                             color="blue-gray"
                             className="font-normal"
                           >
-                            {name}
+                            {title}
                           </Typography>
                           <Typography
                             variant="small"
                             color="blue-gray"
                             className="font-normal opacity-70"
                           >
-                            {email}
+                            {author}
                           </Typography>
                         </div>
                       </div>
