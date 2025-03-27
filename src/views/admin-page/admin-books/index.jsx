@@ -40,7 +40,9 @@ const TABLE_HEAD = [
   "Precio",
   "Completado",
   "Fecha",
-  "Actions",
+  "Lecturas",
+  "Comentarios",
+  "Ventas",
 ];
 
 const TABLE_ROWS = [
@@ -177,18 +179,18 @@ const AdminBooksView = () => {
                   <tr key={author} className="hover:bg-gray-100">
                     <td className={classes}>
                       <div className="flex items-center gap-3 ml-2.5">
-                        <div className="flex flex-col">
+                        <div className="flex flex-col line-clamp-1 w-full">
                           <Typography
-                            variant="medium"
+                            variant="h5"
                             color="blue-gray"
-                            className="font-normal"
+                            className="font-semibold"
                           >
                             {title}
                           </Typography>
                           <Typography
                             variant="small"
                             color="blue-gray"
-                            className="font-normal opacity-70"
+                            className="font-medium opacity-70"
                           >
                             {author}
                           </Typography>
