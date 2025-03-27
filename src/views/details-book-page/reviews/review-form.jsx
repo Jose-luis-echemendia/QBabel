@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export const ReviewForm = () => {
   const [comment, setComment] = useState("");
-  
+
   return (
     <>
       <div className="flex items-center justify-center gap-2 mb-4">
@@ -32,7 +32,7 @@ export const ReviewForm = () => {
           <textarea
             value={comment}
             onChange={(e) => setComment(e.target.value)}
-            className="w-[600px] min-h-[50px] h-[100px] max-h-[300px] border-2 border-gray-300 shadow-md py-4 pl-4 pr-12 rounded-xl resize-none overflow-hidden whitespace-normal break-words  focus:ring-primary focus:border-primary focus:outline-none"
+            className="lg:w-[600px] w-[350px] min-h-[50px] h-[100px] max-h-[300px] border-2 border-gray-300 shadow-md py-4 pl-4 pr-12 rounded-xl resize-none overflow-hidden whitespace-normal break-words  focus:ring-primary focus:border-primary focus:outline-none"
             placeholder="Escribe un comentario..."
           />
           <svg
