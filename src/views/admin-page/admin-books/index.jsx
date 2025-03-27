@@ -11,6 +11,7 @@ import {
   TabsHeader,
   Tab,
 } from "@material-tailwind/react";
+import { CustomModal } from "@/components/modal/index";
 
 const TABS = [
   {
@@ -40,6 +41,7 @@ const TABLE_HEAD = [
   "Precio",
   "Completado",
   "Fecha",
+  "Capítulos",
   "Lecturas",
   "Comentarios",
   "Ventas",
@@ -52,6 +54,10 @@ const TABLE_ROWS = [
     price: 20.2,
     isComplete: true,
     date: "23/04/18",
+    parts: 12,
+    reviews: "21k",
+    reads: "7.6M",
+    sales: "23",
   },
   {
     title: "Lascivia",
@@ -59,6 +65,10 @@ const TABLE_ROWS = [
     price: 1.99,
     isComplete: false,
     date: "23/04/18",
+    parts: 12,
+    reviews: "21k",
+    reads: "7.6M",
+    sales: "23",
   },
   {
     title: "A Través de mi Ventana",
@@ -66,6 +76,10 @@ const TABLE_ROWS = [
     price: 109.99,
     isComplete: false,
     date: "19/09/17",
+    parts: 12,
+    reviews: "21k",
+    reads: "7.6M",
+    sales: "23",
   },
   {
     title: "La Edad de Oro",
@@ -73,6 +87,10 @@ const TABLE_ROWS = [
     price: 1231.79,
     isComplete: true,
     date: "24/12/08",
+    parts: 12,
+    reviews: "21k",
+    reads: "7.6M",
+    sales: "23",
   },
   {
     title: "Introducción a la Programación en Python",
@@ -80,13 +98,21 @@ const TABLE_ROWS = [
     price: 22.0,
     isComplete: false,
     date: "04/10/21",
+    parts: 12,
+    reviews: "21k",
+    reads: "7.6M",
+    sales: "23",
   },
   {
     title: "Había Una Vez",
     author: "Richard Gran",
-    price: 0.00,
+    price: 0.0,
     isComplete: false,
     date: "04/10/21",
+    parts: 12,
+    reviews: "21k",
+    reads: "7.6M",
+    sales: "23",
   },
   {
     title: "Los Anillos de Poder",
@@ -94,6 +120,10 @@ const TABLE_ROWS = [
     price: 621.88,
     isComplete: false,
     date: "04/10/21",
+    parts: 12,
+    reviews: "21k",
+    reads: "7.6M",
+    sales: "23",
   },
   {
     title: "Psicología del Éxito",
@@ -101,13 +131,21 @@ const TABLE_ROWS = [
     price: 0.0,
     isComplete: false,
     date: "04/10/21",
+    parts: 12,
+    reviews: "21k",
+    reads: "7.6M",
+    sales: "23",
   },
   {
     title: "Hábitos Átomicos",
     author: "Richard Gran",
-    price: 30.00,
+    price: 30.0,
     isComplete: false,
     date: "04/10/21",
+    parts: 12,
+    reviews: "21k",
+    reads: "7.6M",
+    sales: "23",
   },
   {
     title: "Padre Rico, Padre Pobre",
@@ -115,6 +153,10 @@ const TABLE_ROWS = [
     price: 0.0,
     isComplete: false,
     date: "04/10/21",
+    parts: 12,
+    reviews: "21k",
+    reads: "7.6M",
+    sales: "23",
   },
 ];
 
@@ -169,7 +211,20 @@ const AdminBooksView = () => {
           </thead>
           <tbody>
             {TABLE_ROWS.map(
-              ({ author, title, price, isComplete, date }, index) => {
+              (
+                {
+                  author,
+                  title,
+                  price,
+                  isComplete,
+                  date,
+                  parts,
+                  reviews,
+                  reads,
+                  sales,
+                },
+                index
+              ) => {
                 const isLast = index === TABLE_ROWS.length - 1;
                 const classes = isLast
                   ? "p-4"
@@ -232,6 +287,42 @@ const AdminBooksView = () => {
                         className="font-normal"
                       >
                         {date}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {parts}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {reviews}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {reads}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {sales}
                       </Typography>
                     </td>
                   </tr>
