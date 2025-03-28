@@ -120,7 +120,7 @@ export const CustomTable = ({
                             color="blue-gray"
                             className="font-medium opacity-70"
                           >
-                            {author}
+                            {author.name}
                           </Typography>
                         </div>
                       </div>
