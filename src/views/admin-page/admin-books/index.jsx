@@ -40,7 +40,12 @@ const TABLE_HEAD = [
 const TABLE_ROWS = [
   {
     title: "El Principito",
-    author: "John Michael",
+    author: {
+      name: "John Michael",
+      avatar: "/assets/images/avatar.jpeg",
+    },
+    sumary:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus culpa error quisquam cum modi, obcaecati veniam, veritatis fugit laboriosam dicta est tempore dolores, libero nisi esse soluta neque. Expedita, sapiente.",
     price: 20.2,
     isComplete: true,
     date: "23/04/18",
@@ -52,10 +57,77 @@ const TABLE_ROWS = [
       "/assets/images/covers/10.1.jpg",
       "/assets/images/covers/10.2.jpg",
     ],
+    categories: [
+      {
+        id: 1,
+        name: "Ficticio",
+      },
+      {
+        id: 2,
+        name: "Aventura",
+      },
+      {
+        id: 3,
+        name: "Infantil",
+      },
+      {
+        id: 4,
+        name: "Ciencia Ficción",
+      },
+      {
+        id: 5,
+        name: "Romántico",
+      },
+      {
+        id: 6,
+        name: "Drama",
+      },
+      {
+        id: 7,
+        name: "Terror",
+      },
+      {
+        id: 8,
+        name: "Acción",
+      },
+      {
+        id: 9,
+        name: "Horror",
+      },
+      {
+        id: 10,
+        name: "Suspenso",
+      },
+      {
+        id: 11,
+        name: "Comedia",
+      },
+      {
+        id: 12,
+        name: "Deportiva",
+      },
+      {
+        id: 13,
+        name: "Biografía",
+      },
+      {
+        id: 14,
+        name: "Historia",
+      },
+      {
+        id: 15,
+        name: "Policial",
+      },
+    ],
   },
   {
     title: "Lascivia",
-    author: "Alexa Liras",
+    author: {
+      name: "Eva Muñoz",
+      avatar: "/assets/images/avatar.jpeg",
+    },
+    sumary:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus culpa error quisquam cum modi, obcaecati veniam, veritatis fugit laboriosam dicta est tempore dolores, libero nisi esse soluta neque. Expedita, sapiente.",
     price: 1.99,
     isComplete: false,
     date: "23/04/18",
@@ -67,10 +139,77 @@ const TABLE_ROWS = [
       "/assets/images/covers/10.1.jpg",
       "/assets/images/covers/10.2.jpg",
     ],
+    categories: [
+      {
+        id: 1,
+        name: "Ficticio",
+      },
+      {
+        id: 2,
+        name: "Aventura",
+      },
+      {
+        id: 3,
+        name: "Infantil",
+      },
+      {
+        id: 4,
+        name: "Ciencia Ficción",
+      },
+      {
+        id: 5,
+        name: "Romántico",
+      },
+      {
+        id: 6,
+        name: "Drama",
+      },
+      {
+        id: 7,
+        name: "Terror",
+      },
+      {
+        id: 8,
+        name: "Acción",
+      },
+      {
+        id: 9,
+        name: "Horror",
+      },
+      {
+        id: 10,
+        name: "Suspenso",
+      },
+      {
+        id: 11,
+        name: "Comedia",
+      },
+      {
+        id: 12,
+        name: "Deportiva",
+      },
+      {
+        id: 13,
+        name: "Biografía",
+      },
+      {
+        id: 14,
+        name: "Historia",
+      },
+      {
+        id: 15,
+        name: "Policial",
+      },
+    ],
   },
   {
     title: "A Través de mi Ventana",
-    author: "Laurent Perrier",
+    author: {
+      name: "Laritza bacallao",
+      avatar: "/assets/images/avatar.jpeg",
+    },
+    sumary:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus culpa error quisquam cum modi, obcaecati veniam, veritatis fugit laboriosam dicta est tempore dolores, libero nisi esse soluta neque. Expedita, sapiente.",
     price: 109.99,
     isComplete: false,
     date: "19/09/17",
@@ -83,10 +222,77 @@ const TABLE_ROWS = [
       "/assets/images/covers/11.2.jpg",
       "/assets/images/covers/11.3.jpg",
     ],
+    categories: [
+      {
+        id: 1,
+        name: "Ficticio",
+      },
+      {
+        id: 2,
+        name: "Aventura",
+      },
+      {
+        id: 3,
+        name: "Infantil",
+      },
+      {
+        id: 4,
+        name: "Ciencia Ficción",
+      },
+      {
+        id: 5,
+        name: "Romántico",
+      },
+      {
+        id: 6,
+        name: "Drama",
+      },
+      {
+        id: 7,
+        name: "Terror",
+      },
+      {
+        id: 8,
+        name: "Acción",
+      },
+      {
+        id: 9,
+        name: "Horror",
+      },
+      {
+        id: 10,
+        name: "Suspenso",
+      },
+      {
+        id: 11,
+        name: "Comedia",
+      },
+      {
+        id: 12,
+        name: "Deportiva",
+      },
+      {
+        id: 13,
+        name: "Biografía",
+      },
+      {
+        id: 14,
+        name: "Historia",
+      },
+      {
+        id: 15,
+        name: "Policial",
+      },
+    ],
   },
   {
     title: "La Edad de Oro",
-    author: "José Julian Martí Pérez",
+    author: {
+      name: "José Julian Martí Pérez",
+      avatar: "/assets/images/avatar.jpeg",
+    },
+    sumary:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus culpa error quisquam cum modi, obcaecati veniam, veritatis fugit laboriosam dicta est tempore dolores, libero nisi esse soluta neque. Expedita, sapiente.",
     price: 1231.79,
     isComplete: true,
     date: "24/12/08",
@@ -98,10 +304,77 @@ const TABLE_ROWS = [
       "/assets/images/covers/12.1.jpg",
       "/assets/images/covers/12.2.jpg",
     ],
+    categories: [
+      {
+        id: 1,
+        name: "Ficticio",
+      },
+      {
+        id: 2,
+        name: "Aventura",
+      },
+      {
+        id: 3,
+        name: "Infantil",
+      },
+      {
+        id: 4,
+        name: "Ciencia Ficción",
+      },
+      {
+        id: 5,
+        name: "Romántico",
+      },
+      {
+        id: 6,
+        name: "Drama",
+      },
+      {
+        id: 7,
+        name: "Terror",
+      },
+      {
+        id: 8,
+        name: "Acción",
+      },
+      {
+        id: 9,
+        name: "Horror",
+      },
+      {
+        id: 10,
+        name: "Suspenso",
+      },
+      {
+        id: 11,
+        name: "Comedia",
+      },
+      {
+        id: 12,
+        name: "Deportiva",
+      },
+      {
+        id: 13,
+        name: "Biografía",
+      },
+      {
+        id: 14,
+        name: "Historia",
+      },
+      {
+        id: 15,
+        name: "Policial",
+      },
+    ],
   },
   {
     title: "Introducción a la Programación en Python",
-    author: "Richard Gran",
+    author: {
+      name: "Richard Gran",
+      avatar: "/assets/images/avatar.jpeg",
+    },
+    sumary:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus culpa error quisquam cum modi, obcaecati veniam, veritatis fugit laboriosam dicta est tempore dolores, libero nisi esse soluta neque. Expedita, sapiente.",
     price: 22.0,
     isComplete: false,
     date: "04/10/21",
@@ -113,10 +386,77 @@ const TABLE_ROWS = [
       "/assets/images/covers/12.1.jpg",
       "/assets/images/covers/12.2.jpg",
     ],
+    categories: [
+      {
+        id: 1,
+        name: "Ficticio",
+      },
+      {
+        id: 2,
+        name: "Aventura",
+      },
+      {
+        id: 3,
+        name: "Infantil",
+      },
+      {
+        id: 4,
+        name: "Ciencia Ficción",
+      },
+      {
+        id: 5,
+        name: "Romántico",
+      },
+      {
+        id: 6,
+        name: "Drama",
+      },
+      {
+        id: 7,
+        name: "Terror",
+      },
+      {
+        id: 8,
+        name: "Acción",
+      },
+      {
+        id: 9,
+        name: "Horror",
+      },
+      {
+        id: 10,
+        name: "Suspenso",
+      },
+      {
+        id: 11,
+        name: "Comedia",
+      },
+      {
+        id: 12,
+        name: "Deportiva",
+      },
+      {
+        id: 13,
+        name: "Biografía",
+      },
+      {
+        id: 14,
+        name: "Historia",
+      },
+      {
+        id: 15,
+        name: "Policial",
+      },
+    ],
   },
   {
     title: "Había Una Vez",
-    author: "Richard Gran",
+    author: {
+      name: "Lolo el Gran Tipo",
+      avatar: "/assets/images/avatar.jpeg",
+    },
+    sumary:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus culpa error quisquam cum modi, obcaecati veniam, veritatis fugit laboriosam dicta est tempore dolores, libero nisi esse soluta neque. Expedita, sapiente.",
     price: 0.0,
     isComplete: false,
     date: "04/10/21",
@@ -128,10 +468,77 @@ const TABLE_ROWS = [
       "/assets/images/covers/10.1.jpg",
       "/assets/images/covers/10.2.jpg",
     ],
+    categories: [
+      {
+        id: 1,
+        name: "Ficticio",
+      },
+      {
+        id: 2,
+        name: "Aventura",
+      },
+      {
+        id: 3,
+        name: "Infantil",
+      },
+      {
+        id: 4,
+        name: "Ciencia Ficción",
+      },
+      {
+        id: 5,
+        name: "Romántico",
+      },
+      {
+        id: 6,
+        name: "Drama",
+      },
+      {
+        id: 7,
+        name: "Terror",
+      },
+      {
+        id: 8,
+        name: "Acción",
+      },
+      {
+        id: 9,
+        name: "Horror",
+      },
+      {
+        id: 10,
+        name: "Suspenso",
+      },
+      {
+        id: 11,
+        name: "Comedia",
+      },
+      {
+        id: 12,
+        name: "Deportiva",
+      },
+      {
+        id: 13,
+        name: "Biografía",
+      },
+      {
+        id: 14,
+        name: "Historia",
+      },
+      {
+        id: 15,
+        name: "Policial",
+      },
+    ],
   },
   {
     title: "El señor de los anillos. Los Anillos de Poder",
-    author: "JRR Tolking",
+    author: {
+      name: "JRR Tolking",
+      avatar: "/assets/images/avatar.jpeg",
+    },
+    sumary:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus culpa error quisquam cum modi, obcaecati veniam, veritatis fugit laboriosam dicta est tempore dolores, libero nisi esse soluta neque. Expedita, sapiente.",
     price: 621.88,
     isComplete: false,
     date: "04/10/21",
@@ -144,10 +551,77 @@ const TABLE_ROWS = [
       "/assets/images/covers/11.2.jpg",
       "/assets/images/covers/11.3.jpg",
     ],
+    categories: [
+      {
+        id: 1,
+        name: "Ficticio",
+      },
+      {
+        id: 2,
+        name: "Aventura",
+      },
+      {
+        id: 3,
+        name: "Infantil",
+      },
+      {
+        id: 4,
+        name: "Ciencia Ficción",
+      },
+      {
+        id: 5,
+        name: "Romántico",
+      },
+      {
+        id: 6,
+        name: "Drama",
+      },
+      {
+        id: 7,
+        name: "Terror",
+      },
+      {
+        id: 8,
+        name: "Acción",
+      },
+      {
+        id: 9,
+        name: "Horror",
+      },
+      {
+        id: 10,
+        name: "Suspenso",
+      },
+      {
+        id: 11,
+        name: "Comedia",
+      },
+      {
+        id: 12,
+        name: "Deportiva",
+      },
+      {
+        id: 13,
+        name: "Biografía",
+      },
+      {
+        id: 14,
+        name: "Historia",
+      },
+      {
+        id: 15,
+        name: "Policial",
+      },
+    ],
   },
   {
     title: "Psicología del Éxito",
-    author: "Mario Luna",
+    author: {
+      name: "Mario Luna",
+      avatar: "/assets/images/avatar.jpeg",
+    },
+    sumary:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus culpa error quisquam cum modi, obcaecati veniam, veritatis fugit laboriosam dicta est tempore dolores, libero nisi esse soluta neque. Expedita, sapiente.",
     price: 0.0,
     isComplete: false,
     date: "04/10/21",
@@ -159,10 +633,77 @@ const TABLE_ROWS = [
       "/assets/images/covers/10.1.jpg",
       "/assets/images/covers/10.2.jpg",
     ],
+    categories: [
+      {
+        id: 1,
+        name: "Ficticio",
+      },
+      {
+        id: 2,
+        name: "Aventura",
+      },
+      {
+        id: 3,
+        name: "Infantil",
+      },
+      {
+        id: 4,
+        name: "Ciencia Ficción",
+      },
+      {
+        id: 5,
+        name: "Romántico",
+      },
+      {
+        id: 6,
+        name: "Drama",
+      },
+      {
+        id: 7,
+        name: "Terror",
+      },
+      {
+        id: 8,
+        name: "Acción",
+      },
+      {
+        id: 9,
+        name: "Horror",
+      },
+      {
+        id: 10,
+        name: "Suspenso",
+      },
+      {
+        id: 11,
+        name: "Comedia",
+      },
+      {
+        id: 12,
+        name: "Deportiva",
+      },
+      {
+        id: 13,
+        name: "Biografía",
+      },
+      {
+        id: 14,
+        name: "Historia",
+      },
+      {
+        id: 15,
+        name: "Policial",
+      },
+    ],
   },
   {
     title: "Hábitos Átomicos",
-    author: "Richard Gran",
+    author: {
+      name: "John Michael",
+      avatar: "/assets/images/avatar.jpeg",
+    },
+    sumary:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus culpa error quisquam cum modi, obcaecati veniam, veritatis fugit laboriosam dicta est tempore dolores, libero nisi esse soluta neque. Expedita, sapiente.",
     price: 30.0,
     isComplete: false,
     date: "04/10/21",
@@ -174,10 +715,77 @@ const TABLE_ROWS = [
       "/assets/images/covers/12.1.jpg",
       "/assets/images/covers/12.2.jpg",
     ],
+    categories: [
+      {
+        id: 1,
+        name: "Ficticio",
+      },
+      {
+        id: 2,
+        name: "Aventura",
+      },
+      {
+        id: 3,
+        name: "Infantil",
+      },
+      {
+        id: 4,
+        name: "Ciencia Ficción",
+      },
+      {
+        id: 5,
+        name: "Romántico",
+      },
+      {
+        id: 6,
+        name: "Drama",
+      },
+      {
+        id: 7,
+        name: "Terror",
+      },
+      {
+        id: 8,
+        name: "Acción",
+      },
+      {
+        id: 9,
+        name: "Horror",
+      },
+      {
+        id: 10,
+        name: "Suspenso",
+      },
+      {
+        id: 11,
+        name: "Comedia",
+      },
+      {
+        id: 12,
+        name: "Deportiva",
+      },
+      {
+        id: 13,
+        name: "Biografía",
+      },
+      {
+        id: 14,
+        name: "Historia",
+      },
+      {
+        id: 15,
+        name: "Policial",
+      },
+    ],
   },
   {
     title: "Padre Rico, Padre Pobre",
-    author: "Robert Kiyosaki",
+    author: {
+      name: "Robert Kiyosaki",
+      avatar: "/assets/images/avatar.jpeg",
+    },
+    sumary:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus culpa error quisquam cum modi, obcaecati veniam, veritatis fugit laboriosam dicta est tempore dolores, libero nisi esse soluta neque. Expedita, sapiente.",
     price: 0.0,
     isComplete: false,
     date: "04/10/21",
@@ -188,6 +796,68 @@ const TABLE_ROWS = [
     covers: [
       "/assets/images/covers/10.1.jpg",
       "/assets/images/covers/10.2.jpg",
+    ],
+    categories: [
+      {
+        id: 1,
+        name: "Ficticio",
+      },
+      {
+        id: 2,
+        name: "Aventura",
+      },
+      {
+        id: 3,
+        name: "Infantil",
+      },
+      {
+        id: 4,
+        name: "Ciencia Ficción",
+      },
+      {
+        id: 5,
+        name: "Romántico",
+      },
+      {
+        id: 6,
+        name: "Drama",
+      },
+      {
+        id: 7,
+        name: "Terror",
+      },
+      {
+        id: 8,
+        name: "Acción",
+      },
+      {
+        id: 9,
+        name: "Horror",
+      },
+      {
+        id: 10,
+        name: "Suspenso",
+      },
+      {
+        id: 11,
+        name: "Comedia",
+      },
+      {
+        id: 12,
+        name: "Deportiva",
+      },
+      {
+        id: 13,
+        name: "Biografía",
+      },
+      {
+        id: 14,
+        name: "Historia",
+      },
+      {
+        id: 15,
+        name: "Policial",
+      },
     ],
   },
 ];
