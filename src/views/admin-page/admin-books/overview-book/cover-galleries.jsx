@@ -7,7 +7,7 @@ function classNames(...classes) {
 export const CoverGalleries = ({ covers, alt }) => {
   return (
     <>
-      <TabGroup as="div" className="flex flex-col-reverse">
+      <TabGroup as="div" className="flex flex-col-reverse gap-3">
         {/* Image selector */}
         <div className="hidden mt-6 w-full max-w-2xl mx-auto sm:block lg:max-w-none">
           <TabList className="grid grid-cols-4 gap-6">
