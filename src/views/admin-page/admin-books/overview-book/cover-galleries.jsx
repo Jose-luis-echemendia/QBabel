@@ -23,7 +23,7 @@ export const CoverGalleries = ({ covers, alt }) => {
                       <img
                         src={src}
                         alt={alt}
-                        className="w-full h-full object-center object-cover"
+                        className="w-40 h-40 object-center object-cover"
                       />
                     </span>
                     <span
@@ -46,7 +46,7 @@ export const CoverGalleries = ({ covers, alt }) => {
               <img
                 src={src}
                 alt={alt}
-                className="w-full h-full object-center object-cover sm:rounded-lg"
+                className="w-40 h-40 object-center object-cover sm:rounded-lg"
               />
             </Tab.Panel>
           ))}
