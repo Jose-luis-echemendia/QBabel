@@ -20,10 +20,9 @@ export const CustomTable = ({
   handleSelectedRow,
   handleOpenModal,
 }) => {
-    console.log(usingRowModal)
+    console.log(2, usingRowModal)
   return (
     <>
-      {" "}
       <Card className="h-full w-full bg-gray-50 shadow-none ">
         <CardHeader
           floated={false}
