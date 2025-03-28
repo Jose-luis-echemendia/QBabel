@@ -74,6 +74,7 @@ export const CustomTable = ({
             </thead>
             <tbody>
               {TABLE_ROWS.map((book, index) => {
+                
                 const {
                   author,
                   title,
@@ -85,6 +86,7 @@ export const CustomTable = ({
                   reads,
                   sales,
                 } = book;
+
                 const isLast = index === TABLE_ROWS.length - 1;
                 const classes = isLast
                   ? "p-4"
@@ -98,8 +100,8 @@ export const CustomTable = ({
                     }`}
                     onClick={() => {
                       if (usingRowModal) {
-                        () => handleSelectedRow(book);
-                        () => handleOpenModal();
+                        handleSelectedRow(book);
+                        handleOpenModal();
                       }
                     }}
                   >
