@@ -18,7 +18,7 @@ export const CustomTable = ({
   TABLE_ROWS,
   usingRowModal = false,
   handleSelectedRow,
-  handleModal,
+  handleOpenModal,
 }) => {
   return (
     <>
@@ -93,9 +93,14 @@ export const CustomTable = ({
                 return (
                   <tr
                     key={author}
-                    className="hover:bg-gray-100"
+                    className={`hover:bg-gray-100 ${
+                      usingRowModal && "cursor-pointer"
+                    }`}
                     onClick={() => {
-                      usingRowModal && (handleSelectedRow(book), handleModal());
+                      if (usingRowModal) {
+                        () => handleSelectedRow(book);
+                        () => handleOpenModal();
+                      }
                     }}
                   >
                     <td className={classes}>
