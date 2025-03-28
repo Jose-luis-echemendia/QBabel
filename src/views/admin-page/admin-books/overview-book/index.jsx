@@ -4,10 +4,10 @@ export const OverViewBook = ({ book }) => {
   return (
     <>
       <section className="p-5 grid grid-cols-11">
-        <div className="col-span-4">
+        <div className="col-span-4 h-full">
           <CoverGalleries covers={book.covers} alt={book.title} />
         </div>
-        <div className="col-span-7 flex flex-col gap-3 leading-8">
+        <div className="col-span-7 relative flex flex-col gap-3 leading-8">
           <h3 className="text-3xl font-semibold text-black">{book.title}</h3>
           <span className="text-gray-700 font-semibold">{book.author.name} </span>
           <p className="line-clamp-5 text-sm text-balance text-justify">
@@ -34,6 +34,9 @@ export const OverViewBook = ({ book }) => {
             </span>
           ))}
         </div>
+        </div>
+        <div className="col-span-11 flex items-center justify-center">
+          tablita
         </div>
       </section>
     </>
