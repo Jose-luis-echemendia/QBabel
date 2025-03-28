@@ -216,6 +216,7 @@ const AdminBooksView = () => {
         handleOpen={() => setOpenOverViewBookModal(false)} // Cierra el modal
         classNameDialog="custom-dialog-class" // Clases personalizadas
         classNameBody="custom-body-class"
+        exitButton={true}
       >
         <OverViewBook book={selectedBook} />
       </CustomModal>
