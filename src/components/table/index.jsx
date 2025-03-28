@@ -20,6 +20,7 @@ export const CustomTable = ({
   handleSelectedRow,
   handleOpenModal,
 }) => {
+    console.log(usingRowModal)
   return (
     <>
       {" "}
@@ -94,7 +95,7 @@ export const CustomTable = ({
 
                 return (
                   <tr
-                    key={author}
+                    key={title}
                     className={`hover:bg-gray-100 ${
                       usingRowModal && "cursor-pointer"
                     }`}
