@@ -8,8 +8,8 @@ import {
 } from "@material-tailwind/react";
 import classNames from "classnames";
 
-const ExitButton = (handleOpen) => {
-  console.log(handleOpen)
+const ExitButton = ({ handleOpen }) => {
+  console.log(handleOpen);
   return (
     <button
       type="button"
@@ -94,4 +94,8 @@ CustomModal.propTypes = {
   header: PropTypes.element,
   footer: PropTypes.element,
   exitButton: PropTypes.bool,
+};
+
+ExitButton.propTypes = {
+  handleOpen: PropTypes.func.isRequired,
 };
