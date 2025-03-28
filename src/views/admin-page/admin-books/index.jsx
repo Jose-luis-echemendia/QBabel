@@ -60,6 +60,11 @@ const TABLE_ROWS = [
     reviews: "21k",
     reads: "7.6M",
     sales: "23",
+    covers: [
+        src: "/assets/images/covers/10.1.jpg"
+      },
+      { src: "/assets/images/covers/10.2.jpg" },
+    ],
   },
   {
     title: "Lascivia",
@@ -71,6 +76,12 @@ const TABLE_ROWS = [
     reviews: "21k",
     reads: "7.6M",
     sales: "23",
+    covers: [
+      {
+        src: "/assets/images/covers/10.1.jpg",
+      },
+      { src: "/assets/images/covers/10.2.jpg" },
+    ],
   },
   {
     title: "A Través de mi Ventana",
@@ -82,6 +93,13 @@ const TABLE_ROWS = [
     reviews: "21k",
     reads: "7.6M",
     sales: "23",
+    covers: [
+      {
+        src: "/assets/images/covers/11.1.jpg",
+      },
+      { src: "/assets/images/covers/11.2.jpg" },
+      { src: "/assets/images/covers/11.3.jpg" },
+    ],
   },
   {
     title: "La Edad de Oro",
@@ -93,6 +111,12 @@ const TABLE_ROWS = [
     reviews: "21k",
     reads: "7.6M",
     sales: "23",
+    covers: [
+      {
+        src: "/assets/images/covers/12.1.jpg",
+      },
+      { src: "/assets/images/covers/12.2.jpg" },
+    ],
   },
   {
     title: "Introducción a la Programación en Python",
@@ -104,6 +128,12 @@ const TABLE_ROWS = [
     reviews: "21k",
     reads: "7.6M",
     sales: "23",
+    covers: [
+      {
+        src: "/assets/images/covers/12.1.jpg",
+      },
+      { src: "/assets/images/covers/12.2.jpg" },
+    ],
   },
   {
     title: "Había Una Vez",
@@ -115,6 +145,12 @@ const TABLE_ROWS = [
     reviews: "21k",
     reads: "7.6M",
     sales: "23",
+    covers: [
+      {
+        src: "/assets/images/covers/10.1.jpg",
+      },
+      { src: "/assets/images/covers/10.2.jpg" },
+    ],
   },
   {
     title: "El señor de los anillos. Los Anillos de Poder",
@@ -126,6 +162,13 @@ const TABLE_ROWS = [
     reviews: "21k",
     reads: "7.6M",
     sales: "23",
+    covers: [
+      {
+        src: "/assets/images/covers/11.1.jpg",
+      },
+      { src: "/assets/images/covers/11.2.jpg" },
+      { src: "/assets/images/covers/11.3.jpg" },
+    ],
   },
   {
     title: "Psicología del Éxito",
@@ -137,6 +180,12 @@ const TABLE_ROWS = [
     reviews: "21k",
     reads: "7.6M",
     sales: "23",
+    covers: [
+      {
+        src: "/assets/images/covers/10.1.jpg",
+      },
+      { src: "/assets/images/covers/10.2.jpg" },
+    ],
   },
   {
     title: "Hábitos Átomicos",
@@ -148,6 +197,12 @@ const TABLE_ROWS = [
     reviews: "21k",
     reads: "7.6M",
     sales: "23",
+    covers: [
+      {
+        src: "/assets/images/covers/12.1.jpg",
+      },
+      { src: "/assets/images/covers/12.2.jpg" },
+    ],
   },
   {
     title: "Padre Rico, Padre Pobre",
@@ -159,6 +214,12 @@ const TABLE_ROWS = [
     reviews: "21k",
     reads: "7.6M",
     sales: "23",
+    covers: [
+      {
+        src: "/assets/images/covers/10.1.jpg",
+      },
+      { src: "/assets/images/covers/10.2.jpg" },
+    ],
   },
 ];
 
