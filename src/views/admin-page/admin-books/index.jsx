@@ -216,7 +216,7 @@ const AdminBooksView = () => {
         TABLE_ROWS={TABLE_ROWS}
         usingRowModal={true}
         handleSelectedRow={setSelectedBook}
-        handleModal={setOpenOverViewBookModal}
+        handleOpenModal={setOpenOverViewBookModal}
       />
     </>
   );
