@@ -14,7 +14,7 @@ const ExitButton = ({ handleOpen }) => {
     <button
       type="button"
       onClick={() => handleOpen()}
-      className="absolute -top-10 right-2.5 text-black cursor-pointer"
+      className="absolute -top-10 right-2.5 text-white cursor-pointer"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -22,7 +22,7 @@ const ExitButton = ({ handleOpen }) => {
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className="size-8 "
+        className="size-8"
       >
         <path
           strokeLinecap="round"
