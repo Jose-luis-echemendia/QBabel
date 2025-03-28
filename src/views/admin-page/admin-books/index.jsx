@@ -53,6 +53,7 @@ const TABLE_ROWS = [
     reviews: "21k",
     reads: "7.6M",
     sales: "23",
+    license: "© All Rights Reserved",
     covers: [
       "/assets/images/covers/10.1.jpg",
       "/assets/images/covers/10.2.jpg",
@@ -135,6 +136,7 @@ const TABLE_ROWS = [
     reviews: "21k",
     reads: "7.6M",
     sales: "23",
+    license: "© All Rights Reserved",
     covers: [
       "/assets/images/covers/10.1.jpg",
       "/assets/images/covers/10.2.jpg",
@@ -217,6 +219,7 @@ const TABLE_ROWS = [
     reviews: "21k",
     reads: "7.6M",
     sales: "23",
+    license: "© All Rights Reserved",
     covers: [
       "/assets/images/covers/11.1.jpg",
       "/assets/images/covers/11.2.jpg",
@@ -300,6 +303,7 @@ const TABLE_ROWS = [
     reviews: "21k",
     reads: "7.6M",
     sales: "23",
+    license: "© All Rights Reserved",
     covers: [
       "/assets/images/covers/12.1.jpg",
       "/assets/images/covers/12.2.jpg",
@@ -382,6 +386,7 @@ const TABLE_ROWS = [
     reviews: "21k",
     reads: "7.6M",
     sales: "23",
+    license: "© All Rights Reserved",
     covers: [
       "/assets/images/covers/12.1.jpg",
       "/assets/images/covers/12.2.jpg",
@@ -464,6 +469,7 @@ const TABLE_ROWS = [
     reviews: "21k",
     reads: "7.6M",
     sales: "23",
+    license: "© All Rights Reserved",
     covers: [
       "/assets/images/covers/10.1.jpg",
       "/assets/images/covers/10.2.jpg",
@@ -546,6 +552,7 @@ const TABLE_ROWS = [
     reviews: "21k",
     reads: "7.6M",
     sales: "23",
+    license: "© All Rights Reserved",
     covers: [
       "/assets/images/covers/11.1.jpg",
       "/assets/images/covers/11.2.jpg",
@@ -629,6 +636,7 @@ const TABLE_ROWS = [
     reviews: "21k",
     reads: "7.6M",
     sales: "23",
+    license: "© All Rights Reserved",
     covers: [
       "/assets/images/covers/10.1.jpg",
       "/assets/images/covers/10.2.jpg",
@@ -711,6 +719,7 @@ const TABLE_ROWS = [
     reviews: "21k",
     reads: "7.6M",
     sales: "23",
+    license: "© All Rights Reserved",
     covers: [
       "/assets/images/covers/12.1.jpg",
       "/assets/images/covers/12.2.jpg",
@@ -793,6 +802,7 @@ const TABLE_ROWS = [
     reviews: "21k",
     reads: "7.6M",
     sales: "23",
+    license: "© All Rights Reserved",
     covers: [
       "/assets/images/covers/10.1.jpg",
       "/assets/images/covers/10.2.jpg",

@@ -23,6 +23,17 @@ export const OverViewBook = ({ book }) => {
             tenetur nesciunt voluptatibus ullam totam. Ut reiciendis rerum ea
             similique ratione voluptatem corporis.
           </p>
+          <span>{book.license}</span>
+        <div className="flex flex-wrap gap-2">
+          {book.categories.map((category) => (
+            <span
+              key={category.id}
+              className="px-3 py-1.5 rounded-2xl bg-gray-200 text-black font-semibold"
+            >
+              {category.name}
+            </span>
+          ))}
+        </div>
         </div>
       </section>
     </>
