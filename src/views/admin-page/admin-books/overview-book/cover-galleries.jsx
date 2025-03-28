@@ -23,7 +23,7 @@ export const CoverGalleries = ({ covers, alt }) => {
                       <img
                         src={src}
                         alt={alt}
-                        className="w-40 h-40 object-center object-cover"
+                        className="w-full h-full object-center object-cover"
                       />
                     </span>
                     <span
@@ -41,13 +41,13 @@ export const CoverGalleries = ({ covers, alt }) => {
         </div>
         
         {/* Image selected */}
-        <TabPanels className="w-full aspect-w-1 aspect-h-1">
+        <TabPanels className="w-full flex items-center justify-center">
           {covers.map((src) => (
             <TabPanel key={src}>
               <img
                 src={src}
                 alt={alt}
-                className="w-40 h-40 object-center object-cover sm:rounded-lg"
+                className="w-60 h-60 object-center object-cover sm:rounded-lg"
               />
             </TabPanel>
           ))}

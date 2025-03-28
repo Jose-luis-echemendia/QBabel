@@ -217,6 +217,7 @@ const AdminBooksView = () => {
         classNameDialog="custom-dialog-class" // Clases personalizadas
         classNameBody="custom-body-class"
         exitButton={true}
+        size="xl"
       >
         <OverViewBook book={selectedBook} />
       </CustomModal>
