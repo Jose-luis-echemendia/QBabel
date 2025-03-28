@@ -1,4 +1,4 @@
-import { Tab } from "@headlessui/react";
+import { Tab, TabList, TabGroup, TabPanel, TabPanels } from "@headlessui/react";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -7,10 +7,10 @@ function classNames(...classes) {
 export const CoverGalleries = ({ covers, alt }) => {
   return (
     <>
-      <Tab.Group as="div" className="flex flex-col-reverse">
+      <TabGroup as="div" className="flex flex-col-reverse">
         {/* Image selector */}
         <div className="hidden mt-6 w-full max-w-2xl mx-auto sm:block lg:max-w-none">
-          <Tab.List className="grid grid-cols-4 gap-6">
+          <TabList className="grid grid-cols-4 gap-6">
             {covers.map((src) => (
               <Tab
                 key={src} // Utilizando el índice como clave
@@ -37,21 +37,22 @@ export const CoverGalleries = ({ covers, alt }) => {
                 )}
               </Tab>
             ))}
-          </Tab.List>
+          </TabList>
         </div>
-
-        <Tab.Panels className="w-full aspect-w-1 aspect-h-1">
+        
+        {/* Image selected */}
+        <TabPanels className="w-full aspect-w-1 aspect-h-1">
           {covers.map((src) => (
-            <Tab.Panel key={src}>
+            <TabPanel key={src}>
               <img
                 src={src}
                 alt={alt}
                 className="w-40 h-40 object-center object-cover sm:rounded-lg"
               />
-            </Tab.Panel>
+            </TabPanel>
           ))}
-        </Tab.Panels>
-      </Tab.Group>
+        </TabPanels>
+      </TabGroup>
     </>
   );
 };
