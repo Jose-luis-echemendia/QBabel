@@ -3,14 +3,14 @@ import { CoverGalleries } from "./cover-galleries";
 export const OverViewBook = ({ book }) => {
   return (
     <>
-      <section className="p-5 grid grid-cols-10 w-[100vw] h-[80vh]">
-        <div className="col-span-4">
+      <section className="p-5 grid grid-cols-11">
+        <div className="col-span-4 bg-blue-200">
           <CoverGalleries
             covers={book.covers}
             alt={book.title}
           ></CoverGalleries>
         </div>
-        <div className="col-span-6">sdf</div>
+        <div className="col-span-7 bg-red-200">sdf</div>
       </section>
     </>
   );
