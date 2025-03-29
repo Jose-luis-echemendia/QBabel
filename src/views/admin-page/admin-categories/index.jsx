@@ -39,21 +39,29 @@ const TABLE_ROWS = [
     img: "/assets/images/home/categoria/Aventura.png",
     name: "Aventura",
     isActive: true,
+    type: "Libro",
+    date: "2025-03-29"
   },
   {
     img: "/assets/images/home/categoria/Romance.png",
     name: "Romance",
     isActive: true,
+    type: "Libro",
+    date: "2025-03-29"
   },
   {
     img: "/assets/images/home/categoria/Suspenso.png",
     name: "Suspenso",
     isActive: true,
+    type: "Libro",
+    date: "2025-03-29"
   },
   {
     img: "/assets/images/home/categoria/Juvenil.png",
     name: "Juvenil",
     isActive: true,
+    type: "Libro",
+    date: "2025-03-29"
   },
 ];
 
@@ -124,7 +132,7 @@ const AdminCategoriesView = () => {
           </thead>
           <tbody>
             {TABLE_ROWS.map(
-              ({ img, name, email, job, isActive, date }, index) => {
+              ({ img, name, email, type, isActive, date }, index) => {
                 const isLast = index === TABLE_ROWS.length - 1;
                 const classes = isLast
                   ? "p-4"
@@ -160,7 +168,7 @@ const AdminCategoriesView = () => {
                           color="blue-gray"
                           className="font-normal"
                         >
-                          {job}
+                          {type}
                         </Typography>
                       </div>
                     </td>
