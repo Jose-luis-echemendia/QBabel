@@ -14,7 +14,7 @@ export const OverViewBook = ({ book }) => {
           <HeaderOverViewBook book={book} />
           <BodyOverviewBook book={book} />
         </div>
-        <div className="col-span-11 flex gap-6 items-center justify-center mt-4">
+        <div className="col-span-11 mt-4">
           <FooterOverviewBook book={book}/>
         </div>
       </section>
