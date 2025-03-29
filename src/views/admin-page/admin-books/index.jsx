@@ -2,6 +2,7 @@ import { CustomModal } from "@/components/modal/index";
 import { useState } from "react";
 import { OverViewBook } from "./overview-book";
 import { CustomTable } from "@/components/table";
+import { Typography } from "@material-tailwind/react";
 
 const TABS = [
   {
@@ -927,25 +928,101 @@ const AdminBooksView = () => {
   const [selectedBook, setSelectedBook] = useState(null);
 
   const renderRow = ({ item, index, totalItems }) => {
-    const { img, name, type, isActive, date } = item;
+    const {
+      author,
+      title,
+      price,
+      isComplete,
+      date,
+      parts,
+      reviews,
+      reads,
+      sales,
+    } = item;
     const isLast = index === totalItems - 1;
     const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
 
     return (
-      <tr key={name} className="hover:bg-gray-100 cursor-pointer">
+      <tr
+        key={title}
+        className="hover:bg-gray-100 cursor-pointer"
+        onClick={() => {
+          setSelectedBook(item);
+          setOpenOverViewBookModal(true);
+        }}
+      >
         <td className={classes}>
           <div className="flex items-center gap-3 ml-2.5">
-            <Avatar src={img} alt={name} size="sm" />
-            <Typography variant="small" className="font-normal">
-              {name}
+            <div className="flex flex-col line-clamp-1 w-full">
+              <Typography
+                variant="h5"
+                color="blue-gray"
+                className="font-semibold"
+              >
+                {title}
+              </Typography>
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="font-medium opacity-70"
+              >
+                {author.name}
+              </Typography>
+            </div>
+          </div>
+        </td>
+        <td className={classes}>
+          <div className="flex flex-col">
+            <Typography
+              variant="small"
+              color="blue-gray"
+              className="font-normal inline-flex"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-5 mr-2"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                />
+              </svg>
+              {price}
             </Typography>
           </div>
         </td>
-        <td className={classes}>{type}</td>
-        <td className={classes}>{isActive ? "✅" : "❌"}</td>
-        <td className={classes}>{date}</td>
         <td className={classes}>
-          <div className="flex gap-2.5">{/* Iconos de acciones */}</div>
+          <div className="ml-5">{isComplete ? "✅" : "❌"}</div>
+        </td>
+        <td className={classes}>
+          <Typography variant="small" color="blue-gray" className="font-normal">
+            {date}
+          </Typography>
+        </td>
+        <td className={classes}>
+          <Typography variant="small" color="blue-gray" className="font-normal">
+            {parts}
+          </Typography>
+        </td>
+        <td className={classes}>
+          <Typography variant="small" color="blue-gray" className="font-normal">
+            {reviews}
+          </Typography>
+        </td>
+        <td className={classes}>
+          <Typography variant="small" color="blue-gray" className="font-normal">
+            {reads}
+          </Typography>
+        </td>
+        <td className={classes}>
+          <Typography variant="small" color="blue-gray" className="font-normal">
+            {sales}
+          </Typography>
         </td>
       </tr>
     );
