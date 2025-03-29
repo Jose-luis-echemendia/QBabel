@@ -159,7 +159,8 @@ const AdminCategoriesView = () => {
       {/* TABLE Categories */}
       <CustomTable
         title={"Etiquetas"}
-        addItems={true}
+        addItem={true}
+        handleAddItem={}
         TABS={TABS}
         TABLE_HEAD={TABLE_HEAD}
         TABLE_ROWS={TABLE_ROWS}
