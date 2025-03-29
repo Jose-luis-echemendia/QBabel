@@ -37,7 +37,7 @@ const elements = [
   {
     id: 4,
     label: "Categorías",
-    highlightPath: ["/admin/cateogies", "/products/add-product"],
+    highlightPath: ["/admin/categories", "/products/add-product"],
     icon: <IconDashboard />,
     subElements: ["Add Product"],
   },
