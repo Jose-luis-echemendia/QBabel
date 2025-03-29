@@ -18,6 +18,7 @@ export const CustomTable = ({
   TABS,
   TABLE_HEAD,
   TABLE_ROWS,
+  renderRow,
   usingRowModal = false,
   handleSelectedRow,
   handleOpenModal,
@@ -92,8 +93,28 @@ export const CustomTable = ({
               </tr>
             </thead>
             <tbody>
-              {TABLE_ROWS.map((book, index) => {
-                const {
+              {TABLE_ROWS.map((item, index) =>
+                renderRow({
+                  item,
+                  index,
+                  totalItems: TABLE_ROWS.length,
+                  usingRowModal,
+                  handleSelectedRow,
+                  handleOpenModal,
+                })
+              )}
+            </tbody>
+          </table>
+        </CardBody>
+        <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
+          <CustomTablePagination />
+        </CardFooter>
+      </Card>
+    </>
+  );
+};
+
+/*const {
                   author,
                   title,
                   price,
@@ -217,15 +238,4 @@ export const CustomTable = ({
                       </Typography>
                     </td>
                   </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </CardBody>
-        <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
-          <CustomTablePagination />
-        </CardFooter>
-      </Card>
-    </>
-  );
-};
+                ); */
