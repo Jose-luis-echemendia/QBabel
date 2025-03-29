@@ -941,6 +941,7 @@ const AdminBooksView = () => {
       </CustomModal>
       {/* TABLE Books */}
       <CustomTable
+        title={"Libros registrados en QBabel"}
         TABS={TABS}
         TABLE_HEAD={TABLE_HEAD}
         TABLE_ROWS={TABLE_ROWS}

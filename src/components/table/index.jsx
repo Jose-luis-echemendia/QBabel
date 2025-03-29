@@ -13,6 +13,7 @@ import {
 } from "@material-tailwind/react";
 
 export const CustomTable = ({
+  title,
   TABS,
   TABLE_HEAD,
   TABLE_ROWS,
@@ -31,7 +32,7 @@ export const CustomTable = ({
         >
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
             <Typography variant="h5" color="blue-gray">
-              Libros registrados en QBabel
+              {title}
             </Typography>
             <Tabs value="all" className="w-full md:w-max">
               <TabsHeader>
