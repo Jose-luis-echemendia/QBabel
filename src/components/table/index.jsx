@@ -67,7 +67,7 @@ export const CustomTable = ({
             </div>
           </div>
         </CardHeader>
-        <CardBody className="px-0">
+        <CardBody className="px-0 min-h-[70vh]">
           <table className="mt-0 w-full min-w-max table-auto text-left">
             <thead>
               <tr>
