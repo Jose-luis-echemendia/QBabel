@@ -38,26 +38,14 @@ const TABLE_ROWS = [
   {
     img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg",
     name: "John Michael",
-    email: "john@creative-tim.com",
-    job: "Author",
-    isActive: true,
-    date: "23/04/18",
   },
   {
     img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-2.jpg",
     name: "Alexa Liras",
-    email: "alexa@creative-tim.com",
-    job: "Reader",
-    isActive: false,
-    date: "23/04/18",
   },
   {
     img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-1.jpg",
     name: "Laurent Perrier",
-    email: "laurent@creative-tim.com",
-    job: "Reader",
-    isActive: false,
-    date: "19/09/17",
   },
 ];
 
