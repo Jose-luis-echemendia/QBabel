@@ -97,10 +97,56 @@ export const FooterOverviewBook = ({ book }) => {
             </span>
             <span className="text-xl font-bold">{book.parts}</span>
           </div>
+          <div className="w-[1px] bg-gray-400 -mx-3 h-14" />
+          <div className="flex flex-col gap-2 items-center justify-center">
+            <span className="flex gap-1.5 text-gray-800">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 10.5v6m3-3H9m4.06-7.19-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z"
+                />
+              </svg>
+
+              <small className="text-lg">Registrado</small>
+            </span>
+            <span className="text-xl font-bold">{book.createdAt}</span>
+          </div>
+          <div className="w-[1px] bg-gray-400 -mx-3 h-14" />
+          <div className="flex flex-col gap-2 items-center justify-center">
+            <span className="flex gap-1.5 text-gray-800">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"
+                />
+              </svg>
+
+              <small className="text-lg">Actualizado</small>
+            </span>
+            <span className="text-xl font-bold">{book.updatedAt}</span>
+          </div>
         </div>
         <div>
           <button className="bg-primary py-2.5 px-16 rounded-full">
-            <span className="font-semibold text-black-80 hover:text-gray-800">Ver Detalles</span>
+            <span className="font-semibold text-black-80 hover:text-gray-800">
+              Ver Detalles
+            </span>
           </button>
         </div>
       </div>
