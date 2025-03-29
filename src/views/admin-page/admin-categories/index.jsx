@@ -160,7 +160,7 @@ const AdminCategoriesView = () => {
       <CustomTable
         title={"Etiquetas"}
         addItem={true}
-        handleAddItem={}
+        handleAddItem={() => (setSelectedCategory(null), setOpenOverViewCategoryModal(true))}
         TABS={TABS}
         TABLE_HEAD={TABLE_HEAD}
         TABLE_ROWS={TABLE_ROWS}
