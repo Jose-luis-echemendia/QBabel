@@ -36,16 +36,24 @@ const TABLE_HEAD = ["Nombre & imagen", "tipo", "Activo", "Fecha", "Acciones"];
 
 const TABLE_ROWS = [
   {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg",
-    name: "John Michael",
+    img: "/assets/images/home/categoria/Aventura.png",
+    name: "Aventura",
+    isActive: true,
   },
   {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-2.jpg",
-    name: "Alexa Liras",
+    img: "/assets/images/home/categoria/Romance.png",
+    name: "Romance",
+    isActive: true,
   },
   {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-1.jpg",
-    name: "Laurent Perrier",
+    img: "/assets/images/home/categoria/Suspenso.png",
+    name: "Suspenso",
+    isActive: true,
+  },
+  {
+    img: "/assets/images/home/categoria/Juvenil.png",
+    name: "Juvenil",
+    isActive: true,
   },
 ];
 
