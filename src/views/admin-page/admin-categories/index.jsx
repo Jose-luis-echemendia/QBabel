@@ -12,6 +12,7 @@ import {
   Tab,
   Avatar,
 } from "@material-tailwind/react";
+import { useState } from "react";
 
 const TABS = [
   {
@@ -32,7 +33,7 @@ const TABS = [
   },
 ];
 
-const TABLE_HEAD = ["Nombre & imagen", "tipo", "Activo", "Fecha", "Acciones"];
+const TABLE_HEAD = ["Imagen & Nombre", "tipo", "Activo", "Fecha", "Acciones"];
 
 const TABLE_ROWS = [
   {
@@ -40,32 +41,60 @@ const TABLE_ROWS = [
     name: "Aventura",
     isActive: true,
     type: "Libro",
-    date: "2025-03-29"
+    date: "2025-03-29",
   },
   {
     img: "/assets/images/home/categoria/Romance.png",
     name: "Romance",
     isActive: true,
     type: "Libro",
-    date: "2025-03-29"
+    date: "2025-03-29",
   },
   {
     img: "/assets/images/home/categoria/Suspenso.png",
     name: "Suspenso",
     isActive: true,
     type: "Libro",
-    date: "2025-03-29"
+    date: "2025-03-29",
   },
   {
     img: "/assets/images/home/categoria/Juvenil.png",
     name: "Juvenil",
     isActive: true,
     type: "Libro",
-    date: "2025-03-29"
+    date: "2025-03-29",
   },
 ];
 
 const AdminCategoriesView = () => {
+  const [openOverViewBookModal, setOpenOverViewBookModal] = useState(false);
+  const [selectedBook, setSelectedBook] = useState(null);
+
+  const renderRow = ({ item, index, totalItems }) => {
+    const { img, name, type, isActive, date } = item;
+    const isLast = index === totalItems - 1;
+    const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
+
+    return (
+      <tr key={name} className="hover:bg-gray-100 cursor-pointer">
+        <td className={classes}>
+          <div className="flex items-center gap-3 ml-2.5">
+            <Avatar src={img} alt={name} size="sm" />
+            <Typography variant="small" className="font-normal">
+              {name}
+            </Typography>
+          </div>
+        </td>
+        <td className={classes}>{type}</td>
+        <td className={classes}>{isActive ? "✅" : "❌"}</td>
+        <td className={classes}>{date}</td>
+        <td className={classes}>
+          <div className="flex gap-2.5">{/* Iconos de acciones */}</div>
+        </td>
+      </tr>
+    );
+  };
+
   return (
     <Card className="h-full w-full bg-gray-50 shadow-none ">
       <CardHeader
@@ -78,7 +107,6 @@ const AdminCategoriesView = () => {
             <Typography variant="h5" color="blue-gray">
               Etiquetas
             </Typography>
-            
           </div>
           <Tabs value="all" className="w-full md:w-max">
             <TabsHeader>
