@@ -14,7 +14,7 @@ import {
 
 export const CustomTable = ({
   title,
-  addItems = false,
+  addItem = false,
   TABS,
   TABLE_HEAD,
   TABLE_ROWS,
@@ -33,7 +33,7 @@ export const CustomTable = ({
               <Typography variant="h5" color="blue-gray">
                 {title}
               </Typography>
-              {addItems && (
+              {addItem && (
                 <button onClick={() => alert("agg libro")}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
