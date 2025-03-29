@@ -28,8 +28,8 @@ export const HeaderOverViewBook = ({ book }) => {
 
       <h3 className="text-3xl font-semibold text-black">{book.title}</h3>
       <div className="flex items-center gap-3 my-2.5">
-        <Avatar src={book.author.avatar} alt={book.author.name} size="sm"/>
-      <span className="text-gray-700 font-semibold">{book.author.name}</span>
+        <Avatar src={book.author.avatar} alt={book.author.name} size="sm" />
+        <span className="text-gray-700 font-semibold">{book.author.name}</span>
       </div>
       <div className="flex gap-2">
         {book.isFree ? (
