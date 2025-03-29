@@ -152,7 +152,7 @@ const AdminCategoriesView = () => {
         classNameDialog="custom-dialog-class" // Clases personalizadas
         classNameBody="custom-body-class"
         exitButton={true}
-        size="lg"
+        size="md"
       >
         <OverViewCategory category={selectedCategory} />
       </CustomModal>
