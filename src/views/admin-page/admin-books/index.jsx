@@ -57,6 +57,8 @@ const TABLE_ROWS = [
     reads: "7.6M",
     sales: "23",
     license: "© All Rights Reserved",
+    createdAt: "2025-01-23",
+    updatedAt: "2025-01-23",
     covers: [
       "/assets/images/covers/10.1.jpg",
       "/assets/images/covers/10.2.jpg",
@@ -143,6 +145,8 @@ const TABLE_ROWS = [
     reads: "7.6M",
     sales: "23",
     license: "© All Rights Reserved",
+    createdAt: "2025-01-23",
+    updatedAt: "2025-01-23",
     covers: [
       "/assets/images/covers/10.1.jpg",
       "/assets/images/covers/10.2.jpg",
@@ -229,6 +233,8 @@ const TABLE_ROWS = [
     reads: "7.6M",
     sales: "23",
     license: "© All Rights Reserved",
+    createdAt: "2025-01-23",
+    updatedAt: "2025-01-23",
     covers: [
       "/assets/images/covers/11.1.jpg",
       "/assets/images/covers/11.2.jpg",
@@ -316,6 +322,8 @@ const TABLE_ROWS = [
     reads: "7.6M",
     sales: "23",
     license: "© All Rights Reserved",
+    createdAt: "2025-01-23",
+    updatedAt: "2025-01-23",
     covers: [
       "/assets/images/covers/12.1.jpg",
       "/assets/images/covers/12.2.jpg",
@@ -402,6 +410,8 @@ const TABLE_ROWS = [
     reads: "7.6M",
     sales: "23",
     license: "© All Rights Reserved",
+    createdAt: "2025-01-23",
+    updatedAt: "2025-01-23",
     covers: [
       "/assets/images/covers/12.1.jpg",
       "/assets/images/covers/12.2.jpg",
@@ -488,6 +498,8 @@ const TABLE_ROWS = [
     reads: "7.6M",
     sales: "23",
     license: "© All Rights Reserved",
+    createdAt: "2025-01-23",
+    updatedAt: "2025-01-23",
     covers: [
       "/assets/images/covers/10.1.jpg",
       "/assets/images/covers/10.2.jpg",
@@ -574,6 +586,8 @@ const TABLE_ROWS = [
     reads: "7.6M",
     sales: "23",
     license: "© All Rights Reserved",
+    createdAt: "2025-01-23",
+    updatedAt: "2025-01-23",
     covers: [
       "/assets/images/covers/11.1.jpg",
       "/assets/images/covers/11.2.jpg",
@@ -661,6 +675,8 @@ const TABLE_ROWS = [
     reads: "7.6M",
     sales: "23",
     license: "© All Rights Reserved",
+    createdAt: "2025-01-23",
+    updatedAt: "2025-01-23",
     covers: [
       "/assets/images/covers/10.1.jpg",
       "/assets/images/covers/10.2.jpg",
@@ -747,6 +763,8 @@ const TABLE_ROWS = [
     reads: "7.6M",
     sales: "23",
     license: "© All Rights Reserved",
+    createdAt: "2025-01-23",
+    updatedAt: "2025-01-23",
     covers: [
       "/assets/images/covers/12.1.jpg",
       "/assets/images/covers/12.2.jpg",
@@ -833,6 +851,8 @@ const TABLE_ROWS = [
     reads: "7.6M",
     sales: "23",
     license: "© All Rights Reserved",
+    createdAt: "2025-01-23",
+    updatedAt: "2025-01-23",
     covers: [
       "/assets/images/covers/10.1.jpg",
       "/assets/images/covers/10.2.jpg",
