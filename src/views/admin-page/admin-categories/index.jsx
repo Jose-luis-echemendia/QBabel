@@ -19,17 +19,14 @@ const TABS = [
     value: "all",
   },
   {
-    label: "Author",
-    value: "Author",
+    label: "Activas",
+    value: "Activas",
   },
   {
-    label: "Readers",
-    value: "Readers",
+    label: "Inactivas",
+    value: "Inactivas",
   },
-  {
-    label: "Admins",
-    value: "Admins",
-  },
+  
 ];
 
 const TABLE_HEAD = ["Nombre & Email", "Rol", "Activo", "Fecha", ""];
@@ -103,7 +100,7 @@ const AdminCategoriesView = () => {
       >
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <Typography variant="h5" color="blue-gray">
-            Usuarios de QBabel
+            Etiquetas para libros
           </Typography>
           <Tabs value="all" className="w-full md:w-max">
             <TabsHeader>
