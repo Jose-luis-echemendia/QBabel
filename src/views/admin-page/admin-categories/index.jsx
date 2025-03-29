@@ -1,19 +1,8 @@
-import { CustomTablePagination } from "@/components/pagination/custom-pagination";
+import { CustomModal } from "@/components/modal";
 import { CustomTable } from "@/components/table";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import {
-  Card,
-  CardHeader,
-  Input,
-  Typography,
-  CardBody,
-  CardFooter,
-  Tabs,
-  TabsHeader,
-  Tab,
-  Avatar,
-} from "@material-tailwind/react";
+import { Typography, Avatar } from "@material-tailwind/react";
 import { useState } from "react";
+import { OverViewCategory } from "./overview-category";
 
 const TABS = [
   {
@@ -68,8 +57,9 @@ const TABLE_ROWS = [
 ];
 
 const AdminCategoriesView = () => {
-  const [openOverViewBookModal, setOpenOverViewBookModal] = useState(false);
-  const [selectedBook, setSelectedBook] = useState(null);
+  const [openOverViewCategoryModal, setOpenOverViewCategoryModal] =
+    useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   const renderRow = ({ item, index, totalItems }) => {
     const { img, name, type, isActive, date } = item;
@@ -77,7 +67,14 @@ const AdminCategoriesView = () => {
     const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
 
     return (
-      <tr key={name} className="hover:bg-gray-100 cursor-pointer">
+      <tr
+        key={name}
+        className="hover:bg-gray-100 cursor-pointer"
+        onClick={() => {
+          setSelectedCategory(item);
+          setOpenOverViewCategoryModal(true);
+        }}
+      >
         <td className={classes}>
           <div className="flex items-center gap-3 ml-2.5">
             <Avatar src={img} alt={name} size="sm" />
@@ -102,7 +99,15 @@ const AdminCategoriesView = () => {
           </div>
         </td>
         <td className={classes}>
-          <div className="ml-2">{isActive ? "✅" : "❌"}</div>
+          <div className="ml-2.5">
+            <Typography
+              variant="small"
+              color="blue-gray"
+              className="font-normal"
+            >
+              {isActive ? "✅" : "❌"}
+            </Typography>
+          </div>
         </td>
         <td className={classes}>
           <Typography variant="small" color="blue-gray" className="font-normal">
@@ -140,6 +145,18 @@ const AdminCategoriesView = () => {
 
   return (
     <>
+      {/* Modal de OverView Category */}
+      <CustomModal
+        open={openOverViewCategoryModal}
+        handleOpen={() => setOpenOverViewCategoryModal(false)} // Cierra el modal
+        classNameDialog="custom-dialog-class" // Clases personalizadas
+        classNameBody="custom-body-class"
+        exitButton={true}
+        size="lg"
+      >
+        <OverViewCategory category={selectedCategory} />
+      </CustomModal>
+      {/* TABLE Categories */}
       <CustomTable
         title={"Etiquetas"}
         addItems={true}
