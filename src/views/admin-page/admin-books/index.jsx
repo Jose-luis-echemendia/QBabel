@@ -926,6 +926,31 @@ const AdminBooksView = () => {
   const [openOverViewBookModal, setOpenOverViewBookModal] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
 
+  const renderRow = ({ item, index, totalItems }) => {
+    const { img, name, type, isActive, date } = item;
+    const isLast = index === totalItems - 1;
+    const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
+
+    return (
+      <tr key={name} className="hover:bg-gray-100 cursor-pointer">
+        <td className={classes}>
+          <div className="flex items-center gap-3 ml-2.5">
+            <Avatar src={img} alt={name} size="sm" />
+            <Typography variant="small" className="font-normal">
+              {name}
+            </Typography>
+          </div>
+        </td>
+        <td className={classes}>{type}</td>
+        <td className={classes}>{isActive ? "✅" : "❌"}</td>
+        <td className={classes}>{date}</td>
+        <td className={classes}>
+          <div className="flex gap-2.5">{/* Iconos de acciones */}</div>
+        </td>
+      </tr>
+    );
+  };
+
   return (
     <>
       {/* Modal de OverView Book */}
@@ -945,6 +970,7 @@ const AdminBooksView = () => {
         TABS={TABS}
         TABLE_HEAD={TABLE_HEAD}
         TABLE_ROWS={TABLE_ROWS}
+        renderRow={renderRow}
         usingRowModal={true}
         handleSelectedRow={setSelectedBook}
         handleOpenModal={() => setOpenOverViewBookModal(true)}
