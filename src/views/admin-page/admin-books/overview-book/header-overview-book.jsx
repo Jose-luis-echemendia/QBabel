@@ -1,3 +1,5 @@
+import { Avatar } from "@material-tailwind/react";
+
 export const HeaderOverViewBook = ({ book }) => {
   return (
     <>
@@ -25,7 +27,10 @@ export const HeaderOverViewBook = ({ book }) => {
       ) : null}
 
       <h3 className="text-3xl font-semibold text-black">{book.title}</h3>
+      <div className="flex items-center gap-3 my-2.5">
+        <Avatar src={book.author.avatar} alt={book.author.name} size="sm"/>
       <span className="text-gray-700 font-semibold">{book.author.name}</span>
+      </div>
       <div className="flex gap-2">
         {book.isFree ? (
           <div className="p-1 h-8 flex items-center rounded-xl bg-green-800 -ml-[1px]">
