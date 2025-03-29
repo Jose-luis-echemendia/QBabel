@@ -47,7 +47,7 @@ export const CoverGalleries = ({ covers, alt }) => {
               <img
                 src={src}
                 alt={alt}
-                className="w-60 h-60 object-center object-cover sm:rounded-lg"
+                className="w-64 h-72 object-center object-cover sm:rounded-lg"
               />
             </TabPanel>
           ))}
