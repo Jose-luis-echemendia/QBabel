@@ -952,23 +952,21 @@ const AdminBooksView = () => {
         }}
       >
         <td className={classes}>
-          <div className="flex items-center gap-3 ml-2.5">
-            <div className="flex flex-col line-clamp-1 w-full">
-              <Typography
-                variant="h5"
-                color="blue-gray"
-                className="font-semibold"
-              >
-                {title}
-              </Typography>
-              <Typography
-                variant="small"
-                color="blue-gray"
-                className="font-medium opacity-70"
-              >
-                {author.name}
-              </Typography>
-            </div>
+          <div className="flex flex-col line-clamp-1 w-full gap-3 ml-2.5">
+            <Typography
+              variant="h5"
+              color="blue-gray"
+              className="font-semibold"
+            >
+              {title}
+            </Typography>
+            <Typography
+              variant="small"
+              color="blue-gray"
+              className="font-medium opacity-70"
+            >
+              {author.name}
+            </Typography>
           </div>
         </td>
         <td className={classes}>
@@ -997,7 +995,15 @@ const AdminBooksView = () => {
           </div>
         </td>
         <td className={classes}>
-          <div className="ml-5">{isComplete ? "✅" : "❌"}</div>
+          <div className="ml-5">
+            <Typography
+              variant="small"
+              color="blue-gray"
+              className="font-normal"
+            >
+              {isComplete ? "✅" : "❌"}
+            </Typography>
+          </div>
         </td>
         <td className={classes}>
           <Typography variant="small" color="blue-gray" className="font-normal">
@@ -1048,9 +1054,6 @@ const AdminBooksView = () => {
         TABLE_HEAD={TABLE_HEAD}
         TABLE_ROWS={TABLE_ROWS}
         renderRow={renderRow}
-        usingRowModal={true}
-        handleSelectedRow={setSelectedBook}
-        handleOpenModal={() => setOpenOverViewBookModal(true)}
       />
     </>
   );

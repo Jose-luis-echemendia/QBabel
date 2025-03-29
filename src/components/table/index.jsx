@@ -19,9 +19,6 @@ export const CustomTable = ({
   TABLE_HEAD,
   TABLE_ROWS,
   renderRow,
-  usingRowModal = false,
-  handleSelectedRow,
-  handleOpenModal,
 }) => {
   return (
     <>
@@ -98,9 +95,6 @@ export const CustomTable = ({
                   item,
                   index,
                   totalItems: TABLE_ROWS.length,
-                  usingRowModal,
-                  handleSelectedRow,
-                  handleOpenModal,
                 })
               )}
             </tbody>
