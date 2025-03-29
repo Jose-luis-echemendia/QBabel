@@ -23,12 +23,16 @@ const TABS = [
     value: "Activas",
   },
   {
-    label: "Inactivas",
-    value: "Inactivas",
+    label: "Libros",
+    value: "Libros",
+  },
+  {
+    label: "Publicaciones",
+    value: "Publicaciones",
   },
 ];
 
-const TABLE_HEAD = ["Nombre & Email", "Rol", "Activo", "Fecha", ""];
+const TABLE_HEAD = ["Nombre & imagen", "tipo", "Activo", "Fecha", ""];
 
 const TABLE_ROWS = [
   {
@@ -54,39 +58,7 @@ const TABLE_ROWS = [
     job: "Reader",
     isActive: false,
     date: "19/09/17",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-4.jpg",
-    name: "Michael Levi",
-    email: "michael@creative-tim.com",
-    job: "Reader",
-    isActive: true,
-    date: "24/12/08",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
-    name: "Richard Gran",
-    email: "richard@creative-tim.com",
-    job: "Admin",
-    isActive: false,
-    date: "04/10/21",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
-    name: "Richard Gran",
-    email: "richard@creative-tim.com",
-    job: "Manager",
-    isActive: false,
-    date: "04/10/21",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
-    name: "Richard Gran",
-    email: "richard@creative-tim.com",
-    job: "Admin",
-    isActive: false,
-    date: "04/10/21",
-  },
+  }
 ];
 
 const AdminCategoriesView = () => {
@@ -100,7 +72,7 @@ const AdminCategoriesView = () => {
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <div className="flex gap-4 justify-center items-center">
             <Typography variant="h5" color="blue-gray">
-              Etiquetas para libros
+              Etiquetas
             </Typography>
             <button onClick={() => alert("agg libro")}>
               <svg
