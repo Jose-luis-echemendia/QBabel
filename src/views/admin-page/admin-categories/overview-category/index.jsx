@@ -1,99 +1,8 @@
+import { customCheckboxTheme } from "@/utils/material-tailwindscss/themes";
 import { Checkbox, ThemeProvider } from "@material-tailwind/react";
 import { useState, useEffect } from "react";
 
-const theme = {
-  checkbox: {
-    defaultProps: {
-      color: "primary-100",
-      label: undefined,
-      icon: undefined,
-      ripple: true,
-      className: "",
-      disabled: false,
-      containerProps: undefined,
-      labelProps: undefined,
-      iconProps: undefined,
-    },
-    valid: {
-      colors: ["primary", "primary-100"],
-    },
-    styles: {
-      base: {
-        root: {
-          display: "inline-flex",
-          alignItems: "items-center",
-        },
-        container: {
-          position: "relative",
-          display: "flex",
-          alignItems: "items-center",
-          cursor: "cursor-pointer",
-          p: "p-3",
-          borderRadius: "rounded-full",
-        },
-        input: {
-          peer: "peer",
-          position: "relative",
-          appearance: "appearance-none",
-          width: "w-5",
-          height: "h-5",
-          borderWidth: "border",
-          borderRadius: "rounded-md",
-          borderColor: "border-blue-gray-200",
-          cursor: "cursor-pointer",
-          transition: "transition-all",
-          before: {
-            content: "before:content['']",
-            display: "before:block",
-            bg: "before:bg-primary",
-            width: "before:w-12",
-            height: "before:h-12",
-            borderRadius: "before:rounded-full",
-            position: "before:absolute",
-            top: "before:top-2/4",
-            left: "before:left-2/4",
-            transform: "before:-translate-y-2/4 before:-translate-x-2/4",
-            opacity: "before:opacity-0 hover:before:opacity-10",
-            transition: "before:transition-opacity",
-          },
-        },
-        label: {
-          color: "text-primary",
-          fontWeight: "font-light",
-          userSelect: "select-none",
-          cursor: "cursor-pointer",
-          mt: "mt-px",
-        },
-        icon: {
-          color: "text-white",
-          position: "absolute",
-          top: "top-2/4",
-          left: "left-2/4",
-          translate: "-translate-y-2/4 -translate-x-2/4",
-          pointerEvents: "pointer-events-none",
-          opacity: "opacity-0 peer-checked:opacity-100",
-          transition: "transition-opacity",
-        },
-        disabled: {
-          opacity: "opacity-50",
-          pointerEvents: "pointer-events-none",
-        },
-      },
-      colors: {
-        primary: {
-          background: "checked:bg-primary",
-          border: "checked:border-primary",
-          before: "checked:before:bg-primary",
-        },
-        "primary-100": {
-          background: "checked:bg-primary-100",
-          border: "checked:border-primary-100",
-          before: "checked:before:bg-primary-100",
-        },
-      },
-    },
-  },
-};
+
 
 export const OverViewCategory = ({ category }) => {
   const [preview, setPreview] = useState(null);
@@ -234,7 +143,7 @@ export const OverViewCategory = ({ category }) => {
             </label>
             <div className="mt-2.5">
               <div className="flex items-center rounded-md bg-white outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary">
-                <ThemeProvider value={theme}>
+                <ThemeProvider value={customCheckboxTheme}>
                   <Checkbox defaultChecked />
                 </ThemeProvider>
               </div>
