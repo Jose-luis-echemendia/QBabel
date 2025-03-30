@@ -147,6 +147,15 @@ export const OverViewCategory = ({ category }) => {
               </div>
             </div>
           </div>
+
+          <div className="flex items-center justify-end gap-4 border-t col-span-full pt-4 -mt-2">
+            <button className="bg-black-500 py-1 px-2.5 rounded-xl">
+              <span className="text-primary font-semibold">Cancelar</span>
+            </button>
+            <button className="bg-primary py-1 px-2.5 rounded-xl">
+              <span className="text-black-500 font-semibold">Aceptar</span>
+            </button>
+          </div>
         </form>
       </div>
     </>
