@@ -1,4 +1,99 @@
+import { Checkbox } from "@material-tailwind/react";
 import { useState, useEffect } from "react";
+
+const theme = {
+  checkbox: {
+    defaultProps: {
+      color: "blue",
+      label: undefined,
+      icon: undefined,
+      ripple: true,
+      className: "",
+      disabled: false,
+      containerProps: undefined,
+      labelProps: undefined,
+      iconProps: undefined,
+    },
+    valid: {
+        colors: ["primary", "primary-100"],
+      },
+    styles: {
+      base: {
+        root: {
+          display: "inline-flex",
+          alignItems: "items-center",
+        },
+        container: {
+          position: "relative",
+          display: "flex",
+          alignItems: "items-center",
+          cursor: "cursor-pointer",
+          p: "p-3",
+          borderRadius: "rounded-full",
+        },
+        input: {
+          peer: "peer",
+          position: "relative",
+          appearance: "appearance-none",
+          width: "w-5",
+          height: "h-5",
+          borderWidth: "border",
+          borderRadius: "rounded-md",
+          borderColor: "border-blue-gray-200",
+          cursor: "cursor-pointer",
+          transition: "transition-all",
+          before: {
+            content: "before:content['']",
+            display: "before:block",
+            bg: "before:bg-blue-gray-500",
+            width: "before:w-12",
+            height: "before:h-12",
+            borderRadius: "before:rounded-full",
+            position: "before:absolute",
+            top: "before:top-2/4",
+            left: "before:left-2/4",
+            transform: "before:-translate-y-2/4 before:-translate-x-2/4",
+            opacity: "before:opacity-0 hover:before:opacity-10",
+            transition: "before:transition-opacity",
+          },
+        },
+        label: {
+          color: "text-gray-700",
+          fontWeight: "font-light",
+          userSelect: "select-none",
+          cursor: "cursor-pointer",
+          mt: "mt-px",
+        },
+        icon: {
+          color: "text-white",
+          position: "absolute",
+          top: "top-2/4",
+          left: "left-2/4",
+          translate: "-translate-y-2/4 -translate-x-2/4",
+          pointerEvents: "pointer-events-none",
+          opacity: "opacity-0 peer-checked:opacity-100",
+          transition: "transition-opacity",
+        },
+        disabled: {
+          opacity: "opacity-50",
+          pointerEvents: "pointer-events-none",
+        },
+      },
+      colors: {
+        primary: {
+          background: "checked:bg-primary",
+          border: "checked:border-primary",
+          before: "checked:before:bg-primary",
+        },
+        "primary-100": {
+          background: "checked:bg-primary-100",
+          border: "checked:border-primary-100",
+          before: "checked:before:bg-primary-100",
+        },
+      },
+    },
+  },
+};
 
 export const OverViewCategory = ({ category }) => {
   const [preview, setPreview] = useState(null);
@@ -90,7 +185,7 @@ export const OverViewCategory = ({ category }) => {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="absolute size-5 bottom-[80px] right-0" 
+                      className="absolute size-5 bottom-[80px] right-0"
                     >
                       <path
                         strokeLinecap="round"
@@ -126,6 +221,20 @@ export const OverViewCategory = ({ category }) => {
                 <p className="text-xs/5 text-gray-600">
                   PNG, JPG, GIF up to 10MB
                 </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="sm:col-span-4">
+            <label
+              htmlFor="username"
+              className="block text-sm/6 font-medium text-gray-900"
+            >
+              Activo
+            </label>
+            <div className="mt-2.5">
+              <div className="flex items-center rounded-md bg-white outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary">
+                <Checkbox defaultChecked />
               </div>
             </div>
           </div>
