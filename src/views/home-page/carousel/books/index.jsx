@@ -25,13 +25,13 @@ export const CustomCarouselBooks = ({
       : carouselSize === "h-96"
         ? "h-76"
         : "h-56",
-  boolsPerSlide,
+  booksPerSlide,
   CarouselItemComponent = BookGroup
 }) => {
   // Dividir los libros en grupos
   const bookGroups = chunkArray(
     [...bestBooksData, ...bestBooksData, ...bestBooksData],
-    boolsPerSlide
+    booksPerSlide
   );
 
   return (
@@ -43,7 +43,7 @@ export const CustomCarouselBooks = ({
         NextArrow={() => <NextArrow />}
       >
         {bookGroups.map((group, index) => (
-          <CarouselItemComponent key={index} books={group} itemHeight={itemHeight} boolsPerSlide={boolsPerSlide} />
+          <CarouselItemComponent key={index} books={group} itemHeight={itemHeight} booksPerSlide={booksPerSlide} />
         ))}
       </Carousel>
     </ThemeProvider>
@@ -55,5 +55,5 @@ CustomCarouselBooks.propTypes = {
   carouselSize: PropTypes.oneOf(["h-64", "h-80", "h-96"]),
   carouselWidth: PropTypes.string,
   itemHeight: PropTypes.string,
-  boolsPerSlide: PropTypes.number,
+  booksPerSlide: PropTypes.number,
 };

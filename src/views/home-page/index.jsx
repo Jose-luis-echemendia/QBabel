@@ -5,31 +5,31 @@ import { BookGroupCard } from "./carousel/books/carousel-items";
 import { useState, useEffect } from "react";
 
 const HomeView = () => {
-  const [boolsPerSlide, setBoolsPerSlide] = useState(8)
-  const [carouselSize, setCarouselSize] = useState(80)
+  const [booksPerSlide, setbooksPerSlide] = useState(8);
+  const [carouselSize, setCarouselSize] = useState(80);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(max-width: 400px)');
+    const mediaQuery = window.matchMedia("(max-width: 400px)");
 
     const handleResize = (e) => {
       if (e.matches) {
-        setBoolsPerSlide(4)
-        setCarouselSize(52)
+        setbooksPerSlide(4);
+        setCarouselSize(52);
       } else {
-        setBoolsPerSlide(8)
-        setCarouselSize(80)
+        setbooksPerSlide(8);
+        setCarouselSize(80);
       }
     };
 
     // Añadir el evento listener
-    mediaQuery.addEventListener('change', handleResize);
+    mediaQuery.addEventListener("change", handleResize);
 
     // Comprobar inicialmente el tamaño de la pantalla
     handleResize(mediaQuery);
 
     // Limpiar el evento listener al desmontar el componente
     return () => {
-      mediaQuery.removeEventListener('change', handleResize);
+      mediaQuery.removeEventListener("change", handleResize);
     };
   }, []);
 
@@ -44,39 +44,48 @@ const HomeView = () => {
             <span className="ml-7 text-black font-bold font-opensans text-lg leading-8">
               Lo mejor de fantasía para ti
             </span>
-            <CustomCarouselBooks carouselSize={`h-${carouselSize}`} boolsPerSlide={boolsPerSlide} />
+            <CustomCarouselBooks
+              carouselSize={`h-${carouselSize}`}
+              booksPerSlide={booksPerSlide}
+            />
+          </div>
+          <div className="flex flex-col gap-1">
+            <span className="ml-7 text-black font-bold font-opensans text-lg leading-8">
+              Lo mejor de fantasía para ti
+            </span>
+            <CustomCarouselBooks
+              carouselSize={`h-${carouselSize}`}
+              booksPerSlide={booksPerSlide}
+            />
           </div>
           <CustomCarousel />
           <div className="flex flex-col gap-1">
             <span className="ml-7 text-black font-bold font-opensans text-lg leading-8">
               Lo mejor de fantasía para ti
             </span>
-            <CustomCarouselBooks carouselSize={`h-${carouselSize}`} boolsPerSlide={boolsPerSlide} />
-          </div>
-          <div className="flex flex-col gap-1">
-            <span className="ml-7 text-black font-bold font-opensans text-lg leading-8">
-              Lo mejor de fantasía para ti
-            </span>
-            <CustomCarouselBooks carouselSize={`h-${carouselSize}`} boolsPerSlide={boolsPerSlide} />
+            <CustomCarouselBooks
+              carouselSize={`h-${carouselSize}`}
+              booksPerSlide={booksPerSlide}
+            />
           </div>
           <div className="flex flex-col gap-0">
             <span className="ml-7 text-black font-bold font-opensans text-lg leading-8">
               Las mejores selecciones para ti para ti
             </span>
-            <CustomCarouselBooks boolsPerSlide={boolsPerSlide} carouselSize={`h-${carouselSize}`} />
+            <CustomCarouselBooks
+              booksPerSlide={booksPerSlide}
+              carouselSize={`h-${carouselSize}`}
+            />
           </div>
 
           <div className="flex flex-col gap-1">
             <span className="ml-7 text-black font-bold font-opensans text-lg leading-8">
               Lo mejor de fantasía para ti
             </span>
-            <CustomCarouselBooks carouselSize={`h-${carouselSize}`} boolsPerSlide={boolsPerSlide} />
-          </div>
-          <div className="flex flex-col gap-1">
-            <span className="ml-7 text-black font-bold font-opensans text-lg leading-8">
-              Lo mejor de fantasía para ti
-            </span>
-            <CustomCarouselBooks carouselSize={`h-${carouselSize}`} boolsPerSlide={boolsPerSlide} />
+            <CustomCarouselBooks
+              carouselSize={`h-${carouselSize}`}
+              booksPerSlide={booksPerSlide}
+            />
           </div>
           <div className="flex flex-col gap-0">
             <span className="flex gap-2 lg:-mb-1.5 mb-4 items-center justify-start ml-7 text-black font-bold font-opensans text-lg leading-8">
@@ -98,11 +107,21 @@ const HomeView = () => {
               <small className="text-gray-600">22d 1h</small>
             </span>
             <CustomCarouselBooks
-              boolsPerSlide={boolsPerSlide === 4 ? 1 : 2}
+              booksPerSlide={booksPerSlide === 4 ? 1 : 2}
               carouselSize={`h-full`}
               CarouselItemComponent={BookGroupCard}
             />
           </div>
+          <div className="flex flex-col gap-1">
+            <span className="ml-7 text-black font-bold font-opensans text-lg leading-8">
+              Lo mejor de fantasía para ti
+            </span>
+            <CustomCarouselBooks
+              carouselSize={`h-${carouselSize}`}
+              booksPerSlide={booksPerSlide}
+            />
+          </div>
+
           <div className="flex flex-col gap-1">
             <span className="ml-7 text-gray-800 font-opensans text-lg -mb-2">
               Historias fascinante de tus escritos de QBabel
@@ -118,7 +137,10 @@ const HomeView = () => {
                 <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
               </svg>
             </span>
-            <CustomCarouselBooks carouselSize={`h-${carouselSize}`} boolsPerSlide={boolsPerSlide} />
+            <CustomCarouselBooks
+              carouselSize={`h-${carouselSize}`}
+              booksPerSlide={booksPerSlide}
+            />
           </div>
         </ContainerHome>
       </div>
