@@ -32,14 +32,14 @@ const elements = [
     label: "Libros",
     highlightPath: ["/admin/books", "/orders/defective-products"],
     icon: <IconDashboard />,
-    subElements: ["Defective Products"],
+    subElements: [],
   },
   {
     id: 4,
     label: "Categorías",
-    highlightPath: ["/admin/cateogies", "/products/add-product"],
+    highlightPath: ["/admin/categories", "/products/add-product"],
     icon: <IconDashboard />,
-    subElements: ["Add Product"],
+    subElements: [],
   },
   {
     id: 5,
