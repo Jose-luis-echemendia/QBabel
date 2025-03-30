@@ -134,10 +134,10 @@ export const OverViewCategory = ({ category }) => {
             </div>
           </div>
 
-          <div className="sm:col-span-4">
+          <div className="sm:col-span-4 flex gap-2 items-center -mt-1 ml-1">
             <label
               htmlFor="username"
-              className="block text-sm/6 font-medium text-gray-900"
+              className="block text-sm/6 font-medium text-gray-900 mt-2.5"
             >
               Activo
             </label>
