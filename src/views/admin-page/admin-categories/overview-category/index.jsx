@@ -2,7 +2,7 @@ import { customCheckboxTheme } from "@/utils/material-tailwindscss/themes";
 import { Checkbox, ThemeProvider } from "@material-tailwind/react";
 import { useState, useEffect } from "react";
 
-export const OverViewCategory = ({ category }) => {
+export const OverViewCategory = ({ category, handleOpen }) => {
   const [preview, setPreview] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -149,7 +149,10 @@ export const OverViewCategory = ({ category }) => {
           </div>
 
           <div className="flex items-center justify-end gap-4 border-t col-span-full pt-4 -mt-2">
-            <button className="bg-black-500 py-1 px-2.5 rounded-xl">
+            <button
+              className="bg-black-500 py-1 px-2.5 rounded-xl"
+              onClick={() => handleOpen()}
+            >
               <span className="text-primary font-semibold">Cancelar</span>
             </button>
             <button className="bg-primary py-1 px-2.5 rounded-xl">

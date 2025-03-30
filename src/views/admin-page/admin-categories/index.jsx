@@ -154,7 +154,7 @@ const AdminCategoriesView = () => {
         exitButton={true}
         size="md"
       >
-        <OverViewCategory category={selectedCategory} />
+        <OverViewCategory category={selectedCategory} handleOpen={() => setOpenOverViewCategoryModal(false)}/>
       </CustomModal>
       {/* TABLE Categories */}
       <CustomTable
