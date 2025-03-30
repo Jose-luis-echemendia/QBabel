@@ -151,7 +151,7 @@ export const OverViewCategory = ({ category, handleOpen }) => {
           <div className="flex items-center justify-end gap-4 border-t col-span-full pt-4 -mt-2">
             <button
               className="bg-black-500 py-1 px-2.5 rounded-xl"
-              onClick={() => handleOpen()}
+              onClick={(e) => (e.preventDefault(), handleOpen())}
             >
               <span className="text-primary font-semibold">Cancelar</span>
             </button>
