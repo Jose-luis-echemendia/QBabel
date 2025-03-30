@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 
 export const OverViewCategory = ({ category }) => {
-    
   const [preview, setPreview] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -60,7 +59,7 @@ export const OverViewCategory = ({ category }) => {
               Imagen
             </label>
             <div className="mt-2.5 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-              <div className="flex flex-col items-center justify-center text-center">
+              <div className="relative flex flex-col items-center justify-center text-center">
                 {preview ? (
                   <img
                     src={preview}
@@ -69,13 +68,14 @@ export const OverViewCategory = ({ category }) => {
                   />
                 ) : (
                   <>
+                    {/* IMAGE ICON */}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="size-6"
+                      className="size-44"
                     >
                       <path
                         strokeLinecap="round"
@@ -83,14 +83,14 @@ export const OverViewCategory = ({ category }) => {
                         d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
                       />
                     </svg>
-
+                    {/* PHOTO ICON */}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="size-6 mt-2"
+                      className="absolute size-5 bottom-[80px] right-0" 
                     >
                       <path
                         strokeLinecap="round"
