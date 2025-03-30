@@ -2,8 +2,6 @@ import { customCheckboxTheme } from "@/utils/material-tailwindscss/themes";
 import { Checkbox, ThemeProvider } from "@material-tailwind/react";
 import { useState, useEffect } from "react";
 
-
-
 export const OverViewCategory = ({ category }) => {
   const [preview, setPreview] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
