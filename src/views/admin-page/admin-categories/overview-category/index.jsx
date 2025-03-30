@@ -1,10 +1,10 @@
-import { Checkbox } from "@material-tailwind/react";
+import { Checkbox, ThemeProvider } from "@material-tailwind/react";
 import { useState, useEffect } from "react";
 
 const theme = {
   checkbox: {
     defaultProps: {
-      color: "blue",
+      color: "primary-100",
       label: undefined,
       icon: undefined,
       ripple: true,
@@ -15,8 +15,8 @@ const theme = {
       iconProps: undefined,
     },
     valid: {
-        colors: ["primary", "primary-100"],
-      },
+      colors: ["primary", "primary-100"],
+    },
     styles: {
       base: {
         root: {
@@ -45,7 +45,7 @@ const theme = {
           before: {
             content: "before:content['']",
             display: "before:block",
-            bg: "before:bg-blue-gray-500",
+            bg: "before:bg-primary",
             width: "before:w-12",
             height: "before:h-12",
             borderRadius: "before:rounded-full",
@@ -58,7 +58,7 @@ const theme = {
           },
         },
         label: {
-          color: "text-gray-700",
+          color: "text-primary",
           fontWeight: "font-light",
           userSelect: "select-none",
           cursor: "cursor-pointer",
@@ -234,7 +234,9 @@ export const OverViewCategory = ({ category }) => {
             </label>
             <div className="mt-2.5">
               <div className="flex items-center rounded-md bg-white outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary">
-                <Checkbox defaultChecked />
+                <ThemeProvider value={theme}>
+                  <Checkbox defaultChecked />
+                </ThemeProvider>
               </div>
             </div>
           </div>

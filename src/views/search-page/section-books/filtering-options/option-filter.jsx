@@ -13,7 +13,7 @@ import { ThemeProvider } from "@material-tailwind/react";
 const theme = {
   checkbox: {
     defaultProps: {
-      color: "primary",
+      color: "primary-100",
       label: undefined,
       icon: undefined,
       ripple: true,
