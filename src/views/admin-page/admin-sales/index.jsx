@@ -1,4 +1,4 @@
-import { Typography } from "@material-tailwind/react";
+import { Avatar, Typography } from "@material-tailwind/react";
 import { CustomTable } from "@/components/table";
 
 const TABS = [
