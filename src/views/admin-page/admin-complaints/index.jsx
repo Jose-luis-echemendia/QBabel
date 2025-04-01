@@ -47,44 +47,44 @@ const AdminComplaintsView = () => {
       <tr key={reportedComment} className="hover:bg-gray-100 h-20">
         <td className={`${classes} `}>
           <div className="flex items-center gap-3 ml-1">
-            <Avatar src={buyer.avatar} alt={buyer.name} size="sm" />
             <Typography
               variant="small"
               color="blue-gray"
               className="font-normal"
             >
-              {buyer.name}
+              {reportedComment}
+            </Typography>
+          </div>
+        </td>
+        <td className={`${classes}`}>
+          <div className="flex items-center gap-3 ml-1">
+            <Avatar
+              src={reportedUser.avatar}
+              alt={reportedUser.name}
+              size="sm"
+            />
+            <Typography
+              variant="small"
+              color="blue-gray"
+              className="font-normal"
+            >
+              {reportedUser.name}
             </Typography>
           </div>
         </td>
         <td className={`${classes} `}>
           <div className="flex items-center gap-3 ml-1">
+            <Avatar
+              src={reportingUser.avatar}
+              alt={reportingUser.name}
+              size="sm"
+            />
             <Typography
               variant="small"
               color="blue-gray"
               className="font-normal"
             >
-              {book.title}
-            </Typography>
-            <Typography
-              variant="small"
-              color="blue-gray"
-              className="font-normal"
-            >
-              {book.license}
-            </Typography>
-            discount or free
-          </div>
-        </td>
-        <td className={`${classes}`}>
-          <div className="flex items-center gap-3 ml-1">
-            <Avatar src={book.author.avatar} alt={buyer.name} size="sm" />
-            <Typography
-              variant="small"
-              color="blue-gray"
-              className="font-normal"
-            >
-              {book.author.name}
+              {reportingUser.name}
             </Typography>
           </div>
         </td>
