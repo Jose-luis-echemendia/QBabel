@@ -5,208 +5,23 @@ const TABS = [];
 
 const TABLE_HEAD = [
   "Comentario denunciado",
+  "usuario denunciado",
+  "usuario denunciante",
   "Causa",
   "estado",
-  "Costo",
   "Fecha",
-  "Ganancia escritor",
-  "Ganancia",
+  "Acciones",
 ];
 
 const TABLE_ROWS = [
   {
-    buyer: {
-      name: "Jose Luis Echemendia Lopez",
-      avatar: "/assets/images/avatar.jpeg",
-    },
-    book: {
-      title: "Lascivia",
-      author: {
-        name: "Eva Muñoz",
-        avatar: "/assets/images/avatar.jpeg",
-      },
-      sumary:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus culpa error quisquam cum modi, obcaecati veniam, veritatis fugit laboriosam dicta est tempore dolores, libero nisi esse soluta neque. Expedita, sapiente.",
-      price: 1.99,
-      isFree: false,
-      isDiscounted: true,
-      discount: "88%",
-      isComplete: false,
-      date: "23/04/18",
-      parts: 12,
-      reviews: "21k",
-      reads: "7.6M",
-      sales: "23",
-      license: "© All Rights Reserved",
-      createdAt: "2025-01-23",
-      updatedAt: "2025-01-23",
-      covers: [
-        "/assets/images/covers/10.1.jpg",
-        "/assets/images/covers/10.2.jpg",
-      ],
-      categories: [
-        {
-          id: 1,
-          name: "Ficticio",
-        },
-        {
-          id: 2,
-          name: "Aventura",
-        },
-        {
-          id: 3,
-          name: "Infantil",
-        },
-        {
-          id: 4,
-          name: "Ciencia Ficción",
-        },
-        {
-          id: 5,
-          name: "Romántico",
-        },
-        {
-          id: 6,
-          name: "Drama",
-        },
-        {
-          id: 7,
-          name: "Terror",
-        },
-        {
-          id: 8,
-          name: "Acción",
-        },
-        {
-          id: 9,
-          name: "Horror",
-        },
-        {
-          id: 10,
-          name: "Suspenso",
-        },
-        {
-          id: 11,
-          name: "Comedia",
-        },
-        {
-          id: 12,
-          name: "Deportiva",
-        },
-        {
-          id: 13,
-          name: "Biografía",
-        },
-        {
-          id: 14,
-          name: "Historia",
-        },
-        {
-          id: 15,
-          name: "Policial",
-        },
-      ],
-    },
-    finalPayment: 22.11,
-    writerProfit: 2.11,
-    profit: 5.11,
-  },
-  {
-    buyer: {
-      name: "Jose Luis Echemendia Lopez",
-      avatar: "/assets/images/avatar.jpeg",
-    },
-    book: {
-      title: "Lascivia",
-      author: {
-        name: "Eva Muñoz",
-        avatar: "/assets/images/avatar.jpeg",
-      },
-      sumary:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus culpa error quisquam cum modi, obcaecati veniam, veritatis fugit laboriosam dicta est tempore dolores, libero nisi esse soluta neque. Expedita, sapiente.",
-      price: 1.99,
-      isFree: false,
-      isDiscounted: true,
-      discount: "88%",
-      isComplete: false,
-      date: "23/04/18",
-      parts: 12,
-      reviews: "21k",
-      reads: "7.6M",
-      sales: "23",
-      license: "© All Rights Reserved",
-      createdAt: "2025-01-23",
-      updatedAt: "2025-01-23",
-      covers: [
-        "/assets/images/covers/10.1.jpg",
-        "/assets/images/covers/10.2.jpg",
-      ],
-      categories: [
-        {
-          id: 1,
-          name: "Ficticio",
-        },
-        {
-          id: 2,
-          name: "Aventura",
-        },
-        {
-          id: 3,
-          name: "Infantil",
-        },
-        {
-          id: 4,
-          name: "Ciencia Ficción",
-        },
-        {
-          id: 5,
-          name: "Romántico",
-        },
-        {
-          id: 6,
-          name: "Drama",
-        },
-        {
-          id: 7,
-          name: "Terror",
-        },
-        {
-          id: 8,
-          name: "Acción",
-        },
-        {
-          id: 9,
-          name: "Horror",
-        },
-        {
-          id: 10,
-          name: "Suspenso",
-        },
-        {
-          id: 11,
-          name: "Comedia",
-        },
-        {
-          id: 12,
-          name: "Deportiva",
-        },
-        {
-          id: 13,
-          name: "Biografía",
-        },
-        {
-          id: 14,
-          name: "Historia",
-        },
-        {
-          id: 15,
-          name: "Policial",
-        },
-      ],
-    },
-    finalPayment: 1991.09,
-    writerProfit: 1900.09,
-    profit: 91.0,
+    reportedComment: "Que fea es la vida",
+    reportedUser: "Jose Luis Echemendia",
+    reportingUser: "Roberto Lalo Pazón",
+    causeComplaint:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic doloremque numquam ut illo sit rerum tempore voluptatem adipisci deserunt accusantium, aspernatur placeat, beatae quidem impedit explicabo perferendis dolores dolore reiciendis.",
+    date: "19/09/17",
+    state: "Analizado",
   },
 ];
 
@@ -217,7 +32,7 @@ const AdminComplaintsView = () => {
     const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
 
     return (
-      <tr key={buyer.name} className="hover:bg-gray-100">
+      <tr key={buyer.name} className="hover:bg-gray-100 h-20">
         <td className={`${classes} `}>
           <div className="flex items-center gap-3 ml-1">
             <Avatar src={buyer.avatar} alt={buyer.name} size="sm" />
