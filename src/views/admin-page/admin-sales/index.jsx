@@ -284,7 +284,7 @@ const AdminSalesView = () => {
             setOpenAuthorProfileModal(true);
           }}
         >
-          <div className="flex items-center gap-3 ml-1">
+          <div className="flex items-center gap-3 -ml-2.5">
             <Avatar src={book.author.avatar} alt={buyer.name} size="sm" />
             <Typography
               variant="small"
