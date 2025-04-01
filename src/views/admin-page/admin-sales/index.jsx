@@ -1,5 +1,8 @@
 import { Avatar, Typography } from "@material-tailwind/react";
 import { CustomTable } from "@/components/table";
+import { useState } from "react";
+import { CustomModal } from "@/components/modal";
+import { OverViewBook } from "../admin-books/overview-book";
 
 const TABS = [
   {
@@ -223,20 +226,23 @@ const TABLE_ROWS = [
     },
     finalPayment: 1991.09,
     writerProfit: 1900.09,
-    profit: 91.00
+    profit: 91.0,
   },
 ];
 
 const AdminSalesView = () => {
+  const [openOverViewBookModal, setOpenOverViewBookModal] = useState(false);
+  const [selectedBook, setSelectedBook] = useState(null);
+
   const renderRow = ({ item, index, totalItems }) => {
     const { buyer, book, finalPayment, writerProfit, profit } = item;
     const isLast = index === totalItems - 1;
     const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
 
     return (
-      <tr key={buyer.name} className="hover:bg-gray-100 cursor-pointer">
+      <tr key={buyer.name} className="hover:bg-gray-100">
         <td className={classes}>
-          <div className="flex items-center gap-3 ml-2.5">
+          <div className="flex items-center gap-3 ml-1">
             <Avatar src={buyer.avatar} alt={buyer.name} size="sm" />
             <Typography
               variant="small"
@@ -247,8 +253,14 @@ const AdminSalesView = () => {
             </Typography>
           </div>
         </td>
-        <td className={classes}>
-          <div className="flex items-center gap-3 ml-2.5">
+        <td
+          className={`${classes} cursor-pointer`}
+          onClick={() => {
+            setSelectedBook(book);
+            setOpenOverViewBookModal(true);
+          }}
+        >
+          <div className="flex items-center gap-3 ml-1">
             <Typography
               variant="small"
               color="blue-gray"
@@ -267,7 +279,7 @@ const AdminSalesView = () => {
           </div>
         </td>
         <td className={classes}>
-        <div className="flex items-center gap-3 ml-2.5">
+          <div className="flex items-center gap-3 ml-1">
             <Avatar src={book.author.avatar} alt={buyer.name} size="sm" />
             <Typography
               variant="small"
@@ -279,7 +291,7 @@ const AdminSalesView = () => {
           </div>
         </td>
         <td className={classes}>
-          <div className="ml-2.5">
+          <div className="ml-1">
             <Typography
               variant="small"
               color="blue-gray"
@@ -290,7 +302,7 @@ const AdminSalesView = () => {
           </div>
         </td>
         <td className={classes}>
-          <div className="ml-2.5">
+          <div className="ml-1">
             <Typography
               variant="small"
               color="blue-gray"
@@ -301,14 +313,26 @@ const AdminSalesView = () => {
           </div>
         </td>
         <td className={classes}>
-          <Typography variant="small" color="blue-gray" className="font-normal">
-            {writerProfit}
-          </Typography>
+          <div>
+            <Typography
+              variant="small"
+              color="blue-gray"
+              className="font-normal"
+            >
+              {writerProfit}
+            </Typography>
+          </div>
         </td>
         <td className={classes}>
-          <Typography variant="small" color="blue-gray" className="font-normal">
-            {profit}
-          </Typography>
+          <div>
+            <Typography
+              variant="small"
+              color="blue-gray"
+              className="font-normal"
+            >
+              {profit}
+            </Typography>
+          </div>
         </td>
       </tr>
     );
@@ -316,6 +340,17 @@ const AdminSalesView = () => {
 
   return (
     <>
+      {/* Modal de OverView Book */}
+      <CustomModal
+        open={openOverViewBookModal}
+        handleOpen={() => setOpenOverViewBookModal(false)} // Cierra el modal
+        classNameDialog="custom-dialog-class" // Clases personalizadas
+        classNameBody="custom-body-class"
+        exitButton={true}
+        size="xl"
+      >
+        <OverViewBook book={selectedBook} />
+      </CustomModal>
       <CustomTable
         title={"Ventas"}
         TABS={TABS}
