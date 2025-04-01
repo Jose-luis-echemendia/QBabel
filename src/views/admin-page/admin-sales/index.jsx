@@ -237,7 +237,7 @@ const AdminSalesView = () => {
 
   const [openBuyerProfileModal, setOpenBuyerProfileModal] = useState(false);
   const [selectedBuyerProfile, setSelectedBuyerProfile] = useState(null);
-  
+
   const [openAuthorProfileModal, setOpenAuthorProfileModal] = useState(false);
   const [selectedAuthorProfile, setSelectedAuthorProfile] = useState(null);
 
@@ -248,7 +248,13 @@ const AdminSalesView = () => {
 
     return (
       <tr key={buyer.name} className="hover:bg-gray-100">
-        <td className={classes}>
+        <td
+          className={`${classes} cursor-pointer`}
+          onClick={() => {
+            setSelectedBuyerProfile(buyer);
+            setOpenBuyerProfileModal(true);
+          }}
+        >
           <div className="flex items-center gap-3 ml-1">
             <Avatar src={buyer.avatar} alt={buyer.name} size="sm" />
             <Typography
@@ -285,7 +291,13 @@ const AdminSalesView = () => {
             discount or free
           </div>
         </td>
-        <td className={classes}>
+        <td
+          className={`${classes} cursor-pointer`}
+          onClick={() => {
+            setSelectedAuthorProfile(buyer);
+            setOpenAuthorProfileModal(true);
+          }}
+        >
           <div className="flex items-center gap-3 ml-1">
             <Avatar src={book.author.avatar} alt={buyer.name} size="sm" />
             <Typography
@@ -360,8 +372,19 @@ const AdminSalesView = () => {
       </CustomModal>
       {/* Modal de Hero buyer profile */}
       <CustomModal
-        open={openOverViewBookModal}
-        handleOpen={() => setOpenOverViewBookModal(false)} // Cierra el modal
+        open={openBuyerProfileModal}
+        handleOpen={() => setOpenBuyerProfileModal(false)} // Cierra el modal
+        classNameDialog="custom-dialog-class" // Clases personalizadas
+        classNameBody="custom-body-class"
+        exitButton={true}
+        size="xl"
+      >
+        <HeroProfile />
+      </CustomModal>
+      {/* Modal de Hero author book profile */}
+      <CustomModal
+        open={openAuthorProfileModal}
+        handleOpen={() => setOpenAuthorProfileModal(false)} // Cierra el modal
         classNameDialog="custom-dialog-class" // Clases personalizadas
         classNameBody="custom-body-class"
         exitButton={true}
