@@ -21,6 +21,7 @@ import AdminUsersPage from "@/pages/admin/admin-users/page";
 import AdminBooksPage from "@/pages/admin/admin-books/page";
 import AdminCategoriesPage from "@/pages/admin/admin-categories/page";
 import AdminSalesPage from "@/pages/admin/admin-sales/page";
+import AdminComplaintsPage from "@/pages/admin/admin-complaints/page";
 
 const Routers = () => {
   const auth = useAppSelector((state) => state.auth);
@@ -98,6 +99,7 @@ const Routers = () => {
           <Route path="/admin/books" element={<AdminBooksPage />}></Route>
           <Route path="/admin/categories" element={<AdminCategoriesPage />}></Route>
           <Route path="/admin/sales" element={<AdminSalesPage />}></Route>
+          <Route path="/admin/complaints" element={<AdminComplaintsPage />}></Route>
 
         </Routes>
       </Router>
