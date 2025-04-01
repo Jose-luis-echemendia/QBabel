@@ -362,7 +362,10 @@ const AdminSalesView = () => {
         exitButton={true}
         size="xl"
       >
-        <HeroProfile />
+        <div>
+          <HeroProfile />
+          <div>cantidad de compras</div>
+        </div>
       </CustomModal>
       {/* Modal de Hero author book profile */}
       <CustomModal
@@ -373,7 +376,10 @@ const AdminSalesView = () => {
         exitButton={true}
         size="xl"
       >
-        <HeroProfile />
+        <div>
+          <HeroProfile />
+          <div>cantidad de libros vendidos</div>
+        </div>
       </CustomModal>
 
       <CustomTable
