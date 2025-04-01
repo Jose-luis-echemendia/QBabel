@@ -5,24 +5,7 @@ import { CustomModal } from "@/components/modal";
 import { OverViewBook } from "../admin-books/overview-book";
 import { HeroProfile } from "@/views/profile-page/hero-profile";
 
-const TABS = [
-  {
-    label: "All",
-    value: "all",
-  },
-  {
-    label: "Activas",
-    value: "Activas",
-  },
-  {
-    label: "Libros",
-    value: "Libros",
-  },
-  {
-    label: "Publicaciones",
-    value: "Publicaciones",
-  },
-];
+const TABS = [];
 
 const TABLE_HEAD = [
   "Comprador",
