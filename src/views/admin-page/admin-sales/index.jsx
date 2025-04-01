@@ -15,6 +15,7 @@ const TABLE_HEAD = [
   "Pago final",
   "Ganancia escritor",
   "Ganancia",
+  "Fecha",
 ];
 
 const TABLE_ROWS = [
@@ -114,6 +115,7 @@ const TABLE_ROWS = [
     finalPayment: 22.11,
     writerProfit: 2.11,
     profit: 5.11,
+    date: "19/09/17",
   },
   {
     buyer: {
@@ -211,6 +213,7 @@ const TABLE_ROWS = [
     finalPayment: 1991.09,
     writerProfit: 1900.09,
     profit: 91.0,
+    date: "19/09/17",
   },
 ];
 
@@ -225,7 +228,7 @@ const AdminSalesView = () => {
   const [selectedAuthorProfile, setSelectedAuthorProfile] = useState(null);
 
   const renderRow = ({ item, index, totalItems }) => {
-    const { buyer, book, finalPayment, writerProfit, profit } = item;
+    const { buyer, book, finalPayment, writerProfit, profit, date } = item;
     const isLast = index === totalItems - 1;
     const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
 
@@ -319,7 +322,7 @@ const AdminSalesView = () => {
             <Typography
               variant="small"
               color="blue-gray"
-              className="font-normal"
+              className="font-normal ml-1.5"
             >
               {writerProfit}
             </Typography>
@@ -330,9 +333,20 @@ const AdminSalesView = () => {
             <Typography
               variant="small"
               color="blue-gray"
-              className="font-normal"
+              className="font-normal ml-1.5"
             >
               {profit}
+            </Typography>
+          </div>
+        </td>
+        <td className={classes}>
+          <div>
+            <Typography
+              variant="small"
+              color="blue-gray"
+              className="font-normal"
+            >
+              {date}
             </Typography>
           </div>
         </td>

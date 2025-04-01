@@ -4,11 +4,11 @@ import { Avatar, Typography } from "@material-tailwind/react";
 const TABS = [];
 
 const TABLE_HEAD = [
-  "Comprador",
-  "Libro",
-  "Autor",
+  "Comentario denunciado",
+  "Causa",
+  "estado",
   "Costo",
-  "Pago final",
+  "Fecha",
   "Ganancia escritor",
   "Ganancia",
 ];
