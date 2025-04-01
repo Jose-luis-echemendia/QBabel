@@ -3,6 +3,7 @@ import { CustomTable } from "@/components/table";
 import { useState } from "react";
 import { CustomModal } from "@/components/modal";
 import { OverViewBook } from "../admin-books/overview-book";
+import { HeroProfile } from "@/views/profile-page/hero-profile";
 
 const TABS = [
   {
@@ -234,6 +235,12 @@ const AdminSalesView = () => {
   const [openOverViewBookModal, setOpenOverViewBookModal] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
 
+  const [openBuyerProfileModal, setOpenBuyerProfileModal] = useState(false);
+  const [selectedBuyerProfile, setSelectedBuyerProfile] = useState(null);
+  
+  const [openAuthorProfileModal, setOpenAuthorProfileModal] = useState(false);
+  const [selectedAuthorProfile, setSelectedAuthorProfile] = useState(null);
+
   const renderRow = ({ item, index, totalItems }) => {
     const { buyer, book, finalPayment, writerProfit, profit } = item;
     const isLast = index === totalItems - 1;
@@ -351,6 +358,18 @@ const AdminSalesView = () => {
       >
         <OverViewBook book={selectedBook} />
       </CustomModal>
+      {/* Modal de Hero buyer profile */}
+      <CustomModal
+        open={openOverViewBookModal}
+        handleOpen={() => setOpenOverViewBookModal(false)} // Cierra el modal
+        classNameDialog="custom-dialog-class" // Clases personalizadas
+        classNameBody="custom-body-class"
+        exitButton={true}
+        size="xl"
+      >
+        <HeroProfile />
+      </CustomModal>
+
       <CustomTable
         title={"Ventas"}
         TABS={TABS}
