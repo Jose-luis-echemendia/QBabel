@@ -16,8 +16,14 @@ const TABLE_HEAD = [
 const TABLE_ROWS = [
   {
     reportedComment: "Que fea es la vida",
-    reportedUser: "Jose Luis Echemendia",
-    reportingUser: "Roberto Lalo Pazón",
+    reportedUser: {
+      name: "Jose Luis Echemendia López",
+      avatar: "/assets/images/avatar.jpeg",
+    },
+    reportingUser: {
+      name: "Roberto Lazo Pozo",
+      avatar: "/assets/images/avatar.jpeg",
+    },
     causeComplaint:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic doloremque numquam ut illo sit rerum tempore voluptatem adipisci deserunt accusantium, aspernatur placeat, beatae quidem impedit explicabo perferendis dolores dolore reiciendis.",
     date: "19/09/17",
@@ -27,12 +33,18 @@ const TABLE_ROWS = [
 
 const AdminComplaintsView = () => {
   const renderRow = ({ item, index, totalItems }) => {
-    const { buyer, book, finalPayment, writerProfit, profit } = item;
+    const {
+      reportedComment,
+      reportedUser,
+      reportingUser,
+      causeComplaint,
+      date,
+    } = item;
     const isLast = index === totalItems - 1;
     const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
 
     return (
-      <tr key={buyer.name} className="hover:bg-gray-100 h-20">
+      <tr key={reportedComment} className="hover:bg-gray-100 h-20">
         <td className={`${classes} `}>
           <div className="flex items-center gap-3 ml-1">
             <Avatar src={buyer.avatar} alt={buyer.name} size="sm" />
