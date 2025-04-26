@@ -1,0 +1,11 @@
+import { createRoot } from "react-dom/client";
+import QBabel from "./QBabel.jsx";
+
+import { store } from "./store";
+import { Provider } from "react-redux";
+
+createRoot(document.getElementById("root")).render(
+  <Provider sotre={store} >
+    <QBabel />
+  </Provider>
+);
