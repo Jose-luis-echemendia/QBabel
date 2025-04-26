@@ -17,6 +17,7 @@ dist-ssr
 **/migrations/
 **/migrations
 migrations
+service-accounts.json
 
 # Editor directories and files
 .vscode/*
