@@ -25,6 +25,18 @@ class GenericImage(BaseModel, AuditRegisteredObjectModel):
     title = models.CharField(
         verbose_name=_("Title"), max_length=255, blank=True, null=True
     )
+    caption = models.CharField(
+        max_length=255,
+        blank=True,
+        verbose_name="Caption",
+        help_text="Brief description of the image. Max 255 characters"
+    )
+    credit = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name="Image Credit",
+        help_text="Photographer/source of the image"
+    )
     order = models.PositiveIntegerField(verbose_name=_("Order"), default=0)
     type = models.CharField(
         verbose_name=_("Type"),
