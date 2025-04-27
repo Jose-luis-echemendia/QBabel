@@ -68,8 +68,8 @@ class CustomCategoryViewSet(viewsets.ModelViewSet):
         ordered_queryset = self.order_queryset(filtered_queryset)
         context = self.get_serializer_context()
         context['withparent'] = self.request.query_params.get('withparent', False) 
-        data_cateogries = self.get_serializer(ordered_queryset, many=True, context=context).data
-        return Response({"categories": data_cateogries}, status=status.HTTP_200_OK)
+        date_categories = self.get_serializer(ordered_queryset, many=True, context=context).data
+        return Response({"categories": date_categories}, status=status.HTTP_200_OK)
 
     def create(self, request, *args, **kwargs):
         if not request.user.is_superuser:

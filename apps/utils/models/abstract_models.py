@@ -43,28 +43,7 @@ class BaseModel(AbstractDateModel):
         Sobrescribe este método en los modelos hijos para devolver
         el campo que debe usarse para generar el slug.
         """
-        raise NotImplementedError("You must override get_slug_source_field to specify the slug source field.")
-        
-class AuditUserChangeModel(models.Model):
-    created_by = models.ForeignKey(
-        User,
-        related_name="%(class)s_created",
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name=_("Created by"),
-    )
-    updated_by = models.ForeignKey(
-        User,
-        related_name="%(class)s_updated",
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name=_("Updated by"),
-    )
-
-    class Meta:
-        abstract = True       
+        raise NotImplementedError("You must override get_slug_source_field to specify the slug source field.")  
         
 class AuditRegisteredObjectModel(models.Model):
     registered_by = models.ForeignKey(
@@ -79,4 +58,15 @@ class AuditRegisteredObjectModel(models.Model):
     class Meta:
         abstract = True 
         
-        
+class AuditUserChangeModel(AuditRegisteredObjectModel):
+    updated_by = models.ForeignKey(
+        User,
+        related_name="%(class)s_updated",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name=_("Updated by"),
+    )
+
+    class Meta:
+        abstract = True     
