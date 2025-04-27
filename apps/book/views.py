@@ -27,6 +27,21 @@ class BookViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         return serializer.save()
+    
+    def create(self, request, *args, **kwargs):
+        """
+        Create a new book.
+        """
+        def create_cover(self):
+            pass
+            
+        def create_file(self):
+            pass
+        
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 class SeeBookContent(APIView):
     pass

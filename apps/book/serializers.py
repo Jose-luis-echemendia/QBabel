@@ -28,6 +28,8 @@ class BookSerializer(AbstractBaseSerializer):
     file_details = serializers.SerializerMethodField()
     
     category_book = serializers.SerializerMethodField()
+    is_discount_active = serializers.SerializerMethodField()
+    discount_percentage = serializers.SerializerMethodField()
 
     class Meta:
         model = Book
@@ -46,9 +48,27 @@ class BookSerializer(AbstractBaseSerializer):
             "number_pages",
             "lenguage",
             "price",
+            "is_discount_active",
+            "discount_percentage",
+            "discount_start_date",
+            "discount_end_date"
             "category_book"
         ]
-        
+        extra_kwargs = {
+            "author": {"required": True},
+            "cover": {"required": True},
+            "file": {"required": True},
+            "category_book": {"required": False},
+            "title": {"required": True},
+            "synopsis": {"required": True},
+            "is_published": {"required": False},
+            "published_date": {"required": False},
+            "number_chapters": {"required": True},
+            "number_pages": {"required": True},
+            "lenguage": {"required": True},
+            "price": {"required": True},
+        }
+           
     def get_author_details(self, obj):
         """
         Get the details of the author.
@@ -76,6 +96,18 @@ class BookSerializer(AbstractBaseSerializer):
         """
         from apps.category.serializers import CategorySerializer
         return CategorySerializer(obj.category_book, many=True).data if obj.category_book else None
+
+    def get_is_discount_active(self, obj):
+        """
+        Check if the discount is active.
+        """
+        return obj.is_discount_active() if obj else False
+    
+    def get_discount_percentage(self, obj):
+        """
+        Get the discount percentage.
+        """
+        return obj.get_discounted_price()if obj else 0.00
 
     def create(self, validated_data):
         """

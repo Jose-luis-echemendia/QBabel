@@ -35,6 +35,42 @@ class Book(BaseModel):
     lenguage = models.CharField(max_length=50, blank=True, null=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     
+    # Campos para el descuento
+    discount_percentage = models.DecimalField(
+        max_digits=5, 
+        decimal_places=2, 
+        default=0.00, 
+        help_text="Descuento en porcentaje (ej. 20.00 para un 20%)"
+    )
+    discount_start_date = models.DateTimeField(
+        blank=True, null=True, 
+        help_text="Fecha de inicio del descuento"
+    )
+    discount_end_date = models.DateTimeField(
+        blank=True, null=True, 
+        help_text="Fecha de finalización del descuento"
+    )
+
+    def is_discount_active(self):
+        from django.utils import timezone
+        now = timezone.now()
+        return (self.discount_start_date and self.discount_end_date and
+                self.discount_start_date <= now <= self.discount_end_date)
+
+    def get_discounted_price(self):
+        if self.is_discount_active():
+            discount_amount = (self.discount_percentage / 100) * self.price
+            return self.price - discount_amount
+        return self.price
+    
+    @property
+    def is_free(self):
+        return self.price == 0.00
+    
+    @property
+    def is_paid(self):
+        return self.price > 0.00
+    
     def __str__(self):
         return f"{self.follower.user.user_name} follows {self.writer.user.user_name}"
     
