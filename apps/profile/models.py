@@ -30,6 +30,32 @@ class Profile(BaseModel):
         verbose_name = 'Profile'
         verbose_name_plural = 'Profiles'
         ordering = ("-created_at",)
+        
+class Follower(BaseModel):
+    follower = models.ForeignKey(
+        Profile,
+        related_name='following',
+        on_delete=models.CASCADE
+    )
+    writer = models.ForeignKey(
+        Profile,
+        related_name='follower',
+        on_delete=models.CASCADE
+    )
+
+    
+    def __str__(self):
+        return f"{self.follower.user.user_name} follows {self.writer.user.user_name}"
+    
+    def get_slug_source_field(self):
+        return 'writer'
+    
+    class Meta:
+        db_table = 'Follower'
+        managed = True
+        verbose_name = 'Follower'
+        verbose_name_plural = 'Followers'
+        ordering = ("-created_at",)
 
 
 class BankAccount(BaseModel):
