@@ -56,6 +56,7 @@ class Follower(BaseModel):
         verbose_name = 'Follower'
         verbose_name_plural = 'Followers'
         ordering = ("-created_at",)
+        unique_together = ("follower", "writer")
 
 
 class BankAccount(BaseModel):
