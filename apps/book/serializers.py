@@ -33,7 +33,7 @@ class BookSerializer(AbstractBaseSerializer):
 
     class Meta:
         model = Book
-        fields = AbstractBaseSerializer.Meta + [
+        fields = AbstractBaseSerializer.Meta.fields + [
             "isbn",
             "author",
             "author_details",

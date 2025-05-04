@@ -40,7 +40,8 @@ class ImageSerializer(AbstractBaseSerializer):
             instance = GenericImage(**validated_data)
 
             # Guardar la instancia con el usuario proporcionado en el contexto
-            instance.save(user=self.context.get("user"))
+            #instance.save(user=self.context.get("user", None))
+            instance.save()
 
             return instance
 
@@ -92,7 +93,8 @@ class DocumentSerializer(AbstractBaseSerializer):
             instance = GenericDocument(**validated_data)
 
             # Guardar la instancia con el usuario proporcionado en el contexto
-            instance.save(user=self.context.get("user"))
+            #instance.save(user=self.context.get("user", None))
+            instance.save()
 
             return instance
 

@@ -10,6 +10,9 @@ class Category(BaseModel, AuditUserChangeModel):
 
     def __str__(self):
         return self.name
+    
+    def get_slug_source_field(self):
+        return 'name'
 
     class Meta:
         db_table = 'Category'

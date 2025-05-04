@@ -8,6 +8,7 @@ from .serializers import CategorySerializer
 from .filters import CategoryFilter
 from apps.user.permisions import IsAdminRole
 from django_filters.rest_framework import DjangoFilterBackend
+from apps.utils.enums import ImageTypes
 
 
 class CustomCategoryViewSet(viewsets.ModelViewSet):
@@ -18,7 +19,7 @@ class CustomCategoryViewSet(viewsets.ModelViewSet):
     filterset_class = CategoryFilter
 
     def get_permissions(self):
-        if self.request.user and IsAdminRole().has_permission(self.request, self) or self.action == "get":
+        if self.request.user and IsAdminRole().has_permission(self.request, self) or self.request.method == "GET":
             return [AllowAny()]
 
         if self.action in [
@@ -33,7 +34,7 @@ class CustomCategoryViewSet(viewsets.ModelViewSet):
         return super().get_permissions()
 
     def perform_create(self, serializer):
-        serializer.save()
+        return serializer.save()
 
     def perform_update(self, serializer):
         return serializer.save()
@@ -58,6 +59,12 @@ class CustomCategoryViewSet(viewsets.ModelViewSet):
             queryset = queryset.order_by(*ordering.split(","))
         return queryset
 
+    def create_image(self, data, *args, **kwargs):
+        from apps.utils.serializers.serializers import ImageSerializer
+        serializer = ImageSerializer(data=data, context={'user': self.request.user})
+        serializer.is_valid(raise_exception=True)
+        return self.perform_create(serializer)
+
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
         if not queryset:
@@ -77,16 +84,59 @@ class CustomCategoryViewSet(viewsets.ModelViewSet):
                 {"detail": "Only superusers can create categories."},
                 status=status.HTTP_403_FORBIDDEN,
             )
+        
+        image_file = request.FILES.get("image", None)
+        category_name = request.data.get("name", None)
+        
+        if not category_name:
+            return Response(
+                {"detail": "Category name is required."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        
+        if not image_file:
+            return Response(
+                {"detail": "Image file is required."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        
+        image = self.create_image(data={
+            "image": image_file,
+            "name": category_name,
+            "caption": category_name,
+            "registered_by": self.request.user.pk,
+            "type": ImageTypes.category,
+        })
 
-        serializer = self.get_serializer(data=request.data)
+        serializer = self.get_serializer(data={
+            "name": category_name,
+            "image": image.pk,
+            "description": request.data.get("description", None),
+            "registered_by": self.request.user.pk,
+            #"parent": request.data.get("parent", None),
+        })
+        
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def update(self, request, *args, **kwargs):
         request_data = request.data.copy()
+        image_file = request.FILES.get("image", None)
         partial = kwargs.pop("partial", False)
         instance = self.get_object()
+        
+        if image_file:
+            image = self.create_image(data={
+            "image": image_file,
+            "name": instance.name,
+            "caption": instance.name,
+            "registered_by": self.request.user.pk,
+            "type": ImageTypes.category,
+            })
+            request_data["image"] = image.pk
+            
+        request_data["updated_by"] = self.request.user.pk           
         serializer = self.get_serializer(instance, data=request_data, partial=partial)
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
