@@ -19,7 +19,7 @@ class Profile(BaseModel):
     literary_preferences = models.ManyToManyField(Category, related_name='literary_preferences', blank=True)
 
     def __str__(self):
-        return self.user.user_name
+        return self.user.user_name or "username not set"
     
     def get_slug_source_field(self):
         return 'user'
