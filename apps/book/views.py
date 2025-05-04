@@ -2,7 +2,6 @@ from rest_framework import status, viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated  
-from django_filters.rest_framework import DjangoFilterBackend
 from apps.utils.pagination import LargeSetPagination
 from .serializers import BookSerializer, CategoryBookSerializer
 from .models import Book, CategoryBook
@@ -32,16 +31,52 @@ class BookViewSet(viewsets.ModelViewSet):
         """
         Create a new book.
         """
-        def create_cover(self):
-            pass
+        def create_cover(self, cover, title):
+            from apps.utils.serializers.serializers import ImageSerializer
+            from apps.utils.enums import ImageTypes
+            serializer = ImageSerializer(data={
+                "image": cover,
+                "type": ImageTypes.cover,
+                "title": title,
+                "registered_by": self.request.user.pk,
+            })
+            serializer.is_valid(raise_exception=True)
+            return self.perform_create(serializer)
             
-        def create_file(self):
-            pass
+        def create_file(self, file, title):
+            from apps.utils.serializers.serializers import DocumentSerializer
+            from apps.utils.enums import DocumentTypes
+            serializer = DocumentSerializer(data={
+                "file": file,
+                "type": DocumentTypes.PDF,
+                "title": title,
+                "registered_by": self.request.user.pk,
+            })
+            serializer.is_valid(raise_exception=True)
+            return self.perform_create(serializer)
         
-        serializer = self.get_serializer(data=request.data)
+        data = request.data.copy()
+        title = data.get("title", None)
+        file = data.pop("file", None)
+        cover = data.pop("cover", None)
+        
+        if not title:
+            return Response({"error": "Title is required."}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if not file:
+            return Response({"error": "File is required."}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if not cover:
+            return Response({"error": "Cover is required."}, status=status.HTTP_400_BAD_REQUEST)
+        
+        file_object = create_file(self, file, title)
+        cover_object = create_cover(self, cover, title)
+        data["author"] = self.request.user.pk
+        data["file"] = file_object.pk
+        data["cover"] = cover_object.pk
+        
+        serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-class SeeBookContent(APIView):
-    pass

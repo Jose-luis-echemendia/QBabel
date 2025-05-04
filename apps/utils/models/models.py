@@ -86,7 +86,6 @@ class GenericDocument(BaseModel, AuditRegisteredObjectModel):
     """
     Model for handling generic documents within the application
     """
-    
     title = models.CharField(
         verbose_name=_("Title"), max_length=255, blank=True, null=True
     )

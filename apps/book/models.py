@@ -7,6 +7,13 @@ from apps.category.models import Category
 User = get_user_model()
 
 class Book(BaseModel):
+    isbn = models.CharField(
+        max_length=13,
+        unique=True,
+        blank=False,
+        null=False,
+        help_text="ISBN number of the book"
+    )
     author = models.ForeignKey(
         User,
         related_name='books',
