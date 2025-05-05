@@ -35,7 +35,7 @@ export const OverViewCategory = ({ category, handleOpen }) => {
         <form action="" className="grid grid-cols-6 w-full h-full gap-5">
           <div className="sm:col-span-4">
             <label
-              htmlFor="username"
+              htmlFor="name"
               className="block text-sm/6 font-medium text-gray-900"
             >
               Nombre
@@ -43,8 +43,8 @@ export const OverViewCategory = ({ category, handleOpen }) => {
             <div className="mt-2.5">
               <div className="flex items-center rounded-md bg-white outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary">
                 <input
-                  id="username"
-                  name="username"
+                  id="name"
+                  name="name"
                   type="text"
                   placeholder="janesmith"
                   className="block border p-2 rounded-lg border-gray-100 min-w-0 grow py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
@@ -134,7 +134,7 @@ export const OverViewCategory = ({ category, handleOpen }) => {
 
           <div className="sm:col-span-4 flex gap-2 items-center -mt-1 ml-1">
             <label
-              htmlFor="username"
+              htmlFor="name"
               className="block text-sm/6 font-medium text-gray-900 mt-2.5"
             >
               Activo

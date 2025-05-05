@@ -33,7 +33,7 @@ export const TabsMenu = () => {
           >
             Following
           </button>
-          {auth.user.role === "Admin" && (
+          {(auth.user.role === "Admin" || auth.user.role === "Writer") && (
             <button
               className={` pb-2 ${
                 activeTab === "books"
