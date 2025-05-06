@@ -12,14 +12,13 @@ User = get_user_model()
 def post_save_user_create_create_profile(sender, instance, created, *args, **kwargs):
     if created:
         try:
-            profile_for_user = Profile.objects.create(
+            Profile.objects.create(
                 user=instance,
                 avatar=GenericImage.objects.get(
                     pk=GenericImage.DEFAULT_AVATAR_IMAGE_UUID
                 ),
             )
-            profile_for_user.save()
-        except GenericImage.DoesNotExist:
-            pass
+        except GenericImage.DoesNotExist as e:
+            print(f"Default avatar image not found: {e}")
 
-        library_for_user = Library.objects.create(user=instance)
+        Library.objects.create(user=instance)
