@@ -6,6 +6,7 @@ from rest_framework.exceptions import ValidationError
 from apps.book.models import Book
 from .models import Library, Item
 from .serializers import LibrarySerializer
+from .mixins import ValidateBookItem
 
 
 class LibraryView(APIView):
@@ -25,25 +26,19 @@ class LibraryView(APIView):
         )
 
 
-class AddBookView(APIView):
+class AddBookView(APIView, ValidateBookItem):
     """
     View to add a book to the library.
     """
 
     permission_classes = [IsAuthenticated]
 
-    def validate_book(self, book_uid):
-        if not isinstance(book_uid, str):
-            raise ValidationError("Book UID must be a string")
-
-        if not Book.objects.filter(pk=book_uid).exists():
-            raise ValidationError("Book with this UID does not exist")
-
     def post(self, request):
-        book = request.data.get("book")
-        if not book:
-            raise ValidationError("Book UID is required")
-        self.validate_book(book)
+        book = request.data.get("book", None)
+        try:
+            self.validate_book(book)
+        except ValidationError as e:
+            return Response({"detail": e.detail}, status=status.HTTP_404_NOT_FOUND)
         user = request.user
         library = Library.objects.get(user=user)
         Item.objects.create(library=library, book=Book.objects.get(pk=book))
@@ -52,16 +47,22 @@ class AddBookView(APIView):
         )
 
 
-class DisaggregateBookView(APIView):
+class DisaggregateBookView(APIView, ValidateBookItem):
     """
     View to disaggregate a book from the library.
     """
 
     permission_classes = [IsAuthenticated]
 
-    def post(self, request):
-        # Logic to disaggregate a book
-
+    def delete(self, request):
+        book = request.data.get("book", None)
+        try:
+            self.validate_book(book)
+        except ValidationError as e:
+            return Response({"detail": e.detail}, status=status.HTTP_404_NOT_FOUND)
+        user = request.user
+        library = Library.objects.get(user=user)
+        Item.objects.delete(library=library, book=Book.objects.get(pk=book))
         return Response(
-            {"message": "Book disaggregated successfully"}, status=status.HTTP_200_OK
+            {"library": LibrarySerializer(library).data}, status=status.HTTP_201_CREATED
         )
