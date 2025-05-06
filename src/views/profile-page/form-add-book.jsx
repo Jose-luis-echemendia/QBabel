@@ -1,8 +1,38 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const FormAddBook = ({ handleOpen }) => {
-  const [preview, setPreview] = useState(null);
+  const [previewImage, setPreviewImage] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
+
+  const [previewPdf, setPreviewPdf] = useState(null);
+  const [selectedPdf, setSelectedPdf] = useState(null);
+
+  useEffect(() => {
+    if (!selectedImage) {
+      setPreviewImage(null);
+      return;
+    }
+
+    const objectUrl = URL.createObjectURL(selectedImage);
+    setPreviewImage(objectUrl);
+
+    // Limpieza
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [selectedImage]);
+
+  // Crear preview cuando se selecciona un PDF
+  useEffect(() => {
+    if (!selectedPdf) {
+      setPreviewPdf(null);
+      return;
+    }
+
+    const objectUrl = URL.createObjectURL(selectedPdf);
+    setPreviewPdf(objectUrl);
+
+    // Limpieza
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [selectedPdf]);
 
   const handleImageSelect = (e) => {
     if (!e.target.files || e.target.files.length === 0) {
@@ -10,6 +40,14 @@ export const FormAddBook = ({ handleOpen }) => {
       return;
     }
     setSelectedImage(e.target.files[0]);
+  };
+
+  const handlePdfSelect = (e) => {
+    if (!e.target.files || e.target.files.length === 0) {
+      setSelectedPdf(null);
+      return;
+    }
+    setSelectedPdf(e.target.files[0]);
   };
 
   return (
@@ -26,9 +64,9 @@ export const FormAddBook = ({ handleOpen }) => {
           </label>
           <div className="mt-2.5 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
             <div className="relative flex flex-col items-center justify-center text-center">
-              {preview ? (
+              {previewImage ? (
                 <img
-                  src={preview}
+                  src={previewImage}
                   alt="Preview"
                   className="h-32 w-32 object-cover rounded-lg mb-4"
                 />
@@ -99,22 +137,32 @@ export const FormAddBook = ({ handleOpen }) => {
         {/* FILE */}
         <div className="col-span-4">
           <label
-            htmlFor="cover-photo"
+            htmlFor="pdf-upload"
             className="block text-sm/6 font-medium text-gray-900"
           >
-            Imagen
+            Documento PDF
           </label>
           <div className="mt-2.5 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
             <div className="relative flex flex-col items-center justify-center text-center">
-              {preview ? (
-                <img
-                  src={preview}
-                  alt="Preview"
-                  className="h-32 w-32 object-cover rounded-lg mb-4"
-                />
+              {previewPdf ? (
+                <div className="mb-4">
+                  <iframe
+                    src={previewPdf}
+                    className="w-full h-32 border rounded-lg"
+                    title="PDF Preview"
+                  >
+                    <p>
+                      Este navegador no soporta la previsualización de PDF.
+                      Descarga el archivo para verlo.
+                    </p>
+                  </iframe>
+                  <p className="text-sm text-gray-800 font-medium mt-2">
+                    Archivo seleccionado: {selectedPdf?.name}
+                  </p>
+                </div>
               ) : (
                 <>
-                  {/* IMAGE ICON */}
+                  {/* FILE ICON */}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -126,27 +174,12 @@ export const FormAddBook = ({ handleOpen }) => {
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
-                    />
-                  </svg>
-                  {/* PHOTO ICON */}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="absolute size-5 bottom-[80px] right-0"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z"
+                      d="M19.5 14.25v4.125A2.625 2.625 0 0 1 16.875 21H7.125A2.625 2.625 0 0 1 4.5 18.375V5.625A2.625 2.625 0 0 1 7.125 3h5.25L19.5 8.25v6z"
                     />
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z"
+                      d="M14.25 3v5.25H19.5"
                     />
                   </svg>
                 </>
@@ -154,28 +187,27 @@ export const FormAddBook = ({ handleOpen }) => {
 
               <div className="mt-4 flex text-sm/6 text-gray-600">
                 <label
-                  htmlFor="file-upload"
-                  className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 focus-within:outline-hidden hover:text-indigo-500"
+                  htmlFor="pdf-upload"
+                  className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
                 >
-                  <span>Upload a file</span>
+                  <span>Sube un archivo</span>
                   <input
-                    id="file-upload"
-                    name="file-upload"
+                    id="pdf-upload"
+                    name="pdf-upload"
                     type="file"
                     className="sr-only"
-                    onChange={handleImageSelect}
-                    accept="image/png, image/jpeg, image/gif"
+                    onChange={handlePdfSelect}
+                    accept="application/pdf"
                   />
                 </label>
-                <p className="pl-1">or drag and drop</p>
+                <p className="pl-1">o arrástralo aquí</p>
               </div>
-              <p className="text-xs/5 text-gray-600">
-                PNG, JPG, GIF up to 10MB
-              </p>
+              <p className="text-xs/5 text-gray-600">Solo PDF, hasta 40MB</p>
             </div>
           </div>
         </div>
 
+        {/* TITLE */}
         <div className="sm:col-span-8">
           <label
             htmlFor="title"
@@ -196,6 +228,7 @@ export const FormAddBook = ({ handleOpen }) => {
           </div>
         </div>
 
+        {/* Sinopsis */}
         <div className="sm:col-span-8">
           <label
             htmlFor="title"
@@ -208,11 +241,36 @@ export const FormAddBook = ({ handleOpen }) => {
               <textarea
                 name=""
                 id=""
-                className="w-full h-48 rounded-lg border-gray-100 min-w-0 grow py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+                className="w-full h-48 rounded-lg border border-gray-100 min-w-0 grow py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6 p-2"
                 placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatibus."
               ></textarea>
             </div>
           </div>
+        </div>
+
+        {/* category */}
+        <div className="sm:col-span-8">
+          <div className="flex gap-4">
+            <label
+              htmlFor="categories"
+              className="block text-sm/6 font-medium text-gray-900"
+            >
+              Categories
+            </label>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="size-5 hover:cursor-pointer"
+            >
+              <path
+                fillRule="evenodd"
+                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </div>
+          <div className="mt-2">lalal</div>
         </div>
       </form>
     </div>
