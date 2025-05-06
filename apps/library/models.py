@@ -12,7 +12,9 @@ class Library(BaseModel):
     Model representing a library.
     """
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="libraries")
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, related_name="libraries"
+    )
     total_items = models.PositiveIntegerField(default=0)
 
     def __str__(self):
