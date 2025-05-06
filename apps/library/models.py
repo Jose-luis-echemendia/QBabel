@@ -59,3 +59,4 @@ class Item(BaseModel):
         verbose_name = "Item"
         verbose_name_plural = "Items"
         ordering = ("-created_at",)
+        unique_together = ("library", "book")
