@@ -270,7 +270,11 @@ export const FormAddBook = ({ handleOpen }) => {
               />
             </svg>
           </div>
-          <div className="mt-2">lalal</div>
+          <div className="mt-2">
+            <span className="flex items-center bg-gray-400 w-fit py-0.5 px-2.5 rounded-full">
+              lolo
+            </span>
+          </div>
         </div>
       </form>
     </div>
