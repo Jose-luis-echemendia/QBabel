@@ -62,7 +62,11 @@ class DisaggregateBookView(APIView, ValidateBookItem):
             return Response({"detail": e.detail}, status=status.HTTP_404_NOT_FOUND)
         user = request.user
         library = Library.objects.get(user=user)
-        Item.objects.delete(library=library, book=Book.objects.get(pk=book))
+        try:
+            Item.objects.get(library=library, book=Book.objects.get(pk=book)).delete()
+        except Item.DoesNotExist:
+            return Response({"detail": "Item not found"}, status=status.HTTP_404_NOT_FOUND)
+        
         return Response(
-            {"library": LibrarySerializer(library).data}, status=status.HTTP_201_CREATED
+            {"library": LibrarySerializer(library).data}, status=status.HTTP_204_NO_CONTENT
         )
