@@ -47,6 +47,12 @@ class Item(BaseModel):
     def get_slug_source_field(self):
         return "book"
 
+    def save(self, *args, **kwargs):
+        library = self.library
+        library.total_items += 1
+        library.save()
+        return super().save(*args, **kwargs)
+
     class Meta:
         db_table = "Item"
         managed = True
