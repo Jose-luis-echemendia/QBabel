@@ -53,6 +53,12 @@ class Item(BaseModel):
         library.save()
         return super().save(*args, **kwargs)
 
+    def delete(self, *args, **kwargs):
+        library = self.library
+        library.total_items -= 1
+        library.save()
+        return super().delete(*args, **kwargs)
+
     class Meta:
         db_table = "Item"
         managed = True
