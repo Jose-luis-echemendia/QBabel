@@ -16,7 +16,7 @@ dist-ssr
 #projecto
 **/migrations/
 **/migrations
-migrations
+migrationsf
 service-accounts.json
 
 # Editor directories and files
