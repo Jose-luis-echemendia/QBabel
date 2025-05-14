@@ -19,7 +19,17 @@ class CustomCategoryViewSet(viewsets.ModelViewSet):
     filterset_class = CategoryFilter
 
     def get_permissions(self):
-        if self.request.user and IsAdminRole().has_permission(self.request, self) or self.request.method == "GET":
+        if self.action == "list":
+            return [AllowAny()]
+
+        if not IsAuthenticated().has_permission(self.request, self):
+            return super().get_permissions()
+
+        if (
+            self.request.user
+            and IsAdminRole().has_permission(self.request, self)
+            or self.request.method == "GET"
+        ):
             return [AllowAny()]
 
         if self.action in [
@@ -40,19 +50,19 @@ class CustomCategoryViewSet(viewsets.ModelViewSet):
         return serializer.save()
 
     def get_queryset(self):
-        if not self.request.user.is_superuser:
-            queryset = self.queryset.filter(gallery__user=self.request.user)
         if "state" not in self.request.GET:
             queryset = self.queryset.filter(is_active=True)
         return queryset
-    
+
     def filter_queryset(self, queryset):
-        filterset = self.filterset_class(self.request.GET, queryset=queryset, request=self.request)
+        filterset = self.filterset_class(
+            self.request.GET, queryset=queryset, request=self.request
+        )
         if not filterset.is_valid():
             raise ValueError(f"Invalid filter data: {filterset.errors}")
         queryset = filterset.qs
         return queryset
-    
+
     def order_queryset(self, queryset):
         ordering = self.request.GET.get("ordering", None)
         if ordering:
@@ -61,7 +71,8 @@ class CustomCategoryViewSet(viewsets.ModelViewSet):
 
     def create_image(self, data, *args, **kwargs):
         from apps.utils.serializers.serializers import ImageSerializer
-        serializer = ImageSerializer(data=data, context={'user': self.request.user})
+
+        serializer = ImageSerializer(data=data, context={"user": self.request.user})
         serializer.is_valid(raise_exception=True)
         return self.perform_create(serializer)
 
@@ -74,8 +85,10 @@ class CustomCategoryViewSet(viewsets.ModelViewSet):
         filtered_queryset = self.filter_queryset(queryset)
         ordered_queryset = self.order_queryset(filtered_queryset)
         context = self.get_serializer_context()
-        context['withparent'] = self.request.query_params.get('withparent', False) 
-        date_categories = self.get_serializer(ordered_queryset, many=True, context=context).data
+        context["withparent"] = self.request.query_params.get("withparent", False)
+        date_categories = self.get_serializer(
+            ordered_queryset, many=True, context=context
+        ).data
         return Response({"categories": date_categories}, status=status.HTTP_200_OK)
 
     def create(self, request, *args, **kwargs):
@@ -84,38 +97,42 @@ class CustomCategoryViewSet(viewsets.ModelViewSet):
                 {"detail": "Only superusers can create categories."},
                 status=status.HTTP_403_FORBIDDEN,
             )
-        
+
         image_file = request.FILES.get("image", None)
         category_name = request.data.get("name", None)
-        
+
         if not category_name:
             return Response(
                 {"detail": "Category name is required."},
                 status=status.HTTP_400_BAD_REQUEST,
             )
-        
+
         if not image_file:
             return Response(
                 {"detail": "Image file is required."},
                 status=status.HTTP_400_BAD_REQUEST,
             )
-        
-        image = self.create_image(data={
-            "image": image_file,
-            "name": category_name,
-            "caption": category_name,
-            "registered_by": self.request.user.pk,
-            "type": ImageTypes.category,
-        })
 
-        serializer = self.get_serializer(data={
-            "name": category_name,
-            "image": image.pk,
-            "description": request.data.get("description", None),
-            "registered_by": self.request.user.pk,
-            #"parent": request.data.get("parent", None),
-        })
-        
+        image = self.create_image(
+            data={
+                "image": image_file,
+                "name": category_name,
+                "caption": category_name,
+                "registered_by": self.request.user.pk,
+                "type": ImageTypes.category,
+            }
+        )
+
+        serializer = self.get_serializer(
+            data={
+                "name": category_name,
+                "image": image.pk,
+                "description": request.data.get("description", None),
+                "registered_by": self.request.user.pk,
+                # "parent": request.data.get("parent", None),
+            }
+        )
+
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -125,18 +142,20 @@ class CustomCategoryViewSet(viewsets.ModelViewSet):
         image_file = request.FILES.get("image", None)
         partial = kwargs.pop("partial", False)
         instance = self.get_object()
-        
+
         if image_file:
-            image = self.create_image(data={
-            "image": image_file,
-            "name": instance.name,
-            "caption": instance.name,
-            "registered_by": self.request.user.pk,
-            "type": ImageTypes.category,
-            })
+            image = self.create_image(
+                data={
+                    "image": image_file,
+                    "name": instance.name,
+                    "caption": instance.name,
+                    "registered_by": self.request.user.pk,
+                    "type": ImageTypes.category,
+                }
+            )
             request_data["image"] = image.pk
-            
-        request_data["updated_by"] = self.request.user.pk           
+
+        request_data["updated_by"] = self.request.user.pk
         serializer = self.get_serializer(instance, data=request_data, partial=partial)
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)

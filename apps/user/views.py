@@ -4,28 +4,27 @@ from django.contrib.auth import get_user_model
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .serializers import UserSerializer
-from .permisions import IsAdminRole
 
 User = get_user_model()
+
 
 class CustomUserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
-    
+
     def get_permissions(self):
         permissions = []
-        
+
         if self.action == "create":
             permissions.append(AllowAny())
             return permissions
-        
+
         return super().get_permissions()
-    
-    
+
     def perform_create(self, serializer):
         serializer.save()
-        
+
     def perform_update(self, serializer):
         return serializer.save()
 
@@ -33,10 +32,8 @@ class CustomUserViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
-        return Response(
-            serializer.data, status=status.HTTP_201_CREATED
-        )
-        
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
     def update(self, request, *args, **kwargs):
         request_data = request.data.copy()
         partial = kwargs.pop("partial", False)
@@ -46,7 +43,8 @@ class CustomUserViewSet(viewsets.ModelViewSet):
         self.perform_update(serializer)
 
         return Response(
-            serializer.data, status=status.HTTP_200_OK,
+            serializer.data,
+            status=status.HTTP_200_OK,
         )
 
     def destroy(self, request, *args, **kwargs):
@@ -57,15 +55,15 @@ class CustomUserViewSet(viewsets.ModelViewSet):
                 {"detail": "This user can not delete becouse he is active."},
                 status=status.HTTP_400_BAD_REQUEST,
             )
-            
+
         instance_user.delete()
 
         return Response(
             {"message": "user account deleted successfully"},
             status=status.HTTP_204_NO_CONTENT,
         )
-        
-    @action(detail=False, methods=["GET"], url_path='me')
+
+    @action(detail=False, methods=["GET"], url_path="me")
     def get_authenticated_user(self, request, *args, **kwargs):
         user = request.user
         serializer = self.get_serializer(user)
