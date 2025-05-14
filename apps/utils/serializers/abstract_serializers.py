@@ -19,36 +19,36 @@ class AbstractBaseSerializer(serializers.ModelSerializer):
         read_only_fields = ("uid", "slug", "created_at", "updated_at")
 
 class AuditUserChangeSerializer(serializers.ModelSerializer):
-    created_by = serializers.PrimaryKeyRelatedField(
+    registered_by = serializers.PrimaryKeyRelatedField(
         queryset=User.objects.all(), write_only=True, required=False
     )
     updated_by = serializers.PrimaryKeyRelatedField(
         queryset=User.objects.all(), required=False, write_only=True
     )
-    created_by_details = serializers.SerializerMethodField()
+    registered_by_details = serializers.SerializerMethodField()
     updated_by_details = serializers.SerializerMethodField()
 
     class Meta:
         abstract = True
         fields = [
-            "created_by",
+            "registered_by",
             "updated_by",
-            "created_by_details",
+            "registered_by_details",
             "updated_by_details",
         ]
         
-    def get_created_by_details(self, obj):
+    def get_registered_by_details(self, obj):
         from apps.user.serializers import UserSerializer
-        return UserSerializer(obj.created_by).data if obj.created_by else None
+        return UserSerializer(obj.registered_by).data if obj.registered_by else None
 
     def get_updated_by_details(self, obj):
         from apps.user.serializers import UserSerializer
         return UserSerializer(obj.updated_by).data if obj.updated_by else None
 
     def create(self, validated_data):
-        if not validated_data.get("created_by"): 
+        if not validated_data.get("registered_by"): 
             user = self.context["request"].user
-            validated_data["created_by"] = user
+            validated_data["registered_by"] = user
         return super().create(validated_data)
 
 

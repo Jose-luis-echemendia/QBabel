@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import Avatar from '../../../public/assets/images/avatar.jpeg';
+import Avatar from 'assets/images/avatar.jpeg';
 function BookCard({ book }) {
   const [showActions, setShowActions] = useState(false);
 

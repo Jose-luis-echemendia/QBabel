@@ -13,7 +13,7 @@ import SearchPage from "@/pages/search/page";
 import CategoryBookPage from "@/pages/category-book/page";
 import BookReaderPage from "@/pages/book-reader/page";
 import ProfilePage from "@/pages/profile/page";
-import Error404 from "@/pages/error/Error404";
+import Error404 from "@/pages/error/error404";
 
 // ADMIN PAGES
 import AdminOverViewPage from "@/pages/admin/admin-overview/page";

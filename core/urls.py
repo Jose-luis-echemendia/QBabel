@@ -24,5 +24,5 @@ urlpatterns = [
     path('api/', include('apps.user.urls')),
     path('api/', include('apps.category.urls')),
     path('api/', include('apps.profile.urls')),
-    
+    path('api/', include('apps.book.urls')),
 ]

@@ -9,6 +9,9 @@ User = get_user_model()
 @receiver(post_save, sender=User)
 def post_save_user_create_create_profile(sender, instance, created,*args, **kwargs):
     if created:
-        profile_for_user = Profile.objects.create(user=instance, avatar=GenericImage.objects.get(pk=GenericImage.DEFAULT_AVATAR_IMAGE_UUID))
+        try:
+            profile_for_user = Profile.objects.create(user=instance, avatar=GenericImage.objects.get(pk=GenericImage.DEFAULT_AVATAR_IMAGE_UUID))
+        except GenericImage.DoesNotExist:
+            return None
         profile_for_user.save()
         
