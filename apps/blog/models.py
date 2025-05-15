@@ -14,6 +14,11 @@ class Post(BaseModel):
         def get_queryset(self):
             return super().get_queryset().filter(status=StatusPost.published)
 
+        def get(self, *args, **kwargs):
+            return self.get_queryset().get(*args, **kwargs)
+
+             
+
     title = models.CharField(max_length=255)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
     image = models.ForeignKey(GenericImage, on_delete=models.SET_NULL, blank=True, null=True)
