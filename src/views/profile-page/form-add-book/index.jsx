@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import { PreviewCategories } from "./preview-categories";
+import { CustomModal } from "@/components/modal";
+import { CategoriesModal } from "./categories-modal";
 
 export const FormAddBook = ({ handleOpen }) => {
   const [previewImage, setPreviewImage] = useState(null);
@@ -6,6 +9,9 @@ export const FormAddBook = ({ handleOpen }) => {
 
   const [previewPdf, setPreviewPdf] = useState(null);
   const [selectedPdf, setSelectedPdf] = useState(null);
+
+  const [categories, setCategories] = useState([]);
+  const [openCategoryModal, setOpenCategoryModal] = useState(false);
 
   useEffect(() => {
     if (!selectedImage) {
@@ -52,8 +58,10 @@ export const FormAddBook = ({ handleOpen }) => {
 
   return (
     <div className="flex flex-col gap-4 items-center justify-center w-full h-full p-5">
-      <h4 className="text-black font-semibold text-2xl w-fit">Libro</h4>
-      <form className="grid grid-cols-8 w-full h-full gap-5">
+      <h4 className="text-black font-semibold text-2xl w-fit">
+        Registra tu libro
+      </h4>
+      <form className="grid grid-cols-12 w-full h-full gap-5">
         {/* COVER */}
         <div className="col-span-4">
           <label
@@ -207,6 +215,51 @@ export const FormAddBook = ({ handleOpen }) => {
           </div>
         </div>
 
+        {/* More information */}
+        <div className="sm:col-span-4">
+          {/* category */}
+          <div className="flex gap-4">
+            <label
+              htmlFor="categories"
+              className="block text-sm/6 font-medium text-gray-900"
+            >
+              Categories
+            </label>
+            <button type="button" onClick={() => setOpenCategoryModal(true)}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="size-5  hover:cursor-pointer"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </button>
+            {/* Modal para agregar libro */}
+            <CustomModal
+              open={openCategoryModal}
+              handleOpen={() => setOpenCategoryModal(false)} // Cierra el modal
+              classNameDialog="custom-dialog-class" // Clases personalizadas
+              classNameBody="custom-body-class"
+              exitButton={true}
+              size="lg"
+            >
+              <CategoriesModal handleOpen={() => setOpenCategoryModal(false)} />
+            </CustomModal>
+          </div>
+          <div className="mt-2">
+            {categories.length > 0 ? (
+              <PreviewCategories categories={categories} />
+            ) : (
+              <span>Agg tus categorias</span>
+            )}
+          </div>
+        </div>
+
         {/* TITLE */}
         <div className="sm:col-span-8">
           <label
@@ -245,35 +298,6 @@ export const FormAddBook = ({ handleOpen }) => {
                 placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatibus."
               ></textarea>
             </div>
-          </div>
-        </div>
-
-        {/* category */}
-        <div className="sm:col-span-8">
-          <div className="flex gap-4">
-            <label
-              htmlFor="categories"
-              className="block text-sm/6 font-medium text-gray-900"
-            >
-              Categories
-            </label>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="size-5 hover:cursor-pointer"
-            >
-              <path
-                fillRule="evenodd"
-                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </div>
-          <div className="mt-2">
-            <span className="flex items-center bg-gray-400 w-fit py-0.5 px-2.5 rounded-full">
-              lolo
-            </span>
           </div>
         </div>
       </form>
