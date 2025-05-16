@@ -10,8 +10,9 @@ export const FormAddBook = ({ handleOpen }) => {
   const [previewPdf, setPreviewPdf] = useState(null);
   const [selectedPdf, setSelectedPdf] = useState(null);
 
-  const [categories, setCategories] = useState([]);
   const [openCategoryModal, setOpenCategoryModal] = useState(false);
+
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
   useEffect(() => {
     if (!selectedImage) {
@@ -248,12 +249,16 @@ export const FormAddBook = ({ handleOpen }) => {
               exitButton={true}
               size="lg"
             >
-              <CategoriesModal handleOpen={() => setOpenCategoryModal(false)} />
+              <CategoriesModal
+                selectedCategories={selectedCategories}
+                setSelectedCategories={setSelectedCategories}
+                handleOpen={() => setOpenCategoryModal(false)}
+              />
             </CustomModal>
           </div>
           <div className="mt-2">
-            {categories.length > 0 ? (
-              <PreviewCategories categories={categories} />
+            {selectedCategories.length > 0 ? (
+              <PreviewCategories categories={selectedCategories} />
             ) : (
               <span>Agg tus categorias</span>
             )}

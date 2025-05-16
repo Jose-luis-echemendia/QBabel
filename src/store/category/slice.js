@@ -1,17 +1,30 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getCategoriesThunk } from "./thunks";
 
 const initialState = {
-    user : null,
-    users: [],
-    loading: false,
-}
+  category: null,
+  categories: [],
+  loading: false,
+};
 
-export const usersSlice = createSlice({
-    name : 'users',
-    initialState: initialState,
-    reducers: {
+export const categorySlice = createSlice({
+  name: "category",
+  initialState: initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      // **Get categories reducers**
+      .addCase(getCategoriesThunk.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getCategoriesThunk.fulfilled, (state, action) => {
+        state.loading = false;
+        state.categories = action.payload.categories;
+      })
+      .addCase(getCategoriesThunk.rejected, (state) => {
+        state.loading = false;
+      });
+  },
+});
 
-    }
-})
-
-export default usersSlice.reducer
+export default categorySlice.reducer;
