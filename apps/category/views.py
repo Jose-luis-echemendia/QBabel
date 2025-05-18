@@ -9,10 +9,12 @@ from .filters import CategoryFilter
 from apps.user.permisions import IsAdminRole
 from django_filters.rest_framework import DjangoFilterBackend
 from apps.utils.enums import ImageTypes
+from rest_framework.parsers import MultiPartParser, FormParser
 
 
 class CustomCategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
+    parser_classes = [MultiPartParser, FormParser]
     serializer_class = CategorySerializer
     permission_classes = [IsAuthenticated]
     filter_backends = [DjangoFilterBackend]
@@ -98,7 +100,7 @@ class CustomCategoryViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_403_FORBIDDEN,
             )
 
-        image_file = request.FILES.get("image", None)
+        image_file = request.FILES.get("img", None)
         category_name = request.data.get("name", None)
 
         if not category_name:

@@ -45,11 +45,12 @@ export const OverViewCategory = ({ category, handleOpen }) => {
     formData.append("description", data.description);
     formData.append("type", data.type);
     formData.append("isActive", data.isActive);
+    formData.append("description", data.description || "");
 
     if (data.img && data.img.length > 0) {
       formData.append("img", data.img[0]);
     }
-
+    console.log("formData", formData);
     if (!category) {
       handleCreateCategory(formData);
     }
