@@ -1,15 +1,26 @@
 import { customCheckboxTheme } from "@/utils/material-tailwindscss/themes";
 import { Checkbox, ThemeProvider } from "@material-tailwind/react";
 import { useState, useEffect } from "react";
+import { Select, Option } from "@material-tailwind/react";
+import { schemaCategory } from "@/helpers/yup-schemas";
+import { useForm } from "@/hooks/useForm";
+import { Controller } from "react-hook-form";
+import { useCategory } from "@/hooks/redux/useCategory";
 
 export const OverViewCategory = ({ category, handleOpen }) => {
   const [preview, setPreview] = useState(null);
+  const { handleCreateCategory } = useCategory();
   const [selectedImage, setSelectedImage] = useState(null);
+  const { register, handleSubmit, errors, control } = useForm(schemaCategory);
 
   // Crear preview cuando se selecciona una imagen
   useEffect(() => {
     if (!selectedImage) {
-      setPreview(null);
+      if (category?.img) {
+        setPreview(category.img); // Imagen existente de la categoría
+      } else {
+        setPreview(null);
+      }
       return;
     }
 
@@ -18,7 +29,7 @@ export const OverViewCategory = ({ category, handleOpen }) => {
 
     // Limpieza
     return () => URL.revokeObjectURL(objectUrl);
-  }, [selectedImage]);
+  }, [selectedImage, category]);
 
   const handleImageSelect = (e) => {
     if (!e.target.files || e.target.files.length === 0) {
@@ -28,11 +39,32 @@ export const OverViewCategory = ({ category, handleOpen }) => {
     setSelectedImage(e.target.files[0]);
   };
 
+  const onSubmit = (data) => {
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("description", data.description);
+    formData.append("type", data.type);
+    formData.append("isActive", data.isActive);
+
+    if (data.img && data.img.length > 0) {
+      formData.append("img", data.img[0]);
+    }
+
+    if (!category) {
+      handleCreateCategory(formData);
+    }
+
+    handleOpen();
+  };
+
   return (
     <>
       <div className="flex flex-col gap-4 items-center justify-center w-full h-full p-5">
         <h4 className="text-black font-semibold text-2xl w-fit">Category</h4>
-        <form action="" className="grid grid-cols-6 w-full h-full gap-5">
+        <form
+          className="grid grid-cols-6 w-full h-full gap-5"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <div className="sm:col-span-4">
             <label
               htmlFor="name"
@@ -46,10 +78,47 @@ export const OverViewCategory = ({ category, handleOpen }) => {
                   id="name"
                   name="name"
                   type="text"
-                  placeholder="janesmith"
+                  {...register("name")}
+                  placeholder={category?.name || "Nombre de la categoria"}
                   className="block border p-2 rounded-lg border-gray-100 min-w-0 grow py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
                 />
+                {errors.name && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.name.message}
+                  </p>
+                )}
               </div>
+            </div>
+          </div>
+
+          <div className="sm:col-span-2">
+            <label
+              htmlFor="name"
+              className="block text-sm/6 font-medium text-gray-900"
+            >
+              Tipo
+            </label>
+            <div className="mt-2.5">
+              <Controller
+                name="type"
+                control={control}
+                defaultValue={category?.type || "Libro"}
+                render={({ field }) => (
+                  <Select
+                    label="Select type category"
+                    value={field.value}
+                    onChange={(val) => field.onChange(val)}
+                  >
+                    <Option value="Libro">Libro</Option>
+                    <Option value="Publicaciones">Publicaciones</Option>
+                  </Select>
+                )}
+              />
+              {errors.type && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.type.message}
+                </p>
+              )}
             </div>
           </div>
 
@@ -116,12 +185,18 @@ export const OverViewCategory = ({ category, handleOpen }) => {
                     <span>Upload a file</span>
                     <input
                       id="file-upload"
-                      name="file-upload"
+                      name="img"
                       type="file"
                       className="sr-only"
+                      {...register("img")}
                       onChange={handleImageSelect}
                       accept="image/png, image/jpeg, image/gif"
                     />
+                    {errors.img && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.img.message}
+                      </p>
+                    )}
                   </label>
                   <p className="pl-1">or drag and drop</p>
                 </div>
@@ -142,8 +217,18 @@ export const OverViewCategory = ({ category, handleOpen }) => {
             <div className="mt-2.5">
               <div className="flex items-center rounded-md bg-white outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary">
                 <ThemeProvider value={customCheckboxTheme}>
-                  <Checkbox defaultChecked />
+                  <Checkbox
+                    defaultChecked
+                    id="isActive"
+                    name="isActive"
+                    {...register("isActive")}
+                  />
                 </ThemeProvider>
+                {errors.isActive && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.isActive.message}
+                  </p>
+                )}
               </div>
             </div>
           </div>
@@ -151,6 +236,7 @@ export const OverViewCategory = ({ category, handleOpen }) => {
           <div className="flex items-center justify-end gap-4 border-t col-span-full pt-4 -mt-2">
             <button
               className="bg-black-500 py-1 px-2.5 rounded-xl"
+              type="button"
               onClick={(e) => (e.preventDefault(), handleOpen())}
             >
               <span className="text-primary font-semibold">Cancelar</span>

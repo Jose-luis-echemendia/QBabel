@@ -1,5 +1,4 @@
 export const PreviewCategories = ({ categories }) => {
-  console.log("categories", categories);
   return (
     <>
       <div className="flex gap-3 flex-wrap">

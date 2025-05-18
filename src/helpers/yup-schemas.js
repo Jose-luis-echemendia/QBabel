@@ -26,3 +26,28 @@ export const schemaSignup = yup.object({
     .oneOf([yup.ref("password"), null], "Las contraseñas deben coincidir")
     .required("La confirmación de la contraseña es obligatoria"),
 });
+
+export const schemaCategory = yup.object({
+  name: yup.string().required("El nombre es obligatorio"),
+  description: yup.string(),
+  img: yup
+    .mixed()
+    .test("fileSize", "El archivo es muy grande", (value) => {
+      if (!value || value.length === 0) return true;
+      return value[0].size <= 10 * 1024 * 1024; // 10MB
+    })
+    .test("fileType", "El archivo debe ser una imagen", (value) => {
+      if (!value || value.length === 0) return true;
+      return (
+        value[0].type === "image/jpeg" ||
+        value[0].type === "image/png" ||
+        value[0].type === "image/jpg"
+      );
+    }),
+
+  type: yup
+    .string()
+    .oneOf(["Libro", "Revista", "Publicaciones"], "Tipo inválido")
+    .required("El tipo es obligatorio"),
+  isActive: yup.boolean().required("El estado es obligatorio"),
+});

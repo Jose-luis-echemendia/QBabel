@@ -5,6 +5,7 @@ import {
   updateProfileThunk,
   updatePartialProfileThunk,
   getAuthenticatedUserProfileThunk,
+  getProfileByUsernameThunk
 } from "./thunks";
 
 const initialState = {
@@ -60,6 +61,20 @@ export const profileSlice = createSlice({
       .addCase(getAuthenticatedUserProfileThunk.rejected, (state) => {
         state.loading = false;
       })
+
+      // **Get profile by username reducers**
+      .addCase(getProfileByUsernameThunk.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getProfileByUsernameThunk.fulfilled, (state, action) => {
+        state.loading = false;
+        state.profile = action.payload;
+      }
+      )
+      .addCase(getProfileByUsernameThunk.rejected, (state) => {
+        state.loading = false;
+      }
+      )
 
       // **Update profile reducers**
       .addCase(updateProfileThunk.pending, (state) => {

@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getCategoriesThunk } from "./thunks";
+import {
+  getCategoriesThunk,
+  createCategoryThunk,
+  deleteCategoryThunk,
+} from "./thunks";
 
 const initialState = {
   category: null,
@@ -22,6 +26,33 @@ export const categorySlice = createSlice({
         state.categories = action.payload.categories;
       })
       .addCase(getCategoriesThunk.rejected, (state) => {
+        state.loading = false;
+      })
+
+      // **Create category reducers**
+      .addCase(createCategoryThunk.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(createCategoryThunk.fulfilled, (state, action) => {
+        state.loading = false;
+        if (state.categories.length === 0) state.categories = action.payload;
+        else state.categories.push(action.payload);
+      })
+      .addCase(createCategoryThunk.rejected, (state) => {
+        state.loading = false;
+      })
+
+      // **Delete category reducers**
+      .addCase(deleteCategoryThunk.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(deleteCategoryThunk.fulfilled, (state, action) => {
+        state.loading = false;
+        state.categories = state.categories.filter(
+          (category) => category.uid !== action.payload.uid
+        );
+      })
+      .addCase(deleteCategoryThunk.rejected, (state) => {
         state.loading = false;
       });
   },

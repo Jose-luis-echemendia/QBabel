@@ -19,3 +19,29 @@ export const getCategoriesThunk = createAsyncThunk(
     }
   }
 );
+
+export const createCategoryThunk = createAsyncThunk(
+  "categories/createCategory",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await createCategoryAPI(data);
+      if (response.status === 200) return response.data;
+      return rejectWithValue(response?.data);
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
+
+export const deleteCategoryThunk = createAsyncThunk(
+  "categories/deleteCategory",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await deleteCategoryAPI(id);
+      if (response.status === 200) return response.data;
+      return rejectWithValue(response?.data);
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);

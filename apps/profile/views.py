@@ -4,7 +4,7 @@ from .filters import ProfileFilter
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from django_filters.rest_framework import DjangoFilterBackend
 from apps.utils.pagination import MediumSetPagination
 from django.shortcuts import get_object_or_404
@@ -24,8 +24,6 @@ class ProfileView(APIView):
 
     def get_queryset(self):
         queryset = Profile.objects.all()
-        if not self.request.user.is_superuser:
-            queryset = queryset.filter(gallery__user=self.request.user)
         if "state" not in self.request.GET:
             queryset = queryset.filter(is_active=True)
         return queryset
@@ -96,6 +94,7 @@ class ProfileView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class ProfileDetailsView(APIView):
     def get_object(self):
         """
@@ -113,43 +112,63 @@ class ProfileDetailsView(APIView):
         profile_data = ProfileSerializer(profile).data
         return Response(profile_data, status=status.HTTP_200_OK)
 
+
 class FollowWriter(APIView):
     def post(self, request, *args, **kwargs):
         follower = request.user
-        writer = request.data.get('writer')
+        writer = request.data.get("writer")
         if not writer:
-            return Response({"error": "Writer ID is required."}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {"error": "Writer ID is required."}, status=status.HTTP_400_BAD_REQUEST
+            )
         try:
             writer_profile = Profile.objects.get(pk=writer)
         except Profile.DoesNotExist:
-            return Response({"error": "Writer not found."}, status=status.HTTP_404_NOT_FOUND)
+            return Response(
+                {"error": "Writer not found."}, status=status.HTTP_404_NOT_FOUND
+            )
         if follower == writer_profile.user:
-            return Response({"error": "You cannot follow yourself."}, status=status.HTTP_400_BAD_REQUEST)
-        
-        serializer = FollowerSerializer(data={
-            "follower": follower.id,
-            "writer": writer_profile.id
-        })
+            return Response(
+                {"error": "You cannot follow yourself."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        serializer = FollowerSerializer(
+            data={"follower": follower.id, "writer": writer_profile.id}
+        )
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-    
+
     def delete(self, request, *args, **kwargs):
         follower = request.user
-        writer = request.data.get('writer')
+        writer = request.data.get("writer")
         if not writer:
-            return Response({"error": "Writer ID is required."}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {"error": "Writer ID is required."}, status=status.HTTP_400_BAD_REQUEST
+            )
         try:
             writer_profile = Profile.objects.get(pk=writer)
         except Profile.DoesNotExist:
-            return Response({"error": "Writer not found."}, status=status.HTTP_404_NOT_FOUND)
-        
+            return Response(
+                {"error": "Writer not found."}, status=status.HTTP_404_NOT_FOUND
+            )
+
         try:
-            follow_instance = Follower.objects.get(follower=follower, writer=writer_profile)
+            follow_instance = Follower.objects.get(
+                follower=follower, writer=writer_profile
+            )
             follow_instance.delete()
-            return Response({"message": "Unfollowed successfully."}, status=status.HTTP_204_NO_CONTENT)
+            return Response(
+                {"message": "Unfollowed successfully."},
+                status=status.HTTP_204_NO_CONTENT,
+            )
         except Follower.DoesNotExist:
-            return Response({"error": "You are not following this writer."}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {"error": "You are not following this writer."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
 
 class AuthenticatedProfileDetailsView(APIView):
     def get(self, request, *args, **kwargs):
@@ -158,5 +177,27 @@ class AuthenticatedProfileDetailsView(APIView):
         """
         user = request.user
         profile = Profile.objects.get(user=user)
+        profile_data = ProfileSerializer(profile).data
+        return Response(profile_data, status=status.HTTP_200_OK)
+
+
+class GetProfileByUsername(APIView):
+    permission_classes = [AllowAny()]
+
+    def get(self, request, *args, **kwargs):
+        """
+        endpoint to get profile by username
+        """
+        username = self.kwargs.get("username", None)
+        if not username:
+            return Response(
+                {"error": "Username is required."}, status=status.HTTP_400_BAD_REQUEST
+            )
+        try:
+            profile = Profile.objects.get(user__user_name=username)
+        except Profile.DoesNotExist:
+            return Response(
+                {"error": "Profile not found."}, status=status.HTTP_404_NOT_FOUND
+            )
         profile_data = ProfileSerializer(profile).data
         return Response(profile_data, status=status.HTTP_200_OK)

@@ -3,11 +3,21 @@ import {
   getProfileByIdThunk,
   updateProfileThunk,
   updatePartialProfileThunk,
+  getAuthenticatedUserProfileThunk,
+  getProfileByUsernameThunk,
 } from "@/store/profile/thunks";
 import { useAppDispatch } from "./useStore";
 
 export const useProfile = () => {
   const dispath = useAppDispatch();
+
+  const handleGetProfileByUsername = (username) => {
+    dispath(getProfileByUsernameThunk(username));
+  };
+
+  const handleGetAuthenticatedProfile = () => {
+    dispath(getAuthenticatedUserProfileThunk());
+  };
 
   const handleGetProfiles = () => {
     dispath(getProfilesThunk());
@@ -26,6 +36,8 @@ export const useProfile = () => {
   };
 
   return {
+    handleGetProfileByUsername,
+    handleGetAuthenticatedProfile,
     handleGetProfiles,
     handleGetProfileById,
     handleUpdateProfile,

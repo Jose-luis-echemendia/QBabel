@@ -23,7 +23,7 @@ export const CustomAvatar = () => {
   const profileMenuItems = [
     {
       label: "Mi perfil",
-      navigateTo: "/#",
+      navigateTo: `/profile/${auth.user.user_name}`,
       action: null,
       icon: (
         <svg
@@ -182,14 +182,14 @@ export const CustomAvatar = () => {
               color="blue-gray"
               className="flex items-center rounded-full p-0"
             >
-              <div className="flex items-center gap-4 md:mr-5 -mr-7 lg:w-full lg:h-full size-12">
+              <div className="flex items-center gap-4 md:mr-5 -mr-7  lg:w-full lg:h-full size-12">
                 <Avatar
                   src={auth.profile.avatar_details.image}
                   alt={auth.profile.avatar_details.alt}
                 />
                 <div className="hidden md:block">
                   <Typography variant="h6" className="text-primary">
-                    {auth.user.user_name}
+                    {auth.user.user_name || auth.user.email}
                   </Typography>
                 </div>
               </div>

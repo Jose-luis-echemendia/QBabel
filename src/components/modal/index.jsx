@@ -9,7 +9,6 @@ import {
 import classNames from "classnames";
 
 const ExitButton = ({ handleOpen }) => {
-  console.log(handleOpen);
   return (
     <button
       type="button"

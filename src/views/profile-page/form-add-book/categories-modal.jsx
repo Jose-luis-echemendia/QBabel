@@ -10,7 +10,7 @@ export const CategoriesModal = ({
   const { handleGetCategories } = useCategory();
 
   const categories = useAppSelector(
-    (state) => (console.log(state), state.category.categories)
+    (state) => (state.category.categories)
   );
 
   useEffect(() => {

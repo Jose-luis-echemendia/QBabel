@@ -1,4 +1,7 @@
-import { getCategoriesThunk } from "@/store/category/thunks";
+import {
+  getCategoriesThunk,
+  createCategoryThunk,
+} from "@/store/category/thunks";
 import { useAppDispatch } from "./useStore";
 
 export const useCategory = () => {
@@ -8,7 +11,12 @@ export const useCategory = () => {
     dispath(getCategoriesThunk());
   };
 
+  const handleCreateCategory = (category) => {
+    dispath(createCategoryThunk(category));
+  };
+
   return {
     handleGetCategories,
+    handleCreateCategory,
   };
 };
