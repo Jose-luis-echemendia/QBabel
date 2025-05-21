@@ -130,7 +130,6 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
 
-
 # Configurar las credenciales para Google Cloud
 
 SERVICE_ACCOUNTS_FILE = os.path.join(BASE_DIR, "service-accounts.json")
@@ -190,3 +189,6 @@ SIMPLE_JWT = {
     "BLACKLIST_AFTER_ROTATION": True,
     "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
 }
+
+
+APPEND_SLASH = True

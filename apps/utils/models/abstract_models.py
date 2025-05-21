@@ -17,9 +17,27 @@ class BaseModel(AbstractDateModel):
     """
     model that represents the basic fields for all instances of the database
     """
+    class BaseObjects(models.Manager):
+        def get_queryset(self):
+            return super().get_queryset()
+        
+        
+        def all_objects(self):
+            return super().get_queryset()
+        
+        
+        def active_objects(self):
+            return super().get_queryset().filter(is_active=True)
+        
+        def inactive_objects(self):
+            return super().get_queryset().filter(is_active=False)
+        
     uid = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
     slug = models.SlugField(unique=True, blank=True, null=True,verbose_name=_("Slug"))
     is_active = models.BooleanField(default=True, verbose_name=_("Is Active"))
+    
+    objects = models.Manager()
+    base_objects = BaseObjects()
 
     class Meta:
         abstract = True
