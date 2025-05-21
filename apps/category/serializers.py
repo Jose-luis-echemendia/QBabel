@@ -18,7 +18,7 @@ class CategorySerializer(
         model = Category
         fields = (
             AbstractBaseSerializer.Meta.fields
-            + ["name", "description", "parent"]
+            + ["name", "description", "parent", "type"]
             + AuditUserChangeSerializer.Meta.fields
             + AbstractImageSerializer.Meta.fields
         )

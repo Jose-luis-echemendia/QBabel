@@ -31,7 +31,6 @@ const Routers = () => {
     handleVerifyToken,
     handlRefreshToken,
   } = useAuth();
-  console.log(auth);
 
   const getStateAuth = async () => {
     try {

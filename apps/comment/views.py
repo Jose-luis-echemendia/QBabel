@@ -7,7 +7,7 @@ from .models import Comment
 from .serializers import CommentSerializer
 
 
-class ListComentView(APIView):
+class CommentView(APIView):
     """
     View to handle comment requests.
     """
@@ -81,3 +81,53 @@ class ListComentView(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save(user=request.user, book=book)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    def put(self, request, pk=None, *args, **kwargs):
+        """
+        Update a comment.
+        """
+        if not pk:
+            return Response(
+                {"error": "Comment ID is required."}, status=status.HTTP_400_BAD_REQUEST
+            )
+        try:
+            comment = Comment.objects.get(uid=pk)
+        except Comment.DoesNotExist:
+            return Response(
+                {"error": "Comment not found."}, status=status.HTTP_404_NOT_FOUND
+            )
+
+        if comment.user != request.user:
+            return Response(
+                {"error": "You do not have permission to edit this comment."},
+                status=status.HTTP_403_FORBIDDEN,
+            )
+
+        serializer = self.get_serializer(comment, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def delete(self, request, pk=None, *args, **kwargs):
+        """
+        Delete a comment.
+        """
+        if not pk:
+            return Response(
+                {"error": "Comment ID is required."}, status=status.HTTP_400_BAD_REQUEST
+            )
+        try:
+            comment = Comment.objects.get(uid=pk)
+        except Comment.DoesNotExist:
+            return Response(
+                {"error": "Comment not found."}, status=status.HTTP_404_NOT_FOUND
+            )
+
+        if comment.user != request.user:
+            return Response(
+                {"error": "You do not have permission to delete this comment."},
+                status=status.HTTP_403_FORBIDDEN,
+            )
+
+        comment.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

@@ -37,7 +37,7 @@ export const MyBooks = () => {
           classNameDialog="custom-dialog-class" // Clases personalizadas
           classNameBody="custom-body-class"
           exitButton={true}
-          size="lg"
+          size="xl"
         >
           <FormAddBook handleOpen={() => setOpenFormAddBookModal(false)} />
         </CustomModal>

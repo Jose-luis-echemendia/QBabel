@@ -51,6 +51,7 @@ class ImageTypes(Enum):
     avatar = _("Avatar")
     cover = _("Cover")
     category = _("Category")
+    blog = _("Blog")
 
 class DocumentTypes(Enum):
     PDF = _("PDF")
