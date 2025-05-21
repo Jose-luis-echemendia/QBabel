@@ -12,17 +12,19 @@ class ValidateCategoryForBookMixin:
                 {"categories": "This field must be a list of strings"}
             )
 
+        from apps.category.enums import TypeCategory
+
         non_existent_categories = [
             category_uid
             for category_uid in categories
-            if not Category.objects.filter(pk=category_uid).exists()
+            if not Category.objects.filter(
+                pk=category_uid, type=TypeCategory.book
+            ).exists()
         ]
         if non_existent_categories:
             raise ValidationError(
                 {"categories": f"Invalid categories: {non_existent_categories}"}
             )
-
-        return [{"category": category, "book": self.book.pk} for category in categories]
 
 
 class ValidateRegisterBookMixin:
@@ -31,7 +33,6 @@ class ValidateRegisterBookMixin:
         synopsis = data.get("synopsis", None)
         categories = data.get("categories", None)
         cover = data.get("cover", None)
-        file = data.get("file", None)
         number_chapters = data.get("number_chapters", None)
         number_pages = data.get("number_pages", None)
         lenguage = data.get("lenguage", None)
@@ -46,8 +47,6 @@ class ValidateRegisterBookMixin:
             raise ValidationError({"categories": "Categories are required."})
         if not cover:
             raise ValidationError({"cover": "Cover is required."})
-        if not file:
-            raise ValidationError({"file": "File is required."})
         if not number_chapters:
             raise ValidationError(
                 {"number_chapters": "Number of chapters is required."}
@@ -69,7 +68,6 @@ class ValidateRegisterBookMixin:
             "synopsis": synopsis,
             "categories": categories,
             "cover": cover,
-            "file": file,
             "number_chapters": number_chapters,
             "number_pages": number_pages,
             "lenguage": lenguage,

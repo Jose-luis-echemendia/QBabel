@@ -48,6 +48,10 @@ class BookViewSet(
 
     def validate(self, request_data):
         validated_data = self.validate_date(request_data)
+        
+        self.validate_categories(validated_data.get("categories"))
+        
+        return validated_data
 
     def create(self, request, *args, **kwargs):
         """
@@ -55,52 +59,29 @@ class BookViewSet(
         """
 
         file = request.FILES.pop("file", None)
-        title = request.data.pop("title", None)
-        cover = request.data.pop("cover", None)
-        categories = request.data.pop("categories", None)
 
-        if not categories:
-            return Response(
-                {"error": "Categories are required."},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
+        try:
+            validated_data = self.validate(request.data)
+        except ValidationError as e:
+            return Response({"error": e.detail}, status=status.HTTP_400_BAD_REQUEST)
 
-        if not title:
-            return Response(
-                {"error": "Title is required."}, status=status.HTTP_400_BAD_REQUEST
-            )
-
-        if not file:
-            return Response(
-                {"error": "File is required."}, status=status.HTTP_400_BAD_REQUEST
-            )
-
-        if not cover:
-            return Response(
-                {"error": "Cover is required."}, status=status.HTTP_400_BAD_REQUEST
-            )
-
-        data = {
-            "title": title,
-            "description": request.data.get("description", None),
-            "price": request.data.get("price", None),
-        }
-
-        file_object = self.create_file(self, file, title)
-        cover_object = self.create_cover(self, cover, title)
-        data["author"] = self.request.user.pk
-        data["file"] = file_object.pk
-        data["cover"] = cover_object.pk
+        file_object = self.create_file(self, file, validated_data.get("title"))
+        cover_object = self.create_cover(
+            self, validated_data.get("cover"), validated_data.get("title")
+        )
+        # validated_data["author"] = self.request.user.pk
+        validated_data["file"] = file_object.pk
+        validated_data["cover"] = cover_object.pk
 
         # CREATE INSTANCE BOOK
-        serializer = self.get_serializer(data=data)
+        serializer = self.get_serializer(data=validated_data)
         serializer.is_valid(raise_exception=True)
         self.book = self.perform_create(serializer)
 
         # CREATE INSTANCES CATEOGRIES BOOKS
         try:
             serializer = CategoryBookSerializer(
-                data=self.validate_categories(data.get("categories")), many=True
+                data=self.validate_categories(validated_data.get("categories")), many=True
             )
         except ValidationError as e:
             return Response({"detail": e.detail}, status=status.HTTP_400_BAD_REQUEST)
