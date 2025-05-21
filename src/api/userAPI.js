@@ -79,7 +79,7 @@ export const getAuthenticatedUserAPI = async () => {
     const isAuthenticated = localStorage.getItem("isAuthenticated");
 
     if (!accessToken || !isAuthenticated) return
-    const response = await axiosInstance.get("/api/custom-users/me/");
+    const response = await axiosInstance.get("/api/users/me/");
     return response;
   } catch (error) {
     console.error(
