@@ -1,9 +1,9 @@
-from django.contrib.auth import get_user_model
-from .validators import validate_password_strength
 from rest_framework import serializers
+from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from apps.utils.utils import desconvertir_de_snake_case
 from apps.utils.serializers.abstract_serializers import AbstractBaseSerializer
+from .validators import validate_password_strength
 
 User = get_user_model()
 
