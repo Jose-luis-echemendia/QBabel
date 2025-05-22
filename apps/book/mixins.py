@@ -91,7 +91,6 @@ class CreateCoverBookMixin:
         serializer.is_valid(raise_exception=True)
         return self.perform_create(serializer)
 
-
 class CreateFileBookMixin:
     def create_file(self, file, title):
         from apps.utils.serializers.serializers import DocumentSerializer
@@ -107,3 +106,7 @@ class CreateFileBookMixin:
         )
         serializer.is_valid(raise_exception=True)
         return self.perform_create(serializer)
+
+class PrepareDataForCategoryBookMixin:
+    def prepare_data_for_category_book(self, categories):
+        return [{"category": category, "book": self.book.pk} for category in categories]

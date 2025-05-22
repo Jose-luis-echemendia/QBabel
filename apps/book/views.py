@@ -12,6 +12,7 @@ from .mixins import (
     ValidateRegisterBookMixin,
     CreateCoverBookMixin,
     CreateFileBookMixin,
+    PrepareDataForCategoryBookMixin,
 )
 
 
@@ -21,6 +22,7 @@ class BookViewSet(
     ValidateRegisterBookMixin,
     CreateCoverBookMixin,
     CreateFileBookMixin,
+    PrepareDataForCategoryBookMixin,
 ):
     """
     View to handle book requests.
@@ -48,9 +50,9 @@ class BookViewSet(
 
     def validate(self, request_data):
         validated_data = self.validate_date(request_data)
-        
+
         self.validate_categories(validated_data.get("categories"))
-        
+
         return validated_data
 
     def create(self, request, *args, **kwargs):
@@ -82,7 +84,7 @@ class BookViewSet(
         # CREATE INSTANCES CATEOGRIES BOOKS
         try:
             serializer = CategoryBookSerializer(
-                data=self.validate_categories(validated_data.get("categories")), many=True
+                data=self.prepare_data_for_category_book(categories, many=True)
             )
         except ValidationError as e:
             return Response({"detail": e.detail}, status=status.HTTP_400_BAD_REQUEST)
@@ -90,7 +92,8 @@ class BookViewSet(
         self.perform_create(serializer)
 
         return Response(
-            {"book": BookSerializer(self.book).data}, status=status.HTTP_201_CREATED
+            {"book": self.get_serializer(self.book).data},
+            status=status.HTTP_201_CREATED,
         )
 
     @action(detail=False, methods=["POST"], url_path="validate-isbn")
