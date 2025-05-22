@@ -7,7 +7,7 @@ export const schemaLogin = yup.object({
     .required('El email es obligatorio'),
   password: yup
     .string()
-    .min(6, 'La contraseña debe tener al menos 6 caracteres')
+    .min(8, 'La contraseña debe tener al menos 6 caracteres')
     .required('La contraseña es obligatoria'),
 });
 
@@ -47,7 +47,26 @@ export const schemaCategory = yup.object({
 
   type: yup
     .string()
-    .oneOf(['Libro', 'Revista', 'Publicaciones'], 'Tipo inválido')
+    .oneOf(['book', 'Revista', 'Publicaciones'], 'Tipo inválido')
     .required('El tipo es obligatorio'),
   isActive: yup.boolean().required('El estado es obligatorio'),
+});
+
+export const schemaBook = yup.object({
+  title: yup.string().required('El nombre es obligatorio'),
+  synopsis: yup.string(),
+  cover: yup
+    .mixed()
+    .test('fileSize', 'El archivo es muy grande', (value) => {
+      if (!value || value.length === 0) return true;
+      return value[0].size <= 10 * 1024 * 1024; // 10MB
+    })
+    .test('fileType', 'El archivo debe ser una imagen', (value) => {
+      if (!value || value.length === 0) return true;
+      return (
+        value[0].type === 'image/jpeg' ||
+        value[0].type === 'image/png' ||
+        value[0].type === 'image/jpg'
+      );
+    }),
 });

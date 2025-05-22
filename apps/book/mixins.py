@@ -37,6 +37,7 @@ class ValidateRegisterBookMixin:
         number_pages = data.get("number_pages", None)
         lenguage = data.get("lenguage", None)
         price = data.get("price", None)
+        is_published = data.get("is_published", False)
 
         if not title:
             raise ValidationError({"title": "Title is required."})
@@ -72,6 +73,7 @@ class ValidateRegisterBookMixin:
             "number_pages": number_pages,
             "lenguage": lenguage,
             "price": price,
+            "is_published": is_published,
         }
 
 
@@ -91,6 +93,7 @@ class CreateCoverBookMixin:
         serializer.is_valid(raise_exception=True)
         return self.perform_create(serializer)
 
+
 class CreateFileBookMixin:
     def create_file(self, file, title):
         from apps.utils.serializers.serializers import DocumentSerializer
@@ -106,6 +109,7 @@ class CreateFileBookMixin:
         )
         serializer.is_valid(raise_exception=True)
         return self.perform_create(serializer)
+
 
 class PrepareDataForCategoryBookMixin:
     def prepare_data_for_category_book(self, categories):

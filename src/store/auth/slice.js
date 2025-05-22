@@ -54,7 +54,6 @@ export const authSlice = createSlice({
       // **Get Authenticated User Reducers**
       .addCase(getAuthenticatedUserThunk.fulfilled, (state, action) => {
         state.user = action.payload;
-        console.log('12312312', state.user);
 
         localStorage.setItem('user', JSON.stringify(action.payload));
       })

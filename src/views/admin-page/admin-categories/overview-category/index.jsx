@@ -9,15 +9,15 @@ import { useCategory } from '@/hooks/redux/useCategory';
 
 export const OverViewCategory = ({ category, handleOpen }) => {
   const [preview, setPreview] = useState(null);
-  const { handleCreateCategory } = useCategory();
+  const { handleCreateCategory, handleUpdateCategory } = useCategory();
   const [selectedImage, setSelectedImage] = useState(null);
   const { register, handleSubmit, errors, control } = useForm(schemaCategory);
 
   // Crear preview cuando se selecciona una imagen
   useEffect(() => {
     if (!selectedImage) {
-      if (category?.img) {
-        setPreview(category.img); // Imagen existente de la categoría
+      if (category?.image_details) {
+        setPreview(category.image_details.image); // Imagen existente de la categoría
       } else {
         setPreview(null);
       }
@@ -39,23 +39,31 @@ export const OverViewCategory = ({ category, handleOpen }) => {
     setSelectedImage(e.target.files[0]);
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    // 1. Montar FormData
     const formData = new FormData();
     formData.append('name', data.name);
-    formData.append('description', data.description);
+    formData.append('description', data.description || '');
     formData.append('type', data.type);
     formData.append('isActive', data.isActive);
-    formData.append('description', data.description || '');
-
-    if (data.img && data.img.length > 0) {
-      formData.append('img', data.img[0]);
-    }
-    console.log('formData', formData);
-    if (!category) {
-      handleCreateCategory(formData);
+    if (selectedImage) {
+      formData.append('image', selectedImage);
     }
 
-    handleOpen();
+    console.log(selectedImage);
+
+    try {
+      if (!category) {
+        handleCreateCategory(formData);
+      } else {
+        await handleUpdateCategory({ id: category.uid, data: formData });
+        console.log(formData.getAll());
+      }
+
+      handleOpen();
+    } catch (err) {
+      console.error('Error al guardar categoría:', err);
+    }
   };
 
   return (
@@ -81,8 +89,10 @@ export const OverViewCategory = ({ category, handleOpen }) => {
                   type='text'
                   {...register('name')}
                   placeholder={category?.name || 'Nombre de la categoria'}
+                  defaultValue={category?.name || ''}
                   className='block border p-2 rounded-lg border-gray-100 min-w-0 grow py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6'
                 />
+
                 {errors.name && (
                   <p className='text-red-500 text-sm mt-1'>
                     {errors.name.message}
@@ -103,14 +113,14 @@ export const OverViewCategory = ({ category, handleOpen }) => {
               <Controller
                 name='type'
                 control={control}
-                defaultValue={category?.type || 'Libro'}
+                defaultValue={category?.type || ''}
                 render={({ field }) => (
                   <Select
                     label='Select type category'
                     value={field.value}
                     onChange={(val) => field.onChange(val)}
                   >
-                    <Option value='Libro'>Libro</Option>
+                    <Option value='book'>Libro</Option>
                     <Option value='Publicaciones'>Publicaciones</Option>
                   </Select>
                 )}
@@ -186,10 +196,10 @@ export const OverViewCategory = ({ category, handleOpen }) => {
                     <span>Upload a file</span>
                     <input
                       id='file-upload'
-                      name='img'
+                      name='image'
                       type='file'
                       className='sr-only'
-                      {...register('img')}
+                      {...register('image')}
                       onChange={handleImageSelect}
                       accept='image/png, image/jpeg, image/gif'
                     />

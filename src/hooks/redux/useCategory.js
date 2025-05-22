@@ -1,22 +1,29 @@
 import {
   getCategoriesThunk,
   createCategoryThunk,
-} from "@/store/category/thunks";
-import { useAppDispatch } from "./useStore";
+  updateCategoryThunk,
+} from '@/store/category/thunks';
+import { useAppDispatch } from './useStore';
+import { useCallback } from 'react';
 
 export const useCategory = () => {
-  const dispath = useAppDispatch();
+  const dispatch = useAppDispatch();
 
-  const handleGetCategories = () => {
-    dispath(getCategoriesThunk());
-  };
+  const handleGetCategories = useCallback(
+    (type = null) => dispatch(getCategoriesThunk(type)).unwrap(),
+    [dispatch]
+  );
 
-  const handleCreateCategory = (category) => {
-    dispath(createCategoryThunk(category));
-  };
+  const handleCreateCategory = (category) => dispatch(createCategoryThunk());
+
+  const handleUpdateCategory = ({id,data}) =>
+    dispatch(
+      updateCategoryThunk({ id, data })
+    ).unwrap();
 
   return {
     handleGetCategories,
     handleCreateCategory,
+    handleUpdateCategory,
   };
 };
