@@ -9,9 +9,9 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const getCategoriesThunk = createAsyncThunk(
   "categories/getCategories",
-  async (_, { rejectWithValue }) => {
+  async (type = null, { rejectWithValue }) => {
     try {
-      const response = await getCategoriesAPI();
+      const response = await getCategoriesAPI(type);
       if (response.status === 200) return response.data;
       return rejectWithValue(response?.data);
     } catch (error) {
@@ -19,6 +19,7 @@ export const getCategoriesThunk = createAsyncThunk(
     }
   }
 );
+
 
 export const createCategoryThunk = createAsyncThunk(
   "categories/createCategory",

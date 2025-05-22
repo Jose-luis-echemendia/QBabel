@@ -1,16 +1,22 @@
 import axiosInstance from "./axiosInstance";
 
 // endpoint for get categories
-export const getCategoriesAPI = async () => {
-    try {
-        const response = await axiosInstance.get("/api/custom-category/");
-        
-        return response;
-      } catch (error) {
-        console.error("Error en obtener las categorias:", error.response?.data || error.message);
-        throw error;
-      }
-}
+export const getCategoriesAPI = async (type = null) => {
+  try {
+    const params = {};
+    if (type) params.type = type;
+
+    const response = await axiosInstance.get("/api/custom-category/", {
+      params,
+    });
+
+    return response;
+  } catch (error) {
+    console.error("Error en obtener las categorías:", error.response?.data || error.message);
+    throw error;
+  }
+};
+
 
 // endpoint for get category by id
 export const getCategoryByIdAPI = async (id) => {

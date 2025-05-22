@@ -7,8 +7,8 @@ import { useAppDispatch } from "./useStore";
 export const useCategory = () => {
   const dispath = useAppDispatch();
 
-  const handleGetCategories = () => {
-    dispath(getCategoriesThunk());
+  const handleGetCategories = (type = null) => {
+    dispath(getCategoriesThunk(type));
   };
 
   const handleCreateCategory = (category) => {

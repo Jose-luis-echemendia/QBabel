@@ -9,12 +9,10 @@ export const CategoriesModal = ({
 }) => {
   const { handleGetCategories } = useCategory();
 
-  const categories = useAppSelector(
-    (state) => (state.category.categories)
-  );
+  const categories = useAppSelector((state) => state.category.categories);
 
   useEffect(() => {
-    handleGetCategories();
+    handleGetCategories("book");
   }, []);
 
   const toggleCategory = (category) => {
