@@ -250,7 +250,7 @@ export const FormAddBook = ({ handleOpen }) => {
                 />
               </svg>
             </button>
-            {/* Modal para agregar libro */}
+            {/* Modal para agregar categorias al libro */}
             <CustomModal
               open={openCategoryModal}
               handleOpen={() => setOpenCategoryModal(false)} // Cierra el modal
@@ -439,13 +439,75 @@ export const FormAddBook = ({ handleOpen }) => {
               Ajusta el numero usando los controladores + y -.
             </Typography>
           </div>
+
+          {/* Precio */}
+          <div className="sm:col-span-4 flex flex-col gap-2 w-48 max-w-sm items-start ">
+            <label htmlFor="precio" className="block font-medium text-gray-900">
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="mb-1 font-medium text-sm text-black-500"
+              >
+                Precio en{" "}
+                <span className="font-semibold text-md text-black-80 ml-1">
+                  CUP
+                </span>
+              </Typography>
+            </label>
+            <div className="relative w-full">
+              <Input
+                type="number"
+                placeholder="1,000"
+                className="appearance-none rounded-r-none !border-t-blue-gray-200 placeholder:text-blue-gray-300  placeholder:opacity-100 focus:!border-t-gray-900 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                labelProps={{
+                  className: "before:content-none after:content-none",
+                }}
+                containerProps={{
+                  className: "min-w-0",
+                }}
+                value={value}
+                onChange={(e) => setValue(Number(e.target.value))}
+              />
+
+              <div className="absolute right-1 top-1 flex gap-0.5">
+                <IconButton
+                  size="sm"
+                  className="rounded"
+                  onClick={() => setValue((cur) => (cur === 0 ? 0 : cur - 1))}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                    className="h-4 w-4"
+                  >
+                    <path d="M3.75 7.25a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5h-8.5Z" />
+                  </svg>
+                </IconButton>
+                <IconButton
+                  size="sm"
+                  className="rounded"
+                  onClick={() => setValue((cur) => cur + 1)}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                    className="h-4 w-4"
+                  >
+                    <path d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z" />
+                  </svg>
+                </IconButton>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* TITLE */}
-        <div className="sm:col-span-8">
+        <div className="sm:col-span-8 -mt-32">
           <label
             htmlFor="title"
-            className="block text-sm/6 font-medium text-gray-900"
+            className="block text-sm/6 font-medium text-gray-900 ml-2.5"
           >
             Title
           </label>
@@ -463,10 +525,10 @@ export const FormAddBook = ({ handleOpen }) => {
         </div>
 
         {/* Sinopsis */}
-        <div className="sm:col-span-8">
+        <div className="sm:col-span-8 -mt-10">
           <label
             htmlFor="title"
-            className="block text-sm/6 font-medium text-gray-900"
+            className="block text-sm/6 font-medium text-gray-900 ml-2.5"
           >
             Sinopsis
           </label>
