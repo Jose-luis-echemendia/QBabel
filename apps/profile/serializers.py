@@ -43,6 +43,9 @@ class ProfileSerializer(AbstractBaseSerializer):
     def get_literary_preferences_details(self, obj):
         return CategorySerializer(obj.literary_preferences, many=True).data
     
+    def to_representation(self, instance):
+        return super().to_representation(instance)
+    
 class FollowerSerializer(AbstractBaseSerializer):
     follower = serializers.PrimaryKeyRelatedField(
         queryset=Profile.objects.all(), write_only=True

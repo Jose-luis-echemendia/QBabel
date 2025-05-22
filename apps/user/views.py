@@ -65,6 +65,14 @@ class GetAuthenticatedUserView(BaseCustomAPIView):
     serializer_class = UserListSerializer
     permission_classes = [IsAuthenticated]
 
+    class Meta:
+        model = User
+        verbose_name = "user"
+        verbose_name_plural = "users"
+
+    def get_model(self):
+        return self.Meta.model
+
     def get(self, request, *args, **kwargs):
         user = request.user
         serializer = self.get_serializer(user)
@@ -78,3 +86,11 @@ class DeleteUserView(BaseCustomAPIView):
 
     def delete(self, request, *args, **kwargs):
         return self.desactive_object(request, *args, **kwargs)
+
+    class Meta:
+        model = User
+        verbose_name = "user"
+        verbose_name_plural = "users"
+
+    def get_model(self):
+        return self.Meta.model

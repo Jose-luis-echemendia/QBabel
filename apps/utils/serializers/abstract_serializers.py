@@ -38,12 +38,12 @@ class AuditUserChangeSerializer(serializers.ModelSerializer):
         ]
         
     def get_registered_by_details(self, obj):
-        from apps.user.serializers import UserSerializer
-        return UserSerializer(obj.registered_by).data if obj.registered_by else None
+        from apps.user.serializers import UserListSerializer
+        return UserListSerializer(obj.registered_by).data if obj.registered_by else None
 
     def get_updated_by_details(self, obj):
-        from apps.user.serializers import UserSerializer
-        return UserSerializer(obj.updated_by).data if obj.updated_by else None
+        from apps.user.serializers import UserListSerializer
+        return UserListSerializer(obj.updated_by).data if obj.updated_by else None
 
     def create(self, validated_data):
         if not validated_data.get("registered_by"): 

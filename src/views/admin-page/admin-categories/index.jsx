@@ -25,36 +25,7 @@ const TABS = [
 
 const TABLE_HEAD = ["Imagen & Nombre", "tipo", "Activo", "Fecha", "Acciones"];
 
-const TABLE_ROWS = [
-  {
-    img: "/assets/images/home/categoria/Aventura.png",
-    name: "Aventura",
-    isActive: true,
-    type: "Libro",
-    date: "2025-03-29",
-  },
-  {
-    img: "/assets/images/home/categoria/Romance.png",
-    name: "Romance",
-    isActive: true,
-    type: "Libro",
-    date: "2025-03-29",
-  },
-  {
-    img: "/assets/images/home/categoria/Suspenso.png",
-    name: "Suspenso",
-    isActive: true,
-    type: "Libro",
-    date: "2025-03-29",
-  },
-  {
-    img: "/assets/images/home/categoria/Juvenil.png",
-    name: "Juvenil",
-    isActive: true,
-    type: "Libro",
-    date: "2025-03-29",
-  },
-];
+
 
 const AdminCategoriesView = () => {
   const [openOverViewCategoryModal, setOpenOverViewCategoryModal] =
