@@ -72,6 +72,7 @@ class BookViewSet(
         # validated_data["author"] = self.request.user.pk
         validated_data["file"] = file_object.pk
         validated_data["cover"] = cover_object.pk
+        categories = validated_data.pop("categories")
 
         # CREATE INSTANCE BOOK
         serializer = self.get_serializer(data=validated_data)
