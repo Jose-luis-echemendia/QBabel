@@ -28,9 +28,9 @@ class LibrarySerializer(AbstractBaseSerializer):
         """
         Get the details of the user.
         """
-        from apps.user.serializers import UserSerializer
+        from apps.user.serializers import UserListSerializer
 
-        return UserSerializer(obj.user).data if obj.user else None
+        return UserListSerializer(obj.user).data if obj.user else None
 
     def get_items(self, obj):
         """

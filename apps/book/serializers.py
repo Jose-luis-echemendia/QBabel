@@ -77,9 +77,9 @@ class BookSerializer(AbstractBaseSerializer):
         """
         Get the details of the author.
         """
-        from apps.user.serializers import UserSerializer
+        from apps.user.serializers import UserListSerializer
 
-        return UserSerializer(obj.author).data if obj.author else None
+        return UserListSerializer(obj.author).data if obj.author else None
 
     def get_cover_details(self, obj):
         """

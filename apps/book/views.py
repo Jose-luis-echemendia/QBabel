@@ -7,6 +7,7 @@ from apps.utils.pagination import LargeSetPagination
 from apps.utils.views.abstract_views import BaseViewSet
 from .serializers import BookSerializer, CategoryBookSerializer
 from .models import Book
+from .filters import BookFilter
 from .mixins import (
     ValidateCategoryForBookMixin,
     ValidateRegisterBookMixin,
@@ -33,6 +34,7 @@ class BookViewSet(
     serializer_class = BookSerializer
     permission_classes = [IsAuthenticated]
     pagination_class = LargeSetPagination
+    filterset_class = BookFilter
 
     class Meta:
         model = Book
