@@ -125,6 +125,7 @@ class FollowWriterView(BaseAPIView):
 
 
 class AuthenticatedProfileDetailsView(BaseCustomAPIView):
+    serializer_class = ProfileSerializer
     class Meta:
         model = Profile
         verbose_name = "profile"
