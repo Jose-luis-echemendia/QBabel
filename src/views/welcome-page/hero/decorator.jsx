@@ -14,7 +14,7 @@ export const Decorator = () => {
         <img
           src="/assets/images/home/hero/image1.png"
           alt=""
-          className="absolute mb-10 z-20 w-[600px] h-[600px]"
+          className="absolute mb-10 z-20 w-[600px] h-[670px]"
         />
         <img
           src="/assets/images/home/hero/image2.png"

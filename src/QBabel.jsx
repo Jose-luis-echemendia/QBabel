@@ -1,5 +1,5 @@
 import Routers from "./routers/routers-app";
-import "./styles/QBabel.css";
+import "./styles/qbabel.css";
 
 import '@fontsource/anton';
 import '@fontsource/quicksand';

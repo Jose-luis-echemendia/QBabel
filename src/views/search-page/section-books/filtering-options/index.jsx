@@ -31,6 +31,13 @@ const priceCriterion = [
   { id: 3, criterion: "$500 - 1500$" },
   { id: 4, criterion: "$1500 o más" },
 ];
+const othersCriterion = [
+  { id: 0, criterion: "Los más vendidos" },
+  { id: 1, criterion: "Los más leídos" },
+  { id: 2, criterion: "Los más comentados" },
+  { id: 3, criterion: "Lo mejor de la semana" },
+  { id: 4, criterion: "Los más votados por la comunidad" },
+];
 
 export const FilteringOptions = () => {
   const { criterion } = useParams();
@@ -38,11 +45,13 @@ export const FilteringOptions = () => {
   const [openAcc2, setOpenAcc2] = useState(false);
   const [openAcc3, setOpenAcc3] = useState(false);
   const [openAcc4, setOpenAcc4] = useState(false);
+  const [openAcc5, setOpenAcc5] = useState(false);
 
   const handleOpenAcc1 = () => setOpenAcc1((cur) => !cur);
   const handleOpenAcc2 = () => setOpenAcc2((cur) => !cur);
   const handleOpenAcc3 = () => setOpenAcc3((cur) => !cur);
   const handleOpenAcc4 = () => setOpenAcc4((cur) => !cur);
+  const handleOpenAcc5 = () => setOpenAcc5((cur) => !cur);
 
   return (
     <div className="col-span-2 w-full h-full flex flex-col gap-2.5">
@@ -71,6 +80,12 @@ export const FilteringOptions = () => {
         handleOpenAcc={handleOpenAcc4}
         criterion={"Precios"}
         options={priceCriterion}
+      />
+      <OptionFilter
+        openAcc={openAcc5}
+        handleOpenAcc={handleOpenAcc5}
+        criterion={"Otros filtros"}
+        options={othersCriterion}
       />
     </div>
   );

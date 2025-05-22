@@ -14,7 +14,7 @@ const NavBar = () => {
           Navbar
         </h2>
         <nav className="flex justify-between px-5 items-center text-primary text-3xl font-opensans">
-          <div className="flex items-center space-x-5 w-1/3 relative ml-5">
+          <div className="flex items-center space-x-5 w-1/3 relative ml-16">
             <IconLogo size="80" />
             <div className="p-1 mb-1">
               <ExplorePopover />

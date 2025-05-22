@@ -139,13 +139,13 @@ const DetailsBookView = () => {
       },
     ],
   };
-  
+
   return (
     <>
       <article className="min-h-screen w-full h-full py-5 mx-0">
         <CustomHeaderBook book={book} />
-        <div className="grid grid-cols-6 gap-10 container mx-auto px-20">
-          <div className="col-span-4 flex flex-col gap-10">
+        <div className="lg:grid lg:grid-cols-6 lg:gap-10 lg:container lg:mx-auto lg:px-20 w-[400px]">
+          <div className="col-span-4 flex flex-col gap-10 lg:p-0 p-3">
             <CustomBodyBook book={book} />
             <CustomFooterBook book={book} />
           </div>

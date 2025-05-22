@@ -44,7 +44,7 @@ const reviews = [
 export const Reviews = () => {
   return (
     <>
-      <div className="grid grid-cols-6 gap-10 container mx-auto px-20 my-10">
+      <div className="grid grid-cols-6 gap-10 container mx-auto lg:px-20 px-6 my-10 ">
         {reviews.map((review) => (
           <div
             key={review.id}
@@ -94,9 +94,9 @@ export const Reviews = () => {
           </div>
         ))}
         <div className="col-span-6 flex justify-center items-center mt-4">
-            <button className="w-1/2 h-12 border-2 border-primary rounded-full hover:bg-gray-50">
-                <span className="font-semibold">Mostrar más</span>
-            </button>
+          <button className="w-1/2 h-12 border-2 border-primary rounded-full hover:bg-gray-50">
+            <span className="font-semibold">Mostrar más</span>
+          </button>
         </div>
       </div>
     </>

@@ -59,3 +59,16 @@ export const getAuthenticatedUserProfileAPI = async () => {
       throw error;
     }
 }
+
+
+// endpoint for get profile by username
+export const getProfileByUsernameAPI = async (username) => {
+  try {
+      const response = await axiosInstance.get(`/api/profile/username/${username}/`);
+      
+      return response;
+    } catch (error) {
+      console.error("Error en obtener el perfil por nombre de usuario:", error.response?.data || error.message);
+      throw error;
+    }
+}

@@ -1,6 +1,35 @@
-import {getProfilesAPI, getProfileByIdAPI, updateProfileAPI, updatePartialProfileAPI} from "@/api/profileAPI";
+import {getProfilesAPI, getProfileByIdAPI, updateProfileAPI, updatePartialProfileAPI, getAuthenticatedUserProfileAPI, getProfileByUsernameAPI} from "@/api/profileAPI";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from 'sonner'
+
+// **thunk for get profile by username**
+export const getProfileByUsernameThunk = createAsyncThunk(
+  "profiles/getProfileByUsername",
+  async (username, { rejectWithValue }) => {
+    try {
+      const response = await getProfileByUsernameAPI(username);
+      if (response.status === 200) return response.data
+      return rejectWithValue(response?.data); 
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
+
+
+// **thunk for get authenticated profile**
+export const getAuthenticatedUserProfileThunk = createAsyncThunk(
+    "profiles/getAuthenticatedUserProfile",
+    async (_, { rejectWithValue }) => {
+      try {
+        const response = await getAuthenticatedUserProfileAPI();
+        if (response.status === 200) return response.data
+        return rejectWithValue(response?.data); 
+      } catch (error) {
+        return rejectWithValue(error.response?.data || error.message);
+      }
+    }
+);
 
 // **thunk for get profiles**
 export const getProfilesThunk = createAsyncThunk(

@@ -1,13 +1,12 @@
 import { useForm } from "@/hooks/useForm";
-import { initialFormSignup } from "@/constants/form-initial-state";
+import { schemaSignup } from "@/helpers/yup-schemas";
 import { useState } from "react";
 import { Oval } from "react-loader-spinner";
 import { CustomImageDecorator } from "@/components/image-decorator";
 
 export const Signup = () => {
   const [accountCreated, setAccountCreated] = useState(false);
-  const { formState, onInputChange } = useForm(initialFormSignup);
-  const { email, userName, password, rePassword } = formState;
+  const { register, handleSubmit, errors } = useForm(schemaSignup);
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -28,7 +27,11 @@ export const Signup = () => {
 
           <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
             <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-              <form className="space-y-6" onSubmit={onSubmit} method="POST">
+              <form
+                className="space-y-6"
+                onSubmit={handleSubmit(onSubmit)}
+                method="POST"
+              >
                 <div>
                   <label
                     htmlFor="email"
@@ -41,8 +44,7 @@ export const Signup = () => {
                       id="email"
                       name="email"
                       type="email"
-                      onChange={onInputChange}
-                      value={email}
+                      {...register("email")}
                       autoComplete="email"
                       required
                       className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
@@ -62,8 +64,7 @@ export const Signup = () => {
                       id="userName"
                       name="userName"
                       type="userName"
-                      onChange={onInputChange}
-                      value={userName}
+                      {...register("userName")}
                       autoComplete="userName"
                       required
                       className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
@@ -82,8 +83,7 @@ export const Signup = () => {
                       id="password"
                       name="password"
                       type="password"
-                      onChange={onInputChange}
-                      value={password}
+                      {...register("password")}
                       autoComplete="current-password"
                       required
                       className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
@@ -103,8 +103,7 @@ export const Signup = () => {
                       id="rePassword"
                       name="rePassword"
                       type="password"
-                      onChange={onInputChange}
-                      value={rePassword}
+                      {...register("rePassword")}
                       autoComplete="current-password"
                       required
                       className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"

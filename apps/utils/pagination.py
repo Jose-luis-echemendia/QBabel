@@ -1,20 +1,29 @@
 from rest_framework.pagination import PageNumberPagination
 
+
 class SmallSetPagination(PageNumberPagination):
-    page_query_param = 'p'
-    page_size = 6
-    page_size_query_param = 'page_size'
-    max_page_size = 6
+    page_query_param = "p"
+    page_size = 10
+    page_size_query_param = "page_size"
+    max_page_size = 10
+
 
 class MediumSetPagination(PageNumberPagination):
-    page_query_param = 'p'
-    page_size = 9
-    page_size_query_param = 'page_size'
-    max_page_size = 9
+    page_query_param = "p"
+    page_size = 18
+    page_size_query_param = "page_size"
+    max_page_size = 18
+
 
 class LargeSetPagination(PageNumberPagination):
-    page_query_param = 'p'
-    page_size = 18
-    page_size_query_param = 'page_size'
-    max_page_size = 18
-    
+    page_query_param = "p"
+    page_size = 26
+    page_size_query_param = "page_size"
+    max_page_size = 26
+
+
+class ExtraLargeSetPagination(PageNumberPagination):
+    page_query_param = "p"
+    page_size = 50
+    page_size_query_param = "page_size"
+    max_page_size = 50

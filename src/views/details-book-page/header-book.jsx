@@ -1,15 +1,15 @@
 export const CustomHeaderBook = ({ book }) => {
   return (
     <>
-      <header className="w-full h-[350px] flex items-center justify-center border-b shadow-2xl">
-        <figure className="flex gap-5 items-center justify-center w-full h-full">
+      <header className="lg:w-full w-[400px] lg:h-[350px] h-full flex items-center justify-center border-b shadow-2xl lg:-mt-0 -mt-6">
+        <figure className="flex lg:flex-row flex-col lg:gap-5 items-center justify-center w-full h-full">
           <img
             src={book.img}
             alt={book.tittle}
-            className="object-cover rounded-xl shadow-xl h-[300px] w-[200px] -mt-2.5"
+            className="object-cover rounded-xl shadow-xl lg:h-[300px] lg:p-0 lg:scale-100 scale-75 lg:w-[200px] lg:-mt-2.5"
           />
-          <figcaption className="h-full py-12 flex flex-col items-start justify-between">
-            <div>
+          <figcaption className="h-full py-12 flex flex-col lg:items-start items-center justify-between lg:-mt-0 -mt-16">
+            <div className="lg:mb-0 mb-2">
               <h2 className="text-3xl font-bold w-full">{book.tittle}</h2>
               {book.isComplete && (
                 <span className="text-3xl font-bold w-full inline-flex -ml-[1px]">
@@ -32,7 +32,7 @@ export const CustomHeaderBook = ({ book }) => {
                 </span>
               )}
             </div>
-            <div className="flex gap-10 mt-3 ml-3 justify-center items-center">
+            <div className="flex lg:flex-row flex-col lg:gap-10 gap-y-0 mt-3 ml-3 justify-center items-center lg:mb-0 mb-4">
               <div className="flex flex-col gap-1 items-center justify-center">
                 <span className="flex gap-1.5 text-gray-800">
                   <svg
@@ -102,7 +102,7 @@ export const CustomHeaderBook = ({ book }) => {
                 <span className="text-sm font-bold">{book.parts}</span>
               </div>
             </div>
-            <div className="flex gap-1">
+            <div className="flex flex-row items-center gap-1">
               <button className="flex gap-1.5 bg-primary py-3 px-5 rounded-l-full text-black-500">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

@@ -1,106 +1,80 @@
-from rest_framework import status, viewsets
-from rest_framework.decorators import action
-from django.contrib.auth import get_user_model
+from rest_framework import status
 from rest_framework.response import Response
+from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from .serializers import UserSerializer
-from .permisions import IsAdminRole
+from apps.utils.views.abstract_views import BaseCustomAPIView
+from django.contrib.auth import get_user_model
+from .serializers import UserCreateSerializer, UserListSerializer
+from .permisions import IsAdminRole, IsAccountOwner
+from .mixins import ValidateRegisterUser
+from .filters import UserFilter
 
 User = get_user_model()
 
-class CustomUserViewSet(viewsets.ModelViewSet):
+
+class RegisterUserView(BaseCustomAPIView, ValidateRegisterUser):
     queryset = User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated]
-    
-    def get_permissions(self):
-        permissions = []
-        
-        if self.action == "create":
-            permissions.append(AllowAny())
-            return permissions
-        
-        return super().get_permissions()
-    
-    
-    def perform_create(self, serializer):
+    serializer_class = UserCreateSerializer
+    permission_classes = [AllowAny]
+
+    class Meta:
+        model = User
+        verbose_name = "user"
+        verbose_name_plural = "users"
+
+    def get_model(self):
+        return self.Meta.model
+
+    def validate(self, request_data):
+
+        return self.validate_data(request_data)
+
+    def post(self, request, *args, **kwargs):
+
+        try:
+            validated_data = self.validate(request.data)
+        except ValidationError as e:
+            return Response({"error": e.detail}, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer = self.get_serializer(data=validated_data)
+        serializer.is_valid(raise_exception=True)
         serializer.save()
-        
-    def perform_update(self, serializer):
-        return serializer.save()
+        return Response({"user": serializer.data}, status=status.HTTP_201_CREATED)
 
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        return Response(
-            serializer.data, status=status.HTTP_201_CREATED
-        )
-        
-    def update(self, request, *args, **kwargs):
-        request_data = request.data.copy()
-        partial = kwargs.pop("partial", False)
-        instance = self.get_object()
-        serializer = self.get_serializer(instance, data=request_data, partial=partial)
-        serializer.is_valid(raise_exception=True)
-        self.perform_update(serializer)
 
-        return Response(
-            serializer.data, status=status.HTTP_200_OK,
-        )
+class ListUserView(BaseCustomAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserListSerializer
+    filterset_class = UserFilter
+    permission_classes = [IsAuthenticated, IsAdminRole]
 
-    def destroy(self, request, *args, **kwargs):
-        instance_user = self.get_object()
+    class Meta:
+        model = User
+        verbose_name = "user"
+        verbose_name_plural = "users"
 
-        if instance_user.is_active:
-            return Response(
-                {"detail": "This user can not delete becouse he is active."},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-            
-        instance_user.delete()
+    def get_model(self):
+        return self.Meta.model
 
-        return Response(
-            {"message": "user account deleted successfully"},
-            status=status.HTTP_204_NO_CONTENT,
-        )
-        
-    @action(detail=False, methods=["GET"], url_path='me')
-    def get_authenticated_user(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
+        return self.get_objects(request, *args, **kwargs)
+
+
+class GetAuthenticatedUserView(BaseCustomAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserListSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
         user = request.user
         serializer = self.get_serializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    @action(detail=True, methods=["POST"])
-    def active(self, request, pk=None, *args, **kwargs):
-        instance_user = self.get_object()
 
-        if instance_user.is_active:
-            return Response(
-                {"detail": "This user is already active."},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
+class DeleteUserView(BaseCustomAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserListSerializer
+    permission_classes = [IsAuthenticated, IsAccountOwner]
 
-        instance_user.is_active = True
-        instance_user.save()
-        return Response(
-            {"message": "user account activate successfully"},
-            status=status.HTTP_204_NO_CONTENT,
-        )
-
-    @action(detail=True, methods=["POST"])
-    def desactive(self, request, pk=None, *args, **kwargs):
-        instance_user = self.get_object()
-
-        if not instance_user.is_active:
-            return Response(
-                {"detail": "This user is already inactive."},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-
-        instance_user.is_active = False
-        instance_user.save()
-        return Response(
-            {"message": "user account desactive successfully"},
-            status=status.HTTP_204_NO_CONTENT,
-        )
+    def delete(self, request, *args, **kwargs):
+        return self.desactive_object(request, *args, **kwargs)
