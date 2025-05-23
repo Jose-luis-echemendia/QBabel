@@ -29,6 +29,7 @@ class ValidateCategoryForBookMixin:
 
 class ValidateRegisterBookMixin:
     def validate_data(self, data):
+        isbn = data.get("isbn", None)
         title = data.get("title", None)
         synopsis = data.get("synopsis", None)
         cover = data.get("cover", None)
@@ -37,6 +38,9 @@ class ValidateRegisterBookMixin:
         lenguage = data.get("lenguage", None)
         price = data.get("price", None)
         is_published = data.get("is_published", False)
+
+        if not isbn:
+            raise ValidationError({"isbn": "isbn is required."})
 
         if not title:
             raise ValidationError({"title": "Title is required."})
