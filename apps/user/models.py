@@ -70,6 +70,10 @@ class UserAccount(BaseModel, AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
     
+    @property
+    def is_staff_business(self):
+        return self.role == RoleType.admin
+    
     def __str__(self):
         return self.email
 

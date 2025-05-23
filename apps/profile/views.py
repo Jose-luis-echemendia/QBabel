@@ -3,18 +3,17 @@ from .models import Profile, Follower
 from .filters import ProfileFilter
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from django_filters.rest_framework import DjangoFilterBackend
-from apps.utils.pagination import MediumSetPagination
-from django.shortcuts import get_object_or_404
+from apps.utils.views.abstract_views import BaseViewSet, BaseCustomAPIView, BaseAPIView
 
 
-class ProfileView(APIView):
+class ProfileViewSet(BaseViewSet):
     """
     view to handle profiles requested by the user
     """
 
+    queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
     permission_classes = [IsAuthenticated]
     filter_backends = [DjangoFilterBackend]
@@ -22,98 +21,53 @@ class ProfileView(APIView):
     ordering_fields = ["created_at"]
     ordering = ["created_at"]
 
-    def get_queryset(self):
-        queryset = Profile.objects.all()
-        if "state" not in self.request.GET:
-            queryset = queryset.filter(is_active=True)
-        return queryset
+    class Meta:
+        model = Profile
+        verbose_name = "profile"
+        verbose_name_plural = "profiles"
 
-    def get_object(self):
+    def get_model(self):
+        return self.Meta.model
+
+
+class ProfileDetailsView(BaseCustomAPIView):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+    permission_classes = [IsAuthenticated]
+
+    class Meta:
+        model = Profile
+        verbose_name = "profile"
+        verbose_name_plural = "profiles"
+
+    def get_model(self):
+        return self.Meta.model
+
+    def get(self, request, uid=None, *args, **kwargs):
         """
-        Retrieve the profile instance based on the provided ID.
+        endpoint to get details profile
         """
-        queryset = self.get_queryset()
-        obj = get_object_or_404(queryset, pk=self.kwargs.get("pk"))
-        self.check_object_permissions(self.request, obj)
-        return obj
-
-    def perform_create(self, serializer):
-        return serializer.save()
-
-    def filter_queryset(self, queryset):
-        filterset = self.filterset_class(
-            self.request.GET, queryset=queryset, request=self.request
-        )
-        if not filterset.is_valid():
-            raise ValueError(f"Invalid filter data: {filterset.errors}")
-        queryset = filterset.qs
-        return queryset
-
-    def order_queryset(self, queryset):
-        ordering = self.request.GET.get("ordering", None)
-        if ordering:
-            queryset = queryset.order_by(*ordering.split(","))
-        return queryset
-
-    def get(self, request, *args, **kwargs):
-        """
-        endpoint to get all profiles of the authenticated user
-        """
-        queryset = self.get_queryset()
-        if not queryset.exists():
-            return Response(
-                {"details": "not profile found"}, status=status.HTTP_404_NOT_FOUND
-            )
-
-        filtered_queryset = self.filter_queryset(queryset)
-        ordered_queryset = self.order_queryset(filtered_queryset)
-        paginator = MediumSetPagination()
-        results = paginator.paginate_queryset(ordered_queryset, request)
-        profiles_data = self.serializer_class(results, many=True).data
-        return paginator.get_paginated_response({"profiles": profiles_data})
-
-    def put(self, request, *args, **kwargs):
-        """
-        Endpoint to update an profile (full update).
-        """
-        instance = self.get_object()  # Obtén la instancia que se va a actualizar
-        serializer = self.serializer_class(instance, data=request.data, partial=False)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    def patch(self, request, *args, **kwargs):
-        """
-        Endpoint to partially update an profile.
-        """
-        instance = self.get_object()  # Obtén la instancia que se va a actualizar
-        serializer = self.serializer_class(instance, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return self.retrive_object(uid=uid, *args, **kwargs)
 
 
-class ProfileDetailsView(APIView):
-    def get_object(self):
-        """
-        Retrieve the profile instance based on the provided ID.
-        """
-        obj = get_object_or_404(Profile, pk=self.kwargs.get("pk"))
-        self.check_object_permissions(self.request, obj)
-        return obj
+class FollowWriterView(BaseAPIView):
+    queryset = Follower.objects.all()
+    permission_classes = [AllowAny]
+    serializer_class = FollowerSerializer
 
-    def get(self, request, *args, **kwargs):
-        """
-        endpoint to get all profiles of the authenticated user
-        """
-        profile = self.get_object()
-        profile_data = ProfileSerializer(profile).data
-        return Response(profile_data, status=status.HTTP_200_OK)
+    class Meta:
+        model = Follower
+        verbose_name = "follower"
+        verbose_name_plural = "followers"
 
+    def get_permissions(self):
+        if self.request.method in ["POST", "DELETE"]:
+            return [IsAuthenticated()]
+        return super().get_permissions()
 
-class FollowWriter(APIView):
+    def get_model(self):
+        return self.Meta.model
+
     def post(self, request, *args, **kwargs):
         follower = request.user
         writer = request.data.get("writer")
@@ -133,7 +87,7 @@ class FollowWriter(APIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        serializer = FollowerSerializer(
+        serializer = self.get_serializer(
             data={"follower": follower.id, "writer": writer_profile.id}
         )
         serializer.is_valid(raise_exception=True)
@@ -170,19 +124,38 @@ class FollowWriter(APIView):
             )
 
 
-class AuthenticatedProfileDetailsView(APIView):
+class AuthenticatedProfileDetailsView(BaseCustomAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = ProfileSerializer
+    class Meta:
+        model = Profile
+        verbose_name = "profile"
+        verbose_name_plural = "profiles"
+
+    def get_model(self):
+        return self.Meta.model
+
     def get(self, request, *args, **kwargs):
         """
         endpoint to get all profiles of the authenticated user
         """
         user = request.user
         profile = Profile.objects.get(user=user)
-        profile_data = ProfileSerializer(profile).data
+        profile_data = self.get_serializer(profile).data
         return Response(profile_data, status=status.HTTP_200_OK)
 
 
-class GetProfileByUsername(APIView):
-    permission_classes = [AllowAny()]
+class GetProfileByUsernameView(BaseCustomAPIView):
+    permission_classes = [AllowAny]
+    serializer_class = ProfileSerializer
+
+    class Meta:
+        model = Profile
+        verbose_name = "profile"
+        verbose_name_plural = "profiles"
+
+    def get_model(self):
+        return self.Meta.model
 
     def get(self, request, *args, **kwargs):
         """
@@ -199,5 +172,5 @@ class GetProfileByUsername(APIView):
             return Response(
                 {"error": "Profile not found."}, status=status.HTTP_404_NOT_FOUND
             )
-        profile_data = ProfileSerializer(profile).data
+        profile_data = self.get_serializer(profile).data
         return Response(profile_data, status=status.HTTP_200_OK)

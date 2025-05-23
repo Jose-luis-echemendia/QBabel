@@ -1,16 +1,20 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 from .views import (
-    ProfileView,
+    ProfileViewSet,
     ProfileDetailsView,
     AuthenticatedProfileDetailsView,
-    FollowWriter,
-    GetProfileByUsername,
+    FollowWriterView,
+    GetProfileByUsernameView,
 )
 
+router = DefaultRouter()
+router.register(r"profile", ProfileViewSet)
+
 urlpatterns = [
-    path("profile/", ProfileView.as_view()),
-    path("profile/<uuid:pk>/", ProfileDetailsView.as_view()),
-    path("profile/username/<str:username>/", GetProfileByUsername.as_view()),
-    path("profile/follow", FollowWriter.as_view()),
+    path("profile/<uuid:uid>/", ProfileDetailsView.as_view()),
+    path("profile/username/<str:username>/", GetProfileByUsernameView.as_view()),
+    path("profile/follow/", FollowWriterView.as_view()),
     path("profile/me/", AuthenticatedProfileDetailsView.as_view()),
+    path("", include(router.urls)),
 ]

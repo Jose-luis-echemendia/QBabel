@@ -9,7 +9,7 @@ from typing import Any
 from ..pagination import MediumSetPagination
 
 
-class BaseAPI(ABC):
+class BaseView(ABC):
     queryset = None
     serializer_class = None
     pagination_class = MediumSetPagination
@@ -108,7 +108,7 @@ class BaseAPI(ABC):
             queryset = self.get_queryset()
         except Exception as e:
             return Response(
-                {"detail": f"an unexpected error occurred: {e.detail}"},
+                {"detail": f"an unexpected error occurred: {e}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
@@ -215,7 +215,7 @@ class BaseAPI(ABC):
         )
 
 
-class BaseViewSet(BaseAPI, viewsets.ModelViewSet):
+class BaseViewSet(BaseView, viewsets.ModelViewSet):
 
     def get_permissions(self):
         return super().get_permissions()
@@ -246,7 +246,7 @@ class BaseViewSet(BaseAPI, viewsets.ModelViewSet):
         return self.desactive_object(request, *args, **kwargs)
 
 
-class BaseAPIView(APIView, BaseAPI):
+class BaseAPIView(BaseView, APIView):
 
     def get_permissions(self):
         return super().get_permissions()
@@ -269,7 +269,7 @@ class BaseAPIView(APIView, BaseAPI):
         return self.delete_object(request)
 
 
-class BaseCustomAPIView(APIView, BaseAPI):
+class BaseCustomAPIView(BaseView, APIView):
 
     def get_permissions(self):
         return super().get_permissions()

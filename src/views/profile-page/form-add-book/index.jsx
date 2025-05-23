@@ -2,6 +2,14 @@ import { useEffect, useState } from "react";
 import { PreviewCategories } from "./preview-categories";
 import { CustomModal } from "@/components/modal";
 import { CategoriesModal } from "./categories-modal";
+import { Controller } from "react-hook-form";
+import { useForm } from "@/hooks/useForm";
+import { Select, Option } from "@material-tailwind/react";
+import { schemaBook } from "@/helpers/yup-schemas";
+import { customCheckboxTheme } from "@/utils/material-tailwindscss/themes";
+import { Checkbox, ThemeProvider } from "@material-tailwind/react";
+import { Input, IconButton, Typography } from "@material-tailwind/react";
+import { useBook } from "@/hooks/redux/useBook";
 
 export const FormAddBook = ({ handleOpen }) => {
   const [previewImage, setPreviewImage] = useState(null);
@@ -13,6 +21,10 @@ export const FormAddBook = ({ handleOpen }) => {
   const [openCategoryModal, setOpenCategoryModal] = useState(false);
 
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [value, setValue] = useState(0);
+
+  const { register, handleSubmit, errors, control } = useForm(schemaBook);
+  const {handleCreateBook} = useBook()
 
   useEffect(() => {
     if (!selectedImage) {
@@ -57,12 +69,22 @@ export const FormAddBook = ({ handleOpen }) => {
     setSelectedPdf(e.target.files[0]);
   };
 
+  const onSubmit = (data) => {
+    const formData = new FormData();
+    
+    // Adjuntar archivos y datos
+    formData.append("cover", data.cover[0]);
+    formData.append("file", data.file[0]);
+
+    
+  };
+
   return (
     <div className="flex flex-col gap-4 items-center justify-center w-full h-full p-5">
       <h4 className="text-black font-semibold text-2xl w-fit">
         Registra tu libro
       </h4>
-      <form className="grid grid-cols-12 w-full h-full gap-5">
+      <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-12 w-full h-full gap-5 relative">
         {/* COVER */}
         <div className="col-span-4">
           <label
@@ -217,14 +239,14 @@ export const FormAddBook = ({ handleOpen }) => {
         </div>
 
         {/* More information */}
-        <div className="sm:col-span-4">
+        <div className="sm:col-span-4 flex flex-col gap-4">
           {/* category */}
           <div className="flex gap-4">
             <label
               htmlFor="categories"
               className="block text-sm/6 font-medium text-gray-900"
             >
-              Categories
+              Categorías
             </label>
             <button type="button" onClick={() => setOpenCategoryModal(true)}>
               <svg
@@ -240,7 +262,7 @@ export const FormAddBook = ({ handleOpen }) => {
                 />
               </svg>
             </button>
-            {/* Modal para agregar libro */}
+            {/* Modal para agregar categorias al libro */}
             <CustomModal
               open={openCategoryModal}
               handleOpen={() => setOpenCategoryModal(false)} // Cierra el modal
@@ -260,48 +282,293 @@ export const FormAddBook = ({ handleOpen }) => {
             {selectedCategories.length > 0 ? (
               <PreviewCategories categories={selectedCategories} />
             ) : (
-              <span>Agg tus categorias</span>
+              <span>Agg tus categorias.5 como maximo</span>
             )}
           </div>
-        </div>
 
-        {/* TITLE */}
-        <div className="sm:col-span-8">
-          <label
-            htmlFor="title"
-            className="block text-sm/6 font-medium text-gray-900"
-          >
-            Title
-          </label>
-          <div className="mt-2.5">
-            <div className="flex items-center rounded-md bg-white outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary">
-              <input
-                id="title"
-                name="title"
-                type="text"
-                placeholder="janesmith"
-                className="block border p-2 rounded-lg border-gray-100 min-w-0 grow py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+          {/* Lenguaje */}
+
+          <div className="mt-20">
+            <Controller
+              name="type"
+              control={control}
+              defaultValue={"Español"}
+              render={({ field }) => (
+                <Select
+                  label="Select type category"
+                  value={field.value}
+                  onChange={(val) => field.onChange(val)}
+                >
+                  <Option value="Español">Español</Option>
+                  <Option value="Inglés">Inglés</Option>
+                </Select>
+              )}
+            />
+            {errors.type && (
+              <p className="text-red-500 text-sm mt-1">{errors.type.message}</p>
+            )}
+          </div>
+
+          {/* Publishied */}
+          <div className="sm:col-span-4 flex gap-2 items-center -mt-1 ml-1">
+            <label
+              htmlFor="name"
+              className="block text-sm/6 font-medium text-gray-900 mt-2.5"
+            >
+              Publicar
+            </label>
+            <div className="mt-2.5">
+              <div className="flex items-center rounded-md bg-white outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary">
+                <ThemeProvider value={customCheckboxTheme}>
+                  <Checkbox
+                    defaultChecked
+                    id="isActive"
+                    name="isActive"
+                    {...register("isActive")}
+                  />
+                </ThemeProvider>
+                {errors.isActive && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.isActive.message}
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-5">
+            <div className="w-48">
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="mb-1 font-medium text-[12px]"
+              >
+                Selecciona el numero de paginas
+              </Typography>
+              <div className="relative w-full">
+                <Input
+                  type="number"
+                  value={value}
+                  onChange={(e) => setValue(Number(e.target.value))}
+                  className="!border-t-blue-gray-200 placeholder:text-blue-gray-300 placeholder:opacity-100  focus:!border-t-gray-900 appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  labelProps={{
+                    className: "before:content-none after:content-none",
+                  }}
+                  containerProps={{
+                    className: "min-w-0",
+                  }}
+                />
+                <div className="absolute right-1 top-1 flex gap-0.5">
+                  <IconButton
+                    size="sm"
+                    className="rounded"
+                    onClick={() => setValue((cur) => (cur === 0 ? 0 : cur - 1))}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 16 16"
+                      fill="currentColor"
+                      className="h-4 w-4"
+                    >
+                      <path d="M3.75 7.25a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5h-8.5Z" />
+                    </svg>
+                  </IconButton>
+                  <IconButton
+                    size="sm"
+                    className="rounded"
+                    onClick={() => setValue((cur) => cur + 1)}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 16 16"
+                      fill="currentColor"
+                      className="h-4 w-4"
+                    >
+                      <path d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z" />
+                    </svg>
+                  </IconButton>
+                </div>
+              </div>
+            </div>
+            <div className="w-48">
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="mb-1 font-medium text-[12px]"
+              >
+                Selecciona el numero de capitulos
+              </Typography>
+              <div className="relative w-full">
+                <Input
+                  type="number"
+                  value={value}
+                  onChange={(e) => setValue(Number(e.target.value))}
+                  className="!border-t-blue-gray-200 placeholder:text-blue-gray-300 placeholder:opacity-100  focus:!border-t-gray-900 appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  labelProps={{
+                    className: "before:content-none after:content-none",
+                  }}
+                  containerProps={{
+                    className: "min-w-0",
+                  }}
+                />
+                <div className="absolute right-1 top-1 flex gap-0.5">
+                  <IconButton
+                    size="sm"
+                    className="rounded"
+                    onClick={() => setValue((cur) => (cur === 0 ? 0 : cur - 1))}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 16 16"
+                      fill="currentColor"
+                      className="h-4 w-4"
+                    >
+                      <path d="M3.75 7.25a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5h-8.5Z" />
+                    </svg>
+                  </IconButton>
+                  <IconButton
+                    size="sm"
+                    className="rounded"
+                    onClick={() => setValue((cur) => cur + 1)}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 16 16"
+                      fill="currentColor"
+                      className="h-4 w-4"
+                    >
+                      <path d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z" />
+                    </svg>
+                  </IconButton>
+                </div>
+              </div>
+            </div>
+            <Typography
+              variant="small"
+              color="gray"
+              className="mt-2 font-normal col-span-2 mx-auto text-[14px]"
+            >
+              Ajusta el numero usando los controladores + y -.
+            </Typography>
+          </div>
+
+          {/* Precio */}
+          <div className="sm:col-span-4 flex flex-col gap-2 w-48 max-w-sm items-start ">
+            <label htmlFor="precio" className="block font-medium text-gray-900">
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="mb-1 font-medium text-sm text-black-500"
+              >
+                Precio en{" "}
+                <span className="font-semibold text-md text-black-80 ml-1">
+                  CUP
+                </span>
+              </Typography>
+            </label>
+            <div className="relative w-full">
+              <Input
+                type="number"
+                placeholder="1,000"
+                className="appearance-none rounded-r-none !border-t-blue-gray-200 placeholder:text-blue-gray-300  placeholder:opacity-100 focus:!border-t-gray-900 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                labelProps={{
+                  className: "before:content-none after:content-none",
+                }}
+                containerProps={{
+                  className: "min-w-0",
+                }}
+                value={value}
+                onChange={(e) => setValue(Number(e.target.value))}
               />
+
+              <div className="absolute right-1 top-1 flex gap-0.5">
+                <IconButton
+                  size="sm"
+                  className="rounded"
+                  onClick={() => setValue((cur) => (cur === 0 ? 0 : cur - 1))}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                    className="h-4 w-4"
+                  >
+                    <path d="M3.75 7.25a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5h-8.5Z" />
+                  </svg>
+                </IconButton>
+                <IconButton
+                  size="sm"
+                  className="rounded"
+                  onClick={() => setValue((cur) => cur + 1)}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                    className="h-4 w-4"
+                  >
+                    <path d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z" />
+                  </svg>
+                </IconButton>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-44">
+            <div className="flex items-center justify-end gap-4 border-t col-span-full pt-4 -mt-2">
+              <button
+                className="bg-black-500 py-1 px-2.5 rounded-xl"
+                type="button"
+                onClick={(e) => (e.preventDefault(), handleOpen())}
+              >
+                <span className="text-primary font-semibold">Cancelar</span>
+              </button>
+              <button className="bg-primary py-1 px-2.5 rounded-xl">
+                <span className="text-black-500 font-semibold">Aceptar</span>
+              </button>
             </div>
           </div>
         </div>
 
-        {/* Sinopsis */}
-        <div className="sm:col-span-8">
-          <label
-            htmlFor="title"
-            className="block text-sm/6 font-medium text-gray-900"
-          >
-            Sinopsis
-          </label>
-          <div className="mt-2.5 w-full">
-            <div className="flex w-full items-center rounded-md bg-white outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary">
-              <textarea
-                name=""
-                id=""
-                className="w-full h-48 rounded-lg border border-gray-100 min-w-0 grow py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6 p-2"
-                placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatibus."
-              ></textarea>
+        <div className="col-span-8  mt-[-350px]">
+          {/* TITLE */}
+          <div className="mb-10">
+            <label
+              htmlFor="title"
+              className="block text-sm/6 font-medium text-gray-900 ml-2.5"
+            >
+              Title
+            </label>
+            <div className="mt-2.5">
+              <div className="flex items-center rounded-md bg-white outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary">
+                <input
+                  id="title"
+                  name="title"
+                  type="text"
+                  placeholder="janesmith"
+                  className="block border p-2 rounded-lg border-gray-100 min-w-0 grow py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Sinopsis */}
+          <div className="">
+            <label
+              htmlFor="title"
+              className="block text-sm/6 font-medium text-gray-900 ml-2.5"
+            >
+              Sinopsis
+            </label>
+            <div className="mt-2.5 w-full">
+              <div className="flex w-full items-center rounded-md bg-white outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary">
+                <textarea
+                  name=""
+                  id=""
+                  className="w-full h-48 rounded-lg border border-gray-100 min-w-0 grow py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6 p-2"
+                  placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatibus."
+                ></textarea>
+              </div>
             </div>
           </div>
         </div>

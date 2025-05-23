@@ -1,9 +1,9 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
-import { HeroProfile } from "./hero-profile";
-import { TabsMenu } from "./tabs-menu";
-import { useParams } from "react-router-dom";
-import { useProfile } from "@/hooks/redux/useProfile";
+import { HeroProfile } from './hero-profile';
+import { TabsMenu } from './tabs-menu';
+import { useParams } from 'react-router-dom';
+import { useProfile } from '@/hooks/redux/useProfile';
 
 const ProfileView = () => {
   const { userName } = useParams();
@@ -18,10 +18,10 @@ const ProfileView = () => {
   }, []);
 
   return (
-    <div className="w-full">
+    <div className='w-full'>
       <HeroProfile />
 
-      <div className="w-full  mt-4">
+      <div className='w-full  mt-4'>
         <TabsMenu />
       </div>
     </div>
