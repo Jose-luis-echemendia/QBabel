@@ -98,7 +98,7 @@ export const schemaBook = yup.object({
     .number()
     .required('El precio es obligatorio')
     .min(0, 'El precio no puede ser negativo'),
-  language: yup
+  lenguage: yup
     .string()
     .required('El idioma es obligatorio')
     .oneOf(['Español', 'Inglés'], 'El idioma debe ser español o inglés'),

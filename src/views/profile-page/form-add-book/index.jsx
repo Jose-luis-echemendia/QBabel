@@ -81,14 +81,20 @@ export const FormAddBook = ({ handleOpen }) => {
     formData.append('cover', data.cover[0]);
     formData.append('file', data.file[0]);
     formData.append('title', data.title);
+    formData.append('number_pages', data.number_pages);
+    formData.append('number_chapters', data.number_chapters);
+    formData.append('price', data.price);
     formData.append('synopsis', data.synopsis);
 
-    formData.append('language', translateLanguageBookAdd(data.language));
+    formData.append('lenguage', translateLanguageBookAdd(data.language));
     formData.append('published', data.publishied);
 
     if (selectedCategories.length > 0 && selectedCategories.length <= 5) {
-      const uid = selectedCategories.map((category) => category.uid);
-      formData.append('categories', uid);
+      const uids = selectedCategories.map((category) => category.uid);
+
+      uids.forEach((uid) => {
+        formData.append('categories', uid);
+      });
     } else {
       alert('Debes seleccionar entre 1 y 5 categorias para el libro');
       return;
@@ -324,7 +330,7 @@ export const FormAddBook = ({ handleOpen }) => {
 
           <div className='mt-20'>
             <Controller
-              name='language'
+              name='lenguage'
               control={control}
               defaultValue={'Español'}
               render={({ field }) => (
@@ -340,7 +346,7 @@ export const FormAddBook = ({ handleOpen }) => {
             />
             {errors.language && (
               <p className='text-red-500 text-sm mt-1'>
-                {errors.language.message}
+                {errors.lenguage.message}
               </p>
             )}
           </div>

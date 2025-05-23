@@ -1,26 +1,22 @@
 from rest_framework import status
-from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from apps.book.models import Book
+from apps.utils.views.abstract_views import BaseViewSet
 from .models import Comment
 from .serializers import CommentSerializer
+from .filters import CommentFilter
 
 
-class CommentView(APIView):
+class CommentViewSet(BaseViewSet):
     """
     View to handle comment requests.
     """
 
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
+    filterset_class = CommentFilter
     permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        queryset = Comment.objects.all()
-        if "state" not in self.request.GET:
-            queryset = queryset.filter(is_active=True)
-        return queryset
 
     def perform_create(self, serializer):
         return serializer.save()

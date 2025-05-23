@@ -51,7 +51,7 @@ class BookViewSet(
         return super().get_permissions()
 
     def validate(self, request_data):
-        validated_data = self.validate_date(request_data)
+        validated_data = self.validate_data(request_data)
 
         self.validate_categories(validated_data.get("categories"))
 
@@ -61,7 +61,9 @@ class BookViewSet(
         """
         Create a new book.
         """
-
+    
+        
+        
         file = request.FILES.pop("file", None)
 
         try:
