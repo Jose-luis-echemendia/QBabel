@@ -69,12 +69,28 @@ export const FormAddBook = ({ handleOpen }) => {
     setSelectedPdf(e.target.files[0]);
   };
 
+  const onSubmit = (data) => {
+    const formData = new FormData();
+    
+    // Adjuntar archivos y datos
+    if (data.img && data.img.length > 0) {
+      formData.append("cover", data.img[0]);
+    }
+    formData.append("pdf", data.pdf[0]);
+    formData.append("data", JSON.stringify({
+      ...data,
+      cover: undefined,
+      pdf: undefined
+    }));
+    
+  };
+
   return (
     <div className="flex flex-col gap-4 items-center justify-center w-full h-full p-5">
       <h4 className="text-black font-semibold text-2xl w-fit">
         Registra tu libro
       </h4>
-      <form className="grid grid-cols-12 w-full h-full gap-5 relative">
+      <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-12 w-full h-full gap-5 relative">
         {/* COVER */}
         <div className="col-span-4">
           <label
