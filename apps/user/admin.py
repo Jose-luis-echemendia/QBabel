@@ -1,5 +1,11 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
-from .models import UserAccount
+from django.contrib.auth import get_user_model
 
-admin.site.register(UserAccount)
+User = get_user_model()
+
+
+class UserAccountAdmin(admin.ModelAdmin):
+    list_display = ("uid", "__str__")
+
+
+admin.site.register(User, UserAccountAdmin)

@@ -4,5 +4,5 @@ from .views import BuyBookView, GetPurchaseInvoicesView
 
 urlpatterns = [
     path("payment/", BuyBookView.as_view()),
-    path("payment/", GetPurchaseInvoicesView.as_view()),
+    path("payments/", GetPurchaseInvoicesView.as_view()),
 ]

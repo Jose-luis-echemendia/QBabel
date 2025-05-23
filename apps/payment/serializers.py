@@ -2,6 +2,7 @@ from apps.utils.serializers.abstract_serializers import AbstractBaseSerializer
 from apps.book.models import Book
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
+from .models import PurchaseInvoices
 
 User = get_user_model()
 
@@ -21,10 +22,12 @@ class PurchaseInvoicesSerializer(AbstractBaseSerializer):
     buyer_details = serializers.SerializerMethodField()
 
     class Meta:
-        model = "PurchaseInvoices"
+        model = PurchaseInvoices
         fields = AbstractBaseSerializer.Meta.fields + [
             "book",
+            "book_details",
             "buyer",
+            "buyer_details",
             "profit",
             "writer_profit",
             "final_payment",
