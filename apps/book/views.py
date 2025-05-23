@@ -51,9 +51,10 @@ class BookViewSet(
         return super().get_permissions()
 
     def validate(self, request_data):
+        categories = request_data.getlist("categories", None)
         validated_data = self.validate_data(request_data)
 
-        self.validate_categories(validated_data.get("categories"))
+        self.validate_categories(categories)
 
         return validated_data
 

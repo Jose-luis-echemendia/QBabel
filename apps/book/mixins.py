@@ -31,7 +31,6 @@ class ValidateRegisterBookMixin:
     def validate_data(self, data):
         title = data.get("title", None)
         synopsis = data.get("synopsis", None)
-        categories = data.get("categories", None)
         cover = data.get("cover", None)
         number_chapters = data.get("number_chapters", None)
         number_pages = data.get("number_pages", None)
@@ -44,8 +43,7 @@ class ValidateRegisterBookMixin:
 
         if not synopsis:
             raise ValidationError({"description": "Description is required."})
-        if not categories:
-            raise ValidationError({"categories": "Categories are required."})
+
         if not cover:
             raise ValidationError({"cover": "Cover is required."})
         if not number_chapters:
@@ -58,16 +56,11 @@ class ValidateRegisterBookMixin:
             raise ValidationError({"lenguage": "Lenguage is required."})
         if not price:
             raise ValidationError({"price": "Price is required."})
-        if not isinstance(categories, list):
-            raise ValidationError(
-                {"categories": "This field must be a list of strings"}
-            )
 
         return {
             "title": title,
             "author": self.request.user.pk,
             "synopsis": synopsis,
-            "categories": categories,
             "cover": cover,
             "number_chapters": number_chapters,
             "number_pages": number_pages,
