@@ -76,6 +76,13 @@ class CustomCategoryViewSet(BaseViewSet, CreateImageCategoryMixin):
 
         image_file = request.FILES.get("img", None)
         category_name = request.data.get("name", None)
+        type = request.data.get("type", None)
+        
+        if not type:
+            return Response(
+                {"detail": "Type is required."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
 
         if not category_name:
             return Response(
@@ -107,6 +114,7 @@ class CustomCategoryViewSet(BaseViewSet, CreateImageCategoryMixin):
                 "image": image.pk,
                 "description": request.data.get("description", None),
                 "registered_by": self.request.user.pk,
+                "type": type,
                 # "parent": request.data.get("parent", None),
             }
         )

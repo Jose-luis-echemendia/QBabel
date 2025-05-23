@@ -45,13 +45,15 @@ export const OverViewCategory = ({ category, handleOpen }) => {
     const formData = new FormData();
     formData.append('name', data.name);
     formData.append('description', data.description || '');
-    formData.append('type', translateLanguageCategory(data.type) || 'other');
+    formData.append('type', translateLanguageCategory(data.type));
+
+    console.log(translateLanguageCategory(data.type));
 
     formData.append('isActive', data.isActive);
     if (selectedImage) {
       formData.append('img', selectedImage);
     }
-    
+
     try {
       if (!category) {
         handleCreateCategory(formData);
@@ -119,7 +121,7 @@ export const OverViewCategory = ({ category, handleOpen }) => {
                     value={field.value}
                     onChange={(val) => field.onChange(val)}
                   >
-                    <Option value='book'>Libro</Option>
+                    <Option value='Libro'>Libro</Option>
                     <Option value='Publicaciones'>Publicaciones</Option>
                   </Select>
                 )}
