@@ -88,7 +88,7 @@ class BookViewSet(
         # CREATE INSTANCES CATEOGRIES BOOKS
         try:
             serializer = CategoryBookSerializer(
-                data=self.prepare_data_for_category_book(categories, many=True)
+                data=self.prepare_data_for_category_book(categories), many=True
             )
         except ValidationError as e:
             return Response({"detail": e.detail}, status=status.HTTP_400_BAD_REQUEST)
@@ -103,8 +103,8 @@ class BookViewSet(
     @action(detail=False, methods=["POST"], url_path="validate-isbn")
     def validate_isbn(self, request, pk=None, *args, **kwargs):
 
-        isb = request.data.get("isbn", None)
-        if not isb:
+        isbn = request.data.get("isbn", None)
+        if not isbn:
             return Response(
                 {"error": "ISBN is required."}, status=status.HTTP_400_BAD_REQUEST
             )
