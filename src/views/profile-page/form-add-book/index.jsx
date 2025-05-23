@@ -73,15 +73,9 @@ export const FormAddBook = ({ handleOpen }) => {
     const formData = new FormData();
     
     // Adjuntar archivos y datos
-    if (data.img && data.img.length > 0) {
-      formData.append("cover", data.img[0]);
-    }
-    formData.append("pdf", data.pdf[0]);
-    formData.append("data", JSON.stringify({
-      ...data,
-      cover: undefined,
-      pdf: undefined
-    }));
+    formData.append("cover", data.cover[0]);
+    formData.append("file", data.file[0]);
+
     
   };
 
