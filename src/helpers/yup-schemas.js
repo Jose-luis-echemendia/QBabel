@@ -53,9 +53,10 @@ export const schemaCategory = yup.object({
 });
 
 export const schemaBook = yup.object({
-  title: yup.string().required('El nombre es obligatorio'),
-  synopsis: yup.string(),
+  title: yup.string().required('El titulo es obligatorio'),
+  synopsis: yup.string().required('La sinopsis es obligatoria'),
   cover: yup
+
     .mixed()
     .test('fileSize', 'El archivo es muy grande', (value) => {
       if (!value || value.length === 0) return true;
@@ -68,7 +69,9 @@ export const schemaBook = yup.object({
         value[0].type === 'image/png' ||
         value[0].type === 'image/jpg'
       );
-    }),
+    })
+    .required('La portada es obligatoria'),
+
   // Nuevos campos
   file: yup
     .mixed()
@@ -98,11 +101,6 @@ export const schemaBook = yup.object({
   language: yup
     .string()
     .required('El idioma es obligatorio')
-    .oneOf(['español', 'inglés'], 'El idioma debe ser español o inglés'),
-  categories: yup
-    .array()
-    .of(yup.string().required())
-    .min(1, 'Debe tener al menos 1 categoría')
-    .max(5, 'No puede tener más de 5 categorías')
-    .required('Las categorías son obligatorias'),
+    .oneOf(['Español', 'Inglés'], 'El idioma debe ser español o inglés'),
+  publishied: yup.boolean().required('El estado es obligatorio'),
 });

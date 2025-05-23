@@ -183,7 +183,7 @@ SIMPLE_JWT = {
     "USER_ID_FIELD": "uid",
     "USER_ID_CLAIM": "user_id",
     "AUTH_HEADER_TYPES": ("JWT",),
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=15),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
     "ROTATE_REFRESFH_TOKENS": True,
     "BLACKLIST_AFTER_ROTATION": True,

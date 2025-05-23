@@ -48,8 +48,6 @@ export const OverViewCategory = ({ category, handleOpen }) => {
     formData.append('description', data.description || '');
     formData.append('type', translateLanguageCategory(data.type));
 
-    console.log(translateLanguageCategory(data.type));
-
     formData.append('isActive', data.isActive);
     if (selectedImage) {
       formData.append('img', selectedImage);
