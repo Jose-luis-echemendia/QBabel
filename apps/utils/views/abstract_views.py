@@ -108,7 +108,7 @@ class BaseView(ABC):
             queryset = self.get_queryset()
         except Exception as e:
             return Response(
-                {"detail": f"an unexpected error occurred: {e.detail}"},
+                {"detail": f"an unexpected error occurred: {e}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 

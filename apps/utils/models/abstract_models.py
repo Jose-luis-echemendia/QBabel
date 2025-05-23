@@ -18,6 +18,9 @@ class BaseModel(AbstractDateModel):
     model that represents the basic fields for all instances of the database
     """
     class BaseObjects(models.Manager):
+        """
+        Custom manager objects for businness models
+        """
         def get_queryset(self):
             return super().get_queryset()
         

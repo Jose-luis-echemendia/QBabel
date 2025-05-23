@@ -14,7 +14,8 @@ export const useCategory = () => {
     [dispatch]
   );
 
-  const handleCreateCategory = () => dispatch(createCategoryThunk());
+  const handleCreateCategory = (categoria) =>
+    dispatch(createCategoryThunk(categoria));
 
   const handleUpdateCategory = ({ id, data }) =>
     dispatch(updateCategoryThunk({ id, data })).unwrap();

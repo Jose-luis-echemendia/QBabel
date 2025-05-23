@@ -69,4 +69,40 @@ export const schemaBook = yup.object({
         value[0].type === 'image/jpg'
       );
     }),
+  // Nuevos campos
+  file: yup
+    .mixed()
+    .test("fileSize", "El PDF es muy grande", (value) => {
+      if (!value || value.length === 0) return true;
+      return value[0].size <= 20 * 1024 * 1024; // 20MB
+    })
+    .test("fileType", "El archivo debe ser un PDF", (value) => {
+      if (!value || value.length === 0) return true;
+      return value[0].type === "application/pdf";
+    })
+    .required("El PDF del libro es obligatorio"),
+  number_pages: yup
+    .number()
+    .required("La cantidad de páginas es obligatoria")
+    .integer("Debe ser un número entero")
+    .min(1, "Debe tener al menos 1 página"),
+  number_chapters: yup
+    .number()
+    .required("La cantidad de capítulos es obligatoria")
+    .integer("Debe ser un número entero")
+    .min(1, "Debe tener al menos 1 capítulo"),
+  price: yup
+    .number()
+    .required("El precio es obligatorio")
+    .min(0, "El precio no puede ser negativo"),
+  language: yup
+    .string()
+    .required("El idioma es obligatorio")
+    .oneOf(["español", "inglés"], "El idioma debe ser español o inglés"),
+  categories: yup
+    .array()
+    .of(yup.string().required())
+    .min(1, "Debe tener al menos 1 categoría")
+    .max(5, "No puede tener más de 5 categorías")
+    .required("Las categorías son obligatorias"),
 });

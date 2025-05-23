@@ -6,6 +6,7 @@ import { schemaCategory } from '@/helpers/yup-schemas';
 import { useForm } from '@/hooks/useForm';
 import { Controller } from 'react-hook-form';
 import { useCategory } from '@/hooks/redux/useCategory';
+import { translateLanguageCategory } from '@/helpers/translate';
 
 export const OverViewCategory = ({ category, handleOpen }) => {
   const [preview, setPreview] = useState(null);
@@ -44,12 +45,13 @@ export const OverViewCategory = ({ category, handleOpen }) => {
     const formData = new FormData();
     formData.append('name', data.name);
     formData.append('description', data.description || '');
-    formData.append('type', data.type);
+    formData.append('type', translateLanguageCategory(data.type) || 'other');
+
     formData.append('isActive', data.isActive);
     if (selectedImage) {
-      formData.append('image', selectedImage);
+      formData.append('img', selectedImage);
     }
-
+    
     try {
       if (!category) {
         handleCreateCategory(formData);
@@ -110,7 +112,7 @@ export const OverViewCategory = ({ category, handleOpen }) => {
               <Controller
                 name='type'
                 control={control}
-                defaultValue={category?.type || ''}
+                defaultValue={category?.type || 'book'}
                 render={({ field }) => (
                   <Select
                     label='Select type category'
@@ -193,15 +195,16 @@ export const OverViewCategory = ({ category, handleOpen }) => {
                     <span>Upload a file</span>{' '}
                     <input
                       id='file-upload'
-                      name='image'
+                      name='img'
                       type='file'
+                      {...register('img')}
                       className='sr-only'
                       onChange={handleImageSelect}
                       accept='image/png, image/jpeg, image/gif'
                     />
-                    {errors.image && (
+                    {errors.img && (
                       <p className='text-red-500 text-sm mt-1'>
-                        {errors.image.message}
+                        {errors.img.message}
                       </p>
                     )}
                   </label>
