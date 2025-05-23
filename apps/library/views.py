@@ -1,15 +1,15 @@
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import ValidationError
 from apps.book.models import Book
+from apps.utils.views.abstract_views import BaseCustomAPIView
 from .models import Library, Item
 from .serializers import LibrarySerializer
 from .mixins import ValidateBookItem
 
 
-class LibraryView(APIView):
+class LibraryView(BaseCustomAPIView):
     """
     View to manage the library.
     """
@@ -26,7 +26,7 @@ class LibraryView(APIView):
         )
 
 
-class AddBookView(APIView, ValidateBookItem):
+class AddBookView(BaseCustomAPIView, ValidateBookItem):
     """
     View to add a book to the library.
     """
@@ -47,7 +47,7 @@ class AddBookView(APIView, ValidateBookItem):
         )
 
 
-class DisaggregateBookView(APIView, ValidateBookItem):
+class DisaggregateBookView(BaseCustomAPIView, ValidateBookItem):
     """
     View to disaggregate a book from the library.
     """

@@ -78,6 +78,9 @@ class BaseView(ABC):
         return queryset
 
     def filter_queryset(self, queryset):
+        if not self.filterset_class:
+            return queryset
+        # Apply filtering using the filterset class
         filterset = self.filterset_class(
             self.request.GET, queryset=queryset, request=self.request
         )
