@@ -125,6 +125,7 @@ class FollowWriterView(BaseAPIView):
 
 
 class AuthenticatedProfileDetailsView(BaseCustomAPIView):
+    permission_classes = [IsAuthenticated]
     serializer_class = ProfileSerializer
     class Meta:
         model = Profile
@@ -146,6 +147,7 @@ class AuthenticatedProfileDetailsView(BaseCustomAPIView):
 
 class GetProfileByUsernameView(BaseCustomAPIView):
     permission_classes = [AllowAny]
+    serializer_class = ProfileSerializer
 
     class Meta:
         model = Profile

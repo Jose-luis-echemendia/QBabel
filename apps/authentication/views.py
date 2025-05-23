@@ -1,17 +1,20 @@
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework_simplejwt.tokens import RefreshToken,  UntypedToken
+from rest_framework_simplejwt.exceptions import TokenError
+from rest_framework.exceptions import AuthenticationFailed
 from rest_framework import status
 from rest_framework.response import Response
 from django_ratelimit.decorators import ratelimit
 from django.utils.decorators import method_decorator
-from rest_framework.views import APIView
-from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework_simplejwt.tokens import RefreshToken,  UntypedToken
 from django.contrib.auth import authenticate
+from apps.utils.views.abstract_views import BaseCustomAPIView
 from .serializers import LoginSerializer
-from rest_framework_simplejwt.exceptions import TokenError
-from rest_framework.exceptions import AuthenticationFailed
 
-class BasicAuthView(APIView):
+class BasicAuthView(BaseCustomAPIView):
     permission_classes = [AllowAny]
+    
+    def get_model(self):
+        return None
 
     @method_decorator(ratelimit(key='ip', rate='5/m', method='POST'))
     def post(self, request, *args, **kwargs):
@@ -27,7 +30,7 @@ class BasicAuthView(APIView):
             return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 
         if not user.is_active:
-                return Response({'error': 'User account is inactive'}, status=status.HTTP_403_FORBIDDEN)
+            return Response({'error': 'User account is inactive'}, status=status.HTTP_403_FORBIDDEN)
 
 
         refresh = RefreshToken.for_user(user)
@@ -37,8 +40,11 @@ class BasicAuthView(APIView):
             'user_id': user.uid,  
         }, status=status.HTTP_200_OK)
 
-class AdminAuthView(APIView):
+class AdminAuthView(BaseCustomAPIView):
     permission_classes = [AllowAny]
+    
+    def get_model(self):
+        return None
 
     def post(self, request, *args, **kwargs):
         email = request.data.get('email')
@@ -62,8 +68,11 @@ class AdminAuthView(APIView):
             'user_id': user.uid,
         })
     
-class CustomTokenRefreshView(APIView):
+class CustomTokenRefreshView(BaseCustomAPIView):
     permission_classes = [AllowAny]  
+
+    def get_model(self):
+        return None
 
     def post(self, request, *args, **kwargs):
         refresh_token = request.data.get('refresh')
@@ -88,8 +97,11 @@ class CustomTokenRefreshView(APIView):
         except TokenError as e:
             return Response({'error': 'Invalid or expired refresh token. Please log in again.'}, status=status.HTTP_401_UNAUTHORIZED)
 
-class CustomJWTVerifyView(APIView):
+class CustomJWTVerifyView(BaseCustomAPIView):
     permission_classes = [AllowAny]  # Permite acceso sin autenticación
+    
+    def get_model(self):
+        return None
 
     def post(self, request):
         token = request.data.get("token")  # Obtiene el token del body
@@ -103,8 +115,11 @@ class CustomJWTVerifyView(APIView):
         except Exception as e:
             raise AuthenticationFailed("Invalid token")  # Si falla, el token no es válido
         
-class LogoutView(APIView):
+class LogoutView(BaseCustomAPIView):
     permission_classes = [IsAuthenticated]
+    
+    def get_model(self):
+        return None
     
     def post(self, request):
         try:

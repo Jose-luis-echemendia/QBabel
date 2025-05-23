@@ -10,7 +10,7 @@ User = get_user_model()
 
 class Profile(BaseModel):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    avatar = models.ForeignKey(GenericImage, on_delete=models.SET_NULL, related_name='avatar', blank=True, null=True)
+    avatar = models.OneToOneField(GenericImage, on_delete=models.SET_NULL, related_name='avatar', blank=True, null=True)
     bio = models.TextField(max_length=500, blank=True)
     age = models.PositiveIntegerField(blank=True, null=True)
     sex = models.CharField(max_length=1, blank=True, null=True, choices=SexType.choices, default=SexType.m)
