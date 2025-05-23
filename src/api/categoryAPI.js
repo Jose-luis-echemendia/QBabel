@@ -53,14 +53,9 @@ export const createCategoryAPI = async (data) => {
 // endpoint for update category
 export const updateCategoryAPI = async (uid, data) => {
   try {
-    const response = await axiosInstance.put(
+    const response = await axiosInstance.patch(
       `/api/custom-category/${uid}/`,
-      data,
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      }
+      data
     );
 
     return response;

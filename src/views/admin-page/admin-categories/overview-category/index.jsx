@@ -50,14 +50,11 @@ export const OverViewCategory = ({ category, handleOpen }) => {
       formData.append('image', selectedImage);
     }
 
-    console.log(selectedImage);
-
     try {
       if (!category) {
         handleCreateCategory(formData);
       } else {
         await handleUpdateCategory({ id: category.uid, data: formData });
-        console.log(formData.getAll());
       }
 
       handleOpen();
@@ -193,19 +190,18 @@ export const OverViewCategory = ({ category, handleOpen }) => {
                     htmlFor='file-upload'
                     className='relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 focus-within:outline-hidden hover:text-indigo-500'
                   >
-                    <span>Upload a file</span>
+                    <span>Upload a file</span>{' '}
                     <input
                       id='file-upload'
                       name='image'
                       type='file'
                       className='sr-only'
-                      {...register('image')}
                       onChange={handleImageSelect}
                       accept='image/png, image/jpeg, image/gif'
                     />
-                    {errors.img && (
+                    {errors.image && (
                       <p className='text-red-500 text-sm mt-1'>
-                        {errors.img.message}
+                        {errors.image.message}
                       </p>
                     )}
                   </label>

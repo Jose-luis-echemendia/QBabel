@@ -14,12 +14,10 @@ export const useCategory = () => {
     [dispatch]
   );
 
-  const handleCreateCategory = (category) => dispatch(createCategoryThunk());
+  const handleCreateCategory = () => dispatch(createCategoryThunk());
 
-  const handleUpdateCategory = ({id,data}) =>
-    dispatch(
-      updateCategoryThunk({ id, data })
-    ).unwrap();
+  const handleUpdateCategory = ({ id, data }) =>
+    dispatch(updateCategoryThunk({ id, data })).unwrap();
 
   return {
     handleGetCategories,
