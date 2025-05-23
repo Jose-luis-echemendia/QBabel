@@ -7,6 +7,7 @@ import { useForm } from '@/hooks/useForm';
 import { Controller } from 'react-hook-form';
 import { useCategory } from '@/hooks/redux/useCategory';
 import { translateLanguageCategory } from '@/helpers/translate';
+import { toast } from 'react-toastify';
 
 export const OverViewCategory = ({ category, handleOpen }) => {
   const [preview, setPreview] = useState(null);
@@ -46,8 +47,6 @@ export const OverViewCategory = ({ category, handleOpen }) => {
     formData.append('name', data.name);
     formData.append('description', data.description || '');
     formData.append('type', translateLanguageCategory(data.type));
-
-    console.log(translateLanguageCategory(data.type));
 
     formData.append('isActive', data.isActive);
     if (selectedImage) {
@@ -253,7 +252,10 @@ export const OverViewCategory = ({ category, handleOpen }) => {
             >
               <span className='text-primary font-semibold'>Cancelar</span>
             </button>
-            <button className='bg-primary py-1 px-2.5 rounded-xl'>
+            <button
+              className='bg-primary py-1 px-2.5 rounded-xl'
+              onClick={() => toast.success('Categoría creada con éxito!')}
+            >
               <span className='text-black-500 font-semibold'>Aceptar</span>
             </button>
           </div>

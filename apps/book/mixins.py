@@ -4,6 +4,7 @@ from apps.category.models import Category
 
 class ValidateCategoryForBookMixin:
     def validate_categories(self, categories):
+        print(categories)
         if not categories:
             raise ValidationError({"categories": "This field is required."})
 
@@ -38,6 +39,8 @@ class ValidateRegisterBookMixin:
         lenguage = data.get("lenguage", None)
         price = data.get("price", None)
         is_published = data.get("is_published", False)
+        print(["sdf", "fsdfs"])
+        print(categories)
 
         if not isbn:
             raise ValidationError({"isbn": "isbn is required."})
