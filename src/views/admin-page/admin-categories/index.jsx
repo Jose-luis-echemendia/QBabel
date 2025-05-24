@@ -1,9 +1,10 @@
 import { CustomModal } from '@/components/modal';
 import { CustomTable } from '@/components/table';
 import { Typography, Avatar } from '@material-tailwind/react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { OverViewCategory } from './overview-category';
-import { useCategory } from '@/hooks/redux/useCategory';
+
+import { useGetAllCategory } from '@/hooks/jquery/useCategoryQuery';
 
 const TABS = [
   {
@@ -30,17 +31,17 @@ const AdminCategoriesView = () => {
   const [openOverViewCategoryModal, setOpenOverViewCategoryModal] =
     useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [row, setRows] = useState([]);
 
-  const { handleGetCategories } = useCategory();
+  const {
+    data: GetAllCategories = [],
+    isLoading,
+    isError,
+  } = useGetAllCategory();
 
-  useEffect(() => {
-    handleGetCategories()
-      .then((payload) => {
-        setRows(payload.categories);
-      })
-      .catch(console.error);
-  }, [handleGetCategories]);
+  const AllCategories = GetAllCategories.categories;
+
+  if (isLoading) return <div>Cargando categorías…</div>;
+  if (isError) return <div>Error al cargar categorías</div>;
 
   const renderRow = ({ item, index, totalItems }) => {
     const { image_details, name, type, isActive, created_at } = item;
@@ -152,7 +153,7 @@ const AdminCategoriesView = () => {
         )}
         TABS={TABS}
         TABLE_HEAD={TABLE_HEAD}
-        TABLE_ROWS={row}
+        TABLE_ROWS={AllCategories}
         renderRow={renderRow}
       />
     </>

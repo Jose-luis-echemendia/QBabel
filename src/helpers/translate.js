@@ -1,9 +1,9 @@
-import { categoryType } from '@/constants/languaje-translate';
+import { categoryType,translateLanguage } from '@/constants/languaje-translate';
 
 export const translateLanguageCategory = (lang) => {
   return categoryType[lang] || 'other';
 };
 
 export const translateLanguageBookAdd = (lang) => {
-  return translateLanguageCategory[lang] || 'spanish';
+  return translateLanguage[lang] || 'spanish';
 };

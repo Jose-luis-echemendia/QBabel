@@ -38,16 +38,16 @@ export const createCategoryThunk = createAsyncThunk(
 
 export const updateCategoryThunk = createAsyncThunk(
   'categories/updateCategory',
-  async ({id,data}, { rejectWithValue }) => {
+  async ({ id, data }, { rejectWithValue }) => {
     try {
-      const response = await updateCategoryAPI(id,data);
+      const response = await updateCategoryAPI(id, data);
       if (response.status === 200) return response.data;
       return rejectWithValue(response?.data);
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
     }
   }
-)
+);
 
 export const deleteCategoryThunk = createAsyncThunk(
   'categories/deleteCategory',
