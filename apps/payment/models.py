@@ -48,9 +48,13 @@ class PurchaseInvoices(BaseModel):
     def __str__(self):
         return f"{self.invoice_number} - {self.supplier_name}"
 
+    def get_slug_source_field(self):
+        return "final_payment"
+
     class Meta:
         db_table = "PurchaseInvoices"
         managed = True
         verbose_name = "PurchaseInvoices"
         verbose_name_plural = "PurchasesInvoices"
         ordering = ("-created_at",)
+        unique_together = ("book", "buyer")
