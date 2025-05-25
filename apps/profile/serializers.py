@@ -21,6 +21,7 @@ class ProfileSerializer(AbstractBaseSerializer):
         model = Profile
         fields = AbstractBaseSerializer.Meta.fields + [
             "user",
+            "user_name",
             "avatar",
             "avatar_details",
             "bio",

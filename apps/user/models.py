@@ -64,7 +64,7 @@ class UserAccount(BaseModel, AbstractBaseUser, PermissionsMixin):
         max_length=255, unique=True, verbose_name=_("User Name"), blank=True, null=True
     )
     is_premium = models.BooleanField(default=False, verbose_name=_("Is Premium"))
-    is_active = models.BooleanField(default=True, verbose_name=_("Is Active"))
+    is_active = models.BooleanField(default=False, verbose_name=_("Is Active"))
     is_superuser = models.BooleanField(default=False, verbose_name=_("Is Superuser"))
     is_staff = models.BooleanField(default=False, verbose_name=_("Is Staff"))
     role = models.CharField(
@@ -81,8 +81,8 @@ class UserAccount(BaseModel, AbstractBaseUser, PermissionsMixin):
 
     @property
     def is_staff_business(self):
-        return bool(self.role == RoleType.admin or self.role ==RoleType.author) 
-    
+        return bool(self.role == RoleType.admin or self.role == RoleType.author)
+
     @property
     def is_admin(self):
         return self.role == RoleType.admin
@@ -90,7 +90,7 @@ class UserAccount(BaseModel, AbstractBaseUser, PermissionsMixin):
     @property
     def is_user(self):
         return self.role == RoleType.user
-    
+
     @property
     def is_author(self):
         return self.role == RoleType.author

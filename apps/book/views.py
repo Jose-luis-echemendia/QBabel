@@ -6,13 +6,13 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.parsers import MultiPartParser, FormParser
 from apps.utils.pagination import LargeSetPagination
 from apps.utils.views.abstract_views import BaseViewSet
+from apps.utils.mixins import CreateImageMixin
 from .serializers import BookSerializer, CategoryBookSerializer
 from .models import Book
 from .filters import BookFilter
 from .mixins import (
     ValidateCategoryForBookMixin,
     ValidateRegisterBookMixin,
-    CreateCoverBookMixin,
     CreateFileBookMixin,
     PrepareDataForCategoryBookMixin,
 )
@@ -22,7 +22,7 @@ class BookViewSet(
     BaseViewSet,
     ValidateCategoryForBookMixin,
     ValidateRegisterBookMixin,
-    CreateCoverBookMixin,
+    CreateImageMixin,
     CreateFileBookMixin,
     PrepareDataForCategoryBookMixin,
 ):
@@ -72,8 +72,17 @@ class BookViewSet(
             return Response({"error": e.detail}, status=status.HTTP_400_BAD_REQUEST)
 
         file_object = self.create_file(file, validated_data.get("title"))
-        cover_object = self.create_cover(
-            validated_data.get("cover"), validated_data.get("title")
+
+        from apps.utils.enums import ImageTypes
+
+        cover_object = self.create_image(
+            data={
+                "image": validated_data.get("cover"),
+                "name": validated_data.get("title"),
+                "caption": validated_data.get("title"),
+                "registered_by": self.request.user.pk,
+                "type": ImageTypes.cover,
+            }
         )
         # validated_data["author"] = self.request.user.pk
         validated_data["file"] = file_object.pk

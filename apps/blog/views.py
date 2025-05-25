@@ -2,12 +2,12 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from apps.utils.views.abstract_views import BaseViewSet
+from apps.utils.mixins import CreateImageMixin
 from .models import Post
 from .serializers import PostSerializer
-from .mixins import CreateImagePublicationMixin
 
 
-class PostsView(BaseViewSet, CreateImagePublicationMixin):
+class PostsView(BaseViewSet, CreateImageMixin):
     permission_classes = [IsAuthenticated]
 
     def get_permissions(self):
@@ -42,7 +42,17 @@ class PostsView(BaseViewSet, CreateImagePublicationMixin):
                 {"error": "Title is required."}, status=status.HTTP_400_BAD_REQUEST
             )
 
-        data["image"] = self.create_image(image, title).uid
+        from apps.utils.enums import ImageTypes
+
+        data["image"] = self.create_image(
+            data={
+                "image": image,
+                "name": title,
+                "caption": title,
+                "registered_by": self.request.user.pk,
+                "type": ImageTypes.category,
+            }
+        ).uid
 
         serializer = PostSerializer(data=data)
         serializer.is_valid(raise_exception=True)

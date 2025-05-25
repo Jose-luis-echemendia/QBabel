@@ -81,24 +81,6 @@ class ValidateRegisterBookMixin:
             "is_published": is_published,
         }
 
-
-class CreateCoverBookMixin:
-    def create_cover(self, cover, title):
-        from apps.utils.serializers.serializers import ImageSerializer
-        from apps.utils.enums import ImageTypes
-
-        serializer = ImageSerializer(
-            data={
-                "image": cover,
-                "type": ImageTypes.cover,
-                "title": title,
-                "registered_by": self.request.user.pk,
-            }
-        )
-        serializer.is_valid(raise_exception=True)
-        return self.perform_create(serializer)
-
-
 class CreateFileBookMixin:
     def create_file(self, file, title):
         from apps.utils.serializers.serializers import DocumentSerializer

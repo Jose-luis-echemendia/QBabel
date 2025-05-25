@@ -5,13 +5,13 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from django_filters.rest_framework import DjangoFilterBackend
 from apps.user.permisions import IsAdminRole
 from apps.utils.views.abstract_views import BaseViewSet
+from apps.utils.mixins import CreateImageMixin
 from .models import Category
 from .serializers import CategorySerializer
 from .filters import CategoryFilter
-from .mixins import CreateImageCategoryMixin
 
 
-class CustomCategoryViewSet(BaseViewSet, CreateImageCategoryMixin):
+class CustomCategoryViewSet(BaseViewSet, CreateImageMixin):
     queryset = Category.objects.all()
     parser_classes = [MultiPartParser, FormParser]
     serializer_class = CategorySerializer

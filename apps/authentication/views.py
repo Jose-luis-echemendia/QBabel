@@ -20,10 +20,7 @@ class BasicAuthView(BaseCustomAPIView):
     @method_decorator(ratelimit(key="ip", rate="5/m", method="POST"))
     def post(self, request, *args, **kwargs):
         serializer = LoginSerializer(data=request.data)
-        if not serializer.is_valid():
-            return Response(
-                {"error": "Invalid input"}, status=status.HTTP_400_BAD_REQUEST
-            )
+        serializer.is_valid(raise_exception=True)
 
         email = serializer.validated_data["email"]
         password = serializer.validated_data["password"]

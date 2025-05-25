@@ -42,6 +42,22 @@ class RegisterUserView(BaseCustomAPIView, ValidateRegisterUser):
         return Response({"user": serializer.data}, status=status.HTTP_201_CREATED)
 
 
+class ActivateUserView(BaseCustomAPIView):
+    permission_classes = [AllowAny]
+    serializer_class = UserListSerializer
+
+    class Meta:
+        model = User
+        verbose_name = "user"
+        verbose_name_plural = "users"
+
+    def get_model(self):
+        return self.Meta.model
+
+    def post(self, request, *args, **kwargs):
+        return self.active_object(request, *args, **kwargs)
+
+
 class ListUserView(BaseCustomAPIView):
     queryset = User.objects.all()
     serializer_class = UserListSerializer
