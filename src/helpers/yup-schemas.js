@@ -34,6 +34,10 @@ export const schemaSignup = yup.object({
 export const schemaCategory = yup.object({
   name: yup.string().required("El nombre es obligatorio"),
   description: yup.string(),
+  type: yup
+    .string()
+    .oneOf(["Libro", "Revista", "Publicaciones"], "Tipo inválido")
+    .required("El tipo es obligatorio"),
   img: yup
     .mixed()
     .test("fileSize", "El archivo es muy grande", (value) => {
@@ -48,11 +52,6 @@ export const schemaCategory = yup.object({
         value[0].type === "image/jpg"
       );
     }),
-
-  type: yup
-    .string()
-    .oneOf(["Libro", "Revista", "Publicaciones"], "Tipo inválido")
-    .required("El tipo es obligatorio"),
   isActive: yup.boolean().required("El estado es obligatorio"),
 });
 

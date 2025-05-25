@@ -81,6 +81,7 @@ export const FormAddBook = ({ handleOpen }) => {
     formData.append('cover', data.cover[0]);
     formData.append('file', data.file[0]);
     formData.append('title', data.title);
+    formData.append('isbn', data.title);
     formData.append('number_pages', data.number_pages);
     formData.append('number_chapters', data.number_chapters);
     formData.append('price', data.price);

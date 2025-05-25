@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.exceptions import ValidationError
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.parsers import MultiPartParser, FormParser
 from apps.utils.pagination import LargeSetPagination
 from apps.utils.views.abstract_views import BaseViewSet
 from .serializers import BookSerializer, CategoryBookSerializer
@@ -35,6 +36,7 @@ class BookViewSet(
     permission_classes = [IsAuthenticated]
     pagination_class = LargeSetPagination
     filterset_class = BookFilter
+    parser_classes = (MultiPartParser, FormParser)
 
     class Meta:
         model = Book
@@ -61,19 +63,17 @@ class BookViewSet(
         """
         Create a new book.
         """
-    
-        
-        
-        file = request.FILES.pop("file", None)
+
+        file = request.FILES.get("file", None)
 
         try:
             validated_data = self.validate(request.data)
         except ValidationError as e:
             return Response({"error": e.detail}, status=status.HTTP_400_BAD_REQUEST)
 
-        file_object = self.create_file(self, file, validated_data.get("title"))
+        file_object = self.create_file(file, validated_data.get("title"))
         cover_object = self.create_cover(
-            self, validated_data.get("cover"), validated_data.get("title")
+            validated_data.get("cover"), validated_data.get("title")
         )
         # validated_data["author"] = self.request.user.pk
         validated_data["file"] = file_object.pk
@@ -88,7 +88,7 @@ class BookViewSet(
         # CREATE INSTANCES CATEOGRIES BOOKS
         try:
             serializer = CategoryBookSerializer(
-                data=self.prepare_data_for_category_book(categories, many=True)
+                data=self.prepare_data_for_category_book(categories), many=True
             )
         except ValidationError as e:
             return Response({"detail": e.detail}, status=status.HTTP_400_BAD_REQUEST)
@@ -103,8 +103,8 @@ class BookViewSet(
     @action(detail=False, methods=["POST"], url_path="validate-isbn")
     def validate_isbn(self, request, pk=None, *args, **kwargs):
 
-        isb = request.data.get("isbn", None)
-        if not isb:
+        isbn = request.data.get("isbn", None)
+        if not isbn:
             return Response(
                 {"error": "ISBN is required."}, status=status.HTTP_400_BAD_REQUEST
             )

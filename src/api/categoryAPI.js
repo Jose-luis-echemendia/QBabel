@@ -51,10 +51,10 @@ export const createCategoryAPI = async (data) => {
 };
 
 // endpoint for update category
-export const updateCategoryAPI = async (uid, data) => {
+export const updateCategoryAPI = async (id, data) => {
   try {
     const response = await axiosInstance.patch(
-      `/api/custom-category/${uid}/`,
+      `/api/custom-category/${id}/`,
       data
     );
 

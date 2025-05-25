@@ -8,12 +8,19 @@ import { Controller } from 'react-hook-form';
 import { useCategory } from '@/hooks/redux/useCategory';
 import { translateLanguageCategory } from '@/helpers/translate';
 import { toast } from 'react-toastify';
+import {
+  useCreateCategory,
+  useUpdateCategory,
+} from '@/hooks/jquery/useCategoryQuery';
 
 export const OverViewCategory = ({ category, handleOpen }) => {
   const [preview, setPreview] = useState(null);
-  const { handleCreateCategory, handleUpdateCategory } = useCategory();
+  const { handleCreateCategory } = useCategory();
   const [selectedImage, setSelectedImage] = useState(null);
   const { register, handleSubmit, errors, control } = useForm(schemaCategory);
+
+  const { mutate: updateCategory } = useUpdateCategory();
+  const { mutate: createCategory } = useCreateCategory();
 
   // Crear preview cuando se selecciona una imagen
   useEffect(() => {
@@ -55,9 +62,10 @@ export const OverViewCategory = ({ category, handleOpen }) => {
 
     try {
       if (!category) {
-        handleCreateCategory(formData);
+        createCategory(formData);
       } else {
-        await handleUpdateCategory({ id: category.uid, data: formData });
+        console.log(category.uid);
+        updateCategory({ id: category.uid, data: formData });
       }
 
       handleOpen();
@@ -113,7 +121,7 @@ export const OverViewCategory = ({ category, handleOpen }) => {
               <Controller
                 name='type'
                 control={control}
-                defaultValue={category?.type || 'book'}
+                defaultValue={category?.type}
                 render={({ field }) => (
                   <Select
                     label='Select type category'
@@ -252,10 +260,7 @@ export const OverViewCategory = ({ category, handleOpen }) => {
             >
               <span className='text-primary font-semibold'>Cancelar</span>
             </button>
-            <button
-              className='bg-primary py-1 px-2.5 rounded-xl'
-              onClick={() => toast.success('Categoría creada con éxito!')}
-            >
+            <button className='bg-primary py-1 px-2.5 rounded-xl'>
               <span className='text-black-500 font-semibold'>Aceptar</span>
             </button>
           </div>

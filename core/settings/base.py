@@ -36,6 +36,7 @@ QBABEL_APPS = [
     "apps.book",
     "apps.library",
     "apps.comment",
+    "apps.payment",
 ]
 
 THIRD_PARTY_APPS = [
