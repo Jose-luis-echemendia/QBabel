@@ -66,7 +66,7 @@ const Routers = () => {
             <Route path="/" element={<WelcomePage />}></Route>
           </Route>
 
-          {/* HOME DISPLAY */}
+          {/* PAGES DISPLAY AUTHENTICATED*/}
           <Route
             element={
               <ProtectedRoute redirectTo="/" isAllowed={auth.isAuthenticated} />
@@ -74,6 +74,8 @@ const Routers = () => {
           >
             <Route path="/home" element={<HomePage />}></Route>
             <Route path="/books/reader/:bookId" element={<BookReaderPage />}></Route>
+            <Route path="/library" element={<LibraryPage />}></Route>
+          <Route path="/profile/:userName" element={<ProfilePage />}></Route>
           </Route>
 
           {/* ADMIN DISPLAY */}
@@ -85,21 +87,20 @@ const Routers = () => {
               />
             }
           >
+            <Route path="/admin" element={<AdminOverViewPage />}></Route>
+            <Route path="/admin/users" element={<AdminUsersPage />}></Route>
+            <Route path="/admin/books" element={<AdminBooksPage />}></Route>
+            <Route path="/admin/categories" element={<AdminCategoriesPage />}></Route>
+            <Route path="/admin/sales" element={<AdminSalesPage />}></Route>
+            <Route path="/admin/complaints" element={<AdminComplaintsPage />}></Route>
           </Route>
 
-          {/* PAGES DISPLAY */} 
-          <Route path="/admin" element={<AdminOverViewPage />}></Route>
-          <Route path="/admin/users" element={<AdminUsersPage />}></Route>
+          {/* PAGES DISPLAY  ALLOWANY*/} 
+          
           <Route path="/books/:bookId" element={<DetailsBookPage />}></Route>
           <Route path="/search/:criterion" element={<SearchPage />}></Route>
           <Route path="/books/category/:category" element={<CategoryBookPage />}></Route>
-          <Route path="/library" element={<LibraryPage />}></Route>
-          <Route path="/profile/:userName" element={<ProfilePage />}></Route>
-          <Route path="/admin/books" element={<AdminBooksPage />}></Route>
-          <Route path="/admin/categories" element={<AdminCategoriesPage />}></Route>
-          <Route path="/admin/sales" element={<AdminSalesPage />}></Route>
-          <Route path="/admin/complaints" element={<AdminComplaintsPage />}></Route>
-
+          
         </Routes>
       </Router>
     </>

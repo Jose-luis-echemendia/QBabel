@@ -22,3 +22,16 @@ def post_save_user_create_create_profile(sender, instance, created, *args, **kwa
             print(f"Default avatar image not found: {e}")
 
         Library.objects.create(user=instance)
+
+        # send mail for active account
+        from .service.mail import MailService
+
+        mailer = MailService()
+        mailer.send_template_email(
+            subject="Bienvenido al SISTEMA",
+            template_name="mail/registered_user.html",
+            context={
+                "active_url": "http://localhost:5173/active",
+            },
+            recipient_list=[instance.email],
+        )
