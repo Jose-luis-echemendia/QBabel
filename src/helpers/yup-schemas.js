@@ -1,71 +1,78 @@
 import * as yup from "yup";
 
 export const schemaSearchBar = yup.object({
-  search: yup.string().required("Debe introducir algo en el campo de busqueda"),
+  search: yup.string().required("Este campo es obligatorio. Por favor introduzca algo en el campo de búsqueda"),
 });
 
 export const schemaLogin = yup.object({
   email: yup
     .string()
-    .email("Email inválido")
-    .required("El email es obligatorio"),
+    .email("Ha introducido datos incorrectos. El correo es inválido")
+    .required("Todos los campos son obligatorios. Por favor introduzca un correo electrónico"),
   password: yup
     .string()
-    .min(8, "La contraseña debe tener al menos 6 caracteres")
-    .required("La contraseña es obligatoria"),
+    .min(8, "Ha introducido datos incorrectos. La contraseña debe tener al menos 6 caracteres")
+    .required("Todos los campos son obligatorios. Por favor introduzca una contraseña"),
 });
 
 export const schemaSignup = yup.object({
-  user_name: yup.string().required("El nombre es obligatorio"),
+  user_name: yup.string().required("Todos los campos son obligatorios. Por favor introduzca un nombre de usuario"),
   email: yup
     .string()
-    .email("Email inválido")
-    .required("El email es obligatorio"),
+    .email("Ha introducido datos incorrectos. El correo es inválido")
+    .required("Todos los campos son obligatorios. Por favor introduzca un correo electrónico"),
   password: yup
     .string()
-    .min(8, "La contraseña debe tener al menos 8 caracteres")
-    .required("La contraseña es obligatoria"),
+    .min(8, "Ha introducido datos incorrectos. La contraseña debe tener al menos 6 caracteres")
+    .required("Todos los campos son obligatorios. Por favor introduzca una contraseña"),
   re_password: yup
     .string()
-    .oneOf([yup.ref("password"), null], "Las contraseñas deben coincidir")
-    .required("La confirmación de la contraseña es obligatoria"),
+    .oneOf([yup.ref("password"), null], "Ha introducido datos incorrectos. Las contraseñas deben coincidir")
+    .required("Todos los campos son obligatorios. Por favor introduzca la confirmación de la contraseña"),
 });
 
 export const schemaCategory = yup.object({
-  name: yup.string().required("El nombre es obligatorio"),
+  name: yup
+    .string()
+    .required("Todos los campos son obligatorios. Por favor introduzca un nombre")
+    .matches(/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/, "El nombre solo puede contener letras"),
   description: yup.string(),
   type: yup
     .string()
     .oneOf(["Libro", "Revista", "Publicaciones"], "Tipo inválido")
-    .required("El tipo es obligatorio"),
+    .required("Todos los campos son obligatorios. Por favor introduzca un tipo"),
   img: yup
     .mixed()
-    .test("fileSize", "El archivo es muy grande", (value) => {
-      if (!value || value.length === 0) return true;
+    .test("required", "Todos los campos son obligatorios. Por favor seleccione una imagen", (value) => {
+      if (!value || value.length === 0) return false; // Ahora es obligatorio
+      return true
+    })
+    .test("fileSize", "Ha introducido datos incorrectos. El archivo es muy grande", (value) => {
+      if (!value || value.length === 0) return false; // Ahora es obligatorio
       return value[0].size <= 10 * 1024 * 1024; // 10MB
     })
-    .test("fileType", "El archivo debe ser una imagen", (value) => {
-      if (!value || value.length === 0) return true;
-      return (
-        value[0].type === "image/jpeg" ||
-        value[0].type === "image/png" ||
-        value[0].type === "image/jpg"
-      );
+    .test("fileType", "Ha introducido datos incorrectos. El archivo debe ser una imagen válida", (value) => {
+      if (!value || value.length === 0) return false; // Ahora es obligatorio
+      return ["image/jpeg", "image/png", "image/jpg"].includes(value[0].type);
     }),
-  isActive: yup.boolean().required("El estado es obligatorio"),
+  isActive: yup.boolean().required("Todos los campos son obligatorios. Por favor introduzca un estado"),
 });
 
-export const schemaBook = yup.object({
-  title: yup.string().required("El titulo es obligatorio"),
-  synopsis: yup.string().required("La sinopsis es obligatoria"),
-  cover: yup
 
+export const schemaBook = yup.object({
+  title: yup.string().required("Todos los campos son obligatorios. Por favor introduzca un título"),
+  synopsis: yup.string().required("Todos los campos son obligatorios. Por favor introduzca una sinopsis"),
+  cover: yup
     .mixed()
-    .test("fileSize", "El archivo es muy grande", (value) => {
+    .test("required", "Todos los campos son obligatorios. Por favor seleccione una imagen", (value) => {
+      if (!value || value.length === 0) return false; // Ahora es obligatorio
+      return true
+    })
+    .test("fileSize", "Ha introducido datos incorrectos. El archivo es muy grande", (value) => {
       if (!value || value.length === 0) return true;
       return value[0].size <= 10 * 1024 * 1024; // 10MB
     })
-    .test("fileType", "El archivo debe ser una imagen", (value) => {
+    .test("fileType", "Ha introducido datos incorrectos. El archivo debe ser una imagen", (value) => {
       if (!value || value.length === 0) return true;
       return (
         value[0].type === "image/jpeg" ||
@@ -73,37 +80,59 @@ export const schemaBook = yup.object({
         value[0].type === "image/jpg"
       );
     })
-    .required("La portada es obligatoria"),
+    .required("Ha introducido datos incorrectos. "),
 
   // Nuevos campos
   file: yup
     .mixed()
-    .test("fileSize", "El PDF es muy grande", (value) => {
+    .test("required", "Todos los campos son obligatorios. Por favor seleccione un archivo", (value) => {
+      if (!value || value.length === 0) return false; // Ahora es obligatorio
+      return true
+    })
+    .test("fileSize", "Ha introducido datos incorrectos. El PDF es muy grande", (value) => {
       if (!value || value.length === 0) return true;
       return value[0].size <= 20 * 1024 * 1024; // 20MB
     })
-    .test("fileType", "El archivo debe ser un PDF", (value) => {
+    .test("fileType", "Ha introducido datos incorrectos. El archivo debe ser un PDF", (value) => {
       if (!value || value.length === 0) return true;
       return value[0].type === "application/pdf";
     })
-    .required("El PDF del libro es obligatorio"),
+    .required("Todos los campos son obligatorios. Por favor seleccione un archivo"),
   number_pages: yup
     .number()
-    .required("La cantidad de páginas es obligatoria")
-    .integer("Debe ser un número entero")
-    .min(1, "Debe tener al menos 1 página"),
+    .transform((value, originalValue) =>
+      originalValue.trim() === "" ? null : value
+    )
+    .nullable()
+    .required("Todos los campos son obligatorios. Por favor introduzca la cantidad de páginas")
+    .positive("Ha introducido datos incorrectos. El número de páginas debe ser positivo")
+    .integer("Ha introducido datos incorrectos. Debe ser un número entero")
+    .min(1, "Ha introducido datos incorrectos. Debe tener al menos 1 página"),
+
   number_chapters: yup
     .number()
-    .required("La cantidad de capítulos es obligatoria")
-    .integer("Debe ser un número entero")
-    .min(1, "Debe tener al menos 1 capítulo"),
+    .transform((value, originalValue) =>
+      originalValue.trim() === "" ? null : value
+    )
+    .nullable()
+    .required("Todos los campos son obligatorios. Por favor introduzca la cantidad de capítulos")
+    .positive("Ha introducido datos incorrectos. El número de capítulos debe ser positivo")
+    .integer("Ha introducido datos incorrectos. Debe ser un número entero")
+    .min(1, "Ha introducido datos incorrectos. Debe tener al menos 1 capítulo"),
+
   price: yup
     .number()
-    .required("El precio es obligatorio")
-    .min(0, "El precio no puede ser negativo"),
+    .transform((value, originalValue) =>
+      originalValue.trim() === "" ? null : value
+    )
+    .nullable()
+    .required("Todos los campos son obligatorios. Por favor introduzca el precio")
+    .integer("Ha introducido datos incorrectos. Debe ser un número entero")
+    .positive("Ha introducido datos incorrectos. El precio tiene que ser un número positivo"),
+
   lenguage: yup
     .string()
-    .required("El idioma es obligatorio")
-    .oneOf(["Español", "Inglés"], "El idioma debe ser español o inglés"),
-  publishied: yup.boolean().required("El estado es obligatorio"),
+    .required("Todos los campos son obligatorios. Por favor introduzca el idioma")
+    .oneOf(["Español", "Inglés"], "Ha introducido campos incorrectos. El idioma debe ser español o inglés"),
+  publishied: yup.boolean().required("Todos los campos son obligatorios. Por favor seleccione el estado"),
 });

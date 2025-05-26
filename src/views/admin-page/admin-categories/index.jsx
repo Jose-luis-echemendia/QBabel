@@ -8,8 +8,8 @@ import { useGetAllCategory } from '@/hooks/jquery/useCategoryQuery';
 
 const TABS = [
   {
-    label: 'All',
-    value: 'all',
+    label: 'Todas',
+    value: 'Todas',
   },
   {
     label: 'Activas',
@@ -25,7 +25,7 @@ const TABS = [
   },
 ];
 
-const TABLE_HEAD = ['Imagen & Nombre', 'tipo', 'Activo', 'Fecha', 'Acciones'];
+const TABLE_HEAD = ['Imagen & Nombre', 'Tipo', 'Activo', 'Fecha', 'Acciones'];
 
 const AdminCategoriesView = () => {
   const [openOverViewCategoryModal, setOpenOverViewCategoryModal] =

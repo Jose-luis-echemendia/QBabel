@@ -72,7 +72,7 @@ export function useCreateCategory() {
         }
       });
     },
-    onSuccess: () => toast.success('Categoria creada con exitos'),
+    onSuccess: () => toast.success('Categoria creada satisfactoriamente'),
     onError: (error) => toast.error('Ha ocurrido un error ', error),
     onSettled: () => queryClient.invalidateQueries(['category']),
   });

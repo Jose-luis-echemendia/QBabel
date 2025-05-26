@@ -77,7 +77,7 @@ export const OverViewCategory = ({ category, handleOpen }) => {
   return (
     <>
       <div className='flex flex-col gap-4 items-center justify-center w-full h-full p-5'>
-        <h4 className='text-black font-semibold text-2xl w-fit'>Category</h4>
+        <h4 className='text-black font-semibold text-2xl w-fit'>Registrar Categoría</h4>
         <form
           className='grid grid-cols-6 w-full h-full gap-5'
           onSubmit={handleSubmit(onSubmit)}
@@ -124,7 +124,7 @@ export const OverViewCategory = ({ category, handleOpen }) => {
                 defaultValue={category?.type}
                 render={({ field }) => (
                   <Select
-                    label='Select type category'
+                    label='Selecciona tipo de categoría'
                     value={field.value}
                     onChange={(val) => field.onChange(val)}
                   >
@@ -201,7 +201,7 @@ export const OverViewCategory = ({ category, handleOpen }) => {
                     htmlFor='file-upload'
                     className='relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 focus-within:outline-hidden hover:text-indigo-500'
                   >
-                    <span>Upload a file</span>{' '}
+                    <span>Seleccione un archivo</span>{' '}
                     <input
                       id='file-upload'
                       name='img'
@@ -217,7 +217,7 @@ export const OverViewCategory = ({ category, handleOpen }) => {
                       </p>
                     )}
                   </label>
-                  <p className='pl-1'>or drag and drop</p>
+                  <p className='pl-1'>o arrástrelo hasta aquí</p>
                 </div>
                 <p className='text-xs/5 text-gray-600'>
                   PNG, JPG, GIF up to 10MB
