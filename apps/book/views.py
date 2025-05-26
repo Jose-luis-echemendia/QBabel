@@ -109,6 +109,9 @@ class BookViewSet(
             status=status.HTTP_201_CREATED,
         )
 
+    def delete(self, request, *args, **kwargs):
+        return self.desactive_object(request, *args, **kwargs)
+
     @action(detail=False, methods=["POST"], url_path="validate-isbn")
     def validate_isbn(self, request, pk=None, *args, **kwargs):
 
@@ -118,7 +121,7 @@ class BookViewSet(
                 {"error": "ISBN is required."}, status=status.HTTP_400_BAD_REQUEST
             )
 
-        if Book.objects.filter(isbn=isb).exists():
+        if Book.objects.filter(isbn=isbn).exists():
             return Response(
                 {"error": "ISBN already exists."}, status=status.HTTP_400_BAD_REQUEST
             )

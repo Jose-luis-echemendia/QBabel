@@ -1,10 +1,11 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import CommentViewSet
+from .views import CommentViewSet, GetCommentFromBook
 
 router = DefaultRouter()
 router.register(r"comment", CommentViewSet)
 
 urlpatterns = [
+    path("comment/book/<uuid:uid>/", GetCommentFromBook.as_view()),
     path("", include(router.urls)),
 ]

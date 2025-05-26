@@ -1,4 +1,4 @@
-import { createBookThunk } from "@/store/book/thunks";
+import { createBookThunk, getBooksThunk } from "@/store/book/thunks";
 import { useAppDispatch } from "./useStore";
 
 export const useBook = () => {
@@ -8,7 +8,12 @@ export const useBook = () => {
     dispath(createBookThunk(book));
   };
 
+  const handleGetBooks = (filter = null) => {
+    dispath(getBooksThunk(filter));
+  };
+
   return {
     handleCreateBook,
+    handleGetBooks,
   };
 };

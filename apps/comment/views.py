@@ -2,10 +2,38 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from apps.book.models import Book
-from apps.utils.views.abstract_views import BaseViewSet
+from apps.utils.views.abstract_views import BaseViewSet, BaseCustomAPIView
+from rest_framework.permissions import AllowAny
 from .models import Comment
 from .serializers import CommentSerializer
 from .filters import CommentFilter
+
+
+class GetCommentFromBook(BaseCustomAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    filterset_class = CommentFilter
+    permission_classes = [AllowAny]
+
+    class Meta:
+        model = Comment
+        verbose_name = "comment"
+        verbose_name_plural = "comments"
+
+    def get_model(self):
+        return self.Meta.model
+
+    def get(self, request, uid=None, *args, **kwargs):
+        """
+        List all comments from book.
+        """
+        if not uid:
+            return Response(
+                {"error": "Book ID is required."}, status=status.HTTP_400_BAD_REQUEST
+            )
+        comments = Comment.objects.filter(book__uid=uid)
+        serializer = self.get_serializer(comments, many=True)
+        return Response({"comments": serializer.data}, status=status.HTTP_200_OK)
 
 
 class CommentViewSet(BaseViewSet):
@@ -17,6 +45,14 @@ class CommentViewSet(BaseViewSet):
     serializer_class = CommentSerializer
     filterset_class = CommentFilter
     permission_classes = [IsAuthenticated]
+
+    class Meta:
+        model = Comment
+        verbose_name = "comment"
+        verbose_name_plural = "comments"
+
+    def get_model(self):
+        return self.Meta.model
 
     def perform_create(self, serializer):
         return serializer.save()
@@ -37,30 +73,38 @@ class CommentViewSet(BaseViewSet):
 
         return super().validate(request_data, *args, **kwargs)
 
-    def get(self, request, pk=None, *args, **kwargs):
-        """
-        List all comments.
-        """
-        if not pk:
-            return Response(
-                {"error": "Book ID is required."}, status=status.HTTP_400_BAD_REQUEST
-            )
-        comments = Comment.objects.filter(book__uid=pk)
-        serializer = self.get_serializer(comments, many=True)
-        return Response({"comments": serializer.data}, status=status.HTTP_200_OK)
-
-    def post(self, request, pk=None, *args, **kwargs):
+    def create(self, request, *args, **kwargs):
         """
         Create a new comment.
         """
-        if not pk:
+
+        data = request.data.copy()
+
+        book_uid = data.get("book", None)
+        rating = data.get("rating", None)
+
+        if not rating:
+            return Response(
+                {"error": "Rating is required"}, status=status.HTTP_400_BAD_REQUEST
+            )
+
+        if not isinstance(rating, int):
+            return Response(
+                {"error": "Rating is required"}, status=status.HTTP_400_BAD_REQUEST
+            )
+
+        if rating > 5 or rating < 0:
+            return Response(
+                {"error": "Rating is out range"}, status=status.HTTP_400_BAD_REQUEST
+            )
+
+        if not book_uid:
             return Response(
                 {"error": "Book ID is required."}, status=status.HTTP_400_BAD_REQUEST
             )
-        data = request.data.copy()
 
         try:
-            book = Book.objects.get(uid=pk)
+            book = Book.objects.get(uid=book_uid)
         except Book.DoesNotExist:
             return Response(
                 {"error": "Book not found."}, status=status.HTTP_404_NOT_FOUND
@@ -78,7 +122,7 @@ class CommentViewSet(BaseViewSet):
         serializer.save(user=request.user, book=book)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-    def put(self, request, pk=None, *args, **kwargs):
+    def update(self, request, pk=None, *args, **kwargs):
         """
         Update a comment.
         """

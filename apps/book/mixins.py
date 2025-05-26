@@ -41,27 +41,70 @@ class ValidateRegisterBookMixin:
         is_published = data.get("is_published", False)
 
         if not isbn:
-            raise ValidationError({"isbn": "isbn is required."})
+            raise ValidationError(
+                {
+                    "isbn": "isbn is required.",
+                    "message": "Todos los campos son obligatorios.",
+                }
+            )
 
         if not title:
-            raise ValidationError({"title": "Title is required."})
+            raise ValidationError(
+                {
+                    "title": "Title is required.",
+                    "message": "Todos los campos son obligatorios.",
+                }
+            )
 
         if not synopsis:
-            raise ValidationError({"description": "Description is required."})
+            raise ValidationError(
+                {
+                    "description": "Description is required.",
+                    "message": "Todos los campos son obligatorios.",
+                }
+            )
         if not categories:
-            raise ValidationError({"categories": "Categories are required."})
+            raise ValidationError(
+                {
+                    "categories": "Categories are required.",
+                    "message": "Todos los campos son obligatorios.",
+                }
+            )
         if not cover:
-            raise ValidationError({"cover": "Cover is required."})
+            raise ValidationError(
+                {
+                    "cover": "Cover is required.",
+                    "message": "Todos los campos son obligatorios.",
+                }
+            )
         if not number_chapters:
             raise ValidationError(
-                {"number_chapters": "Number of chapters is required."}
+                {
+                    "number_chapters": "Number of chapters is required.",
+                    "message": "Todos los campos son obligatorios.",
+                }
             )
         if not number_pages:
-            raise ValidationError({"number_pages": "Number of pages is required."})
+            raise ValidationError(
+                {
+                    "number_pages": "Number of pages is required.",
+                    "message": "Todos los campos son obligatorios.",
+                }
+            )
         if not lenguage:
-            raise ValidationError({"lenguage": "Lenguage is required."})
+            raise ValidationError(
+                {
+                    "lenguage": "Lenguage is required.",
+                    "message": "Todos los campos son obligatorios.",
+                }
+            )
         if not price:
-            raise ValidationError({"price": "Price is required."})
+            raise ValidationError(
+                {
+                    "price": "Price is required.",
+                    "message": "Todos los campos son obligatorios.",
+                }
+            )
         if not isinstance(categories, list):
             raise ValidationError(
                 {"categories": "This field must be a list of strings"}
@@ -80,6 +123,7 @@ class ValidateRegisterBookMixin:
             "price": price,
             "is_published": is_published,
         }
+
 
 class CreateFileBookMixin:
     def create_file(self, file, title):

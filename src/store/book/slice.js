@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createBookThunk } from "./thunks";
+import { createBookThunk, getBooksThunk } from "./thunks";
 
 const initialState = {
   book: null,
@@ -23,6 +23,18 @@ export const bookSlice = createSlice({
         else state.books.push(action.payload);
       })
       .addCase(createBookThunk.rejected, (state) => {
+        state.loading = false;
+      })
+
+      // **   Get books reducers**
+      .addCase(getBooksThunk.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getBooksThunk.fulfilled, (state, action) => {
+        state.loading = false;
+        state.books = action.payload;
+      })
+      .addCase(getBooksThunk.rejected, (state) => {
         state.loading = false;
       });
   },

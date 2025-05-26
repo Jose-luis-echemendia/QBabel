@@ -9,6 +9,7 @@ from apps.utils.mixins import CreateImageMixin
 from .models import Category
 from .serializers import CategorySerializer
 from .filters import CategoryFilter
+from .constance import CATEGORY_TYPE
 
 
 class CustomCategoryViewSet(BaseViewSet, CreateImageMixin):
@@ -18,7 +19,7 @@ class CustomCategoryViewSet(BaseViewSet, CreateImageMixin):
     permission_classes = [IsAuthenticated]
     filter_backends = [DjangoFilterBackend]
     filterset_class = CategoryFilter
-    
+
     class Meta:
         model = Category
         verbose_name = "category"
@@ -66,7 +67,7 @@ class CustomCategoryViewSet(BaseViewSet, CreateImageMixin):
             ordered_queryset, many=True, context=context
         ).data
         return Response({"categories": date_categories}, status=status.HTTP_200_OK)
- 
+
     def create(self, request, *args, **kwargs):
         if not request.user.is_superuser:
             return Response(
@@ -77,22 +78,39 @@ class CustomCategoryViewSet(BaseViewSet, CreateImageMixin):
         image_file = request.FILES.get("img", None)
         category_name = request.data.get("name", None)
         type = request.data.get("type", None)
-        
+
         if not type:
             return Response(
-                {"detail": "Type is required."},
+                {
+                    "detail": "Type is required.",
+                    "message": "Todos los campos son obligatorios",
+                },
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+            
+        if type not in CATEGORY_TYPE:
+            return Response(
+                {
+                    "message": "Ha intorducido datos incorrectos. El tipo no es válido",
+                },
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
         if not category_name:
             return Response(
-                {"detail": "Category name is required."},
+                {
+                    "detail": "Category name is required.",
+                    "message": "Todos los campos son obligatorios",
+                },
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
         if not image_file:
             return Response(
-                {"detail": "Image file is required."},
+                {
+                    "detail": "Image file is required.",
+                    "message": "Todos los campos son obligatorios",
+                },
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
@@ -152,6 +170,3 @@ class CustomCategoryViewSet(BaseViewSet, CreateImageMixin):
             serializer.data,
             status=status.HTTP_200_OK,
         )
-
-
-

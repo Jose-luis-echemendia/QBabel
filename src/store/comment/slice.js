@@ -1,0 +1,43 @@
+import { createSlice } from "@reduxjs/toolkit";
+import { getCommentsThunk, createCommentThunk } from "./thunks";
+
+const initialState = {
+  comment: null,
+  comments: [],
+  loading: false,
+};
+
+export const commentSlice = createSlice({
+  name: "comment",
+  initialState: initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      // **Get comments reducers**
+      .addCase(getCommentsThunk.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getCommentsThunk.fulfilled, (state, action) => {
+        state.loading = false;
+        state.comments = action.payload.comments;
+      })
+      .addCase(getCommentsThunk.rejected, (state) => {
+        state.loading = false;
+      })
+
+      // **Create comment reducers**
+      .addCase(createCommentThunk.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(createCommentThunk.fulfilled, (state, action) => {
+        state.loading = false;
+        if (state.comments.length === 0) state.comments = action.payload;
+        else state.comments.push(action.payload);
+      })
+      .addCase(createCommentThunk.rejected, (state) => {
+        state.loading = false;
+      });
+  },
+});
+
+export default commentSlice.reducer;

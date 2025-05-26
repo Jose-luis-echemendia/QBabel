@@ -15,24 +15,21 @@ const chunkArray = (array, size) => {
 };
 
 export const CustomCarouselBooks = ({
-
+  books = bestBooksData,
   carouselSize = "h-64",
   carouselWidth = "w-full",
   itemHeight = carouselSize === "h-64"
     ? "h-56"
     : carouselSize === "h-80"
-      ? "h-68"
-      : carouselSize === "h-96"
-        ? "h-76"
-        : "h-56",
+    ? "h-68"
+    : carouselSize === "h-96"
+    ? "h-76"
+    : "h-56",
   booksPerSlide,
-  CarouselItemComponent = BookGroup
+  CarouselItemComponent = BookGroup,
 }) => {
   // Dividir los libros en grupos
-  const bookGroups = chunkArray(
-    [...bestBooksData, ...bestBooksData, ...bestBooksData],
-    booksPerSlide
-  );
+  const bookGroups = chunkArray([...books], booksPerSlide);
 
   return (
     <ThemeProvider value={customTheme}>
@@ -43,7 +40,12 @@ export const CustomCarouselBooks = ({
         NextArrow={() => <NextArrow />}
       >
         {bookGroups.map((group, index) => (
-          <CarouselItemComponent key={index} books={group} itemHeight={itemHeight} booksPerSlide={booksPerSlide} />
+          <CarouselItemComponent
+            key={index}
+            books={group}
+            itemHeight={itemHeight}
+            booksPerSlide={booksPerSlide}
+          />
         ))}
       </Carousel>
     </ThemeProvider>
