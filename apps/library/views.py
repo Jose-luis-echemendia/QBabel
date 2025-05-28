@@ -5,7 +5,7 @@ from rest_framework.exceptions import ValidationError
 from apps.book.models import Book
 from apps.utils.views.abstract_views import BaseCustomAPIView
 from .models import Library, Item
-from .serializers import LibrarySerializer
+from .serializers import LibrarySerializer, ItemSerializer
 from .mixins import ValidateBookItem
 
 
@@ -15,14 +15,24 @@ class LibraryView(BaseCustomAPIView):
     """
 
     permission_classes = [IsAuthenticated]
+    serializer_class = LibrarySerializer
 
-    def get(self, request):
+    class Meta:
+        model = Library
+        verbose_name = "library"
+        verbose_name_plural = "libraries"
+
+    def get_model(self):
+        return self.Meta.model
+
+    def get(self, request, *args, **kwargs):
         # Logic to retrieve library information
         user = request.user
         library = Library.objects.get(user=user)
 
         return Response(
-            {"library": LibrarySerializer(library).data}, status=status.HTTP_200_OK
+            {self.get_verbose_name(): self.get_serializer(library).data},
+            status=status.HTTP_200_OK,
         )
 
 
@@ -31,19 +41,33 @@ class AddBookView(BaseCustomAPIView, ValidateBookItem):
     View to add a book to the library.
     """
 
+    serializer_class = LibrarySerializer
     permission_classes = [IsAuthenticated]
 
-    def post(self, request):
-        book = request.data.get("book", None)
+    class Meta:
+        model = Book
+        verbose_name = "library"
+        verbose_name_plural = "libraries"
+
+    def get_model(self):
+        return None
+
+    def post(self, request, *args, **kwargs):
+        book_uid = request.data.get("book", None)
         try:
-            self.validate_book(book)
+            self.validate_book(book_uid)
         except ValidationError as e:
             return Response({"detail": e.detail}, status=status.HTTP_404_NOT_FOUND)
         user = request.user
         library = Library.objects.get(user=user)
-        Item.objects.create(library=library, book=Book.objects.get(pk=book))
+        book = Book.objects.get(pk=book_uid)
+        item = ItemSerializer(data={"library": library.uid, "book": book.uid})
+        item.is_valid(raise_exception=True)
+        self.perform_create(item)
+
         return Response(
-            {"library": LibrarySerializer(library).data}, status=status.HTTP_201_CREATED
+            {self.get_verbose_name(): self.get_serializer(library).data},
+            status=status.HTTP_204_NO_CONTENT,
         )
 
 
@@ -54,19 +78,42 @@ class DisaggregateBookView(BaseCustomAPIView, ValidateBookItem):
 
     permission_classes = [IsAuthenticated]
 
-    def delete(self, request):
-        book = request.data.get("book", None)
+    queryset = Book.objects.all()
+    serializer_class = LibrarySerializer
+    permission_classes = [IsAuthenticated]
+
+    class Meta:
+        model = Book
+        verbose_name = "library"
+        verbose_name_plural = "libraries"
+
+    def get_model(self):
+        return self.Meta.model
+
+    def delete(self, request, uid=None, *args, **kwargs):
+        if not uid:
+            return Response(
+                {"detail": "Book UID is required"}, status=status.HTTP_400_BAD_REQUEST
+            )
+
         try:
-            self.validate_book(book)
+            self.validate_book(str(uid))
         except ValidationError as e:
             return Response({"detail": e.detail}, status=status.HTTP_404_NOT_FOUND)
+
+        book = self.get_object(*args, **kwargs)
         user = request.user
         library = Library.objects.get(user=user)
         try:
-            Item.objects.get(library=library, book=Book.objects.get(pk=book)).delete()
+            Item.objects.get(
+                library=library, book=Book.objects.get(pk=book.uid)
+            ).soft_delete()
         except Item.DoesNotExist:
-            return Response({"detail": "Item not found"}, status=status.HTTP_404_NOT_FOUND)
-        
+            return Response(
+                {"detail": "Item not found"}, status=status.HTTP_404_NOT_FOUND
+            )
+
         return Response(
-            {"library": LibrarySerializer(library).data}, status=status.HTTP_204_NO_CONTENT
+            {self.get_verbose_name(): self.get_serializer(library).data},
+            status=status.HTTP_204_NO_CONTENT,
         )

@@ -8,16 +8,15 @@ User = get_user_model()
 
 
 class CommentSerializer(AbstractBaseSerializer):
-    """
-    Serializer for the Comment model.
-    """
-
     user = serializers.PrimaryKeyRelatedField(
         queryset=User.objects.all(), write_only=True
     )
     book = serializers.PrimaryKeyRelatedField(
         queryset=Book.objects.all(), write_only=True
     )
+    rating = serializers.IntegerField(min_value=0, max_value=5, default=0)
+    like = serializers.IntegerField(min_value=0, default=0)
+    deslike = serializers.IntegerField(min_value=0, default=0)
 
     class Meta:
         model = Comment
@@ -29,3 +28,4 @@ class CommentSerializer(AbstractBaseSerializer):
             "like",
             "deslike",
         ]
+        extra_kwargs = {"comment": {"required": True}}

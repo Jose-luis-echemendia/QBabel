@@ -1,4 +1,8 @@
+import { useAppSelector } from "@/hooks/redux/useStore";
+
 export const CustomHeaderBook = ({ book }) => {
+  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
+  
   return (
     <>
       <header className="lg:w-full w-[400px] lg:h-[350px] h-full flex items-center justify-center border-b shadow-2xl lg:-mt-0 -mt-6">
