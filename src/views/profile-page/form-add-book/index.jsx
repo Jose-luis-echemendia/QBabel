@@ -11,6 +11,8 @@ import { Checkbox, ThemeProvider } from '@material-tailwind/react';
 import { Input, IconButton, Typography } from '@material-tailwind/react';
 import { useBook } from '@/hooks/redux/useBook';
 import { translateLanguageBookAdd } from '@/helpers/translate';
+import { toast } from 'sonner';
+
 
 export const FormAddBook = ({ handleOpen }) => {
   const [previewImage, setPreviewImage] = useState(null);
@@ -97,7 +99,7 @@ export const FormAddBook = ({ handleOpen }) => {
         formData.append('categories', uid);
       });
     } else {
-      alert('Debes seleccionar entre 1 y 5 categorias para el libro');
+      toast.error('Todos los campos son obligatorios. Debes seleccionar entre 1 y 5 categorias para el libro');
       return;
     }
 
@@ -175,7 +177,7 @@ export const FormAddBook = ({ handleOpen }) => {
                   htmlFor='cover-upload'
                   className='relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 focus-within:outline-hidden hover:text-indigo-500'
                 >
-                  <span>Upload a file</span>
+                  <span>Seleccione un archivo</span>
                   <input
                     id='cover-upload'
                     name='cover'
@@ -191,7 +193,7 @@ export const FormAddBook = ({ handleOpen }) => {
                     </p>
                   )}
                 </label>
-                <p className='pl-1'>or drag and drop</p>
+                <p className='pl-1'>o arrástrelo hasta aquí</p>
               </div>
               <p className='text-xs/5 text-gray-600'>
                 PNG, JPG, GIF up to 10MB
@@ -272,7 +274,7 @@ export const FormAddBook = ({ handleOpen }) => {
                     </p>
                   )}
                 </label>
-                <p className='pl-1'>o arrástralo aquí</p>
+                <p className='pl-1'>o arrástrelo hasta aquí</p>
               </div>
               <p className='text-xs/5 text-gray-600'>Solo PDF, hasta 40MB</p>
             </div>
@@ -323,7 +325,7 @@ export const FormAddBook = ({ handleOpen }) => {
             {selectedCategories.length > 0 ? (
               <PreviewCategories categories={selectedCategories} />
             ) : (
-              <span>Agg tus categorias.5 como maximo</span>
+              <span>Agrega hasta 5 categorías.</span>
             )}
           </div>
 
@@ -386,7 +388,7 @@ export const FormAddBook = ({ handleOpen }) => {
                 color='blue-gray'
                 className='mb-1 font-medium text-[12px]'
               >
-                Selecciona el numero de paginas
+                Selecciona el número de páginas
               </Typography>
               <div className='relative w-full'>
                 <Input
@@ -414,7 +416,7 @@ export const FormAddBook = ({ handleOpen }) => {
                 color='blue-gray'
                 className='mb-1 font-medium text-[12px]'
               >
-                Selecciona el numero de capitulos
+                Selecciona el número de capítulos
               </Typography>
               <div className='relative w-full'>
                 <Input
@@ -441,7 +443,7 @@ export const FormAddBook = ({ handleOpen }) => {
               color='gray'
               className='mt-2 font-normal col-span-2 mx-auto text-[14px]'
             >
-              Ajusta el numero usando los controladores + y -.
+              Ajusta el número usando los controladores + y -.
             </Typography>
           </div>
 
@@ -504,7 +506,7 @@ export const FormAddBook = ({ handleOpen }) => {
               htmlFor='title'
               className='block text-sm/6 font-medium text-gray-900 ml-2.5'
             >
-              Title
+              Título
             </label>
             <div className='mt-2.5'>
               <div className='flex items-center rounded-md bg-white outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary'>
