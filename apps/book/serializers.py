@@ -107,11 +107,11 @@ class BookSerializer(AbstractBaseSerializer):
         if not category_book.exists():
             return None
 
-        return (
+        return [
             CategorySerializer(category.category).data
             for category in category_book
             if category.category
-        )
+        ]
 
     def get_is_discount_active(self, obj):
         """

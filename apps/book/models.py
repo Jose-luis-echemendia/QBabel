@@ -69,7 +69,7 @@ class Book(BaseModel):
             self.discount_start_date
             and self.discount_end_date
             and self.discount_start_date <= now <= self.discount_end_date
-        )
+        ) or False
 
     def get_discounted_price(self):
         if self.is_discount_active():

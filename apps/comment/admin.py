@@ -8,7 +8,7 @@ class CommentAdmin(admin.ModelAdmin):
     """
 
     list_display = ("user", "book", "comment", "rating", "like", "deslike")
-    search_fields = ("user__username", "book__title", "comment")
+    search_fields = ("user__user_name", "book__title", "comment")
     list_filter = ("rating", "created_at")
     ordering = ("-created_at",)
 
