@@ -61,6 +61,13 @@ class Book(BaseModel):
         blank=True, null=True, help_text="Fecha de finalización del descuento"
     )
 
+    count_reads = models.PositiveIntegerField(default=0, editable=False)
+
+    is_complete = models.BooleanField(
+        default=False,
+        help_text="Indicates if the book is complete or still being written",
+    )
+
     def is_discount_active(self):
         from django.utils import timezone
 
@@ -84,6 +91,27 @@ class Book(BaseModel):
     @property
     def is_paid(self):
         return self.price > 0.00
+
+    @property
+    def license(self):
+        return "© All Rights Reserved"
+
+    @property
+    def chapters(self):
+        return [
+            {
+                "id": i,
+                "name": f"Capítulo {i}",
+                "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam quidem perferendis ab doloribus ipsam ratione fugit officia, rem necessitatibus.",
+            }
+            for i in range(1, self.number_chapters + 1)
+        ]
+
+    @property
+    def reviews(self):
+        from apps.comment.models import Comment
+
+        return Comment.objects.filter(book=self, is_active=True).count()
 
     def __str__(self):
         return self.title

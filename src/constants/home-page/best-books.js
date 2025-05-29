@@ -8,11 +8,72 @@ export const bestBooksData = [
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi,rem magnam nesciunt minima placeat, itaque eum neque officiis unde,eaque optio ratione aliquid assumenda facere ab et quasi ducimus autdoloribus non numquam. Lorem ipsum dolor, sit amet consecteturadipisicing elit. Quisquam quidem perferendis ab doloribus ipsamratione fugit officia, rem necessitatibus.",
     color: "#5C505A",
     reviews: "21k",
-    category: "category",
-    parts: 12
+    categories: [
+      {
+        id: 1,
+        name: "Ficticio",
+      },
+      {
+        id: 2,
+        name: "Aventura",
+      },
+      {
+        id: 3,
+        name: "Infantil",
+      },
+      {
+        id: 4,
+        name: "Ciencia Ficción",
+      },
+      {
+        id: 5,
+        name: "Romántico",
+      },
+      {
+        id: 6,
+        name: "Drama",
+      },
+      {
+        id: 7,
+        name: "Terror",
+      },
+      {
+        id: 8,
+        name: "Acción",
+      },
+      {
+        id: 9,
+        name: "Horror",
+      },
+      {
+        id: 10,
+        name: "Suspenso",
+      },
+      {
+        id: 11,
+        name: "Comedia",
+      },
+      {
+        id: 12,
+        name: "Deportiva",
+      },
+      {
+        id: 13,
+        name: "Biografía",
+      },
+      {
+        id: 14,
+        name: "Historia",
+      },
+      {
+        id: 15,
+        name: "Policial",
+      },
+    ],
+    parts: 12,
   },
   {
-    id: 2, 
+    id: 2,
     author: "Jennifer Lynn Barnes",
     tittle: "La Jugada Final",
     img: "/assets/images/home/best_books/book2.jpg",
@@ -20,8 +81,69 @@ export const bestBooksData = [
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi,rem magnam nesciunt minima placeat, itaque eum neque officiis unde,eaque optio ratione aliquid assumenda facere ab et quasi ducimus autdoloribus non numquam. Lorem ipsum dolor, sit amet consecteturadipisicing elit. Quisquam quidem perferendis ab doloribus ipsamratione fugit officia, rem necessitatibus.",
     color: "#6F151D",
     reviews: "26k",
-    category: "category",
-    parts: 23
+    categories: [
+      {
+        id: 1,
+        name: "Ficticio",
+      },
+      {
+        id: 2,
+        name: "Aventura",
+      },
+      {
+        id: 3,
+        name: "Infantil",
+      },
+      {
+        id: 4,
+        name: "Ciencia Ficción",
+      },
+      {
+        id: 5,
+        name: "Romántico",
+      },
+      {
+        id: 6,
+        name: "Drama",
+      },
+      {
+        id: 7,
+        name: "Terror",
+      },
+      {
+        id: 8,
+        name: "Acción",
+      },
+      {
+        id: 9,
+        name: "Horror",
+      },
+      {
+        id: 10,
+        name: "Suspenso",
+      },
+      {
+        id: 11,
+        name: "Comedia",
+      },
+      {
+        id: 12,
+        name: "Deportiva",
+      },
+      {
+        id: 13,
+        name: "Biografía",
+      },
+      {
+        id: 14,
+        name: "Historia",
+      },
+      {
+        id: 15,
+        name: "Policial",
+      },
+    ],
+    parts: 23,
   },
   {
     id: 3,
@@ -32,8 +154,69 @@ export const bestBooksData = [
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi,rem magnam nesciunt minima placeat, itaque eum neque officiis unde,eaque optio ratione aliquid assumenda facere ab et quasi ducimus autdoloribus non numquam. Lorem ipsum dolor, sit amet consecteturadipisicing elit. Quisquam quidem perferendis ab doloribus ipsamratione fugit officia, rem necessitatibus.",
     color: "#272450",
     reviews: "11k",
-    category: "category",
-    parts: 82
+    categories: [
+      {
+        id: 1,
+        name: "Ficticio",
+      },
+      {
+        id: 2,
+        name: "Aventura",
+      },
+      {
+        id: 3,
+        name: "Infantil",
+      },
+      {
+        id: 4,
+        name: "Ciencia Ficción",
+      },
+      {
+        id: 5,
+        name: "Romántico",
+      },
+      {
+        id: 6,
+        name: "Drama",
+      },
+      {
+        id: 7,
+        name: "Terror",
+      },
+      {
+        id: 8,
+        name: "Acción",
+      },
+      {
+        id: 9,
+        name: "Horror",
+      },
+      {
+        id: 10,
+        name: "Suspenso",
+      },
+      {
+        id: 11,
+        name: "Comedia",
+      },
+      {
+        id: 12,
+        name: "Deportiva",
+      },
+      {
+        id: 13,
+        name: "Biografía",
+      },
+      {
+        id: 14,
+        name: "Historia",
+      },
+      {
+        id: 15,
+        name: "Policial",
+      },
+    ],
+    parts: 82,
   },
   {
     id: 4,
@@ -44,8 +227,69 @@ export const bestBooksData = [
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi,rem magnam nesciunt minima placeat, itaque eum neque officiis unde,eaque optio ratione aliquid assumenda facere ab et quasi ducimus autdoloribus non numquam. Lorem ipsum dolor, sit amet consecteturadipisicing elit. Quisquam quidem perferendis ab doloribus ipsamratione fugit officia, rem necessitatibus.",
     color: "#488899",
     reviews: "31k",
-    category: "category",
-    parts: 51
+    categories: [
+      {
+        id: 1,
+        name: "Ficticio",
+      },
+      {
+        id: 2,
+        name: "Aventura",
+      },
+      {
+        id: 3,
+        name: "Infantil",
+      },
+      {
+        id: 4,
+        name: "Ciencia Ficción",
+      },
+      {
+        id: 5,
+        name: "Romántico",
+      },
+      {
+        id: 6,
+        name: "Drama",
+      },
+      {
+        id: 7,
+        name: "Terror",
+      },
+      {
+        id: 8,
+        name: "Acción",
+      },
+      {
+        id: 9,
+        name: "Horror",
+      },
+      {
+        id: 10,
+        name: "Suspenso",
+      },
+      {
+        id: 11,
+        name: "Comedia",
+      },
+      {
+        id: 12,
+        name: "Deportiva",
+      },
+      {
+        id: 13,
+        name: "Biografía",
+      },
+      {
+        id: 14,
+        name: "Historia",
+      },
+      {
+        id: 15,
+        name: "Policial",
+      },
+    ],
+    parts: 51,
   },
   {
     id: 5,
@@ -56,8 +300,69 @@ export const bestBooksData = [
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi,rem magnam nesciunt minima placeat, itaque eum neque officiis unde,eaque optio ratione aliquid assumenda facere ab et quasi ducimus autdoloribus non numquam. Lorem ipsum dolor, sit amet consecteturadipisicing elit. Quisquam quidem perferendis ab doloribus ipsamratione fugit officia, rem necessitatibus.",
     color: "#A5A5A6",
     reviews: "41k",
-    category: "category",
-    parts: 37
+    categories: [
+      {
+        id: 1,
+        name: "Ficticio",
+      },
+      {
+        id: 2,
+        name: "Aventura",
+      },
+      {
+        id: 3,
+        name: "Infantil",
+      },
+      {
+        id: 4,
+        name: "Ciencia Ficción",
+      },
+      {
+        id: 5,
+        name: "Romántico",
+      },
+      {
+        id: 6,
+        name: "Drama",
+      },
+      {
+        id: 7,
+        name: "Terror",
+      },
+      {
+        id: 8,
+        name: "Acción",
+      },
+      {
+        id: 9,
+        name: "Horror",
+      },
+      {
+        id: 10,
+        name: "Suspenso",
+      },
+      {
+        id: 11,
+        name: "Comedia",
+      },
+      {
+        id: 12,
+        name: "Deportiva",
+      },
+      {
+        id: 13,
+        name: "Biografía",
+      },
+      {
+        id: 14,
+        name: "Historia",
+      },
+      {
+        id: 15,
+        name: "Policial",
+      },
+    ],
+    parts: 37,
   },
   {
     id: 6,
@@ -68,8 +373,69 @@ export const bestBooksData = [
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi,rem magnam nesciunt minima placeat, itaque eum neque officiis unde,eaque optio ratione aliquid assumenda facere ab et quasi ducimus autdoloribus non numquam. Lorem ipsum dolor, sit amet consecteturadipisicing elit. Quisquam quidem perferendis ab doloribus ipsamratione fugit officia, rem necessitatibus.",
     color: "#12284C",
     reviews: "20k",
-    category: "category",
-    parts: 52
+    categories: [
+      {
+        id: 1,
+        name: "Ficticio",
+      },
+      {
+        id: 2,
+        name: "Aventura",
+      },
+      {
+        id: 3,
+        name: "Infantil",
+      },
+      {
+        id: 4,
+        name: "Ciencia Ficción",
+      },
+      {
+        id: 5,
+        name: "Romántico",
+      },
+      {
+        id: 6,
+        name: "Drama",
+      },
+      {
+        id: 7,
+        name: "Terror",
+      },
+      {
+        id: 8,
+        name: "Acción",
+      },
+      {
+        id: 9,
+        name: "Horror",
+      },
+      {
+        id: 10,
+        name: "Suspenso",
+      },
+      {
+        id: 11,
+        name: "Comedia",
+      },
+      {
+        id: 12,
+        name: "Deportiva",
+      },
+      {
+        id: 13,
+        name: "Biografía",
+      },
+      {
+        id: 14,
+        name: "Historia",
+      },
+      {
+        id: 15,
+        name: "Policial",
+      },
+    ],
+    parts: 52,
   },
   {
     id: 7,
@@ -80,8 +446,69 @@ export const bestBooksData = [
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi,rem magnam nesciunt minima placeat, itaque eum neque officiis unde,eaque optio ratione aliquid assumenda facere ab et quasi ducimus autdoloribus non numquam. Lorem ipsum dolor, sit amet consecteturadipisicing elit. Quisquam quidem perferendis ab doloribus ipsamratione fugit officia, rem necessitatibus.",
     color: "#182139",
     reviews: "81k",
-    category: "category",
-    parts: 69
+    categories: [
+      {
+        id: 1,
+        name: "Ficticio",
+      },
+      {
+        id: 2,
+        name: "Aventura",
+      },
+      {
+        id: 3,
+        name: "Infantil",
+      },
+      {
+        id: 4,
+        name: "Ciencia Ficción",
+      },
+      {
+        id: 5,
+        name: "Romántico",
+      },
+      {
+        id: 6,
+        name: "Drama",
+      },
+      {
+        id: 7,
+        name: "Terror",
+      },
+      {
+        id: 8,
+        name: "Acción",
+      },
+      {
+        id: 9,
+        name: "Horror",
+      },
+      {
+        id: 10,
+        name: "Suspenso",
+      },
+      {
+        id: 11,
+        name: "Comedia",
+      },
+      {
+        id: 12,
+        name: "Deportiva",
+      },
+      {
+        id: 13,
+        name: "Biografía",
+      },
+      {
+        id: 14,
+        name: "Historia",
+      },
+      {
+        id: 15,
+        name: "Policial",
+      },
+    ],
+    parts: 69,
   },
   {
     id: 8,
@@ -92,8 +519,69 @@ export const bestBooksData = [
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi,rem magnam nesciunt minima placeat, itaque eum neque officiis unde,eaque optio ratione aliquid assumenda facere ab et quasi ducimus autdoloribus non numquam. Lorem ipsum dolor, sit amet consecteturadipisicing elit. Quisquam quidem perferendis ab doloribus ipsamratione fugit officia, rem necessitatibus.",
     color: "#404145",
     reviews: "12k",
-    category: "category",
-    parts: 5
+    categories: [
+      {
+        id: 1,
+        name: "Ficticio",
+      },
+      {
+        id: 2,
+        name: "Aventura",
+      },
+      {
+        id: 3,
+        name: "Infantil",
+      },
+      {
+        id: 4,
+        name: "Ciencia Ficción",
+      },
+      {
+        id: 5,
+        name: "Romántico",
+      },
+      {
+        id: 6,
+        name: "Drama",
+      },
+      {
+        id: 7,
+        name: "Terror",
+      },
+      {
+        id: 8,
+        name: "Acción",
+      },
+      {
+        id: 9,
+        name: "Horror",
+      },
+      {
+        id: 10,
+        name: "Suspenso",
+      },
+      {
+        id: 11,
+        name: "Comedia",
+      },
+      {
+        id: 12,
+        name: "Deportiva",
+      },
+      {
+        id: 13,
+        name: "Biografía",
+      },
+      {
+        id: 14,
+        name: "Historia",
+      },
+      {
+        id: 15,
+        name: "Policial",
+      },
+    ],
+    parts: 5,
   },
 ];
 
@@ -181,7 +669,7 @@ export const booksData = [
     ],
   },
   {
-    id: 2, 
+    id: 2,
     author: "Jennifer Lynn Barnes",
     tittle: "La Jugada Final",
     img: "/assets/images/covers/2.png",
@@ -275,7 +763,7 @@ export const booksData = [
     isFree: true,
     isDiscounted: false,
     discount: "50%",
-    price: 0.00,
+    price: 0.0,
     isComplete: false,
     categories: [
       {
@@ -435,7 +923,7 @@ export const booksData = [
     isFree: true,
     isDiscounted: false,
     discount: "50%",
-    price: 0.00,
+    price: 0.0,
     isComplete: true,
     categories: [
       {
@@ -741,6 +1229,3 @@ export const booksData = [
     ],
   },
 ];
-
-
-

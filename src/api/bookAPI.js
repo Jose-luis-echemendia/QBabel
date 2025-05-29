@@ -35,3 +35,18 @@ export const getBooksAPI = async (filter = null) => {
     throw error;
   }
 };
+
+
+export const getBookForIdAPI = async (bookId) => {
+  try {
+    const response = await axiosInstance.get(`/api/book/${bookId}/`);
+
+    return response;
+  } catch (error) {
+    console.error(
+      "Error al obtener el libro por ID:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+}

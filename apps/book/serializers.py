@@ -29,7 +29,7 @@ class BookSerializer(AbstractBaseSerializer):
     )
     file_details = serializers.SerializerMethodField()
 
-    category_book = serializers.SerializerMethodField()
+    categories = serializers.SerializerMethodField()
     is_discount_active = serializers.SerializerMethodField()
     discount_percentage = serializers.SerializerMethodField()
 
@@ -55,7 +55,14 @@ class BookSerializer(AbstractBaseSerializer):
             "discount_percentage",
             "discount_start_date",
             "discount_end_date",
-            "category_book",
+            "categories",
+            "count_reads",
+            "is_complete",
+            "is_free",
+            "is_paid",
+            "license",
+            "chapters",
+            "reviews",
         ]
         extra_kwargs = {
             "isbn": {"required": True},
@@ -77,9 +84,10 @@ class BookSerializer(AbstractBaseSerializer):
         """
         Get the details of the author.
         """
-        from apps.user.serializers import UserListSerializer
+        from apps.profile.serializers import ProfileSerializer
 
-        return UserListSerializer(obj.author).data if obj.author else None
+        return ProfileSerializer(obj.author.profile).data if obj.author.profile else None
+
 
     def get_cover_details(self, obj):
         """
@@ -97,7 +105,7 @@ class BookSerializer(AbstractBaseSerializer):
 
         return DocumentSerializer(obj.file).data if obj.file else None
 
-    def get_category_book(self, obj):
+    def get_categories(self, obj):
         """
         Get the details of the category book.
         """

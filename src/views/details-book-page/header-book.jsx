@@ -1,21 +1,24 @@
 import { useAppSelector } from "@/hooks/redux/useStore";
+import { useLibrary } from "@/hooks/redux/useLibrary";
 
 export const CustomHeaderBook = ({ book }) => {
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
-  
+  const { handleAddBookToLibrary, handleDisaggregateBookFromLibrary } =
+    useLibrary();
+
   return (
     <>
       <header className="lg:w-full w-[400px] lg:h-[350px] h-full flex items-center justify-center border-b shadow-2xl lg:-mt-0 -mt-6">
         <figure className="flex lg:flex-row flex-col lg:gap-5 items-center justify-center w-full h-full">
           <img
-            src={book.img}
+            src={book.cover_details.image}
             alt={book.tittle}
             className="object-cover rounded-xl shadow-xl lg:h-[300px] lg:p-0 lg:scale-100 scale-75 lg:w-[200px] lg:-mt-2.5"
           />
           <figcaption className="h-full py-12 flex flex-col lg:items-start items-center justify-between lg:-mt-0 -mt-16">
             <div className="lg:mb-0 mb-2">
               <h2 className="text-3xl font-bold w-full">{book.tittle}</h2>
-              {book.isComplete && (
+              {book.is_complete && (
                 <span className="text-3xl font-bold w-full inline-flex -ml-[1px]">
                   (Completa
                   <svg
@@ -60,7 +63,7 @@ export const CustomHeaderBook = ({ book }) => {
                   </svg>
                   <small>Lecturas</small>
                 </span>
-                <span className="text-sm font-bold">{book.reads}</span>
+                <span className="text-sm font-bold">{book.count_reads}</span>
               </div>
               <div className="w-[1px] bg-gray-400 -mx-3 h-14" />
               <div className="flex flex-col gap-1 items-center justify-center">
@@ -103,7 +106,9 @@ export const CustomHeaderBook = ({ book }) => {
 
                   <small>Capítulos</small>
                 </span>
-                <span className="text-sm font-bold">{book.parts}</span>
+                <span className="text-sm font-bold">
+                  {book.number_chapters}
+                </span>
               </div>
             </div>
             <div className="flex flex-row items-center gap-1">

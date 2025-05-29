@@ -31,9 +31,9 @@ export const addBookToLibraryAPI = async (data) => {
 };
 
 // endpoint for disaggregate bokk
-export const disaggregateBookFromLibraryAPI = async () => {
+export const disaggregateBookFromLibraryAPI = async (id) => {
   try {
-    const response = await axiosInstance.delete(`/api/disaggregate-book/`);
+    const response = await axiosInstance.delete(`/api/disaggregate-book/${id}/`);
 
     return response;
   } catch (error) {

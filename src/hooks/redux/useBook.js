@@ -1,4 +1,8 @@
-import { createBookThunk, getBooksThunk } from "@/store/book/thunks";
+import {
+  createBookThunk,
+  getBooksThunk,
+  getBookForIdThunk,
+} from "@/store/book/thunks";
 import { useAppDispatch } from "./useStore";
 
 export const useBook = () => {
@@ -12,8 +16,13 @@ export const useBook = () => {
     dispath(getBooksThunk(filter));
   };
 
+  const handleGetBookForId = (bookId) => {
+    dispath(getBookForIdThunk(bookId));
+  };
+
   return {
     handleCreateBook,
     handleGetBooks,
+    handleGetBookForId,
   };
 };
