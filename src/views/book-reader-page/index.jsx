@@ -111,7 +111,9 @@ const BookReaderView = () => {
           </div>
 
           <Document
-            file={book.file_details.file}
+            file={{
+              url: `https://cors-anywhere.herokuapp.com/${book.file_details.file}`,
+            }}
             onLoadSuccess={onDocumentLoadSuccess}
           >
             <div className="flex justify-center items-center h-full border-8 border-[#492800] rounded-2xl bg-white shadow-2xl shadow-gray-800 flex-col lg:flex-row">

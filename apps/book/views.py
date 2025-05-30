@@ -18,7 +18,7 @@ from .mixins import (
 )
 
 
-from django.http import FileResponse, Http404
+from django.http import FileResponse
 from google.cloud import storage
 from django.conf import settings
 import mimetypes
@@ -141,7 +141,7 @@ class ReadBookView(BaseCustomAPIView):
     queryset = Book.objects.all()
     book = None
     serializer_class = BookSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     pagination_class = LargeSetPagination
     filterset_class = BookFilter
     parser_classes = (MultiPartParser, FormParser)
@@ -155,13 +155,16 @@ class ReadBookView(BaseCustomAPIView):
         return self.Meta.model
 
     def get(self, request, *args, **kwargs):
+        book = self.get_object(*args, **kwargs)
         client = storage.Client()
 
-        bucket = client.bucket("nombre-de-tu-bucket")
-        blob = bucket.blob(f"ruta/al/archivo/{book_id}.pdf")
+        bucket = client.bucket(settings.GS_BUCKET_NAME)
+        blob = bucket.blob(book.file.url)
 
         if not blob.exists():
-            raise Http404("Archivo no encontrado")
+            return Response(
+                {"detail": "Archivo no encontrado"}, status=status.HTTP_404_NOT_FOUND
+            )
 
         file_stream = blob.open("rb")
         content_type, _ = mimetypes.guess_type(blob.name)
