@@ -1,13 +1,47 @@
 import { useAppSelector } from "@/hooks/redux/useStore";
 import { useLibrary } from "@/hooks/redux/useLibrary";
+import { Login } from "../auth/login";
+import { CustomModal } from "@/components/modal";
+import { useState } from "react";
+import { toast } from "sonner";
 
 export const CustomHeaderBook = ({ book }) => {
+  const [openLoginModal, setOpenLoginModal] = useState(false);
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
-  const { handleAddBookToLibrary, handleDisaggregateBookFromLibrary } =
-    useLibrary();
+  const { handleAddBookToLibrary } = useLibrary();
+
+  const read = () => {
+    console.log(isAuthenticated);
+    if (!isAuthenticated) {
+      toast.info("Inicia sesión para continuar");
+      setOpenLoginModal(true);
+    }
+    if (!book.in_library) {
+      handleAddBookToLibrary(book.uid);
+    }
+  };
+
+  const add = () => {
+    if (!isAuthenticated) {
+      toast.info("Inicia sesión para continuar");
+      setOpenLoginModal(true);
+    }
+    if (!book.in_library) {
+      handleAddBookToLibrary(book.uid);
+    }
+  };
 
   return (
     <>
+      {/* Modal de inicio de sesión */}
+      <CustomModal
+        open={openLoginModal}
+        handleOpen={() => setOpenLoginModal(false)} // Cierra el modal
+        classNameDialog="custom-dialog-class" // Clases personalizadas
+        classNameBody="custom-body-class"
+      >
+        <Login />
+      </CustomModal>
       <header className="lg:w-full w-[400px] lg:h-[350px] h-full flex items-center justify-center border-b shadow-2xl lg:-mt-0 -mt-6">
         <figure className="flex lg:flex-row flex-col lg:gap-5 items-center justify-center w-full h-full">
           <img
@@ -127,7 +161,9 @@ export const CustomHeaderBook = ({ book }) => {
                     d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"
                   />
                 </svg>
-                <span className="font-semibold">Comenzar a leer</span>
+                <span className="font-semibold" onClick={() => read()}>
+                  Comenzar a leer
+                </span>
               </button>
               <button className="flex gap-1.5 bg-black-500 py-3 px-3 rounded-r-full text-primary">
                 <svg
@@ -144,7 +180,9 @@ export const CustomHeaderBook = ({ book }) => {
                     d="M12 4.5v15m7.5-7.5h-15"
                   />
                 </svg>
-                <span className="font-semibold">Agregar</span>
+                <span className="font-semibold" onClick={() => add()}>
+                  Agregar
+                </span>
               </button>
             </div>
           </figcaption>

@@ -61,13 +61,19 @@ class AddBookView(BaseCustomAPIView, ValidateBookItem):
         user = request.user
         library = Library.objects.get(user=user)
         book = Book.objects.get(pk=book_uid)
+        if Item.objects.filter(book=book_uid, library=library.uid).exists():
+            return Response(
+                {"detail": "Este libro ya está agregado a tu biblioteca"},
+                status=status.HTTP_409_CONFLICT,
+            )
+
         item = ItemSerializer(data={"library": library.uid, "book": book.uid})
         item.is_valid(raise_exception=True)
         self.perform_create(item)
 
         return Response(
             {self.get_verbose_name(): self.get_serializer(library).data},
-            status=status.HTTP_204_NO_CONTENT,
+            status=status.HTTP_201_CREATED,
         )
 
 

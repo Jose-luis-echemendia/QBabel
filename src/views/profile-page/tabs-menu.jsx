@@ -1,13 +1,10 @@
 import { useState } from "react";
 import { Following } from "./following";
 import { CardProfile } from "./card-profile";
-import { useAppSelector } from "@/hooks/redux/useStore";
-import { MyBooks } from "./my-books";
 import ReadingListProfile from "./card-read-profile";
 
 export const TabsMenu = () => {
   const [activeTab, setActiveTab] = useState("info");
-  const auth = useAppSelector((state) => state.auth);
 
   return (
     <>
@@ -33,18 +30,6 @@ export const TabsMenu = () => {
           >
             Following
           </button>
-          {(auth.user.role === "Admin" || auth.user.role === "Writer") && (
-            <button
-              className={` pb-2 ${
-                activeTab === "books"
-                  ? "border-b-2 border-primary font-bold text-black"
-                  : "text-gray-600"
-              }`}
-              onClick={() => setActiveTab("books")}
-            >
-              books
-            </button>
-          )}
         </div>
 
         <button className="mr-4 md:mr-24 px-5 gap-3 py-2 mb-3 border border-gray-300 rounded-md text-gray-700 flex items-center hover:bg-gray-100">
@@ -74,11 +59,6 @@ export const TabsMenu = () => {
         {activeTab === "following" && (
           <div>
             <Following />
-          </div>
-        )}
-        {activeTab === "books" && (
-          <div>
-            <MyBooks />
           </div>
         )}
       </div>

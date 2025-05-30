@@ -77,7 +77,6 @@ export const FormAddBook = ({ handleOpen }) => {
   const onSubmit = (data) => {
     const formData = new FormData();
 
-    console.log(errors.cover?.message);
 
     // Adjuntar archivos y datos
     formData.append('cover', data.cover[0]);

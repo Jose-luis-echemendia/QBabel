@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-
 import { HeroProfile } from './hero-profile';
 import { TabsMenu } from './tabs-menu';
 import { useParams } from 'react-router-dom';

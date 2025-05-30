@@ -43,7 +43,6 @@ export const bookSlice = createSlice({
         state.loading = true;
       })
       .addCase(getBookForIdThunk.fulfilled, (state, action) => {
-        console.log(state.payload);
         state.loading = false;
         state.book = action.payload.book;
       })

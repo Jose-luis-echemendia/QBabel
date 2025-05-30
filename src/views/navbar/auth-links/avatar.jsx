@@ -65,7 +65,7 @@ export const CustomAvatar = () => {
     },
     {
       label: "Mi biblioteca",
-      navigateTo: "/#",
+      navigateTo: "/library",
       action: null,
       icon: (
         <svg

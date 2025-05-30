@@ -113,6 +113,14 @@ class Book(BaseModel):
 
         return Comment.objects.filter(book=self, is_active=True).count()
 
+    @property
+    def in_library(self):
+        from apps.library.models import Item
+
+        return Item.objects.filter(
+            book=self.uid, library=self.author.library.uid
+        ).exists()
+
     def __str__(self):
         return self.title
 

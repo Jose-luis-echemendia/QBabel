@@ -5,7 +5,7 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.parsers import MultiPartParser, FormParser
 from apps.utils.pagination import LargeSetPagination
-from apps.utils.views.abstract_views import BaseViewSet
+from apps.utils.views.abstract_views import BaseViewSet, BaseCustomAPIView
 from apps.utils.mixins import CreateImageMixin
 from .serializers import BookSerializer, CategoryBookSerializer
 from .models import Book
@@ -16,6 +16,12 @@ from .mixins import (
     CreateFileBookMixin,
     PrepareDataForCategoryBookMixin,
 )
+
+
+from django.http import FileResponse, Http404
+from google.cloud import storage
+from django.conf import settings
+import mimetypes
 
 
 class BookViewSet(
@@ -129,3 +135,34 @@ class BookViewSet(
             {"data": True},
             status=status.HTTP_204_NO_CONTENT,
         )
+
+
+class ReadBookView(BaseCustomAPIView):
+    queryset = Book.objects.all()
+    book = None
+    serializer_class = BookSerializer
+    permission_classes = [IsAuthenticated]
+    pagination_class = LargeSetPagination
+    filterset_class = BookFilter
+    parser_classes = (MultiPartParser, FormParser)
+
+    class Meta:
+        model = Book
+        verbose_name = "book"
+        verbose_name_plural = "books"
+
+    def get_model(self):
+        return self.Meta.model
+
+    def get(self, request, *args, **kwargs):
+        client = storage.Client()
+
+        bucket = client.bucket("nombre-de-tu-bucket")
+        blob = bucket.blob(f"ruta/al/archivo/{book_id}.pdf")
+
+        if not blob.exists():
+            raise Http404("Archivo no encontrado")
+
+        file_stream = blob.open("rb")
+        content_type, _ = mimetypes.guess_type(blob.name)
+        return FileResponse(file_stream, content_type=content_type)

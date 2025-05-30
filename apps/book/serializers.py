@@ -63,6 +63,7 @@ class BookSerializer(AbstractBaseSerializer):
             "license",
             "chapters",
             "reviews",
+            "in_library",
         ]
         extra_kwargs = {
             "isbn": {"required": True},
@@ -86,8 +87,9 @@ class BookSerializer(AbstractBaseSerializer):
         """
         from apps.profile.serializers import ProfileSerializer
 
-        return ProfileSerializer(obj.author.profile).data if obj.author.profile else None
-
+        return (
+            ProfileSerializer(obj.author.profile).data if obj.author.profile else None
+        )
 
     def get_cover_details(self, obj):
         """

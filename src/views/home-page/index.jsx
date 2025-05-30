@@ -15,8 +15,6 @@ const HomeView = () => {
 
   const books = booksState.books?.results?.books;
 
-  console.log("books", books);
-
   useEffect(() => {
     // get books
     handleGetBooks({ is_published: true });

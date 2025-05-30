@@ -15,12 +15,15 @@ const DetailsBookView = () => {
   const booksState = useAppSelector((state) => state.book);
   const { loading, book } = booksState;
 
-  console.log(loading);
-
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+
     const uid = params.bookId;
     handleGetBookForId(uid);
-  }, []);
+  }, [params]);
 
   return (
     <>

@@ -18,7 +18,9 @@ export const getLIbraryAPI = async () => {
 // endpoint for add book
 export const addBookToLibraryAPI = async (data) => {
   try {
-    const response = await axiosInstance.post("/api/library/add-book/", data);
+    const response = await axiosInstance.post("/api/library/add-book/", {
+      book: data,
+    });
 
     return response;
   } catch (error) {
@@ -33,7 +35,9 @@ export const addBookToLibraryAPI = async (data) => {
 // endpoint for disaggregate bokk
 export const disaggregateBookFromLibraryAPI = async (id) => {
   try {
-    const response = await axiosInstance.delete(`/api/disaggregate-book/${id}/`);
+    const response = await axiosInstance.delete(
+      `/api/disaggregate-book/${id}/`
+    );
 
     return response;
   } catch (error) {
