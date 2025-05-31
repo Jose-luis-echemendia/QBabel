@@ -269,3 +269,18 @@ export const schemaBook = yup.object({
       "Todos los campos son obligatorios. Por favor seleccione el estado"
     ),
 });
+
+export const schemaComment = yup.object({
+  rating: yup
+    .number()
+    .required("Por favor califica con coraziones")
+    .min(1, "La calificación debe ser al menos 1 estrella")
+    .max(5, "La calificación no puede ser mayor a 5 estrellas")
+    .integer("La calificación debe ser un número entero"),
+
+  comment: yup
+    .string()
+    .required(
+      "Todos los campos son obligatorios. Por favor introduzca un comentario"
+    ),
+});

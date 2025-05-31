@@ -1,35 +1,27 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Rating } from '@material-tailwind/react'
+import React from "react";
+import PropTypes from "prop-types";
+import { Rating } from "@material-tailwind/react";
 
-function CustomRating ({
-  srcRatedIcon = null,
-  srcUnratedIcon = null,
+function CustomRating({
+  RatedIcon = null,
+  UnratedIcon = null,
   value = 0,
   readonly = false,
-  onChange = () => {}
+  onChange = () => {},
 }) {
   return (
     <Rating
-      ratedIcon={srcRatedIcon ? <img src={srcRatedIcon} alt='ratedIcon' /> : undefined}
-      unratedIcon={srcUnratedIcon ? <img src={srcUnratedIcon} alt='unratedIcon' /> : undefined}
+      ratedIcon={RatedIcon ? <RatedIcon /> : undefined}
+      unratedIcon={UnratedIcon ? <UnratedIcon /> : undefined}
       value={value}
       readonly={readonly}
       onChange={onChange}
     />
-  )
+  );
 }
 
 // PropTypes for CustomRating
 CustomRating.propTypes = {
-  /**
-   * Icono para las estrellas calificadas. Si no se proporciona, se usará el predeterminado de Material Tailwind.
-   */
-  srcRatedIcon: PropTypes.string,
-  /**
-   * Icono para las estrellas no calificadas. Si no se proporciona, se usará el predeterminado de Material Tailwind.
-   */
-  srcUnratedIcon: PropTypes.string,
   /**
    * Valor actual de la calificación. Debe ser un número entre 0 y el máximo permitido.
    */
@@ -41,7 +33,7 @@ CustomRating.propTypes = {
   /**
    * Función que se ejecuta cuando el valor de la calificación cambia.
    */
-  onChange: PropTypes.func
-}
+  onChange: PropTypes.func,
+};
 
-export default CustomRating
+export default CustomRating;

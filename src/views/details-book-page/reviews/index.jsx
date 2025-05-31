@@ -9,7 +9,7 @@ export const ReviewsBook = ({ pkBook }) => {
 
   return (
     <div className="flex flex-col items-center justify-center gap-0">
-      <ReviewForm />
+      <ReviewForm pkBook={pkBook} />
       {isLoading && <div>Cargando reseñas...</div>}
       {isError && <div>Error al cargar reseñas</div>}
 

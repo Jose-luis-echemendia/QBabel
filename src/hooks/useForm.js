@@ -6,6 +6,7 @@ export const useForm = (schema) => {
     register,
     handleSubmit,
     control,
+    setValue,
     formState: { errors },
   } = useFormReact({
     resolver: yupResolver(schema),
@@ -16,5 +17,6 @@ export const useForm = (schema) => {
     handleSubmit,
     errors,
     control,
+    setValue,
   };
 };

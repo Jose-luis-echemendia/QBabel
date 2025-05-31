@@ -96,7 +96,7 @@ class CommentViewSet(BaseViewSet):
 
         if not isinstance(rating, int):
             return Response(
-                {"error": "Rating is required"}, status=status.HTTP_400_BAD_REQUEST
+                {"error": "Rating is not type int"}, status=status.HTTP_400_BAD_REQUEST
             )
 
         if rating > 5 or rating < 0:
