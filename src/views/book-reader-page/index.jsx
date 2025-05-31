@@ -21,7 +21,7 @@ const BookReaderView = () => {
   }, [params]);
 
   const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(8);
+  const [pageNumber, setPageNumber] = useState(1);
   const [activeButton, setActiveButton] = useState("");
   const [scale, setScale] = useState(1);
 
@@ -112,9 +112,7 @@ const BookReaderView = () => {
 
           <Document
             file={book.file_details.file}
-            onDocumentLoadSuccess={() =>
-              onDocumentLoadSuccess(book.number_pages)
-            }
+            onLoadSuccess={onDocumentLoadSuccess}
           >
             <div className="flex justify-center items-center h-full border-8 border-[#492800] rounded-2xl bg-white shadow-2xl shadow-gray-800 flex-col lg:flex-row">
               <Page
@@ -124,18 +122,17 @@ const BookReaderView = () => {
                 scale={scale}
                 className="w-[80vw] h-[40vw] lg:w-[40vw] lg:h-[40vw] flex justify-center items-center rounded-tl-lg rounded-bl-lg"
               />
-              {pageNumber + 1 <= numPages && (
-                <div className="flex items-center h-full lg:rounded-tr-lg lg:rounded-br-lg flex-col lg:flex-row">
-                  <div className="lg:w-4 lg:h-full bg-[#492800] w-full h-4"></div>
-                  <Page
-                    pageNumber={pageNumber + 1}
-                    renderTextLayer={false}
-                    renderAnnotationLayer={false}
-                    scale={scale}
-                    className="w-[80vw] h-[40vw] lg:w-[40vw] lg:h-[40vw] flex justify-center items-center rounded-tr-lg rounded-br-lg"
-                  />
-                </div>
-              )}
+
+              <div className="flex items-center h-full lg:rounded-tr-lg lg:rounded-br-lg flex-col lg:flex-row">
+                <div className="lg:w-4 lg:h-full bg-[#492800] w-full h-4"></div>
+                <Page
+                  pageNumber={pageNumber + 1}
+                  renderTextLayer={false}
+                  renderAnnotationLayer={false}
+                  scale={scale}
+                  className="w-[80vw] h-[40vw] lg:w-[40vw] lg:h-[40vw] flex justify-center items-center rounded-tr-lg rounded-br-lg"
+                />
+              </div>
             </div>
           </Document>
         </div>
