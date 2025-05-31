@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { Following } from "./following";
 import { CardProfile } from "./card-profile";
+import { CustomModal } from "@/components/modal";
+import { ProfileForm } from "./profile-form";
 import ReadingListProfile from "./card-read-profile";
 
 export const TabsMenu = () => {
   const [activeTab, setActiveTab] = useState("info");
+  const [openProfileFormModal, setOpenProfileFormModal] = useState(false);
 
   return (
     <>
@@ -32,7 +35,21 @@ export const TabsMenu = () => {
           </button>
         </div>
 
-        <button className="mr-4 md:mr-24 px-5 gap-3 py-2 mb-3 border border-gray-300 rounded-md text-gray-700 flex items-center hover:bg-gray-100">
+        <CustomModal
+          open={openProfileFormModal}
+          handleOpen={() => setOpenProfileFormModal(false)} // Cierra el modal
+          classNameDialog="custom-dialog-class" // Clases personalizadas
+          classNameBody="custom-body-class"
+          exitButton={true}
+          size="md"
+        >
+          <ProfileForm handleOpen={() => setOpenProfileFormModal(false)} />
+        </CustomModal>
+
+        <button
+          onClick={() => setOpenProfileFormModal(true)}
+          className="mr-4 md:mr-24 px-5 gap-3 py-2 mb-3 border border-gray-300 rounded-md text-gray-700 flex items-center hover:bg-gray-100"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"

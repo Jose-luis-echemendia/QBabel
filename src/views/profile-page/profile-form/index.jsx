@@ -1,32 +1,17 @@
-import { customCheckboxTheme } from "@/utils/material-tailwindscss/themes";
-import { Checkbox, ThemeProvider } from "@material-tailwind/react";
-import { useState, useEffect } from "react";
-import { Select, Option } from "@material-tailwind/react";
-import { schemaCategory } from "@/helpers/yup-schemas";
+import { schemaProfile } from "@/helpers/yup-schemas";
 import { useForm } from "@/hooks/useForm";
-import { Controller } from "react-hook-form";
-import { useCategory } from "@/hooks/redux/useCategory";
-import { translateLanguageCategory } from "@/helpers/translate";
-import { toast } from "react-toastify";
-import {
-  useCreateCategory,
-  useUpdateCategory,
-} from "@/hooks/jquery/useCategoryQuery";
+import { useEffect, useState } from "react";
 
-export const OverViewCategory = ({ category, handleOpen }) => {
+export const ProfileForm = ({ profile, handleOpen }) => {
   const [preview, setPreview] = useState(null);
-  const { handleCreateCategory } = useCategory();
   const [selectedImage, setSelectedImage] = useState(null);
-  const { register, handleSubmit, errors, control } = useForm(schemaCategory);
-
-  const { mutate: updateCategory } = useUpdateCategory();
-  const { mutate: createCategory } = useCreateCategory();
+  const { register, handleSubmit, errors } = useForm(schemaProfile);
 
   // Crear preview cuando se selecciona una imagen
   useEffect(() => {
     if (!selectedImage) {
-      if (category?.image_details) {
-        setPreview(category.image_details.image); // Imagen existente de la categoría
+      if (profile?.avatar_details) {
+        setPreview(profile.avatar_details.image); // Imagen existente de la categoría
       } else {
         setPreview(null);
       }
@@ -38,7 +23,7 @@ export const OverViewCategory = ({ category, handleOpen }) => {
 
     // Limpieza
     return () => URL.revokeObjectURL(objectUrl);
-  }, [selectedImage, category]);
+  }, [selectedImage, profile]);
 
   const handleImageSelect = (e) => {
     if (!e.target.files || e.target.files.length === 0) {
@@ -49,106 +34,24 @@ export const OverViewCategory = ({ category, handleOpen }) => {
   };
 
   const onSubmit = async (data) => {
-    // 1. Montar FormData
-    const formData = new FormData();
-    formData.append("name", data.name);
-    formData.append("description", data.description || "");
-    formData.append("type", translateLanguageCategory(data.type));
-
-    formData.append("isActive", data.isActive);
-    if (selectedImage) {
-      formData.append("img", selectedImage);
-    }
-
-    try {
-      if (!category) {
-        createCategory(formData);
-      } else {
-        console.log(category.uid);
-        updateCategory({ id: category.uid, data: formData });
-      }
-
-      handleOpen();
-    } catch (err) {
-      console.error("Error al guardar categoría:", err);
-    }
+    alert(data);
   };
-
   return (
     <>
       <div className="flex flex-col gap-4 items-center justify-center w-full h-full p-5">
         <h4 className="text-black font-semibold text-2xl w-fit">
-          Registrar Categoría
+          Actualiza tu perfil
         </h4>
         <form
           className="grid grid-cols-6 w-full h-full gap-5"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div className="sm:col-span-4">
-            <label
-              htmlFor="name"
-              className="block text-sm/6 font-medium text-gray-900"
-            >
-              Nombre
-            </label>
-            <div className="mt-2.5">
-              <div className="flex items-center rounded-md bg-white outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary">
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  {...register("name")}
-                  placeholder={category?.name || "Nombre de la categoria"}
-                  defaultValue={category?.name || ""}
-                  className="block border p-2 rounded-lg border-gray-100 min-w-0 grow py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
-                />
-
-                {errors.name && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.name.message}
-                  </p>
-                )}
-              </div>
-            </div>
-          </div>
-
-          <div className="sm:col-span-2">
-            <label
-              htmlFor="name"
-              className="block text-sm/6 font-medium text-gray-900"
-            >
-              Tipo
-            </label>
-            <div className="mt-2.5">
-              <Controller
-                name="type"
-                control={control}
-                defaultValue={category?.type}
-                render={({ field }) => (
-                  <Select
-                    label="Selecciona tipo de categoría"
-                    value={field.value}
-                    onChange={(val) => field.onChange(val)}
-                  >
-                    <Option value="Libro">Libro</Option>
-                    <Option value="Publicaciones">Publicaciones</Option>
-                  </Select>
-                )}
-              />
-              {errors.type && (
-                <p className="text-red-500 text-sm mt-1">
-                  {errors.type.message}
-                </p>
-              )}
-            </div>
-          </div>
-
           <div className="col-span-full">
             <label
               htmlFor="cover-photo"
               className="block text-sm/6 font-medium text-gray-900"
             >
-              Imagen
+              Avatar
             </label>
             <div className="mt-2.5 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
               <div className="relative flex flex-col items-center justify-center text-center">
@@ -203,19 +106,19 @@ export const OverViewCategory = ({ category, handleOpen }) => {
                     htmlFor="file-upload"
                     className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 focus-within:outline-hidden hover:text-indigo-500"
                   >
-                    <span>Seleccione un archivo</span>{" "}
+                    <span>Seleccione tu foto de perfil</span>{" "}
                     <input
                       id="file-upload"
-                      name="img"
+                      name="avatar"
                       type="file"
-                      {...register("img")}
+                      {...register("avatar")}
                       className="sr-only"
                       onChange={handleImageSelect}
                       accept="image/png, image/jpeg, image/gif"
                     />
-                    {errors.img && (
+                    {errors.avatar && (
                       <p className="text-red-500 text-sm mt-1">
-                        {errors.img.message}
+                        {errors.avatar.message}
                       </p>
                     )}
                   </label>
@@ -227,33 +130,6 @@ export const OverViewCategory = ({ category, handleOpen }) => {
               </div>
             </div>
           </div>
-
-          <div className="sm:col-span-4 flex gap-2 items-center -mt-1 ml-1">
-            <label
-              htmlFor="name"
-              className="block text-sm/6 font-medium text-gray-900 mt-2.5"
-            >
-              Activo
-            </label>
-            <div className="mt-2.5">
-              <div className="flex items-center rounded-md bg-white outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary">
-                <ThemeProvider value={customCheckboxTheme}>
-                  <Checkbox
-                    defaultChecked
-                    id="isActive"
-                    name="isActive"
-                    {...register("isActive")}
-                  />
-                </ThemeProvider>
-                {errors.isActive && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.isActive.message}
-                  </p>
-                )}
-              </div>
-            </div>
-          </div>
-
           <div className="flex items-center justify-end gap-4 border-t col-span-full pt-4 -mt-2">
             <button
               className="bg-black-500 py-1 px-2.5 rounded-xl"

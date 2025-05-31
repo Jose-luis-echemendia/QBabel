@@ -31,6 +31,10 @@ class ProfileSerializer(AbstractBaseSerializer):
             "number_phone",
             "literary_preferences",
             "literary_preferences_details",
+            "count_following",
+            "count_follower",
+            "count_reads",
+            "count_books"
         ]
         extra_kwargs = {
             "user": {"read_only": True},

@@ -8,63 +8,94 @@ from .enums import SexType
 
 User = get_user_model()
 
+
 class Profile(BaseModel):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    avatar = models.ForeignKey(GenericImage, on_delete=models.SET_NULL, related_name='avatar', blank=True, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
+    avatar = models.ForeignKey(
+        GenericImage,
+        on_delete=models.SET_NULL,
+        related_name="avatar",
+        blank=True,
+        null=True,
+    )
     bio = models.TextField(max_length=500, blank=True)
     age = models.PositiveIntegerField(blank=True, null=True)
-    sex = models.CharField(max_length=1, blank=True, null=True, choices=SexType.choices, default=SexType.m)
+    sex = models.CharField(
+        max_length=1, blank=True, null=True, choices=SexType.choices, default=SexType.m
+    )
     country = models.CharField(max_length=50, blank=True, null=True)
     number_phone = models.CharField(max_length=15, blank=True, null=True)
-    literary_preferences = models.ManyToManyField(Category, related_name='literary_preferences', blank=True)
+    literary_preferences = models.ManyToManyField(
+        Category, related_name="literary_preferences", blank=True
+    )
 
     @property
     def user_name(self):
         return self.user.user_name if self.user else None
 
+    @property
+    def count_following(self):
+        return Follower.objects.filter(writer=self).count()
+
+    @property
+    def count_follower(self):
+        return Follower.objects.filter(follower=self).count()
+
+    @property
+    def count_reads(self):
+        from django.db.models import Sum
+
+        if self.user:
+            # Sumar los 'count_reads' de todos los libros del autor
+            result = self.user.books.aggregate(total_reads=Sum("count_reads"))
+            return result["total_reads"] or 0  # Retorna 0 si no hay lecturas
+        return 0
+
+    @property
+    def count_books(self):
+        return self.user.books.count() if self.user else 0
+
     def __str__(self):
         return self.user.user_name or "username not set"
-    
+
     def get_slug_source_field(self):
-        return 'user'
-    
+        return "user"
+
     class Meta:
-        db_table = 'Profile'
+        db_table = "Profile"
         managed = True
-        verbose_name = 'Profile'
-        verbose_name_plural = 'Profiles'
+        verbose_name = "Profile"
+        verbose_name_plural = "Profiles"
         ordering = ("-created_at",)
-        
+
+
 class Follower(BaseModel):
     follower = models.ForeignKey(
-        Profile,
-        related_name='following',
-        on_delete=models.CASCADE
+        Profile, related_name="following", on_delete=models.CASCADE
     )
     writer = models.ForeignKey(
-        Profile,
-        related_name='follower',
-        on_delete=models.CASCADE
+        Profile, related_name="follower", on_delete=models.CASCADE
     )
 
-    
     def __str__(self):
         return f"{self.follower.user.user_name} follows {self.writer.user.user_name}"
-    
+
     def get_slug_source_field(self):
-        return 'writer'
-    
+        return "writer"
+
     class Meta:
-        db_table = 'Follower'
+        db_table = "Follower"
         managed = True
-        verbose_name = 'Follower'
-        verbose_name_plural = 'Followers'
+        verbose_name = "Follower"
+        verbose_name_plural = "Followers"
         ordering = ("-created_at",)
         unique_together = ("follower", "writer")
 
 
 class BankAccount(BaseModel):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='bank_accounts')
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="bank_accounts"
+    )
     bank = models.CharField(max_length=50)
     account_number = models.CharField(max_length=20)
     account_type = models.CharField(max_length=20)
@@ -74,16 +105,16 @@ class BankAccount(BaseModel):
     country = models.CharField(max_length=50)
     currency = models.CharField(max_length=3)
     is_default = models.BooleanField(default=False)
-    
+
     def get_slug_source_field(self):
-        return 'user'
+        return "user"
 
     def __str__(self):
         return f"{self.user.username} - {self.bank}"
-    
+
     class Meta:
-        db_table = 'BankAccount'
+        db_table = "BankAccount"
         managed = True
-        verbose_name = 'Bank Account'
-        verbose_name_plural = 'Bank Accounts'
+        verbose_name = "Bank Account"
+        verbose_name_plural = "Bank Accounts"
         ordering = ("-created_at",)
