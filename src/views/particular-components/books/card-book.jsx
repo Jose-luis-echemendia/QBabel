@@ -1,28 +1,47 @@
 import { useState } from "react";
+import { CustomModal } from "@/components/modal";
+import { BuyBook } from "./buy-book";
 
 export const CardBook = ({ book }) => {
   const [showActions, setShowActions] = useState(false);
+  const [openBuyBookModal, setOpenBuyBookModal] = useState(false);
   return (
     <>
       <div
         onMouseEnter={() => setShowActions(true)}
         onMouseLeave={() => setShowActions(false)}
       >
+        <CustomModal
+          open={openBuyBookModal}
+          handleOpen={() => setOpenBuyBookModal(false)} // cierra el mdoal
+          classNameDialog="custom-dialog-class" // Clases personalizadas
+          classNameBody="custom-body-class flex items-center justify-center"
+          exitButton={true}
+          size="md"
+        >
+          <BuyBook />
+        </CustomModal>
         <div className="relative">
           {showActions && (
             <div className="absolute inset-0 flex items-center justify-center transition-opacity duration-200">
               <div className="relative bg-black bg-opacity-70 w-full h-full rounded p-4 flex flex-col items-center justify-center space-y-2">
                 <button className="w-full bg-transparent text-white border-2 px-3 py-1 rounded hover:bg-gray-300 cursor-pointer hover:text-black transition">
-                  Start Reading
+                  Leer
                 </button>
                 <button className="w-full bg-transparent text-white border-2 border-white px-3 py-1 rounded hover:bg-gray-300 cursor-pointer hover:text-black transition">
-                  Details
+                  Detalles
                 </button>
                 <button className="w-full bg-transparent text-white border-2 border-white px-3 py-1 rounded hover:bg-gray-300 cursor-pointer hover:text-black transition">
-                  Archive
+                  Archivar
                 </button>
-                <button className="w-full bg-transparent text-white border-2 border-white px-3 py-1 rounded  hover:bg-gray-300 cursor-pointer hover:text-black transition">
-                  Add to List
+                <button
+                  onClick={() => {
+                    setShowActions(false);
+                    setOpenBuyBookModal(true);
+                  }}
+                  className="w-full bg-transparent text-white border-2 border-white px-3 py-1 rounded  hover:bg-gray-300 cursor-pointer hover:text-black transition"
+                >
+                  Comprar
                 </button>
 
                 <button

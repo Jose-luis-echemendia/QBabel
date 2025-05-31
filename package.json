@@ -37,6 +37,7 @@
     "sharp": "^0.33.5",
     "sonner": "^2.0.1",
     "swiper": "^11.2.2",
+    "use-react-countries": "^2.0.1",
     "uuid": "^11.0.3",
     "yup": "^1.6.1"
   },
