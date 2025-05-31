@@ -21,7 +21,7 @@ const BookReaderView = () => {
   }, [params]);
 
   const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
+  const [pageNumber, setPageNumber] = useState(8);
   const [activeButton, setActiveButton] = useState("");
   const [scale, setScale] = useState(1);
 
@@ -111,10 +111,10 @@ const BookReaderView = () => {
           </div>
 
           <Document
-            file={{
-              url: `https://cors-anywhere.herokuapp.com/${book.file_details.file}`,
-            }}
-            onLoadSuccess={onDocumentLoadSuccess}
+            file={book.file_details.file}
+            onDocumentLoadSuccess={() =>
+              onDocumentLoadSuccess(book.number_pages)
+            }
           >
             <div className="flex justify-center items-center h-full border-8 border-[#492800] rounded-2xl bg-white shadow-2xl shadow-gray-800 flex-col lg:flex-row">
               <Page
