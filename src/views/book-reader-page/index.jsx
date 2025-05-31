@@ -123,7 +123,7 @@ const BookReaderView = () => {
             onLoadSuccess={onDocumentLoadSuccess}
           >
             {/* Contenido del libro */}
-            <div className="flex w-full h-full z-0">
+            <div className="flex w-full h-full z-0 gap-16">
               {/* Página izquierda */}
               <div className="flex-1 flex justify-end items-center p-4">
                 <div className="bg-white w-full h-full rounded-l-xl rounded-r-sm shadow-inner flex items-center justify-center overflow-hidden">
@@ -132,32 +132,43 @@ const BookReaderView = () => {
                     onLoadSuccess={onDocumentLoadSuccess}
                     className="h-full"
                   >
-                    <Page
-                      pageNumber={pageNumber}
-                      renderTextLayer={false}
-                      renderAnnotationLayer={false}
-                      scale={scale}
-                      className="h-full"
-                    />
-                  </Document>
-                </div>
-              </div>
-
-              {/* Página derecha */}
-              <div className="flex-1 flex justify-start items-center p-4">
-                <div className="bg-white w-full h-full rounded-r-xl rounded-l-sm shadow-inner flex items-center justify-center overflow-hidden">
-                  {pageNumber + 1 <= numPages ? (
-                    <Document file={book.file_details.file} className="h-full">
+                    <div className="flex items-center h-full lg:rounded-tr-lg lg:rounded-br-lg flex-col lg:flex-row">
                       <Page
-                        pageNumber={pageNumber + 1}
+                        pageNumber={pageNumber}
                         renderTextLayer={false}
                         renderAnnotationLayer={false}
                         scale={scale}
-                        className="h-full"
+                        className="w-[80vw] h-[40vw] lg:w-[40vw] lg:h-[40vw] flex justify-center items-center rounded-tr-lg rounded-br-lg"
                       />
+                    </div>
+                  </Document>
+                </div>
+              </div>
+              {/* Lomo del libro */}
+              <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-[95%] bg-gradient-to-r  via-amber-900 to-amber-800 rounded-lg z-10">
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-90 text-black font-bold tracking-wider text-lg">
+                  {book.title}
+                </div>
+              </div>
+              {/* Página derecha */}
+              <div className="flex-1 flex justify-start items-center p-4">
+                <div className="bg-white w-[80vw] h-[40vw] lg:w-[40vw] lg:h-[40vw]  rounded-r-xl rounded-l-sm shadow-inner flex items-center justify-center overflow-hidden">
+                  {pageNumber + 1 <= numPages ? (
+                    <Document file={book.file_details.file} className="h-full">
+                      <div className="flex items-center  lg:rounded-tr-lg lg:rounded-br-lg flex-col lg:flex-row">
+                        <Page
+                          pageNumber={pageNumber + 1}
+                          renderTextLayer={false}
+                          renderAnnotationLayer={false}
+                          scale={scale}
+                          className="w-[80vw] h-[40vw] lg:w-[40vw] lg:h-[40vw] flex justify-center items-center rounded-tr-lg rounded-br-lg"
+                        />
+                      </div>
                     </Document>
                   ) : (
-                    <div className="text-black text-lg italic">Fin.</div>
+                    <div className="text-black text-lg italic flex items-center justify-center lg:rounded-tr-lg lg:rounded-br-lg flex-col lg:flex-row w-[80vw] h-[40vw] lg:w-[40vw] lg:h-[40vw]  rounded-br-lg">
+                      Fin.
+                    </div>
                   )}
                 </div>
               </div>
