@@ -1,63 +1,22 @@
-const reviews = [
-  {
-    id: 1,
-    user: "John Doe",
-    comment: "Great book! Highly recommend it.",
-  },
-  {
-    id: 2,
-    user: "Jane Smith",
-    comment: "Interesting read, but a bit slow in the middle.",
-  },
-  {
-    id: 3,
-    user: "Alice Johnson",
-    comment: "Loved the characters and the plot twists!",
-  },
-  {
-    id: 4,
-    user: "James Brown",
-    comment: "Not my cup of tea, but well written.",
-  },
-  {
-    id: 5,
-    user: "Alice Johnson",
-    comment: "Loved the characters and the plot twists!",
-  },
-  {
-    id: 6,
-    user: "James Brown",
-    comment: "Not my cup of tea, but well written.",
-  },
-  {
-    id: 7,
-    user: "Alice Johnson",
-    comment: "Loved the characters and the plot twists!",
-  },
-  {
-    id: 8,
-    user: "James Brown",
-    comment: "Not my cup of tea, but well written.",
-  },
-];
-
-export const Reviews = () => {
+export const Reviews = ({ reviews }) => {
   return (
     <>
       <div className="grid grid-cols-6 gap-10 container mx-auto lg:px-20 px-6 my-10 ">
         {reviews.map((review) => (
           <div
-            key={review.id}
+            key={review.uid}
             className="col-span-3 flex justify-between gap-2 bg-white shadow-md p-4 rounded-lg"
           >
             <div className="flex flex-col gap-4 items-start justify-start">
               <div className="flex gap-3">
                 <img
                   src="/assets/images/avatar.jpeg"
-                  alt={review.user}
+                  alt={review.profile.avatar_details.image}
                   className="w-7 h-7 object-cover rounded-full"
                 />
-                <span className="font-semibold">{review.user}</span>
+                <span className="font-semibold">
+                  {review.profile.user_name}
+                </span>
               </div>
               <p className="text-gray-700">{review.comment}</p>
             </div>

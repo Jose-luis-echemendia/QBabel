@@ -19,7 +19,7 @@ export const commentSlice = createSlice({
       })
       .addCase(getCommentsThunk.fulfilled, (state, action) => {
         state.loading = false;
-        state.comments = action.payload.comments;
+        state.comments = action.payload.results.comments;
       })
       .addCase(getCommentsThunk.rejected, (state) => {
         state.loading = false;

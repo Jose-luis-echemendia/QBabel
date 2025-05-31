@@ -7,6 +7,7 @@ from rest_framework.permissions import AllowAny
 from .models import Comment
 from .serializers import CommentSerializer
 from .filters import CommentFilter
+from .pagination import CommentPagination
 
 
 class GetCommentFromBook(BaseCustomAPIView):
@@ -14,6 +15,7 @@ class GetCommentFromBook(BaseCustomAPIView):
     serializer_class = CommentSerializer
     filterset_class = CommentFilter
     permission_classes = [AllowAny]
+    pagination_class = CommentPagination
 
     class Meta:
         model = Comment
@@ -32,8 +34,12 @@ class GetCommentFromBook(BaseCustomAPIView):
                 {"error": "Book ID is required."}, status=status.HTTP_400_BAD_REQUEST
             )
         comments = Comment.objects.filter(book__uid=uid)
-        serializer = self.get_serializer(comments, many=True)
-        return Response({"comments": serializer.data}, status=status.HTTP_200_OK)
+        paginator = CommentPagination()
+        results_page = paginator.paginate_queryset(comments, request)
+        serialized_data = self.get_serializer(results_page, many=True).data
+        return paginator.get_paginated_response(
+            {self.get_verbose_name_plural(): serialized_data}
+        )
 
 
 class CommentViewSet(BaseViewSet):
@@ -109,11 +115,11 @@ class CommentViewSet(BaseViewSet):
             return Response(
                 {"error": "Book not found."}, status=status.HTTP_404_NOT_FOUND
             )
-        if Comment.objects.filter(user=request.user, book=book).exists():
-            return Response(
-                {"error": "You have already commented on this book."},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
+        # if Comment.objects.filter(user=request.user, book=book).exists():
+        #    return Response(
+        #        {"error": "You have already commented on this book."},
+        #        status=status.HTTP_400_BAD_REQUEST,
+        #    )
         data["book"] = book.uid
         data["user"] = request.user.pk
 

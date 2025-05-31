@@ -39,7 +39,7 @@ const DetailsBookView = () => {
               <RelatedInformationBook />
             </div>
             <div className="col-span-6">
-              <ReviewsBook />
+              <ReviewsBook pkBook={book.uid} />
             </div>
             <hr className="col-span-6" />
             <div className="col-span-6">

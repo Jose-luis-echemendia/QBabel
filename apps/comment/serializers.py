@@ -11,6 +11,7 @@ class CommentSerializer(AbstractBaseSerializer):
     user = serializers.PrimaryKeyRelatedField(
         queryset=User.objects.all(), write_only=True
     )
+    profile = serializers.SerializerMethodField()
     book = serializers.PrimaryKeyRelatedField(
         queryset=Book.objects.all(), write_only=True
     )
@@ -22,6 +23,7 @@ class CommentSerializer(AbstractBaseSerializer):
         model = Comment
         fields = AbstractBaseSerializer.Meta.fields + [
             "user",
+            "profile",
             "book",
             "comment",
             "rating",
@@ -29,3 +31,8 @@ class CommentSerializer(AbstractBaseSerializer):
             "deslike",
         ]
         extra_kwargs = {"comment": {"required": True}}
+
+    def get_profile(self, obj):
+        from apps.profile.serializers import ProfileSerializer
+
+        return ProfileSerializer(obj.user.profile).data if obj.user.profile else None
