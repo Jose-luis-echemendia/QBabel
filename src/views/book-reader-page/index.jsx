@@ -48,6 +48,14 @@ const BookReaderView = () => {
     }
   }
 
+  const zoomIn = () => {
+    setScale((prev) => Math.min(prev + 0.2, 2));
+  };
+
+  const zoomOut = () => {
+    setScale((prev) => Math.max(prev - 0.2, 0.5));
+  };
+
   useEffect(() => {
     function handleResize() {
       if (window.innerWidth <= 400) {
@@ -114,24 +122,44 @@ const BookReaderView = () => {
             file={book.file_details.file}
             onLoadSuccess={onDocumentLoadSuccess}
           >
-            <div className="flex justify-center items-center h-full border-8 border-[#492800] rounded-2xl bg-white shadow-2xl shadow-gray-800 flex-col lg:flex-row">
-              <Page
-                pageNumber={pageNumber}
-                renderTextLayer={false}
-                renderAnnotationLayer={false}
-                scale={scale}
-                className="w-[80vw] h-[40vw] lg:w-[40vw] lg:h-[40vw] flex justify-center items-center rounded-tl-lg rounded-bl-lg"
-              />
+            {/* Contenido del libro */}
+            <div className="flex w-full h-full z-0">
+              {/* Página izquierda */}
+              <div className="flex-1 flex justify-end items-center p-4">
+                <div className="bg-white w-full h-full rounded-l-xl rounded-r-sm shadow-inner flex items-center justify-center overflow-hidden">
+                  <Document
+                    file={book.file_details.file}
+                    onLoadSuccess={onDocumentLoadSuccess}
+                    className="h-full"
+                  >
+                    <Page
+                      pageNumber={pageNumber}
+                      renderTextLayer={false}
+                      renderAnnotationLayer={false}
+                      scale={scale}
+                      className="h-full"
+                    />
+                  </Document>
+                </div>
+              </div>
 
-              <div className="flex items-center h-full lg:rounded-tr-lg lg:rounded-br-lg flex-col lg:flex-row">
-                <div className="lg:w-4 lg:h-full bg-[#492800] w-full h-4"></div>
-                <Page
-                  pageNumber={pageNumber + 1}
-                  renderTextLayer={false}
-                  renderAnnotationLayer={false}
-                  scale={scale}
-                  className="w-[80vw] h-[40vw] lg:w-[40vw] lg:h-[40vw] flex justify-center items-center rounded-tr-lg rounded-br-lg"
-                />
+              {/* Página derecha */}
+              <div className="flex-1 flex justify-start items-center p-4">
+                <div className="bg-white w-full h-full rounded-r-xl rounded-l-sm shadow-inner flex items-center justify-center overflow-hidden">
+                  {pageNumber + 1 <= numPages ? (
+                    <Document file={book.file_details.file} className="h-full">
+                      <Page
+                        pageNumber={pageNumber + 1}
+                        renderTextLayer={false}
+                        renderAnnotationLayer={false}
+                        scale={scale}
+                        className="h-full"
+                      />
+                    </Document>
+                  ) : (
+                    <div className="text-black text-lg italic">Fin.</div>
+                  )}
+                </div>
               </div>
             </div>
           </Document>
