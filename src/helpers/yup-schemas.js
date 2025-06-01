@@ -109,21 +109,15 @@ export const schemaCategory = yup.object({
 });
 
 export const schemaProfile = yup.object({
+  user_name: yup.string(),
+
   avatar: yup
     .mixed()
-    .test(
-      "required",
-      "Todos los campos son obligatorios. Por favor seleccione una imagen",
-      (value) => {
-        if (!value || value.length === 0) return false; // Ahora es obligatorio
-        return true;
-      }
-    )
     .test(
       "fileSize",
       "Ha introducido datos incorrectos. El archivo es muy grande",
       (value) => {
-        if (!value || value.length === 0) return false; // Ahora es obligatorio
+        if (!value || value.length === 0) return true; // Ahora es obligatorio
         return value[0].size <= 10 * 1024 * 1024; // 10MB
       }
     )
@@ -131,7 +125,7 @@ export const schemaProfile = yup.object({
       "fileType",
       "Ha introducido datos incorrectos. El archivo debe ser una imagen válida",
       (value) => {
-        if (!value || value.length === 0) return false; // Ahora es obligatorio
+        if (!value || value.length === 0) return true; // Ahora es obligatorio
         return ["image/jpeg", "image/png", "image/jpg"].includes(value[0].type);
       }
     ),

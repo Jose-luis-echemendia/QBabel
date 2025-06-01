@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Comment
+from .models import Comment, ReactComment
 
 
 class CommentAdmin(admin.ModelAdmin):
@@ -14,3 +14,5 @@ class CommentAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Comment, CommentAdmin)
+
+admin.site.register(ReactComment)

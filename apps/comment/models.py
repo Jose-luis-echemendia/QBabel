@@ -52,3 +52,30 @@ class Comment(BaseModel):
         verbose_name_plural = "Comments"
         ordering = ["-created_at"]
         # unique_together = ("user", "book")
+
+
+class ReactComment(BaseModel):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="react",
+        verbose_name="User",
+    )
+    comment = models.ForeignKey(
+        Comment,
+        on_delete=models.CASCADE,
+        related_name="react",
+        verbose_name="Comment",
+    )
+
+    def __str__(self):
+        return f"{self.user.user_name} react {self.comment}"
+
+    def get_slug_source_field(self):
+        return "comment"
+
+    class Meta:
+        verbose_name = "ReactComment"
+        verbose_name_plural = "ReactComments"
+        ordering = ["-created_at"]
+        unique_together = ("user", "comment")

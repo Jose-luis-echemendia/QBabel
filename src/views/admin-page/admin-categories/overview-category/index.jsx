@@ -15,7 +15,6 @@ import {
 
 export const OverViewCategory = ({ category, handleOpen }) => {
   const [preview, setPreview] = useState(null);
-  const { handleCreateCategory } = useCategory();
   const [selectedImage, setSelectedImage] = useState(null);
   const { register, handleSubmit, errors, control } = useForm(schemaCategory);
 

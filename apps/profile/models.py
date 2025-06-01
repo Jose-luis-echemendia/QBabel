@@ -30,6 +30,10 @@ class Profile(BaseModel):
     )
 
     @property
+    def email(self):
+        return self.user.email if self.user else None
+
+    @property
     def user_name(self):
         return self.user.user_name if self.user else None
 
@@ -53,7 +57,7 @@ class Profile(BaseModel):
 
     @property
     def count_books(self):
-        return self.user.books.count() if self.user else 0
+        return self.user.books.filter(is_active=True).count() if self.user else 0
 
     def __str__(self):
         return self.user.user_name or "username not set"

@@ -1,11 +1,17 @@
 import { schemaProfile } from "@/helpers/yup-schemas";
 import { useForm } from "@/hooks/useForm";
 import { useEffect, useState } from "react";
+import { useAppSelector } from "@/hooks/redux/useStore";
+import { useUpdateProfile } from "@/hooks/jquery/useProfileQuery";
 
-export const ProfileForm = ({ profile, handleOpen }) => {
+export const ProfileForm = ({ handleOpen }) => {
+  const profile = useAppSelector((state) => state.profile.profile);
   const [preview, setPreview] = useState(null);
+  const [changeImage, setChangeImage] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const { register, handleSubmit, errors } = useForm(schemaProfile);
+
+  const { mutate: updateProfile } = useUpdateProfile();
 
   // Crear preview cuando se selecciona una imagen
   useEffect(() => {
@@ -31,10 +37,24 @@ export const ProfileForm = ({ profile, handleOpen }) => {
       return;
     }
     setSelectedImage(e.target.files[0]);
+    setChangeImage(true);
   };
 
-  const onSubmit = async (data) => {
-    alert(data);
+  const onSubmit = (data) => {
+    const formData = new FormData();
+
+    if (profile.user_name !== data.user_name) {
+      formData.append("user_name", data.user_name);
+    }
+
+    if (changeImage && selectedImage) {
+      formData.append("avatar", selectedImage);
+    }
+    if (formData.size !== 0) {
+      console.log("FormData:", formData);
+      updateProfile({ id: profile.uid, data: formData });
+    }
+    handleOpen();
   };
   return (
     <>
@@ -46,6 +66,33 @@ export const ProfileForm = ({ profile, handleOpen }) => {
           className="grid grid-cols-6 w-full h-full gap-5"
           onSubmit={handleSubmit(onSubmit)}
         >
+          <div className="sm:col-span-4">
+            <label
+              htmlFor="name"
+              className="block text-sm/6 font-medium text-gray-900"
+            >
+              Nombre de usuario
+            </label>
+            <div className="mt-2.5">
+              <div className="flex items-center rounded-md bg-white outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary">
+                <input
+                  id="name"
+                  name="user_name"
+                  type="text"
+                  {...register("user_name")}
+                  placeholder={profile.user_name}
+                  defaultValue={profile.user_name}
+                  className="block border p-2 rounded-lg border-gray-100 min-w-0 grow py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+                />
+
+                {errors.user_name && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.user_name.message}
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
           <div className="col-span-full">
             <label
               htmlFor="cover-photo"

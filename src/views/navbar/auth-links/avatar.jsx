@@ -17,13 +17,14 @@ export const CustomAvatar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const closeMenu = () => setIsMenuOpen(false);
 
-  const auth = useAppSelector((state) => state.auth);
+  const profile = useAppSelector((state) => state.auth.profile);
+  const user = useAppSelector((state) => state.auth.user);
   const { handleLogout } = useAuth();
 
   const profileMenuItems = [
     {
       label: "Mi perfil",
-      navigateTo: `/profile/${auth.user.user_name}`,
+      navigateTo: `/profile/${profile?.user_name}`,
       action: null,
       icon: (
         <svg
@@ -170,7 +171,7 @@ export const CustomAvatar = () => {
     },
   ];
 
-  if (auth.profile === null || auth.user === null) return <></>;
+  if (profile === null || profile === null) return <></>;
 
   return (
     <>
@@ -184,12 +185,12 @@ export const CustomAvatar = () => {
             >
               <div className="flex items-center gap-4 md:mr-5 -mr-7  lg:w-full lg:h-full size-12">
                 <Avatar
-                  src={auth.profile.avatar_details.image}
-                  alt={auth.profile.avatar_details.alt}
+                  src={profile.avatar_details.image}
+                  alt={profile.avatar_details.alt}
                 />
                 <div className="hidden md:block">
                   <Typography variant="h6" className="text-primary">
-                    {auth.user.user_name || auth.user.email}
+                    {profile.user_name || profile.email}
                   </Typography>
                 </div>
               </div>
@@ -199,7 +200,7 @@ export const CustomAvatar = () => {
             {profileMenuItems.map(
               ({ label, navigateTo, action, icon }, key) => {
                 const isLastItem = key === profileMenuItems.length - 1;
-                if (label === "Administración" && auth.user.role !== "Admin")
+                if (label === "Administración" && user?.role !== "Admin")
                   return null;
                 return (
                   <MenuItem

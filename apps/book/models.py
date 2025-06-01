@@ -114,6 +114,16 @@ class Book(BaseModel):
         return Comment.objects.filter(book=self, is_active=True).count()
 
     @property
+    def avg_rating(self):
+        from django.db.models import Avg
+
+        return Book.objects.annotate(
+            annotated_rating=Avg(
+                "comments__rating", filter=models.Q(comments__rating__gt=0)
+            )
+        )
+
+    @property
     def in_library(self):
         from apps.library.models import Item
 

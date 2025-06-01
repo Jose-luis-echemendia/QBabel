@@ -36,7 +36,9 @@ class GetCommentFromBook(BaseCustomAPIView):
         comments = Comment.objects.filter(book__uid=uid)
         paginator = CommentPagination()
         results_page = paginator.paginate_queryset(comments, request)
-        serialized_data = self.get_serializer(results_page, many=True).data
+        serialized_data = self.get_serializer(
+            results_page, many=True, context={"request": request}
+        ).data
         return paginator.get_paginated_response(
             {self.get_verbose_name_plural(): serialized_data}
         )

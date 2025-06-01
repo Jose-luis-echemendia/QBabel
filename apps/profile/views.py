@@ -229,7 +229,7 @@ class AuthenticatedProfileDetailsView(BaseCustomAPIView):
 
     def get(self, request, *args, **kwargs):
         """
-        endpoint to get all profiles of the authenticated user
+        endpoint to get  profile of the authenticated user
         """
         user = request.user
         profile = Profile.objects.get(user=user)

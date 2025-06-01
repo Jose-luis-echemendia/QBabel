@@ -28,11 +28,11 @@ export const useProfile = () => {
   };
 
   const handleUpdateProfile = (data) => {
-    dispath(updateProfileThunk(data));
+    dispath(updateProfileThunk(data)).unwrap();
   };
 
-  const handleUpdatePartialProfile = (data) => {
-    dispath(updatePartialProfileThunk(data));
+  const handleUpdatePartialProfile = (id, data) => {
+    dispath(updatePartialProfileThunk({ id, data })).unwrap();
   };
 
   return {

@@ -25,9 +25,9 @@ export const updateProfileAPI = async (data) => {
 }
 
 // endpoint for partial update profile
-export const updatePartialProfileAPI = async (data) => {
+export const updatePartialProfileAPI = async (id, data) => {
     try {
-        const response = await axiosInstance.patch("/api/profile/", data);
+        const response = await axiosInstance.patch(`/api/profile/update/${id}/`, data);
         
         return response;
       } catch (error) {

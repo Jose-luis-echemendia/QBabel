@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from apps.utils.serializers.abstract_serializers import AbstractBaseSerializer
-from .models import Comment
+from .models import Comment, ReactComment
 from django.contrib.auth import get_user_model
 from apps.book.models import Book
 
@@ -19,6 +19,8 @@ class CommentSerializer(AbstractBaseSerializer):
     like = serializers.IntegerField(min_value=0, default=0)
     deslike = serializers.IntegerField(min_value=0, default=0)
 
+    user_reacted = serializers.SerializerMethodField()
+
     class Meta:
         model = Comment
         fields = AbstractBaseSerializer.Meta.fields + [
@@ -27,6 +29,7 @@ class CommentSerializer(AbstractBaseSerializer):
             "book",
             "comment",
             "rating",
+            "user_reacted",
             "like",
             "deslike",
         ]
@@ -36,3 +39,36 @@ class CommentSerializer(AbstractBaseSerializer):
         from apps.profile.serializers import ProfileSerializer
 
         return ProfileSerializer(obj.user.profile).data if obj.user.profile else None
+
+    def get_user_reacted(self, obj):
+        request = self.context.get("request")
+        if request and request.user.is_authenticated:
+            # Usamos un cache en el contexto para optimizar consultas
+            if "user_reacted_comments" not in self.context:
+                # Prefetch para evitar N+1: todas las reacciones del usuario en este queryset
+                reacted_comments = ReactComment.objects.filter(
+                    comment__in=[
+                        c.uid for c in obj.__class__.objects.filter(uid=obj.uid)
+                    ],
+                    user=request.user,
+                ).values_list("comment_id", flat=True)
+                self.context["user_reacted_comments"] = set(reacted_comments)
+
+            return obj.uid in self.context["user_reacted_comments"]
+        return False
+
+
+class ReactCommentSerializer(AbstractBaseSerializer):
+    user = serializers.PrimaryKeyRelatedField(
+        queryset=User.objects.all(), write_only=True
+    )
+    comment = serializers.PrimaryKeyRelatedField(
+        queryset=Comment.objects.all(), write_only=True
+    )
+
+    class Meta:
+        model = Comment
+        fields = AbstractBaseSerializer.Meta.fields + [
+            "user",
+            "book",
+        ]
