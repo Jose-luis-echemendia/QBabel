@@ -116,12 +116,12 @@ class Book(BaseModel):
     @property
     def avg_rating(self):
         from django.db.models import Avg
+        from apps.comment.models import Comment
 
-        return Book.objects.annotate(
-            annotated_rating=Avg(
-                "comments__rating", filter=models.Q(comments__rating__gt=0)
-            )
-        )
+        average = Comment.objects.filter(book=self, is_active=True).aggregate(
+            avg=Avg("rating")
+        )["avg"]
+        return round(average, 2) if average is not None else 0.0
 
     @property
     def in_library(self):

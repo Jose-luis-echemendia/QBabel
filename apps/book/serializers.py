@@ -63,6 +63,7 @@ class BookSerializer(AbstractBaseSerializer):
             "license",
             "chapters",
             "reviews",
+            "avg_rating",
             "in_library",
         ]
         extra_kwargs = {

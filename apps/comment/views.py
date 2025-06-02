@@ -4,13 +4,13 @@ from rest_framework.permissions import IsAuthenticated
 from apps.book.models import Book
 from apps.utils.views.abstract_views import BaseViewSet, BaseCustomAPIView
 from rest_framework.permissions import AllowAny
-from .models import Comment
-from .serializers import CommentSerializer
+from .models import Comment, ReactComment
+from .serializers import CommentSerializer, ReactCommentSerializer
 from .filters import CommentFilter
 from .pagination import CommentPagination
 
 
-class GetCommentFromBook(BaseCustomAPIView):
+class GetCommentFromBookView(BaseCustomAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     filterset_class = CommentFilter
@@ -179,3 +179,51 @@ class CommentViewSet(BaseViewSet):
 
         comment.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class ReactCommentView(BaseCustomAPIView):
+    queryset = ReactComment.objects.all()
+    serializer_class = ReactCommentSerializer
+    permission_classes = [IsAuthenticated]
+
+    class Meta:
+        model = ReactComment
+        verbose_name = "react_comment"
+        verbose_name_plural = "react_comments"
+
+    def get_model(self):
+        return self.Meta.model
+
+    def post(self, request, *args, **kwargs):
+        comment = request.data.get("comment", None)
+        user = request.data.get("user", None)
+
+        if ReactComment.objects.filter(comment=comment, user=user).exists():
+            ReactComment.objects.filter(comment=comment, user=user).update(
+                is_active=True
+            )
+
+            return Response({"detail": "React active again"}, status=status.HTTP_200_OK)
+
+        return self.create_object(request, *args, **kwargs)
+
+
+class UnReactCommentView(BaseCustomAPIView):
+    queryset = ReactComment.objects.all()
+    serializer_class = ReactCommentSerializer
+    permission_classes = [IsAuthenticated]
+
+    class Meta:
+        model = ReactComment
+        verbose_name = "react_comment"
+        verbose_name_plural = "react_comments"
+
+    def get_model(self):
+        return self.Meta.model
+
+    def delete(self, request, uid=None, *args, **kwargs):
+        if not uid:
+            return Response(
+                {"detail": "The uid es required"}, status=status.HTTP_400_BAD_REQUEST
+            )
+        return self.desactive_object(request, *args, **kwargs)

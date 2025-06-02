@@ -20,6 +20,7 @@ class CommentSerializer(AbstractBaseSerializer):
     deslike = serializers.IntegerField(min_value=0, default=0)
 
     user_reacted = serializers.SerializerMethodField()
+    user_react_uid = serializers.SerializerMethodField()
 
     class Meta:
         model = Comment
@@ -30,6 +31,7 @@ class CommentSerializer(AbstractBaseSerializer):
             "comment",
             "rating",
             "user_reacted",
+            "user_react_uid",
             "like",
             "deslike",
         ]
@@ -43,19 +45,18 @@ class CommentSerializer(AbstractBaseSerializer):
     def get_user_reacted(self, obj):
         request = self.context.get("request")
         if request and request.user.is_authenticated:
-            # Usamos un cache en el contexto para optimizar consultas
-            if "user_reacted_comments" not in self.context:
-                # Prefetch para evitar N+1: todas las reacciones del usuario en este queryset
-                reacted_comments = ReactComment.objects.filter(
-                    comment__in=[
-                        c.uid for c in obj.__class__.objects.filter(uid=obj.uid)
-                    ],
-                    user=request.user,
-                ).values_list("comment_id", flat=True)
-                self.context["user_reacted_comments"] = set(reacted_comments)
-
-            return obj.uid in self.context["user_reacted_comments"]
+            return ReactComment.objects.filter(
+                comment=obj, user=request.user, is_active=True
+            ).exists()
         return False
+
+    def get_user_react_uid(self, obj):
+        request = self.context.get("request")
+        if request and request.user.is_authenticated:
+            return (
+                ReactComment.objects.filter(comment=obj, user=request.user).first().uid
+            )
+        return None
 
 
 class ReactCommentSerializer(AbstractBaseSerializer):
@@ -67,8 +68,8 @@ class ReactCommentSerializer(AbstractBaseSerializer):
     )
 
     class Meta:
-        model = Comment
+        model = ReactComment
         fields = AbstractBaseSerializer.Meta.fields + [
             "user",
-            "book",
+            "comment",
         ]
