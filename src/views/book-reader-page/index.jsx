@@ -145,11 +145,12 @@ const BookReaderView = () => {
                 </div>
               </div>
               {/* Lomo del libro */}
-              <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-[95%] bg-gradient-to-r  via-amber-900 to-amber-800 rounded-lg z-10">
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-90 text-black font-bold tracking-wider text-lg">
+              <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-[95%] bg-gradient-to-r via-amber-900 to-amber-800 rounded-lg z-10 flex items-center justify-center">
+                <div className="transform rotate-90 whitespace-nowrap text-black font-bold tracking-wider text-[14px] text-center text-xl">
                   {book.title}
                 </div>
               </div>
+
               {/* Página derecha */}
               <div className="flex-1 flex justify-start items-center p-4">
                 <div className="bg-white w-[80vw] h-[40vw] lg:w-[40vw] lg:h-[40vw]  rounded-r-xl rounded-l-sm shadow-inner flex items-center justify-center overflow-hidden">

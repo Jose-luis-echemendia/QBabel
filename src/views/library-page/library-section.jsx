@@ -1,14 +1,13 @@
 // LibrarySection.jsx
 import { useState } from "react";
 import PropTypes from "prop-types";
-import AllStories from "./allstories";
-// Importa tu componente para Reading Lists
-import { ReadingListView } from "./reading-view";
-import { MyBooks } from "./my-books";
+
 import { FormAddBook } from "./form-add-book";
 import { CustomModal } from "@/components/modal";
+import { Tabs } from "./tabs";
+import { ContentTabs } from "./content-tabs";
 
-function LibrarySection({ books }) {
+function LibrarySection() {
   const [openFormAddBookModal, setOpenFormAddBookModal] = useState(false);
   const [activeTab, setActiveTab] = useState("current");
 
@@ -52,81 +51,14 @@ function LibrarySection({ books }) {
           </CustomModal>
         </div>
 
-        {/* Tabs */}
-        <div className="flex items-center justify-between border-b border-gray-200 mb-4">
-          <div className="flex space-x-6 text-xl">
-            <button
-              className={`pb-2 ${
-                activeTab === "current"
-                  ? "border-b-2 border-primary font-bold"
-                  : "text-gray-600"
-              }`}
-              onClick={() => setActiveTab("current")}
-            >
-              Lecturas actuales
-            </button>
-            <button
-              className={`pb-2 ${
-                activeTab === "archive"
-                  ? "border-b-2 border-primary font-bold"
-                  : "text-gray-600"
-              }`}
-              onClick={() => setActiveTab("archive")}
-            >
-              Archivados
-            </button>
-            <button
-              className={`pb-2 ${
-                activeTab === "reading"
-                  ? "border-b-2 border-primary font-bold"
-                  : "text-gray-600"
-              }`}
-              onClick={() => setActiveTab("reading")}
-            >
-              Lista de lecturas
-            </button>
-            <button
-              className={` pb-2 ${
-                activeTab === "books"
-                  ? "border-b-2 border-primary font-bold text-black"
-                  : "text-gray-600"
-              }`}
-              onClick={() => setActiveTab("books")}
-            >
-              Tus libros
-            </button>
-          </div>
-        </div>
+        <Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
+
+        <ContentTabs activeTab={activeTab} />
 
         {/* Contenido según la pestaña */}
-        {activeTab === "current" && (
-          <>
-            <h3 className="text-xl font-bold mb-7 mt-6">Todas tus historias</h3>
-            <AllStories books={books} />
-          </>
-        )}
-
-        {activeTab === "archive" && (
-          <div className="text-gray-700">Contenido del Archive...</div>
-        )}
-
-        {activeTab === "reading" && (
-          // Aquí renderizas tu componente para Reading Lists
-          <ReadingListView />
-        )}
-        {activeTab === "books" && (
-          <>
-            <h3 className="text-xl font-bold mb-7 ">Tus historias</h3>
-            <MyBooks />
-          </>
-        )}
       </div>
     </section>
   );
 }
-
-LibrarySection.propTypes = {
-  books: PropTypes.array.isRequired,
-};
 
 export default LibrarySection;

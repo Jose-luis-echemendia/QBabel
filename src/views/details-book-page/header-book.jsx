@@ -4,21 +4,44 @@ import { Login } from "../auth/login";
 import { CustomModal } from "@/components/modal";
 import { useState } from "react";
 import { toast } from "sonner";
+import { Question } from "./question";
+import { useNavigate } from "react-router-dom";
+import { BuyBook } from "../particular-components/books/buy-book";
 
 export const CustomHeaderBook = ({ book }) => {
   const [openLoginModal, setOpenLoginModal] = useState(false);
+  const [openQuestionModal, setOpenQuestionModal] = useState(false);
+  const [openBuyBookModal, setOpenBuyBookModal] = useState(false);
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
   const { handleAddBookToLibrary } = useLibrary();
+  const navigate = useNavigate();
+
+  const addLibraryAndRead = () => {
+    handleAddBookToLibrary(book.uid);
+    if (!book.is_free) {
+      navigate(`/library`);
+      toast.info("Compra el libro para continuar con la lectura");
+      return;
+    }
+    navigate(`/books/reader/${book.uid}`);
+  };
 
   const read = () => {
-    console.log(isAuthenticated);
     if (!isAuthenticated) {
       toast.info("Inicia sesión para continuar");
       setOpenLoginModal(true);
+      return;
     }
     if (!book.in_library) {
-      handleAddBookToLibrary(book.uid);
+      setOpenQuestionModal(true);
+      return;
     }
+    if (!book.is_free) {
+      setOpenBuyBookModal(true);
+      return;
+    }
+
+    navigate(`/books/reader/${book.uid}`);
   };
 
   const add = () => {
@@ -41,6 +64,25 @@ export const CustomHeaderBook = ({ book }) => {
         classNameBody="custom-body-class"
       >
         <Login />
+      </CustomModal>
+      <CustomModal
+        open={openQuestionModal}
+        handleOpen={() => setOpenQuestionModal(false)} // Cierra el modal
+        classNameDialog="custom-dialog-class" // Clases personalizadas
+        classNameBody="custom-body-class"
+      >
+        <Question
+          handleOpen={() => setOpenQuestionModal(false)}
+          handleAddLibraryAndRead={() => addLibraryAndRead()}
+        />
+      </CustomModal>
+      <CustomModal
+        open={openBuyBookModal}
+        handleOpen={() => setOpenBuyBookModal(false)} // Cierra el modal
+        classNameDialog="custom-dialog-class" // Clases personalizadas
+        classNameBody="custom-body-class"
+      >
+        <BuyBook handleOpen={() => setOpenQuestionModal(false)} />
       </CustomModal>
       <header className="lg:w-full w-[400px] lg:h-[350px] h-full flex items-center justify-center border-b shadow-2xl lg:-mt-0 -mt-6">
         <figure className="flex lg:flex-row flex-col lg:gap-5 items-center justify-center w-full h-full">
@@ -146,7 +188,10 @@ export const CustomHeaderBook = ({ book }) => {
               </div>
             </div>
             <div className="flex flex-row items-center gap-1">
-              <button className="flex gap-1.5 bg-primary py-3 px-5 rounded-l-full text-black-500">
+              <button
+                className="flex gap-1.5 bg-primary py-3 px-5 rounded-l-full text-black-500"
+                onClick={() => read()}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -161,11 +206,12 @@ export const CustomHeaderBook = ({ book }) => {
                     d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"
                   />
                 </svg>
-                <span className="font-semibold" onClick={() => read()}>
-                  Comenzar a leer
-                </span>
+                <span className="font-semibold">Comenzar a leer</span>
               </button>
-              <button className="flex gap-1.5 bg-black-500 py-3 px-3 rounded-r-full text-primary">
+              <button
+                className="flex gap-1.5 bg-black-500 py-3 px-3 rounded-r-full text-primary"
+                onClick={() => add()}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -180,9 +226,7 @@ export const CustomHeaderBook = ({ book }) => {
                     d="M12 4.5v15m7.5-7.5h-15"
                   />
                 </svg>
-                <span className="font-semibold" onClick={() => add()}>
-                  Agregar
-                </span>
+                <span className="font-semibold">Agregar</span>
               </button>
             </div>
           </figcaption>

@@ -52,7 +52,11 @@ class CommentSerializer(AbstractBaseSerializer):
 
     def get_user_react_uid(self, obj):
         request = self.context.get("request")
-        if request and request.user.is_authenticated:
+        if (
+            request
+            and request.user.is_authenticated
+            and ReactComment.objects.filter(comment=obj, user=request.user).exists()
+        ):
             return (
                 ReactComment.objects.filter(comment=obj, user=request.user).first().uid
             )
