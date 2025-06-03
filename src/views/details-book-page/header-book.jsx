@@ -90,6 +90,7 @@ export const CustomHeaderBook = ({ book }) => {
         <FormPaymentBook
           handleOpen={() => setOpenQuestionModal(false)}
           price={book.price}
+          discount={book.discount}
         />
       </CustomModal>
       <header className="lg:w-full w-[400px] lg:h-[350px] h-full flex items-center justify-center border-b shadow-2xl lg:-mt-0 -mt-6">

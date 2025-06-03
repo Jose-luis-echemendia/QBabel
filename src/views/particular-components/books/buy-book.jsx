@@ -33,7 +33,7 @@ function formatCardNumber(value) {
   }
 }
 
-export const FormPaymentBook = ({ price }) => {
+export const FormPaymentBook = ({ price, discount }) => {
   const [paymentMethod, setPaymentMethod] = React.useState("Escanear QR");
   const [type, setType] = React.useState("card");
   const [cardNumber, setCardNumber] = React.useState("");
@@ -193,13 +193,13 @@ export const FormPaymentBook = ({ price }) => {
                                   Descuento
                                 </span>
                                 <span className="col-span-1 text-black font-semibold">
-                                  $ 2
+                                  $ {discount}
                                 </span>
                                 <span className="col-span-4 text-black">
                                   Total a pagar
                                 </span>
                                 <span className="col-span-1 text-black font-semibold">
-                                  $ 2
+                                  $ {price - discount}
                                 </span>
                               </div>
                             </>
