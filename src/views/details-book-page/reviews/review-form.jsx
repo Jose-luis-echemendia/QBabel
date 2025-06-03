@@ -61,7 +61,6 @@ export const ReviewForm = ({ pkBook }) => {
       book: pkBook,
     };
 
-    console.log(payload);
     createComment(payload);
   };
 

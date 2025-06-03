@@ -1,5 +1,6 @@
 import { createBookApi, getBooksAPI, getBookForIdAPI } from "@/api/bookAPI";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { toast } from "sonner";
 
 // ** Thunk for create book
 export const createBookThunk = createAsyncThunk(
@@ -7,7 +8,10 @@ export const createBookThunk = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const response = await createBookApi(data);
-      if (response.status === 200) return response.data;
+      if (response.status === 200) {
+        toast.success("Tu libro ha sido registrado satisfactoriamente");
+        return response.data;
+      }
       return rejectWithValue(response?.data);
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
@@ -28,7 +32,6 @@ export const getBooksThunk = createAsyncThunk(
     }
   }
 );
-
 
 // ** Thunk for get book for id
 export const getBookForIdThunk = createAsyncThunk(

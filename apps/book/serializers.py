@@ -27,11 +27,13 @@ class BookSerializer(AbstractBaseSerializer):
     file = serializers.PrimaryKeyRelatedField(
         queryset=GenericDocument.objects.all(), write_only=True
     )
+
+    price = serializers.FloatField(
+        help_text="Price of the book",
+    )
     file_details = serializers.SerializerMethodField()
 
     categories = serializers.SerializerMethodField()
-    is_discount_active = serializers.SerializerMethodField()
-    discount_percentage = serializers.SerializerMethodField()
 
     class Meta:
         model = Book
@@ -53,6 +55,8 @@ class BookSerializer(AbstractBaseSerializer):
             "price",
             "is_discount_active",
             "discount_percentage",
+            "discount",
+            "price_discounted",
             "discount_start_date",
             "discount_end_date",
             "categories",
@@ -123,18 +127,6 @@ class BookSerializer(AbstractBaseSerializer):
             for category in category_book
             if category.category
         ]
-
-    def get_is_discount_active(self, obj):
-        """
-        Check if the discount is active.
-        """
-        return obj.is_discount_active() if obj else False
-
-    def get_discount_percentage(self, obj):
-        """
-        Get the discount percentage.
-        """
-        return obj.get_discounted_price() if obj else 0.00
 
     def create(self, validated_data):
         """

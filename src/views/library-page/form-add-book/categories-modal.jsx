@@ -60,7 +60,7 @@ export const CategoriesModal = ({
           <span>Not categories registered</span>
         )}
       </div>
-      <div className="flex gap-10">
+      <div className="flex flex-row-reverse gap-10">
         <button
           className="bg-black-500 py-2 px-10 rounded-xl"
           onClick={handleOpen}

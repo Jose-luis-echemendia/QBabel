@@ -7,7 +7,6 @@ export const SearchBar = () => {
 
   const onSubmit = (data) => {
     alert(data);
-    console.logs(data);
   };
 
   return (

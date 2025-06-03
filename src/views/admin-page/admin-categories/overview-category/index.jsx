@@ -63,7 +63,6 @@ export const OverViewCategory = ({ category, handleOpen }) => {
       if (!category) {
         createCategory(formData);
       } else {
-        console.log(category.uid);
         updateCategory({ id: category.uid, data: formData });
       }
 

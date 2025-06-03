@@ -51,7 +51,6 @@ export const ProfileForm = ({ handleOpen }) => {
       formData.append("avatar", selectedImage);
     }
     if (formData.size !== 0) {
-      console.log("FormData:", formData);
       updateProfile({ id: profile.uid, data: formData });
     }
     handleOpen();

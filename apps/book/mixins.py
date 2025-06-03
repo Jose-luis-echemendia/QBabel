@@ -32,7 +32,7 @@ class ValidateRegisterBookMixin:
         isbn = data.get("isbn", None)
         title = data.get("title", None)
         synopsis = data.get("synopsis", None)
-        categories = data.get("categories", None)
+        categories = data.getlist("categories", None)
         cover = data.get("cover", None)
         number_chapters = data.get("number_chapters", None)
         number_pages = data.get("number_pages", None)
@@ -63,6 +63,7 @@ class ValidateRegisterBookMixin:
                     "message": "Todos los campos son obligatorios.",
                 }
             )
+
         if not categories:
             raise ValidationError(
                 {
@@ -70,6 +71,7 @@ class ValidateRegisterBookMixin:
                     "message": "Todos los campos son obligatorios.",
                 }
             )
+
         if not cover:
             raise ValidationError(
                 {
@@ -77,6 +79,7 @@ class ValidateRegisterBookMixin:
                     "message": "Todos los campos son obligatorios.",
                 }
             )
+
         if not number_chapters:
             raise ValidationError(
                 {
@@ -84,6 +87,7 @@ class ValidateRegisterBookMixin:
                     "message": "Todos los campos son obligatorios.",
                 }
             )
+
         if not number_pages:
             raise ValidationError(
                 {
@@ -91,6 +95,7 @@ class ValidateRegisterBookMixin:
                     "message": "Todos los campos son obligatorios.",
                 }
             )
+
         if not lenguage:
             raise ValidationError(
                 {
@@ -98,6 +103,7 @@ class ValidateRegisterBookMixin:
                     "message": "Todos los campos son obligatorios.",
                 }
             )
+
         if not price:
             raise ValidationError(
                 {
@@ -105,6 +111,7 @@ class ValidateRegisterBookMixin:
                     "message": "Todos los campos son obligatorios.",
                 }
             )
+
         if not isinstance(categories, list):
             raise ValidationError(
                 {"categories": "This field must be a list of strings"}

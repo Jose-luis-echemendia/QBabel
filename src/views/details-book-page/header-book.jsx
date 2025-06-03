@@ -6,12 +6,13 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { Question } from "./question";
 import { useNavigate } from "react-router-dom";
-import { BuyBook } from "../particular-components/books/buy-book";
+import { FormPaymentBook } from "../particular-components/books/buy-book";
 
 export const CustomHeaderBook = ({ book }) => {
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const [openQuestionModal, setOpenQuestionModal] = useState(false);
   const [openBuyBookModal, setOpenBuyBookModal] = useState(false);
+  const [bookInLibrary, setBookInLibrary] = useState(book.in_library);
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
   const { handleAddBookToLibrary } = useLibrary();
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ export const CustomHeaderBook = ({ book }) => {
       setOpenLoginModal(true);
       return;
     }
-    if (!book.in_library) {
+    if (!bookInLibrary) {
       setOpenQuestionModal(true);
       return;
     }
@@ -49,10 +50,13 @@ export const CustomHeaderBook = ({ book }) => {
       toast.info("Inicia sesión para continuar");
       setOpenLoginModal(true);
     }
-    if (!book.in_library) {
+    if (!bookInLibrary) {
       handleAddBookToLibrary(book.uid);
+      setBookInLibrary(true);
     }
   };
+
+  console.log(book);
 
   return (
     <>
@@ -81,19 +85,23 @@ export const CustomHeaderBook = ({ book }) => {
         handleOpen={() => setOpenBuyBookModal(false)} // Cierra el modal
         classNameDialog="custom-dialog-class" // Clases personalizadas
         classNameBody="custom-body-class"
+        size="lg"
       >
-        <BuyBook handleOpen={() => setOpenQuestionModal(false)} />
+        <FormPaymentBook
+          handleOpen={() => setOpenQuestionModal(false)}
+          price={book.price}
+        />
       </CustomModal>
       <header className="lg:w-full w-[400px] lg:h-[350px] h-full flex items-center justify-center border-b shadow-2xl lg:-mt-0 -mt-6">
         <figure className="flex lg:flex-row flex-col lg:gap-5 items-center justify-center w-full h-full">
           <img
             src={book.cover_details.image}
-            alt={book.tittle}
+            alt={book.title}
             className="object-cover rounded-xl shadow-xl lg:h-[300px] lg:p-0 lg:scale-100 scale-75 lg:w-[200px] lg:-mt-2.5"
           />
           <figcaption className="h-full py-12 flex flex-col lg:items-start items-center justify-between lg:-mt-0 -mt-16">
             <div className="lg:mb-0 mb-2">
-              <h2 className="text-3xl font-bold w-full">{book.tittle}</h2>
+              <h2 className="text-3xl font-bold w-full">{book.title}</h2>
               {book.is_complete && (
                 <span className="text-3xl font-bold w-full inline-flex -ml-[1px]">
                   (Completa

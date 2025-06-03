@@ -117,7 +117,6 @@ export const Review = ({ review }) => {
 };
 
 export const Reviews = ({ reviews }) => {
-  console.log(reviews);
 
   return (
     <>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CustomModal } from "@/components/modal";
-import { BuyBook } from "./buy-book";
+import { FormPaymentBook } from "./buy-book";
 
 export const CardBook = ({ book }) => {
   const [showActions, setShowActions] = useState(false);
@@ -17,9 +17,9 @@ export const CardBook = ({ book }) => {
           classNameDialog="custom-dialog-class" // Clases personalizadas
           classNameBody="custom-body-class flex items-center justify-center"
           exitButton={true}
-          size="md"
+          size="lg"
         >
-          <BuyBook />
+          <FormPaymentBook />
         </CustomModal>
         <div className="relative">
           {showActions && (

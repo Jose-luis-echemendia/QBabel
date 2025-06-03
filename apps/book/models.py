@@ -68,6 +68,7 @@ class Book(BaseModel):
         help_text="Indicates if the book is complete or still being written",
     )
 
+    @property
     def is_discount_active(self):
         from django.utils import timezone
 
@@ -78,8 +79,16 @@ class Book(BaseModel):
             and self.discount_start_date <= now <= self.discount_end_date
         ) or False
 
-    def get_discounted_price(self):
-        if self.is_discount_active():
+    @property
+    def discount(self):
+        if self.is_discount_active:
+            discount_amount = (self.discount_percentage / 100) * self.price
+            return discount_amount
+        return self.price
+
+    @property
+    def price_discounted(self):
+        if self.is_discount_active:
             discount_amount = (self.discount_percentage / 100) * self.price
             return self.price - discount_amount
         return self.price

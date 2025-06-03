@@ -243,10 +243,7 @@ export const schemaBook = yup.object({
     .required(
       "Todos los campos son obligatorios. Por favor introduzca el precio"
     )
-    .integer("Ha introducido datos incorrectos. Debe ser un número entero")
-    .positive(
-      "Ha introducido datos incorrectos. El precio tiene que ser un número positivo"
-    ),
+    .integer("Ha introducido datos incorrectos. Debe ser un número entero"),
 
   lenguage: yup
     .string()
