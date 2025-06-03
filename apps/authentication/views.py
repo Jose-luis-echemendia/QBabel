@@ -8,7 +8,54 @@ from django_ratelimit.decorators import ratelimit
 from django.utils.decorators import method_decorator
 from django.contrib.auth import authenticate
 from apps.utils.views.abstract_views import BaseCustomAPIView
+from django.shortcuts import get_object_or_404
+from django.contrib.auth import get_user_model
+from uuid import UUID
 from .serializers import LoginSerializer
+from .models import ActivationToken
+
+User = get_user_model()
+
+
+class AccountActivationView(BaseCustomAPIView):
+    permission_classes = [AllowAny]
+
+    def get_model(self):
+        return None
+
+    def get(self, request, uid, token, *args, **kwargs):
+        try:
+            # Validar que el token sea un UUID válido
+            token_uuid = UUID(token)
+        except ValueError:
+            return Response(
+                {"error": "Invalid activation token format"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        if not User.objects.filter(pk=uid).exists():
+            return Response(
+                {"error": "Invalid activation. User not found"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        # Buscar el token de activación
+        activation_token = get_object_or_404(
+            ActivationToken, token=token_uuid, user__uid=uid, used=False
+        )
+
+        # Activar la cuenta del usuario
+        user = activation_token.user
+        user.is_active = True
+        user.save()
+
+        # Marcar el token como usado
+        activation_token.used = True
+        activation_token.save()
+
+        return Response(
+            {"message": "Account activated successfully"}, status=status.HTTP_200_OK
+        )
 
 
 class BasicAuthView(BaseCustomAPIView):

@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 from apps.profile.models import Profile
 from apps.library.models import Library
 from apps.utils.models.models import GenericImage
+from apps.authentication.models import ActivationToken
 
 User = get_user_model()
 
@@ -22,6 +23,9 @@ def post_save_user_create_create_profile(sender, instance, created, *args, **kwa
             print(f"Default avatar image not found: {e}")
 
         Library.objects.create(user=instance)
+
+        activation_token = ActivationToken.objects.create(user=instance.uid)
+        activation_url = f"http://localhost:5173/activate/{user.uid}/{activation_token.token}/"
 
         # send mail for active account
         from .service.mail import MailService

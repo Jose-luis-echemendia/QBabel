@@ -7,7 +7,11 @@ import {
   logoutThunk,
 } from "@/store/auth/thunks";
 import { useAppDispatch } from "./useStore";
-import { logoutLocal } from "@/store/auth/slice";
+import {
+  logoutLocal,
+  avtiveAccount,
+  removeAvtiveAccount,
+} from "@/store/auth/slice";
 
 export const useAuth = () => {
   const dispath = useAppDispatch();
@@ -38,6 +42,14 @@ export const useAuth = () => {
     dispath(logoutLocal());
   };
 
+  const handleAvtiveAccount = () => {
+    dispath(avtiveAccount());
+  };
+
+  const handleRemoveAvtiveAccount = () => {
+    dispath(removeAvtiveAccount());
+  };
+
   return {
     handleLogin,
     handleGetAuthenticatedUser,
@@ -46,5 +58,7 @@ export const useAuth = () => {
     handlRefreshToken,
     handleLogout,
     handleLogoutLocal,
+    handleAvtiveAccount,
+    handleRemoveAvtiveAccount,
   };
 };

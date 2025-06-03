@@ -1,28 +1,24 @@
-import { Layout } from "../../hocs/Layout";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
-import { useAuth } from "../../hooks/useAuth";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Oval } from "react-loader-spinner";
 
-export const Activate = () => {
+const Activate = () => {
   const params = useParams();
-  const { activate, stateAuth } = useAuth();
-
+  const navigate = useNavigate();
   const [activated, setActivated] = useState(false);
 
   const activateAccount = () => {
     const uid = params.uid;
     const token = params.token;
-    activate(uid, token);
     setActivated(true);
   };
 
-  if (activated && !stateAuth.loading) return <Navigate to="/"></Navigate>;
+  //if (activated && !stateAuth.loading) return navigate("/home");
 
   return (
-    <Layout>
+    <>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* We've used 3xl here, but feel free to try other max-widths based on your needs */}
         <div className="max-w-3xl mx-auto">
@@ -48,6 +44,8 @@ export const Activate = () => {
           )}
         </div>
       </div>
-    </Layout>
+    </>
   );
 };
+
+export default Activate;

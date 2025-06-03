@@ -1,7 +1,8 @@
 from django.urls import path
-from .views import BasicAuthView, AdminAuthView, LogoutView, CustomTokenRefreshView, CustomJWTVerifyView
+from .views import AccountActivationView,  BasicAuthView, AdminAuthView, LogoutView, CustomTokenRefreshView, CustomJWTVerifyView
 
 urlpatterns = [
+    path('activate/custom/<uuid:uid>/<str:token>/', AccountActivationView.as_view(), name='account-activate'),
     path('token/jwt/create/users/', BasicAuthView.as_view(), name='basic-auth'),
     path('token/jwt/create/admins/', AdminAuthView.as_view(), name='admin-auth'),
     path('token/jwt/refresh/custom/', CustomTokenRefreshView.as_view(), name='token-refresh'),

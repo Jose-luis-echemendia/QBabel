@@ -9,33 +9,39 @@ export const ContentTabs = ({ activeTab }) => {
   const { handleGetLibrary } = useLibrary();
 
   useEffect(() => {
-    if (activeTab === "current") {
+    if (activeTab === "allStory") {
       handleGetLibrary();
     }
   }, [activeTab]);
 
   return (
     <>
-      {activeTab === "current" && (
+      {activeTab === "allStory" && (
         <>
-          <h3 className="text-xl font-bold mb-7 mt-6">Todas tus historias</h3>
           <AllStories />
         </>
       )}
-
-      {activeTab === "archive" && (
-        <div className="text-gray-700">Contenido del Archive...</div>
+      {activeTab === "readingStory" && (
+        <>
+          <AllStories />
+        </>
       )}
-
-      {activeTab === "reading" && (
+      {activeTab === "forBuying" && (
+        <>
+          <AllStories />
+        </>
+      )}
+      {activeTab === "listReading" && (
         // Aquí renderizas tu componente para Reading Lists
         <ReadingListView />
       )}
-      {activeTab === "books" && (
+      {activeTab === "myStory" && (
         <>
-          <h3 className="text-xl font-bold mb-7 mt-6">Tus historias</h3>
           <AllStories books={books} />
         </>
+      )}
+      {activeTab === "archiveStory" && (
+        <div className="text-gray-700">Contenido del Archive...</div>
       )}
     </>
   );
