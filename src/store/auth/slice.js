@@ -157,4 +157,5 @@ export const authSlice = createSlice({
 });
 
 export default authSlice.reducer;
-export const { logoutLocal } = authSlice.actions;
+export const { logoutLocal, avtiveAccount, removeAvtiveAccount } =
+  authSlice.actions;

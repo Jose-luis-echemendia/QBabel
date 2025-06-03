@@ -10,7 +10,7 @@ User = get_user_model()
 class ActivationToken(BaseModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     token = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    code = models.CharField(max_length=5)
     used = models.BooleanField(default=False)
 
     def __str__(self):

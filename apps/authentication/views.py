@@ -1,3 +1,4 @@
+from datetime import timezone
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken, UntypedToken
 from rest_framework_simplejwt.exceptions import TokenError
@@ -23,7 +24,16 @@ class AccountActivationView(BaseCustomAPIView):
     def get_model(self):
         return None
 
-    def get(self, request, uid, token, *args, **kwargs):
+    def post(self, request, uid, token, *args, **kwargs):
+        # Obtener el código del body de la petición
+        code = request.data.get("code")
+
+        if not code:
+            return Response(
+                {"error": "Invalid activation. The code is required"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
         try:
             # Validar que el token sea un UUID válido
             token_uuid = UUID(token)
@@ -33,16 +43,28 @@ class AccountActivationView(BaseCustomAPIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        if not User.objects.filter(pk=uid).exists():
+        try:
+            # Buscar todo en una sola consulta optimizada
+            activation_token = ActivationToken.objects.select_related("user").get(
+                token=token_uuid,
+                code=code,
+                user__uid=uid,
+                used=False,
+                created_at__gte=timezone.now()
+                - timezone.timedelta(days=1),  # Tokens expiran en 1 día
+            )
+        except ActivationToken.DoesNotExist:
             return Response(
-                {"error": "Invalid activation. User not found"},
+                {"error": "Invalid activation token, code or user"},
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        # Buscar el token de activación
-        activation_token = get_object_or_404(
-            ActivationToken, token=token_uuid, user__uid=uid, used=False
-        )
+        # Verificar si el usuario ya está activo
+        if activation_token.user.is_active:
+            return Response(
+                {"error": "Account is already active"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
 
         # Activar la cuenta del usuario
         user = activation_token.user
@@ -53,8 +75,14 @@ class AccountActivationView(BaseCustomAPIView):
         activation_token.used = True
         activation_token.save()
 
+        refresh = RefreshToken.for_user(user)
         return Response(
-            {"message": "Account activated successfully"}, status=status.HTTP_200_OK
+            {
+                "access": str(refresh.access_token),
+                "refresh": str(refresh),
+                "user_id": user.uid,
+            },
+            status=status.HTTP_200_OK,
         )
 
 

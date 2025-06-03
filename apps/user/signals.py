@@ -24,8 +24,11 @@ def post_save_user_create_create_profile(sender, instance, created, *args, **kwa
 
         Library.objects.create(user=instance)
 
-        activation_token = ActivationToken.objects.create(user=instance.uid)
-        activation_url = f"http://localhost:5173/activate/{user.uid}/{activation_token.token}/"
+        from apps.utils.utils import generate_random_string
+
+        code = generate_random_string(5)
+        activation_token = ActivationToken.objects.create(user=instance, code=code)
+        activation_url = f"http://localhost:5173/activate/{instance.uid}/{activation_token.token}/"
 
         # send mail for active account
         from .service.mail import MailService
@@ -35,7 +38,8 @@ def post_save_user_create_create_profile(sender, instance, created, *args, **kwa
             subject="Bienvenido al SISTEMA",
             template_name="mail/registered_user.html",
             context={
-                "active_url": "http://localhost:5173/active",
+                "code": code,
+                "active_url": activation_url,
             },
             recipient_list=[instance.email],
         )
