@@ -67,17 +67,19 @@ export const CardBook = ({ book }) => {
             </div>
           )}
           <img
-            src={book.img}
-            alt={book.tittle}
+            src={book.cover_details.image}
+            alt={book.title}
             className="w-full h-72  object-cover rounded-md"
           />
         </div>
         <div className="flex items-center ">
           <div className="flex flex-col">
             <h3 className="text-sm w-32 font-semibold mt-2 truncate">
-              {book.tittle}
+              {book.title}
             </h3>
-            <p className="text-xs text-gray-500">{book.author}</p>
+            <p className="text-xs text-gray-500">
+              {book.author_details.user_name}
+            </p>
           </div>
 
           <img
@@ -127,7 +129,7 @@ export const CardBook = ({ book }) => {
               />
             </svg>
 
-            <span>{book.parts}</span>
+            <span>{book.avg_rating}</span>
             {/* partes */}
           </div>
           <div className="flex items-center space-x-1">
@@ -145,7 +147,7 @@ export const CardBook = ({ book }) => {
                 d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5"
               ></path>
             </svg>
-            <span>{book.parts}</span>
+            <span>{book.number_chapters}</span>
           </div>
         </div>
       </div>

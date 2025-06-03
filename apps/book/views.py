@@ -18,12 +18,6 @@ from .mixins import (
 )
 
 
-from django.http import FileResponse
-from google.cloud import storage
-from django.conf import settings
-import mimetypes
-
-
 class BookViewSet(
     BaseViewSet,
     ValidateCategoryForBookMixin,
@@ -156,16 +150,4 @@ class ReadBookView(BaseCustomAPIView):
 
     def get(self, request, *args, **kwargs):
         book = self.get_object(*args, **kwargs)
-        client = storage.Client()
-
-        bucket = client.bucket(settings.GS_BUCKET_NAME)
-        blob = bucket.blob(book.file.url)
-
-        if not blob.exists():
-            return Response(
-                {"detail": "Archivo no encontrado"}, status=status.HTTP_404_NOT_FOUND
-            )
-
-        file_stream = blob.open("rb")
-        content_type, _ = mimetypes.guess_type(blob.name)
-        return FileResponse(file_stream, content_type=content_type)
+        pass

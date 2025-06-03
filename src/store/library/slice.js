@@ -4,10 +4,12 @@ import {
   addBookToLibraryThunk,
   disaggregateBookFromLibraryThunk,
 } from "./thunks";
+
 const initialState = {
-  library: [],
+  library: null,
   loading: false,
 };
+
 export const librarySlice = createSlice({
   name: "library",
   initialState: initialState,
@@ -20,7 +22,7 @@ export const librarySlice = createSlice({
       })
       .addCase(getLibraryThunk.fulfilled, (state, action) => {
         state.loading = false;
-        state.library = action.payload;
+        state.library = action.payload.library;
       })
       .addCase(getLibraryThunk.rejected, (state) => {
         state.loading = false;
@@ -32,7 +34,7 @@ export const librarySlice = createSlice({
       })
       .addCase(addBookToLibraryThunk.fulfilled, (state, action) => {
         state.loading = false;
-        state.library.push(action.payload);
+        state.library = action.payload.library;
       })
       .addCase(addBookToLibraryThunk.rejected, (state) => {
         state.loading = false;
@@ -44,12 +46,7 @@ export const librarySlice = createSlice({
       })
       .addCase(disaggregateBookFromLibraryThunk.fulfilled, (state, action) => {
         state.loading = false;
-        const index = state.library.findIndex(
-          (book) => book.id === action.payload.id
-        );
-        if (index !== -1) {
-          state.library.splice(index, 1);
-        }
+        state.library = action.payload.library;
       })
       .addCase(disaggregateBookFromLibraryThunk.rejected, (state) => {
         state.loading = false;

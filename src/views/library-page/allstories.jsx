@@ -1,15 +1,21 @@
 // AllStories.jsx
 import PropTypes from "prop-types";
 import { CardBook } from "../particular-components/books/card-book";
+import { useAppSelector } from "@/hooks/redux/useStore";
 
-function AllStories({ books }) {
+function AllStories() {
+  const library = useAppSelector((state) => state.library.library);
+
+  console.log("Library data:", library);
+
   return (
     <section className="py-4">
       <div className="max-w-screen-xl mx-auto">
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-10">
-          {books.map((book) => (
-            <CardBook key={book.id} book={book} />
-          ))}
+          {library &&
+            library.items.map((item) => (
+              <CardBook key={item.uid} book={item.book_details} />
+            ))}
         </div>
       </div>
     </section>

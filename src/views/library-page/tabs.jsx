@@ -4,7 +4,7 @@ export const Tabs = ({ activeTab, setActiveTab }) => {
       {" "}
       {/* Tabs */}
       <div className="flex items-center justify-between border-b border-gray-200 mb-4">
-        <div className="flex space-x-6 text-xl">
+        <div className="flex space-x-7 text-xl">
           <button
             className={`pb-2 ${
               activeTab === "current"
@@ -17,23 +17,13 @@ export const Tabs = ({ activeTab, setActiveTab }) => {
           </button>
           <button
             className={`pb-2 ${
-              activeTab === "archive"
-                ? "border-b-2 border-primary font-bold"
-                : "text-gray-600"
-            }`}
-            onClick={() => setActiveTab("archive")}
-          >
-            Archivados
-          </button>
-          <button
-            className={`pb-2 ${
               activeTab === "reading"
                 ? "border-b-2 border-primary font-bold"
                 : "text-gray-600"
             }`}
             onClick={() => setActiveTab("reading")}
           >
-            Lista de lecturas
+            Historias por comprar
           </button>
           <button
             className={` pb-2 ${
@@ -44,6 +34,16 @@ export const Tabs = ({ activeTab, setActiveTab }) => {
             onClick={() => setActiveTab("books")}
           >
             Tus libros
+          </button>
+          <button
+            className={`pb-2 ${
+              activeTab === "archive"
+                ? "border-b-2 border-primary font-bold"
+                : "text-gray-600"
+            }`}
+            onClick={() => setActiveTab("archive")}
+          >
+            Archivados
           </button>
         </div>
       </div>

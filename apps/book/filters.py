@@ -8,7 +8,13 @@ class BookFilter(django_filters.FilterSet):
     price__gt = django_filters.NumberFilter(field_name="price", lookup_expr="gt")
     price__lt = django_filters.NumberFilter(field_name="price", lookup_expr="lt")
     is_published = django_filters.BooleanFilter(field_name="is_published")
+    me = django_filters.BooleanFilter(field_name="me", method="filter_me")
 
     class Meta:
         model = Book
         fields = ["title", "price", "is_published"]
+
+    def filter_me(self, queryset, name, value):
+        if value:
+            return queryset.filter(author=self.request.user)
+        return queryset
