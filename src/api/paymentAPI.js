@@ -1,9 +1,9 @@
 import axiosInstance from "./axiosInstance";
 
 // endpoint for pay book
-export const payBookAPI = async () => {
+export const payBookAPI = async (data) => {
   try {
-    const response = await axiosInstance.post("/api/payment/");
+    const response = await axiosInstance.post("/api/payment/", data);
 
     return response;
   } catch (error) {
@@ -16,9 +16,10 @@ export const payBookAPI = async () => {
 };
 
 // endpoint for get all payment
-export const getUsersAPI = async () => {
+export const getPaymentsAPI = async (filter = null) => {
   try {
-    const response = await axiosInstance.get("/api/payments/");
+    const params = filter ? { ...filter } : {};
+    const response = await axiosInstance.get("/api/payments/", { params });
 
     return response;
   } catch (error) {
@@ -29,4 +30,19 @@ export const getUsersAPI = async () => {
     throw error;
   }
 };
-//Compra realizada satisfactoriamente
+
+
+export const getPaymentsBooksForUserAPI = async () => {
+  try {
+
+    const response = await axiosInstance.get("/api/payments-books/", );
+
+    return response;
+  } catch (error) {
+    console.error(
+      "Error en obtener los pagos:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};

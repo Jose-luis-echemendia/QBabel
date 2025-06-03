@@ -88,6 +88,8 @@ const BookReaderView = () => {
     };
   }, [numPages, pageNumber]);
 
+  console.log("read", book);
+
   return (
     <>
       {!loading && book && (

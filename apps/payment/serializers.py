@@ -43,3 +43,15 @@ class PurchaseInvoicesSerializer(AbstractBaseSerializer):
         from apps.user.serializers import UserListSerializer
 
         return UserListSerializer(obj.buyer).data if obj.buyer else None
+
+
+class PaymentsBooksSerializer(AbstractBaseSerializer):
+    """
+    Serializer for get all Payments Books
+    """
+
+    class Meta:
+        model = PurchaseInvoices
+        fields = [
+            "book",
+        ]

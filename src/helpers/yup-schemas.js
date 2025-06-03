@@ -264,7 +264,7 @@ export const schemaBook = yup.object({
 export const schemaComment = yup.object({
   rating: yup
     .number()
-    .required("Por favor califica con coraziones")
+    .required("Por favor califica con corazones")
     .min(1, "La calificación debe ser al menos 1 estrella")
     .max(5, "La calificación no puede ser mayor a 5 estrellas")
     .integer("La calificación debe ser un número entero"),
@@ -275,3 +275,36 @@ export const schemaComment = yup.object({
       "Todos los campos son obligatorios. Por favor introduzca un comentario"
     ),
 });
+
+export const schemaPayment = yup.object({
+  card: yup
+    .string()
+    .required("El número de tarjeta es obligatorio")
+    .transform((value) => value.replace(/\s+/g, "")) // Elimina espacios para validación
+    .min(13, "El número debe tener mínimo 13 dígitos")
+    .max(19, "El número no puede exceder 19 dígitos")
+    .matches(/^\d+$/, "Debe contener solo números")
+    .test("luhn-check", "Número de tarjeta inválido", (value) => {
+      return luhnCheck(value); // Validación con algoritmo de Luhn
+    }),
+});
+
+const luhnCheck = (cardNumber) => {
+  if (!cardNumber) return false;
+
+  let sum = 0;
+  let shouldDouble = false;
+
+  for (let i = cardNumber.length - 1; i >= 0; i--) {
+    let digit = parseInt(cardNumber.charAt(i));
+
+    if (shouldDouble) {
+      if ((digit *= 2) > 9) digit -= 9;
+    }
+
+    sum += digit;
+    shouldDouble = !shouldDouble;
+  }
+
+  return sum % 10 === 0;
+};

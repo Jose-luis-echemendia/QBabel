@@ -38,6 +38,7 @@ export const CustomHeaderBook = ({ book }) => {
       return;
     }
     if (!book.is_free) {
+      toast.info("Compra el libro para continuar con la lectura");
       setOpenBuyBookModal(true);
       return;
     }
@@ -55,8 +56,6 @@ export const CustomHeaderBook = ({ book }) => {
       setBookInLibrary(true);
     }
   };
-
-  console.log(book);
 
   return (
     <>
@@ -88,7 +87,9 @@ export const CustomHeaderBook = ({ book }) => {
         size="lg"
       >
         <FormPaymentBook
+          redirectRoRead={true}
           handleOpen={() => setOpenQuestionModal(false)}
+          bookUid={book.uid}
           price={book.price}
           discount={book.discount}
         />

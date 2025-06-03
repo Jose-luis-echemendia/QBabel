@@ -15,6 +15,11 @@ import {
   Option,
 } from "@material-tailwind/react";
 import { CreditCardIcon, LockClosedIcon } from "@heroicons/react/24/solid";
+import { usePayment } from "@/hooks/redux/usePayment";
+import { useAppSelector } from "@/hooks/redux/useStore";
+import { useForm } from "@/hooks/useForm";
+import { schemaPayment } from "@/helpers/yup-schemas";
+import { useNavigate } from "react-router-dom";
 
 function formatCardNumber(value) {
   const val = value.replace(/\s+/g, "").replace(/[^0-9]/gi, "");
@@ -33,10 +38,47 @@ function formatCardNumber(value) {
   }
 }
 
-export const FormPaymentBook = ({ price, discount }) => {
+export const FormPaymentBook = ({
+  redirectRoRead = false,
+  handleOpen,
+  bookUid,
+  price,
+  discount,
+}) => {
   const [paymentMethod, setPaymentMethod] = React.useState("Escanear QR");
+  const [finalPayment, setFinalPayment] = React.useState(price - discount);
   const [type, setType] = React.useState("card");
   const [cardNumber, setCardNumber] = React.useState("");
+  const { handleSubmit, errors, setValue } = useForm(schemaPayment);
+  const { handlePayBook } = usePayment();
+  const navigate = useNavigate();
+  const user = useAppSelector((state) => state.auth.user);
+  const paymentsBooks = useAppSelector((state) => state.payment.paymentsBooks);
+
+  const handleCardChange = (e) => {
+    setCardNumber(e.target.value);
+    setValue("card", e.target.value);
+  };
+
+  const onSubmit = (data) => {
+    const payload = {
+      book: bookUid,
+      buyer: user.uid,
+      final_payment: parseFloat(finalPayment.toFixed(2)),
+    };
+
+    handlePayBook(payload);
+  };
+
+  React.useEffect(() => {
+    if (paymentsBooks.includes(bookUid)) {
+      if (redirectRoRead) {
+        navigate(`/books/reader/${bookUid}`);
+      } else {
+        handleOpen();
+      }
+    }
+  }, [paymentsBooks]);
 
   return (
     <div className="flex justify-center items-center h-full">
@@ -84,7 +126,10 @@ export const FormPaymentBook = ({ price, discount }) => {
                 }}
               >
                 <TabPanel value="card" className="p-4 h-full">
-                  <form className="flex flex-col gap-4 h-[50vh]">
+                  <form
+                    className="flex flex-col gap-4 h-[50vh]"
+                    onSubmit={handleSubmit(onSubmit)}
+                  >
                     <div className="overflow-y-hidden flex-grow pr-2">
                       <div className="my-3">
                         {/* Método de Pago */}
@@ -103,15 +148,13 @@ export const FormPaymentBook = ({ price, discount }) => {
                           value={paymentMethod}
                           onChange={(value) => setPaymentMethod(value)}
                         >
-                          {["Escanear QR", "Introducir Tarjeta"].map(
-                            (method) => (
-                              <Option key={method} value={method}>
-                                <div className="flex items-center gap-x-2">
-                                  {method}
-                                </div>
-                              </Option>
-                            )
-                          )}
+                          {["Escanear QR", "Pago por tarjeta"].map((method) => (
+                            <Option key={method} value={method}>
+                              <div className="flex items-center gap-x-2">
+                                {method}
+                              </div>
+                            </Option>
+                          ))}
                         </Select>
 
                         <div className="grid grid-cols-5 gap-2">
@@ -139,9 +182,7 @@ export const FormPaymentBook = ({ price, discount }) => {
                                 <Input
                                   maxLength={19}
                                   value={formatCardNumber(cardNumber)}
-                                  onChange={(event) =>
-                                    setCardNumber(event.target.value)
-                                  }
+                                  onChange={handleCardChange}
                                   icon={
                                     <CreditCardIcon className="absolute left-0 h-4 w-4 text-blue-gray-300" />
                                   }
@@ -152,6 +193,11 @@ export const FormPaymentBook = ({ price, discount }) => {
                                       "before:content-none after:content-none",
                                   }}
                                 />
+                                {errors.card && (
+                                  <p className="text-red-500 text-sm mt-1">
+                                    {errors.card.message}
+                                  </p>
+                                )}
                               </div>
 
                               <div className="col-span-5 w-full">
@@ -199,7 +245,7 @@ export const FormPaymentBook = ({ price, discount }) => {
                                   Total a pagar
                                 </span>
                                 <span className="col-span-1 text-black font-semibold">
-                                  $ {price - discount}
+                                  $ {parseFloat(finalPayment.toFixed(2))}
                                 </span>
                               </div>
                             </>
@@ -208,8 +254,8 @@ export const FormPaymentBook = ({ price, discount }) => {
                       </div>
                     </div>
                     <div className="mt-auto pt-2">
-                      {paymentMethod === "Introducir Tarjeta" && (
-                        <Button size="lg" fullWidth>
+                      {paymentMethod === "Pago por tarjeta" && (
+                        <Button size="lg" fullWidth type="submit">
                           Pagar ahora
                         </Button>
                       )}
@@ -233,7 +279,7 @@ export const FormPaymentBook = ({ price, discount }) => {
                           color="blue-gray"
                           className="mb-2 font-medium "
                         >
-                          Tu cuenta de banco
+                          Tu tarjeta de banco
                         </Typography>
 
                         <Input

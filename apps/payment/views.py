@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import PurchaseInvoices
 from .filters import PurchaseInvoicesFilter
-from .serializers import PurchaseInvoicesSerializer
+from .serializers import PurchaseInvoicesSerializer, PaymentsBooksSerializer
 from .mixins import ValidateRegisterPaymentMixin
 
 
@@ -66,3 +66,27 @@ class GetPurchaseInvoicesView(BaseCustomAPIView):
 
     def get(self, request, *args, **kwargs):
         return self.get_objects(request, *args, **kwargs)
+
+
+class GetPaymentsBooksForUserView(BaseCustomAPIView):
+    """
+    View to handle get all Payments Books for user.
+    """
+
+    queryset = PurchaseInvoices.objects.all()
+    permission_classes = [IsAuthenticated]
+    serializer_class = PaymentsBooksSerializer
+    filterset_class = PurchaseInvoicesFilter
+
+    class Meta:
+        model = PurchaseInvoices
+        verbose_name = "purchaseInvoices"
+        verbose_name_plural = "purchasesInvoices"
+
+    def get_model(self):
+        return self.Meta.model
+
+    def get(self, request, *args, **kwargs):
+        books_payments = self.queryset.filter(buyer=request.user)
+        serializer = self.get_serializer(books_payments, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)

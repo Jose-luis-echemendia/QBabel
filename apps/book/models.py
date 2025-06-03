@@ -83,7 +83,8 @@ class Book(BaseModel):
     def discount(self):
         if self.is_discount_active:
             discount_amount = (self.discount_percentage / 100) * self.price
-            return discount_amount
+            # return discount_amount
+            return round(discount_amount, 2)
         return self.price
 
     @property
