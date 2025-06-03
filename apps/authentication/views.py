@@ -26,6 +26,7 @@ class AccountActivationView(BaseCustomAPIView):
 
     def post(self, request, uid, token, *args, **kwargs):
         # Obtener el código del body de la petición
+        print(request.data)
         code = request.data.get("code")
 
         if not code:

@@ -1,5 +1,22 @@
 import axiosInstance from "./axiosInstance";
 
+// endpoit for active account
+export const activeAccountAPI = async (uidUser, token, code) => {
+  try {
+    const response = await axiosInstance.post(
+      `activate/custom/${uidUser}/${token}/`,
+      {
+        code,
+      }
+    );
+
+    return response;
+  } catch (error) {
+    console.error("Error en login:", error.response?.data || error.message);
+    throw error;
+  }
+};
+
 // endpoit for login
 export const loginAPI = async (email, password) => {
   try {
