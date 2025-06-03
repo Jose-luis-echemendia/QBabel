@@ -1,4 +1,5 @@
 import {
+  activeAccountAPI,
   loginAPI,
   refreshTokenAPI,
   logoutAPI,
@@ -8,6 +9,23 @@ import { getAuthenticatedUserAPI } from "@/api/userAPI";
 import { getAuthenticatedUserProfileAPI } from "@/api/profileAPI";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "sonner";
+
+// **Thunk para manejar el login**
+export const activeAccountThunk = createAsyncThunk(
+  "auth/activeAccount",
+  async ({ uidUser, token, code }, { rejectWithValue }) => {
+    try {
+      const response = await activeAccountAPI(uidUser, token, code);
+      if (response.status === 200) {
+        toast.success("Has activado tu cuenta correctamente");
+        return response.data;
+      }
+      return rejectWithValue(response?.data);
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
 
 // **Thunk para manejar el login**
 export const loginThunk = createAsyncThunk(

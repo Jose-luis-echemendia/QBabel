@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  activeAccountThunk,
   loginThunk,
   getAuthenticatedUserThunk,
   getAuthenticatedUserProfileThunk,
@@ -42,6 +43,26 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      // **Active Account Reducers**
+      .addCase(activeAccountThunk.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(activeAccountThunk.fulfilled, (state, action) => {
+        state.loading = false;
+        state.isAuthenticated = true;
+        state.jwtTokenAccess = action.payload.access;
+        state.jwtTokenRefresh = action.payload.refresh;
+        state.user = action.payload.user_id;
+        state.userForActiveAccount = false;
+        localStorage.setItem("jwtTokenAccess", action.payload.access);
+        localStorage.setItem("jwtTokenRefresh", action.payload.refresh);
+        localStorage.setItem("isAuthenticated", true);
+        localStorage.removeItem("userForActiveAccount");
+      })
+      .addCase(activeAccountThunk.rejected, (state) => {
+        state.loading = false;
+      })
+
       // **Login Reducers**
       .addCase(loginThunk.pending, (state) => {
         state.loading = true;

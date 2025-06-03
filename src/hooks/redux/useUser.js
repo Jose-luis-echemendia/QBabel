@@ -7,6 +7,7 @@ import {
   deleteUserThunk,
 } from "@/store/users/thunks";
 import { useAppDispatch } from "./useStore";
+import { removeCreatedUser } from "@/store/users/slice";
 
 export const useUser = () => {
   const dispath = useAppDispatch();
@@ -35,7 +36,12 @@ export const useUser = () => {
     dispath(deleteUserThunk(id));
   };
 
+  const handleRemoveCreatedUser = () => {
+    dispath(removeCreatedUser());
+  };
+
   return {
+    handleRemoveCreatedUser,
     handleGetUsers,
     handleGetUserById,
     handleCreateUser,

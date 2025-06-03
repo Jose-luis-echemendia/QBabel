@@ -36,7 +36,7 @@ export const GetAuthLinks = () => {
         classNameDialog="custom-dialog-class" // Clases personalizadas
         classNameBody="custom-body-class"
       >
-        <Signup />
+        <Signup handleOpen={() => setOpenLoginModal(false)}/>
       </CustomModal>
 
       {/* Modal de inicio de sesión */}

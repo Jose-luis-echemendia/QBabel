@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { Oval } from "react-loader-spinner";
 
 const Activate = () => {

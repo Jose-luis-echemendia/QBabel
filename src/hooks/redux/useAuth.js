@@ -1,4 +1,5 @@
 import {
+  activeAccountThunk,
   loginThunk,
   getAuthenticatedUserThunk,
   getAuthenticatedUserProfileThunk,
@@ -15,6 +16,10 @@ import {
 
 export const useAuth = () => {
   const dispath = useAppDispatch();
+
+  const handleActiveAccountThunk = ({ uidUser, token, code }) => {
+    dispath(activeAccountThunk({ uidUser, token, code }));
+  };
 
   const handleLogin = ({ email, password }) => {
     dispath(loginThunk({ email, password }));
@@ -51,6 +56,7 @@ export const useAuth = () => {
   };
 
   return {
+    handleActiveAccountThunk,
     handleLogin,
     handleGetAuthenticatedUser,
     handleGetAuthenticatedUserProfile,
