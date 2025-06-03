@@ -15,6 +15,8 @@ export const CustomHeaderBook = ({ book }) => {
   const [bookInLibrary, setBookInLibrary] = useState(book.in_library);
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
   const { handleAddBookToLibrary } = useLibrary();
+  const paymentsBooks = useAppSelector((state) => state.payment.paymentsBooks);
+
   const navigate = useNavigate();
 
   const addLibraryAndRead = () => {
@@ -37,7 +39,7 @@ export const CustomHeaderBook = ({ book }) => {
       setOpenQuestionModal(true);
       return;
     }
-    if (!book.is_free) {
+    if (!book.is_free && !paymentsBooks.includes(book.uid)) {
       toast.info("Compra el libro para continuar con la lectura");
       setOpenBuyBookModal(true);
       return;

@@ -8,10 +8,12 @@ import { ReviewsBook } from "./reviews";
 import { useEffect } from "react";
 import { useBook } from "@/hooks/redux/useBook";
 import { useAppSelector } from "@/hooks/redux/useStore";
+import { usePayment } from "@/hooks/redux/usePayment";
 
 const DetailsBookView = () => {
   const params = useParams();
   const { handleGetBookForId } = useBook();
+  const { handleGetPaymentsBooksForUserThunk } = usePayment();
   const booksState = useAppSelector((state) => state.book);
   const { loading, book } = booksState;
 
@@ -23,6 +25,7 @@ const DetailsBookView = () => {
 
     const uid = params.bookId;
     handleGetBookForId(uid);
+    handleGetPaymentsBooksForUserThunk();
   }, [params]);
 
   return (
