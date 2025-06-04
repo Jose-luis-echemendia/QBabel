@@ -50,6 +50,10 @@ const Routers = () => {
     getStateAuth();
   }, [auth.isAuthenticated]);
 
+  const userForActiveAccount = useAppSelector((state) => state.auth.userForActiveAccount) || false;
+  const createdUser = useAppSelector((state) => state.users.createdUser) || false;
+
+
   return (
     <>
       <Router>
@@ -61,12 +65,15 @@ const Routers = () => {
           <Route
             element={
               <ProtectedRoute
-                redirectTo="/home"
-                isAllowed={!auth.isAuthenticated}
+                redirectTo="/"
+                isAllowed={userForActiveAccount && createdUser}
               />
             }
           >
-            <Route path="/activate/:userID/:token" element={<ActivePage />}></Route>
+            <Route
+              path="/activate/:userID/:token"
+              element={<ActivePage />}
+            ></Route>
           </Route>
 
           {/* WELCOME DISPLAY */}

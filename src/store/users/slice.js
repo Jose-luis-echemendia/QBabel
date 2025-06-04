@@ -9,7 +9,7 @@ import {
 } from "./thunks";
 
 const initialState = {
-  createdUser: localStorage.getItem("createdUser" === "true"),
+  createdUser: localStorage.getItem("createdUser") === "true",
   user: null,
   count: 0,
   next: null,
@@ -62,7 +62,7 @@ export const userSlice = createSlice({
       })
       .addCase(createUserThunk.fulfilled, (state, action) => {
         state.createdUser = true;
-        localStorage.setItem("createdUser", true);
+        localStorage.setItem("createdUser", "true");
         state.loading = false;
         if (state.users.length === 0) state.users = action.payload;
         else state.users.push(action.payload);

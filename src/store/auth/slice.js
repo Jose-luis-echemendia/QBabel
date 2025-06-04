@@ -10,7 +10,8 @@ import {
 } from "./thunks";
 
 const initialState = {
-  userForActiveAccount: localStorage.getItem("userForActiveAccount" === "true"),
+  statementRead: localStorage.getItem("statementRead") === "true",
+  userForActiveAccount: localStorage.getItem("userForActiveAccount") === "true",
   isAuthenticated: localStorage.getItem("isAuthenticated") === "true",
   jwtTokenAccess: localStorage.getItem("jwtTokenAccess"),
   jwtTokenRefresh: localStorage.getItem("jwtTokenRefresh"),
@@ -34,11 +35,19 @@ export const authSlice = createSlice({
     },
     avtiveAccount: (state) => {
       state.userForActiveAccount = true;
-      localStorage.setItem("userForActiveAccount", true);
+      localStorage.setItem("userForActiveAccount", "true");
     },
     removeAvtiveAccount: (state) => {
       state.userForActiveAccount = false;
       localStorage.removeItem("userForActiveAccount");
+    },
+    avtiveStatementRead: (state) => {
+      state.statementRead = true;
+      localStorage.setItem("statementRead", "true");
+    },
+    removeStatementRead: (state) => {
+      state.statementRead = false;
+      localStorage.removeItem("statementRead");
     },
   },
   extraReducers: (builder) => {
@@ -178,5 +187,10 @@ export const authSlice = createSlice({
 });
 
 export default authSlice.reducer;
-export const { logoutLocal, avtiveAccount, removeAvtiveAccount } =
-  authSlice.actions;
+export const {
+  logoutLocal,
+  avtiveAccount,
+  removeAvtiveAccount,
+  avtiveStatementRead,
+  removeStatementRead,
+} = authSlice.actions;

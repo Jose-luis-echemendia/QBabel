@@ -15,3 +15,13 @@ class ActivationToken(BaseModel):
 
     def __str__(self):
         return f"Token for {self.user.email}"
+
+    def get_slug_source_field(self):
+        return "code"
+
+    class Meta:
+        db_table = "ActivationToken"
+        managed = True
+        verbose_name = "ActivationToken"
+        verbose_name_plural = "ActivationTokens"
+        ordering = ("-created_at",)

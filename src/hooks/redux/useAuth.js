@@ -12,6 +12,8 @@ import {
   logoutLocal,
   avtiveAccount,
   removeAvtiveAccount,
+  avtiveStatementRead,
+  removeStatementRead,
 } from "@/store/auth/slice";
 
 export const useAuth = () => {
@@ -55,6 +57,14 @@ export const useAuth = () => {
     dispath(removeAvtiveAccount());
   };
 
+  const handleAvtiveStatementRead = () => {
+    dispath(avtiveStatementRead());
+  };
+
+  const handleRemoveStatementRead = () => {
+    dispath(removeStatementRead());
+  };
+
   return {
     handleActiveAccountThunk,
     handleLogin,
@@ -66,5 +76,7 @@ export const useAuth = () => {
     handleLogoutLocal,
     handleAvtiveAccount,
     handleRemoveAvtiveAccount,
+    handleAvtiveStatementRead,
+    handleRemoveStatementRead,
   };
 };

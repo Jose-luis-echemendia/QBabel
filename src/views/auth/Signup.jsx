@@ -1,36 +1,41 @@
 import { useForm } from "@/hooks/useForm";
 import { schemaSignup } from "@/helpers/yup-schemas";
-import { useState } from "react";
 import { Oval } from "react-loader-spinner";
 import { CustomImageDecorator } from "@/components/image-decorator";
 import { useUser } from "@/hooks/redux/useUser";
 import { useAuth } from "@/hooks/redux/useAuth";
-import { CustomModal } from "@/components/modal";
-import { ActiveAccount } from "./activeAccountModal";
+import { useEffect, useState } from "react";
 
-export const Signup = ({ handleOpen }) => {
-  const [openActiveAccountModal, setOpenActiveAccountModal] = useState(false);
-  const { register, handleSubmit, errors, reset } = useForm(schemaSignup);
+export const Signup = ({
+  handleCantCreateUser,
+  cantCreateUser,
+  handleOpen,
+  userForActiveAccount,
+  createdUser,
+}) => {
+  const [loading, setLoading] = useState(false);
+  const { register, handleSubmit, errors } = useForm(schemaSignup);
   const { handleCreateUser } = useUser();
+  const { handleAvtiveAccount, handleRemoveStatementRead } = useAuth();
 
-  const onSubmit = (data) => {
-    handleOpen();
-    handleCreateUser(data);
-    reset();
+  const onSubmit = async (data) => {
+    handleCantCreateUser(true);
+    handleRemoveStatementRead();
+    setLoading(true);
+    await handleCreateUser(data);
+    await handleAvtiveAccount();
+    setLoading(false);
   };
+
+  useEffect(() => {
+    if (userForActiveAccount && createdUser && cantCreateUser) {
+      handleOpen();
+      handleCantCreateUser(false);
+    }
+  }, [userForActiveAccount, createdUser, cantCreateUser]);
 
   return (
     <>
-      <CustomModal
-        open={openActiveAccountModal}
-        handleOpen={() => setOpenActiveAccountModal(false)} // Cierra el modal
-        classNameDialog="custom-dialog-class" // Clases personalizadas
-        classNameBody="custom-body-class"
-        exitButton={true}
-        size="md"
-      >
-        <ActiveAccount handleOpen={() => setOpenActiveAccountModal(false)} />
-      </CustomModal>
       <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="flex flex-col justify-center z-10">
           <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -142,7 +147,7 @@ export const Signup = ({ handleOpen }) => {
                 </div>
 
                 <div>
-                  {!stateAuth ? (
+                  {loading ? (
                     <button className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-[#2E2E2E] bg-primary hover:bg-primary-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:border-primary">
                       <Oval
                         visible={true}
