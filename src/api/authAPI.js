@@ -1,10 +1,10 @@
 import axiosInstance from "./axiosInstance";
 
 // endpoit for active account
-export const activeAccountAPI = async (uidUser, token, code) => {
+export const activeAccountAPI = async (userID, token, code) => {
   try {
     const response = await axiosInstance.post(
-      `activate/custom/${uidUser}/${token}/`,
+      `/api/activate/custom/${userID}/${token}/`,
       {
         code,
       }

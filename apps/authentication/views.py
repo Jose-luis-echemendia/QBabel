@@ -1,4 +1,4 @@
-from datetime import timezone
+from django.utils import timezone
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken, UntypedToken
 from rest_framework_simplejwt.exceptions import TokenError
@@ -26,7 +26,6 @@ class AccountActivationView(BaseCustomAPIView):
 
     def post(self, request, uid, token, *args, **kwargs):
         # Obtener el código del body de la petición
-        print(request.data)
         code = request.data.get("code")
 
         if not code:

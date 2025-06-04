@@ -62,11 +62,9 @@ export const authSlice = createSlice({
         state.jwtTokenAccess = action.payload.access;
         state.jwtTokenRefresh = action.payload.refresh;
         state.user = action.payload.user_id;
-        state.userForActiveAccount = false;
         localStorage.setItem("jwtTokenAccess", action.payload.access);
         localStorage.setItem("jwtTokenRefresh", action.payload.refresh);
         localStorage.setItem("isAuthenticated", true);
-        localStorage.removeItem("userForActiveAccount");
       })
       .addCase(activeAccountThunk.rejected, (state) => {
         state.loading = false;

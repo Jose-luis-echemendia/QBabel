@@ -11,6 +11,7 @@ export const GetAuthLinks = () => {
   const [openRegisterModal, setOpenRegisterModal] = useState(false);
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const [cantCreateUser, setCantCreateUser] = useState(true);
+  const [user, setUser] = useState("");
   const auth = useAppSelector((state) => state.auth);
   const createdUser =
     useAppSelector((state) => state.users.createdUser) || false;
@@ -56,7 +57,10 @@ export const GetAuthLinks = () => {
         exitButton={true}
         size="md"
       >
-        <ActiveAccount handleOpen={() => setOpenActiveAccountModal(false)} />
+        <ActiveAccount
+          handleOpen={() => setOpenActiveAccountModal(false)}
+          user={user}
+        />
       </CustomModal>
 
       {/* Modal de registro */}
@@ -67,6 +71,7 @@ export const GetAuthLinks = () => {
         classNameBody="custom-body-class"
       >
         <Signup
+          handleSetUser={setUser}
           handleCantCreateUser={setCantCreateUser}
           cantCreateUser={cantCreateUser}
           handleOpen={() => setOpenRegisterModal(false)}

@@ -17,6 +17,8 @@ export const CustomHeaderBook = ({ book }) => {
   const { handleAddBookToLibrary } = useLibrary();
   const paymentsBooks = useAppSelector((state) => state.payment.paymentsBooks);
 
+  console.log(book);
+
   const navigate = useNavigate();
 
   const addLibraryAndRead = () => {

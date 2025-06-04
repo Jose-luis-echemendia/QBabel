@@ -4,6 +4,8 @@ import { CustomCarouselBooks } from "./carousel/books";
 import { BookGroupCard } from "./carousel/books/carousel-items";
 import { useState, useEffect } from "react";
 import { useBook } from "@/hooks/redux/useBook";
+import { useAuth } from "@/hooks/redux/useAuth";
+import { useUser } from "@/hooks/redux/useUser";
 import { useAppSelector } from "@/hooks/redux/useStore";
 
 const HomeView = () => {
@@ -13,9 +15,15 @@ const HomeView = () => {
   const booksState = useAppSelector((state) => state.book);
   const { isLoading } = booksState;
 
+  const { handleRemoveCreatedUser } = useUser();
+  const { handleRemoveAvtiveAccount, handleRemoveStatementRead } = useAuth();
+
   const books = booksState.books?.results?.books;
 
   useEffect(() => {
+    handleRemoveCreatedUser();
+    handleRemoveAvtiveAccount();
+    handleRemoveStatementRead();
     // get books
     handleGetBooks({ is_published: true });
 

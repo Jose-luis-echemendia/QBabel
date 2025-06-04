@@ -1,6 +1,6 @@
 import { useAuth } from "@/hooks/redux/useAuth";
 
-export const ActiveAccount = ({ handleOpen }) => {
+export const ActiveAccount = ({ handleOpen, user }) => {
   const { handleAvtiveStatementRead } = useAuth();
 
   const handleClick = () => {
@@ -15,6 +15,7 @@ export const ActiveAccount = ({ handleOpen }) => {
           Bienvenido a la{" "}
           <span className="text-primary font-extrabold">Comunidad</span>
         </h2>
+        <span className="mb-2">{user}</span>
         <p className="text-center text-black">
           Para verificar su registro y comenzar a navegar por nuestras historias
           consulte su correo electrónico para activar su cuenta

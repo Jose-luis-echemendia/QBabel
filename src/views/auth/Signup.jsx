@@ -7,6 +7,7 @@ import { useAuth } from "@/hooks/redux/useAuth";
 import { useEffect, useState } from "react";
 
 export const Signup = ({
+  handleSetUser,
   handleCantCreateUser,
   cantCreateUser,
   handleOpen,
@@ -25,6 +26,7 @@ export const Signup = ({
     await handleCreateUser(data);
     await handleAvtiveAccount();
     setLoading(false);
+    handleSetUser(data.user_name);
   };
 
   useEffect(() => {

@@ -13,9 +13,9 @@ import { toast } from "sonner";
 // **Thunk para manejar el login**
 export const activeAccountThunk = createAsyncThunk(
   "auth/activeAccount",
-  async ({ uidUser, token, code }, { rejectWithValue }) => {
+  async ({ userID, token, activationCode }, { rejectWithValue }) => {
     try {
-      const response = await activeAccountAPI(uidUser, token, code);
+      const response = await activeAccountAPI(userID, token, activationCode);
       if (response.status === 200) {
         toast.success("Has activado tu cuenta correctamente");
         return response.data;

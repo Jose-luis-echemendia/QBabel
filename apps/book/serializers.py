@@ -34,6 +34,7 @@ class BookSerializer(AbstractBaseSerializer):
     file_details = serializers.SerializerMethodField()
 
     categories = serializers.SerializerMethodField()
+    in_library =serializers.SerializerMethodField()
 
     class Meta:
         model = Book
@@ -127,6 +128,8 @@ class BookSerializer(AbstractBaseSerializer):
             for category in category_book
             if category.category
         ]
+
+
 
     def create(self, validated_data):
         """

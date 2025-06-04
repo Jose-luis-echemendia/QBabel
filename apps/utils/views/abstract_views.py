@@ -126,7 +126,9 @@ class BaseView(ABC):
         ordered_queryset = self.order_queryset(filtered_queryset)
         paginator = MediumSetPagination()
         results = paginator.paginate_queryset(ordered_queryset, request)
-        serialized_data = self.get_serializer(results, many=True).data
+        serialized_data = self.get_serializer(
+            results, many=True, context={"request": request}
+        ).data
         return paginator.get_paginated_response(
             {self.get_verbose_name_plural(): serialized_data}
         )

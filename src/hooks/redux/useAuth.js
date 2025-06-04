@@ -19,8 +19,8 @@ import {
 export const useAuth = () => {
   const dispath = useAppDispatch();
 
-  const handleActiveAccountThunk = ({ uidUser, token, code }) => {
-    dispath(activeAccountThunk({ uidUser, token, code }));
+  const handleActiveAccountThunk = ({ userID, token, activationCode }) => {
+    dispath(activeAccountThunk({ userID, token, activationCode }));
   };
 
   const handleLogin = ({ email, password }) => {
