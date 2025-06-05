@@ -15,6 +15,23 @@ export const getLIbraryAPI = async () => {
   }
 };
 
+// endpoint for get all items in library
+export const getItemsOfLIbraryAPI = async (filters = {}) => {
+  try {
+    const response = await axiosInstance.get("/api/library/items/", {
+      params: filters, // aquí se pasan los filtros como query params
+    });
+
+    return response;
+  } catch (error) {
+    console.error(
+      "Error en obtener la librería:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};
+
 // endpoint for add book
 export const addBookToLibraryAPI = async (data) => {
   try {

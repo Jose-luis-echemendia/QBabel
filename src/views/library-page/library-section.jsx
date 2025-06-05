@@ -9,7 +9,7 @@ import { ContentTabs } from "./content-tabs";
 
 function LibrarySection() {
   const [openFormAddBookModal, setOpenFormAddBookModal] = useState(false);
-  const [activeTab, setActiveTab] = useState("current");
+  const [activeTab, setActiveTab] = useState("allStory");
 
   return (
     <section className="py-4 ">
@@ -20,7 +20,9 @@ function LibrarySection() {
           {/* button agg book */}
           <div className="flex justify-end items-end w-full">
             <button
-              onClick={() => setOpenFormAddBookModal(true)} // Abre el modal
+              onClick={() => {
+                setOpenFormAddBookModal(true), setActiveTab("myStory");
+              }} // Abre el modal
               className="mr-0 md:mr-0 px-5 gap-3 py-2 mb-3 border border-gray-300 rounded-md text-gray-700 flex items-center hover:bg-gray-100"
             >
               <svg

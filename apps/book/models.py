@@ -12,8 +12,8 @@ class Book(BaseModel):
     isbn = models.CharField(
         max_length=13,
         unique=True,
-        blank=False,
-        null=False,
+        blank=True,
+        null=True,
         help_text="ISBN number of the book",
     )
     author = models.ForeignKey(User, related_name="books", on_delete=models.CASCADE)
@@ -132,14 +132,6 @@ class Book(BaseModel):
             avg=Avg("rating")
         )["avg"]
         return round(average, 2) if average is not None else 0.0
-
-    @property
-    def in_library(self):
-        from apps.library.models import Item
-
-        return Item.objects.filter(
-            book=self.uid, library=self.author.library.uid
-        ).exists()
 
     def __str__(self):
         return self.title

@@ -8,7 +8,7 @@ export const createBookThunk = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const response = await createBookApi(data);
-      if (response.status === 200) {
+      if (response.status === 201) {
         toast.success("Tu libro ha sido registrado satisfactoriamente");
         return response.data;
       }

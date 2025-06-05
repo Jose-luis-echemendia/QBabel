@@ -1,10 +1,26 @@
 import { useState } from "react";
 import { CustomModal } from "@/components/modal";
 import { FormPaymentBook } from "./buy-book";
+import { toast } from "sonner";
+import { useAppSelector } from "@/hooks/redux/useStore";
+import { useNavigate } from "react-router-dom";
 
-export const CardBook = ({ book }) => {
+export const CardBook = ({ book, seeBuy, seeArchive }) => {
   const [showActions, setShowActions] = useState(false);
   const [openBuyBookModal, setOpenBuyBookModal] = useState(false);
+  const paymentsBooks = useAppSelector((state) => state.payment.paymentsBooks);
+  const navigate = useNavigate();
+
+  const read = () => {
+    if (!book.is_free && !paymentsBooks.includes(book.uid)) {
+      toast.info("Compra el libro para continuar con la lectura");
+      setOpenBuyBookModal(true);
+      return;
+    }
+
+    navigate(`/books/reader/${book.uid}`);
+  };
+
   return (
     <>
       <div
@@ -25,24 +41,31 @@ export const CardBook = ({ book }) => {
           {showActions && (
             <div className="absolute inset-0 flex items-center justify-center transition-opacity duration-200">
               <div className="relative bg-black bg-opacity-70 w-full h-full rounded p-4 flex flex-col items-center justify-center space-y-2">
-                <button className="w-full bg-transparent text-white border-2 px-3 py-1 rounded hover:bg-gray-300 cursor-pointer hover:text-black transition">
+                <button
+                  onClick={() => read()}
+                  className="w-full bg-transparent text-white border-2 px-3 py-1 rounded hover:bg-gray-300 cursor-pointer hover:text-black transition"
+                >
                   Leer
                 </button>
                 <button className="w-full bg-transparent text-white border-2 border-white px-3 py-1 rounded hover:bg-gray-300 cursor-pointer hover:text-black transition">
                   Detalles
                 </button>
-                <button className="w-full bg-transparent text-white border-2 border-white px-3 py-1 rounded hover:bg-gray-300 cursor-pointer hover:text-black transition">
-                  Archivar
-                </button>
-                <button
-                  onClick={() => {
-                    setShowActions(false);
-                    setOpenBuyBookModal(true);
-                  }}
-                  className="w-full bg-transparent text-white border-2 border-white px-3 py-1 rounded  hover:bg-gray-300 cursor-pointer hover:text-black transition"
-                >
-                  Comprar
-                </button>
+                {seeArchive && (
+                  <button className="w-full bg-transparent text-white border-2 border-white px-3 py-1 rounded hover:bg-gray-300 cursor-pointer hover:text-black transition">
+                    Archivar
+                  </button>
+                )}
+                {seeBuy && (
+                  <button
+                    onClick={() => {
+                      setShowActions(false);
+                      setOpenBuyBookModal(true);
+                    }}
+                    className="w-full bg-transparent text-white border-2 border-white px-3 py-1 rounded  hover:bg-gray-300 cursor-pointer hover:text-black transition"
+                  >
+                    Comprar
+                  </button>
+                )}
 
                 <button
                   className="absolute top-0 right-2 text-white p-1 rounded-full"

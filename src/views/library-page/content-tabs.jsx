@@ -1,16 +1,30 @@
-import AllStories from "./allstories";
+import Stories from "./stories";
 // Importa tu componente para Reading Lists
 import { useEffect } from "react";
 import { ReadingListView } from "./reading-view";
-import { bestBooksData as books } from "../../constants/home-page/best-books";
 import { useLibrary } from "@/hooks/redux/useLibrary";
+import { useAppSelector } from "@/hooks/redux/useStore";
+import { useBook } from "@/hooks/redux/useBook";
 
 export const ContentTabs = ({ activeTab }) => {
-  const { handleGetLibrary } = useLibrary();
+  const items = useAppSelector((state) => state.library.items);
+  const mybooks = useAppSelector((state) => state.book.books?.results?.books);
+  const { handleGetItemsOfLIbraryThunk } = useLibrary();
+  const { handleGetBooks } = useBook();
 
   useEffect(() => {
     if (activeTab === "allStory") {
-      handleGetLibrary();
+      handleGetItemsOfLIbraryThunk();
+    } else if (activeTab === "readingStory") {
+      handleGetItemsOfLIbraryThunk({ is_sold: true });
+    } else if (activeTab === "forBuying") {
+      handleGetItemsOfLIbraryThunk({ is_sold: false });
+    } else if (activeTab === "listReading") {
+      handleGetItemsOfLIbraryThunk();
+    } else if (activeTab === "myStory") {
+      handleGetBooks({ me: true });
+    } else if (activeTab === "archiveStory") {
+      handleGetItemsOfLIbraryThunk();
     }
   }, [activeTab]);
 
@@ -18,17 +32,17 @@ export const ContentTabs = ({ activeTab }) => {
     <>
       {activeTab === "allStory" && (
         <>
-          <AllStories />
+          <Stories items={items?.results?.items} />
         </>
       )}
       {activeTab === "readingStory" && (
         <>
-          <AllStories />
+          <Stories items={items?.results?.items} seeBuy={false} />
         </>
       )}
       {activeTab === "forBuying" && (
         <>
-          <AllStories />
+          <Stories items={items?.results?.items} />
         </>
       )}
       {activeTab === "listReading" && (
@@ -37,7 +51,7 @@ export const ContentTabs = ({ activeTab }) => {
       )}
       {activeTab === "myStory" && (
         <>
-          <AllStories books={books} />
+          <Stories mybooks={mybooks} seeBuy={false} seeArchive={false} />
         </>
       )}
       {activeTab === "archiveStory" && (

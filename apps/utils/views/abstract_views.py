@@ -124,7 +124,7 @@ class BaseView(ABC):
             queryset if instances is None else instances
         )
         ordered_queryset = self.order_queryset(filtered_queryset)
-        paginator = MediumSetPagination()
+        paginator = self.get_pagination()
         results = paginator.paginate_queryset(ordered_queryset, request)
         serialized_data = self.get_serializer(
             results, many=True, context={"request": request}

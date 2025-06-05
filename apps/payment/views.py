@@ -34,6 +34,17 @@ class BuyBookView(BaseCustomAPIView, ValidateRegisterPaymentMixin):
             validated_data = self.validate(request.data)
         except ValidationError as e:
             return Response({"detail": e.detail}, status=status.HTTP_400_BAD_REQUEST)
+
+        book = validated_data.get("book")
+        from apps.library.models import Item
+
+        if not Item.objects.filter(book=book, is_filed=True).exists():
+            raise ValidationError({"detail": "The book is not available for purchase."})
+
+        item = Item.objects.filter(book=book, is_filed=True).first()
+        item.is_sold = True
+        item.save()
+
         validated_data["profit"] = round(validated_data["final_payment"] * 0.1, 2)
         validated_data["writer_profit"] = round(
             validated_data["final_payment"] * 0.9, 2

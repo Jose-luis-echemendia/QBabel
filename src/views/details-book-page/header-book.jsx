@@ -3,7 +3,7 @@ import { useLibrary } from "@/hooks/redux/useLibrary";
 import { Login } from "../auth/login";
 import { CustomModal } from "@/components/modal";
 import { useState } from "react";
-import { toast } from "sonner";
+
 import { Question } from "./question";
 import { useNavigate } from "react-router-dom";
 import { FormPaymentBook } from "../particular-components/books/buy-book";
@@ -16,8 +16,6 @@ export const CustomHeaderBook = ({ book }) => {
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
   const { handleAddBookToLibrary } = useLibrary();
   const paymentsBooks = useAppSelector((state) => state.payment.paymentsBooks);
-
-  console.log(book);
 
   const navigate = useNavigate();
 

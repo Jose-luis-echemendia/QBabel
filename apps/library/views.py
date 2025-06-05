@@ -7,6 +7,7 @@ from apps.utils.views.abstract_views import BaseCustomAPIView
 from .models import Library, Item
 from .serializers import LibrarySerializer, ItemSerializer
 from .mixins import ValidateBookItem
+from .filters import ItemFilter
 
 
 class LibraryView(BaseCustomAPIView):
@@ -34,6 +35,30 @@ class LibraryView(BaseCustomAPIView):
             {self.get_verbose_name(): self.get_serializer(library).data},
             status=status.HTTP_200_OK,
         )
+
+
+class ItemsView(BaseCustomAPIView):
+    """
+    View to manage items in the library.
+    """
+
+    permission_classes = [IsAuthenticated]
+    serializer_class = ItemSerializer
+    filterset_class = ItemFilter
+
+    class Meta:
+        model = Item
+        verbose_name = "item"
+        verbose_name_plural = "items"
+
+    def get_model(self):
+        return self.Meta.model
+
+    def get(self, request, *args, **kwargs):
+        user = request.user
+        library = Library.objects.get(user=user)
+        items = Item.objects.filter(library=library)
+        return self.get_objects(request, instances=items, *args, **kwargs)
 
 
 class AddBookView(BaseCustomAPIView, ValidateBookItem):
@@ -123,3 +148,7 @@ class DisaggregateBookView(BaseCustomAPIView, ValidateBookItem):
             {self.get_verbose_name(): self.get_serializer(library).data},
             status=status.HTTP_204_NO_CONTENT,
         )
+
+
+class ArchiveBookView(BaseCustomAPIView):
+    pass

@@ -34,12 +34,12 @@ class BookSerializer(AbstractBaseSerializer):
     file_details = serializers.SerializerMethodField()
 
     categories = serializers.SerializerMethodField()
-    in_library =serializers.SerializerMethodField()
+    in_library = serializers.SerializerMethodField()
 
     class Meta:
         model = Book
         fields = AbstractBaseSerializer.Meta.fields + [
-            "isbn",
+            #"isbn",
             "author",
             "author_details",
             "title",
@@ -72,7 +72,7 @@ class BookSerializer(AbstractBaseSerializer):
             "in_library",
         ]
         extra_kwargs = {
-            "isbn": {"required": True},
+            #"isbn": {"required": True},
             "author": {"required": True},
             "cover": {"required": True},
             "file": {"required": True},
@@ -129,7 +129,15 @@ class BookSerializer(AbstractBaseSerializer):
             if category.category
         ]
 
+    def get_in_library(self, obj):
+        request = self.context.get("request")
+        if request and request.user.is_authenticated:
+            from apps.library.models import Item
 
+            return Item.objects.filter(
+                book=obj.uid, library=request.user.library
+            ).exists()
+        return False
 
     def create(self, validated_data):
         """

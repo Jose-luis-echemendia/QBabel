@@ -3,10 +3,12 @@ import {
   getLibraryThunk,
   addBookToLibraryThunk,
   disaggregateBookFromLibraryThunk,
+  getItemsOfLIbraryThunk,
 } from "./thunks";
 
 const initialState = {
   library: null,
+  items: null,
   loading: false,
 };
 
@@ -25,6 +27,18 @@ export const librarySlice = createSlice({
         state.library = action.payload.library;
       })
       .addCase(getLibraryThunk.rejected, (state) => {
+        state.loading = false;
+      })
+
+      // **Get items of library reducers**
+      .addCase(getItemsOfLIbraryThunk.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getItemsOfLIbraryThunk.fulfilled, (state, action) => {
+        state.items = action.payload;
+        state.loading = false;
+      })
+      .addCase(getItemsOfLIbraryThunk.rejected, (state) => {
         state.loading = false;
       })
 

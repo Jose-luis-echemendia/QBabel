@@ -4,7 +4,7 @@ import { CustomModal } from "@/components/modal";
 import { CategoriesModal } from "./categories-modal";
 import { Controller } from "react-hook-form";
 import { useForm } from "@/hooks/useForm";
-import { Select, Option } from "@material-tailwind/react";
+import { Select, Option, Button } from "@material-tailwind/react";
 import { schemaBook } from "@/helpers/yup-schemas";
 import { customCheckboxTheme } from "@/utils/material-tailwindscss/themes";
 import { Checkbox, ThemeProvider } from "@material-tailwind/react";
@@ -12,6 +12,7 @@ import { Input, IconButton, Typography } from "@material-tailwind/react";
 import { useBook } from "@/hooks/redux/useBook";
 import { translateLanguageBookAdd } from "@/helpers/translate";
 import { toast } from "sonner";
+import { useAppSelector } from "@/hooks/redux/useStore";
 
 export const FormAddBook = ({ handleOpen }) => {
   const [previewImage, setPreviewImage] = useState(null);
@@ -23,12 +24,11 @@ export const FormAddBook = ({ handleOpen }) => {
   const [openCategoryModal, setOpenCategoryModal] = useState(false);
 
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const [chapters, setChapters] = useState(0);
-  const [pages, setPages] = useState(0);
-  const [price, setPrice] = useState(0);
 
   const { register, handleSubmit, errors, control } = useForm(schemaBook);
   const { handleCreateBook } = useBook();
+  const loading = useAppSelector((state) => state.book.loading);
+  console.log(loading);
 
   useEffect(() => {
     if (!selectedImage) {
@@ -80,7 +80,7 @@ export const FormAddBook = ({ handleOpen }) => {
     formData.append("cover", data.cover[0]);
     formData.append("file", data.file[0]);
     formData.append("title", data.title);
-    formData.append("isbn", data.title);
+    //formData.append("isbn", data.title);
     formData.append("number_pages", data.number_pages);
     formData.append("number_chapters", data.number_chapters);
     formData.append("price", data.price);
@@ -482,16 +482,20 @@ export const FormAddBook = ({ handleOpen }) => {
 
           <div className="mt-44">
             <div className="flex items-center justify-end gap-4 border-t col-span-full pt-4 -mt-2">
-              <button
-                className="bg-black-500 py-1 px-2.5 rounded-xl"
+              <Button
+                className="bg-black-500 py-1 px-2.5 rounded-xl h-9"
                 type="button"
                 onClick={(e) => (e.preventDefault(), handleOpen())}
               >
                 <span className="text-primary font-semibold">Cancelar</span>
-              </button>
-              <button className="bg-primary py-1 px-2.5 rounded-xl">
+              </Button>
+              <Button
+                type="submit"
+                className="bg-primary py-1 px-2.5 rounded-xl h-9"
+                loading={loading}
+              >
                 <span className="text-black-500 font-semibold">Aceptar</span>
-              </button>
+              </Button>
             </div>
           </div>
         </div>

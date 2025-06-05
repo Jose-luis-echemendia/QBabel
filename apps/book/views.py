@@ -4,9 +4,9 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.parsers import MultiPartParser, FormParser
-from apps.utils.pagination import LargeSetPagination
 from apps.utils.views.abstract_views import BaseViewSet, BaseCustomAPIView
 from apps.utils.mixins import CreateImageMixin
+from apps.utils.pagination import LargeSetPagination, MediumSetPagination
 from .serializers import BookSerializer, CategoryBookSerializer
 from .models import Book
 from .filters import BookFilter
@@ -58,6 +58,11 @@ class BookViewSet(
         self.validate_categories(validated_data.get("categories"))
 
         return validated_data
+
+    def get_pagination(self):
+        if self.request.query_params.get("me", None):
+            return MediumSetPagination()
+        return super().get_pagination()
 
     def create(self, request, *args, **kwargs):
         """
@@ -129,6 +134,111 @@ class BookViewSet(
             {"data": True},
             status=status.HTTP_204_NO_CONTENT,
         )
+
+
+class GetBooksHomeView(BaseCustomAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+    permission_classes = [IsAuthenticated]
+    pagination_class = LargeSetPagination
+    filterset_class = BookFilter
+
+    class Meta:
+        model = Book
+        verbose_name = "book"
+        verbose_name_plural = "books"
+
+    def get_model(self):
+        return self.Meta.model
+
+    def get_limited_books(self, queryset):
+        count = queryset.count()
+        if count >= 32:
+            return queryset[:32]
+        elif count >= 16:
+            return queryset[:16]
+        elif count >= 8:
+            return queryset[:8]
+        return queryset
+
+    def get(self, request, *args, **kwargs):
+        """
+        libros a obtener:
+            => fantasía
+            => romance
+            => Mejores selecciones
+            => comedia
+            => historias gratis
+            => tus lecturas actuales
+            => historias de escritores recientes
+        """
+
+        user = request.user
+
+        def get_books_by_category(name):
+            return (
+                Book.objects.filter(
+                    category_book__category__name__iexact=name, is_published=True
+                )
+                .order_by("-created_at")
+                .distinct()
+            )
+
+        def get_most_read_books():
+            return (
+                Book.objects.filter(is_published=True)
+                .limit(32)
+                .order_by("-count_reads")
+            )
+
+        def get_free_books():
+            return Book.objects.filter(price=0.00, is_published=True).order_by(
+                "-created_at"
+            )
+
+        def get_user_current_reads():
+            return Book.objects.filter(
+                items__library__user=user, is_published=True
+            ).order_by("-created_at")
+
+        def get_recent_authors_books():
+            from django.utils import timezone
+            from datetime import timedelta
+
+            recent_days = timezone.now() - timedelta(days=30)
+            return (
+                Book.objects.filter(
+                    author__books__created_at__gte=recent_days, is_published=True
+                )
+                .order_by("-created_at")
+                .distinct()
+            )
+
+        data = {
+            "fantasy": self.serializer_class(
+                self.get_limited_books(get_books_by_category("Fantasía")), many=True
+            ).data,
+            "romance": self.serializer_class(
+                self.get_limited_books(get_books_by_category("Romance")), many=True
+            ).data,
+            "top_picks": self.serializer_class(
+                self.get_limited_books(get_most_read_books()), many=True
+            ).data,
+            "comedy": self.serializer_class(
+                self.get_limited_books(get_books_by_category("Comedia")), many=True
+            ).data,
+            "free_books": self.serializer_class(
+                self.get_limited_books(get_free_books()), many=True
+            ).data,
+            "your_library": self.serializer_class(
+                self.get_limited_books(get_user_current_reads()), many=True
+            ).data,
+            "new_authors": self.serializer_class(
+                self.get_limited_books(get_recent_authors_books()), many=True
+            ).data,
+        }
+
+        return Response(data)
 
 
 class ReadBookView(BaseCustomAPIView):

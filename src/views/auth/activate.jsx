@@ -9,14 +9,12 @@ const Activate = () => {
   const params = useParams();
   const navigate = useNavigate();
   const [activated, setActivated] = useState(false);
-  const [load, setLoad] = useState(false);
   const [activationCode, setActivationCode] = useState("");
   const [error, setError] = useState("");
   const { handleActiveAccountThunk } = useAuth();
   const stateAuth = useAppSelector((state) => state.auth);
 
   const handleSubmit = (e) => {
-    setLoad(true);
     e.preventDefault();
     if (!activationCode.trim()) {
       setError("Por favor ingresa el código de activación");

@@ -1,4 +1,5 @@
 import {
+  getItemsOfLIbraryAPI,
   getLIbraryAPI,
   addBookToLibraryAPI,
   disaggregateBookFromLibraryAPI,
@@ -11,6 +12,19 @@ export const getLibraryThunk = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await getLIbraryAPI();
+      if (response.status === 200) return response.data;
+      return rejectWithValue(response?.data);
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
+
+export const getItemsOfLIbraryThunk = createAsyncThunk(
+  "library/getItemsOfLIbrary",
+  async (filters = {}, { rejectWithValue }) => {
+    try {
+      const response = await getItemsOfLIbraryAPI(filters);
       if (response.status === 200) return response.data;
       return rejectWithValue(response?.data);
     } catch (error) {

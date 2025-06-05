@@ -8,5 +8,9 @@ class LibraryAdmin(admin.ModelAdmin):
     list_filter = ("total_items",)
 
 
+class ItemAdmin(admin.ModelAdmin):
+    list_display = ("book", "library", "is_sold", "is_filed")
+
+
 admin.site.register(Library, LibraryAdmin)
-admin.site.register(Item)
+admin.site.register(Item, ItemAdmin)

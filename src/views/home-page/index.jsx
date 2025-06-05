@@ -12,12 +12,12 @@ const HomeView = () => {
   const [booksPerSlide, setbooksPerSlide] = useState(8);
   const [carouselSize, setCarouselSize] = useState(80);
   const { handleGetBooks } = useBook();
-  const booksState = useAppSelector((state) => state.book);
-  const { isLoading } = booksState;
 
   const { handleRemoveCreatedUser } = useUser();
   const { handleRemoveAvtiveAccount, handleRemoveStatementRead } = useAuth();
 
+  const booksState = useAppSelector((state) => state.book);
+  const { loading } = booksState;
   const books = booksState.books?.results?.books;
 
   useEffect(() => {
@@ -58,7 +58,7 @@ const HomeView = () => {
           Home
         </h2>
         <ContainerHome>
-          {!isLoading && books && (
+          {!loading && books && (
             <div className="flex flex-col gap-1">
               <span className="ml-7 text-black font-bold font-opensans text-lg leading-8">
                 Algunos libros que te pueden interesar
@@ -82,7 +82,7 @@ const HomeView = () => {
           <CustomCarousel />
           <div className="flex flex-col gap-1">
             <span className="ml-7 text-black font-bold font-opensans text-lg leading-8">
-              Lo mejor de fantasía para ti
+              Lo mejor de romance para ti
             </span>
             <CustomCarouselBooks
               carouselSize={`h-${carouselSize}`}
@@ -91,7 +91,7 @@ const HomeView = () => {
           </div>
           <div className="flex flex-col gap-0">
             <span className="ml-7 text-black font-bold font-opensans text-lg leading-8">
-              Las mejores selecciones para ti para ti
+              Las mejores selecciones para ti
             </span>
             <CustomCarouselBooks
               booksPerSlide={booksPerSlide}
@@ -101,7 +101,7 @@ const HomeView = () => {
 
           <div className="flex flex-col gap-1">
             <span className="ml-7 text-black font-bold font-opensans text-lg leading-8">
-              Lo mejor de fantasía para ti
+              Lo mejor de la comedia para ti
             </span>
             <CustomCarouselBooks
               carouselSize={`h-${carouselSize}`}
@@ -135,7 +135,7 @@ const HomeView = () => {
           </div>
           <div className="flex flex-col gap-1">
             <span className="ml-7 text-black font-bold font-opensans text-lg leading-8">
-              Lo mejor de fantasía para ti
+              Tus lecturas actuales
             </span>
             <CustomCarouselBooks
               carouselSize={`h-${carouselSize}`}

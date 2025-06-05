@@ -10,20 +10,20 @@ class SmallSetPagination(PageNumberPagination):
 
 class MediumSetPagination(PageNumberPagination):
     page_query_param = "p"
-    page_size = 18
+    page_size = 15
     page_size_query_param = "page_size"
-    max_page_size = 18
+    max_page_size = 15
 
 
 class LargeSetPagination(PageNumberPagination):
     page_query_param = "p"
-    page_size = 26
+    page_size = 32
     page_size_query_param = "page_size"
-    max_page_size = 26
+    max_page_size = 32
 
 
 class ExtraLargeSetPagination(PageNumberPagination):
     page_query_param = "p"
-    page_size = 50
+    page_size = 54
     page_size_query_param = "page_size"
-    max_page_size = 50
+    max_page_size = 54

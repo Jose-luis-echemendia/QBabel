@@ -29,7 +29,7 @@ export const CustomCarouselBooks = ({
   CarouselItemComponent = BookGroup,
 }) => {
   // Dividir los libros en grupos
-  const bookGroups = chunkArray([...books, ...books, ...books], booksPerSlide);
+  const bookGroups = chunkArray([...books], booksPerSlide);
 
   return (
     <ThemeProvider value={customTheme}>

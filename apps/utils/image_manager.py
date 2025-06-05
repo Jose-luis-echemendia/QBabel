@@ -29,27 +29,35 @@ def upload_generic_image(instance, filename):
 
 def optimize_image(image_file):
     """
-    Optimizes an image by converting it to JPEG format and adjusting its quality.
-
-    Args:
-        image_file (File): The original image file to be optimized.
-
-    Returns:
-        File: The optimized image file with reduced size.
+    Optimiza una imagen convirtiéndola a JPEG, excepto si es GIF (para conservar animaciones).
     """
-    # Abre la imagen original
-    image = Image.open(image_file)
+    try:
+        # Asegura que el archivo se lea desde el inicio
+        image_file.seek(0)
+        image = Image.open(image_file)
 
-    # Convertir la imagen a RGB para asegurar el formato JPEG
-    image = image.convert("RGB")
+        # Si es GIF, retorna el archivo original sin cambios
+        if image.format == "GIF":
+            image_file.seek(0)  # Reinicia el puntero del archivo
+            return image_file
 
-    # Crear un buffer de memoria para la imagen optimizada
-    image_io = BytesIO()
+        # Proceso de optimización para otros formatos
+        image = image.convert("RGB")
+        image_io = BytesIO()
 
-    # Guardar la imagen en el buffer en formato JPEG
-    image.save(image_io, format="JPEG", quality=100, optimize=True, progressive=True)
+        # Guarda en JPEG con calidad alta
+        image.save(
+            image_io, format="JPEG", quality=100, optimize=True, progressive=True
+        )
 
-    # Crear un nuevo archivo ContentFile para la imagen optimizada
-    optimized_image = ContentFile(image_io.getvalue(), name=image_file.name)
+        # Crea un nuevo ContentFile con el mismo nombre
+        optimized_image = ContentFile(image_io.getvalue(), name=image_file.name)
 
-    return optimized_image
+        return optimized_image
+
+    except Exception as e:
+        # Manejo básico de errores (opcional: añade logs)
+        return image_file
+
+    finally:
+        image_file.seek(0)  # Asegura reinicio del puntero

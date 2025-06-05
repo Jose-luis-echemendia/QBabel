@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createBookThunk, getBooksThunk, getBookForIdThunk } from "./thunks";
 
 const initialState = {
+  homeBooks: null,
   book: null,
   books: [],
   loading: false,
@@ -19,8 +20,11 @@ export const bookSlice = createSlice({
       })
       .addCase(createBookThunk.fulfilled, (state, action) => {
         state.loading = false;
-        if (state.books.length === 0) state.books = action.payload;
-        else state.books.push(action.payload);
+        const newBook = action.payload.book;
+
+        state.books = Array.isArray(state.books)
+          ? [...state.books, newBook]
+          : [newBook];
       })
       .addCase(createBookThunk.rejected, (state) => {
         state.loading = false;
