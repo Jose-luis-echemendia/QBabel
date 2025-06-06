@@ -62,6 +62,11 @@ class BookViewSet(
     def get_pagination(self):
         if self.request.query_params.get("me", None):
             return MediumSetPagination()
+        elif self.request.query_params.get("title", None):
+            from .pagination import SearchSetPagination
+
+            return SearchSetPagination()
+
         return super().get_pagination()
 
     def create(self, request, *args, **kwargs):
