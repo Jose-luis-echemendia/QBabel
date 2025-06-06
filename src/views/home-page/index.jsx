@@ -7,11 +7,15 @@ import { useBook } from "@/hooks/redux/useBook";
 import { useAuth } from "@/hooks/redux/useAuth";
 import { useUser } from "@/hooks/redux/useUser";
 import { useAppSelector } from "@/hooks/redux/useStore";
+import {
+  LoadingCardBook,
+  LoadingCardBookMoreInformation,
+} from "../loading/card-book";
 
 const HomeView = () => {
   const [booksPerSlide, setbooksPerSlide] = useState(8);
   const [carouselSize, setCarouselSize] = useState(80);
-  const { handleGetBooks } = useBook();
+  const { handleGetBooks, handleGetBooksHome } = useBook();
 
   const { handleRemoveCreatedUser } = useUser();
   const { handleRemoveAvtiveAccount, handleRemoveStatementRead } = useAuth();
@@ -19,6 +23,9 @@ const HomeView = () => {
   const booksState = useAppSelector((state) => state.book);
   const { loading } = booksState;
   const books = booksState.books?.results?.books;
+  const homeBooks = booksState.homeBooks;
+
+  console.log(booksState);
 
   useEffect(() => {
     handleRemoveCreatedUser();
@@ -26,6 +33,7 @@ const HomeView = () => {
     handleRemoveStatementRead();
     // get books
     handleGetBooks({ is_published: true });
+    handleGetBooksHome();
 
     const mediaQuery = window.matchMedia("(max-width: 400px)");
 
@@ -58,56 +66,168 @@ const HomeView = () => {
           Home
         </h2>
         <ContainerHome>
-          {!loading && books && (
-            <div className="flex flex-col gap-1">
-              <span className="ml-7 text-black font-bold font-opensans text-lg leading-8">
-                Algunos libros que te pueden interesar
-              </span>
-              <CustomCarouselBooks
-                books={books}
-                carouselSize={`h-${carouselSize}`}
-                booksPerSlide={booksPerSlide}
-              />
+          <div className="flex flex-col gap-1">
+            <span className="ml-7 text-black font-bold font-opensans text-lg leading-8">
+              Algunos libros que te pueden interesar
+            </span>
+            <div className="relative h-[260px]">
+              <div
+                className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
+                  !loading && books
+                    ? "opacity-0 pointer-events-none"
+                    : "opacity-100"
+                }`}
+              >
+                <LoadingCardBook />
+              </div>
+              {/* Contenedor del carousel */}
+              <div
+                className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
+                  !loading && books
+                    ? "opacity-100"
+                    : "opacity-0 pointer-events-none"
+                }`}
+              >
+                {books && (
+                  <CustomCarouselBooks
+                    books={books}
+                    carouselSize={`h-${carouselSize}`}
+                    booksPerSlide={booksPerSlide}
+                  />
+                )}
+              </div>
             </div>
-          )}
+          </div>
           <div className="flex flex-col gap-1">
             <span className="ml-7 text-black font-bold font-opensans text-lg leading-8">
               Lo mejor de fantasía para ti
             </span>
-            <CustomCarouselBooks
-              carouselSize={`h-${carouselSize}`}
-              booksPerSlide={booksPerSlide}
-            />
+            <div className="relative h-[260px]">
+              <div
+                className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
+                  !loading && homeBooks
+                    ? "opacity-0 pointer-events-none"
+                    : "opacity-100"
+                }`}
+              >
+                <LoadingCardBook />
+              </div>
+              <div
+                className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
+                  !loading && homeBooks
+                    ? "opacity-100"
+                    : "opacity-0 pointer-events-none"
+                }`}
+              >
+                {homeBooks && (
+                  <CustomCarouselBooks
+                    books={homeBooks.fantasy}
+                    carouselSize={`h-${carouselSize}`}
+                    booksPerSlide={booksPerSlide}
+                  />
+                )}
+              </div>
+            </div>
           </div>
+
           <CustomCarousel />
+
           <div className="flex flex-col gap-1">
             <span className="ml-7 text-black font-bold font-opensans text-lg leading-8">
               Lo mejor de romance para ti
             </span>
-            <CustomCarouselBooks
-              carouselSize={`h-${carouselSize}`}
-              booksPerSlide={booksPerSlide}
-            />
+            <div className="relative h-[260px]">
+              <div
+                className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
+                  !loading && homeBooks
+                    ? "opacity-0 pointer-events-none"
+                    : "opacity-100"
+                }`}
+              >
+                <LoadingCardBook />
+              </div>
+              <div
+                className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
+                  !loading && homeBooks
+                    ? "opacity-100"
+                    : "opacity-0 pointer-events-none"
+                }`}
+              >
+                {homeBooks && (
+                  <CustomCarouselBooks
+                    books={homeBooks.romance}
+                    carouselSize={`h-${carouselSize}`}
+                    booksPerSlide={booksPerSlide}
+                  />
+                )}
+              </div>
+            </div>
           </div>
+
           <div className="flex flex-col gap-0">
             <span className="ml-7 text-black font-bold font-opensans text-lg leading-8">
               Las mejores selecciones para ti
             </span>
-            <CustomCarouselBooks
-              booksPerSlide={booksPerSlide}
-              carouselSize={`h-${carouselSize}`}
-            />
+            <div className="relative h-[260px]">
+              <div
+                className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
+                  !loading && homeBooks
+                    ? "opacity-0 pointer-events-none"
+                    : "opacity-100"
+                }`}
+              >
+                <LoadingCardBook />
+              </div>
+              <div
+                className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
+                  !loading && homeBooks
+                    ? "opacity-100"
+                    : "opacity-0 pointer-events-none"
+                }`}
+              >
+                {homeBooks && (
+                  <CustomCarouselBooks
+                    books={homeBooks.top_picks}
+                    booksPerSlide={booksPerSlide}
+                    carouselSize={`h-${carouselSize}`}
+                  />
+                )}
+              </div>
+            </div>
           </div>
 
           <div className="flex flex-col gap-1">
             <span className="ml-7 text-black font-bold font-opensans text-lg leading-8">
               Lo mejor de la comedia para ti
             </span>
-            <CustomCarouselBooks
-              carouselSize={`h-${carouselSize}`}
-              booksPerSlide={booksPerSlide}
-            />
+            <div className="relative h-[260px]">
+              <div
+                className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
+                  !loading && homeBooks
+                    ? "opacity-0 pointer-events-none"
+                    : "opacity-100"
+                }`}
+              >
+                <LoadingCardBook />
+              </div>
+              <div
+                className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
+                  !loading && homeBooks
+                    ? "opacity-100"
+                    : "opacity-0 pointer-events-none"
+                }`}
+              >
+                {homeBooks && (
+                  <CustomCarouselBooks
+                    books={homeBooks.comedy}
+                    carouselSize={`h-${carouselSize}`}
+                    booksPerSlide={booksPerSlide}
+                  />
+                )}
+              </div>
+            </div>
           </div>
+
           <div className="flex flex-col gap-0">
             <span className="flex gap-2 lg:-mb-1.5 mb-4 items-center justify-start ml-7 text-black font-bold font-opensans text-lg leading-8">
               Historias gratis de la semana escogidas por la comunidad
@@ -127,20 +247,65 @@ const HomeView = () => {
               </svg>
               <small className="text-gray-600">22d 1h</small>
             </span>
-            <CustomCarouselBooks
-              booksPerSlide={booksPerSlide === 4 ? 1 : 2}
-              carouselSize={`h-full`}
-              CarouselItemComponent={BookGroupCard}
-            />
+            <div className="relative h-[260px]">
+              <div
+                className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
+                  !loading && homeBooks
+                    ? "opacity-0 pointer-events-none"
+                    : "opacity-100"
+                }`}
+              >
+                <LoadingCardBookMoreInformation />
+              </div>
+              <div
+                className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
+                  !loading && homeBooks
+                    ? "opacity-100"
+                    : "opacity-0 pointer-events-none"
+                }`}
+              >
+                {homeBooks && (
+                  <CustomCarouselBooks
+                    books={homeBooks.free_books}
+                    booksPerSlide={booksPerSlide === 4 ? 1 : 2}
+                    carouselSize={`h-full`}
+                    CarouselItemComponent={BookGroupCard}
+                  />
+                )}
+              </div>
+            </div>
           </div>
+
           <div className="flex flex-col gap-1">
             <span className="ml-7 text-black font-bold font-opensans text-lg leading-8">
               Tus lecturas actuales
             </span>
-            <CustomCarouselBooks
-              carouselSize={`h-${carouselSize}`}
-              booksPerSlide={booksPerSlide}
-            />
+            <div className="relative h-[260px]">
+              <div
+                className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
+                  !loading && homeBooks
+                    ? "opacity-0 pointer-events-none"
+                    : "opacity-100"
+                }`}
+              >
+                <LoadingCardBook />
+              </div>
+              <div
+                className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
+                  !loading && homeBooks
+                    ? "opacity-100"
+                    : "opacity-0 pointer-events-none"
+                }`}
+              >
+                {homeBooks && (
+                  <CustomCarouselBooks
+                    books={homeBooks.your_library}
+                    carouselSize={`h-${carouselSize}`}
+                    booksPerSlide={booksPerSlide}
+                  />
+                )}
+              </div>
+            </div>
           </div>
 
           <div className="flex flex-col gap-1">
@@ -158,10 +323,32 @@ const HomeView = () => {
                 <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
               </svg>
             </span>
-            <CustomCarouselBooks
-              carouselSize={`h-${carouselSize}`}
-              booksPerSlide={booksPerSlide}
-            />
+            <div className="relative h-[260px]">
+              <div
+                className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
+                  !loading && homeBooks
+                    ? "opacity-0 pointer-events-none"
+                    : "opacity-100"
+                }`}
+              >
+                <LoadingCardBook />
+              </div>
+              <div
+                className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
+                  !loading && homeBooks
+                    ? "opacity-100"
+                    : "opacity-0 pointer-events-none"
+                }`}
+              >
+                {homeBooks && (
+                  <CustomCarouselBooks
+                    books={homeBooks.new_authors}
+                    carouselSize={`h-${carouselSize}`}
+                    booksPerSlide={booksPerSlide}
+                  />
+                )}
+              </div>
+            </div>
           </div>
         </ContainerHome>
       </div>

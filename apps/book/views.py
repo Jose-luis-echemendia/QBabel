@@ -185,11 +185,7 @@ class GetBooksHomeView(BaseCustomAPIView):
             )
 
         def get_most_read_books():
-            return (
-                Book.objects.filter(is_published=True)
-                .limit(32)
-                .order_by("-count_reads")
-            )
+            return Book.objects.filter(is_published=True).order_by("-count_reads")[:32]
 
         def get_free_books():
             return Book.objects.filter(price=0.00, is_published=True).order_by(
@@ -239,6 +235,35 @@ class GetBooksHomeView(BaseCustomAPIView):
         }
 
         return Response(data)
+
+
+class GetBooksTopSellerFromCategoryView(BaseCustomAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+    permission_classes = [IsAuthenticated]
+    filterset_class = BookFilter
+
+    class Meta:
+        model = Book
+        verbose_name = "book"
+        verbose_name_plural = "books"
+
+    def get_model(self):
+        return self.Meta.model
+
+    def get(self, request, category, *args, **kwargs):
+        # Obtiene la categoría del parámetro URL
+        category = self.kwargs.get("category")
+
+        # Aplica el filtro de top vendidos
+        queryset = self.get_queryset()
+        queryset = BookFilter().filter_top_selling_by_category(
+            queryset=queryset, value=category, name="top_selling"
+        )
+        return Response(
+            {"books": self.get_serializer(queryset, many=True).data},
+            status=status.HTTP_200_OK,
+        )
 
 
 class ReadBookView(BaseCustomAPIView):

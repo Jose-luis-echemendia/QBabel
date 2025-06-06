@@ -1,4 +1,10 @@
-import { createBookApi, getBooksAPI, getBookForIdAPI } from "@/api/bookAPI";
+import {
+  createBookApi,
+  getBooksAPI,
+  getBooksHomeAPI,
+  getBookForIdAPI,
+  getTopSellerBooksFromCategoryAPI,
+} from "@/api/bookAPI";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "sonner";
 
@@ -33,12 +39,40 @@ export const getBooksThunk = createAsyncThunk(
   }
 );
 
+// ** Thunk for get home books
+export const getBooksHomeThunk = createAsyncThunk(
+  "books/getBooksHome",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await getBooksHomeAPI();
+      if (response.status === 200) return response.data;
+      return rejectWithValue(response?.data);
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
+
 // ** Thunk for get book for id
 export const getBookForIdThunk = createAsyncThunk(
   "books/getBookForId",
   async (bookId, { rejectWithValue }) => {
     try {
       const response = await getBookForIdAPI(bookId);
+      if (response.status === 200) return response.data;
+      return rejectWithValue(response?.data);
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
+
+// ** Thunk for get top seller books from category
+export const getTopSellerBooksFromCategoryThunk = createAsyncThunk(
+  "books/getTopSellerBooksFromCategory",
+  async (category, { rejectWithValue }) => {
+    try {
+      const response = await getTopSellerBooksFromCategoryAPI(category);
       if (response.status === 200) return response.data;
       return rejectWithValue(response?.data);
     } catch (error) {

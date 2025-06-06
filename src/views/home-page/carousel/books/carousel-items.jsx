@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 export const BookGroup = ({ books, itemHeight, booksPerSlide }) => (
-  <div className="flex items-center justify-center gap-2 px-5 pt-3">
+  <div className="flex items-center justify-start gap-2 px-5 pt-3 ">
     {books.map((book) => (
       <figure
         key={book.id || book.uid}
-        className={`w-1/4 ${itemHeight} flex flex-col gap-1`}
+        className={`${itemHeight} flex flex-col gap-1`}
       >
         <Link
           to={`/books/${book.id || book.uid}`}
@@ -58,13 +58,13 @@ export const BookGroupCard = ({ books, itemHeight }) => (
   <div className={`flex lg:justify-center gap-3 lg:px-6 mt-5 w-full`}>
     {books.map((book) => (
       <div
-        key={book.id}
+        key={book.uid}
         className={`${itemHeight} bg-gray-100 flex gap-2 lg:w-1/2 w-full rounded-xl h-full lg:h-56`}
       >
         <figure className="lg:w-[800px] w-[400px]">
           <Link to={`/books/${book.id}`} className="block w-full h-full">
             <img
-              src={book.img}
+              src={book.cover_details.image}
               alt={book.title}
               className="h-full w-full object-cover rounded-l-xl hover:lg:relative hover:absolute hover:top-0 hover:left-0 hover:bottom-0 hover:right-0"
             />
@@ -72,10 +72,10 @@ export const BookGroupCard = ({ books, itemHeight }) => (
         </figure>
         <div className="flex flex-col gap-2 pt-5 px-2 lg:w-[2500px] w-full">
           <h4 className="text-xl text-black font-opensans font-bold">
-            {book.tittle}
+            {book.title}
           </h4>
-          <p className="text-sm text-start text-gray-800 pr-5">
-            {book.description}
+          <p className="text-sm text-start text-gray-800 pr-5 line-clamp-6">
+            {book.synopsis}
           </p>
           <span className="flex gap-1.5 -mt-1 text-gray-800 text-sm">
             <svg

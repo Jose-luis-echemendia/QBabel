@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { useBook } from "@/hooks/redux/useBook";
 import { useAppSelector } from "@/hooks/redux/useStore";
 import { usePayment } from "@/hooks/redux/usePayment";
+import { LoadingHeaderBook } from "../loading/details-book";
 
 const DetailsBookView = () => {
   const params = useParams();
@@ -30,9 +31,13 @@ const DetailsBookView = () => {
 
   return (
     <>
-      {!loading && book && (
-        <article className="min-h-screen w-full h-full py-5 mx-0">
+      <article className="min-h-screen w-full h-full py-5 mx-0">
+        {!loading && book ? (
           <CustomHeaderBook book={book} />
+        ) : (
+          <LoadingHeaderBook />
+        )}
+        {!loading && book && (
           <div className="lg:grid lg:grid-cols-6 lg:gap-10 lg:container lg:mx-auto lg:px-20 w-[400px]">
             <div className="col-span-4 flex flex-col gap-10 lg:p-0 p-3">
               <CustomBodyBook book={book} />
@@ -49,8 +54,8 @@ const DetailsBookView = () => {
               <RecommendationsBooks books={[book, book, book]} />
             </div>
           </div>
-        </article>
-      )}
+        )}
+      </article>
     </>
   );
 };

@@ -3,7 +3,7 @@ import { useLibrary } from "@/hooks/redux/useLibrary";
 import { Login } from "../auth/login";
 import { CustomModal } from "@/components/modal";
 import { useState } from "react";
-
+import { toast } from "react-toastify";
 import { Question } from "./question";
 import { useNavigate } from "react-router-dom";
 import { FormPaymentBook } from "../particular-components/books/buy-book";
@@ -16,7 +16,7 @@ export const CustomHeaderBook = ({ book }) => {
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
   const { handleAddBookToLibrary } = useLibrary();
   const paymentsBooks = useAppSelector((state) => state.payment.paymentsBooks);
-
+  console.log(paymentsBooks);
   const navigate = useNavigate();
 
   const addLibraryAndRead = () => {
@@ -221,7 +221,7 @@ export const CustomHeaderBook = ({ book }) => {
                 <span className="font-semibold">Comenzar a leer</span>
               </button>
               <button
-                className="flex gap-1.5 bg-black-500 py-3 px-3 rounded-r-full text-primary"
+                className="flex gap-1.5 bg-black-500  py-3 px-3 rounded-r-full text-primary"
                 onClick={() => add()}
               >
                 <svg

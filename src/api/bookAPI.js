@@ -36,6 +36,36 @@ export const getBooksAPI = async (filter = null) => {
   }
 };
 
+// endpoint for get books
+export const getTopSellerBooksFromCategoryAPI = async (category = null) => {
+  try {
+    const response = await axiosInstance.get(`/api/book/top/${category}/`);
+
+    return response;
+  } catch (error) {
+    console.error(
+      "Error en obtener los libros:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};
+``;
+
+// endpoint for get home books
+export const getBooksHomeAPI = async () => {
+  try {
+    const response = await axiosInstance.get("/api/book/home/");
+
+    return response;
+  } catch (error) {
+    console.error(
+      "Error en obtener los libros de la página principal:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};
 
 export const getBookForIdAPI = async (bookId) => {
   try {
@@ -49,4 +79,4 @@ export const getBookForIdAPI = async (bookId) => {
     );
     throw error;
   }
-}
+};

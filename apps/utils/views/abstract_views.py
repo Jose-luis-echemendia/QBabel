@@ -135,7 +135,9 @@ class BaseView(ABC):
 
     def retrive_object(self, request, uid=None, object=None, *args, **kwargs):
         instance = self.get_object(*args, **kwargs) if object is None else object
-        serialized_data = self.get_serializer(instance).data
+        serialized_data = self.get_serializer(
+            instance, context={"request": request}
+        ).data
         return Response(
             {self.get_verbose_name(): serialized_data}, status=status.HTTP_200_OK
         )

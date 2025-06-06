@@ -1,14 +1,28 @@
+import { useParams } from "react-router-dom";
 import { BestSellers } from "./best-sellers";
 import { Categories } from "./categories";
 import { CategoryBooks } from "./category-books";
+import { useEffect } from "react";
+import { useBook } from "@/hooks/redux/useBook";
 
 const CategoryBookView = () => {
+  const params = useParams();
+  const { handleGetBooks, handleGetTopSellerBooksFromCategoryThunk } =
+    useBook();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    const category = params.category;
+    handleGetBooks({ category: category });
+    handleGetTopSellerBooksFromCategoryThunk(category);
+  }, [params]);
+
   return (
     <>
       <div className="min-h-screen h-full w-full flex flex-col items-center justify-start px-2 py-10 gap-14 relative">
         <div className="absolute right-1/4 mt-5">
           <h2 className="w-full text-[70px] leading-[80px] text-center font-italianno text-gray-600">
-            Historias de Romances
+            Historias de {params.category}
           </h2>
         </div>
         <div className="mt-32 w-full h-full flex flex-col items-center justify-start gap-0">

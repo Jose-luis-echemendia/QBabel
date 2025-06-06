@@ -39,7 +39,7 @@ class BookSerializer(AbstractBaseSerializer):
     class Meta:
         model = Book
         fields = AbstractBaseSerializer.Meta.fields + [
-            #"isbn",
+            # "isbn",
             "author",
             "author_details",
             "title",
@@ -72,7 +72,7 @@ class BookSerializer(AbstractBaseSerializer):
             "in_library",
         ]
         extra_kwargs = {
-            #"isbn": {"required": True},
+            # "isbn": {"required": True},
             "author": {"required": True},
             "cover": {"required": True},
             "file": {"required": True},
