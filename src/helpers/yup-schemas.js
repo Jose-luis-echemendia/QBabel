@@ -108,6 +108,21 @@ export const schemaCategory = yup.object({
     ),
 });
 
+export const schemaCategoryUpdate = yup.object({
+  name: yup
+    .string()
+    .matches(
+      /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/,
+      "El nombre solo puede contener letras"
+    ),
+  description: yup.string(),
+  type: yup
+    .string()
+    .oneOf(["Libro", "Revista", "Publicaciones"], "Tipo inválido"),
+  img: yup.mixed(),
+  isActive: yup.boolean(),
+});
+
 export const schemaProfile = yup.object({
   user_name: yup.string(),
 
@@ -204,6 +219,78 @@ export const schemaBook = yup.object({
     .required(
       "Todos los campos son obligatorios. Por favor seleccione un archivo"
     ),
+  number_pages: yup
+    .number()
+    .transform((value, originalValue) =>
+      originalValue.trim() === "" ? null : value
+    )
+    .nullable()
+    .required(
+      "Todos los campos son obligatorios. Por favor introduzca la cantidad de páginas"
+    )
+    .positive(
+      "Ha introducido datos incorrectos. El número de páginas debe ser positivo"
+    )
+    .integer("Ha introducido datos incorrectos. Debe ser un número entero")
+    .min(1, "Ha introducido datos incorrectos. Debe tener al menos 1 página"),
+
+  number_chapters: yup
+    .number()
+    .transform((value, originalValue) =>
+      originalValue.trim() === "" ? null : value
+    )
+    .nullable()
+    .required(
+      "Todos los campos son obligatorios. Por favor introduzca la cantidad de capítulos"
+    )
+    .positive(
+      "Ha introducido datos incorrectos. El número de capítulos debe ser positivo"
+    )
+    .integer("Ha introducido datos incorrectos. Debe ser un número entero")
+    .min(1, "Ha introducido datos incorrectos. Debe tener al menos 1 capítulo"),
+
+  price: yup
+    .number()
+    .transform((value, originalValue) =>
+      originalValue.trim() === "" ? null : value
+    )
+    .nullable()
+    .required(
+      "Todos los campos son obligatorios. Por favor introduzca el precio"
+    )
+    .integer("Ha introducido datos incorrectos. Debe ser un número entero"),
+
+  lenguage: yup
+    .string()
+    .required(
+      "Todos los campos son obligatorios. Por favor introduzca el idioma"
+    )
+    .oneOf(
+      ["Español", "Inglés"],
+      "Ha introducido campos incorrectos. El idioma debe ser español o inglés"
+    ),
+  publishied: yup
+    .boolean()
+    .required(
+      "Todos los campos son obligatorios. Por favor seleccione el estado"
+    ),
+});
+
+export const schemaBookUpdate = yup.object({
+  title: yup
+    .string()
+    .required(
+      "Todos los campos son obligatorios. Por favor introduzca un título"
+    ),
+  synopsis: yup
+    .string()
+    .required(
+      "Todos los campos son obligatorios. Por favor introduzca una sinopsis"
+    ),
+  cover: yup.mixed(),
+
+  // Nuevos campos
+  file: yup.mixed(),
   number_pages: yup
     .number()
     .transform((value, originalValue) =>

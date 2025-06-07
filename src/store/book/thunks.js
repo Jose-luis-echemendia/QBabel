@@ -1,5 +1,6 @@
 import {
   createBookApi,
+  updateBookAPI,
   getBooksAPI,
   getBooksHomeAPI,
   getBookForIdAPI,
@@ -18,6 +19,19 @@ export const createBookThunk = createAsyncThunk(
         toast.success("Tu libro ha sido registrado satisfactoriamente");
         return response.data;
       }
+      return rejectWithValue(response?.data);
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
+
+export const updateBookThunk = createAsyncThunk(
+  "categories/updateBook",
+  async ({ id, data }, { rejectWithValue }) => {
+    try {
+      const response = await updateBookAPI(id, data);
+      if (response.status === 200) return response.data;
       return rejectWithValue(response?.data);
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);

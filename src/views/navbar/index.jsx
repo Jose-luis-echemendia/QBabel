@@ -4,10 +4,17 @@ import { AuthLinks } from "./auth-links";
 import { useAppSelector } from "@/hooks/redux/useStore";
 import { SearchBar } from "./search";
 import ResponsiveNav from "./responsive";
+import { useEffect } from "react";
+import { useCategory } from "@/hooks/redux/useCategory";
 
 const NavBar = () => {
   const auth = useAppSelector((state) => state.auth);
-  
+  const { handleGetCategories } = useCategory();
+
+  useEffect(() => {
+    handleGetCategories("book");
+  }, []);
+
   return (
     <>
       <header className="hidden md:block w-full h-[80px] bg-black-500 p-1 border-b border-black-500 shadow-lg shadow-gray-400">

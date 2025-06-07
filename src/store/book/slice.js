@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   createBookThunk,
+  updateBookThunk,
   getBooksThunk,
   getBookForIdThunk,
   getBooksHomeThunk,
@@ -37,6 +38,23 @@ export const bookSlice = createSlice({
         state.loading = false;
       })
 
+      // **Update book reducers**
+      .addCase(updateBookThunk.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateBookThunk.fulfilled, (state, action) => {
+        state.loading = false;
+        const index = state.books.findIndex(
+          (book) => book.uid === action.payload.book.uid
+        );
+        if (index !== -1) {
+          state.categories[index] = action.payload;
+        }
+      })
+      .addCase(updateBookThunk.rejected, (state) => {
+        state.loading = false;
+      })
+
       // **   Get books reducers**
       .addCase(getBooksThunk.pending, (state) => {
         state.loading = true;
@@ -65,10 +83,13 @@ export const bookSlice = createSlice({
       .addCase(getTopSellerBooksFromCategoryThunk.pending, (state) => {
         state.loading = true;
       })
-      .addCase(getTopSellerBooksFromCategoryThunk.fulfilled, (state, action) => {
-        state.loading = false;
-        state.topSellerBooksFromCategory = action.payload.books;
-      })
+      .addCase(
+        getTopSellerBooksFromCategoryThunk.fulfilled,
+        (state, action) => {
+          state.loading = false;
+          state.topSellerBooksFromCategory = action.payload.books;
+        }
+      )
       .addCase(getTopSellerBooksFromCategoryThunk.rejected, (state) => {
         state.loading = false;
       })

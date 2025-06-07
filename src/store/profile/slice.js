@@ -29,7 +29,7 @@ export const profileSlice = createSlice({
       })
       .addCase(getProfilesThunk.fulfilled, (state, action) => {
         state.loading = false;
-        state.profiles = action.payload.results;
+        state.profiles = action.payload.results?.profiles;
         state.count = action.payload.count;
         state.next = action.payload.next;
         state.previous = action.payload.previous;

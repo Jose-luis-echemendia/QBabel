@@ -4,7 +4,6 @@ export const BodyCategoryBooks = () => {
   const books = useAppSelector((state) => state.book.books?.results?.books);
   const loading = useAppSelector((state) => state.book.loading);
 
-  console.log(books);
   return (
     <>
       <div className="grid grid-cols-2 w-full h-full py-3 px-8 gap-9 mt-5">

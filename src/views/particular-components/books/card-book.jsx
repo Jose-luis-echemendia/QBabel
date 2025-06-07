@@ -4,8 +4,15 @@ import { FormPaymentBook } from "./buy-book";
 import { toast } from "sonner";
 import { useAppSelector } from "@/hooks/redux/useStore";
 import { useNavigate } from "react-router-dom";
+import { FormBook } from "@/views/library-page/form-book";
 
-export const CardBook = ({ book, seeBuy, seeArchive }) => {
+export const CardBook = ({
+  book,
+  mybook = false,
+  seeArchive,
+  seeUpdateBook = false,
+}) => {
+  const [openFormBookModal, setOpenFormBookModal] = useState(false);
   const [showActions, setShowActions] = useState(false);
   const [openBuyBookModal, setOpenBuyBookModal] = useState(false);
   const paymentsBooks = useAppSelector((state) => state.payment.paymentsBooks);
@@ -37,6 +44,19 @@ export const CardBook = ({ book, seeBuy, seeArchive }) => {
         >
           <FormPaymentBook />
         </CustomModal>
+        <CustomModal
+          open={openFormBookModal}
+          handleOpen={() => setOpenFormBookModal(false)} // Cierra el modal
+          classNameDialog="custom-dialog-class" // Clases personalizadas
+          classNameBody="custom-body-class"
+          exitButton={true}
+          size="xl"
+        >
+          <FormBook
+            handleOpen={() => setOpenFormBookModal(false)}
+            book={book}
+          />
+        </CustomModal>
         <div className="relative">
           {showActions && (
             <div className="absolute inset-0 flex items-center justify-center transition-opacity duration-200">
@@ -55,15 +75,28 @@ export const CardBook = ({ book, seeBuy, seeArchive }) => {
                     Archivar
                   </button>
                 )}
-                {seeBuy && (
+                {!mybook &&
+                  !book.is_free &&
+                  !paymentsBooks.includes(book.uid) && (
+                    <button
+                      onClick={() => {
+                        setShowActions(false);
+                        setOpenBuyBookModal(true);
+                      }}
+                      className="w-full bg-transparent text-white border-2 border-white px-3 py-1 rounded  hover:bg-gray-300 cursor-pointer hover:text-black transition"
+                    >
+                      Comprar
+                    </button>
+                  )}
+                {seeUpdateBook && (
                   <button
                     onClick={() => {
                       setShowActions(false);
-                      setOpenBuyBookModal(true);
+                      setOpenFormBookModal(true);
                     }}
                     className="w-full bg-transparent text-white border-2 border-white px-3 py-1 rounded  hover:bg-gray-300 cursor-pointer hover:text-black transition"
                   >
-                    Comprar
+                    Actualizar
                   </button>
                 )}
 

@@ -22,7 +22,9 @@ function Stories({
               />
             ))}
           {mybooks &&
-            mybooks.map((book) => <CardBook key={book.uid} book={book} />)}
+            mybooks.map((book) => (
+              <CardBook key={book.uid} book={book} seeUpdateBook={true} mybook={true} />
+            ))}
         </div>
       </div>
     </section>

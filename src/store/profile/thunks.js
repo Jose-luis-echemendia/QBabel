@@ -40,9 +40,9 @@ export const getAuthenticatedUserProfileThunk = createAsyncThunk(
 // **thunk for get profiles**
 export const getProfilesThunk = createAsyncThunk(
   "profiles/getProfiles",
-  async (_, { rejectWithValue }) => {
+  async (filter = null, { rejectWithValue }) => {
     try {
-      const response = await getProfilesAPI();
+      const response = await getProfilesAPI(filter);
       if (response.status === 200) return response.data;
       return rejectWithValue(response?.data);
     } catch (error) {

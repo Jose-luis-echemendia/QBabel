@@ -1,5 +1,6 @@
 import {
   createBookThunk,
+  updateBookThunk,
   getBooksThunk,
   getBooksHomeThunk,
   getBookForIdThunk,
@@ -9,31 +10,36 @@ import { useAppDispatch } from "./useStore";
 import { useCallback } from "react";
 
 export const useBook = () => {
-  const dispath = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   const handleCreateBook = (book) => {
-    dispath(createBookThunk(book));
+    dispatch(createBookThunk(book));
+  };
+
+  const handleUpdateBook = (id, data) => {
+    dispatch(updateBookThunk(id, data)).unwrap();
   };
 
   const handleGetBooksHome = useCallback(
-    () => dispath(getBooksHomeThunk()).unwrap(),
-    [dispath]
+    () => dispatch(getBooksHomeThunk()).unwrap(),
+    [dispatch]
   );
 
   const handleGetBooks = useCallback(
-    (filter = null) => dispath(getBooksThunk(filter)).unwrap(),
-    [dispath]
+    (filter = null) => dispatch(getBooksThunk(filter)).unwrap(),
+    [dispatch]
   );
 
   const handleGetBookForId = (bookId) => {
-    dispath(getBookForIdThunk(bookId));
+    dispatch(getBookForIdThunk(bookId));
   };
 
   const handleGetTopSellerBooksFromCategoryThunk = (category) => {
-    dispath(getTopSellerBooksFromCategoryThunk(category));
+    dispatch(getTopSellerBooksFromCategoryThunk(category));
   };
 
   return {
+    handleUpdateBook,
     handleGetBooksHome,
     handleCreateBook,
     handleGetBooks,

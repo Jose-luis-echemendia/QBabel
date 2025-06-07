@@ -15,6 +15,21 @@ export const createBookApi = async (data) => {
   }
 };
 
+// endpoint for update book
+export const updateBookAPI = async (id, data) => {
+  try {
+    const response = await axiosInstance.patch(`/api/book/${id}/`, data);
+
+    return response;
+  } catch (error) {
+    console.error(
+      "Error en actualizar el libro:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};
+
 // endpoint for get books
 export const getBooksAPI = async (filter = null) => {
   try {

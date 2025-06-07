@@ -5,18 +5,21 @@ import { CategoriesModal } from "./categories-modal";
 import { Controller } from "react-hook-form";
 import { useForm } from "@/hooks/useForm";
 import { Select, Option, Button } from "@material-tailwind/react";
-import { schemaBook } from "@/helpers/yup-schemas";
+import { schemaBook, schemaBookUpdate } from "@/helpers/yup-schemas";
 import { customCheckboxTheme } from "@/utils/material-tailwindscss/themes";
 import { Checkbox, ThemeProvider } from "@material-tailwind/react";
-import { Input, IconButton, Typography } from "@material-tailwind/react";
+import { Input, Typography } from "@material-tailwind/react";
 import { useBook } from "@/hooks/redux/useBook";
 import { translateLanguageBookAdd } from "@/helpers/translate";
 import { toast } from "sonner";
 import { useAppSelector } from "@/hooks/redux/useStore";
 
-export const FormAddBook = ({ handleOpen }) => {
+export const FormBook = ({ handleOpen, book }) => {
+
   const [previewImage, setPreviewImage] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
+
+  const [changeBook, setchangeBook] = useState(false);
 
   const [previewPdf, setPreviewPdf] = useState(null);
   const [selectedPdf, setSelectedPdf] = useState(null);
@@ -25,14 +28,29 @@ export const FormAddBook = ({ handleOpen }) => {
 
   const [selectedCategories, setSelectedCategories] = useState([]);
 
-  const { register, handleSubmit, errors, control } = useForm(schemaBook);
-  const { handleCreateBook } = useBook();
+  const { register, handleSubmit, errors, control } = useForm(
+    book ? schemaBookUpdate : schemaBook
+  );
+  const { handleCreateBook, handleUpdateBook } = useBook();
   const loading = useAppSelector((state) => state.book.loading);
-  console.log(loading);
 
   useEffect(() => {
+    if (!loading && changeBook) {
+      handleOpen(); // Cerrar el modal o realizar alguna acción después de guardar
+    }
+  }, [loading, changeBook]);
+
+  useEffect(() => {
+    if (book) {
+      setSelectedCategories(book.categories);
+    }
+
     if (!selectedImage) {
-      setPreviewImage(null);
+      if (book?.cover_details) {
+        setPreviewImage(book.cover_details.image); // Imagen existente de la categoría
+      } else {
+        setPreviewImage(null);
+      }
       return;
     }
 
@@ -41,12 +59,16 @@ export const FormAddBook = ({ handleOpen }) => {
 
     // Limpieza
     return () => URL.revokeObjectURL(objectUrl);
-  }, [selectedImage]);
+  }, [selectedImage, book]);
 
   // Crear preview cuando se selecciona un PDF
   useEffect(() => {
     if (!selectedPdf) {
-      setPreviewPdf(null);
+      if (book?.file_details) {
+        setPreviewPdf(book.file_details.file); // PDF existente de la categoría
+      } else {
+        setPreviewPdf(null);
+      }
       return;
     }
 
@@ -101,7 +123,17 @@ export const FormAddBook = ({ handleOpen }) => {
       );
       return;
     }
-    handleCreateBook(formData);
+
+    try {
+      if (!book) {
+        handleCreateBook(formData);
+      } else {
+        handleUpdateBook({ id: book.uid, data: formData });
+      }
+      setchangeBook(true);
+    } catch (err) {
+      console.error("Error al guardar el libro:", err);
+    }
   };
 
   return (
@@ -399,6 +431,7 @@ export const FormAddBook = ({ handleOpen }) => {
                   containerProps={{
                     className: "min-w-0",
                   }}
+                  defaultValue={book?.number_pages || 0}
                 />
                 {errors.number_pages && (
                   <p className="text-red-500 text-sm mt-1">
@@ -427,6 +460,7 @@ export const FormAddBook = ({ handleOpen }) => {
                   containerProps={{
                     className: "min-w-0",
                   }}
+                  defaultValue={book?.number_chapters || 0}
                 />
                 {errors.number_chapters && (
                   <p className="text-red-500 text-sm mt-1">
@@ -471,6 +505,7 @@ export const FormAddBook = ({ handleOpen }) => {
                 }}
                 name="price"
                 {...register("price")}
+                defaultValue={book?.price || 0}
               />
               {errors.price && (
                 <p className="text-red-500 text-sm mt-1">
@@ -517,6 +552,7 @@ export const FormAddBook = ({ handleOpen }) => {
                   type="text"
                   {...register("title")}
                   placeholder="janesmith"
+                  defaultValue={book?.title || ""}
                   className="block border p-2 rounded-lg border-gray-100 min-w-0 grow py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
                 />
                 {errors.title && (
@@ -542,6 +578,7 @@ export const FormAddBook = ({ handleOpen }) => {
                   name="synopsis"
                   id="synopsis"
                   {...register("synopsis")}
+                  defaultValue={book?.synopsis || ""}
                   className="w-full h-48 rounded-lg border border-gray-100 min-w-0 grow py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6 p-2"
                   placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatibus."
                 ></textarea>

@@ -1,74 +1,99 @@
 import axiosInstance from "./axiosInstance";
 
 // endpoint for get profiles
-export const getProfilesAPI = async () => {
-    try {
-        const response = await axiosInstance.get("/api/profile/");
-        
-        return response;
-      } catch (error) {
-        console.error("Error en obtener los perfiles:", error.response?.data || error.message);
-        throw error;
-      }
-}
+export const getProfilesAPI = async (filter = null) => {
+  try {
+    const params = filter ? { ...filter } : {};
+    const response = await axiosInstance.get("/api/profile/", {
+      params, // Enviar los parámetros como query strings
+    });
+
+    return response;
+  } catch (error) {
+    console.error(
+      "Error en obtener los perfiles:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};
 
 // endpoint for update profile
 export const updateProfileAPI = async (data) => {
-    try {
-        const response = await axiosInstance.put("/api/profile/", data);
-        
-        return response;
-      } catch (error) {
-        console.error("Error en actualizar el perfil:", error.response?.data || error.message);
-        throw error;
-      }
-}
+  try {
+    const response = await axiosInstance.put("/api/profile/", data);
+
+    return response;
+  } catch (error) {
+    console.error(
+      "Error en actualizar el perfil:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};
 
 // endpoint for partial update profile
 export const updatePartialProfileAPI = async (id, data) => {
-    try {
-        const response = await axiosInstance.patch(`/api/profile/update/${id}/`, data);
-        
-        return response;
-      } catch (error) {
-        console.error("Error en actualizar parcialmente el perfil:", error.response?.data || error.message);
-        throw error;
-      }
-}
+  try {
+    const response = await axiosInstance.patch(
+      `/api/profile/update/${id}/`,
+      data
+    );
+
+    return response;
+  } catch (error) {
+    console.error(
+      "Error en actualizar parcialmente el perfil:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};
 
 // endpoint for get profile by id
 export const getProfileByIdAPI = async (id) => {
   try {
-      const response = await axiosInstance.get(`/api/profile/${id}/`);
-      
-      return response;
-    } catch (error) {
-      console.error("Error en obtener el perfil:", error.response?.data || error.message);
-      throw error;
-    }
-}
+    const response = await axiosInstance.get(`/api/profile/${id}/`);
+
+    return response;
+  } catch (error) {
+    console.error(
+      "Error en obtener el perfil:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};
 
 // endpoint for get authenticated user profile
 export const getAuthenticatedUserProfileAPI = async () => {
   try {
-      const response = await axiosInstance.get("/api/profile/me/");
-      
-      return response;
-    } catch (error) {
-      console.error("Error en obtener el perfil del usuario autenticado:", error.response?.data || error.message);
-      throw error;
-    }
-}
+    const response = await axiosInstance.get("/api/profile/me/");
 
+    return response;
+  } catch (error) {
+    console.error(
+      "Error en obtener el perfil del usuario autenticado:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};
 
 // endpoint for get profile by username
 export const getProfileByUsernameAPI = async (username) => {
   try {
-      const response = await axiosInstance.get(`/api/profile/username/${username}/`);
-      
-      return response;
-    } catch (error) {
-      console.error("Error en obtener el perfil por nombre de usuario:", error.response?.data || error.message);
-      throw error;
-    }
-}
+    const response = await axiosInstance.get(
+      `/api/profile/username/${username}/`
+    );
+
+    return response;
+  } catch (error) {
+    console.error(
+      "Error en obtener el perfil por nombre de usuario:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};

@@ -2,9 +2,10 @@ import {
   getCategoriesThunk,
   createCategoryThunk,
   updateCategoryThunk,
-} from '@/store/category/thunks';
-import { useAppDispatch } from './useStore';
-import { useCallback } from 'react';
+  deleteCategoryThunk,
+} from "@/store/category/thunks";
+import { useAppDispatch } from "./useStore";
+import { useCallback } from "react";
 
 export const useCategory = () => {
   const dispatch = useAppDispatch();
@@ -19,9 +20,13 @@ export const useCategory = () => {
   const handleUpdateCategory = (id, data) =>
     dispatch(updateCategoryThunk({ id, data })).unwrap();
 
+  const handledeleteCategoryThunk = (id) =>
+    dispatch(deleteCategoryThunk(id)).unwrap();
+
   return {
     handleGetCategories,
     handleCreateCategory,
     handleUpdateCategory,
+    handledeleteCategoryThunk,
   };
 };

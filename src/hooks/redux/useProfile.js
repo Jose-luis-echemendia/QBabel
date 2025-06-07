@@ -7,6 +7,7 @@ import {
   getProfileByUsernameThunk,
 } from "@/store/profile/thunks";
 import { useAppDispatch } from "./useStore";
+import { useCallback } from "react";
 
 export const useProfile = () => {
   const dispath = useAppDispatch();
@@ -19,9 +20,10 @@ export const useProfile = () => {
     dispath(getAuthenticatedUserProfileThunk());
   };
 
-  const handleGetProfiles = () => {
-    dispath(getProfilesThunk());
-  };
+  const handleGetProfiles = useCallback(
+    (filter = null) => dispath(getProfilesThunk(filter)).unwrap(),
+    [dispath]
+  );
 
   const handleGetProfileById = (id) => {
     dispath(getProfileByIdThunk(id));

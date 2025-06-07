@@ -1,22 +1,25 @@
 import { customCheckboxTheme } from "@/utils/material-tailwindscss/themes";
-import { Checkbox, ThemeProvider } from "@material-tailwind/react";
+import { Button, Checkbox, ThemeProvider } from "@material-tailwind/react";
 import { useState, useEffect } from "react";
 import { Select, Option } from "@material-tailwind/react";
-import { schemaCategory } from "@/helpers/yup-schemas";
+import { schemaCategory, schemaCategoryUpdate } from "@/helpers/yup-schemas";
 import { useForm } from "@/hooks/useForm";
 import { Controller } from "react-hook-form";
-import { useCategory } from "@/hooks/redux/useCategory";
 import { translateLanguageCategory } from "@/helpers/translate";
-import { toast } from "react-toastify";
 import {
   useCreateCategory,
   useUpdateCategory,
 } from "@/hooks/jquery/useCategoryQuery";
+import { useAppSelector } from "@/hooks/redux/useStore";
 
 export const OverViewCategory = ({ category, handleOpen }) => {
   const [preview, setPreview] = useState(null);
+  const [changeCategory, setchangeCategory] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-  const { register, handleSubmit, errors, control } = useForm(schemaCategory);
+  const { register, handleSubmit, errors, control } = useForm(
+    category ? schemaCategoryUpdate : schemaCategory
+  );
+  const loading = useAppSelector((state) => state.category.loading);
 
   const { mutate: updateCategory } = useUpdateCategory();
   const { mutate: createCategory } = useCreateCategory();
@@ -39,6 +42,12 @@ export const OverViewCategory = ({ category, handleOpen }) => {
     return () => URL.revokeObjectURL(objectUrl);
   }, [selectedImage, category]);
 
+  useEffect(() => {
+    if (!loading && changeCategory) {
+      handleOpen(); // Cerrar el modal o realizar alguna acción después de guardar
+    }
+  }, [loading, changeCategory]);
+
   const handleImageSelect = (e) => {
     if (!e.target.files || e.target.files.length === 0) {
       setSelectedImage(null);
@@ -54,7 +63,7 @@ export const OverViewCategory = ({ category, handleOpen }) => {
     formData.append("description", data.description || "");
     formData.append("type", translateLanguageCategory(data.type));
 
-    formData.append("isActive", data.isActive);
+    formData.append("is_active", data.isActive);
     if (selectedImage) {
       formData.append("img", selectedImage);
     }
@@ -65,8 +74,7 @@ export const OverViewCategory = ({ category, handleOpen }) => {
       } else {
         updateCategory({ id: category.uid, data: formData });
       }
-
-      handleOpen();
+      setchangeCategory(true);
     } catch (err) {
       console.error("Error al guardar categoría:", err);
     }
@@ -121,7 +129,9 @@ export const OverViewCategory = ({ category, handleOpen }) => {
               <Controller
                 name="type"
                 control={control}
-                defaultValue={category?.type}
+                defaultValue={
+                  translateLanguageCategory(category?.type) || "Libro"
+                }
                 render={({ field }) => (
                   <Select
                     label="Selecciona tipo de categoría"
@@ -237,7 +247,7 @@ export const OverViewCategory = ({ category, handleOpen }) => {
               <div className="flex items-center rounded-md bg-white outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary">
                 <ThemeProvider value={customCheckboxTheme}>
                   <Checkbox
-                    defaultChecked
+                    defaultChecked={category?.is_active}
                     id="isActive"
                     name="isActive"
                     {...register("isActive")}
@@ -260,9 +270,13 @@ export const OverViewCategory = ({ category, handleOpen }) => {
             >
               <span className="text-primary font-semibold">Cancelar</span>
             </button>
-            <button className="bg-primary py-1 px-2.5 rounded-xl">
+            <Button
+              type="submit"
+              loading={loading}
+              className="bg-primary py-1 px-2.5 rounded-xl h-9"
+            >
               <span className="text-black-500 font-semibold">Aceptar</span>
-            </button>
+            </Button>
           </div>
         </form>
       </div>

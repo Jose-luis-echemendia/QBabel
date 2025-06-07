@@ -1,6 +1,5 @@
 import { CustomIcon } from "@/components/icons/custom-icons";
 import { schemaSearchBar } from "@/helpers/yup-schemas";
-import { useBook } from "@/hooks/redux/useBook";
 import { useForm } from "@/hooks/useForm";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -9,9 +8,7 @@ import { useParams } from "react-router-dom";
 export const SearchBar = () => {
   const params = useParams();
   const { register, handleSubmit, errors, setValue } = useForm(schemaSearchBar);
-  const { handleGetBooks } = useBook();
   const navigate = useNavigate();
-  console.log(params);
 
   useEffect(() => {
     if (params) {
@@ -20,8 +17,6 @@ export const SearchBar = () => {
   }, [params, setValue]);
 
   const onSubmit = (data) => {
-    handleGetBooks(data);
-    // get profile for data
     navigate(`/search/${data.search}`);
   };
 

@@ -119,7 +119,7 @@ class BookSerializer(AbstractBaseSerializer):
         """
         from apps.category.serializers import CategorySerializer
 
-        category_book = CategoryBook.objects.filter(book=obj)
+        category_book = CategoryBook.objects.filter(book=obj, is_active=True)
         if not category_book.exists():
             return None
 

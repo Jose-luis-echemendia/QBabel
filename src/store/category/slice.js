@@ -1,10 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 import {
   getCategoriesThunk,
   createCategoryThunk,
   deleteCategoryThunk,
   updateCategoryThunk,
-} from './thunks';
+} from "./thunks";
 
 const initialState = {
   category: null,
@@ -13,7 +13,7 @@ const initialState = {
 };
 
 export const categorySlice = createSlice({
-  name: 'category',
+  name: "category",
   initialState: initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -66,9 +66,12 @@ export const categorySlice = createSlice({
       })
       .addCase(deleteCategoryThunk.fulfilled, (state, action) => {
         state.loading = false;
-        state.categories = state.categories.filter(
-          (category) => category.uid !== action.payload.uid
+        const index = state.categories.findIndex(
+          (category) => category.uid === action.payload
         );
+        if (index !== -1) {
+          state.categories[index].is_active = false;
+        }
       })
       .addCase(deleteCategoryThunk.rejected, (state) => {
         state.loading = false;

@@ -4,11 +4,11 @@ import {
   createCategoryAPI,
   updateCategoryAPI,
   deleteCategoryAPI,
-} from '@/api/categoryAPI';
-import { createAsyncThunk } from '@reduxjs/toolkit';
+} from "@/api/categoryAPI";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const getCategoriesThunk = createAsyncThunk(
-  'categories/getCategories',
+  "categories/getCategories",
   async (type = null, { rejectWithValue }) => {
     try {
       const response = await getCategoriesAPI(type);
@@ -24,7 +24,7 @@ export const getCategoriesThunk = createAsyncThunk(
 );
 
 export const createCategoryThunk = createAsyncThunk(
-  'categories/createCategory',
+  "categories/createCategory",
   async (data, { rejectWithValue }) => {
     try {
       const response = await createCategoryAPI(data);
@@ -37,7 +37,7 @@ export const createCategoryThunk = createAsyncThunk(
 );
 
 export const updateCategoryThunk = createAsyncThunk(
-  'categories/updateCategory',
+  "categories/updateCategory",
   async ({ id, data }, { rejectWithValue }) => {
     try {
       const response = await updateCategoryAPI(id, data);
@@ -50,11 +50,11 @@ export const updateCategoryThunk = createAsyncThunk(
 );
 
 export const deleteCategoryThunk = createAsyncThunk(
-  'categories/deleteCategory',
+  "categories/deleteCategory",
   async (id, { rejectWithValue }) => {
     try {
       const response = await deleteCategoryAPI(id);
-      if (response.status === 200) return response.data;
+      if (response.status === 204) return id;
       return rejectWithValue(response?.data);
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);

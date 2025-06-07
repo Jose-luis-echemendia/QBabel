@@ -8,7 +8,7 @@ from apps.utils.views.abstract_views import BaseViewSet, BaseCustomAPIView
 from apps.utils.mixins import CreateImageMixin
 from apps.utils.pagination import LargeSetPagination, MediumSetPagination
 from .serializers import BookSerializer, CategoryBookSerializer
-from .models import Book
+from .models import Book, CategoryBook
 from .filters import BookFilter
 from .mixins import (
     ValidateCategoryForBookMixin,
@@ -118,6 +118,53 @@ class BookViewSet(
             {"book": self.get_serializer(self.book).data},
             status=status.HTTP_201_CREATED,
         )
+
+    def update(self, request, *args, **kwargs):
+        book = self.get_object(*args, **kwargs)
+        data = {}
+
+        categories = request.data.getlist("categories", None)
+
+        if categories:
+            self.validate_categories(categories)
+            CategoryBook.objects.filter(book=book.uid).update(is_active=False)
+
+            for cat_id in categories:
+                CategoryBook.objects.update_or_create(
+                    book=book,
+                    category_id=cat_id,
+                    defaults={"is_active": True},
+                )
+
+        file = request.FILES.get("file", None)
+        if file:
+            file_object = self.create_file(file, request.data.get("title", book.title))
+            data["file"] = file_object.pk
+
+        cover = request.data.get("cover", None)
+        if cover:
+            from apps.utils.enums import ImageTypes
+
+            cover_object = self.create_image(
+                data={
+                    "image": cover,
+                    "name": request.data.get("title", book.title),
+                    "caption": request.data.get("title", book.title),
+                    "registered_by": self.request.user.pk,
+                    "type": ImageTypes.cover,
+                }
+            )
+            data["cover"] = cover_object.pk
+
+        data["title"] = request.data.get("title")
+        data["synopsis"] = request.data.get("synopsis", None)
+        data["number_chapters"] = request.data.get("number_chapters", None)
+        data["number_pages"] = request.data.get("number_pages", None)
+        data["lenguage"] = request.data.get("lenguage", None)
+        data["price"] = request.data.get("price", None)
+        data["is_published"] = request.data.get("is_published", False)
+
+        return self.update_object(request, data=data, partial=True, *args, **kwargs)
 
     def delete(self, request, *args, **kwargs):
         return self.desactive_object(request, *args, **kwargs)

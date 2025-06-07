@@ -5,12 +5,18 @@ import { ReadingListView } from "./reading-view";
 import { useLibrary } from "@/hooks/redux/useLibrary";
 import { useAppSelector } from "@/hooks/redux/useStore";
 import { useBook } from "@/hooks/redux/useBook";
+import { usePayment } from "@/hooks/redux/usePayment";
+import { LoadingCardBookLibrary } from "../loading/card-book-library";
 
 export const ContentTabs = ({ activeTab }) => {
   const items = useAppSelector((state) => state.library.items);
   const mybooks = useAppSelector((state) => state.book.books?.results?.books);
+  const { handleGetPaymentsBooksForUserThunk } = usePayment();
   const { handleGetItemsOfLIbraryThunk } = useLibrary();
   const { handleGetBooks } = useBook();
+
+  const loadingLibrary = useAppSelector((state) => state.library.loading);
+  const loadingBooks = useAppSelector((state) => state.library.loading);
 
   useEffect(() => {
     if (activeTab === "allStory") {
@@ -26,32 +32,54 @@ export const ContentTabs = ({ activeTab }) => {
     } else if (activeTab === "archiveStory") {
       handleGetItemsOfLIbraryThunk();
     }
+    handleGetPaymentsBooksForUserThunk();
   }, [activeTab]);
 
   return (
     <>
       {activeTab === "allStory" && (
         <>
-          <Stories items={items?.results?.items} />
+          {loadingLibrary || loadingBooks ? (
+            <LoadingCardBookLibrary />
+          ) : (
+            <Stories items={items?.results?.items} />
+          )}
         </>
       )}
       {activeTab === "readingStory" && (
         <>
-          <Stories items={items?.results?.items} seeBuy={false} />
+          {loadingLibrary || loadingBooks ? (
+            <LoadingCardBookLibrary />
+          ) : (
+            <Stories items={items?.results?.items} />
+          )}
         </>
       )}
       {activeTab === "forBuying" && (
         <>
-          <Stories items={items?.results?.items} />
+          {loadingLibrary || loadingBooks ? (
+            <LoadingCardBookLibrary />
+          ) : (
+            <Stories items={items?.results?.items} />
+          )}
         </>
       )}
       {activeTab === "listReading" && (
-        // Aquí renderizas tu componente para Reading Lists
-        <ReadingListView />
+        <>
+          {loadingLibrary || loadingBooks ? (
+            <LoadingCardBookLibrary />
+          ) : (
+            <ReadingListView />
+          )}
+        </>
       )}
       {activeTab === "myStory" && (
         <>
-          <Stories mybooks={mybooks} seeBuy={false} seeArchive={false} />
+          {loadingLibrary || loadingBooks ? (
+            <LoadingCardBookLibrary />
+          ) : (
+            <Stories mybooks={mybooks} seeArchive={false} />
+          )}
         </>
       )}
       {activeTab === "archiveStory" && (

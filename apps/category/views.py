@@ -87,7 +87,7 @@ class CustomCategoryViewSet(BaseViewSet, CreateImageMixin):
                 },
                 status=status.HTTP_400_BAD_REQUEST,
             )
-            
+
         if type not in CATEGORY_TYPE:
             return Response(
                 {
@@ -170,3 +170,6 @@ class CustomCategoryViewSet(BaseViewSet, CreateImageMixin):
             serializer.data,
             status=status.HTTP_200_OK,
         )
+
+    def destroy(self, request, *args, **kwargs):
+        return self.desactive_object(request, *args, **kwargs)
