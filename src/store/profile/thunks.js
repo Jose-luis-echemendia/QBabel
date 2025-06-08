@@ -5,9 +5,23 @@ import {
   updatePartialProfileAPI,
   getAuthenticatedUserProfileAPI,
   getProfileByUsernameAPI,
+  followerWriterAPI,
 } from "@/api/profileAPI";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "sonner";
+
+export const followerWriterThunk = createAsyncThunk(
+  "profiles/followerWriterAPI",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await followerWriterAPI(data);
+      if (response.status === 201) return response.data;
+      return rejectWithValue(response?.data);
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
 
 // **thunk for get profile by username**
 export const getProfileByUsernameThunk = createAsyncThunk(
@@ -72,7 +86,7 @@ export const updateProfileThunk = createAsyncThunk(
     try {
       const response = await updateProfileAPI(data);
       if (response.status === 200) {
-        toast.success("Profile updated successfully");
+        //toast.success("Profile updated successfully");
         return response.data;
       }
       return rejectWithValue(response?.data);
@@ -89,7 +103,7 @@ export const updatePartialProfileThunk = createAsyncThunk(
     try {
       const response = await updatePartialProfileAPI(id, data);
       if (response.status === 200) {
-        toast.success("Profile updated successfully");
+        //toast.success("Profile updated successfully");
         return response.data;
       }
       return rejectWithValue(response?.data);

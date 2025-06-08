@@ -34,6 +34,7 @@ QBABEL_APPS = [
     "apps.profile",
     "apps.category",
     "apps.book",
+    "apps.blog",
     "apps.library",
     "apps.comment",
     "apps.payment",

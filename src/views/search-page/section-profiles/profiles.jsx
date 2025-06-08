@@ -1,3 +1,4 @@
+import { useProfile } from "@/hooks/redux/useProfile";
 import { useAppSelector } from "@/hooks/redux/useStore";
 import { Link } from "react-router-dom";
 
@@ -5,13 +6,15 @@ export const Profiles = () => {
   const profiles = useAppSelector((state) => state.profile.profiles);
   const loading = useAppSelector((state) => state.book.loading);
 
+  const { handlefollowerWriter } = useProfile();
+
   return (
     <>
       <div className="col-span-8 grid grid-cols-2 w-full h-fit py-3 px-8 gap-9 mt-5">
         {profiles && !loading ? (
           profiles.map((profile) => (
             <Link
-              to={`/profile/${profile.user_name }`}
+              to={`/profile/${profile.user_name}`}
               key={profile.id}
               className="relative h-full flex items-center justify-between py-3 px-6 gap-1.5 bg-white rounded-lg shadow-xl hover:scale-105 transition-transform duration-200"
             >
@@ -49,7 +52,10 @@ export const Profiles = () => {
                 </div>
               </div>
               <div className="">
-                <button className="flex place-items-center gap-1 py-2 px-5 relative bg-gray-300 rounded-full font-semibold">
+                <button
+                  onClick={() => handlefollowerWriter({ writer: profile.uid })}
+                  className="flex place-items-center gap-1 py-2 px-5 relative bg-gray-300 rounded-full font-semibold"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"

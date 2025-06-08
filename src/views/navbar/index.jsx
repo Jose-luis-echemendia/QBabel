@@ -12,7 +12,7 @@ const NavBar = () => {
   const { handleGetCategories } = useCategory();
 
   useEffect(() => {
-    handleGetCategories("book");
+    handleGetCategories({ type: "book", is_active: true });
   }, []);
 
   return (

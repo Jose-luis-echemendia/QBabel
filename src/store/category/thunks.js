@@ -6,12 +6,13 @@ import {
   deleteCategoryAPI,
 } from "@/api/categoryAPI";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { toast } from "sonner";
 
 export const getCategoriesThunk = createAsyncThunk(
   "categories/getCategories",
-  async (type = null, { rejectWithValue }) => {
+  async (filter = null, { rejectWithValue }) => {
     try {
-      const response = await getCategoriesAPI(type);
+      const response = await getCategoriesAPI(filter);
       if (response.status === 200) {
         return response.data;
       }
@@ -54,7 +55,10 @@ export const deleteCategoryThunk = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const response = await deleteCategoryAPI(id);
-      if (response.status === 204) return id;
+      if (response.status === 204) {
+        toast.success("Se ha eliminado correctamente la categoría");
+        return id;
+      }
       return rejectWithValue(response?.data);
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);

@@ -8,6 +8,7 @@ from .enums import StatusPost
 
 User = get_user_model()
 
+
 class Post(BaseModel):
 
     class PostObjects(models.Manager):
@@ -17,28 +18,33 @@ class Post(BaseModel):
         def get(self, *args, **kwargs):
             return self.get_queryset().get(*args, **kwargs)
 
-             
-
     title = models.CharField(max_length=255)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
-    image = models.ForeignKey(GenericImage, on_delete=models.SET_NULL, blank=True, null=True)
+    image = models.ForeignKey(
+        GenericImage, on_delete=models.SET_NULL, blank=True, null=True
+    )
     content = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
     publication_date = models.DateTimeField(default=timezone.now)
-    status = models.CharField(max_length=10, choices=StatusPost.choices, default=StatusPost.draft)
+    status = models.CharField(
+        max_length=10, choices=StatusPost.choices, default=StatusPost.draft
+    )
 
     objects = models.Manager()  # default manager
     post_objects = PostObjects()  # custom manager
 
     class Meta:
-        db_table = 'Post'
+        db_table = "Post"
         managed = True
-        verbose_name = 'Post'
-        verbose_name_plural = 'Posts'
-        ordering = ("-published",)
+        verbose_name = "Post"
+        verbose_name_plural = "Posts"
+        ordering = ("-publication_date",)
 
     def __str__(self):
         return self.title
+
+    def get_slug_source_field(self):
+        return "title"
 
     def get_image(self):
         if self.image:

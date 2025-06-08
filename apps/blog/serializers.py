@@ -17,7 +17,7 @@ class PostSerializer(AbstractBaseSerializer):
     author_details = serializers.SerializerMethodField()
 
     image = serializers.PrimaryKeyRelatedField(
-        queryser=GenericImage.objects.all(), write_only=True
+        queryset=GenericImage.objects.all(), write_only=True
     )
     image_details = serializers.SerializerMethodField()
 

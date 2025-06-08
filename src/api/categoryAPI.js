@@ -1,19 +1,18 @@
-import axiosInstance from './axiosInstance';
+import axiosInstance from "./axiosInstance";
 
 // endpoint for get categories
-export const getCategoriesAPI = async (type = null) => {
+export const getCategoriesAPI = async (filter = null) => {
   try {
-    const params = {};
-    if (type) params.type = type;
+    const params = filter ? { ...filter } : {};
 
-    const response = await axiosInstance.get('/api/custom-category/', {
+    const response = await axiosInstance.get("/api/custom-category/", {
       params,
     });
 
     return response;
   } catch (error) {
     console.error(
-      'Error en obtener las categorías:',
+      "Error en obtener las categorías:",
       error.response?.data || error.message
     );
     throw error;
@@ -28,7 +27,7 @@ export const getCategoryByIdAPI = async (id) => {
     return response;
   } catch (error) {
     console.error(
-      'Error en obtener la categoria:',
+      "Error en obtener la categoria:",
       error.response?.data || error.message
     );
     throw error;
@@ -38,12 +37,12 @@ export const getCategoryByIdAPI = async (id) => {
 // endpoint for create category
 export const createCategoryAPI = async (data) => {
   try {
-    const response = await axiosInstance.post('/api/custom-category/', data);
+    const response = await axiosInstance.post("/api/custom-category/", data);
 
     return response;
   } catch (error) {
     console.error(
-      'Error en crear la categoria:',
+      "Error en crear la categoria:",
       error.response?.data || error.message
     );
     throw error;
@@ -61,7 +60,7 @@ export const updateCategoryAPI = async (id, data) => {
     return response;
   } catch (error) {
     console.error(
-      'Error en actualizar la categoria:',
+      "Error en actualizar la categoria:",
       error.response?.data || error.message
     );
     throw error;
@@ -76,7 +75,7 @@ export const deleteCategoryAPI = async (id) => {
     return response;
   } catch (error) {
     console.error(
-      'Error en eliminar la categoria:',
+      "Error en eliminar la categoria:",
       error.response?.data || error.message
     );
     throw error;

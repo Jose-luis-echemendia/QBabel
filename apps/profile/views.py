@@ -162,6 +162,7 @@ class FollowWriterView(BaseAPIView):
     def post(self, request, *args, **kwargs):
         follower = request.user
         writer = request.data.get("writer")
+        print(writer)
         if not writer:
             return Response(
                 {"error": "Writer ID is required."}, status=status.HTTP_400_BAD_REQUEST
@@ -179,8 +180,12 @@ class FollowWriterView(BaseAPIView):
             )
 
         serializer = self.get_serializer(
-            data={"follower": follower.id, "writer": writer_profile.id}
+            data={
+                "follower": str(follower.profile.uid),
+                "writer": str(writer_profile.uid),
+            }
         )
+
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)

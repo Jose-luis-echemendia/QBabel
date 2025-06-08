@@ -97,3 +97,17 @@ export const getProfileByUsernameAPI = async (username) => {
     throw error;
   }
 };
+
+export const followerWriterAPI = async (data) => {
+  try {
+    const response = await axiosInstance.post(`/api/profile/follow/`, data);
+
+    return response;
+  } catch (error) {
+    console.error(
+      "Error al seguir el escritor:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};

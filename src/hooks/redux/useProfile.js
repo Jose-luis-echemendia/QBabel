@@ -5,6 +5,7 @@ import {
   updatePartialProfileThunk,
   getAuthenticatedUserProfileThunk,
   getProfileByUsernameThunk,
+  followerWriterThunk,
 } from "@/store/profile/thunks";
 import { useAppDispatch } from "./useStore";
 import { useCallback } from "react";
@@ -37,6 +38,10 @@ export const useProfile = () => {
     dispath(updatePartialProfileThunk({ id, data })).unwrap();
   };
 
+  const handlefollowerWriter = (data) => {
+    dispath(followerWriterThunk(data)).unwrap();
+  };
+
   return {
     handleGetProfileByUsername,
     handleGetAuthenticatedProfile,
@@ -44,5 +49,6 @@ export const useProfile = () => {
     handleGetProfileById,
     handleUpdateProfile,
     handleUpdatePartialProfile,
+    handlefollowerWriter,
   };
 };

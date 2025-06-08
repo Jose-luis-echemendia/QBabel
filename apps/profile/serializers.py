@@ -102,4 +102,6 @@ class FollowerSerializer(AbstractBaseSerializer):
         if Follower.objects.filter(follower=follower, writer=writer).exists():
             raise ValidationError("Follower already exists.")
 
-        return super().create(validated_data)
+        return Follower.objects.create(
+            follower=follower, writer=writer, **validated_data
+        )

@@ -164,7 +164,7 @@ class BookViewSet(
         data["price"] = request.data.get("price", None)
         data["is_published"] = request.data.get("is_published", False)
 
-        return self.update_object(request, data=data, partial=True, *args, **kwargs)
+        return self.update_object(request, data=data, *args, **kwargs)
 
     def delete(self, request, *args, **kwargs):
         return self.desactive_object(request, *args, **kwargs)

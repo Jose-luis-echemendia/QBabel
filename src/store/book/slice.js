@@ -28,11 +28,8 @@ export const bookSlice = createSlice({
       })
       .addCase(createBookThunk.fulfilled, (state, action) => {
         state.loading = false;
-        const newBook = action.payload.book;
-
-        state.books = Array.isArray(state.books)
-          ? [...state.books, newBook]
-          : [newBook];
+        if (state.books.length === 0) state.books = action.book;
+        else state.books.push(action.payload.book);
       })
       .addCase(createBookThunk.rejected, (state) => {
         state.loading = false;

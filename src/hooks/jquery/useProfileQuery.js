@@ -39,7 +39,7 @@ export function useUpdateProfile() {
     },
     onSuccess: async () => {
       await refetch();
-      toast.success("Perfil actualizado con éxito");
+      toast.success("Su perfil ha sido editado correctamente");
     },
     onSettled: () => {
       queryClient.invalidateQueries(["profile"]);

@@ -15,7 +15,6 @@ import { toast } from "sonner";
 import { useAppSelector } from "@/hooks/redux/useStore";
 
 export const FormBook = ({ handleOpen, book }) => {
-
   const [previewImage, setPreviewImage] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -35,6 +34,7 @@ export const FormBook = ({ handleOpen, book }) => {
   const loading = useAppSelector((state) => state.book.loading);
 
   useEffect(() => {
+    console.log(loading, changeBook);
     if (!loading && changeBook) {
       handleOpen(); // Cerrar el modal o realizar alguna acción después de guardar
     }
@@ -77,7 +77,7 @@ export const FormBook = ({ handleOpen, book }) => {
 
     // Limpieza
     return () => URL.revokeObjectURL(objectUrl);
-  }, [selectedPdf]);
+  }, [selectedPdf, book]);
 
   const handleImageSelect = (e) => {
     if (!e.target.files || e.target.files.length === 0) {
@@ -99,8 +99,9 @@ export const FormBook = ({ handleOpen, book }) => {
     const formData = new FormData();
 
     // Adjuntar archivos y datos
-    formData.append("cover", data.cover[0]);
-    formData.append("file", data.file[0]);
+    if (selectedImage) formData.append("cover", selectedImage);
+    if (selectedPdf) formData.append("file", selectedPdf);
+
     formData.append("title", data.title);
     //formData.append("isbn", data.title);
     formData.append("number_pages", data.number_pages);

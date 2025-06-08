@@ -11,7 +11,7 @@ export const useCategory = () => {
   const dispatch = useAppDispatch();
 
   const handleGetCategories = useCallback(
-    (type = null) => dispatch(getCategoriesThunk(type)).unwrap(),
+    (filter = null) => dispatch(getCategoriesThunk(filter)).unwrap(),
     [dispatch]
   );
 
