@@ -42,7 +42,13 @@ export const CardBook = ({
           exitButton={true}
           size="lg"
         >
-          <FormPaymentBook />
+          <FormPaymentBook
+            redirectRoRead={true}
+            handleOpen={() => setOpenQuestionModal(false)}
+            bookUid={book.uid}
+            price={book.price}
+            discount={book.discount}
+          />
         </CustomModal>
         <CustomModal
           open={openFormBookModal}

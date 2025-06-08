@@ -28,8 +28,8 @@ export const bookSlice = createSlice({
       })
       .addCase(createBookThunk.fulfilled, (state, action) => {
         state.loading = false;
-        if (state.books.length === 0) state.books = action.book;
-        else state.books.push(action.payload.book);
+        if (state.books.length === 0) state.books = [action.payload.book];
+        else state.books.results.books.push(action.payload.book);
       })
       .addCase(createBookThunk.rejected, (state) => {
         state.loading = false;
@@ -41,11 +41,11 @@ export const bookSlice = createSlice({
       })
       .addCase(updateBookThunk.fulfilled, (state, action) => {
         state.loading = false;
-        const index = state.books.findIndex(
+        const index = state.books.results.books.findIndex(
           (book) => book.uid === action.payload.book.uid
         );
         if (index !== -1) {
-          state.categories[index] = action.payload;
+          state.books.results.books[index] = action.payload.book;
         }
       })
       .addCase(updateBookThunk.rejected, (state) => {

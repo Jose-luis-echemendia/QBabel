@@ -38,10 +38,12 @@ class BuyBookView(BaseCustomAPIView, ValidateRegisterPaymentMixin):
         book = validated_data.get("book")
         from apps.library.models import Item
 
-        if not Item.objects.filter(book=book, is_filed=True).exists():
-            raise ValidationError({"detail": "The book is not available for purchase."})
+        if Item.objects.filter(
+            book=book, is_sold=True, library=request.user.library.uid
+        ).exists():
+            raise ValidationError({"detail": "The book is purchase."})
 
-        item = Item.objects.filter(book=book, is_filed=True).first()
+        item = Item.objects.filter(book=book, library=request.user.library.uid).first()
         item.is_sold = True
         item.save()
 

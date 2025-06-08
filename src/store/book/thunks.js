@@ -27,11 +27,14 @@ export const createBookThunk = createAsyncThunk(
 );
 
 export const updateBookThunk = createAsyncThunk(
-  "categories/updateBook",
+  "books/updateBook",
   async ({ id, data }, { rejectWithValue }) => {
     try {
       const response = await updateBookAPI(id, data);
-      if (response.status === 200) return response.data;
+      if (response.status === 200) {
+        toast.success("El libro se ha editado satisfactoriamente");
+        return response.data;
+      }
       return rejectWithValue(response?.data);
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
