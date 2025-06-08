@@ -105,6 +105,46 @@ export const BookGroupCard = ({ books, itemHeight }) => (
   </div>
 );
 
+export const BookGroupCover = ({ books }) => {
+  const groupedBooks = [];
+
+  for (let i = 0; i < books.length; i += 5) {
+    groupedBooks.push(books.slice(i, i + 5));
+  }
+
+  return (
+    <div className="flex gap-6 px-5 pt-3">
+      {groupedBooks.map((group, groupIndex) => (
+        <div key={groupIndex} className="flex gap-4 items-start">
+          {/* Main large image */}
+          {group[0] && (
+            <Link to={`/books/${group[0].id || group[0].uid}`}>
+              <img
+                src={group[0].cover}
+                alt="Main cover"
+                className="w-60 h-[264px] object-cover rounded-xl"
+              />
+            </Link>
+          )}
+
+          {/* 2x2 Grid of smaller images */}
+          <div className="grid grid-cols-2 grid-rows-2 gap-2">
+            {group.slice(1).map((book) => (
+              <Link to={`/books/${book.id || book.uid}`} key={book.uid}>
+                <img
+                  src={book.cover}
+                  alt="Small cover"
+                  className="w-28 h-32 object-cover rounded-xl"
+                />
+              </Link>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
+
 BookGroupCard.propTypes = BookGroup.propTypes = {
   books: PropTypes.arrayOf(
     PropTypes.shape({

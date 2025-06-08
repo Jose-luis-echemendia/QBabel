@@ -32,7 +32,9 @@ export const SearchBar = () => {
             {...register("search")}
           />
           {errors.search && (
-            <p className="text-red-500 text-sm mt-1">{errors.search.message}</p>
+            <p className="absolute text-red-500 text-sm mt-1">
+              {errors.search.message}
+            </p>
           )}
           <button>
             <CustomIcon

@@ -1,5 +1,11 @@
-import { getCommentsAPI, createCommentAPI, reactCommentAPI, unReactCommentsAPI } from "@/api/commentAPI";
+import {
+  getCommentsAPI,
+  createCommentAPI,
+  reactCommentAPI,
+  unReactCommentsAPI,
+} from "@/api/commentAPI";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { toast } from "sonner";
 
 export const getCommentsThunk = createAsyncThunk(
   "comments/getComments",
@@ -22,7 +28,10 @@ export const createCommentThunk = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const response = await createCommentAPI(data);
-      if (response.status === 200) return response.data;
+      if (response.status === 201) {
+        toast.success("Gracias por opinar sobre el libro");
+        return response.data;
+      }
       return rejectWithValue(response?.data);
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
@@ -43,7 +52,6 @@ export const reactCommentThunk = createAsyncThunk(
   }
 );
 
-
 export const unReactCommentThunk = createAsyncThunk(
   "comments/unReactComment",
   async (pkReact, { rejectWithValue }) => {
@@ -56,4 +64,3 @@ export const unReactCommentThunk = createAsyncThunk(
     }
   }
 );
-

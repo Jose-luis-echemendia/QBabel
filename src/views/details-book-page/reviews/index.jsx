@@ -1,8 +1,10 @@
 import { ReviewForm } from "./review-form";
 import { Reviews } from "./reviews";
 import { useGetCommentFromBook } from "@/hooks/jquery/useCommentQuery";
+import { useAppSelector } from "@/hooks/redux/useStore";
 
 export const ReviewsBook = ({ pkBook }) => {
+  const comments = useAppSelector((state) => state.comment.comments);
   const { data, isLoading, isError } = useGetCommentFromBook(pkBook);
 
   const commentFromBook = data?.results.comments || [];
@@ -14,7 +16,7 @@ export const ReviewsBook = ({ pkBook }) => {
       {isError && <div>Error al cargar reseñas</div>}
 
       {!isLoading && !isError && commentFromBook && (
-        <Reviews reviews={commentFromBook} />
+        <Reviews reviews={comments} />
       )}
     </div>
   );

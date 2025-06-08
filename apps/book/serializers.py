@@ -156,6 +156,22 @@ class BookSerializer(AbstractBaseSerializer):
         return instance
 
 
+class BookCoverSerializer(AbstractBaseSerializer):
+    cover = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Book
+        fields = AbstractBaseSerializer.Meta.fields + ["cover"]
+
+    def get_cover(self, obj):
+        """
+        Get the details of the cover image.
+        """
+        from apps.utils.serializers.serializers import ImageSerializer
+
+        return obj.cover.url if obj.cover else None
+
+
 class CategoryBookSerializer(AbstractBaseSerializer):
     book = serializers.PrimaryKeyRelatedField(
         queryset=Book.objects.all(), write_only=True

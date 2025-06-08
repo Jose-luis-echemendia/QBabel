@@ -12,6 +12,9 @@ const initialState = {
   topSellerBooksFromCategory: null,
   homeBooks: null,
   book: null,
+  count: null,
+  next: null,
+  previous: null,
   books: [],
   loading: false,
 };
@@ -29,7 +32,7 @@ export const bookSlice = createSlice({
       .addCase(createBookThunk.fulfilled, (state, action) => {
         state.loading = false;
         if (state.books.length === 0) state.books = [action.payload.book];
-        else state.books.results.books.push(action.payload.book);
+        else state.books.push(action.payload.book);
       })
       .addCase(createBookThunk.rejected, (state) => {
         state.loading = false;
@@ -41,11 +44,11 @@ export const bookSlice = createSlice({
       })
       .addCase(updateBookThunk.fulfilled, (state, action) => {
         state.loading = false;
-        const index = state.books.results.books.findIndex(
+        const index = state.books.findIndex(
           (book) => book.uid === action.payload.book.uid
         );
         if (index !== -1) {
-          state.books.results.books[index] = action.payload.book;
+          state.books[index] = action.payload.book;
         }
       })
       .addCase(updateBookThunk.rejected, (state) => {
@@ -58,7 +61,10 @@ export const bookSlice = createSlice({
       })
       .addCase(getBooksThunk.fulfilled, (state, action) => {
         state.loading = false;
-        state.books = action.payload;
+        state.count = action.payload.count;
+        state.next = action.payload.next;
+        state.previous = action.payload.previous;
+        state.books = action.payload.results.books;
       })
       .addCase(getBooksThunk.rejected, (state) => {
         state.loading = false;

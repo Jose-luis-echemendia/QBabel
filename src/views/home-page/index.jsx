@@ -2,6 +2,7 @@ import { CustomCarousel } from "./carousel";
 import { ContainerHome } from "@/containers/home";
 import { CustomCarouselBooks } from "./carousel/books";
 import { BookGroupCard } from "./carousel/books/carousel-items";
+import { BookGroupCover } from "./carousel/books/carousel-items";
 import { useState, useEffect } from "react";
 import { useBook } from "@/hooks/redux/useBook";
 import { useAuth } from "@/hooks/redux/useAuth";
@@ -202,45 +203,48 @@ const HomeView = () => {
             </div>
           </div>
 
-          <div className="flex flex-col gap-1">
-            <span className="flex gap-2 ml-7 text-black font-bold font-opensans text-lg leading-8">
-              Historias para los pequeños de casa
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="size-6 text-red-400 mt-1.5"
-              >
-                <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
-              </svg>
-            </span>
-            <div className="relative h-[260px]">
-              <div
-                className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
-                  !loading && homeBooks
-                    ? "opacity-0 pointer-events-none"
-                    : "opacity-100"
-                }`}
-              >
-                <LoadingCardBook />
-              </div>
-              <div
-                className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
-                  !loading && homeBooks
-                    ? "opacity-100"
-                    : "opacity-0 pointer-events-none"
-                }`}
-              >
-                {homeBooks && (
-                  <CustomCarouselBooks
-                    books={homeBooks.romance}
-                    carouselSize={`h-${carouselSize}`}
-                    booksPerSlide={booksPerSlide}
-                  />
-                )}
+          {booksPerSlide === 8 && (
+            <div className="flex flex-col gap-1">
+              <span className="flex gap-2 ml-7 text-black font-bold font-opensans text-lg leading-8">
+                Más historias para ti
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="size-6 text-red-400 mt-1.5"
+                >
+                  <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+                </svg>
+              </span>
+              <div className="relative h-[260px]">
+                <div
+                  className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
+                    !loading && homeBooks
+                      ? "opacity-0 pointer-events-none"
+                      : "opacity-100"
+                  }`}
+                >
+                  <LoadingCardBook />
+                </div>
+                <div
+                  className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
+                    !loading && homeBooks
+                      ? "opacity-100"
+                      : "opacity-0 pointer-events-none"
+                  }`}
+                >
+                  {homeBooks && (
+                    <CustomCarouselBooks
+                      books={homeBooks.first_books}
+                      carouselSize={`h-${carouselSize}`}
+                      booksPerSlide={15}
+                      CarouselItemComponent={BookGroupCover}
+                    />
+                  )}
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
           <div className="flex flex-col gap-0">
             <span className="ml-7 text-black font-bold font-opensans text-lg leading-8">

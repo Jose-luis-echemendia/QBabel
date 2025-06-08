@@ -10,13 +10,13 @@ import { LoadingCardBookLibrary } from "../loading/card-book-library";
 
 export const ContentTabs = ({ activeTab }) => {
   const items = useAppSelector((state) => state.library.items);
-  const mybooks = useAppSelector((state) => state.book.books?.results?.books);
+  const mybooks = useAppSelector((state) => state.book.books);
   const { handleGetPaymentsBooksForUserThunk } = usePayment();
   const { handleGetItemsOfLIbraryThunk } = useLibrary();
   const { handleGetBooks } = useBook();
 
   const loadingLibrary = useAppSelector((state) => state.library.loading);
-  const loadingBooks = useAppSelector((state) => state.library.loading);
+  const loadingBooks = useAppSelector((state) => state.book.loading);
 
   useEffect(() => {
     if (activeTab === "allStory") {

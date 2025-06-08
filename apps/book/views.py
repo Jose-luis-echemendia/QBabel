@@ -7,7 +7,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from apps.utils.views.abstract_views import BaseViewSet, BaseCustomAPIView
 from apps.utils.mixins import CreateImageMixin
 from apps.utils.pagination import LargeSetPagination, MediumSetPagination
-from .serializers import BookSerializer, CategoryBookSerializer
+from .serializers import BookSerializer, CategoryBookSerializer, BookCoverSerializer
 from .models import Book, CategoryBook
 from .filters import BookFilter
 from .mixins import (
@@ -260,7 +260,10 @@ class GetBooksHomeView(BaseCustomAPIView):
                 )
                 .order_by("-created_at")
                 .distinct()
-            )
+            )[:60]
+
+        def get_cover_first_books():
+            return Book.objects.all().order_by("created_at")
 
         data = {
             "fantasy": self.serializer_class(
@@ -284,6 +287,7 @@ class GetBooksHomeView(BaseCustomAPIView):
             "new_authors": self.serializer_class(
                 self.get_limited_books(get_recent_authors_books()), many=True
             ).data,
+            "first_books": BookCoverSerializer(get_cover_first_books(), many=True).data,
         }
 
         return Response(data)

@@ -11,14 +11,37 @@ export const Profiles = () => {
   return (
     <>
       <div className="col-span-8 grid grid-cols-2 w-full h-fit py-3 px-8 gap-9 mt-5">
-        {profiles && !loading ? (
+        {loading ? (
+          <div className="col-span-2 text-center text-gray-500">
+            <div className="col-span-2 flex flex-col gap-4 items-center justify-center h-full">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-14 animate-spin text-gray-500"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 3v1.5m0 15V21m8.25-9h-1.5M4.5 12H3m16.5 6.75l-.75-.75m-15 0l-.75.75m15-15l-.75.75M4.5 4.5l-.75-.75M12 12a3 3 0 100-6 3 3 0 000 6z"
+                />
+              </svg>
+              ... Cargando libros
+            </div>
+            ;
+          </div>
+        ) : profiles && !loading ? (
           profiles.map((profile) => (
-            <Link
-              to={`/profile/${profile.user_name}`}
+            <div
               key={profile.id}
               className="relative h-full flex items-center justify-between py-3 px-6 gap-1.5 bg-white rounded-lg shadow-xl hover:scale-105 transition-transform duration-200"
             >
-              <div className="flex gap-2 items-start justify-start w-full h-full">
+              <Link
+                to={`/profile/${profile.user_name}`}
+                className="flex gap-2 items-start justify-start w-full h-full"
+              >
                 <img
                   src={profile.avatar_details.image}
                   alt={profile.user_name}
@@ -50,7 +73,7 @@ export const Profiles = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
               <div className="">
                 <button
                   onClick={() => handlefollowerWriter({ writer: profile.uid })}
@@ -73,10 +96,14 @@ export const Profiles = () => {
                   <span>Seguir</span>
                 </button>
               </div>
-            </Link>
+            </div>
           ))
         ) : (
-          <></>
+          <>
+            <div className="col-span-2 text-center text-gray-500">
+              No se encontraron perfiles.
+            </div>
+          </>
         )}
       </div>
     </>

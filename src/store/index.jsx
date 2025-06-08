@@ -6,6 +6,7 @@ import profileReducer from "./profile/slice";
 import bookReducer from "./book/slice";
 import libraryReducer from "./library/slice";
 import paymentReducer from "./payment/slice";
+import commentReducer from "./comment/slice";
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     profile: profileReducer,
     category: categoryReducer,
     book: bookReducer,
+    comment: commentReducer,
     library: libraryReducer,
     payment: paymentReducer,
   },

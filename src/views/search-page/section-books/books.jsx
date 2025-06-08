@@ -2,13 +2,34 @@ import { useAppSelector } from "@/hooks/redux/useStore";
 import { Link } from "react-router-dom";
 
 export const Books = () => {
-  const books = useAppSelector((state) => state.book.books?.results?.books);
+  const books = useAppSelector((state) => state.book.books);
   const loading = useAppSelector((state) => state.book.loading);
 
   return (
     <>
       <div className="col-span-8 grid grid-cols-2 w-full h-fit py-3 px-8 gap-9 mt-5">
-        {books && !loading ? (
+        {loading ? (
+          <div className="col-span-2 text-center text-gray-500">
+            <div className="col-span-2 flex flex-col gap-4 items-center justify-center h-full">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-14 animate-spin text-gray-500"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 3v1.5m0 15V21m8.25-9h-1.5M4.5 12H3m16.5 6.75l-.75-.75m-15 0l-.75.75m15-15l-.75.75M4.5 4.5l-.75-.75M12 12a3 3 0 100-6 3 3 0 000 6z"
+                />
+              </svg>
+              ... Cargando libros
+            </div>
+            ;
+          </div>
+        ) : books && books.length !== 0 ? (
           books.map((book, index) => (
             <Link
               to={`/books/${book.uid}`}
@@ -197,7 +218,11 @@ export const Books = () => {
             </Link>
           ))
         ) : (
-          <></>
+          <>
+            <div className="col-span-2 text-center text-gray-500">
+              No se encontraron libros.
+            </div>
+          </>
         )}
       </div>
     </>

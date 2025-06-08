@@ -3,6 +3,7 @@ import { useForm } from "@/hooks/useForm";
 import { schemaComment } from "@/helpers/yup-schemas";
 import { useCreateComment } from "@/hooks/jquery/useCommentQuery";
 import CustomRating from "@/components/rating";
+import { useComment } from "@/hooks/redux/useComment";
 
 function RatedIcon() {
   return (
@@ -46,8 +47,9 @@ function UnratedIcon() {
 export const ReviewForm = ({ pkBook }) => {
   const { register, handleSubmit, errors, setValue } = useForm(schemaComment);
   const [rating, setRating] = useState(0);
+  const { handleCreateComment } = useComment();
 
-  const { mutate: createComment } = useCreateComment();
+  //const { mutate: createComment } = useCreateComment();
 
   const handleRatingChange = (newRating) => {
     setRating(newRating);
@@ -61,7 +63,7 @@ export const ReviewForm = ({ pkBook }) => {
       book: pkBook,
     };
 
-    createComment(payload);
+    handleCreateComment(payload);
   };
 
   return (

@@ -3,6 +3,9 @@ import { getCommentsThunk, createCommentThunk } from "./thunks";
 
 const initialState = {
   comment: null,
+  count: null,
+  next: null,
+  previous: null,
   comments: [],
   loading: false,
 };
@@ -31,7 +34,7 @@ export const commentSlice = createSlice({
       })
       .addCase(createCommentThunk.fulfilled, (state, action) => {
         state.loading = false;
-        if (state.comments.length === 0) state.comments = action.payload;
+        if (state.comments.length === 0) state.comments = [action.payload];
         else state.comments.push(action.payload);
       })
       .addCase(createCommentThunk.rejected, (state) => {
