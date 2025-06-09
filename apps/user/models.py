@@ -71,7 +71,7 @@ class UserAccount(BaseModel, AbstractBaseUser, PermissionsMixin):
         verbose_name=_("Role"),
         max_length=20,
         choices=RoleType.choices,
-        default=RoleType.user,
+        default=RoleType.reader,
     )
 
     objects = UserAccountManager()

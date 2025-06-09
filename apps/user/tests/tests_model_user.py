@@ -6,6 +6,7 @@ import inspect
 
 User = get_user_model()
 
+# 20
 
 class UserModelTest(BaseTest):
 

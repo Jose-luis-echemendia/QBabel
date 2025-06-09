@@ -162,7 +162,7 @@ class FollowWriterView(BaseAPIView):
     def post(self, request, *args, **kwargs):
         follower = request.user
         writer = request.data.get("writer")
-        print(writer)
+
         if not writer:
             return Response(
                 {"error": "Writer ID is required."}, status=status.HTTP_400_BAD_REQUEST
@@ -173,6 +173,15 @@ class FollowWriterView(BaseAPIView):
             return Response(
                 {"error": "Writer not found."}, status=status.HTTP_404_NOT_FOUND
             )
+
+        if Follower.objects.filter(
+            follower=follower.profile, writer=writer_profile
+        ).exists():
+            return Response(
+                {"error": "You are already following this writer."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
         if follower == writer_profile.user:
             return Response(
                 {"error": "You cannot follow yourself."},

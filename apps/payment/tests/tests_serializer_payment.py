@@ -11,6 +11,7 @@ import inspect
 
 User = get_user_model()
 
+# 7
 
 class PurchaseInvoicesSerializerTest(BaseTest):
     @classmethod

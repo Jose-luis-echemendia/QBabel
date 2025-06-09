@@ -22,6 +22,9 @@ export const commentSlice = createSlice({
       })
       .addCase(getCommentsThunk.fulfilled, (state, action) => {
         state.loading = false;
+        state.count = action.payload.count;
+        state.next = action.payload.next;
+        state.previous = action.payload.previous;
         state.comments = action.payload.results.comments;
       })
       .addCase(getCommentsThunk.rejected, (state) => {
@@ -35,7 +38,10 @@ export const commentSlice = createSlice({
       .addCase(createCommentThunk.fulfilled, (state, action) => {
         state.loading = false;
         if (state.comments.length === 0) state.comments = [action.payload];
-        else state.comments.push(action.payload);
+        else {
+          const newComment = action.payload; // o action.payload.comment si la API lo devuelve así
+          state.comments = [newComment, ...state.comments];
+        }
       })
       .addCase(createCommentThunk.rejected, (state) => {
         state.loading = false;

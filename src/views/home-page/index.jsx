@@ -23,7 +23,7 @@ const HomeView = () => {
 
   const booksState = useAppSelector((state) => state.book);
   const { loading } = booksState;
-  const books = booksState.books?.results?.books;
+  const books = booksState.books;
   const homeBooks = booksState.homeBooks;
 
   useEffect(() => {

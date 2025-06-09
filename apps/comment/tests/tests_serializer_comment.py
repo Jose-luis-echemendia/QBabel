@@ -12,6 +12,7 @@ import inspect
 
 User = get_user_model()
 
+# 7
 
 class CommentSerializerTest(BaseTest):
     @classmethod

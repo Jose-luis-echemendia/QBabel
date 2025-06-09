@@ -8,6 +8,9 @@ import {
 
 const initialState = {
   library: null,
+  count: null,
+  next: null,
+  previous: null,
   items: null,
   loading: false,
 };
@@ -35,7 +38,10 @@ export const librarySlice = createSlice({
         state.loading = true;
       })
       .addCase(getItemsOfLIbraryThunk.fulfilled, (state, action) => {
-        state.items = action.payload;
+        state.count = action.payload.count;
+        state.next = action.payload.next;
+        state.previous = action.payload.previous;
+        state.items = action.payload.results.items;
         state.loading = false;
       })
       .addCase(getItemsOfLIbraryThunk.rejected, (state) => {

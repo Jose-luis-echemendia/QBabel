@@ -32,7 +32,10 @@ export const bookSlice = createSlice({
       .addCase(createBookThunk.fulfilled, (state, action) => {
         state.loading = false;
         if (state.books.length === 0) state.books = [action.payload.book];
-        else state.books.push(action.payload.book);
+        else {
+          const newBook = action.payload.book;
+          state.books = [newBook, ...state.books];
+        }
       })
       .addCase(createBookThunk.rejected, (state) => {
         state.loading = false;

@@ -15,9 +15,20 @@ export const followerWriterThunk = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const response = await followerWriterAPI(data);
-      if (response.status === 201) return response.data;
+      if (response.status === 201) {
+        toast.success("Has empezado a seguir al escritor");
+        return response.data;
+      }
+
       return rejectWithValue(response?.data);
     } catch (error) {
+      if (
+        error.response.status === 400 &&
+        error.response.data?.error === "You are already following this writer."
+      ) {
+        toast.error("Ya sigues a este escritor");
+        return error.response.data;
+      }
       return rejectWithValue(error.response?.data || error.message);
     }
   }

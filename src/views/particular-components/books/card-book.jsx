@@ -73,7 +73,10 @@ export const CardBook = ({
                 >
                   Leer
                 </button>
-                <button className="w-full bg-transparent text-white border-2 border-white px-3 py-1 rounded hover:bg-gray-300 cursor-pointer hover:text-black transition">
+                <button
+                  onClick={() => navigate(`/books/${book.uid}`)}
+                  className="w-full bg-transparent text-white border-2 border-white px-3 py-1 rounded hover:bg-gray-300 cursor-pointer hover:text-black transition"
+                >
                   Detalles
                 </button>
                 {seeArchive && (

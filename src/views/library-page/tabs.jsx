@@ -1,4 +1,7 @@
+import { useAppSelector } from "@/hooks/redux/useStore";
+
 export const Tabs = ({ activeTab, setActiveTab }) => {
+  const user = useAppSelector((state) => state.auth.user);
   return (
     <>
       {" "}
@@ -70,16 +73,19 @@ export const Tabs = ({ activeTab, setActiveTab }) => {
           MIS HISTORIAS
 
           */}
-          <button
-            className={` pb-2 ${
-              activeTab === "myStory"
-                ? "border-b-2 border-primary font-bold text-black"
-                : "text-gray-600"
-            }`}
-            onClick={() => setActiveTab("myStory")}
-          >
-            Tus historias
-          </button>
+          {user.role !== "Reader" && (
+            <button
+              className={` pb-2 ${
+                activeTab === "myStory"
+                  ? "border-b-2 border-primary font-bold text-black"
+                  : "text-gray-600"
+              }`}
+              onClick={() => setActiveTab("myStory")}
+            >
+              Tus historias
+            </button>
+          )}
+
           {/*
           
           HISTORIAS ARCHIVADAS

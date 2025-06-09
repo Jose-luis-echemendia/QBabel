@@ -28,7 +28,7 @@ export const Profiles = () => {
                   d="M12 3v1.5m0 15V21m8.25-9h-1.5M4.5 12H3m16.5 6.75l-.75-.75m-15 0l-.75.75m15-15l-.75.75M4.5 4.5l-.75-.75M12 12a3 3 0 100-6 3 3 0 000 6z"
                 />
               </svg>
-              ... Cargando libros
+              ... Cargando perfiles
             </div>
             ;
           </div>
