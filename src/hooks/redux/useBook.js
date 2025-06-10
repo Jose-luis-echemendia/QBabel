@@ -3,6 +3,7 @@ import {
   updateBookThunk,
   getBooksThunk,
   getBooksHomeThunk,
+  fetchMoreBooksThunk,
   getBookForIdThunk,
   getTopSellerBooksFromCategoryThunk,
 } from "@/store/book/thunks";
@@ -30,6 +31,11 @@ export const useBook = () => {
     [dispatch]
   );
 
+  const handleFetchMoreBooks = useCallback(
+    (next = null) => dispatch(fetchMoreBooksThunk(next)).unwrap(),
+    [dispatch]
+  );
+
   const handleGetBookForId = (bookId) => {
     dispatch(getBookForIdThunk(bookId));
   };
@@ -43,6 +49,7 @@ export const useBook = () => {
     handleGetBooksHome,
     handleCreateBook,
     handleGetBooks,
+    handleFetchMoreBooks,
     handleGetBookForId,
     handleGetTopSellerBooksFromCategoryThunk,
   };

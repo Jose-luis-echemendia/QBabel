@@ -1,9 +1,15 @@
+import { useDate } from "@/hooks/useDate";
+import { useNavigate } from "react-router-dom";
+
 export const FooterOverviewBook = ({ book }) => {
+  const navigate = useNavigate();
+  const { formatDate, formatRelativeTime } = useDate();
+
   return (
     <>
       <div className="flex flex-col items-center justify-center gap-8">
         <div className="flex gap-10 items-center justify-center">
-          {!book.isFree && (
+          {!book.is_free && (
             <>
               <div className="flex flex-col gap-2 items-center justify-center px-1.5">
                 <span className="flex gap-1.5  text-gray-800">
@@ -52,7 +58,7 @@ export const FooterOverviewBook = ({ book }) => {
               </svg>
               <small className="text-lg">Lecturas</small>
             </span>
-            <span className="text-xl font-bold">{book.reads}</span>
+            <span className="text-xl font-bold">{book.count_reads}</span>
           </div>
           <div className="w-[1px] bg-gray-400 -mx-3 h-14" />
           <div className="flex flex-col gap-2 items-center justify-center">
@@ -95,7 +101,7 @@ export const FooterOverviewBook = ({ book }) => {
 
               <small className="text-lg">Capítulos</small>
             </span>
-            <span className="text-xl font-bold">{book.parts}</span>
+            <span className="text-xl font-bold">{book.number_chapters}</span>
           </div>
           <div className="w-[1px] bg-gray-400 -mx-3 h-14" />
           <div className="flex flex-col gap-2 items-center justify-center">
@@ -117,7 +123,9 @@ export const FooterOverviewBook = ({ book }) => {
 
               <small className="text-lg">Registrado</small>
             </span>
-            <span className="text-xl font-bold">{book.createdAt}</span>
+            <span className="text-xl font-bold">
+              {formatRelativeTime(book.created_at)}
+            </span>
           </div>
           <div className="w-[1px] bg-gray-400 -mx-3 h-14" />
           <div className="flex flex-col gap-2 items-center justify-center">
@@ -139,11 +147,25 @@ export const FooterOverviewBook = ({ book }) => {
 
               <small className="text-lg">Actualizado</small>
             </span>
-            <span className="text-xl font-bold">{book.updatedAt}</span>
+            <span className="text-xl font-bold">
+              {formatDate(book.updated_at, {
+                format: "custom",
+                customFormat: {
+                  day: "2-digit",
+                  month: "short",
+                  year: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                },
+              })}
+            </span>
           </div>
         </div>
         <div>
-          <button className="bg-primary py-2.5 px-16 rounded-full">
+          <button
+            onClick={() => navigate(`/books/${book.uid}`)}
+            className="bg-primary py-2.5 px-16 rounded-full"
+          >
             <span className="font-semibold text-black-80 hover:text-gray-800">
               Ver Detalles
             </span>

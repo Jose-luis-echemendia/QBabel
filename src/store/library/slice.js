@@ -8,7 +8,7 @@ import {
 
 const initialState = {
   library: null,
-  count: null,
+  count: 0,
   next: null,
   previous: null,
   items: null,

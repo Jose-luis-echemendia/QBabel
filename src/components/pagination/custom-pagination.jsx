@@ -4,54 +4,99 @@ import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useAppSelector } from "@/hooks/redux/useStore";
 import { useBook } from "@/hooks/redux/useBook";
 import { useLibrary } from "@/hooks/redux/useLibrary";
+import { usePayment } from "@/hooks/redux/usePayment";
 
 export const CustomTablePagination = () => {
+  const { next, previous, count } = useAppSelector((state) => state.payment);
+  const { handleGetPayments } = usePayment();
   const [active, setActive] = React.useState(1);
+
+  const itemsPerPage = 15;
+  const totalPages = Math.ceil(count / itemsPerPage);
+  const maxVisiblePages = 5; // Número máximo de páginas visibles
+
+  const handlePageChange = (page) => {
+    if (page < 1 || page > totalPages) return;
+    setActive(page);
+    handleGetPayments({ p: page });
+  };
+
+  const handleNext = () => handlePageChange(active + 1);
+  const handlePrev = () => handlePageChange(active - 1);
+
+  // Genera los números de página visibles
+  const getVisiblePages = () => {
+    if (totalPages <= maxVisiblePages) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    }
+
+    let startPage = Math.max(active - Math.floor(maxVisiblePages / 2), 1);
+    startPage = Math.min(startPage, totalPages - maxVisiblePages + 1);
+
+    return Array.from({ length: maxVisiblePages }, (_, i) => startPage + i);
+  };
 
   const getItemProps = (index) => ({
     variant: active === index ? "filled" : "text",
     color: "gray",
-    onClick: () => setActive(index),
+    onClick: () => handlePageChange(index),
     className: "rounded-full",
+    disabled: index < 1 || index > totalPages,
   });
 
-  const next = () => {
-    if (active === 5) return;
-
-    setActive(active + 1);
-  };
-
-  const prev = () => {
-    if (active === 1) return;
-
-    setActive(active - 1);
-  };
+  if (totalPages <= 1) return null; // No mostrar paginación si solo hay 1 página
 
   return (
-    <div className="w-full flex items-center justify-between px-5">
+    <div className="w-full flex items-center justify-between px-5 py-2">
       <Button
         variant="text"
         className="flex items-center gap-2 rounded-full"
-        onClick={prev}
-        disabled={active === 1}
+        onClick={handlePrev}
+        disabled={active === 1 || !previous}
       >
         <ArrowLeftIcon strokeWidth={2} className="h-4 w-4" /> Previous
       </Button>
-      <div className="flex items-center gap-2">
-        <IconButton {...getItemProps(1)}>1</IconButton>
-        <IconButton {...getItemProps(2)}>2</IconButton>
-        <IconButton {...getItemProps(3)}>3</IconButton>
-        <IconButton {...getItemProps(4)}>4</IconButton>
-        <IconButton {...getItemProps(5)}>5</IconButton>
+
+      <div className="flex items-center gap-1">
+        {/* Mostrar primera página si no está visible */}
+        {active > Math.floor(maxVisiblePages / 2) + 1 &&
+          totalPages > maxVisiblePages && (
+            <>
+              <IconButton {...getItemProps(1)}>1</IconButton>
+              {active > Math.floor(maxVisiblePages / 2) + 2 && (
+                <span className="mx-1">...</span>
+              )}
+            </>
+          )}
+
+        {/* Páginas visibles */}
+        {getVisiblePages().map((page) => (
+          <IconButton key={page} {...getItemProps(page)}>
+            {page}
+          </IconButton>
+        ))}
+
+        {/* Mostrar última página si no está visible */}
+        {active < totalPages - Math.floor(maxVisiblePages / 2) &&
+          totalPages > maxVisiblePages && (
+            <>
+              {active < totalPages - Math.floor(maxVisiblePages / 2) - 1 && (
+                <span className="mx-1">...</span>
+              )}
+              <IconButton {...getItemProps(totalPages)}>
+                {totalPages}
+              </IconButton>
+            </>
+          )}
       </div>
+
       <Button
         variant="text"
         className="flex items-center gap-2 rounded-full"
-        onClick={next}
-        disabled={active === 5}
+        onClick={handleNext}
+        disabled={active === totalPages || !next}
       >
-        Next
-        <ArrowRightIcon strokeWidth={2} className="h-4 w-4" />
+        Next <ArrowRightIcon strokeWidth={2} className="h-4 w-4" />
       </Button>
     </div>
   );

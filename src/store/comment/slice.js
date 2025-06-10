@@ -3,7 +3,7 @@ import { getCommentsThunk, createCommentThunk } from "./thunks";
 
 const initialState = {
   comment: null,
-  count: null,
+  count: 0,
   next: null,
   previous: null,
   comments: [],

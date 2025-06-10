@@ -40,8 +40,6 @@ class PurchaseInvoicesSerializer(AbstractBaseSerializer):
         return BookSerializer(obj.book).data if obj.book else None
 
     def get_buyer_details(self, obj):
-        from apps.user.serializers import UserListSerializer
+        from apps.profile.serializers import ProfileSerializer
 
-        return UserListSerializer(obj.buyer).data if obj.buyer else None
-
-
+        return ProfileSerializer(obj.buyer.profile).data if obj.buyer else None

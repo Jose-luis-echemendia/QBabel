@@ -1,4 +1,5 @@
-import { customAccordionTheme } from "@/utils/material-tailwindscss/themes";
+// src/components/OptionFilter.jsx
+import { customAccordionTheme } from "@/utils/material-tailwindscss/themes"; // Ajusta la ruta
 import {
   Checkbox,
   List,
@@ -11,15 +12,19 @@ import {
 } from "@material-tailwind/react";
 import { ThemeProvider } from "@material-tailwind/react";
 
-
-
 export const OptionFilter = ({
   openAcc,
   handleOpenAcc,
   criterion,
   note = "Puedes seleccionar múltiples opciones",
   options,
+  selectedOptionIds,
+  onFilterChange,
 }) => {
+  const handleCheckboxChange = (optionId, isChecked) => {
+    onFilterChange(criterion, optionId, isChecked);
+  };
+
   return (
     <>
       <Accordion
@@ -55,22 +60,26 @@ export const OptionFilter = ({
                 {options.map((option) => (
                   <ListItem
                     className="p-0 -ml-2"
-                    color="primary-100"
+                    color="primary-100" // Asegúrate que estos colores estén definidos en tu theme
                     key={option.id}
                   >
                     <label
-                      htmlFor={option.criterion}
+                      htmlFor={`${criterion}-${option.id}`} // Asegurar ID único para el label
                       className="flex w-full cursor-pointer items-center px-3 py-2"
                     >
                       <ListItemPrefix className="mr-3" color="primary-100">
                         <Checkbox
-                          id={option.criterion}
+                          id={`${criterion}-${option.id}`} // Asegurar ID único
                           ripple={false}
-                          color="primary-100"
+                          color="primary-100" // Asegúrate que estos colores estén definidos
                           className="hover:before:opacity-0"
                           containerProps={{
                             className: "p-0",
                           }}
+                          checked={selectedOptionIds.includes(option.id)}
+                          onChange={(e) =>
+                            handleCheckboxChange(option.id, e.target.checked)
+                          }
                         />
                       </ListItemPrefix>
                       <Typography color="primary-100" className="font-medium">

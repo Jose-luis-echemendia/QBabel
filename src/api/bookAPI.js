@@ -51,6 +51,23 @@ export const getBooksAPI = async (filter = null) => {
   }
 };
 
+export const fetchMoreBooksAPI = async (next = null) => {
+  try {
+    if (next) {
+      // Si hay un enlace 'next', hacer la petición a esa URL
+      const response = await axiosInstance.get(next);
+      return response;
+    }
+    return [];
+  } catch (error) {
+    console.error(
+      "Error en obtener los libros:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};
+
 // endpoint for get books
 export const getTopSellerBooksFromCategoryAPI = async (category = null) => {
   try {

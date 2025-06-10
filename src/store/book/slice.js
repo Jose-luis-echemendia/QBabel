@@ -3,6 +3,7 @@ import {
   createBookThunk,
   updateBookThunk,
   getBooksThunk,
+  fetchMoreBooksThunk,
   getBookForIdThunk,
   getBooksHomeThunk,
   getTopSellerBooksFromCategoryThunk,
@@ -12,7 +13,7 @@ const initialState = {
   topSellerBooksFromCategory: null,
   homeBooks: null,
   book: null,
-  count: null,
+  count: 0,
   next: null,
   previous: null,
   books: [],
@@ -71,6 +72,19 @@ export const bookSlice = createSlice({
       })
       .addCase(getBooksThunk.rejected, (state) => {
         state.loading = false;
+      })
+
+      .addCase(fetchMoreBooksThunk.pending, (state) => {
+        state.loading = true; // Or a specific 'loadingMore' state
+      })
+      .addCase(fetchMoreBooksThunk.fulfilled, (state, action) => {
+        state.books = [...state.books, ...action.payload.results.books];
+        state.next = action.payload.next;
+        state.loading = false;
+      })
+      .addCase(fetchMoreBooksThunk.rejected, (state) => {
+        state.loading = false;
+        // Handle error
       })
 
       // ** Get home books reducers**

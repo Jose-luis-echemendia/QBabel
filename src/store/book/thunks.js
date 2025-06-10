@@ -2,6 +2,7 @@ import {
   createBookApi,
   updateBookAPI,
   getBooksAPI,
+  fetchMoreBooksAPI,
   getBooksHomeAPI,
   getBookForIdAPI,
   getTopSellerBooksFromCategoryAPI,
@@ -48,6 +49,20 @@ export const getBooksThunk = createAsyncThunk(
   async (filter = null, { rejectWithValue }) => {
     try {
       const response = await getBooksAPI(filter);
+      if (response.status === 200) return response.data;
+      return rejectWithValue(response?.data);
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
+
+// ** Thunk for get books
+export const fetchMoreBooksThunk = createAsyncThunk(
+  "books/fetchMoreBooks",
+  async (next, { rejectWithValue }) => {
+    try {
+      const response = await fetchMoreBooksAPI(next);
       if (response.status === 200) return response.data;
       return rejectWithValue(response?.data);
     } catch (error) {

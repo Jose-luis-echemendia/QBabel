@@ -7,6 +7,9 @@ import {
 
 const initialState = {
   loading: false,
+  count: 0,
+  previous: null,
+  next: null,
   payments: [],
   paymentsBooks: [],
 };
@@ -36,10 +39,14 @@ export const paymentSlice = createSlice({
       // **Get Payments Reducers**
       .addCase(getPaymentsThunk.pending, (state) => {
         state.loading = true;
+        state.payments = [];
       })
       .addCase(getPaymentsThunk.fulfilled, (state, action) => {
         state.loading = false;
-        state.payments = action.payload;
+        state.count = action.payload.count;
+        state.next = action.payload.next;
+        state.previous = action.payload.previous;
+        state.payments = action.payload.results.purchasesInvoices;
       })
       .addCase(getPaymentsThunk.rejected, (state) => {
         state.loading = false;

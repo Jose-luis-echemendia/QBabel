@@ -54,7 +54,7 @@ export const Review = ({ review }) => {
         <div className="flex flex-col gap-4 items-start justify-start ml-1.5">
           <div className="flex gap-3 pt-3">
             <img
-              src="/assets/images/avatar.jpeg"
+              src={review.profile.avatar_details.image}
               alt={review.profile.avatar_details.image}
               className="w-12 h-12 object-cover rounded-full ml-0.5"
             />
@@ -117,7 +117,6 @@ export const Review = ({ review }) => {
 };
 
 export const Reviews = ({ reviews }) => {
-
   return (
     <>
       <div className="grid grid-cols-6 gap-10 container mx-auto lg:px-20 px-6 my-10 ">
