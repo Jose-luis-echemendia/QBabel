@@ -133,6 +133,12 @@ class Book(BaseModel):
         )["avg"]
         return round(average, 2) if average is not None else 0.0
 
+    @property
+    def sales_count(self):
+        from apps.payment.models import PurchaseInvoices
+
+        return PurchaseInvoices.objects.filter(book=self).count()
+
     def __str__(self):
         return self.title
 

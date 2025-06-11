@@ -166,7 +166,7 @@ class BookViewSet(
 
         return self.update_object(request, data=data, *args, **kwargs)
 
-    def delete(self, request, *args, **kwargs):
+    def destroy(self, request, *args, **kwargs):
         return self.desactive_object(request, *args, **kwargs)
 
     @action(detail=False, methods=["POST"], url_path="validate-isbn")

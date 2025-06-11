@@ -6,6 +6,7 @@ import {
   getBooksHomeAPI,
   getBookForIdAPI,
   getTopSellerBooksFromCategoryAPI,
+  deleteBookAPI,
 } from "@/api/bookAPI";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "sonner";
@@ -106,6 +107,22 @@ export const getTopSellerBooksFromCategoryThunk = createAsyncThunk(
     try {
       const response = await getTopSellerBooksFromCategoryAPI(category);
       if (response.status === 200) return response.data;
+      return rejectWithValue(response?.data);
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
+
+export const deleteBookThunk = createAsyncThunk(
+  "books/deleteBook",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await deleteBookAPI(id);
+      if (response.status === 204) {
+        toast.success("Se ha eliminado correctamente el libro");
+        return id;
+      }
       return rejectWithValue(response?.data);
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);

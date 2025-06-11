@@ -61,7 +61,7 @@ export const disaggregateBookFromLibraryThunk = createAsyncThunk(
       const response = await disaggregateBookFromLibraryAPI(id);
       if (response.status === 204) {
         toast.success("Book removed from library successfully");
-        return response.data;
+        return id;
       }
       return rejectWithValue(response?.data);
     } catch (error) {

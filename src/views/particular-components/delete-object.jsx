@@ -1,12 +1,9 @@
-import { useCategory } from "@/hooks/redux/useCategory";
-
-export const DeleteObject = ({ uid, handleOpen }) => {
-  const { handledeleteCategoryThunk } = useCategory();
+export const DeleteObject = ({ handleOpen, objectName, handleDelete }) => {
   return (
     <>
       <div className="flex flex-col gap-5 p-10">
         <h6 className="text-2xl font-semibold text-center">
-          Estas seguro que deseas eliminar el objeto?
+          Estas seguro que deseas eliminar {objectName}?
         </h6>
         <div className="flex items-center justify-between gap-4  pt-4 mt-10 mx-48">
           <button
@@ -17,7 +14,7 @@ export const DeleteObject = ({ uid, handleOpen }) => {
           </button>
           <button
             onClick={() => {
-              handledeleteCategoryThunk(uid), handleOpen();
+              handleDelete(), handleOpen();
             }}
             className="bg-primary py-1.5 px-4 rounded-xl"
           >

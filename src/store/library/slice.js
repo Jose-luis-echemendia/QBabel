@@ -66,7 +66,10 @@ export const librarySlice = createSlice({
       })
       .addCase(disaggregateBookFromLibraryThunk.fulfilled, (state, action) => {
         state.loading = false;
-        state.library = action.payload.library;
+        console.log(action.payload);
+        state.items = state.items.filter(
+          (item) => item.book_details.uid !== action.payload
+        );
       })
       .addCase(disaggregateBookFromLibraryThunk.rejected, (state) => {
         state.loading = false;

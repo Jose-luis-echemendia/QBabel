@@ -9,7 +9,7 @@ class LibraryAdmin(admin.ModelAdmin):
 
 
 class ItemAdmin(admin.ModelAdmin):
-    list_display = ("book", "library", "is_sold", "is_filed")
+    list_display = ("book", "library", "is_sold", "is_filed", "is_active")
 
 
 admin.site.register(Library, LibraryAdmin)

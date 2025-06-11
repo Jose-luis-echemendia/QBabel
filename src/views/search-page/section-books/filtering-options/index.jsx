@@ -1,10 +1,8 @@
-// src/components/FilteringOptions.jsx
-import { useParams } from "react-router-dom";
-import { OptionFilter } from "./option-filter"; // Ajusta la ruta si es necesario
+// src/components/filtering-options.jsx
+import { OptionFilter } from "./option-filter"; // Nombre de archivo corregido
 import { useState } from "react";
-import { useAppSelector } from "@/hooks/redux/useStore"; // Ajusta la ruta
 
-// Definiciones de los criterios (deben estar disponibles aquí)
+// *** IMPORTANTE: Define o importa estos arrays aquí ***
 const partsCriterion = [
   { id: 1, criterion: "Cualquier extension" },
   { id: 2, criterion: "1 - 10 capítulos" },
@@ -41,9 +39,13 @@ const othersCriterion = [
   { id: 3, criterion: "Lo mejor de la semana" },
   { id: 4, criterion: "Los más votados por la comunidad" },
 ];
+// ******************************************************
 
-export const FilteringOptions = ({ selectedFilters, onFilterChange }) => {
-  const { criterion: searchCriterionParam } = useParams();
+export const FilteringOptions = ({
+  selectedFilters,
+  onFilterChange,
+  searchCriterionParam,
+}) => {
   const [openAcc1, setOpenAcc1] = useState(false);
   const [openAcc2, setOpenAcc2] = useState(false);
   const [openAcc3, setOpenAcc3] = useState(false);
@@ -56,23 +58,17 @@ export const FilteringOptions = ({ selectedFilters, onFilterChange }) => {
   const handleOpenAcc4 = () => setOpenAcc4((cur) => !cur);
   const handleOpenAcc5 = () => setOpenAcc5((cur) => !cur);
 
-  // Este count es el total ANTES de filtrar localmente.
-  // El count de resultados filtrados se manejará en el componente padre.
-  const countResultsFromSearch = useAppSelector((state) => state.book.count);
-
   return (
-    <div className="col-span-2 w-full h-full flex flex-col gap-2.5">
-      <h6 className="text-3xl font-bold">"{searchCriterionParam}"</h6>
-      {/* El conteo de resultados filtrados se mostrará en el componente padre 
-          o se pasará aquí si es necesario.
-      <span className="text-sm text-gray-600 -mt-1">
-        {countResultsFromSearch} resultados iniciales
-      </span> 
-      */}
+    // Este div es el md:col-span-2 del padre.
+    // El div interno puede ser w-full h-full si quieres que ocupe todo ese espacio.
+    <div className="w-full h-full flex flex-col gap-2.5">
+      {searchCriterionParam && (
+        <h6 className="text-3xl font-bold">"{searchCriterionParam}"</h6>
+      )}
       <OptionFilter
         openAcc={openAcc1}
         handleOpenAcc={handleOpenAcc1}
-        criterion={"Capítulos"}
+        criterion={"Capítulos"} // Esta clave DEBE coincidir con la de selectedFilters
         options={partsCriterion}
         selectedOptionIds={selectedFilters["Capítulos"] || []}
         onFilterChange={onFilterChange}
@@ -80,7 +76,7 @@ export const FilteringOptions = ({ selectedFilters, onFilterChange }) => {
       <OptionFilter
         openAcc={openAcc2}
         handleOpenAcc={handleOpenAcc2}
-        criterion={"Última actualización"}
+        criterion={"Última actualización"} // Esta clave DEBE coincidir
         options={updateCriterion}
         selectedOptionIds={selectedFilters["Última actualización"] || []}
         onFilterChange={onFilterChange}
@@ -88,7 +84,7 @@ export const FilteringOptions = ({ selectedFilters, onFilterChange }) => {
       <OptionFilter
         openAcc={openAcc3}
         handleOpenAcc={handleOpenAcc3}
-        criterion={"Contenido"}
+        criterion={"Contenido"} // Esta clave DEBE coincidir
         options={contentCriterion}
         selectedOptionIds={selectedFilters["Contenido"] || []}
         onFilterChange={onFilterChange}
@@ -96,7 +92,7 @@ export const FilteringOptions = ({ selectedFilters, onFilterChange }) => {
       <OptionFilter
         openAcc={openAcc4}
         handleOpenAcc={handleOpenAcc4}
-        criterion={"Precios"}
+        criterion={"Precios"} // Esta clave DEBE coincidir
         options={priceCriterion}
         selectedOptionIds={selectedFilters["Precios"] || []}
         onFilterChange={onFilterChange}
@@ -104,7 +100,7 @@ export const FilteringOptions = ({ selectedFilters, onFilterChange }) => {
       <OptionFilter
         openAcc={openAcc5}
         handleOpenAcc={handleOpenAcc5}
-        criterion={"Otros filtros"}
+        criterion={"Otros filtros"} // Esta clave DEBE coincidir
         options={othersCriterion}
         selectedOptionIds={selectedFilters["Otros filtros"] || []}
         onFilterChange={onFilterChange}

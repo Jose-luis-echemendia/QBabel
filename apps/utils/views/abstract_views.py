@@ -70,7 +70,7 @@ class BaseView(ABC):
         from apps.user.permisions import IsAdminRole, IsSuperUserRole
 
         if (
-            "state" not in self.request.GET
+            "is_active" not in self.request.GET
             and not IsAdminRole().has_permission(self.request, self)
             and not IsSuperUserRole().has_permission(self.request, self)
         ):

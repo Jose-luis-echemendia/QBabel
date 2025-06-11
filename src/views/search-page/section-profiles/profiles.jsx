@@ -10,7 +10,7 @@ export const Profiles = () => {
 
   return (
     <>
-      <div className="col-span-8 grid grid-cols-2 w-full h-fit py-3 px-8 gap-9 mt-5">
+      <div className="col-span-10 grid grid-cols-2 w-full h-fit py-3 px-8 gap-9 mt-5">
         {loading ? (
           <div className="col-span-2 text-center text-gray-500">
             <div className="col-span-2 flex flex-col gap-4 items-center justify-center h-full">

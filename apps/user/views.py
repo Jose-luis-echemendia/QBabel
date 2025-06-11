@@ -6,13 +6,13 @@ from apps.utils.views.abstract_views import BaseCustomAPIView
 from django.contrib.auth import get_user_model
 from .serializers import UserCreateSerializer, UserListSerializer
 from .permisions import IsAdminRole, IsAccountOwner
-from .mixins import ValidateRegisterUser
+from .mixins import ValidateRegisterUserMixin
 from .filters import UserFilter
 
 User = get_user_model()
 
 
-class RegisterUserView(BaseCustomAPIView, ValidateRegisterUser):
+class RegisterUserView(BaseCustomAPIView, ValidateRegisterUserMixin):
     queryset = User.objects.all()
     serializer_class = UserCreateSerializer
     permission_classes = [AllowAny]

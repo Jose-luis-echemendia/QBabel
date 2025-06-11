@@ -28,7 +28,7 @@ export const Signup = ({
     setLoading(false);
     handleSetUser(data.user_name);
   };
-
+ 
   useEffect(() => {
     if (userForActiveAccount && createdUser && cantCreateUser) {
       handleOpen();
@@ -68,11 +68,10 @@ export const Signup = ({
                       type="email"
                       {...register("email")}
                       autoComplete="email"
-                      required
                       className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                     />
                     {errors.email && (
-                      <span className="text-red-500 text-sm">
+                      <span className="text-red-500 text-sm mt-1">
                         {errors.email.message}
                       </span>
                     )}
@@ -93,9 +92,13 @@ export const Signup = ({
                       type="user_name"
                       {...register("user_name")}
                       autoComplete="user_name"
-                      required
                       className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                     />
+                    {errors.user_name && (
+                      <span className="text-red-500 text-sm mt-1">
+                        {errors.user_name.message}
+                      </span>
+                    )}
                   </div>
                 </div>
                 <div>
@@ -112,11 +115,10 @@ export const Signup = ({
                       type="password"
                       {...register("password")}
                       autoComplete="current-password"
-                      required
                       className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                     />
                     {errors.password && (
-                      <span className="text-red-500 text-sm">
+                      <span className="text-red-500 text-sm mt-1">
                         {errors.password.message}
                       </span>
                     )}
@@ -137,11 +139,10 @@ export const Signup = ({
                       type="password"
                       {...register("re_password")}
                       autoComplete="current-password"
-                      required
                       className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                     />
                     {errors.re_password && (
-                      <span className="text-red-500 text-sm">
+                      <span className="text-red-500 text-sm mt-1">
                         {errors.re_password.message}
                       </span>
                     )}

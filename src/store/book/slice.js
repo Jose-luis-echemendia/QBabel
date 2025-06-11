@@ -7,6 +7,7 @@ import {
   getBookForIdThunk,
   getBooksHomeThunk,
   getTopSellerBooksFromCategoryThunk,
+  deleteBookThunk,
 } from "./thunks";
 
 const initialState = {
@@ -123,6 +124,18 @@ export const bookSlice = createSlice({
         state.book = action.payload.book;
       })
       .addCase(getBookForIdThunk.rejected, (state) => {
+        state.loading = false;
+      })
+
+      // **Delete book reducers**
+      .addCase(deleteBookThunk.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(deleteBookThunk.fulfilled, (state, action) => {
+        state.loading = false;
+        state.books = state.books.filter((book) => book.uid !== action.payload);
+      })
+      .addCase(deleteBookThunk.rejected, (state) => {
         state.loading = false;
       });
   },

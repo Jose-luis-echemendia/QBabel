@@ -23,7 +23,7 @@ function Stories({
             ))}
           {mybooks &&
             mybooks.map((book) => (
-              <CardBook key={book.uid} book={book} seeUpdateBook={true} mybook={true} />
+              <CardBook key={book.uid} book={book} seeUpdateBook={true} mybook={true} isItems={false} />
             ))}
         </div>
       </div>

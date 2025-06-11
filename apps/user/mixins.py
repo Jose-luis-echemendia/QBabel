@@ -1,7 +1,7 @@
 from rest_framework.exceptions import ValidationError
 
 
-class ValidateRegisterUser:
+class ValidateRegisterUserMixin:
     """
     Validates the data for user registration.
     """

@@ -3,7 +3,7 @@ from .models import Book, CategoryBook
 
 
 class BookAdmin(admin.ModelAdmin):
-    list_display = ("uid", "__str__", "author", "price")
+    list_display = ("uid", "__str__", "author", "is_active", "price")
 
 
 admin.site.register(Book, BookAdmin)

@@ -86,11 +86,24 @@ class AddBookView(BaseCustomAPIView, ValidateBookItem):
         user = request.user
         library = Library.objects.get(user=user)
         book = Book.objects.get(pk=book_uid)
-        if Item.objects.filter(book=book_uid, library=library.uid).exists():
-            return Response(
-                {"detail": "Este libro ya está agregado a tu biblioteca"},
-                status=status.HTTP_409_CONFLICT,
-            )
+        item = Item.objects.filter(book=book_uid, library=library.uid)
+
+        if item.exists():
+
+            item = item.first()
+            if item.is_active:
+                return Response(
+                    {"detail": "Este libro ya está agregado a tu biblioteca"},
+                    status=status.HTTP_409_CONFLICT,
+                )
+            else:
+                item.is_active = True
+                item.save()
+
+                return Response(
+                    {self.get_verbose_name(): self.get_serializer(library).data},
+                    status=status.HTTP_201_CREATED,
+                )
 
         item = ItemSerializer(data={"library": library.uid, "book": book.uid})
         item.is_valid(raise_exception=True)
@@ -115,8 +128,8 @@ class DisaggregateBookView(BaseCustomAPIView, ValidateBookItem):
 
     class Meta:
         model = Book
-        verbose_name = "library"
-        verbose_name_plural = "libraries"
+        verbose_name = "item"
+        verbose_name_plural = "items"
 
     def get_model(self):
         return self.Meta.model
@@ -135,17 +148,14 @@ class DisaggregateBookView(BaseCustomAPIView, ValidateBookItem):
         book = self.get_object(*args, **kwargs)
         user = request.user
         library = Library.objects.get(user=user)
-        try:
-            Item.objects.get(
-                library=library, book=Book.objects.get(pk=book.uid)
-            ).soft_delete()
-        except Item.DoesNotExist:
+        item = Item.objects.filter(library=library, book=Book.objects.get(pk=book.uid))
+        if not item.exists():
             return Response(
                 {"detail": "Item not found"}, status=status.HTTP_404_NOT_FOUND
             )
 
+        item.first().soft_delete()
         return Response(
-            {self.get_verbose_name(): self.get_serializer(library).data},
             status=status.HTTP_204_NO_CONTENT,
         )
 

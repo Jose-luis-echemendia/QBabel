@@ -1,7 +1,7 @@
 import axiosInstance from './axiosInstance';
 
 // endpoint for get users
-export const getUsersAPI = async () => {
+export const getUsersAPI = async () => {route
   try {
     const response = await axiosInstance.get('/api/custom-users/');
 

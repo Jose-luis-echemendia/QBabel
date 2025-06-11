@@ -138,33 +138,49 @@ export const useFilter = (allBooks, selectedFilters) => {
         if (!passesPriceFilter) return false;
       }
 
-      // --- Filtro por Otros (othersCriterion) ---
       const othersFilterIds = selectedFilters["Otros filtros"] || [];
       if (othersFilterIds.length > 0) {
-        let passesOthersFilter = true;
+        let passesOthersFilter = true; // Asume que pasa, a menos que un filtro falle
         for (const id of othersFilterIds) {
-          let conditionMet = false;
-          if (id === 0) conditionMet = book.count_reads > 5000;
-          // Umbral arbitrario para "más vendidos"
-          else if (id === 1) conditionMet = book.count_reads > 1000;
-          // Umbral arbitrario para "más leídos"
-          // id: 2, "Los más comentados" - Necesitaría un campo `comments_count`
-          else if (id === 3) {
+          // Itera sobre TODOS los IDs de "Otros filtros" seleccionados
+          let conditionMet = false; // Para este ID específico
+
+          if (id === 0) {
+            // "Los más vendidos"
+            // Usando book.sales_count (numérico)
+            // Definimos "más vendido" como tener más de X ventas.
+            // Puedes ajustar este umbral (ej. 100, 500, etc.)
+            conditionMet = book.sales_count > 100; // Ejemplo: más de 100 ventas
+          } else if (id === 1) {
+            // "Los más leídos"
+            // Usando book.count_reads (numérico)
+            conditionMet = book.count_reads > 50; // Umbral arbitrario
+          } else if (id === 2) {
+            // "Los más comentados"
+            // Usando book.reviews (asumiendo que es un campo numérico con el total de comentarios/reseñas)
+            // Puedes ajustar este umbral (ej. 20, 50, etc.)
+            conditionMet = book.reviews > 20; // Ejemplo: más de 20 comentarios/reseñas
+          } else if (id === 3) {
+            // "Lo mejor de la semana"
+            // Publicado esta semana Y con una calificación promedio alta.
             const bookPublishDate = new Date(book.published_date);
             conditionMet =
               isThisWeek(bookPublishDate) && book.avg_rating >= 4.0;
           } else if (id === 4) {
+            // "Los más votados por la comunidad"
+            // Basada en una calificación promedio alta.
             conditionMet = book.avg_rating >= 4.5;
           } else {
-            conditionMet = true; // Si no hay lógica específica o ID no manejado
+            conditionMet = true; // Si es un ID no manejado explícitamente, no lo filtramos (pasa)
           }
 
           if (!conditionMet) {
-            passesOthersFilter = false;
-            break;
+            // Si ESTE "Otro filtro" NO se cumple
+            passesOthersFilter = false; // El libro NO pasa el conjunto de "Otros filtros"
+            break; // No es necesario seguir revisando otros "Otros filtros" para este libro
           }
         }
-        if (!passesOthersFilter) return false;
+        if (!passesOthersFilter) return false; // Si el libro no pasó alguno de los "Otros filtros" seleccionados, se descarta
       }
 
       return true; // Si pasa todos los filtros

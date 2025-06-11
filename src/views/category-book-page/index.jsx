@@ -7,14 +7,13 @@ import { useBook } from "@/hooks/redux/useBook";
 
 const CategoryBookView = () => {
   const params = useParams();
-  const { handleGetBooks, handleGetTopSellerBooksFromCategoryThunk } =
-    useBook();
+  const { handleGetBooks, handleGetTopSellerBooksFromCategory } = useBook();
 
   useEffect(() => {
     window.scrollTo(0, 0);
     const category = params.category;
     handleGetBooks({ category: category });
-    handleGetTopSellerBooksFromCategoryThunk(category);
+    handleGetTopSellerBooksFromCategory(category);
   }, [params]);
 
   return (

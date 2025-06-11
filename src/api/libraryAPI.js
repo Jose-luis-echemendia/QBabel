@@ -53,9 +53,8 @@ export const addBookToLibraryAPI = async (data) => {
 export const disaggregateBookFromLibraryAPI = async (id) => {
   try {
     const response = await axiosInstance.delete(
-      `/api/disaggregate-book/${id}/`
+      `/api/library/disaggregate-book/${id}/`
     );
-
     return response;
   } catch (error) {
     console.error(

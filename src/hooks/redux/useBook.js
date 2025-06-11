@@ -6,6 +6,7 @@ import {
   fetchMoreBooksThunk,
   getBookForIdThunk,
   getTopSellerBooksFromCategoryThunk,
+  deleteBookThunk,
 } from "@/store/book/thunks";
 import { useAppDispatch } from "./useStore";
 import { useCallback } from "react";
@@ -40,9 +41,11 @@ export const useBook = () => {
     dispatch(getBookForIdThunk(bookId));
   };
 
-  const handleGetTopSellerBooksFromCategoryThunk = (category) => {
+  const handleGetTopSellerBooksFromCategory = (category) => {
     dispatch(getTopSellerBooksFromCategoryThunk(category));
   };
+
+  const handledeleteBook = (id) => dispatch(deleteBookThunk(id)).unwrap();
 
   return {
     handleUpdateBook,
@@ -51,6 +54,7 @@ export const useBook = () => {
     handleGetBooks,
     handleFetchMoreBooks,
     handleGetBookForId,
-    handleGetTopSellerBooksFromCategoryThunk,
+    handleGetTopSellerBooksFromCategory,
+    handledeleteBook,
   };
 };

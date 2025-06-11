@@ -70,6 +70,7 @@ class BookSerializer(AbstractBaseSerializer):
             "reviews",
             "avg_rating",
             "in_library",
+            "sales_count",
         ]
         extra_kwargs = {
             # "isbn": {"required": True},
@@ -135,7 +136,7 @@ class BookSerializer(AbstractBaseSerializer):
             from apps.library.models import Item
 
             return Item.objects.filter(
-                book=obj.uid, library=request.user.library
+                book=obj.uid, library=request.user.library, is_active=True
             ).exists()
         return False
 

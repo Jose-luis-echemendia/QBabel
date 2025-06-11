@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { Question } from "./question";
 import { useNavigate } from "react-router-dom";
 import { FormPaymentBook } from "../particular-components/books/buy-book";
+import { Button } from "@material-tailwind/react";
 
 export const CustomHeaderBook = ({ book }) => {
   const [openLoginModal, setOpenLoginModal] = useState(false);
@@ -16,6 +17,7 @@ export const CustomHeaderBook = ({ book }) => {
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
   const { handleAddBookToLibrary } = useLibrary();
   const paymentsBooks = useAppSelector((state) => state.payment.paymentsBooks);
+  const loading = useAppSelector((state) => state.library.loading);
   const navigate = useNavigate();
 
   const addLibraryAndRead = () => {
@@ -55,6 +57,8 @@ export const CustomHeaderBook = ({ book }) => {
     if (!bookInLibrary) {
       handleAddBookToLibrary(book.uid);
       setBookInLibrary(true);
+    } else {
+      toast.info("El libro ya está en tu biblioteca");
     }
   };
 
@@ -219,8 +223,9 @@ export const CustomHeaderBook = ({ book }) => {
                 </svg>
                 <span className="font-semibold">Comenzar a leer</span>
               </button>
-              <button
-                className="flex gap-1.5 bg-black-500  py-3 px-3 rounded-r-full text-primary"
+              <Button
+                loading={loading}
+                className="flex items-center gap-1.5 bg-black-500  py-3 px-3 rounded-r-full text-primary"
                 onClick={() => add()}
               >
                 <svg
@@ -238,7 +243,7 @@ export const CustomHeaderBook = ({ book }) => {
                   />
                 </svg>
                 <span className="font-semibold">Agregar</span>
-              </button>
+              </Button>
             </div>
           </figcaption>
         </figure>

@@ -22,11 +22,11 @@ export const ContentTabs = ({ activeTab }) => {
 
   useEffect(() => {
     if (activeTab === "allStory") {
-      handleGetItemsOfLIbraryThunk();
+      handleGetItemsOfLIbraryThunk({ is_active: true });
     } else if (activeTab === "readingStory") {
-      handleGetItemsOfLIbraryThunk({ is_sold: true });
+      handleGetItemsOfLIbraryThunk({ is_sold: true, is_active: true });
     } else if (activeTab === "forBuying") {
-      handleGetItemsOfLIbraryThunk({ is_sold: false });
+      handleGetItemsOfLIbraryThunk({ is_sold: false, is_active: true });
     } else if (activeTab === "listReading") {
       handleGetItemsOfLIbraryThunk();
     } else if (activeTab === "myStory") {

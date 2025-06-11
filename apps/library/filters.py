@@ -6,11 +6,12 @@ from .models import Item
 class ItemFilter(django_filters.FilterSet):
     is_sold = django_filters.BooleanFilter(method="filter_is_sold")
     is_filed = django_filters.BooleanFilter()
+    is_active = django_filters.BooleanFilter()
     me = django_filters.BooleanFilter(field_name="me", method="filter_me")
 
     class Meta:
         model = Item
-        fields = ["is_sold", "is_filed"]
+        fields = ["is_sold", "is_filed", "is_active"]
 
     def filter_is_sold(self, queryset, name, value):
         """

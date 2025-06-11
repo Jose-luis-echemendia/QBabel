@@ -112,3 +112,18 @@ export const getBookForIdAPI = async (bookId) => {
     throw error;
   }
 };
+
+// endpoint for delete book
+export const deleteBookAPI = async (id) => {
+  try {
+    const response = await axiosInstance.delete(`/api/book/${id}/`);
+
+    return response;
+  } catch (error) {
+    console.error(
+      "Error en eliminar el libro:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};

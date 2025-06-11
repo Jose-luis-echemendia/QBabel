@@ -6,6 +6,7 @@ import { OverViewCategory } from "./overview-category";
 
 import { useGetAllCategory } from "@/hooks/jquery/useCategoryQuery";
 import { DeleteObject } from "@/views/particular-components/delete-object";
+import { useCategory } from "@/hooks/redux/useCategory";
 
 const TABS = [
   {
@@ -34,6 +35,7 @@ const AdminCategoriesView = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   const [opendeleteCategoryModal, setdeleteCategoryModal] = useState(false);
+  const { handledeleteCategoryThunk } = useCategory();
 
   const {
     data: GetAllCategories = [],
@@ -165,7 +167,8 @@ const AdminCategoriesView = () => {
       >
         <DeleteObject
           handleOpen={() => setdeleteCategoryModal(false)}
-          uid={selectedCategory?.uid}
+          handleDelete={() => handledeleteCategoryThunk(selectedCategory?.uid)}
+          objectName="la categoría"
         />
       </CustomModal>
       {/* TABLE Categories */}

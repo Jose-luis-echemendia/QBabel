@@ -5,17 +5,24 @@ import { toast } from "sonner";
 import { useAppSelector } from "@/hooks/redux/useStore";
 import { useNavigate } from "react-router-dom";
 import { FormBook } from "@/views/library-page/form-book";
+import { useBook } from "@/hooks/redux/useBook";
+import { DeleteObject } from "../delete-object";
+import { useLibrary } from "@/hooks/redux/useLibrary";
 
 export const CardBook = ({
   book,
   mybook = false,
   seeArchive,
   seeUpdateBook = false,
+  isItems = true,
 }) => {
   const [openFormBookModal, setOpenFormBookModal] = useState(false);
+  const [opendeleteBookModal, setOpenDeleteBookModal] = useState(false);
   const [showActions, setShowActions] = useState(false);
   const [openBuyBookModal, setOpenBuyBookModal] = useState(false);
   const paymentsBooks = useAppSelector((state) => state.payment.paymentsBooks);
+  const { handledeleteBook } = useBook();
+  const { handleDisaggregateBookFromLibrary } = useLibrary();
   const navigate = useNavigate();
 
   const read = () => {
@@ -26,6 +33,15 @@ export const CardBook = ({
     }
 
     navigate(`/books/reader/${book.uid}`);
+  };
+
+  const handleDeleteAction = () => {
+    if (isItems) {
+      handleDisaggregateBookFromLibrary(book.uid);
+    } else {
+      handledeleteBook(book.uid);
+    }
+    setOpenDeleteBookModal(false); // Cierra el modal después de la acción
   };
 
   return (
@@ -61,6 +77,20 @@ export const CardBook = ({
           <FormBook
             handleOpen={() => setOpenFormBookModal(false)}
             book={book}
+          />
+        </CustomModal>
+        <CustomModal
+          open={opendeleteBookModal}
+          handleOpen={() => setdeleteBookModal(false)} // Cierra el modal
+          classNameDialog="custom-dialog-class" // Clases personalizadas
+          classNameBody="custom-body-class"
+          exitButton={true}
+          size="md"
+        >
+          <DeleteObject
+            handleOpen={() => setOpenDeleteBookModal(false)}
+            handleDelete={handleDeleteAction}
+            objectName={isItems ? "el libro de tu biblioteca" : "el libro"}
           />
         </CustomModal>
         <div className="relative">
@@ -111,7 +141,7 @@ export const CardBook = ({
 
                 <button
                   className="absolute top-0 right-2 text-white p-1 rounded-full"
-                  onClick={() => console.log("Eliminar libro:", book.id)}
+                  onClick={() => setOpenDeleteBookModal(true)}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
