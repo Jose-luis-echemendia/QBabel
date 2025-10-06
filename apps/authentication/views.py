@@ -9,7 +9,6 @@ from django_ratelimit.decorators import ratelimit
 from django.utils.decorators import method_decorator
 from django.contrib.auth import authenticate
 from apps.utils.views.abstract_views import BaseCustomAPIView
-from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
 from uuid import UUID
 from .serializers import LoginSerializer
