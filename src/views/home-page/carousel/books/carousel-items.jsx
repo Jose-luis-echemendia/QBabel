@@ -2,15 +2,18 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 export const BookGroup = ({ books, itemHeight, booksPerSlide }) => (
-  <div className="flex items-center justify-center gap-2 px-5 pt-3">
+  <div className="flex items-center justify-start gap-2 px-5 pt-3 ">
     {books.map((book) => (
       <figure
-        key={book.id}
-        className={`w-1/4 ${itemHeight} flex flex-col gap-1`}
+        key={book.id || book.uid}
+        className={`${itemHeight} flex flex-col gap-1`}
       >
-        <Link to={`/books/${book.id}`} className="block w-full h-full">
+        <Link
+          to={`/books/${book.id || book.uid}`}
+          className="block w-full h-full"
+        >
           <img
-            src={book.img}
+            src={book.img || book.cover_details.image}
             alt={book.title}
             className={
               booksPerSlide < 8
@@ -21,7 +24,7 @@ export const BookGroup = ({ books, itemHeight, booksPerSlide }) => (
         </Link>
         <figcaption>
           <span className="ml-2 bg-gray-200 w-fit p-0.5 px-2 mt-1 rounded-xl font-opensans text-black text-sm font-semibold">
-            {book.category}
+            {book.categories?.[0]?.name || "Sin categoría"}
           </span>
           <span className="ml-3 flex gap-1.5 text-gray-800 mt-1 text-xs">
             <svg
@@ -55,13 +58,13 @@ export const BookGroupCard = ({ books, itemHeight }) => (
   <div className={`flex lg:justify-center gap-3 lg:px-6 mt-5 w-full`}>
     {books.map((book) => (
       <div
-        key={book.id}
+        key={book.uid}
         className={`${itemHeight} bg-gray-100 flex gap-2 lg:w-1/2 w-full rounded-xl h-full lg:h-56`}
       >
         <figure className="lg:w-[800px] w-[400px]">
           <Link to={`/books/${book.id}`} className="block w-full h-full">
             <img
-              src={book.img}
+              src={book.cover_details.image}
               alt={book.title}
               className="h-full w-full object-cover rounded-l-xl hover:lg:relative hover:absolute hover:top-0 hover:left-0 hover:bottom-0 hover:right-0"
             />
@@ -69,10 +72,10 @@ export const BookGroupCard = ({ books, itemHeight }) => (
         </figure>
         <div className="flex flex-col gap-2 pt-5 px-2 lg:w-[2500px] w-full">
           <h4 className="text-xl text-black font-opensans font-bold">
-            {book.tittle}
+            {book.title}
           </h4>
-          <p className="text-sm text-start text-gray-800 pr-5">
-            {book.description}
+          <p className="text-sm text-start text-gray-800 pr-5 line-clamp-6">
+            {book.synopsis}
           </p>
           <span className="flex gap-1.5 -mt-1 text-gray-800 text-sm">
             <svg
@@ -101,6 +104,46 @@ export const BookGroupCard = ({ books, itemHeight }) => (
     ))}
   </div>
 );
+
+export const BookGroupCover = ({ books }) => {
+  const groupedBooks = [];
+
+  for (let i = 0; i < books.length; i += 5) {
+    groupedBooks.push(books.slice(i, i + 5));
+  }
+
+  return (
+    <div className="flex gap-6 px-5 pt-3">
+      {groupedBooks.map((group, groupIndex) => (
+        <div key={groupIndex} className="flex gap-4 items-start">
+          {/* Main large image */}
+          {group[0] && (
+            <Link to={`/books/${group[0].id || group[0].uid}`}>
+              <img
+                src={group[0].cover}
+                alt="Main cover"
+                className="w-60 h-[264px] object-cover rounded-xl"
+              />
+            </Link>
+          )}
+
+          {/* 2x2 Grid of smaller images */}
+          <div className="grid grid-cols-2 grid-rows-2 gap-2">
+            {group.slice(1).map((book) => (
+              <Link to={`/books/${book.id || book.uid}`} key={book.uid}>
+                <img
+                  src={book.cover}
+                  alt="Small cover"
+                  className="w-28 h-32 object-cover rounded-xl"
+                />
+              </Link>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
 
 BookGroupCard.propTypes = BookGroup.propTypes = {
   books: PropTypes.arrayOf(

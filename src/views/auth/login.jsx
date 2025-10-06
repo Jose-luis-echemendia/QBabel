@@ -1,22 +1,22 @@
 import { useForm } from "@/hooks/useForm";
 import { useState, useEffect } from "react";
 import { Oval } from "react-loader-spinner";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { CustomImageDecorator } from "@/components/image-decorator";
 import { useAuth } from "@/hooks/redux/useAuth";
 import { useAppSelector } from "@/hooks/redux/useStore";
 import { schemaLogin } from "@/helpers/yup-schemas";
 
 export const Login = () => {
-
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const { register, handleSubmit, errors } = useForm(schemaLogin);
   const { handleLogin } = useAuth();
   const auth = useAppSelector((state) => state.auth);
+  const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    event.preventDefault();
     handleLogin(data);
+
     setIsAuthenticated(true);
   };
 
@@ -25,8 +25,7 @@ export const Login = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  if (isAuthenticated && auth.isAuthenticated)
-    return <Navigate to="/home"></Navigate>;
+  if (isAuthenticated && auth.isAuthenticated) return navigate("/home");
 
   return (
     <>
@@ -40,7 +39,11 @@ export const Login = () => {
 
           <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
             <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-              <form className="space-y-6" onSubmit={handleSubmit(onSubmit)} method="POST">
+              <form
+                className="space-y-6"
+                onSubmit={handleSubmit(onSubmit)}
+                method="POST"
+              >
                 <div>
                   <label
                     htmlFor="email"
@@ -53,12 +56,15 @@ export const Login = () => {
                       id="email"
                       name="email"
                       type="email"
-                      {...register("email") }
+                      {...register("email")}
                       autoComplete="email"
-                      required
                       className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                     />
-                    {errors.email && <p>{errors.email.message}</p>}
+                    {errors.email && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.email.message}
+                      </p>
+                    )}
                   </div>
                 </div>
 
@@ -74,12 +80,15 @@ export const Login = () => {
                       id="password"
                       name="password"
                       type="password"
-                      {...register("password") }
+                      {...register("password")}
                       autoComplete="current-password"
-                      required
                       className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                     />
-                    {errors.password && <p>{errors.password.message}</p>}
+                    {errors.password && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.password.message}
+                      </p>
+                    )}
                   </div>
                 </div>
 

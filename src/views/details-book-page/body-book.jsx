@@ -6,14 +6,14 @@ export const CustomBodyBook = ({ book }) => {
       <div className="flex flex-col lg:justify-start lg:items-start items-center py-10 gap-6">
         <figure className="flex gap-5 justify-center items-center">
           <img
-            src={book.author.avatar}
-            alt={book.author.name}
+            src={book.author_details.avatar_details.image}
+            alt={book.author_details.user_name}
             className="w-10 h-10 object-cover rounded-full"
           />
-          <figcaption>{book.author.name}</figcaption>
+          <figcaption>{book.author_details.user_name}</figcaption>
         </figure>
         <div className="flex gap-2">
-          {book.isFree ? (
+          {book.is_free ? (
             <div className="p-2 rounded-xl bg-green-800 -ml-[1px]">
               <span className="text-white-100 font-semibold">Gratuito!</span>
             </div>
@@ -23,7 +23,7 @@ export const CustomBodyBook = ({ book }) => {
             </div>
           )}
 
-          {book.isComplete ? (
+          {book.is_complete ? (
             <div className="p-2 rounded-xl bg-green-800 -ml-[1px]">
               <span className="text-white-100 font-semibold">Completada</span>
             </div>
@@ -34,7 +34,7 @@ export const CustomBodyBook = ({ book }) => {
           )}
         </div>
         <p className="text-gray-800 text-base text-start text-balance leading-7 font-normal lg:p-0 pl-4">
-          {book.description}
+          {book.synopsis}
           <br />
           <br />
           ***
@@ -66,7 +66,7 @@ export const CustomBodyBook = ({ book }) => {
         <div className="flex flex-wrap lg:gap-2 gap-4 lg:justify-normal justify-center">
           {book.categories.map((category) => (
             <span
-              key={category.id}
+              key={category.uid}
               className="px-3 py-1.5 rounded-2xl bg-gray-200 text-black font-semibold"
             >
               {category.name}
@@ -78,6 +78,7 @@ export const CustomBodyBook = ({ book }) => {
   );
 };
 
+/*
 CustomBodyBook.propTypes = {
   book: PropTypes.shape({
     author: PropTypes.shape({
@@ -95,3 +96,4 @@ CustomBodyBook.propTypes = {
     ).isRequired,
   }).isRequired,
 };
+ */

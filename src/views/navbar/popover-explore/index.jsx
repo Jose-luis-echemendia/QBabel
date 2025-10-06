@@ -5,8 +5,8 @@ import {
   Button,
 } from "@material-tailwind/react";
 import { NavLink } from "react-router-dom";
-import { schemaImagesCategoria } from "@/views/welcome-page/categories/images-categoria";
 import { v4 as uuidi } from "uuid";
+import { useAppSelector } from "@/hooks/redux/useStore";
 
 const blogPosts = [
   {
@@ -39,6 +39,8 @@ const blogPosts = [
 ];
 
 export const ExplorePopover = () => {
+  const categories = useAppSelector((state) => state.category.categories);
+
   return (
     <>
       <Popover className="flex items-center relative">
@@ -61,13 +63,11 @@ export const ExplorePopover = () => {
               <h6 className="col-span-4 text-lg font-semibold text-gray-700 mb-4">
                 Nuestras temáticas
               </h6>
-              {[...schemaImagesCategoria, ...schemaImagesCategoria].map(
-                (item) => (
-                  <NavLink to={`/books/category/${item.text}`} key={uuidi()}> 
-                    {item.text}
-                  </NavLink>
-                )
-              )}
+              {categories.map((category) => (
+                <NavLink to={`/books/category/${category.name}`} key={uuidi()}>
+                  {category.name}
+                </NavLink>
+              ))}
             </div>
             <div className="bg-gray-50 px-4 py-8 sm:py-12 sm:px-6 lg:px-8 xl:pl-12">
               <div>

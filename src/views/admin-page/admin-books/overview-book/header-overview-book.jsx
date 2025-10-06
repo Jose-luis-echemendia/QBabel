@@ -4,7 +4,7 @@ export const HeaderOverViewBook = ({ book }) => {
   return (
     <>
       {/* free or discounted */}
-      {book.isFree || book.isDiscounted ? (
+      {book.is_free || book.is_discount_active ? (
         <div className="absolute top-5 right-6">
           <svg
             width="27"
@@ -20,19 +20,27 @@ export const HeaderOverViewBook = ({ book }) => {
             />
           </svg>
           <div className="flex items-center justify-center absolute top-[18px] left-2.5 text-black-500 font-bold text-sm">
-            {book.isFree && <span>Gratis</span>}
-            {book.isDiscounted && <span> -{book.discount} </span>}
+            {book.is_free && <span>Gratis</span>}
+            {book.is_discount_active && (
+              <span> -{book.is_discount_active} </span>
+            )}
           </div>
         </div>
       ) : null}
 
       <h3 className="text-3xl font-semibold text-black">{book.title}</h3>
       <div className="flex items-center gap-3 my-2.5">
-        <Avatar src={book.author.avatar} alt={book.author.name} size="sm" />
-        <span className="text-gray-700 font-semibold">{book.author.name}</span>
+        <Avatar
+          src={book.author_details.avatar_details.image}
+          alt={book.author_details.user_name}
+          size="sm"
+        />
+        <span className="text-gray-700 font-semibold">
+          {book.author_details.user_name}
+        </span>
       </div>
       <div className="flex gap-2">
-        {book.isFree ? (
+        {book.is_free ? (
           <div className="p-1 h-8 flex items-center rounded-xl bg-green-800 -ml-[1px]">
             <span className="text-white-100 text-sm font-semibold">
               Gratuito!
@@ -46,7 +54,7 @@ export const HeaderOverViewBook = ({ book }) => {
           </div>
         )}
 
-        {book.isComplete ? (
+        {book.is_complete ? (
           <div className="p-1 h-8 flex items-center rounded-xl bg-green-800 -ml-[1px]">
             <span className="text-white-100 text-sm font-semibold">
               Completada

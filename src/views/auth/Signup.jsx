@@ -1,19 +1,40 @@
 import { useForm } from "@/hooks/useForm";
-import { initialFormSignup } from "@/constants/form-initial-state";
-import { useState } from "react";
+import { schemaSignup } from "@/helpers/yup-schemas";
 import { Oval } from "react-loader-spinner";
 import { CustomImageDecorator } from "@/components/image-decorator";
+import { useUser } from "@/hooks/redux/useUser";
+import { useAuth } from "@/hooks/redux/useAuth";
+import { useEffect, useState } from "react";
 
-export const Signup = () => {
-  const [accountCreated, setAccountCreated] = useState(false);
-  const { formState, onInputChange } = useForm(initialFormSignup);
-  const { email, userName, password, rePassword } = formState;
+export const Signup = ({
+  handleSetUser,
+  handleCantCreateUser,
+  cantCreateUser,
+  handleOpen,
+  userForActiveAccount,
+  createdUser,
+}) => {
+  const [loading, setLoading] = useState(false);
+  const { register, handleSubmit, errors } = useForm(schemaSignup);
+  const { handleCreateUser } = useUser();
+  const { handleAvtiveAccount, handleRemoveStatementRead } = useAuth();
 
-  const onSubmit = (event) => {
-    event.preventDefault();
+  const onSubmit = async (data) => {
+    handleCantCreateUser(true);
+    handleRemoveStatementRead();
+    setLoading(true);
+    await handleCreateUser(data);
+    await handleAvtiveAccount();
+    setLoading(false);
+    handleSetUser(data.user_name);
   };
-
-  const stateAuth = true;
+ 
+  useEffect(() => {
+    if (userForActiveAccount && createdUser && cantCreateUser) {
+      handleOpen();
+      handleCantCreateUser(false);
+    }
+  }, [userForActiveAccount, createdUser, cantCreateUser]);
 
   return (
     <>
@@ -28,7 +49,11 @@ export const Signup = () => {
 
           <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
             <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-              <form className="space-y-6" onSubmit={onSubmit} method="POST">
+              <form
+                className="space-y-6"
+                onSubmit={handleSubmit(onSubmit)}
+                method="POST"
+              >
                 <div>
                   <label
                     htmlFor="email"
@@ -41,12 +66,15 @@ export const Signup = () => {
                       id="email"
                       name="email"
                       type="email"
-                      onChange={onInputChange}
-                      value={email}
+                      {...register("email")}
                       autoComplete="email"
-                      required
                       className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                     />
+                    {errors.email && (
+                      <span className="text-red-500 text-sm mt-1">
+                        {errors.email.message}
+                      </span>
+                    )}
                   </div>
                 </div>
 
@@ -59,15 +87,18 @@ export const Signup = () => {
                   </label>
                   <div className="mt-1">
                     <input
-                      id="userName"
-                      name="userName"
-                      type="userName"
-                      onChange={onInputChange}
-                      value={userName}
-                      autoComplete="userName"
-                      required
+                      id="user_name"
+                      name="user_name"
+                      type="user_name"
+                      {...register("user_name")}
+                      autoComplete="user_name"
                       className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                     />
+                    {errors.user_name && (
+                      <span className="text-red-500 text-sm mt-1">
+                        {errors.user_name.message}
+                      </span>
+                    )}
                   </div>
                 </div>
                 <div>
@@ -82,12 +113,15 @@ export const Signup = () => {
                       id="password"
                       name="password"
                       type="password"
-                      onChange={onInputChange}
-                      value={password}
+                      {...register("password")}
                       autoComplete="current-password"
-                      required
                       className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                     />
+                    {errors.password && (
+                      <span className="text-red-500 text-sm mt-1">
+                        {errors.password.message}
+                      </span>
+                    )}
                   </div>
                 </div>
 
@@ -100,20 +134,23 @@ export const Signup = () => {
                   </label>
                   <div className="mt-1">
                     <input
-                      id="rePassword"
-                      name="rePassword"
+                      id="re_password"
+                      name="re_password"
                       type="password"
-                      onChange={onInputChange}
-                      value={rePassword}
+                      {...register("re_password")}
                       autoComplete="current-password"
-                      required
                       className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                     />
+                    {errors.re_password && (
+                      <span className="text-red-500 text-sm mt-1">
+                        {errors.re_password.message}
+                      </span>
+                    )}
                   </div>
                 </div>
 
                 <div>
-                  {!stateAuth ? (
+                  {loading ? (
                     <button className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-[#2E2E2E] bg-primary hover:bg-primary-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:border-primary">
                       <Oval
                         visible={true}

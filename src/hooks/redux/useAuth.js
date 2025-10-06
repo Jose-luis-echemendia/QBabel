@@ -1,4 +1,5 @@
 import {
+  activeAccountThunk,
   loginThunk,
   getAuthenticatedUserThunk,
   getAuthenticatedUserProfileThunk,
@@ -7,12 +8,22 @@ import {
   logoutThunk,
 } from "@/store/auth/thunks";
 import { useAppDispatch } from "./useStore";
-import { logoutLocal } from "@/store/auth/slice";
+import {
+  logoutLocal,
+  avtiveAccount,
+  removeAvtiveAccount,
+  avtiveStatementRead,
+  removeStatementRead,
+} from "@/store/auth/slice";
 
 export const useAuth = () => {
   const dispath = useAppDispatch();
 
-  const handleLogin = ({email, password}) => {
+  const handleActiveAccountThunk = ({ userID, token, activationCode }) => {
+    dispath(activeAccountThunk({ userID, token, activationCode }));
+  };
+
+  const handleLogin = ({ email, password }) => {
     dispath(loginThunk({ email, password }));
   };
 
@@ -21,7 +32,7 @@ export const useAuth = () => {
   };
 
   const handleGetAuthenticatedUserProfile = () => {
-    dispath(getAuthenticatedUserProfileThunk());
+    dispath(getAuthenticatedUserProfileThunk()).unwrap();
   };
 
   const handleVerifyToken = () => {
@@ -38,7 +49,24 @@ export const useAuth = () => {
     dispath(logoutLocal());
   };
 
+  const handleAvtiveAccount = () => {
+    dispath(avtiveAccount());
+  };
+
+  const handleRemoveAvtiveAccount = () => {
+    dispath(removeAvtiveAccount());
+  };
+
+  const handleAvtiveStatementRead = () => {
+    dispath(avtiveStatementRead());
+  };
+
+  const handleRemoveStatementRead = () => {
+    dispath(removeStatementRead());
+  };
+
   return {
+    handleActiveAccountThunk,
     handleLogin,
     handleGetAuthenticatedUser,
     handleGetAuthenticatedUserProfile,
@@ -46,5 +74,9 @@ export const useAuth = () => {
     handlRefreshToken,
     handleLogout,
     handleLogoutLocal,
+    handleAvtiveAccount,
+    handleRemoveAvtiveAccount,
+    handleAvtiveStatementRead,
+    handleRemoveStatementRead,
   };
 };

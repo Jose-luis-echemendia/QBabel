@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Bienvenido al SISTEMA</title>
+    <style>
+        .code-container {
+            background-color: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #212529;
+        }
+        .instructions {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 12px;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f6f6f6; padding: 20px;">
+
+    <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; margin: auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <tr>
+            <td style="padding: 30px;">
+                <h2 style="color: #333333; text-align: center;">👋 Bienvenido al SISTEMA</h2>
+                
+                <p style="font-size: 16px; color: #555555; text-align: center;">
+                    Tu cuenta ha sido creada con éxito. Por favor activa tu cuenta usando el siguiente código:
+                </p>
+
+                <!-- Contenedor del código de activación -->
+                <div class="code-container">
+                    {{ code }}
+                </div>
+
+                <div class="instructions">
+                    <p style="margin: 0;">
+                        <strong>Instrucciones:</strong><br>
+                        1. Haz clic en el botón "Activar mi cuenta"<br>
+                        2. Ingresa el código mostrado arriba cuando te lo soliciten
+                    </p>
+                </div>
+
+                <p style="margin: 30px 0; text-align: center;">
+                    <a href="{{ active_url }}" style="background-color: #007BFF; color: #fff; text-decoration: none; padding: 12px 20px; border-radius: 5px; font-weight: bold; display: inline-block;">
+                        🚀 Activar mi cuenta
+                    </a>
+                </p>
+
+                <p style="font-size: 14px; color: #6c757d; text-align: center;">
+                    Si el botón no funciona, copia y pega esta URL en tu navegador:<br>
+                    <span style="word-break: break-all; color: #007BFF;">{{ active_url }}</span>
+                </p>
+            </td>
+        </tr>
+    </table>
+
+    <p style="text-align: center; font-size: 12px; color: #aaaaaa; margin-top: 20px;">
+        © {{ current_year }} QBabel. Todos los derechos reservados.
+    </p>
+
+</body>
+</html>

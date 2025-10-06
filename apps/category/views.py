@@ -1,24 +1,45 @@
 from rest_framework import status
-from rest_framework import viewsets
 from rest_framework.response import Response
-from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.parsers import MultiPartParser, FormParser
+from django_filters.rest_framework import DjangoFilterBackend
+from apps.user.permisions import IsAdminRole
+from apps.utils.views.abstract_views import BaseViewSet
+from apps.utils.mixins import CreateImageMixin
 from .models import Category
 from .serializers import CategorySerializer
 from .filters import CategoryFilter
-from apps.user.permisions import IsAdminRole
-from django_filters.rest_framework import DjangoFilterBackend
+from .constance import CATEGORY_TYPE
 
 
-class CustomCategoryViewSet(viewsets.ModelViewSet):
+class CustomCategoryViewSet(BaseViewSet, CreateImageMixin):
     queryset = Category.objects.all()
+    parser_classes = [MultiPartParser, FormParser]
     serializer_class = CategorySerializer
     permission_classes = [IsAuthenticated]
     filter_backends = [DjangoFilterBackend]
     filterset_class = CategoryFilter
 
+    class Meta:
+        model = Category
+        verbose_name = "category"
+        verbose_name_plural = "categories"
+
+    def get_model(self):
+        return self.Meta.model
+
     def get_permissions(self):
-        if self.request.user and IsAdminRole().has_permission(self.request, self) or self.action == "get":
+        if self.action == "list":
+            return [AllowAny()]
+
+        if not IsAuthenticated().has_permission(self.request, self):
+            return super().get_permissions()
+
+        if (
+            self.request.user
+            and IsAdminRole().has_permission(self.request, self)
+            or self.request.method == "GET"
+        ):
             return [AllowAny()]
 
         if self.action in [
@@ -32,32 +53,6 @@ class CustomCategoryViewSet(viewsets.ModelViewSet):
 
         return super().get_permissions()
 
-    def perform_create(self, serializer):
-        serializer.save()
-
-    def perform_update(self, serializer):
-        return serializer.save()
-
-    def get_queryset(self):
-        if not self.request.user.is_superuser:
-            queryset = self.queryset.filter(gallery__user=self.request.user)
-        if "state" not in self.request.GET:
-            queryset = self.queryset.filter(is_active=True)
-        return queryset
-    
-    def filter_queryset(self, queryset):
-        filterset = self.filterset_class(self.request.GET, queryset=queryset, request=self.request)
-        if not filterset.is_valid():
-            raise ValueError(f"Invalid filter data: {filterset.errors}")
-        queryset = filterset.qs
-        return queryset
-    
-    def order_queryset(self, queryset):
-        ordering = self.request.GET.get("ordering", None)
-        if ordering:
-            queryset = queryset.order_by(*ordering.split(","))
-        return queryset
-
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
         if not queryset:
@@ -67,9 +62,11 @@ class CustomCategoryViewSet(viewsets.ModelViewSet):
         filtered_queryset = self.filter_queryset(queryset)
         ordered_queryset = self.order_queryset(filtered_queryset)
         context = self.get_serializer_context()
-        context['withparent'] = self.request.query_params.get('withparent', False) 
-        data_cateogries = self.get_serializer(ordered_queryset, many=True, context=context).data
-        return Response({"categories": data_cateogries}, status=status.HTTP_200_OK)
+        context["withparent"] = self.request.query_params.get("withparent", False)
+        date_categories = self.get_serializer(
+            ordered_queryset, many=True, context=context
+        ).data
+        return Response({"categories": date_categories}, status=status.HTTP_200_OK)
 
     def create(self, request, *args, **kwargs):
         if not request.user.is_superuser:
@@ -78,15 +75,93 @@ class CustomCategoryViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_403_FORBIDDEN,
             )
 
-        serializer = self.get_serializer(data=request.data)
+        image_file = request.FILES.get("img", None)
+        category_name = request.data.get("name", None)
+        type = request.data.get("type", None)
+
+        if not type:
+            return Response(
+                {
+                    "detail": "Type is required.",
+                    "message": "Todos los campos son obligatorios",
+                },
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        if type not in CATEGORY_TYPE:
+            return Response(
+                {
+                    "message": "Ha intorducido datos incorrectos. El tipo no es válido",
+                },
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        if not category_name:
+            return Response(
+                {
+                    "detail": "Category name is required.",
+                    "message": "Todos los campos son obligatorios",
+                },
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        if not image_file:
+            return Response(
+                {
+                    "detail": "Image file is required.",
+                    "message": "Todos los campos son obligatorios",
+                },
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        from apps.utils.enums import ImageTypes
+
+        image = self.create_image(
+            data={
+                "image": image_file,
+                "name": category_name,
+                "caption": category_name,
+                "registered_by": self.request.user.pk,
+                "type": ImageTypes.category,
+            }
+        )
+
+        serializer = self.get_serializer(
+            data={
+                "name": category_name,
+                "image": image.pk,
+                "description": request.data.get("description", None),
+                "registered_by": self.request.user.pk,
+                "type": type,
+                # "parent": request.data.get("parent", None),
+            }
+        )
+
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def update(self, request, *args, **kwargs):
         request_data = request.data.copy()
+        image_file = request.FILES.get("image", None)
         partial = kwargs.pop("partial", False)
         instance = self.get_object()
+
+        if image_file:
+            from apps.utils.enums import ImageTypes
+
+            image = self.create_image(
+                data={
+                    "image": image_file,
+                    "name": instance.name,
+                    "caption": instance.name,
+                    "registered_by": self.request.user.pk,
+                    "type": ImageTypes.category,
+                }
+            )
+            request_data["image"] = image.pk
+
+        request_data["updated_by"] = self.request.user.pk
         serializer = self.get_serializer(instance, data=request_data, partial=partial)
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
@@ -97,51 +172,4 @@ class CustomCategoryViewSet(viewsets.ModelViewSet):
         )
 
     def destroy(self, request, *args, **kwargs):
-        instance_user = self.get_object()
-
-        if instance_user.is_active:
-            return Response(
-                {"detail": "This user can not delete becouse he is active."},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-
-        instance_user.delete()
-
-        return Response(
-            {"message": "user account deleted successfully"},
-            status=status.HTTP_204_NO_CONTENT,
-        )
-
-    @action(detail=True, methods=["POST"])
-    def active(self, request, pk=None, *args, **kwargs):
-        instance_user = self.get_object()
-
-        if instance_user.is_active:
-            return Response(
-                {"detail": "This user is already active."},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-
-        instance_user.is_active = True
-        instance_user.save()
-        return Response(
-            {"message": "user account activate successfully"},
-            status=status.HTTP_204_NO_CONTENT,
-        )
-
-    @action(detail=True, methods=["POST"])
-    def desactive(self, request, pk=None, *args, **kwargs):
-        instance_user = self.get_object()
-
-        if not instance_user.is_active:
-            return Response(
-                {"detail": "This user is already inactive."},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-
-        instance_user.is_active = False
-        instance_user.save()
-        return Response(
-            {"message": "user account desactive successfully"},
-            status=status.HTTP_204_NO_CONTENT,
-        )
+        return self.desactive_object(request, *args, **kwargs)

@@ -8,14 +8,17 @@ export const OverViewBook = ({ book }) => {
     <>
       <section className="p-5 grid grid-cols-11 gap-3">
         <div className="col-span-4 h-full">
-          <CoverGalleries covers={book.covers} alt={book.title} />
+          <CoverGalleries
+            covers={[book.cover_details.image]}
+            alt={book.title}
+          />
         </div>
         <div className="col-span-7 relative flex flex-col gap-3 leading-8">
           <HeaderOverViewBook book={book} />
           <BodyOverviewBook book={book} />
         </div>
         <div className="col-span-11 mt-6">
-          <FooterOverviewBook book={book}/>
+          <FooterOverviewBook book={book} />
         </div>
       </section>
     </>

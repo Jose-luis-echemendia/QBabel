@@ -17,13 +17,14 @@ export const CustomAvatar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const closeMenu = () => setIsMenuOpen(false);
 
-  const auth = useAppSelector((state) => state.auth);
+  const profile = useAppSelector((state) => state.auth.profile);
+  const user = useAppSelector((state) => state.auth.user);
   const { handleLogout } = useAuth();
 
   const profileMenuItems = [
     {
       label: "Mi perfil",
-      navigateTo: "/#",
+      navigateTo: `/profile/${profile?.user_name}`,
       action: null,
       icon: (
         <svg
@@ -65,7 +66,7 @@ export const CustomAvatar = () => {
     },
     {
       label: "Mi biblioteca",
-      navigateTo: "/#",
+      navigateTo: "/library",
       action: null,
       icon: (
         <svg
@@ -105,27 +106,7 @@ export const CustomAvatar = () => {
         </svg>
       ),
     },
-    {
-      label: "Inbox",
-      navigateTo: "/#",
-      action: null,
-      icon: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="size-6"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-          />
-        </svg>
-      ),
-    },
+
     {
       label: "Ayuda",
       navigateTo: "/#",
@@ -170,7 +151,7 @@ export const CustomAvatar = () => {
     },
   ];
 
-  if (auth.profile === null || auth.user === null) return <></>;
+  if (profile === null || profile === null) return <></>;
 
   return (
     <>
@@ -182,14 +163,14 @@ export const CustomAvatar = () => {
               color="blue-gray"
               className="flex items-center rounded-full p-0"
             >
-              <div className="flex items-center gap-4 md:mr-5 -mr-7 lg:w-full lg:h-full size-12">
+              <div className="flex items-center gap-4 md:mr-5 -mr-7  lg:w-full lg:h-full size-12">
                 <Avatar
-                  src={auth.profile.avatar_details.image}
-                  alt={auth.profile.avatar_details.alt}
+                  src={profile.avatar_details.image}
+                  alt={profile.avatar_details.alt}
                 />
                 <div className="hidden md:block">
                   <Typography variant="h6" className="text-primary">
-                    {auth.user.user_name}
+                    {profile.user_name || profile.email}
                   </Typography>
                 </div>
               </div>
@@ -199,7 +180,7 @@ export const CustomAvatar = () => {
             {profileMenuItems.map(
               ({ label, navigateTo, action, icon }, key) => {
                 const isLastItem = key === profileMenuItems.length - 1;
-                if (label === "Administración" && auth.user.role !== "Admin")
+                if (label === "Administración" && user?.role !== "Admin")
                   return null;
                 return (
                   <MenuItem

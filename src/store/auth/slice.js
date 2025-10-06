@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  activeAccountThunk,
   loginThunk,
   getAuthenticatedUserThunk,
   getAuthenticatedUserProfileThunk,
@@ -9,6 +10,8 @@ import {
 } from "./thunks";
 
 const initialState = {
+  statementRead: localStorage.getItem("statementRead") === "true",
+  userForActiveAccount: localStorage.getItem("userForActiveAccount") === "true",
   isAuthenticated: localStorage.getItem("isAuthenticated") === "true",
   jwtTokenAccess: localStorage.getItem("jwtTokenAccess"),
   jwtTokenRefresh: localStorage.getItem("jwtTokenRefresh"),
@@ -25,14 +28,48 @@ export const authSlice = createSlice({
       state.isAuthenticated = false;
       state.jwtTokenAccess = null;
       state.jwtTokenRefresh = null;
-      state.user = null;
+      state.user = "";
       localStorage.removeItem("jwtTokenAccess");
       localStorage.removeItem("jwtTokenRefresh");
       localStorage.removeItem("isAuthenticated");
     },
+    avtiveAccount: (state) => {
+      state.userForActiveAccount = true;
+      localStorage.setItem("userForActiveAccount", "true");
+    },
+    removeAvtiveAccount: (state) => {
+      state.userForActiveAccount = false;
+      localStorage.removeItem("userForActiveAccount");
+    },
+    avtiveStatementRead: (state) => {
+      state.statementRead = true;
+      localStorage.setItem("statementRead", "true");
+    },
+    removeStatementRead: (state) => {
+      state.statementRead = false;
+      localStorage.removeItem("statementRead");
+    },
   },
   extraReducers: (builder) => {
     builder
+      // **Active Account Reducers**
+      .addCase(activeAccountThunk.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(activeAccountThunk.fulfilled, (state, action) => {
+        state.loading = false;
+        state.isAuthenticated = true;
+        state.jwtTokenAccess = action.payload.access;
+        state.jwtTokenRefresh = action.payload.refresh;
+        state.user = action.payload.user_id;
+        localStorage.setItem("jwtTokenAccess", action.payload.access);
+        localStorage.setItem("jwtTokenRefresh", action.payload.refresh);
+        localStorage.setItem("isAuthenticated", true);
+      })
+      .addCase(activeAccountThunk.rejected, (state) => {
+        state.loading = false;
+      })
+
       // **Login Reducers**
       .addCase(loginThunk.pending, (state) => {
         state.loading = true;
@@ -54,6 +91,7 @@ export const authSlice = createSlice({
       // **Get Authenticated User Reducers**
       .addCase(getAuthenticatedUserThunk.fulfilled, (state, action) => {
         state.user = action.payload;
+
         localStorage.setItem("user", JSON.stringify(action.payload));
       })
       .addCase(getAuthenticatedUserThunk.rejected, (state) => {
@@ -72,9 +110,9 @@ export const authSlice = createSlice({
       })
 
       // **Get Authenticated Profile Reducers**
-      .addCase(getAuthenticatedUserProfileThunk.fulfilled, (state, action) =>{
-        state.profile = action.payload
-        localStorage.setItem("profile", JSON.stringify(action.payload))
+      .addCase(getAuthenticatedUserProfileThunk.fulfilled, (state, action) => {
+        state.profile = action.payload;
+        localStorage.setItem("profile", JSON.stringify(action.payload));
       })
       .addCase(getAuthenticatedUserProfileThunk.rejected, (state) => {
         state.jwtTokenAccess
@@ -147,4 +185,10 @@ export const authSlice = createSlice({
 });
 
 export default authSlice.reducer;
-export const { logoutLocal } = authSlice.actions;
+export const {
+  logoutLocal,
+  avtiveAccount,
+  removeAvtiveAccount,
+  avtiveStatementRead,
+  removeStatementRead,
+} = authSlice.actions;

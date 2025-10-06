@@ -1,14 +1,14 @@
-from django.contrib.auth import get_user_model
-from .validators import validate_password_strength
 from rest_framework import serializers
+from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from apps.utils.utils import desconvertir_de_snake_case
 from apps.utils.serializers.abstract_serializers import AbstractBaseSerializer
+from .validators import validate_password_strength
 
 User = get_user_model()
 
 
-class UserSerializer(AbstractBaseSerializer):
+class UserCreateSerializer(AbstractBaseSerializer):
     class Meta:
         model = User
         fields = AbstractBaseSerializer.Meta.fields + [
@@ -45,6 +45,23 @@ class UserSerializer(AbstractBaseSerializer):
         if password:
             instance.set_password(password)
         return super().update(instance, validated_data)
+
+
+class UserListSerializer(AbstractBaseSerializer):
+
+    class Meta:
+        model = User
+        fields = AbstractBaseSerializer.Meta.fields + [
+            "email",
+            "user_name",
+            "password",
+            "is_premium",
+            "is_superuser",
+            "is_staff",
+            "role",
+        ]
+        extra_kwargs = {"password": {"write_only": True}}
+        read_only_fields = ("uid", "created_at", "updated_at")
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)

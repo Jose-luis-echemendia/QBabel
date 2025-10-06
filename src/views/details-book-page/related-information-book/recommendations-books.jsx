@@ -4,7 +4,9 @@ export const RecommendationsBooks = ({ books }) => {
   return (
     <>
       <div className="w-full h-full">
-        <h3 className="text-2xl font-medium mb-2 lg:text-left text-center lg:mt-0 mt-3">Recomendaciones</h3>
+        <h3 className="text-2xl font-medium mb-2 lg:text-left text-center lg:mt-0 mt-3">
+          Recomendaciones
+        </h3>
         <div className="grid lg:grid-cols-2 grid-cols-1 lg:gap-5 gap-y-6 lg:px-0 px-5 place-items-center py-2">
           {books.map((book) => (
             <div
@@ -12,9 +14,9 @@ export const RecommendationsBooks = ({ books }) => {
               className="flex gap-1.5 w-full rounded-xl lg:h-56"
             >
               <figure className="lg:w-[1000px] w-[400px]">
-                <Link to={`/books/${book.id}`} className="block w-full h-full">
+                <Link to={`/books/${book.uid}`} className="block w-full h-full">
                   <img
-                    src={book.img}
+                    src={book.cover_details.image}
                     alt={book.title}
                     className="h-full w-full object-cover rounded-md hover:lg:relative hover:absolute hover:top-0 hover:left-0 hover:bottom-0 hover:right-0"
                   />
@@ -25,7 +27,7 @@ export const RecommendationsBooks = ({ books }) => {
                   {book.tittle}
                 </h3>
                 <span className="text-sm">
-                  <strong>Por: </strong> {book.author.name}{" "}
+                  <strong>Por: </strong> {book.author_details.name}
                 </span>
                 <div className="flex gap-4 mt-1">
                   <span className="flex gap-1.5 -mt-1 text-gray-800 text-xs">
@@ -57,7 +59,7 @@ export const RecommendationsBooks = ({ books }) => {
                         clipRule="evenodd"
                       />
                     </svg>
-                    {book.reads}
+                    {book.count_reads}
                   </span>
                   <span className="flex gap-1.5 -mt-1 text-gray-800 text-xs">
                     <svg
@@ -72,11 +74,11 @@ export const RecommendationsBooks = ({ books }) => {
                         clipRule="evenodd"
                       />
                     </svg>
-                    {book.parts}
+                    {book.number_chapters}
                   </span>
                 </div>
                 <p className="text-sm text-start text-gray-800 pr-5 line-clamp-4">
-                  {book.description}
+                  {book.synopsis}
                 </p>
                 <div className="flex flex-wrap gap-2 mt-2">
                   {book.categories.slice(0, 4).map((category) => (
@@ -87,7 +89,11 @@ export const RecommendationsBooks = ({ books }) => {
                       {category.name}
                     </span>
                   ))}
-                  {book.categories.length > 4 && <span className="text-gray-800 text-xs flex items-center ml-1.5">+{book.categories.length - 4} más</span>}
+                  {book.categories.length > 4 && (
+                    <span className="text-gray-800 text-xs flex items-center ml-1.5">
+                      +{book.categories.length - 4} más
+                    </span>
+                  )}
                 </div>
               </div>
             </div>

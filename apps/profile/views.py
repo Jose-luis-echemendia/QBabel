@@ -1,126 +1,282 @@
-from .serializers import ProfileSerializer
-from .models import Profile
+from .serializers import ProfileSerializer, FollowerSerializer
+from .models import Profile, Follower
 from .filters import ProfileFilter
+from .permissions import IsProfileAccountOwner
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.parsers import MultiPartParser, FormParser
 from django_filters.rest_framework import DjangoFilterBackend
-from apps.utils.pagination import MediumSetPagination
-from django.shortcuts import get_object_or_404
+from django.db import transaction
+from apps.utils.views.abstract_views import BaseCustomAPIView, BaseAPIView
+from apps.utils.mixins import CreateImageMixin
 
 
-class ProfileView(APIView):
-    """
-    view to handle profiles requested by the user
-    """
-
+class GetProfilesView(BaseCustomAPIView):
+    queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     filter_backends = [DjangoFilterBackend]
     filterset_class = ProfileFilter
     ordering_fields = ["created_at"]
     ordering = ["created_at"]
 
-    def get_queryset(self):
-        queryset = Profile.objects.all()
-        if not self.request.user.is_superuser:
-            queryset = queryset.filter(gallery__user=self.request.user)
-        if "state" not in self.request.GET:
-            queryset = queryset.filter(is_active=True)
-        return queryset
+    class Meta:
+        model = Profile
+        verbose_name = "profile"
+        verbose_name_plural = "profiles"
 
-    def get_object(self):
-        """
-        Retrieve the profile instance based on the provided ID.
-        """
-        queryset = self.get_queryset()
-        obj = get_object_or_404(queryset, pk=self.kwargs.get("pk"))
-        self.check_object_permissions(self.request, obj)
-        return obj
-
-    def perform_create(self, serializer):
-        return serializer.save()
-
-    def filter_queryset(self, queryset):
-        filterset = self.filterset_class(
-            self.request.GET, queryset=queryset, request=self.request
-        )
-        if not filterset.is_valid():
-            raise ValueError(f"Invalid filter data: {filterset.errors}")
-        queryset = filterset.qs
-        return queryset
-
-    def order_queryset(self, queryset):
-        ordering = self.request.GET.get("ordering", None)
-        if ordering:
-            queryset = queryset.order_by(*ordering.split(","))
-        return queryset
+    def get_model(self):
+        return self.Meta.model
 
     def get(self, request, *args, **kwargs):
-        """
-        endpoint to get all profiles of the authenticated user
-        """
-        queryset = self.get_queryset()
-        if not queryset.exists():
-            return Response(
-                {"details": "not profile found"}, status=status.HTTP_404_NOT_FOUND
-            )
+        return self.get_objects(request, *args, **kwargs)
 
-        filtered_queryset = self.filter_queryset(queryset)
-        ordered_queryset = self.order_queryset(filtered_queryset)
-        paginator = MediumSetPagination()
-        results = paginator.paginate_queryset(ordered_queryset, request)
-        profiles_data = self.serializer_class(results, many=True).data
-        return paginator.get_paginated_response({"profiles": profiles_data})
 
-    def put(self, request, *args, **kwargs):
-        """
-        Endpoint to update an profile (full update).
-        """
-        instance = self.get_object()  # Obtén la instancia que se va a actualizar
-        serializer = self.serializer_class(instance, data=request.data, partial=False)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class UpdateProfileView(BaseCustomAPIView, CreateImageMixin):
+    """
+    view to handle change profile
+    """
+
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+    permission_classes = [IsAuthenticated, IsProfileAccountOwner]
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = ProfileFilter
+    ordering_fields = ["created_at"]
+    ordering = ["created_at"]
+    parser_classes = (MultiPartParser, FormParser)
+
+    class Meta:
+        model = Profile
+        verbose_name = "profile"
+        verbose_name_plural = "profiles"
+
+    def get_model(self):
+        return self.Meta.model
 
     def patch(self, request, *args, **kwargs):
-        """
-        Endpoint to partially update an profile.
-        """
-        instance = self.get_object()  # Obtén la instancia que se va a actualizar
-        serializer = self.serializer_class(instance, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        profile = self.get_object(*args, **kwargs)
+        avatar = request.FILES.get("avatar", False)
+        data = request.data
+        user_name = data.get("user_name")
+
+        if avatar:
+            from apps.utils.enums import ImageTypes
+
+            image = self.create_image(
+                data={
+                    "image": avatar,
+                    "name": (
+                        user_name if user_name is not None else profile.user.user_name
+                    ),
+                    "caption": (
+                        user_name if user_name is not None else profile.user.user_name
+                    ),
+                    "registered_by": self.request.user.pk,
+                    "type": ImageTypes.avatar,
+                }
+            )
+
+            data["avatar"] = image.pk
+
+        if user_name:
+            profile.user.user_name = user_name
+
+        serializer = self.get_serializer(
+            profile,
+            data=data,
+            partial=True,
+            context={"request": request},
+        )
+        serializer.is_valid(raise_exception=True)
+
+        with transaction.atomic():
+            self.perform_update(serializer)
+            profile.user.save()
+
+        return Response(
+            {self.get_verbose_name(): serializer.data}, status=status.HTTP_200_OK
+        )
 
 
-class ProfileDetailsView(APIView):
-    def get_object(self):
+class DeleteProfileView(BaseCustomAPIView):
+    queryset = Profile.objects.all()
+    permission_classes = [IsAuthenticated, IsProfileAccountOwner]
+
+    class Meta:
+        model = Profile
+        verbose_name = "profile"
+        verbose_name_plural = "profiles"
+
+    def get_model(self):
+        return self.Meta.model
+
+    def delete(self, request, *args, **kwargs):
+        profile = self.get_object(*args, **kwargs)
+
+        with transaction.atomic():
+            profile.user.is_active = False
+            profile.user.save()
+            return self.desactive_object(request, *args, **kwargs)
+
+
+class ProfileDetailsView(BaseCustomAPIView):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+    permission_classes = [IsAuthenticated]
+
+    class Meta:
+        model = Profile
+        verbose_name = "profile"
+        verbose_name_plural = "profiles"
+
+    def get_model(self):
+        return self.Meta.model
+
+    def get(self, request, uid=None, *args, **kwargs):
         """
-        Retrieve the profile instance based on the provided ID.
+        endpoint to get details profile
         """
-        obj = get_object_or_404(Profile, pk=self.kwargs.get("pk"))
-        self.check_object_permissions(self.request, obj)
-        return obj
+        return self.retrive_object(uid=uid, *args, **kwargs)
+
+
+class FollowWriterView(BaseAPIView):
+    queryset = Follower.objects.all()
+    permission_classes = [IsAuthenticated]
+    serializer_class = FollowerSerializer
+
+    class Meta:
+        model = Follower
+        verbose_name = "follower"
+        verbose_name_plural = "followers"
+
+    def get_permissions(self):
+        if self.request.method in ["POST", "DELETE"]:
+            return [IsAuthenticated()]
+        return super().get_permissions()
+
+    def get_model(self):
+        return self.Meta.model
+
+    def post(self, request, *args, **kwargs):
+        follower = request.user
+        writer = request.data.get("writer")
+
+        if not writer:
+            return Response(
+                {"error": "Writer ID is required."}, status=status.HTTP_400_BAD_REQUEST
+            )
+        try:
+            writer_profile = Profile.objects.get(pk=writer)
+        except Profile.DoesNotExist:
+            return Response(
+                {"error": "Writer not found."}, status=status.HTTP_404_NOT_FOUND
+            )
+
+        if Follower.objects.filter(
+            follower=follower.profile, writer=writer_profile
+        ).exists():
+            return Response(
+                {"error": "You are already following this writer."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        if follower == writer_profile.user:
+            return Response(
+                {"error": "You cannot follow yourself."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        serializer = self.get_serializer(
+            data={
+                "follower": str(follower.profile.uid),
+                "writer": str(writer_profile.uid),
+            }
+        )
+
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    def delete(self, request, *args, **kwargs):
+        follower = request.user
+        writer = request.data.get("writer")
+        if not writer:
+            return Response(
+                {"error": "Writer ID is required."}, status=status.HTTP_400_BAD_REQUEST
+            )
+        try:
+            writer_profile = Profile.objects.get(pk=writer)
+        except Profile.DoesNotExist:
+            return Response(
+                {"error": "Writer not found."}, status=status.HTTP_404_NOT_FOUND
+            )
+
+        try:
+            follow_instance = Follower.objects.get(
+                follower=follower, writer=writer_profile
+            )
+            follow_instance.delete()
+            return Response(
+                {"message": "Unfollowed successfully."},
+                status=status.HTTP_204_NO_CONTENT,
+            )
+        except Follower.DoesNotExist:
+            return Response(
+                {"error": "You are not following this writer."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+
+class AuthenticatedProfileDetailsView(BaseCustomAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = ProfileSerializer
+
+    class Meta:
+        model = Profile
+        verbose_name = "profile"
+        verbose_name_plural = "profiles"
+
+    def get_model(self):
+        return self.Meta.model
 
     def get(self, request, *args, **kwargs):
         """
-        endpoint to get all profiles of the authenticated user
-        """
-        profile = self.get_object()
-        profile_data = ProfileSerializer(profile).data
-        return Response(profile_data, status=status.HTTP_200_OK)
-
-
-class AuthenticatedProfileDetailsView(APIView):
-    def get(self, request, *args, **kwargs):
-        """
-        endpoint to get all profiles of the authenticated user
+        endpoint to get  profile of the authenticated user
         """
         user = request.user
         profile = Profile.objects.get(user=user)
-        profile_data = ProfileSerializer(profile).data
+        profile_data = self.get_serializer(profile).data
+        return Response(profile_data, status=status.HTTP_200_OK)
+
+
+class GetProfileByUsernameView(BaseCustomAPIView):
+    permission_classes = [AllowAny]
+    serializer_class = ProfileSerializer
+
+    class Meta:
+        model = Profile
+        verbose_name = "profile"
+        verbose_name_plural = "profiles"
+
+    def get_model(self):
+        return self.Meta.model
+
+    def get(self, request, *args, **kwargs):
+        """
+        endpoint to get profile by username
+        """
+        username = self.kwargs.get("username", None)
+        if not username:
+            return Response(
+                {"error": "Username is required."}, status=status.HTTP_400_BAD_REQUEST
+            )
+        try:
+            profile = Profile.objects.get(user__user_name=username)
+        except Profile.DoesNotExist:
+            return Response(
+                {"error": "Profile not found."}, status=status.HTTP_404_NOT_FOUND
+            )
+        profile_data = self.get_serializer(profile).data
         return Response(profile_data, status=status.HTTP_200_OK)

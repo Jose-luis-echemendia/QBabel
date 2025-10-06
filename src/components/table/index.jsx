@@ -11,6 +11,7 @@ import {
   TabsHeader,
   Tab,
 } from "@material-tailwind/react";
+import { useEffect } from "react";
 
 export const CustomTable = ({
   title,

@@ -1,17 +1,115 @@
+import { useAppSelector } from "@/hooks/redux/useStore";
+import { useLibrary } from "@/hooks/redux/useLibrary";
+import { Login } from "../auth/login";
+import { CustomModal } from "@/components/modal";
+import { useState } from "react";
+import { toast } from "sonner";
+import { Question } from "./question";
+import { useNavigate } from "react-router-dom";
+import { FormPaymentBook } from "../particular-components/books/buy-book";
+import { Button } from "@material-tailwind/react";
+
 export const CustomHeaderBook = ({ book }) => {
+  const [openLoginModal, setOpenLoginModal] = useState(false);
+  const [openQuestionModal, setOpenQuestionModal] = useState(false);
+  const [openBuyBookModal, setOpenBuyBookModal] = useState(false);
+  const [bookInLibrary, setBookInLibrary] = useState(book.in_library);
+  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
+  const { handleAddBookToLibrary } = useLibrary();
+  const paymentsBooks = useAppSelector((state) => state.payment.paymentsBooks);
+  const loading = useAppSelector((state) => state.library.loading);
+  const navigate = useNavigate();
+
+  const addLibraryAndRead = () => {
+    handleAddBookToLibrary(book.uid);
+    if (!book.is_free) {
+      navigate(`/library`);
+      toast.info("Compra el libro para continuar con la lectura");
+      return;
+    }
+    navigate(`/books/reader/${book.uid}`);
+  };
+
+  const read = () => {
+    if (!isAuthenticated) {
+      toast.info("Inicia sesión para continuar");
+      setOpenLoginModal(true);
+      return;
+    }
+    if (!bookInLibrary) {
+      setOpenQuestionModal(true);
+      return;
+    }
+    if (!book.is_free && !paymentsBooks.includes(book.uid)) {
+      toast.info("Compra el libro para continuar con la lectura");
+      setOpenBuyBookModal(true);
+      return;
+    }
+
+    navigate(`/books/reader/${book.uid}`);
+  };
+
+  const add = () => {
+    if (!isAuthenticated) {
+      toast.info("Inicia sesión para continuar");
+      setOpenLoginModal(true);
+    }
+    if (!bookInLibrary) {
+      handleAddBookToLibrary(book.uid);
+      setBookInLibrary(true);
+    } else {
+      toast.info("El libro ya está en tu biblioteca");
+    }
+  };
+
   return (
     <>
+      {/* Modal de inicio de sesión */}
+      <CustomModal
+        open={openLoginModal}
+        handleOpen={() => setOpenLoginModal(false)} // Cierra el modal
+        classNameDialog="custom-dialog-class" // Clases personalizadas
+        classNameBody="custom-body-class"
+      >
+        <Login />
+      </CustomModal>
+      <CustomModal
+        open={openQuestionModal}
+        handleOpen={() => setOpenQuestionModal(false)} // Cierra el modal
+        classNameDialog="custom-dialog-class" // Clases personalizadas
+        classNameBody="custom-body-class"
+      >
+        <Question
+          handleOpen={() => setOpenQuestionModal(false)}
+          handleAddLibraryAndRead={() => addLibraryAndRead()}
+        />
+      </CustomModal>
+      <CustomModal
+        open={openBuyBookModal}
+        handleOpen={() => setOpenBuyBookModal(false)} // Cierra el modal
+        classNameDialog="custom-dialog-class" // Clases personalizadas
+        classNameBody="custom-body-class"
+        size="lg"
+      >
+        <FormPaymentBook
+          redirectRoRead={true}
+          handleOpen={() => setOpenQuestionModal(false)}
+          bookUid={book.uid}
+          price={book.price}
+          discount={book.discount}
+        />
+      </CustomModal>
       <header className="lg:w-full w-[400px] lg:h-[350px] h-full flex items-center justify-center border-b shadow-2xl lg:-mt-0 -mt-6">
         <figure className="flex lg:flex-row flex-col lg:gap-5 items-center justify-center w-full h-full">
           <img
-            src={book.img}
-            alt={book.tittle}
+            src={book.cover_details.image}
+            alt={book.title}
             className="object-cover rounded-xl shadow-xl lg:h-[300px] lg:p-0 lg:scale-100 scale-75 lg:w-[200px] lg:-mt-2.5"
           />
           <figcaption className="h-full py-12 flex flex-col lg:items-start items-center justify-between lg:-mt-0 -mt-16">
             <div className="lg:mb-0 mb-2">
-              <h2 className="text-3xl font-bold w-full">{book.tittle}</h2>
-              {book.isComplete && (
+              <h2 className="text-3xl font-bold w-full">{book.title}</h2>
+              {book.is_complete && (
                 <span className="text-3xl font-bold w-full inline-flex -ml-[1px]">
                   (Completa
                   <svg
@@ -56,7 +154,7 @@ export const CustomHeaderBook = ({ book }) => {
                   </svg>
                   <small>Lecturas</small>
                 </span>
-                <span className="text-sm font-bold">{book.reads}</span>
+                <span className="text-sm font-bold">{book.count_reads}</span>
               </div>
               <div className="w-[1px] bg-gray-400 -mx-3 h-14" />
               <div className="flex flex-col gap-1 items-center justify-center">
@@ -99,11 +197,16 @@ export const CustomHeaderBook = ({ book }) => {
 
                   <small>Capítulos</small>
                 </span>
-                <span className="text-sm font-bold">{book.parts}</span>
+                <span className="text-sm font-bold">
+                  {book.number_chapters}
+                </span>
               </div>
             </div>
             <div className="flex flex-row items-center gap-1">
-              <button className="flex gap-1.5 bg-primary py-3 px-5 rounded-l-full text-black-500">
+              <button
+                className="flex gap-1.5 bg-primary py-3 px-5 rounded-l-full text-black-500"
+                onClick={() => read()}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -120,7 +223,11 @@ export const CustomHeaderBook = ({ book }) => {
                 </svg>
                 <span className="font-semibold">Comenzar a leer</span>
               </button>
-              <button className="flex gap-1.5 bg-black-500 py-3 px-3 rounded-r-full text-primary">
+              <Button
+                loading={loading}
+                className="flex items-center gap-1.5 bg-black-500  py-3 px-3 rounded-r-full text-primary"
+                onClick={() => add()}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -136,7 +243,7 @@ export const CustomHeaderBook = ({ book }) => {
                   />
                 </svg>
                 <span className="font-semibold">Agregar</span>
-              </button>
+              </Button>
             </div>
           </figcaption>
         </figure>

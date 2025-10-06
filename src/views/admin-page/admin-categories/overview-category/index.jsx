@@ -1,15 +1,37 @@
 import { customCheckboxTheme } from "@/utils/material-tailwindscss/themes";
-import { Checkbox, ThemeProvider } from "@material-tailwind/react";
+import { Button, Checkbox, ThemeProvider } from "@material-tailwind/react";
 import { useState, useEffect } from "react";
+import { Select, Option } from "@material-tailwind/react";
+import { schemaCategory, schemaCategoryUpdate } from "@/helpers/yup-schemas";
+import { useForm } from "@/hooks/useForm";
+import { Controller } from "react-hook-form";
+import { translateLanguageCategory } from "@/helpers/translate";
+import {
+  useCreateCategory,
+  useUpdateCategory,
+} from "@/hooks/jquery/useCategoryQuery";
+import { useAppSelector } from "@/hooks/redux/useStore";
 
 export const OverViewCategory = ({ category, handleOpen }) => {
   const [preview, setPreview] = useState(null);
+  const [changeCategory, setchangeCategory] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+  const { register, handleSubmit, errors, control } = useForm(
+    category ? schemaCategoryUpdate : schemaCategory
+  );
+  const loading = useAppSelector((state) => state.category.loading);
+
+  const { mutate: updateCategory } = useUpdateCategory();
+  const { mutate: createCategory } = useCreateCategory();
 
   // Crear preview cuando se selecciona una imagen
   useEffect(() => {
     if (!selectedImage) {
-      setPreview(null);
+      if (category?.image_details) {
+        setPreview(category.image_details.image); // Imagen existente de la categoría
+      } else {
+        setPreview(null);
+      }
       return;
     }
 
@@ -18,7 +40,13 @@ export const OverViewCategory = ({ category, handleOpen }) => {
 
     // Limpieza
     return () => URL.revokeObjectURL(objectUrl);
-  }, [selectedImage]);
+  }, [selectedImage, category]);
+
+  useEffect(() => {
+    if (!loading && changeCategory) {
+      handleOpen(); // Cerrar el modal o realizar alguna acción después de guardar
+    }
+  }, [loading, changeCategory]);
 
   const handleImageSelect = (e) => {
     if (!e.target.files || e.target.files.length === 0) {
@@ -28,14 +56,43 @@ export const OverViewCategory = ({ category, handleOpen }) => {
     setSelectedImage(e.target.files[0]);
   };
 
+  const onSubmit = async (data) => {
+    // 1. Montar FormData
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("description", data.description || "");
+    formData.append("type", translateLanguageCategory(data.type));
+
+    formData.append("is_active", data.isActive);
+    if (selectedImage) {
+      formData.append("img", selectedImage);
+    }
+
+    try {
+      if (!category) {
+        createCategory(formData);
+      } else {
+        updateCategory({ id: category.uid, data: formData });
+      }
+      setchangeCategory(true);
+    } catch (err) {
+      console.error("Error al guardar categoría:", err);
+    }
+  };
+
   return (
     <>
       <div className="flex flex-col gap-4 items-center justify-center w-full h-full p-5">
-        <h4 className="text-black font-semibold text-2xl w-fit">Category</h4>
-        <form action="" className="grid grid-cols-6 w-full h-full gap-5">
+        <h4 className="text-black font-semibold text-2xl w-fit">
+          Registrar Categoría
+        </h4>
+        <form
+          className="grid grid-cols-6 w-full h-full gap-5"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <div className="sm:col-span-4">
             <label
-              htmlFor="username"
+              htmlFor="name"
               className="block text-sm/6 font-medium text-gray-900"
             >
               Nombre
@@ -43,13 +100,54 @@ export const OverViewCategory = ({ category, handleOpen }) => {
             <div className="mt-2.5">
               <div className="flex items-center rounded-md bg-white outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary">
                 <input
-                  id="username"
-                  name="username"
+                  id="name"
+                  name="name"
                   type="text"
-                  placeholder="janesmith"
+                  {...register("name")}
+                  placeholder={category?.name || "Nombre de la categoria"}
+                  defaultValue={category?.name || ""}
                   className="block border p-2 rounded-lg border-gray-100 min-w-0 grow py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
                 />
+
+                {errors.name && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.name.message}
+                  </p>
+                )}
               </div>
+            </div>
+          </div>
+
+          <div className="sm:col-span-2">
+            <label
+              htmlFor="name"
+              className="block text-sm/6 font-medium text-gray-900"
+            >
+              Tipo
+            </label>
+            <div className="mt-2.5">
+              <Controller
+                name="type"
+                control={control}
+                defaultValue={
+                  translateLanguageCategory(category?.type) || "Libro"
+                }
+                render={({ field }) => (
+                  <Select
+                    label="Selecciona tipo de categoría"
+                    value={field.value}
+                    onChange={(val) => field.onChange(val)}
+                  >
+                    <Option value="Libro">Libro</Option>
+                    <Option value="Publicaciones">Publicaciones</Option>
+                  </Select>
+                )}
+              />
+              {errors.type && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.type.message}
+                </p>
+              )}
             </div>
           </div>
 
@@ -92,7 +190,7 @@ export const OverViewCategory = ({ category, handleOpen }) => {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="absolute size-5 bottom-[80px] right-0"
+                      className="absolute size-5 bottom-[80px] right-11"
                     >
                       <path
                         strokeLinecap="round"
@@ -113,17 +211,23 @@ export const OverViewCategory = ({ category, handleOpen }) => {
                     htmlFor="file-upload"
                     className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 focus-within:outline-hidden hover:text-indigo-500"
                   >
-                    <span>Upload a file</span>
+                    <span>Seleccione un archivo</span>{" "}
                     <input
                       id="file-upload"
-                      name="file-upload"
+                      name="img"
                       type="file"
+                      {...register("img")}
                       className="sr-only"
                       onChange={handleImageSelect}
                       accept="image/png, image/jpeg, image/gif"
                     />
+                    {errors.img && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.img.message}
+                      </p>
+                    )}
                   </label>
-                  <p className="pl-1">or drag and drop</p>
+                  <p className="pl-1">o arrástrelo hasta aquí</p>
                 </div>
                 <p className="text-xs/5 text-gray-600">
                   PNG, JPG, GIF up to 10MB
@@ -134,7 +238,7 @@ export const OverViewCategory = ({ category, handleOpen }) => {
 
           <div className="sm:col-span-4 flex gap-2 items-center -mt-1 ml-1">
             <label
-              htmlFor="username"
+              htmlFor="name"
               className="block text-sm/6 font-medium text-gray-900 mt-2.5"
             >
               Activo
@@ -142,8 +246,18 @@ export const OverViewCategory = ({ category, handleOpen }) => {
             <div className="mt-2.5">
               <div className="flex items-center rounded-md bg-white outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary">
                 <ThemeProvider value={customCheckboxTheme}>
-                  <Checkbox defaultChecked />
+                  <Checkbox
+                    defaultChecked={category?.is_active}
+                    id="isActive"
+                    name="isActive"
+                    {...register("isActive")}
+                  />
                 </ThemeProvider>
+                {errors.isActive && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.isActive.message}
+                  </p>
+                )}
               </div>
             </div>
           </div>
@@ -151,13 +265,18 @@ export const OverViewCategory = ({ category, handleOpen }) => {
           <div className="flex items-center justify-end gap-4 border-t col-span-full pt-4 -mt-2">
             <button
               className="bg-black-500 py-1 px-2.5 rounded-xl"
+              type="button"
               onClick={(e) => (e.preventDefault(), handleOpen())}
             >
               <span className="text-primary font-semibold">Cancelar</span>
             </button>
-            <button className="bg-primary py-1 px-2.5 rounded-xl">
+            <Button
+              type="submit"
+              loading={loading}
+              className="bg-primary py-1 px-2.5 rounded-xl h-9"
+            >
               <span className="text-black-500 font-semibold">Aceptar</span>
-            </button>
+            </Button>
           </div>
         </form>
       </div>

@@ -3,8 +3,8 @@ from django.contrib.auth.models import (
     AbstractBaseUser,
     PermissionsMixin,
     BaseUserManager,
-    Group, 
-    Permission
+    # Group,
+    # Permission
 )
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
@@ -12,6 +12,7 @@ from apps.utils.models.abstract_models import BaseModel
 from django.utils.translation import gettext_lazy as _
 from .validators import validate_password_strength
 from .enums import RoleType
+
 
 class UserAccountManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -47,38 +48,62 @@ class UserAccountManager(BaseUserManager):
 
         user.save()
         return user
-    
+
     def create_admin(self, email, password, **extra_fields):
         user = self.create_user(email, password, **extra_fields)
         user.role = RoleType.admin
         user.save()
         return user
 
+
 class UserAccount(BaseModel, AbstractBaseUser, PermissionsMixin):
-    groups = models.ManyToManyField(Group, related_name="useraccount_groups", verbose_name=_("Groups"))
-    user_permissions = models.ManyToManyField(Permission, related_name="useraccount_permissions", verbose_name=_("User Permissions"))
+    # groups = models.ManyToManyField(Group, related_name="useraccount_groups", verbose_name=_("Groups"))
+    # user_permissions = models.ManyToManyField(Permission, related_name="useraccount_permissions", verbose_name=_("User Permissions"))
     email = models.EmailField(max_length=255, unique=True, verbose_name=_("Email"))
-    user_name = models.CharField(max_length=255, unique=True, verbose_name=_("User Name"))
+    user_name = models.CharField(
+        max_length=255, unique=True, verbose_name=_("User Name"), blank=True, null=True
+    )
     is_premium = models.BooleanField(default=False, verbose_name=_("Is Premium"))
-    is_active = models.BooleanField(default=True, verbose_name=_("Is Active"))
+    is_active = models.BooleanField(default=False, verbose_name=_("Is Active"))
     is_superuser = models.BooleanField(default=False, verbose_name=_("Is Superuser"))
     is_staff = models.BooleanField(default=False, verbose_name=_("Is Staff"))
-    role = models.CharField(verbose_name=_("Role"), max_length=20, choices=RoleType.choices, default=RoleType.user)
-    
+    role = models.CharField(
+        verbose_name=_("Role"),
+        max_length=20,
+        choices=RoleType.choices,
+        default=RoleType.reader,
+    )
+
     objects = UserAccountManager()
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
-    
+
+    @property
+    def is_staff_business(self):
+        return bool(self.role == RoleType.admin or self.role == RoleType.author)
+
+    @property
+    def is_admin(self):
+        return self.role == RoleType.admin
+
+    @property
+    def is_user(self):
+        return self.role == RoleType.user
+
+    @property
+    def is_author(self):
+        return self.role == RoleType.author
+
     def __str__(self):
         return self.email
 
     class Meta:
-        db_table = 'User'
+        db_table = "User"
         managed = True
-        verbose_name = 'User'
-        verbose_name_plural = 'Users'
+        verbose_name = "User"
+        verbose_name_plural = "Users"
         ordering = ("-created_at",)
-        
+
     def get_slug_source_field(self):
-        return 'user_name'
+        return "user_name"

@@ -1,9 +1,9 @@
-import { bestBooksData } from '../../constants/home-page/best-books';
-import LibrarySection from './library-section';
+import LibrarySection from "./library-section";
+
 const LibraryView = () => {
   return (
-    <div className='min-h-screen bg-gray-100'>
-      <LibrarySection books={bestBooksData} />
+    <div className="min-h-screen h-full py-10 -mt-10">
+      <LibrarySection />
     </div>
   );
 };

@@ -1,0 +1,129 @@
+import axiosInstance from "./axiosInstance";
+
+// endpoit for create book
+export const createBookApi = async (data) => {
+  try {
+    const response = await axiosInstance.post("/api/book/", data);
+
+    return response;
+  } catch (error) {
+    console.error(
+      "Error al crear el libro:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};
+
+// endpoint for update book
+export const updateBookAPI = async (id, data) => {
+  try {
+    const response = await axiosInstance.patch(`/api/book/${id}/`, data);
+
+    return response;
+  } catch (error) {
+    console.error(
+      "Error en actualizar el libro:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};
+
+// endpoint for get books
+export const getBooksAPI = async (filter = null) => {
+  try {
+    // 1. Crear objeto de parámetros basado en el filtro
+    const params = filter ? { ...filter } : {};
+
+    // 2. Hacer la petición GET con los parámetros
+    const response = await axiosInstance.get("/api/book/", {
+      params, // Enviar los parámetros como query strings
+    });
+
+    return response;
+  } catch (error) {
+    console.error(
+      "Error en obtener los libros:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};
+
+export const fetchMoreBooksAPI = async (next = null) => {
+  try {
+    if (next) {
+      // Si hay un enlace 'next', hacer la petición a esa URL
+      const response = await axiosInstance.get(next);
+      return response;
+    }
+    return [];
+  } catch (error) {
+    console.error(
+      "Error en obtener los libros:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};
+
+// endpoint for get books
+export const getTopSellerBooksFromCategoryAPI = async (category = null) => {
+  try {
+    const response = await axiosInstance.get(`/api/book/top/${category}/`);
+
+    return response;
+  } catch (error) {
+    console.error(
+      "Error en obtener los libros:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};
+``;
+
+// endpoint for get home books
+export const getBooksHomeAPI = async () => {
+  try {
+    const response = await axiosInstance.get("/api/book/home/");
+
+    return response;
+  } catch (error) {
+    console.error(
+      "Error en obtener los libros de la página principal:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};
+
+export const getBookForIdAPI = async (bookId) => {
+  try {
+    const response = await axiosInstance.get(`/api/book/${bookId}/`);
+
+    return response;
+  } catch (error) {
+    console.error(
+      "Error al obtener el libro por ID:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};
+
+// endpoint for delete book
+export const deleteBookAPI = async (id) => {
+  try {
+    const response = await axiosInstance.delete(`/api/book/${id}/`);
+
+    return response;
+  } catch (error) {
+    console.error(
+      "Error en eliminar el libro:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};

@@ -1,12 +1,26 @@
-import { HeroProfile } from './hero-profile';
-import { TabsMenu } from './tabs-menu';
+import { useEffect } from "react";
+import { HeroProfile } from "./hero-profile";
+import { TabsMenu } from "./tabs-menu";
+import { useParams } from "react-router-dom";
+import { useProfile } from "@/hooks/redux/useProfile";
 
 const ProfileView = () => {
-  return (
-    <div className='w-full'>
-      <HeroProfile />
+  const { userName } = useParams();
+  const { handleGetProfileByUsername } = useProfile();
 
-      <div className='w-full  mt-4'>
+  useEffect(() => {
+    handleGetProfileByUsername(userName);
+  }, [userName]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+    <div className="w-full h-full">
+      <HeroProfile userName={userName} />
+
+      <div className="w-full  mt-4">
         <TabsMenu />
       </div>
     </div>

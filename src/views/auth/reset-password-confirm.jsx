@@ -26,8 +26,6 @@ export const ResetPasswordConfirm = () => {
     event.preventDefault()
     const uid = params.uid
     const token = params.token
-    console.log(token)
-    console.log(uid)
     resetPasswordConfirm(uid, token, newPassword, repeatNewPassword)
     if(newPassword === repeatNewPassword){
         setRequestSent(true)
